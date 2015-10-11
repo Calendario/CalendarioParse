@@ -32,6 +32,7 @@
 		E2E0D7521BC9976400662E70 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7511BC9976400662E70 /* SystemConfiguration.framework */; };
 		E2E0D7541BC9977D00662E70 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7531BC9977D00662E70 /* libz.1.dylib */; };
 		E2E0D7561BC997BE00662E70 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7551BC997BE00662E70 /* libsqlite3.dylib */; };
+		E2E0D7591BCA0CFD00662E70 /* Old.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E0D7581BCA0CFD00662E70 /* Old.storyboard */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		E2E0D7511BC9976400662E70 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E2E0D7531BC9977D00662E70 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = /usr/lib/libz.1.dylib; sourceTree = "<absolute>"; };
 		E2E0D7551BC997BE00662E70 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = /usr/lib/libsqlite3.dylib; sourceTree = "<absolute>"; };
+		E2E0D7581BCA0CFD00662E70 /* Old.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Old.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 				E2E0D7081BC9950800662E70 /* ViewController.h */,
 				E2E0D7091BC9950800662E70 /* ViewController.m */,
 				E2E0D70B1BC9950800662E70 /* Main.storyboard */,
+				E2E0D7581BCA0CFD00662E70 /* Old.storyboard */,
 				E2E0D70E1BC9950800662E70 /* Assets.xcassets */,
 				E2E0D7101BC9950800662E70 /* LaunchScreen.storyboard */,
 				E2E0D7131BC9950800662E70 /* Info.plist */,
@@ -319,6 +322,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2E0D7591BCA0CFD00662E70 /* Old.storyboard in Resources */,
 				E2E0D7121BC9950800662E70 /* LaunchScreen.storyboard in Resources */,
 				E2E0D70F1BC9950800662E70 /* Assets.xcassets in Resources */,
 				E2E0D70D1BC9950800662E70 /* Main.storyboard in Resources */,
@@ -580,6 +584,7 @@
 				E2E0D72E1BC9950800662E70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E2E0D72F1BC9950800662E70 /* Build configuration list for PBXNativeTarget "CalendarioTests" */ = {
 			isa = XCConfigurationList;
@@ -588,6 +593,7 @@
 				E2E0D7311BC9950800662E70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E2E0D7321BC9950800662E70 /* Build configuration list for PBXNativeTarget "CalendarioUITests" */ = {
 			isa = XCConfigurationList;
@@ -596,6 +602,7 @@
 				E2E0D7341BC9950800662E70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
