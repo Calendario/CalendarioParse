@@ -18,17 +18,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    //reference the uitabBar
-    UITabBar *tabBar = [UITabBar appearance];
-    
-    //uiTabBar appearance properties
-    tabBar.backgroundColor = [UIColor colorWithRed:46/255.0 green:153/255.0 blue:80/255.0 alpha:1.0];
-    tabBar.barTintColor = [UIColor colorWithRed:46/255.0 green:153/255.0 blue:80/255.0 alpha:1.0];
-    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UITabBar appearance] setShadowImage:nil];
-    return YES;
-    
-    
     
     // Override point for customization after application launch.
     // Initialize Parse.
