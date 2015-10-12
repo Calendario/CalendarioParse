@@ -58,6 +58,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     var statusID = arc4random()
     
     
+    // location 
+    let locationManager = CLLocationManager()
     
     
     
@@ -72,6 +74,10 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         self.navigationItem.setRightBarButtonItem(PostButton, animated: true)
         statusUpdateTextField.delegate = self
         dateLabel.hidden = true
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
         
     }
 
@@ -110,6 +116,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         statusupdate["dateofevent"] = dateLabel.text
         statusupdate["ID"] = Int(statusID)
         statusupdate["tense"] = currenttense
+        statusupdate["location"] = LocationLabel.text
         
         
         
@@ -168,10 +175,47 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         return (newLength > 400) ? false:true
     }
     
+    // core location delegate methods
+    
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        CLGeocoder().reverseGeocodeLocation(manager.location!) { (placemarks, error:NSError?) -> Void in
+            if error != nil
+            {
+                if let pm = placemarks?.first
+                {
+                    self.DisplayLocationInfo(pm)
+                }
+                else
+                {
+                    print("error with data")
+                }
+            }
+        }
+    }
+    
+    
+    func DisplayLocationInfo(placemark:CLPlacemark)
+    {
+        self.locationManager.stopUpdatingLocation()
+        print(placemark.locality)
+        print(placemark.postalCode)
+        print(placemark.administrativeArea)
+        print(placemark.country)
+        
+        LocationLabel.text = placemark.country
+    }
+    
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print(error.localizedDescription)
+    }
     
     
     
-
+    
+    
+    
     /*
     // MARK: - Navigation
 
