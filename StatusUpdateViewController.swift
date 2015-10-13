@@ -11,7 +11,7 @@ import CoreLocation
 
 
 
-class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate {
+class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var PostButton: UIBarButtonItem!
     
@@ -46,7 +46,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
     }
     
-    var currenttense: String! = "going"
+    var currenttense: String! = " "
     
     
     
@@ -165,6 +165,34 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     
     
+    // camera controls
+    
+    
+    @IBAction func CameraTapped(sender: AnyObject) {
+        var camera = UIImagePickerController()
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            camera.delegate = self
+            camera.sourceType = UIImagePickerControllerSourceType.Camera
+            camera.allowsEditing = false
+            self.presentViewController(camera, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func libaryTapped(sender: AnyObject) {
+        
+        var lib = UIImagePickerController()
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            lib.delegate = self
+            lib.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        lib.allowsEditing = false
+            self.presentViewController(lib, animated: true, completion: nil)
+        }
+    }
+    
+    
+    
+    
+    
     
     // UITextfield delegate methods
     
@@ -210,6 +238,14 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print(error.localizedDescription)
     }
+    
+    
+    
+    
+    
+
+    
+    
     
     
     
