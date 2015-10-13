@@ -7,9 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E25607AE1BCAF5EC0085B9B4 /* LoginViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25607AD1BCAF5EC0085B9B4 /* LoginViewViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		E2AE81531BCAFF320047D1FA /* NewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE81521BCAFF320047D1FA /* NewsfeedViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		E25607AE1BCAF5EC0085B9B4 /* LoginViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25607AD1BCAF5EC0085B9B4 /* LoginViewViewController.swift */; };
+		E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */; };
+		E2AE81531BCAFF320047D1FA /* NewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE81521BCAFF320047D1FA /* NewsfeedViewController.swift */; };
+		E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8A1BCCC575003F4651 /* CLWeeklyCalendarView.m */; settings = {ASSET_TAGS = (); }; };
+		E2D09C901BCCC575003F4651 /* DailyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8C1BCCC575003F4651 /* DailyCalendarView.m */; settings = {ASSET_TAGS = (); }; };
+		E2D09C911BCCC575003F4651 /* DayTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8E1BCCC575003F4651 /* DayTitleLabel.m */; settings = {ASSET_TAGS = (); }; };
+		E2D09C9A1BCCC59A003F4651 /* NSDate+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C931BCCC59A003F4651 /* NSDate+CL.m */; settings = {ASSET_TAGS = (); }; };
+		E2D09C9B1BCCC59A003F4651 /* NSDictionary+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C951BCCC59A003F4651 /* NSDictionary+CL.m */; settings = {ASSET_TAGS = (); }; };
+		E2D09C9C1BCCC59A003F4651 /* UIColor+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C971BCCC59A003F4651 /* UIColor+CL.m */; settings = {ASSET_TAGS = (); }; };
+		E2D09C9D1BCCC59A003F4651 /* UIImage+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C991BCCC59A003F4651 /* UIImage+CL.m */; settings = {ASSET_TAGS = (); }; };
 		E2E0D7041BC9950800662E70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E0D7031BC9950800662E70 /* main.m */; };
 		E2E0D7071BC9950800662E70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E0D7061BC9950800662E70 /* AppDelegate.m */; };
 		E2E0D70D1BC9950800662E70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E0D70B1BC9950800662E70 /* Main.storyboard */; };
@@ -17,13 +24,13 @@
 		E2E0D7121BC9950800662E70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E0D7101BC9950800662E70 /* LaunchScreen.storyboard */; };
 		E2E0D71D1BC9950800662E70 /* CalendarioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E0D71C1BC9950800662E70 /* CalendarioTests.m */; };
 		E2E0D7281BC9950800662E70 /* CalendarioUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E0D7271BC9950800662E70 /* CalendarioUITests.m */; };
-		E2E0D73C1BC996C100662E70 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7351BC996C100662E70 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
-		E2E0D73D1BC996C100662E70 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7361BC996C100662E70 /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
-		E2E0D73E1BC996C100662E70 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7371BC996C100662E70 /* ParseCrashReporting.framework */; settings = {ASSET_TAGS = (); }; };
-		E2E0D73F1BC996C100662E70 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7381BC996C100662E70 /* ParseFacebookUtils.framework */; settings = {ASSET_TAGS = (); }; };
-		E2E0D7401BC996C100662E70 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7391BC996C100662E70 /* ParseFacebookUtilsV4.framework */; settings = {ASSET_TAGS = (); }; };
-		E2E0D7411BC996C100662E70 /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D73A1BC996C100662E70 /* ParseTwitterUtils.framework */; settings = {ASSET_TAGS = (); }; };
-		E2E0D7421BC996C100662E70 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D73B1BC996C100662E70 /* ParseUI.framework */; settings = {ASSET_TAGS = (); }; };
+		E2E0D73C1BC996C100662E70 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7351BC996C100662E70 /* Bolts.framework */; };
+		E2E0D73D1BC996C100662E70 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7361BC996C100662E70 /* Parse.framework */; };
+		E2E0D73E1BC996C100662E70 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7371BC996C100662E70 /* ParseCrashReporting.framework */; };
+		E2E0D73F1BC996C100662E70 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7381BC996C100662E70 /* ParseFacebookUtils.framework */; };
+		E2E0D7401BC996C100662E70 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7391BC996C100662E70 /* ParseFacebookUtilsV4.framework */; };
+		E2E0D7411BC996C100662E70 /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D73A1BC996C100662E70 /* ParseTwitterUtils.framework */; };
+		E2E0D7421BC996C100662E70 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D73B1BC996C100662E70 /* ParseUI.framework */; };
 		E2E0D7441BC996D400662E70 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7431BC996D400662E70 /* AudioToolbox.framework */; };
 		E2E0D7461BC996E200662E70 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7451BC996E200662E70 /* CFNetwork.framework */; };
 		E2E0D7481BC996ED00662E70 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7471BC996ED00662E70 /* CoreGraphics.framework */; };
@@ -34,7 +41,7 @@
 		E2E0D7521BC9976400662E70 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7511BC9976400662E70 /* SystemConfiguration.framework */; };
 		E2E0D7541BC9977D00662E70 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7531BC9977D00662E70 /* libz.1.dylib */; };
 		E2E0D7561BC997BE00662E70 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7551BC997BE00662E70 /* libsqlite3.dylib */; };
-		E2E0D7591BCA0CFD00662E70 /* Old.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E0D7581BCA0CFD00662E70 /* Old.storyboard */; settings = {ASSET_TAGS = (); }; };
+		E2E0D7591BCA0CFD00662E70 /* Old.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E0D7581BCA0CFD00662E70 /* Old.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +66,20 @@
 		E25607AD1BCAF5EC0085B9B4 /* LoginViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewViewController.swift; path = ../LoginViewViewController.swift; sourceTree = "<group>"; };
 		E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusUpdateViewController.swift; path = ../StatusUpdateViewController.swift; sourceTree = "<group>"; };
 		E2AE81521BCAFF320047D1FA /* NewsfeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedViewController.swift; sourceTree = "<group>"; };
+		E2D09C891BCCC575003F4651 /* CLWeeklyCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWeeklyCalendarView.h; sourceTree = "<group>"; };
+		E2D09C8A1BCCC575003F4651 /* CLWeeklyCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWeeklyCalendarView.m; sourceTree = "<group>"; };
+		E2D09C8B1BCCC575003F4651 /* DailyCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyCalendarView.h; sourceTree = "<group>"; };
+		E2D09C8C1BCCC575003F4651 /* DailyCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyCalendarView.m; sourceTree = "<group>"; };
+		E2D09C8D1BCCC575003F4651 /* DayTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayTitleLabel.h; sourceTree = "<group>"; };
+		E2D09C8E1BCCC575003F4651 /* DayTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayTitleLabel.m; sourceTree = "<group>"; };
+		E2D09C921BCCC59A003F4651 /* NSDate+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CL.h"; sourceTree = "<group>"; };
+		E2D09C931BCCC59A003F4651 /* NSDate+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CL.m"; sourceTree = "<group>"; };
+		E2D09C941BCCC59A003F4651 /* NSDictionary+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CL.h"; sourceTree = "<group>"; };
+		E2D09C951BCCC59A003F4651 /* NSDictionary+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CL.m"; sourceTree = "<group>"; };
+		E2D09C961BCCC59A003F4651 /* UIColor+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CL.h"; sourceTree = "<group>"; };
+		E2D09C971BCCC59A003F4651 /* UIColor+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CL.m"; sourceTree = "<group>"; };
+		E2D09C981BCCC59A003F4651 /* UIImage+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CL.h"; sourceTree = "<group>"; };
+		E2D09C991BCCC59A003F4651 /* UIImage+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CL.m"; sourceTree = "<group>"; };
 		E2E0D6FF1BC9950800662E70 /* Calendario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calendario.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E0D7031BC9950800662E70 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E2E0D7051BC9950800662E70 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -135,6 +156,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E2D09C9E1BCCC5BD003F4651 /* WeeklyCalender */ = {
+			isa = PBXGroup;
+			children = (
+				E2D09C891BCCC575003F4651 /* CLWeeklyCalendarView.h */,
+				E2D09C8A1BCCC575003F4651 /* CLWeeklyCalendarView.m */,
+				E2D09C8B1BCCC575003F4651 /* DailyCalendarView.h */,
+				E2D09C8C1BCCC575003F4651 /* DailyCalendarView.m */,
+				E2D09C8D1BCCC575003F4651 /* DayTitleLabel.h */,
+				E2D09C8E1BCCC575003F4651 /* DayTitleLabel.m */,
+				E2D09C921BCCC59A003F4651 /* NSDate+CL.h */,
+				E2D09C931BCCC59A003F4651 /* NSDate+CL.m */,
+				E2D09C941BCCC59A003F4651 /* NSDictionary+CL.h */,
+				E2D09C951BCCC59A003F4651 /* NSDictionary+CL.m */,
+				E2D09C961BCCC59A003F4651 /* UIColor+CL.h */,
+				E2D09C971BCCC59A003F4651 /* UIColor+CL.m */,
+				E2D09C981BCCC59A003F4651 /* UIImage+CL.h */,
+				E2D09C991BCCC59A003F4651 /* UIImage+CL.m */,
+			);
+			name = WeeklyCalender;
+			path = Calendario;
+			sourceTree = "<group>";
+		};
 		E2E0D6F61BC9950800662E70 = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +187,7 @@
 				E2E0D7001BC9950800662E70 /* Products */,
 				E2E0D7571BC997D000662E70 /* Parse */,
 				E25607AC1BCAF5EC0085B9B4 /* Calendario-Bridging-Header.h */,
+				E2D09C9E1BCCC5BD003F4651 /* WeeklyCalender */,
 			);
 			sourceTree = "<group>";
 		};
@@ -358,9 +402,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2AE81531BCAFF320047D1FA /* NewsfeedViewController.swift in Sources */,
+				E2D09C9C1BCCC59A003F4651 /* UIColor+CL.m in Sources */,
 				E2E0D7071BC9950800662E70 /* AppDelegate.m in Sources */,
+				E2D09C911BCCC575003F4651 /* DayTitleLabel.m in Sources */,
 				E2E0D7041BC9950800662E70 /* main.m in Sources */,
 				E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */,
+				E2D09C9B1BCCC59A003F4651 /* NSDictionary+CL.m in Sources */,
+				E2D09C901BCCC575003F4651 /* DailyCalendarView.m in Sources */,
+				E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */,
+				E2D09C9A1BCCC59A003F4651 /* NSDate+CL.m in Sources */,
+				E2D09C9D1BCCC59A003F4651 /* UIImage+CL.m in Sources */,
 				E25607AE1BCAF5EC0085B9B4 /* LoginViewViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

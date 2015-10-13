@@ -38,16 +38,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="News feed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1k-t6-e0h">
-                                <rect key="frame" x="139" y="245" width="82" height="21"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ulr-ZQ-cuc">
+                                <rect key="frame" x="0.0" y="83" width="390" height="545"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="sGJ-qf-6wC">
+                                        <rect key="frame" x="0.0" y="28" width="390" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sGJ-qf-6wC" id="elz-Dq-uTm">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="Ulr-ZQ-cuc" secondAttribute="bottom" constant="39" id="LmP-Ue-gNS"/>
+                            <constraint firstItem="Ulr-ZQ-cuc" firstAttribute="leading" secondItem="vb2-fj-8dB" secondAttribute="leading" id="SnY-Wq-Joi"/>
+                            <constraint firstItem="Ulr-ZQ-cuc" firstAttribute="top" secondItem="kSV-ge-vA8" secondAttribute="bottom" constant="63" id="VZe-Hi-9Wx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ulr-ZQ-cuc" secondAttribute="trailing" constant="-31" id="hAM-GL-IVj"/>
+                        </constraints>
                     </view>
                     <toolbarItems>
                         <barButtonItem title="Share" id="T6W-Mh-dWj">
