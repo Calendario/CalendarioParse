@@ -8,17 +8,12 @@
 
 import UIKit
 
-class NewsfeedViewController: UIViewController,  CLWeeklyCalendarViewDelegate, UITableViewDelegate, UITableViewDataSource{
+class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var table: UITableView!
     @IBOutlet weak var sharebutton: UIBarButtonItem!
     
     var statausData:NSMutableArray = NSMutableArray()
-    
-    
-    
-    
-   
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +28,6 @@ class NewsfeedViewController: UIViewController,  CLWeeklyCalendarViewDelegate, U
         self.view.addSubview(cal)
         
         self.navigationController?.hidesBarsOnTap = true
-        
-        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -50,9 +43,6 @@ class NewsfeedViewController: UIViewController,  CLWeeklyCalendarViewDelegate, U
      
         return [CLCalendarWeekStartDay: 1]
     }
-    
-
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -72,14 +62,8 @@ class NewsfeedViewController: UIViewController,  CLWeeklyCalendarViewDelegate, U
             {
             }
         }
-     
-        }
-        
     }
-    
-    
-    
-    
+
     // Tableview delegate methods
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -91,19 +75,9 @@ class NewsfeedViewController: UIViewController,  CLWeeklyCalendarViewDelegate, U
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        
         return cell
     }
-
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

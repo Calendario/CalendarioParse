@@ -1,14 +1,14 @@
 //
-//  LoginViewViewController.swift
+//  RegisterViewController.swift
 //  Calendario
 //
-//  Created by Derek Cacciotti on 10/11/15.
+//  Created by Daniel Sadjadian on 14/10/2015.
 //  Copyright © 2015 Calendario. All rights reserved.
 //
 
 import UIKit
 
-class LoginViewViewController: UIViewController, PFLogInViewControllerDelegate {
+class RegisterViewViewController: UIViewController, PFLogInViewControllerDelegate {
     
     // Setup the on screen button actions.
     @IBAction func loginUser(sender: UIButton) {
