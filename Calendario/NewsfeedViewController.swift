@@ -32,6 +32,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        LoadData()
     }
     
     
@@ -60,9 +61,21 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         getstatus.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
             if error == nil
             {
+                for object in objects!
+                {
+                    let statusupdate:PFObject = object as! PFObject
+                    self.statausData.addObject(statusupdate)
+                    
+                }
+                let array:NSArray = self.statausData.reverseObjectEnumerator().allObjects
+                self.statausData = NSMutableArray(array: array)
+                
+                self.table.reloadData()
+                
+                
             }
         }
-    }
+   }
 
     // Tableview delegate methods
     
@@ -71,13 +84,21 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0 // add array later
+        return statausData.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
         
+        let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
+        
+        cell.statusTextView.text = statusupdate.objectForKey("updatetext") as! String
+
+
+
         return cell
-    }
+}
+
+
 }

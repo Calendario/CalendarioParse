@@ -18,6 +18,7 @@
 		E2D09C9B1BCCC59A003F4651 /* NSDictionary+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C951BCCC59A003F4651 /* NSDictionary+CL.m */; settings = {ASSET_TAGS = (); }; };
 		E2D09C9C1BCCC59A003F4651 /* UIColor+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C971BCCC59A003F4651 /* UIColor+CL.m */; settings = {ASSET_TAGS = (); }; };
 		E2D09C9D1BCCC59A003F4651 /* UIImage+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C991BCCC59A003F4651 /* UIImage+CL.m */; settings = {ASSET_TAGS = (); }; };
+		E2D8D9FD1BCF51E800A40350 /* NewsfeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8D9FC1BCF51E800A40350 /* NewsfeedTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		E2E0D7041BC9950800662E70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E0D7031BC9950800662E70 /* main.m */; };
 		E2E0D7071BC9950800662E70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E0D7061BC9950800662E70 /* AppDelegate.m */; };
 		E2E0D70D1BC9950800662E70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E0D70B1BC9950800662E70 /* Main.storyboard */; };
@@ -82,6 +83,7 @@
 		E2D09C971BCCC59A003F4651 /* UIColor+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CL.m"; sourceTree = "<group>"; };
 		E2D09C981BCCC59A003F4651 /* UIImage+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CL.h"; sourceTree = "<group>"; };
 		E2D09C991BCCC59A003F4651 /* UIImage+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CL.m"; sourceTree = "<group>"; };
+		E2D8D9FC1BCF51E800A40350 /* NewsfeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedTableViewCell.swift; sourceTree = "<group>"; };
 		E2E0D6FF1BC9950800662E70 /* Calendario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calendario.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E0D7031BC9950800662E70 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E2E0D7051BC9950800662E70 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 			children = (
 				E2AE81521BCAFF320047D1FA /* NewsfeedViewController.swift */,
 				E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */,
+				E2D8D9FC1BCF51E800A40350 /* NewsfeedTableViewCell.swift */,
 			);
 			name = Newsfeed;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				E2D09C9C1BCCC59A003F4651 /* UIColor+CL.m in Sources */,
 				E2E0D7071BC9950800662E70 /* AppDelegate.m in Sources */,
 				E2D09C911BCCC575003F4651 /* DayTitleLabel.m in Sources */,
+				E2D8D9FD1BCF51E800A40350 /* NewsfeedTableViewCell.swift in Sources */,
 				E2E0D7041BC9950800662E70 /* main.m in Sources */,
 				E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */,
 				E2D09C9B1BCCC59A003F4651 /* NSDictionary+CL.m in Sources */,
