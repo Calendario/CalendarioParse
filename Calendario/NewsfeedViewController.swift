@@ -94,6 +94,20 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
         
         cell.statusTextView.text = statusupdate.objectForKey("updatetext") as! String
+        
+        
+        
+        var findUser:PFQuery = PFUser.query()!
+        
+        findUser.whereKey("objectId", equalTo: (statusupdate.objectForKey("user")?.objectId)!)
+        
+        findUser.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
+            if let aobject = objects
+            {
+                let puser = (aobject as NSArray).lastObject as? PFUser
+                cell.UserNameLabel.text = puser?.username
+            }
+        }
 
 
 
