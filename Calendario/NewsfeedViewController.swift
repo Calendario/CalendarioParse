@@ -14,6 +14,8 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     @IBOutlet weak var sharebutton: UIBarButtonItem!
     
     var statausData:NSMutableArray = NSMutableArray()
+    var currentDate:NSDate!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +39,13 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     
     func dailyCalendarViewDidSelect(date: NSDate!) {
-        print(date)
+        
+        currentDate = date
+        print(currentDate)
+        //getUpdatesbasedOnTense()
+        
+        
+        
     }
     
     func CLCalendarBehaviorAttributes() -> [NSObject : AnyObject]! {
@@ -58,15 +66,22 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         statausData.removeAllObjects()
         
         var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
+        getstatus.whereKey("tense", equalTo: "going")
+        
         getstatus.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
             if error == nil
             {
                 for object in objects!
                 {
                     let statusupdate:PFObject = object as! PFObject
+                    
+                    
+                    
+                    
+                    
                     self.statausData.addObject(statusupdate)
                     
-                }
+        }
                 let array:NSArray = self.statausData.reverseObjectEnumerator().allObjects
                 self.statausData = NSMutableArray(array: array)
                 
@@ -113,6 +128,26 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
 
         return cell
 }
+    
+    // function that get statuses based on date selected in the calender 
+    func getUpdatesbasedOnTense()
+    {
+        var query = PFQuery(className: "StatusUpdate")
+        query.whereKey("tense", equalTo: "going")
+        //query.whereKey("tense", equalTo: "currently")
+        query.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
+            print("updates found")
+            if let objects = objects as [PFObject]!
+            {
+                for object in objects
+                {
+                    print(object.createdAt)
+                }
+            }
+        }
+
+        
+    }
 
 
 }
