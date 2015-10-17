@@ -14,7 +14,10 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     @IBOutlet weak var sharebutton: UIBarButtonItem!
     
     var statausData:NSMutableArray = NSMutableArray()
-    var currentDate:NSDate!
+    var currentDate = NSDate()
+    var  statustext:String!
+    var selecteddate:NSDate!
+    
     
     
     override func viewDidLoad() {
@@ -39,11 +42,8 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     
     func dailyCalendarViewDidSelect(date: NSDate!) {
-        
-        currentDate = date
-        print(currentDate)
-        //getUpdatesbasedOnTense()
-        
+        selecteddate = date
+        print("the selected date is \(selecteddate)")
         
         
     }
@@ -63,7 +63,15 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     func LoadData()
     {
+        currentDate = NSDate()
+        print("the current date is \(currentDate)")
+        
+    
+        
+        
         statausData.removeAllObjects()
+        
+      
         
         var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
         getstatus.whereKey("tense", equalTo: "going")
@@ -74,6 +82,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
                 for object in objects!
                 {
                     let statusupdate:PFObject = object as! PFObject
+                    
                     
                     
                     
@@ -109,6 +118,10 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
         
         cell.statusTextView.text = statusupdate.objectForKey("updatetext") as! String
+        
+        
+        
+        
         
         
         
