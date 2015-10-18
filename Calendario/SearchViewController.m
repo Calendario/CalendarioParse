@@ -53,7 +53,7 @@
                  }
                  
                  self.allUsers = newArray;
-                 [self.editFriendsTableView reloadData];
+                 [self.searchTableView reloadData];
              }
              
              /* self.allUsers = objects;
@@ -67,6 +67,65 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.searchTableView.dataSource = self;
+    self.searchTableView.delegate = self;
+    
+    //configure search controller
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.delegate = self;
+    self.searchController.searchBar.delegate = self;
+    self.searchController.searchResultsUpdater = self;
+
+    
+    //override default background color of searchbar's textfield
+    for (UIView *subView in self.searchController.searchBar.subviews)
+    {
+        for (UIView *secondLevelSubview in subView.subviews){
+            if ([secondLevelSubview isKindOfClass:[UITextField class]])
+            {
+                UITextField *searchBarTextField = (UITextField *)secondLevelSubview;
+                
+                //set font color here
+                searchBarTextField.backgroundColor = [UIColor colorWithRed:24/255.0f green:99/255.0f blue:56/255.0f alpha:1.0];
+                searchBarTextField.textColor = [UIColor whiteColor];
+                break;
+            }
+        }
+    }
+    
+    //set searchbar properties
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    [self.searchController.searchBar sizeToFit];
+    self.searchController.searchBar.backgroundColor = [UIColor colorWithRed:33/255.0f green:135/255.0f blue:75/255.0f alpha:1.0];
+    self.searchController.searchBar.barTintColor = [UIColor colorWithRed:33/255.0f green:135/255.0f blue:75/255.0f alpha:1.0];
+    self.searchController.searchBar.tintColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0];
+    self.searchController.searchBar.translucent = NO;
+
+    
+    //set searchBar Text color
+    for (UIView *subview in self.searchController.searchBar.subviews) {
+        for (UIView *sv in subview.subviews) {
+            if ([NSStringFromClass([sv class]) isEqualToString:@"UISearchBarTextField"]) {
+                
+                if ([sv respondsToSelector:@selector(setAttributedPlaceholder:)]) {
+                    ((UITextField *)sv).attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.searchController.searchBar.placeholder attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+                }
+                break;
+            }
+        }
+    }
+    
+    //set search bar icon color
+    [self.searchController.searchBar setImage:[UIImage imageNamed:@"search_icon"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+
+    
+    
+    self.searchTableView.tableHeaderView = self.searchController.searchBar;
+    self.definesPresentationContext = YES;
+    
+    
+    filteredArray = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,9 +133,28 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL) isFriend:(PFUser *)user
+{
+    for (PFUser *friend in self.friends)
+    {
+        if ([friend.objectId isEqualToString:user.objectId])
+        {
+            return YES;
+        }
+        
+        
+    }
+    return NO;
+}
+
+
 
 - (IBAction)backButtonPressed:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
 
 #pragma mark Search Bar Methods
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
@@ -88,7 +166,7 @@
     NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"username == %@", searchString];
     filteredArray = [[self.friends filteredArrayUsingPredicate:searchPredicate] mutableCopy];
     
-    [self.removeTableView reloadData];
+    [self.searchTableView reloadData];
     
 }
 
@@ -110,15 +188,53 @@
     else
     {
         
-        return self.friends.count;
+        return self.allUsers.count;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+   
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell"];
+    UILabel *userLabel = (UILabel *)[cell.contentView viewWithTag:2];
+    UIImageView *userImage = (UIImageView *)[cell.contentView viewWithTag:1];
+    UIImage *image = [UIImage imageNamed:@"N/A_icon"];
+
     
-    UILabel *userLabel = [cell.contentView viewWithTag:2];
+    if ([self.searchController isActive])
+    {
+        PFUser *user = [filteredArray objectAtIndex:indexPath.row];
+        userLabel.text = user.username;
+        
+                            //NEED TO IMPLEMENT USER PROFILE IMAGE ONCE AVAILABLE****
+        [userImage setImage:image];
+        userImage.layer.cornerRadius = userImage.frame.size.width/2;
+        userImage.clipsToBounds = YES;
+        userImage.layer.borderWidth = 1.0f;
+        userImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        
+        
+        return cell;
+    }
+    
+    else
+    {
+        PFUser *user = [self.allUsers objectAtIndex:indexPath.row];
+        userLabel.text = user.username;
+        
+                             //NEED TO IMPLEMENT USER PROFILE IMAGE ONCE AVAILABLE****
+        [userImage setImage:image];
+        userImage.layer.cornerRadius = userImage.frame.size.width/2;
+        userImage.clipsToBounds = YES;
+        userImage.layer.borderWidth = 1.0f;
+        userImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
+
+        
+        return cell;
+    }
+    
+    
+    return cell;
     
 }
 
@@ -141,9 +257,15 @@
     }
 }
 
+
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //row automatically deselects so it doesn't stay highlighted
+    [self.searchTableView deselectRowAtIndexPath:indexPath animated:NO];
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
+    
+    //NAVIGATE TO SELECTED USER'S PROFILE PAGE
     
 }
 
