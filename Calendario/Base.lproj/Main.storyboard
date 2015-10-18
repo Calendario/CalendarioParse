@@ -88,6 +88,116 @@
             </objects>
             <point key="canvasLocation" x="1275.5" y="433.5"/>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="5BP-c9-sZC">
+            <objects>
+                <viewController id="LWK-IF-Qh9" customClass="SearchViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Icz-TE-WIm"/>
+                        <viewControllerLayoutGuide type="bottom" id="58e-Z4-n0n"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xL0-dF-ULN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ef0-Ce-UCZ" userLabel="TopLayoutGuide">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="nCA-3v-zK5"/>
+                                </constraints>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13r-Iw-JZK">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="0m4-HK-huF"/>
+                                    <constraint firstAttribute="height" constant="44" id="LTv-XT-qTB"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="21"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Search" id="1fH-0L-sAT">
+                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="L8Y-Ia-3M5">
+                                            <inset key="imageInsets" minX="0.0" minY="18" maxX="35" maxY="16"/>
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="backButtonPressed:" destination="LWK-IF-Qh9" id="lff-u2-XFX"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="52" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="esI-F5-Fps">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="52" id="v4l-4r-4nc" customClass="searchCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="52"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v4l-4r-4nc" id="1if-ng-4jI">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MeP-xu-Qpc" userLabel="User Profile Image">
+                                                    <rect key="frame" x="8" y="7" width="38" height="38"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="38" id="93r-KM-E8O"/>
+                                                        <constraint firstAttribute="width" constant="38" id="u3q-H3-Bb2"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7rJ-wq-Ucb" userLabel="Username">
+                                                    <rect key="frame" x="54" y="16" width="313" height="20"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstItem="MeP-xu-Qpc" firstAttribute="leading" secondItem="1if-ng-4jI" secondAttribute="leading" constant="8" id="9tQ-yv-TS7"/>
+                                                <constraint firstItem="7rJ-wq-Ucb" firstAttribute="trailing" secondItem="1if-ng-4jI" secondAttribute="trailingMargin" id="QNK-v8-Vr9"/>
+                                                <constraint firstItem="7rJ-wq-Ucb" firstAttribute="centerY" secondItem="1if-ng-4jI" secondAttribute="centerY" id="QX1-59-7pi"/>
+                                                <constraint firstItem="MeP-xu-Qpc" firstAttribute="centerY" secondItem="1if-ng-4jI" secondAttribute="centerY" id="l2a-kC-QLa"/>
+                                                <constraint firstItem="7rJ-wq-Ucb" firstAttribute="leading" secondItem="MeP-xu-Qpc" secondAttribute="trailing" constant="8" id="yyb-bp-w8u"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="13r-Iw-JZK" firstAttribute="top" secondItem="Icz-TE-WIm" secondAttribute="bottom" id="FiC-sM-qi9"/>
+                            <constraint firstItem="58e-Z4-n0n" firstAttribute="top" secondItem="esI-F5-Fps" secondAttribute="bottom" id="KaE-TE-kfl"/>
+                            <constraint firstItem="ef0-Ce-UCZ" firstAttribute="top" secondItem="xL0-dF-ULN" secondAttribute="top" id="LS3-at-PaT"/>
+                            <constraint firstItem="esI-F5-Fps" firstAttribute="top" secondItem="13r-Iw-JZK" secondAttribute="bottom" id="PHa-um-ek0"/>
+                            <constraint firstItem="esI-F5-Fps" firstAttribute="leading" secondItem="xL0-dF-ULN" secondAttribute="leading" id="SF9-dm-Fyg"/>
+                            <constraint firstAttribute="trailing" secondItem="ef0-Ce-UCZ" secondAttribute="trailing" id="d9x-RJ-bi6"/>
+                            <constraint firstItem="ef0-Ce-UCZ" firstAttribute="leading" secondItem="xL0-dF-ULN" secondAttribute="leading" id="g8z-Kd-xhy"/>
+                            <constraint firstItem="13r-Iw-JZK" firstAttribute="leading" secondItem="xL0-dF-ULN" secondAttribute="leading" id="m3P-9G-Zux"/>
+                            <constraint firstAttribute="trailing" secondItem="13r-Iw-JZK" secondAttribute="trailing" id="qAP-jG-WXD"/>
+                            <constraint firstAttribute="trailing" secondItem="esI-F5-Fps" secondAttribute="trailing" id="tjY-2P-uHZ"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="searchTableView" destination="esI-F5-Fps" id="lWp-85-p6M"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OyA-zl-nYg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1275.5" y="1181.5"/>
+        </scene>
         <!--Status Update View Controller-->
         <scene sceneID="dRe-1v-v2S">
             <objects>
@@ -265,7 +375,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0vf-oq-P8f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1869" y="412"/>
+            <point key="canvasLocation" x="1759" y="468"/>
         </scene>
         <!--Login View View Controller-->
         <scene sceneID="vZk-wx-8V6">

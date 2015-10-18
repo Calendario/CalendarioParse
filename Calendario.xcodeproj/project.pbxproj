@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A2E12C831BCE6E59007D8587 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E187B5F51BD3368400845C2F /* SearchViewController.m */; settings = {ASSET_TAGS = (); }; };
 		E25607AE1BCAF5EC0085B9B4 /* LoginViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25607AD1BCAF5EC0085B9B4 /* LoginViewViewController.swift */; };
 		E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */; };
 		E2AE81531BCAFF320047D1FA /* NewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE81521BCAFF320047D1FA /* NewsfeedViewController.swift */; };
@@ -65,6 +66,8 @@
 
 /* Begin PBXFileReference section */
 		A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		E187B5F41BD3368400845C2F /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		E187B5F51BD3368400845C2F /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		E25607AC1BCAF5EC0085B9B4 /* Calendario-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Calendario-Bridging-Header.h"; sourceTree = "<group>"; };
 		E25607AD1BCAF5EC0085B9B4 /* LoginViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewViewController.swift; path = ../LoginViewViewController.swift; sourceTree = "<group>"; };
 		E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusUpdateViewController.swift; path = ../StatusUpdateViewController.swift; sourceTree = "<group>"; };
@@ -213,6 +216,15 @@
 			name = Newsfeed;
 			sourceTree = "<group>";
 		};
+		E187B5F31BD3367100845C2F /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				E187B5F41BD3368400845C2F /* SearchViewController.h */,
+				E187B5F51BD3368400845C2F /* SearchViewController.m */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
 		E2D09C9E1BCCC5BD003F4651 /* WeeklyCalender */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +273,7 @@
 		E2E0D7011BC9950800662E70 /* Calendario */ = {
 			isa = PBXGroup;
 			children = (
+				E187B5F31BD3367100845C2F /* Search */,
 				A2E12C8B1BCE6EF7007D8587 /* Newsfeed */,
 				A2E12C861BCE6E92007D8587 /* Main UI */,
 				A2E12C841BCE6E7A007D8587 /* Other */,
@@ -462,6 +475,7 @@
 				E2D8D9FD1BCF51E800A40350 /* NewsfeedTableViewCell.swift in Sources */,
 				E2E0D7041BC9950800662E70 /* main.m in Sources */,
 				E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */,
+				E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */,
 				E2D09C9B1BCCC59A003F4651 /* NSDictionary+CL.m in Sources */,
 				E2D09C901BCCC575003F4651 /* DailyCalendarView.m in Sources */,
 				E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */,
