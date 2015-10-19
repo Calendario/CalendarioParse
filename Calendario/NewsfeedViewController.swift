@@ -18,6 +18,8 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     var  statustext:String!
     var selecteddate:NSDate!
     
+    var updateText:String!
+    
     
     
     override func viewDidLoad() {
@@ -33,20 +35,62 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         self.view.addSubview(cal)
         
         self.navigationController?.hidesBarsOnTap = true
+        print(statausData.count)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        LoadData()
+        //LoadData()
     }
     
     
     func dailyCalendarViewDidSelect(date: NSDate!) {
-        selecteddate = date
-        print("the selected date is \(selecteddate)")
+        statausData.removeAllObjects()
+        
+        let dateformatter = NSDateFormatter()
+        dateformatter.dateFormat = "MM/dd/yy"
+        var newdate = dateformatter.stringFromDate(date)
         
         
+        
+        var getdates:PFQuery = PFQuery(className: "StatusUpdate")
+        getdates.whereKey("dateofevent", equalTo: newdate)
+        print("passed date is \(String(newdate))")
+        
+        
+        getdates.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
+            if error == nil
+            {
+                print(objects!.count)
+                for object in objects!
+                {
+                    let statusupdate:PFObject = object as! PFObject
+                    
+                
+                    
+                    self.statausData.addObject(statusupdate)
+                    
+                    
+                    
+                    
+
+                }
+                
+                
+                let array:NSArray = self.statausData.reverseObjectEnumerator().allObjects
+                self.statausData = NSMutableArray(array: array)
+                
+                self.table.reloadData()
+
+                
+                }
+                
+                
+            }
     }
+
+    
+    
     
     func CLCalendarBehaviorAttributes() -> [NSObject : AnyObject]! {
      
@@ -74,7 +118,8 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
       
         
         var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
-        getstatus.whereKey("tense", equalTo: "going")
+        //getstatus.whereKey("tense", equalTo: "going")
+        
         
         getstatus.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
             if error == nil

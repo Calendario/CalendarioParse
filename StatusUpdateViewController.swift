@@ -79,6 +79,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         
+     
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -110,6 +112,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     func PostStatusUpdate()
     {
+       var dateformatter = NSDateFormatter()
+        
         var statusupdate = PFObject(className: "StatusUpdate")
         statusupdate["updatetext"] = statusUpdateTextField.text
         statusupdate["user"] = PFUser.currentUser()
@@ -239,8 +243,14 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         print(error.localizedDescription)
     }
     
-    
-    
+    func DectectHashTags()
+    {
+        let detector = CalHashTagDetector()
+        detector.decorateTags(statusUpdateTextField.text)
+    }
+
+
+       
     
     
 
