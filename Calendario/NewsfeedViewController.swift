@@ -183,29 +183,17 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         }
 
 
-
+        StartDectingHastags(cell.statusTextView.text)
         return cell
 }
+
+    // function that dectects hastags 
     
-    // function that get statuses based on date selected in the calender 
-    func getUpdatesbasedOnTense()
+    func StartDectingHastags(text:String)
     {
-        var query = PFQuery(className: "StatusUpdate")
-        query.whereKey("tense", equalTo: "going")
-        //query.whereKey("tense", equalTo: "currently")
-        query.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
-            print("updates found")
-            if let objects = objects as [PFObject]!
-            {
-                for object in objects
-                {
-                    print(object.createdAt)
-                }
-            }
-        }
-
+        let dector = CalHashTagDetector()
         
+        dector.decorateTags(text)
     }
-
 
 }

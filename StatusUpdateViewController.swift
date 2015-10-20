@@ -70,7 +70,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha: 1)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationItem.setRightBarButtonItem(PostButton, animated: true)
         statusUpdateTextField.delegate = self
         dateLabel.hidden = true
@@ -78,6 +79,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
+      
         
      
         
@@ -243,11 +245,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         print(error.localizedDescription)
     }
     
-    func DectectHashTags()
-    {
-        let detector = CalHashTagDetector()
-        detector.decorateTags(statusUpdateTextField.text)
-    }
+    
 
 
        
