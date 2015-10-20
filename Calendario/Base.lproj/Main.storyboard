@@ -39,12 +39,22 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXy-RC-Kfz">
-                                                    <rect key="frame" x="16" y="38" width="333" height="90"/>
+                                                    <rect key="frame" x="16" y="42" width="333" height="90"/>
                                                     <animations/>
                                                     <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3z0-mT-fxK">
+                                                    <rect key="frame" x="186" y="-1" width="58" height="50"/>
+                                                    <animations/>
+                                                    <state key="normal" image="like button "/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQl-PN-6NQ">
+                                                    <rect key="frame" x="241" y="2" width="62" height="40"/>
+                                                    <animations/>
+                                                    <state key="normal" image="comment"/>
+                                                </button>
                                             </subviews>
                                             <animations/>
                                         </tableViewCellContentView>
@@ -256,6 +266,7 @@
                                     <segment title="Went"/>
                                     <segment title="Currently"/>
                                 </segments>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="tenseControlchanged:" destination="9Rc-cM-4J1" eventType="valueChanged" id="TQJ-7K-BpX"/>
                                 </connections>
@@ -281,7 +292,7 @@
                                 <rect key="frame" x="-12" y="197" width="438" height="110"/>
                                 <animations/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hn-TC-05F">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hn-TC-05F">
                                 <rect key="frame" x="92" y="77" width="207" height="21"/>
                                 <animations/>
                                 <constraints>
@@ -292,15 +303,15 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gZ4-sN-fht">
-                                <rect key="frame" x="29" y="643" width="54" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gZ4-sN-fht">
+                                <rect key="frame" x="37" y="616" width="56" height="63"/>
                                 <animations/>
-                                <state key="normal" title="Camera"/>
+                                <state key="normal" image="camera_icon"/>
                                 <connections>
                                     <action selector="CameraTapped:" destination="9Rc-cM-4J1" eventType="touchUpInside" id="6hA-Bl-2mT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3YI-hx-syF">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3YI-hx-syF">
                                 <rect key="frame" x="115" y="643" width="47" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Libary "/>
@@ -313,7 +324,7 @@
                                 <animations/>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2tv-95-hXK">
-                                <rect key="frame" x="29" y="342" width="365" height="299"/>
+                                <rect key="frame" x="37" y="325" width="352" height="283"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -330,33 +341,33 @@
                             <constraint firstItem="HhE-B9-o42" firstAttribute="leading" secondItem="WyQ-Fc-Ez4" secondAttribute="leading" id="Ax5-UJ-VQt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="r46-FK-Xrz" secondAttribute="trailing" constant="9" id="F2C-8o-cDQ"/>
                             <constraint firstItem="r46-FK-Xrz" firstAttribute="top" secondItem="xQJ-8T-iwD" secondAttribute="bottom" constant="8" symbolic="YES" id="Fpk-ao-fXK"/>
-                            <constraint firstItem="gZ4-sN-fht" firstAttribute="top" secondItem="2tv-95-hXK" secondAttribute="bottom" constant="3" id="H4c-dQ-IlN"/>
+                            <constraint firstItem="gZ4-sN-fht" firstAttribute="top" secondItem="2tv-95-hXK" secondAttribute="bottom" constant="8" id="H4c-dQ-IlN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5Mx-Sv-ocw" secondAttribute="trailing" constant="-19" id="HPJ-9m-FJn"/>
                             <constraint firstItem="P3y-v8-GPh" firstAttribute="top" secondItem="HhE-B9-o42" secondAttribute="bottom" constant="42" id="I8Y-lD-hAr"/>
                             <constraint firstItem="Gcm-dB-nn2" firstAttribute="leading" secondItem="WyQ-Fc-Ez4" secondAttribute="leadingMargin" constant="5" id="IZL-f3-e9o"/>
-                            <constraint firstItem="9V3-fZ-HWV" firstAttribute="top" secondItem="6hn-TC-05F" secondAttribute="bottom" constant="98" id="J9m-PG-Slv"/>
-                            <constraint firstItem="6hn-TC-05F" firstAttribute="leading" secondItem="WyQ-Fc-Ez4" secondAttribute="leadingMargin" constant="75" id="JgJ-c9-JIw"/>
-                            <constraint firstItem="6hn-TC-05F" firstAttribute="top" secondItem="xQJ-8T-iwD" secondAttribute="bottom" constant="58" id="KTa-eQ-o3j"/>
+                            <constraint firstItem="9V3-fZ-HWV" firstAttribute="top" secondItem="6hn-TC-05F" secondAttribute="bottom" constant="99" id="J9m-PG-Slv"/>
+                            <constraint firstItem="6hn-TC-05F" firstAttribute="leading" secondItem="WyQ-Fc-Ez4" secondAttribute="leadingMargin" constant="72" id="JgJ-c9-JIw"/>
+                            <constraint firstItem="6hn-TC-05F" firstAttribute="top" secondItem="xQJ-8T-iwD" secondAttribute="bottom" constant="57" id="KTa-eQ-o3j"/>
                             <constraint firstItem="5Mx-Sv-ocw" firstAttribute="top" secondItem="HhE-B9-o42" secondAttribute="bottom" constant="45" id="LKm-re-r1l"/>
                             <constraint firstItem="9V3-fZ-HWV" firstAttribute="top" secondItem="r46-FK-Xrz" secondAttribute="bottom" constant="47" id="La2-2W-Nhs"/>
                             <constraint firstItem="9V3-fZ-HWV" firstAttribute="leading" secondItem="WyQ-Fc-Ez4" secondAttribute="leadingMargin" constant="-32" id="MUW-rc-fR5"/>
-                            <constraint firstItem="2tv-95-hXK" firstAttribute="top" secondItem="P3y-v8-GPh" secondAttribute="bottom" constant="40" id="RT7-Bo-3bi"/>
-                            <constraint firstItem="2tv-95-hXK" firstAttribute="trailing" secondItem="WyQ-Fc-Ez4" secondAttribute="trailingMargin" id="UHC-T6-U6W"/>
-                            <constraint firstItem="3YI-hx-syF" firstAttribute="baseline" secondItem="gZ4-sN-fht" secondAttribute="baseline" id="WTa-UC-g4T"/>
+                            <constraint firstItem="2tv-95-hXK" firstAttribute="top" secondItem="P3y-v8-GPh" secondAttribute="bottom" constant="24" id="RT7-Bo-3bi"/>
+                            <constraint firstItem="2tv-95-hXK" firstAttribute="trailing" secondItem="WyQ-Fc-Ez4" secondAttribute="trailingMargin" constant="-5" id="UHC-T6-U6W"/>
+                            <constraint firstItem="3YI-hx-syF" firstAttribute="baseline" secondItem="gZ4-sN-fht" secondAttribute="baseline" constant="-16" id="WTa-UC-g4T"/>
                             <constraint firstItem="r46-FK-Xrz" firstAttribute="leading" secondItem="Gcm-dB-nn2" secondAttribute="trailing" constant="8" symbolic="YES" id="d8Y-eM-jmb"/>
                             <constraint firstItem="Gcm-dB-nn2" firstAttribute="top" secondItem="xQJ-8T-iwD" secondAttribute="bottom" constant="52" id="dlA-QB-bca"/>
                             <constraint firstItem="5Mx-Sv-ocw" firstAttribute="leading" secondItem="WyQ-Fc-Ez4" secondAttribute="leadingMargin" constant="-37" id="fOo-WS-XU2"/>
                             <constraint firstItem="mwk-yB-n2C" firstAttribute="trailing" secondItem="P3y-v8-GPh" secondAttribute="trailing" id="frN-DN-5Kw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="R26-bd-sTX" secondAttribute="trailing" constant="19" id="fzl-qE-RdR"/>
-                            <constraint firstItem="QO2-YO-TNd" firstAttribute="top" secondItem="gZ4-sN-fht" secondAttribute="bottom" constant="19" id="hik-Cs-B3x"/>
-                            <constraint firstItem="3YI-hx-syF" firstAttribute="leading" secondItem="gZ4-sN-fht" secondAttribute="trailing" constant="32" id="jby-XJ-gxq"/>
+                            <constraint firstItem="QO2-YO-TNd" firstAttribute="top" secondItem="gZ4-sN-fht" secondAttribute="bottom" constant="13" id="hik-Cs-B3x"/>
+                            <constraint firstItem="3YI-hx-syF" firstAttribute="leading" secondItem="gZ4-sN-fht" secondAttribute="trailing" constant="22" id="jby-XJ-gxq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mwk-yB-n2C" secondAttribute="trailing" constant="-14" id="rcB-Zt-hBD"/>
-                            <constraint firstItem="2tv-95-hXK" firstAttribute="top" secondItem="9V3-fZ-HWV" secondAttribute="bottom" constant="34" id="tKA-xv-CYf"/>
+                            <constraint firstItem="2tv-95-hXK" firstAttribute="top" secondItem="9V3-fZ-HWV" secondAttribute="bottom" constant="18" id="tKA-xv-CYf"/>
                             <constraint firstItem="mwk-yB-n2C" firstAttribute="leading" secondItem="WyQ-Fc-Ez4" secondAttribute="leadingMargin" constant="4" id="tjE-9J-aY6"/>
                             <constraint firstItem="HhE-B9-o42" firstAttribute="centerX" secondItem="mwk-yB-n2C" secondAttribute="centerX" id="uu8-De-fct"/>
                             <constraint firstItem="2tv-95-hXK" firstAttribute="leading" secondItem="gZ4-sN-fht" secondAttribute="leading" id="wfx-uh-ACf"/>
                             <constraint firstItem="9V3-fZ-HWV" firstAttribute="top" secondItem="mwk-yB-n2C" secondAttribute="top" id="yNa-JR-cFL"/>
-                            <constraint firstItem="2tv-95-hXK" firstAttribute="leading" secondItem="WyQ-Fc-Ez4" secondAttribute="leadingMargin" constant="9" id="yxO-04-lQZ"/>
+                            <constraint firstItem="2tv-95-hXK" firstAttribute="leading" secondItem="WyQ-Fc-Ez4" secondAttribute="leadingMargin" constant="17" id="yxO-04-lQZ"/>
                         </constraints>
                     </view>
                     <toolbarItems>
@@ -1457,9 +1468,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         </scene>
     </scenes>
     <resources>
+        <image name="camera_icon" width="120" height="120"/>
+        <image name="comment" width="60" height="60"/>
         <image name="default_profile_pic" width="120" height="120"/>
         <image name="email_grey" width="256" height="256"/>
         <image name="left_icon" width="60" height="60"/>
+        <image name="like button " width="60" height="60"/>
         <image name="lock_icon" width="120" height="120"/>
         <image name="loginViewBackground" width="375" height="667"/>
         <image name="loginViewTitle" width="345" height="66"/>
