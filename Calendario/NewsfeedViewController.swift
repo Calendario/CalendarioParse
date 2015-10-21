@@ -41,6 +41,8 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         
         self.navigationController?.hidesBarsOnTap = true
         print(statausData.count)
+        
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -86,6 +88,9 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
                 self.statausData = NSMutableArray(array: array)
                 
                 self.table.reloadData()
+                
+                
+                
 
                 
                 }
@@ -93,7 +98,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
                 
             }
         
-            isDatePassed(NSDate(), date2: date)
+        
     }
     
 
@@ -194,6 +199,9 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
 
 
         StartDectingHastags(cell.statusTextView.text)
+        
+       isDatePassed(statusupdate.createdAt!, date2: NSDate(), ParseID: statusupdate.objectId!)
+        
         return cell
 }
     
@@ -218,13 +226,29 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     
     
-    func isDatePassed(date1:NSDate, date2:NSDate)
+    func isDatePassed(date1:NSDate, date2:NSDate, ParseID: String)
     {
         if date1.timeIntervalSince1970 < date2.timeIntervalSince1970
         {
             print("Date1 has passed")
-        }
-    }
+            
+            var query = PFQuery(className: "StatusUpdate")
+            query.getObjectInBackgroundWithId(ParseID, block: { (updates:PFObject?, error:NSError?) -> Void in
+                if error == nil
+                {
+                    var aobject:PFObject = updates!
+                    
+                    print(error)
+                    
+                    print("tense is going to change")
+                    aobject["tense"] = "went"
+                    aobject.saveInBackground()
+                }
+            })
+
+                    
+                }
+
     
     
     
@@ -233,4 +257,5 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     
 
+}
 }

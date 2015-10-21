@@ -79,6 +79,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
+        self.TenseControl.tintColor = UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha:1)
+
       
         
      
@@ -184,17 +186,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         }
     }
     
-    @IBAction func libaryTapped(sender: AnyObject) {
-        
-        var lib = UIImagePickerController()
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            lib.delegate = self
-            lib.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        lib.allowsEditing = false
-            self.presentViewController(lib, animated: true, completion: nil)
-        }
-    }
-    
+   
     
     
     
