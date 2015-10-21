@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A2E12C831BCE6E59007D8587 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		E151AF721BD72D6500811A31 /* tabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E151AF711BD72D6500811A31 /* tabBarViewController.m */; settings = {ASSET_TAGS = (); }; };
 		E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E187B5F51BD3368400845C2F /* SearchViewController.m */; settings = {ASSET_TAGS = (); }; };
 		E25607AE1BCAF5EC0085B9B4 /* LoginViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25607AD1BCAF5EC0085B9B4 /* LoginViewViewController.swift */; };
 		E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */; };
@@ -67,6 +68,8 @@
 
 /* Begin PBXFileReference section */
 		A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		E151AF701BD72D6500811A31 /* tabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tabBarViewController.h; sourceTree = "<group>"; };
+		E151AF711BD72D6500811A31 /* tabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tabBarViewController.m; sourceTree = "<group>"; };
 		E187B5F41BD3368400845C2F /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		E187B5F51BD3368400845C2F /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		E25607AC1BCAF5EC0085B9B4 /* Calendario-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Calendario-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -221,6 +224,15 @@
 			name = Newsfeed;
 			sourceTree = "<group>";
 		};
+		E151AF6F1BD72D3E00811A31 /* TabBar Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E151AF701BD72D6500811A31 /* tabBarViewController.h */,
+				E151AF711BD72D6500811A31 /* tabBarViewController.m */,
+			);
+			name = "TabBar Controller";
+			sourceTree = "<group>";
+		};
 		E187B5F31BD3367100845C2F /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +290,7 @@
 		E2E0D7011BC9950800662E70 /* Calendario */ = {
 			isa = PBXGroup;
 			children = (
+				E151AF6F1BD72D3E00811A31 /* TabBar Controller */,
 				E187B5F31BD3367100845C2F /* Search */,
 				A2E12C8B1BCE6EF7007D8587 /* Newsfeed */,
 				A2E12C861BCE6E92007D8587 /* Main UI */,
@@ -487,6 +500,7 @@
 				E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */,
 				E2D09C9A1BCCC59A003F4651 /* NSDate+CL.m in Sources */,
 				A2E12C831BCE6E59007D8587 /* RegisterViewController.swift in Sources */,
+				E151AF721BD72D6500811A31 /* tabBarViewController.m in Sources */,
 				E2D09C9D1BCCC59A003F4651 /* UIImage+CL.m in Sources */,
 				E25607AE1BCAF5EC0085B9B4 /* LoginViewViewController.swift in Sources */,
 			);
