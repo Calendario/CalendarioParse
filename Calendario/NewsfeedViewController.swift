@@ -92,7 +92,10 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
                 
                 
             }
+        
+            isDatePassed(NSDate(), date2: date)
     }
+    
 
     
     
@@ -212,6 +215,17 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         
         dector.decorateTags(text)
     }
+    
+    
+    
+    func isDatePassed(date1:NSDate, date2:NSDate)
+    {
+        if date1.timeIntervalSince1970 < date2.timeIntervalSince1970
+        {
+            print("Date1 has passed")
+        }
+    }
+    
     
     
     
