@@ -13,12 +13,17 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var sharebutton: UIBarButtonItem!
     
+  
+    
+    
     var statausData:NSMutableArray = NSMutableArray()
     var currentDate = NSDate()
     var  statustext:String!
     var selecteddate:NSDate!
     
     var updateText:String!
+    
+    var currentobjectID:String!
     
     
     
@@ -170,6 +175,8 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         
         
         
+        
+        
         var findUser:PFQuery = PFUser.query()!
         
         findUser.whereKey("objectId", equalTo: (statusupdate.objectForKey("user")?.objectId)!)
@@ -186,6 +193,16 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         StartDectingHastags(cell.statusTextView.text)
         return cell
 }
+    
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
+        
+        //print(statusupdate.objectId!)
+        currentobjectID = statusupdate.objectId
+        print("the current object id is \(currentobjectID)")
+    }
 
     // function that dectects hastags 
     
@@ -195,5 +212,11 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         
         dector.decorateTags(text)
     }
+    
+    
+    
+    
+    
+    
 
 }

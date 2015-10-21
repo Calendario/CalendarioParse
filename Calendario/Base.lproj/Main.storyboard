@@ -49,6 +49,9 @@
                                                     <rect key="frame" x="186" y="-1" width="58" height="50"/>
                                                     <animations/>
                                                     <state key="normal" image="like button "/>
+                                                    <connections>
+                                                        <action selector="LikeButtonTapped:" destination="sGJ-qf-6wC" eventType="touchUpInside" id="1xh-o9-36L"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQl-PN-6NQ">
                                                     <rect key="frame" x="241" y="2" width="62" height="40"/>
@@ -60,6 +63,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
+                                            <outlet property="LikeButton" destination="3z0-mT-fxK" id="mjk-yT-zEz"/>
                                             <outlet property="UserNameLabel" destination="vug-8I-4BZ" id="AKP-z6-y2t"/>
                                             <outlet property="statusTextView" destination="NXy-RC-Kfz" id="bRR-Lc-dMb"/>
                                         </connections>
