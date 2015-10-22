@@ -35,7 +35,6 @@ class RegisterViewViewController: UIViewController {
     @IBOutlet weak var profileImage: UIButton!
     @IBOutlet weak var profileScroll: UIScrollView!
     
-    
     // Setup the on screen button actions.
     
     @IBAction func createUser(sender: UIButton) {
@@ -115,6 +114,10 @@ class RegisterViewViewController: UIViewController {
         newUser.username = username
         newUser.password = password
         newUser.email = email
+        
+        // Set the other user data fields.
+        newUser.setObject(self.descField.text, forKey: "userBio")
+        newUser.setObject(self.webField.text!, forKey: "website")
         
         // Pass the details to the Parse API.
         newUser.signUpInBackgroundWithBlock { (succed, error) -> Void in
