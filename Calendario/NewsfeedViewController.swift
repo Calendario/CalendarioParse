@@ -18,7 +18,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     var statausData:NSMutableArray = NSMutableArray()
     var currentDate = NSDate()
-    var  statustext:String!
+    var statustext:String!
     var selecteddate:NSDate!
     
     var updateText:String!

@@ -21,7 +21,7 @@ THANKS - DANIEL SADJADIAN
 import UIKit
 import Parse
 
-class LoginViewViewController: UIViewController {
+class LoginViewViewController: UIViewController, UITextFieldDelegate {
     
     // Setup the username and password text fields.
     @IBOutlet weak var userField: UITextField!
@@ -45,10 +45,9 @@ class LoginViewViewController: UIViewController {
         self.view.resignFirstResponder()
         
         // Open the register view.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let NFVC = sb.instantiateViewControllerWithIdentifier("registerview") as! RegisterViewViewController
-        let NC = UINavigationController(rootViewController: NFVC)
-        self.presentViewController(NC, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewC = storyboard.instantiateViewControllerWithIdentifier("registerview") as! RegisterViewViewController
+        self.presentViewController(viewC, animated: true, completion: nil)
     }
     
     @IBAction func resetPassword(sender: UIButton) {
@@ -128,10 +127,12 @@ class LoginViewViewController: UIViewController {
     // News feed methods.
     
     func GotoNewsfeed() {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let NFVC = sb.instantiateViewControllerWithIdentifier("newsfeed") as! NewsfeedViewController
-        let NC = UINavigationController(rootViewController: NFVC)
-        self.presentViewController(NC, animated: true, completion: nil)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let tabBarController: UITabBarController = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! tabBarViewController
+        appDelegate.window.makeKeyAndVisible()
+        appDelegate.window.rootViewController = tabBarController
     }
     
     // Alert methods.
@@ -149,7 +150,12 @@ class LoginViewViewController: UIViewController {
         presentViewController(alertController, animated: true, completion: nil)
     }
     
-    // Other metods.
+    // Other methods.
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

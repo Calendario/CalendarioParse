@@ -6,3 +6,5 @@
 #import <Parse/Parse.h>
 #import "CLWeeklyCalendarView.h"
 #import  "CalHashTagDetector.h"
+#import "AppDelegate.h"
+#import "tabBarViewController.h"

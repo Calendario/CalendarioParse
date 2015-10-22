@@ -22,7 +22,7 @@ import UIKit
 import Parse
 import Photos
 
-class RegisterViewViewController: UIViewController {
+class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // Setup the data input text fields and other objects.
     @IBOutlet weak var emailField: UITextField!
@@ -35,6 +35,9 @@ class RegisterViewViewController: UIViewController {
     @IBOutlet weak var profileImage: UIButton!
     @IBOutlet weak var profileScroll: UIScrollView!
     
+    // Store the selected profile image data.
+    var imageData : NSData!
+    
     // Setup the on screen button actions.
     
     @IBAction func createUser(sender: UIButton) {
@@ -46,15 +49,102 @@ class RegisterViewViewController: UIViewController {
     @IBAction func cancel(sender: UIButton) {
         
         // Go back to the login page.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let NFVC = sb.instantiateViewControllerWithIdentifier("LoginPage") as! LoginViewViewController
-        let NC = UINavigationController(rootViewController: NFVC)
-        self.presentViewController(NC, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewC = storyboard.instantiateViewControllerWithIdentifier("LoginPage") as! LoginViewViewController
+        self.presentViewController(viewC, animated: true, completion: nil)
     }
     
     @IBAction func addImage(sender: UIButton) {
+    
+        // Setup the image picker view controller.
+        var imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
         
-        // Open the image gallary.
+        // Setup the alert controller.
+        let imageAlert = UIAlertController(title: "Profile Picture", message: "Add a photo from your library or take a picture with the camera.", preferredStyle: .Alert)
+        
+        // Setup the alert actions.
+        let libraryPicture = { (action:UIAlertAction!) -> Void in
+            
+            // Check if the device has a photo library.
+            
+            if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)) {
+                
+                // Access the photo library (not the camera).
+                imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+                
+                // Request photo library authorisation.
+                let check = PHPhotoLibrary.authorizationStatus()
+                
+                // Check to see what the users response if.
+                
+                if (check == PHAuthorizationStatus.Authorized) {
+                    self.presentViewController(imagePicker, animated: true, completion: nil)
+                }
+                
+                else if ((check == PHAuthorizationStatus.NotDetermined) || (check == PHAuthorizationStatus.Denied)) {
+                    
+                    // Request library authorisation.
+                    PHPhotoLibrary.requestAuthorization({ (status) -> Void in
+                        
+                        // Check to see if access has been granted.
+                        
+                        if (status == PHAuthorizationStatus.Authorized) {
+                            self.presentViewController(imagePicker, animated: true, completion: nil)
+                        }
+                        
+                        else {
+                            self.displayError("Error", alertMessage: "You have not granted access to your photo library.")
+                        }
+                    })
+                }
+                
+                else if (check == PHAuthorizationStatus.Restricted) {
+                    self.displayError("Error", alertMessage: "You have not granted access to your photo library.")
+                }
+            }
+            
+            else {
+                self.displayError("Error", alertMessage: "Your device does not have a photo library")
+            }
+        }
+        let buttonOne = UIAlertAction(title: "Library", style: .Default, handler: libraryPicture)
+        
+        let cameraPicture = { (action:UIAlertAction!) -> Void in
+            
+            // Check if the device has a camera.
+            
+            if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
+                
+                // Access the camera (not the photo library).
+                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+                
+                // Request access to the camera.
+                AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: { (success) -> Void in
+                    
+                    if (success) {
+                        self.presentViewController(imagePicker, animated: true, completion: nil)
+                    }
+                        
+                    else {
+                        self.displayError("Error", alertMessage: "You have not granted access to your camera.")
+                    }
+                })
+            }
+            
+            else {
+                self.displayError("Error", alertMessage: "Your device does not have a camera.")
+            }
+        }
+        let buttonTwo = UIAlertAction(title: "Camera", style: .Default, handler: cameraPicture)
+        
+        // Add the actions to the alert.
+        imageAlert.addAction(buttonOne)
+        imageAlert.addAction(buttonTwo)
+        
+        // Present the alert on screen.
+        self.presentViewController(imageAlert, animated: true, completion: nil)
     }
     
     // View Did Load.
@@ -65,6 +155,18 @@ class RegisterViewViewController: UIViewController {
         // Setup the scroll view.
         profileScroll.scrollEnabled = true
         profileScroll.contentSize = CGSize(width:self.view.bounds.width, height: 880)
+        
+        // Allow the user to dismiss the keyboard with a toolabr.
+        let editToolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.frame.size.width, 50))
+        editToolbar.barStyle = UIBarStyle.Default
+        
+        editToolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "textViewDismissKeyboard")
+        ]
+        
+        editToolbar.sizeToFit()
+        descField.inputAccessoryView = editToolbar
     }
     
     // Data check methods.
@@ -116,8 +218,13 @@ class RegisterViewViewController: UIViewController {
         newUser.email = email
         
         // Set the other user data fields.
-        newUser.setObject(self.descField.text, forKey: "userBio")
-        newUser.setObject(self.webField.text!, forKey: "website")
+        newUser["userBio"] = self.descField.text
+        newUser["website"] = self.webField.text
+        newUser["fullName"] = self.fullNameField.text
+        
+        // Set the user profile picture.
+        let imageFile = PFFile(name: "prof.jpg", data: imageData!)
+        newUser["profileImage"] = imageFile
         
         // Pass the details to the Parse API.
         newUser.signUpInBackgroundWithBlock { (succed, error) -> Void in
@@ -153,10 +260,12 @@ class RegisterViewViewController: UIViewController {
     // News feed methods.
     
     func GotoNewsfeed() {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let NFVC = sb.instantiateViewControllerWithIdentifier("newsfeed") as! NewsfeedViewController
-        let NC = UINavigationController(rootViewController: NFVC)
-        self.presentViewController(NC, animated: true, completion: nil)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let tabBarController: UITabBarController = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! tabBarViewController
+        appDelegate.window.makeKeyAndVisible()
+        appDelegate.window.rootViewController = tabBarController
     }
     
     // Alert methods.
@@ -174,7 +283,30 @@ class RegisterViewViewController: UIViewController {
         presentViewController(alertController, animated: true, completion: nil)
     }
     
-    // Other metods.
+    // Other methods.
+    
+    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!){
+        
+        // Dismiss the image picker view controller.
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+            // Store the image for use in the registration.
+            self.imageData = UIImageJPEGRepresentation(image, 1.0)
+            
+            // Set the profile button image.
+            self.profileImage.setImage(image, forState: UIControlState.Normal)
+        })
+    }
+    
+    func textViewDismissKeyboard() {
+        descField.resignFirstResponder()
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

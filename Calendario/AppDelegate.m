@@ -19,6 +19,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    // Override point for customization after application launch.
+    
+    // IMPORTANT: If this line does NOT execute, then the app will crash
+    // when you try to interact with the Parse API - this line MUST be executed!
+    [Parse setApplicationId:@"p8YhMVSoCmZvl5tBbpvdk2CK3BYmqwC3p9VS4kPI" clientKey:@"fyHr9RFkqoeefvQxX92J1RBAKnm1s4aqDLRDhAgr"];
+    
     //reference uiTabBar and set ui properties
     //reference the uitabBar
     UITabBar *tabBar = [UITabBar appearance];
@@ -28,19 +34,6 @@
     tabBar.barTintColor = [UIColor colorWithRed:46/255.0 green:153/255.0 blue:80/255.0 alpha:1.0];
     [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     [[UITabBar appearance] setShadowImage:nil];
-    return YES;
-    
-    
-    // Override point for customization after application launch.
-    // Initialize Parse.
-    [Parse setApplicationId:@"p8YhMVSoCmZvl5tBbpvdk2CK3BYmqwC3p9VS4kPI"
-                  clientKey:@"fyHr9RFkqoeefvQxX92J1RBAKnm1s4aqDLRDhAgr"];
-    
-    
-    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    testObject[@"foo"] = @"bar";
-    [testObject saveInBackground];
-    
     return YES;
 }
 
