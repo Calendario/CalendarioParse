@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LiG-4T-5M1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="16Q-ZH-5Rb">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -287,14 +287,14 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="39BA30F3-871E-49BA-9F6A-FCF0E10830EE" translatesAutoresizingMaskIntoConstraints="NO" id="5Mx-Sv-ocw">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="D442F8E2-C468-4A69-9D92-773F4E79A11E" translatesAutoresizingMaskIntoConstraints="NO" id="5Mx-Sv-ocw">
                                 <rect key="frame" x="-17" y="276" width="430" height="110"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="110" id="Fwt-AK-kZ5"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="39BA30F3-871E-49BA-9F6A-FCF0E10830EE" translatesAutoresizingMaskIntoConstraints="NO" id="9V3-fZ-HWV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="D442F8E2-C468-4A69-9D92-773F4E79A11E" translatesAutoresizingMaskIntoConstraints="NO" id="9V3-fZ-HWV">
                                 <rect key="frame" x="-12" y="197" width="438" height="110"/>
                                 <animations/>
                             </imageView>
@@ -312,12 +312,12 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gZ4-sN-fht">
                                 <rect key="frame" x="37" y="616" width="32" height="32"/>
                                 <animations/>
-                                <state key="normal" image="0126D4D7-A454-4A2F-8B67-FBA40AA11093"/>
+                                <state key="normal" image="8DE63F08-793D-4843-8214-4308AED922B3"/>
                                 <connections>
                                     <action selector="CameraTapped:" destination="9Rc-cM-4J1" eventType="touchUpInside" id="6hA-Bl-2mT"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="39BA30F3-871E-49BA-9F6A-FCF0E10830EE" translatesAutoresizingMaskIntoConstraints="NO" id="HhE-B9-o42">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="D442F8E2-C468-4A69-9D92-773F4E79A11E" translatesAutoresizingMaskIntoConstraints="NO" id="HhE-B9-o42">
                                 <rect key="frame" x="0.0" y="121" width="432" height="110"/>
                                 <animations/>
                             </imageView>
@@ -410,11 +410,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginViewBackground" translatesAutoresizingMaskIntoConstraints="NO" id="X8g-s8-fXk">
-                                <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
-                                <animations/>
-                                <gestureRecognizers/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yil-Qb-tGA">
                                 <rect key="frame" x="117" y="347" width="142" height="62"/>
                                 <animations/>
@@ -551,6 +546,11 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="GRb-HE-0pS" secondAttribute="height" multiplier="274:77" constant="3.5584415584415297" id="Etp-Y3-1Qw"/>
                                 </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginViewBackground" translatesAutoresizingMaskIntoConstraints="NO" id="X8g-s8-fXk">
+                                <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
+                                <animations/>
+                                <gestureRecognizers/>
                             </imageView>
                         </subviews>
                         <animations/>
@@ -1543,7 +1543,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         </scene>
     </scenes>
     <resources>
-        <image name="0126D4D7-A454-4A2F-8B67-FBA40AA11093" width="120" height="120">
+        <image name="8DE63F08-793D-4843-8214-4308AED922B3" width="120" height="120">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -2512,7 +2512,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgEAAAMAAAABAHgAAAEBAAMAAAABAHgAAAEC
 AAMAAAAEAADhtgEDAAMAAAABAAEAAAEGAAMAAAABAAIAAAERAAQAAAABAAAACAESAAMAAAABAAEAAAEV
 AAMAAAABAAQAAAEWAAMAAAABAHgAAAEXAAQAAAABAADhAAEcAAMAAAABAAEAAAFSAAMAAAABAAIAAAFT
 AAMAAAAEAADhvodzAAcAAAxIAADhxgAAAAAACAAIAAgACAABAAEAAQABAAAMSExpbm8CEAAAbW50clJH
-QiBYWVogB84AAgAJAAYAMQAAYWNzcE1TRlQAAAAASUVDIHNSR0IAAAAAAAAAAAAAAAEAAPbWAAEAAAAA
+QiBYWVogB84AAgAJAAYAMQAAYWNzcE1TRlQAAAAASUVDIHNSR0IAAAAAAAAAAAAAAAAAAPbWAAEAAAAA
 0y1IUCAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARY3BydAAA
 AVAAAAAzZGVzYwAAAYQAAABsd3RwdAAAAfAAAAAUYmtwdAAAAgQAAAAUclhZWgAAAhgAAAAUZ1hZWgAA
 AiwAAAAUYlhZWgAAAkAAAAAUZG1uZAAAAlQAAABwZG1kZAAAAsQAAACIdnVlZAAAA0wAAACGdmlldwAA
@@ -2573,7 +2573,7 @@ M+9C70bvTe9V72LvZ+9p72vvcO9473vvgO+I74vvne+g76UAAAAAAAACAQAAAAAAAAA+AAAAAAAAAAAA
 AAAAAADvpw
 </mutableData>
         </image>
-        <image name="39BA30F3-871E-49BA-9F6A-FCF0E10830EE" width="300" height="300">
+        <image name="D442F8E2-C468-4A69-9D92-773F4E79A11E" width="300" height="300">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -8583,7 +8583,7 @@ AQIAAwAAAAQABX72AQMAAwAAAAEAAQAAAQYAAwAAAAEAAgAAAREABAAAAAMABX8KARIAAwAAAAEAAQAA
 ARUAAwAAAAEABAAAARYAAwAAAAEAbQAAARcABAAAAAMABX7+ARwAAwAAAAEAAQAAAVIAAwAAAAEAAgAA
 AVMAAwAAAAQABX8Wh3MABwAADEgABX8eAAAAAAAIAAgACAAIAAH+8AAB/vAAAYBgAAAACAAB/vgAA/3o
 AAEAAQABAAEAAAxITGlubwIQAABtbnRyUkdCIFhZWiAHzgACAAkABgAxAABhY3NwTVNGVAAAAABJRUMg
-c1JHQgAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLUhQICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+c1JHQgAAAAAAAAAAAAAAAAAA9tYAAQAAAADTLUhQICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAABFjcHJ0AAABUAAAADNkZXNjAAABhAAAAGx3dHB0AAAB8AAAABRia3B0
 AAACBAAAABRyWFlaAAACGAAAABRnWFlaAAACLAAAABRiWFlaAAACQAAAABRkbW5kAAACVAAAAHBkbWRk
 AAACxAAAAIh2dWVkAAADTAAAAIZ2aWV3AAAD1AAAACRsdW1pAAAD+AAAABRtZWFzAAAEDAAAACR0ZWNo
