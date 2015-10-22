@@ -54,7 +54,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     func dailyCalendarViewDidSelect(date: NSDate!) {
         statausData.removeAllObjects()
         
-        let dateformatter = NSDateFormatter()
+     /*   let dateformatter = NSDateFormatter()
         dateformatter.dateFormat = "MM/dd/yy"
         var newdate = dateformatter.stringFromDate(date)
         
@@ -96,7 +96,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
                 }
                 
                 
-            }
+            }*/
         
         
     }
