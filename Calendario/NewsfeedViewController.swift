@@ -68,7 +68,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         getdates.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
             if error == nil
             {
-                print(objects!.count)
+               // print(objects!.count)
                 for object in objects!
                 {
                     let statusupdate:PFObject = object as! PFObject

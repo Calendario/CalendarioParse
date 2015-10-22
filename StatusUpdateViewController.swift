@@ -186,6 +186,15 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         }
     }
     
+    
+    
+    @IBAction func VideoTapped(sender: AnyObject) {
+        var camera = UIImagePickerController()
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            camera.delegate = self
+            
+        }
+    }
    
     
     
