@@ -7,21 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A2E12C831BCE6E59007D8587 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		E151AF721BD72D6500811A31 /* tabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E151AF711BD72D6500811A31 /* tabBarViewController.m */; settings = {ASSET_TAGS = (); }; };
-		E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E187B5F51BD3368400845C2F /* SearchViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A26359E41BDA8342003F8FEB /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */; };
+		A2E12C831BCE6E59007D8587 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */; };
+		E151AF721BD72D6500811A31 /* tabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E151AF711BD72D6500811A31 /* tabBarViewController.m */; };
+		E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E187B5F51BD3368400845C2F /* SearchViewController.m */; };
 		E25607AE1BCAF5EC0085B9B4 /* LoginViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25607AD1BCAF5EC0085B9B4 /* LoginViewViewController.swift */; };
 		E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */; };
 		E2AE81531BCAFF320047D1FA /* NewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE81521BCAFF320047D1FA /* NewsfeedViewController.swift */; };
-		E2B420EB1BD585F900984E7B /* CalHashTagDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B420EA1BD585F900984E7B /* CalHashTagDetector.m */; settings = {ASSET_TAGS = (); }; };
-		E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8A1BCCC575003F4651 /* CLWeeklyCalendarView.m */; settings = {ASSET_TAGS = (); }; };
-		E2D09C901BCCC575003F4651 /* DailyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8C1BCCC575003F4651 /* DailyCalendarView.m */; settings = {ASSET_TAGS = (); }; };
-		E2D09C911BCCC575003F4651 /* DayTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8E1BCCC575003F4651 /* DayTitleLabel.m */; settings = {ASSET_TAGS = (); }; };
-		E2D09C9A1BCCC59A003F4651 /* NSDate+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C931BCCC59A003F4651 /* NSDate+CL.m */; settings = {ASSET_TAGS = (); }; };
-		E2D09C9B1BCCC59A003F4651 /* NSDictionary+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C951BCCC59A003F4651 /* NSDictionary+CL.m */; settings = {ASSET_TAGS = (); }; };
-		E2D09C9C1BCCC59A003F4651 /* UIColor+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C971BCCC59A003F4651 /* UIColor+CL.m */; settings = {ASSET_TAGS = (); }; };
-		E2D09C9D1BCCC59A003F4651 /* UIImage+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C991BCCC59A003F4651 /* UIImage+CL.m */; settings = {ASSET_TAGS = (); }; };
-		E2D8D9FD1BCF51E800A40350 /* NewsfeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8D9FC1BCF51E800A40350 /* NewsfeedTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		E2B420EB1BD585F900984E7B /* CalHashTagDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B420EA1BD585F900984E7B /* CalHashTagDetector.m */; };
+		E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8A1BCCC575003F4651 /* CLWeeklyCalendarView.m */; };
+		E2D09C901BCCC575003F4651 /* DailyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8C1BCCC575003F4651 /* DailyCalendarView.m */; };
+		E2D09C911BCCC575003F4651 /* DayTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8E1BCCC575003F4651 /* DayTitleLabel.m */; };
+		E2D09C9A1BCCC59A003F4651 /* NSDate+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C931BCCC59A003F4651 /* NSDate+CL.m */; };
+		E2D09C9B1BCCC59A003F4651 /* NSDictionary+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C951BCCC59A003F4651 /* NSDictionary+CL.m */; };
+		E2D09C9C1BCCC59A003F4651 /* UIColor+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C971BCCC59A003F4651 /* UIColor+CL.m */; };
+		E2D09C9D1BCCC59A003F4651 /* UIImage+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C991BCCC59A003F4651 /* UIImage+CL.m */; };
+		E2D8D9FD1BCF51E800A40350 /* NewsfeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8D9FC1BCF51E800A40350 /* NewsfeedTableViewCell.swift */; };
 		E2E0D7041BC9950800662E70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E0D7031BC9950800662E70 /* main.m */; };
 		E2E0D7071BC9950800662E70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E0D7061BC9950800662E70 /* AppDelegate.m */; };
 		E2E0D70D1BC9950800662E70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E0D70B1BC9950800662E70 /* Main.storyboard */; };
@@ -67,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		E151AF701BD72D6500811A31 /* tabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tabBarViewController.h; sourceTree = "<group>"; };
 		E151AF711BD72D6500811A31 /* tabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tabBarViewController.m; sourceTree = "<group>"; };
@@ -169,13 +171,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A2E12C811BCE6E27007D8587 /* Login/Sign Up page */ = {
+		A2E12C811BCE6E27007D8587 /* Login/Sign Up/Reset Pass page */ = {
 			isa = PBXGroup;
 			children = (
 				E25607AD1BCAF5EC0085B9B4 /* LoginViewViewController.swift */,
 				A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */,
+				A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */,
 			);
-			name = "Login/Sign Up page";
+			name = "Login/Sign Up/Reset Pass page";
 			sourceTree = "<group>";
 		};
 		A2E12C841BCE6E7A007D8587 /* Other */ = {
@@ -295,7 +298,7 @@
 				A2E12C8B1BCE6EF7007D8587 /* Newsfeed */,
 				A2E12C861BCE6E92007D8587 /* Main UI */,
 				A2E12C841BCE6E7A007D8587 /* Other */,
-				A2E12C811BCE6E27007D8587 /* Login/Sign Up page */,
+				A2E12C811BCE6E27007D8587 /* Login/Sign Up/Reset Pass page */,
 				E2E0D70E1BC9950800662E70 /* Assets.xcassets */,
 				E2E0D7101BC9950800662E70 /* LaunchScreen.storyboard */,
 				E2E0D7131BC9950800662E70 /* Info.plist */,
@@ -496,6 +499,7 @@
 				E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */,
 				E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */,
 				E2D09C9B1BCCC59A003F4651 /* NSDictionary+CL.m in Sources */,
+				A26359E41BDA8342003F8FEB /* ResetPasswordViewController.swift in Sources */,
 				E2B420EB1BD585F900984E7B /* CalHashTagDetector.m in Sources */,
 				E2D09C901BCCC575003F4651 /* DailyCalendarView.m in Sources */,
 				E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */,

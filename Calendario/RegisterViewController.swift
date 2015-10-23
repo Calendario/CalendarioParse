@@ -97,18 +97,18 @@ class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextV
                         }
                         
                         else {
-                            self.displayError("Error", alertMessage: "You have not granted access to your photo library.")
+                            self.displayAlert("Error", alertMessage: "You have not granted access to your photo library.")
                         }
                     })
                 }
                 
                 else if (check == PHAuthorizationStatus.Restricted) {
-                    self.displayError("Error", alertMessage: "You have not granted access to your photo library.")
+                    self.displayAlert("Error", alertMessage: "You have not granted access to your photo library.")
                 }
             }
             
             else {
-                self.displayError("Error", alertMessage: "Your device does not have a photo library")
+                self.displayAlert("Error", alertMessage: "Your device does not have a photo library")
             }
         }
         let buttonOne = UIAlertAction(title: "Library", style: .Default, handler: libraryPicture)
@@ -130,13 +130,13 @@ class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextV
                     }
                         
                     else {
-                        self.displayError("Error", alertMessage: "You have not granted access to your camera.")
+                        self.displayAlert("Error", alertMessage: "You have not granted access to your camera.")
                     }
                 })
             }
             
             else {
-                self.displayError("Error", alertMessage: "Your device does not have a camera.")
+                self.displayAlert("Error", alertMessage: "Your device does not have a camera.")
             }
         }
         let buttonTwo = UIAlertAction(title: "Camera", style: .Default, handler: cameraPicture)
@@ -196,7 +196,7 @@ class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextV
                 let errorMessage = "Please ensure you have completed the \(errorStrings[loop]) field before continuing."
                 
                 // Display the error alert.
-                displayError("Error", alertMessage: errorMessage)
+                displayAlert("Error", alertMessage: errorMessage)
                 
                 // Exit out of the for-loop/method.
                 return
@@ -213,7 +213,7 @@ class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextV
             
             // Alert the user that there are 
             // capital letters in the username.
-            self.displayError("Error", alertMessage: "Calendario usernames cannot include capital letters.")
+            self.displayAlert("Error", alertMessage: "Calendario usernames cannot include capital letters.")
         }
         
         else {
@@ -260,7 +260,7 @@ class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextV
             dispatch_async(dispatch_get_main_queue(),{
                 
                 if (error != nil) {
-                    self.displayError("Error", alertMessage: "\(error)")
+                    self.displayAlert("Error", alertMessage: "\(error)")
                 }
                     
                 else {
@@ -297,7 +297,7 @@ class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextV
     
     // Alert methods.
     
-    func displayError(alertTitle: String, alertMessage: String) {
+    func displayAlert(alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
         let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)

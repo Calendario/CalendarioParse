@@ -54,6 +54,11 @@ class LoginViewViewController: UIViewController, UITextFieldDelegate {
         
         // Dismiss the keyboard.
         self.view.resignFirstResponder()
+        
+        // Open the reset password view.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewC = storyboard.instantiateViewControllerWithIdentifier("resetpassword") as! ResetPasswordViewController
+        self.presentViewController(viewC, animated: true, completion: nil)
     }
     
     // View Did Load method.
@@ -96,7 +101,7 @@ class LoginViewViewController: UIViewController, UITextFieldDelegate {
                 }
                     
                 else {
-                    self.displayError("Error", alertMessage: "An error has occured, please ensure you have entered the correct username and password and then try again.")
+                    self.displayAlert("Error", alertMessage: "An error has occured, please ensure you have entered the correct username and password and then try again.")
                 }
             })
         }
@@ -109,13 +114,13 @@ class LoginViewViewController: UIViewController, UITextFieldDelegate {
         let dataPass = self.passField.text
     
         if (dataUser == nil) {
-            displayError("Errpr", alertMessage: "Please enter your username before logging in.")
+            displayAlert("Errpr", alertMessage: "Please enter your username before logging in.")
         }
         
         else {
             
             if (dataPass == nil) {
-                displayError("Errpr", alertMessage: "Please enter your password before logging in.")
+                displayAlert("Errpr", alertMessage: "Please enter your password before logging in.")
             }
             
             else {
@@ -137,7 +142,7 @@ class LoginViewViewController: UIViewController, UITextFieldDelegate {
     
     // Alert methods.
     
-    func displayError(alertTitle: String, alertMessage: String) {
+    func displayAlert(alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
         let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
