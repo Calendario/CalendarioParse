@@ -21,6 +21,7 @@ THANKS - DANIEL SADJADIAN
 import UIKit
 import Parse
 import Photos
+import QuartzCore
 
 class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -30,9 +31,10 @@ class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextV
     @IBOutlet weak var passField: UITextField!
     @IBOutlet weak var rePassField: UITextField!
     @IBOutlet weak var descField: UITextView!
+    @IBOutlet weak var descFieldPlaceholder: UITextView!
     @IBOutlet weak var fullNameField: UITextField!
     @IBOutlet weak var webField: UITextField!
-    @IBOutlet weak var profileImage: UIButton!
+    @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var profileScroll: UIScrollView!
     
     // Store the selected profile image data.
@@ -152,6 +154,10 @@ class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextV
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        // Turn the profile picture into a cirlce.
+        self.profilePicture.layer.cornerRadius = (self.profilePicture.frame.size.width / 2)
+        self.profilePicture.clipsToBounds = true
+        
         // Setup the scroll view.
         profileScroll.scrollEnabled = true
         profileScroll.contentSize = CGSize(width:self.view.bounds.width, height: 880)
@@ -197,9 +203,25 @@ class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextV
             }
         }
         
-        // The data meets all the requirements
-        // go on to the actual registration.
-        registerUser()
+        // Check the username to ensure that there
+        // are no capital letters in the string.
+        let capitalLetterRegEx  = ".*[A-Z]+.*"
+        let textData = NSPredicate(format:"SELF MATCHES %@", capitalLetterRegEx)
+        let capitalresult = textData.evaluateWithObject(self.userField.text)
+        
+        if (capitalresult == true) {
+            
+            // Alert the user that there are 
+            // capital letters in the username.
+            self.displayError("Error", alertMessage: "Calendario usernames cannot include capital letters.")
+        }
+        
+        else {
+            
+            // The data meets all the requirements
+            // go on to the actual registration.
+            registerUser()
+        }
     }
     
     // Create user method.
@@ -222,9 +244,14 @@ class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextV
         newUser["website"] = self.webField.text
         newUser["fullName"] = self.fullNameField.text
         
-        // Set the user profile picture.
-        let imageFile = PFFile(name: "prof.jpg", data: imageData!)
-        newUser["profileImage"] = imageFile
+        // Set the user profile picture if
+        // one has been set buy the user.
+        
+        if (imageData != nil) {
+            
+            let imageFile = PFFile(name: "prof.jpg", data: imageData!)
+            newUser["profileImage"] = imageFile
+        }
         
         // Pass the details to the Parse API.
         newUser.signUpInBackgroundWithBlock { (succed, error) -> Void in
@@ -239,7 +266,7 @@ class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextV
                 else {
                     
                     // Setup the alert controller.
-                    let registerAlert = UIAlertController(title: "Welcome :)", message: "You have successfully created a Calendario account.", preferredStyle: .Alert)
+                    let registerAlert = UIAlertController(title: "Welcome to Calendario", message: "You have successfully created a Calendario account.", preferredStyle: .Alert)
                     
                     // Setup the alert actions.
                     let nextHandler = { (action:UIAlertAction!) -> Void in
@@ -293,9 +320,28 @@ class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextV
             // Store the image for use in the registration.
             self.imageData = UIImageJPEGRepresentation(image, 1.0)
             
-            // Set the profile button image.
-            self.profileImage.setImage(image, forState: UIControlState.Normal)
+            // Set the profile picture view.
+            self.profilePicture.image = image
         })
+    }
+    
+    func setPlaceholderAlpha() {
+        
+        if (self.descField.hasText()) {
+            self.descFieldPlaceholder.alpha = 0.0
+        }
+            
+        else {
+            self.descFieldPlaceholder.alpha = 1.0
+        }
+    }
+    
+    func textViewDidEndEditing(textView: UITextView) {
+        self.setPlaceholderAlpha()
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        self.setPlaceholderAlpha()
     }
     
     func textViewDismissKeyboard() {
