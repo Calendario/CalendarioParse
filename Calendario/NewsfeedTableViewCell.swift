@@ -17,10 +17,11 @@ class NewsfeedTableViewCell: UITableViewCell {
 
     @IBOutlet weak var LikeButton: UIButton!
     
-    let nf = NewsfeedViewController()
+
     
     
     let filledlikebutton = UIImage(named: "like button filled")
+    var counter = 1
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,8 +34,20 @@ class NewsfeedTableViewCell: UITableViewCell {
     
     @IBAction func LikeButtonTapped(sender: AnyObject) {
         LikeButton.setImage(filledlikebutton, forState: .Normal)
-    
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        var objid = defaults.stringForKey("objectid")
+        print(objid!)
+        
+        var query = PFQuery(className: "StatusUpdate")
+        query.getObjectInBackgroundWithId(objid!) { (statusupdate:PFObject?, error:NSError?) -> Void in
+            if error == nil
+            {
+                statusupdate!["likes"] = self.counter++
+                statusupdate?.saveInBackground()
             }
+        }
+    }
     
     
     override func setSelected(selected: Bool, animated: Bool) {

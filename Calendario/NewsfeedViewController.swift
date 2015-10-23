@@ -34,7 +34,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
 
         // Do any additional setup after loading the view.
         
-    let cal = CLWeeklyCalendarView(frame: CGRectMake(0, 0, self.view.bounds.size.width, 125))
+    let cal = CLWeeklyCalendarView(frame: CGRectMake(0, 0, self.view.bounds.size.width, 120))
         cal.delegate = self
         
         self.view.addSubview(cal)
@@ -54,7 +54,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     func dailyCalendarViewDidSelect(date: NSDate!) {
         statausData.removeAllObjects()
         
-     /*   let dateformatter = NSDateFormatter()
+       let dateformatter = NSDateFormatter()
         dateformatter.dateFormat = "MM/dd/yy"
         var newdate = dateformatter.stringFromDate(date)
         
@@ -96,7 +96,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
                 }
                 
                 
-            }*/
+            }
         
         
     }
@@ -210,9 +210,14 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
         
-        //print(statusupdate.objectId!)
+        print(statusupdate.objectId!)
         currentobjectID = statusupdate.objectId
         print("the current object id is \(currentobjectID)")
+        
+        // storing the object id in NSUserDefaults 
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(statusupdate.objectId, forKey: "objectid")
     }
 
     // function that dectects hastags 
@@ -248,6 +253,10 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
 
                     
                 }
+        
+        
+        
+    
 
     
     
@@ -258,4 +267,25 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
 
 }
+    
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        // jdhdh
+    }
+    
+    
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
+            print("report was tapped")
+         
+        
+        }
+        report.backgroundColor = UIColor.grayColor()
+        return [report]
+    }
 }
