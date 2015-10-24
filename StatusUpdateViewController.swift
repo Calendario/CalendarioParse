@@ -11,7 +11,7 @@ import CoreLocation
 
 
 
-class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UINavigationBarDelegate {
 
     @IBOutlet weak var PostButton: UIBarButtonItem!
     
@@ -68,6 +68,31 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 55))
+        navigationbar.backgroundColor = UIColor.whiteColor()
+        navigationbar.delegate = self
+        navigationbar.barTintColor = UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha: 1)
+        navigationbar.tintColor = UIColor.whiteColor()
+        
+        // logo for nav title 
+        
+        let logo = UIImage(named: "navtext")
+        let imageview = UIImageView(image: logo)
+        
+        
+        // navigation items
+        let navitems = UINavigationItem()
+        navitems.titleView = imageview
+        
+        navitems.rightBarButtonItem = PostButton
+        
+        // set nav items in nav bar
+        navigationbar.items = [navitems]
+        self.view.addSubview(navigationbar)
+        
+    
+        
 
         // Do any additional setup after loading the view.
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha: 1)

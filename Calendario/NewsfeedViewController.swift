@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate{
 
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var sharebutton: UIBarButtonItem!
@@ -30,7 +30,9 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.setRightBarButtonItem(sharebutton, animated: true)
+        
+        
+    //self.navigationItem.setRightBarButtonItem(sharebutton, animated: true)
 
         // Do any additional setup after loading the view.
         
@@ -39,8 +41,10 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         
         self.view.addSubview(cal)
         
-        self.navigationController?.hidesBarsOnTap = true
         print(statausData.count)
+        
+        
+        
         
         
     }
