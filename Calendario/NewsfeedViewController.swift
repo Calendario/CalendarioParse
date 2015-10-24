@@ -25,6 +25,8 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     var currentobjectID:String!
     
+    let greenColor =  UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha: 1)
+    
     
     
     override func viewDidLoad() {
@@ -42,6 +44,8 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         self.view.addSubview(cal)
         
         print(statausData.count)
+        
+        
         
         
         
@@ -110,8 +114,12 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     
     func CLCalendarBehaviorAttributes() -> [NSObject : AnyObject]! {
+        
+        
      
         return [CLCalendarWeekStartDay: 1]
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
