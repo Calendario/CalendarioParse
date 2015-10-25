@@ -27,6 +27,8 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     let greenColor =  UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha: 1)
     
+    var reportedID:String!
+    
     
     
     override func viewDidLoad() {
@@ -295,6 +297,42 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
             print("report was tapped")
+            let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
+            
+            
+            var reportquery = PFQuery(className: "StatusUpdate")
+            reportquery.whereKey("updatetext", equalTo: statusupdate.objectForKey("updatetext")!)
+            reportquery.findObjectsInBackgroundWithBlock({ (objects:[PFObject]?, error:NSError?) -> Void in
+                if error == nil
+                {
+                    print("objects found")
+                    
+                    if let objects = objects as [PFObject]!
+                    {
+                        for object in objects
+                        {
+                            var objID = object.objectId
+                            self.reportedID = objID
+                        }
+                        
+                        
+                        var reportstatus = PFQuery(className: "StatusUpdate")
+                        reportstatus.getObjectInBackgroundWithId(self.reportedID, block: { (status:PFObject?, error:NSError?) -> Void in
+                            if error == nil
+                            {
+                                status!["reported"] = true
+                                print("reported")
+                                status?.saveInBackground()
+                            }
+                        })
+                        
+                        
+                        
+                        
+                        
+                    }
+                }
+            })
          
         
         }
