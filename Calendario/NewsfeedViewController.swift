@@ -55,12 +55,12 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        //LoadData()
+        LoadData()
     }
     
     
     func dailyCalendarViewDidSelect(date: NSDate!) {
-        statausData.removeAllObjects()
+        /*statausData.removeAllObjects()
         
        let dateformatter = NSDateFormatter()
         dateformatter.dateFormat = "MM/dd/yy"
@@ -105,6 +105,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
                 
                 
             }
+            */
         
         
     }
