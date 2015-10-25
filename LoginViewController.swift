@@ -27,6 +27,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userField: UITextField!
     @IBOutlet weak var passField: UITextField!
     
+    // Background animation image view.
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
+    // Backgrond photo names array.
+    var backgroundPhotos = Array<UIImage>()
+    
     // Setup the on screen button actions.
     
     @IBAction func loginUser(sender: UIButton) {
@@ -66,6 +72,73 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // Get the screen dimensions.
+        let height = UIScreen.mainScreen().bounds.size.height
+        
+        // Set the animation images depending on
+        // the height of the iOS device screen.
+        var imageName = "iphone4s"
+        
+        if (height == 480) {
+            // 3.5 inch display - iPhone 4S & below.
+            imageName = "iphone4s"
+        }
+        
+        else if (height == 568) {
+            // 4 inch display - iPhone 5/5s.
+            imageName = "iphone5&5s"
+        }
+        
+        else if (height == 667) {
+            // 4.7 inch display - iPhone 6/6s.
+            imageName = "iphone6"
+        }
+        
+        else if (height >= 736) {
+            // 5.5 inch display - iPhone 6/6s Plus.
+            imageName = "iphone6+"
+        }
+        
+        // Add the appropriate images to the photos array.
+        
+        for (var loop = 0; loop < 10; loop++) {
+            backgroundPhotos.append(UIImage(named: "\(imageName)\(loop + 1).png")!)
+        }
+        
+        // Run the animation.
+        self.runBackgroundAnim(0)
+    }
+    
+    // Animation methods.
+    
+    func runBackgroundAnim(let num:Int) {
+        
+        // Set the array counter number.
+        var count = num
+        
+        if (count == 9) {
+            count = 0
+        }
+        
+        else {
+            count = (count + 1)
+        }
+        
+        UIView.transitionWithView(self.backgroundImage, duration:3.0, options:UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+            
+            // Set the background photo
+            self.backgroundImage.image = self.backgroundPhotos[count]
+            }, completion: {(Bool) in
+                
+                // Move on to the next photo animation
+                // after a small transitional delay.
+                let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(2.0 * Double(NSEC_PER_SEC)))
+                
+                dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+                    self.runBackgroundAnim(count)
+                })
+        })
     }
     
     // Login methods.
