@@ -78,7 +78,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         // Setup the image picker view controller.
         var imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.allowsEditing = false
+        imagePicker.allowsEditing = true
         
         // Setup the alert controller.
         let imageAlert = UIAlertController(title: "Profile Picture", message: "Add a photo from your library or take a picture with the camera.", preferredStyle: .Alert)
