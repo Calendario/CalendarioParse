@@ -69,6 +69,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // View Did Load method.
     
+    override func viewDidAppear(animated: Bool) {
+        
+        // Automatically take the user to the
+        // new feed section if they are already
+        // logged in to the Calendario app.
+        var currentUser = PFUser.currentUser()
+        
+        if (currentUser != nil) {
+            
+            // The user is already logged in.
+            self.GotoNewsfeed()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
