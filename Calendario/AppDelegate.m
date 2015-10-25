@@ -21,6 +21,9 @@
     
     // Override point for customization after application launch.
     
+    //make status bar text white
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+    
     // IMPORTANT: If this line does NOT execute, then the app will crash
     // when you try to interact with the Parse API - this line MUST be executed!
     [Parse setApplicationId:@"p8YhMVSoCmZvl5tBbpvdk2CK3BYmqwC3p9VS4kPI" clientKey:@"fyHr9RFkqoeefvQxX92J1RBAKnm1s4aqDLRDhAgr"];

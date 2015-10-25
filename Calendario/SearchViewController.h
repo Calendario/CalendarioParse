@@ -14,6 +14,7 @@
 //UI properties
 @property (weak, nonatomic) IBOutlet UITableView *searchTableView;
 @property (nonatomic, strong) UISearchController *searchController;
+@property (weak, nonatomic) IBOutlet UIView *statusBarBackground;
 
 //User Properties
 @property (nonatomic, strong) NSArray *allUsers;

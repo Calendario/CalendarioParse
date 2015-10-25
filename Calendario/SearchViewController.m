@@ -10,7 +10,10 @@
 
 @interface SearchViewController ()
 {
-    NSMutableArray *filteredArray; 
+    NSMutableArray *filteredArray;
+    NSMutableArray *searchedData;
+    BOOL isFiltered;
+
 }
 
 @end
@@ -20,6 +23,7 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    
     //set current user
     self.currentUser = [PFUser currentUser];
     NSString *currentUsername = self.currentUser.username;
@@ -118,9 +122,14 @@
     
     //set search bar icon color
     [self.searchController.searchBar setImage:[UIImage imageNamed:@"search_icon"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+    
+    //hide 1px black line above searchbar
+    self.searchController.searchBar.layer.borderColor = [UIColor colorWithRed:33/255.0f green:135/255.0f blue:75/255.0f alpha:1.0].CGColor;
+    self.searchController.searchBar.layer.borderWidth = 1;
+    
 
-    
-    
+
+
     self.searchTableView.tableHeaderView = self.searchController.searchBar;
     self.definesPresentationContext = YES;
     
@@ -164,9 +173,16 @@
     NSString *searchString = self.searchController.searchBar.text;
     
     NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"username == %@", searchString];
-    filteredArray = [[self.friends filteredArrayUsingPredicate:searchPredicate] mutableCopy];
+    filteredArray = [[self.allUsers filteredArrayUsingPredicate:searchPredicate] mutableCopy];
     
     [self.searchTableView reloadData];
+    
+}
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    //force lowercase typing
+    searchBar.text = searchText.lowercaseString;
     
 }
 
@@ -198,20 +214,33 @@
     
     UILabel *userLabel = (UILabel *)[cell.contentView viewWithTag:2];
     UIImageView *userImage = (UIImageView *)[cell.contentView viewWithTag:1];
-    UIImage *image = [UIImage imageNamed:@"N/A_icon"];
-
+    UIImage *notAvailable = [UIImage imageNamed:@"notAvailable_icon.png"];
+    userImage.image = notAvailable;
+    
+    //hide elements
+    userLabel.hidden = YES;
+    userImage.hidden = YES;
     
     if ([self.searchController isActive])
     {
         PFUser *user = [filteredArray objectAtIndex:indexPath.row];
+        userLabel.hidden = NO;
+        userImage.hidden = NO;
         userLabel.text = user.username;
         
-                            //NEED TO IMPLEMENT USER PROFILE IMAGE ONCE AVAILABLE****
-        [userImage setImage:image];
-        userImage.layer.cornerRadius = userImage.frame.size.width/2;
-        userImage.clipsToBounds = YES;
-        userImage.layer.borderWidth = 1.0f;
-        userImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        //fetch user profile image for table cell
+        PFFile *userImageFile = user[@"profileImage"];
+        [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+            if (!error) {
+                UIImage *image = [UIImage imageWithData:imageData];
+                [userImage setImage:image];
+                userImage.layer.cornerRadius = userImage.frame.size.width/2;
+                userImage.clipsToBounds = YES;
+                userImage.layer.borderWidth = 1.0f;
+                userImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
+
+            }
+        }];
         
         
         return cell;
@@ -219,18 +248,25 @@
     
     else
     {
-        PFUser *user = [self.allUsers objectAtIndex:indexPath.row];
+        /*PFUser *user = [self.allUsers objectAtIndex:indexPath.row];
         userLabel.text = user.username;
         
-                             //NEED TO IMPLEMENT USER PROFILE IMAGE ONCE AVAILABLE****
-        [userImage setImage:image];
-        userImage.layer.cornerRadius = userImage.frame.size.width/2;
-        userImage.clipsToBounds = YES;
-        userImage.layer.borderWidth = 1.0f;
-        userImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
-
+        //NEED TO IMPLEMENT USER PROFILE IMAGE ONCE AVAILABLE****
         
-        return cell;
+        PFFile *userImageFile = user[@"profileImage"];
+        [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+            if (!error) {
+                UIImage *image = [UIImage imageWithData:imageData];
+                [userImage setImage:image];
+                userImage.layer.cornerRadius = userImage.frame.size.width/2;
+                userImage.clipsToBounds = YES;
+                userImage.layer.borderWidth = 1.0f;
+                userImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
+                
+            }
+        }];
+        
+        return cell;*/
     }
     
     
