@@ -21,7 +21,7 @@ THANKS - DANIEL SADJADIAN
 import UIKit
 import Parse
 
-class LoginViewViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // Setup the username and password text fields.
     @IBOutlet weak var userField: UITextField!
@@ -46,7 +46,7 @@ class LoginViewViewController: UIViewController, UITextFieldDelegate {
         
         // Open the register view.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewC = storyboard.instantiateViewControllerWithIdentifier("registerview") as! RegisterViewViewController
+        let viewC = storyboard.instantiateViewControllerWithIdentifier("registerview") as! RegisterViewController
         self.presentViewController(viewC, animated: true, completion: nil)
     }
     

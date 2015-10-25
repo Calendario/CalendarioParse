@@ -43,10 +43,10 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
     @IBAction func cancel(sender: UIButton) {
         
         // Dismiss the keyboard.
-        self.view.resignFirstResponder()
+        self.emailField.resignFirstResponder()
         
         // Go back to the login page.
-        self.openLoginPage()
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // View Did Load method.
@@ -134,7 +134,7 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
         
         // Go to the login page.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewC = storyboard.instantiateViewControllerWithIdentifier("LoginPage") as! LoginViewViewController
+        let viewC = storyboard.instantiateViewControllerWithIdentifier("LoginPage") as! LoginViewController
         self.presentViewController(viewC, animated: true, completion: nil)
     }
     

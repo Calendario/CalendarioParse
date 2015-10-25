@@ -23,7 +23,7 @@ import Parse
 import Photos
 import QuartzCore
 
-class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // Setup the data input text fields and other objects.
     @IBOutlet weak var emailField: UITextField!
@@ -48,12 +48,29 @@ class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextV
         checkData()
     }
     
+    @IBAction func openTos(sender: UIButton) {
+        
+        // Open the register view.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewC = storyboard.instantiateViewControllerWithIdentifier("tos") as! TosViewController
+        self.presentViewController(viewC, animated: true, completion: nil)
+    }
+    
+    @IBAction func openPrivacyPolicy(sender: UIButton) {
+        
+        // Open the register view.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewC = storyboard.instantiateViewControllerWithIdentifier("privacypolicy") as! PrivacyPolicyViewController
+        self.presentViewController(viewC, animated: true, completion: nil)
+    }
+    
     @IBAction func cancel(sender: UIButton) {
         
+        // Dismiss the keyboard.
+        self.view.resignFirstResponder()
+        
         // Go back to the login page.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewC = storyboard.instantiateViewControllerWithIdentifier("LoginPage") as! LoginViewViewController
-        self.presentViewController(viewC, animated: true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func addImage(sender: UIButton) {
@@ -141,9 +158,12 @@ class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextV
         }
         let buttonTwo = UIAlertAction(title: "Camera", style: .Default, handler: cameraPicture)
         
+        let buttonThree = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        
         // Add the actions to the alert.
         imageAlert.addAction(buttonOne)
         imageAlert.addAction(buttonTwo)
+        imageAlert.addAction(buttonThree)
         
         // Present the alert on screen.
         self.presentViewController(imageAlert, animated: true, completion: nil)
@@ -183,7 +203,7 @@ class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextV
         let userData = [self.emailField.text, self.userField.text, self.passField.text, self.rePassField.text, self.descField.text, self.fullNameField.text]
         
         // Setup the errors array.
-        let errorStrings: [String] = ["Email", "Username", "Password", "Re-Enter Password", "Description", "Full name"]
+        let errorStrings: [String] = ["email", "username", "password", "re-enter password", "description", "full name"]
         
         for (var loop = 0; loop < 6; loop++) {
             
@@ -193,7 +213,7 @@ class RegisterViewViewController: UIViewController, UITextFieldDelegate, UITextV
             if (data == nil) {
                 
                 // Create the error message.
-                let errorMessage = "Please ensure you have completed the \(errorStrings[loop]) field before continuing."
+                let errorMessage = "Please ensure you have completed the '\(errorStrings[loop])' field before continuing."
                 
                 // Display the error alert.
                 displayAlert("Error", alertMessage: errorMessage)
