@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="16Q-ZH-5Rb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="16Q-ZH-5Rb">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -28,7 +28,7 @@
                                         <rect key="frame" x="0.0" y="28" width="390" height="195"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sGJ-qf-6wC" id="elz-Dq-uTm">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="194"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="195"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXy-RC-Kfz">
@@ -135,7 +135,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v4l-4r-4nc" id="1if-ng-4jI">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MeP-xu-Qpc" userLabel="User Profile Image">
@@ -204,7 +204,7 @@
                         <viewControllerLayoutGuide type="bottom" id="QO2-YO-TNd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WyQ-Fc-Ez4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gcm-dB-nn2">
@@ -254,7 +254,7 @@
                                     <action selector="tenseControlchanged:" destination="9Rc-cM-4J1" eventType="valueChanged" id="TQJ-7K-BpX"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="400" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R26-bd-sTX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R26-bd-sTX">
                                 <rect key="frame" x="309" y="546" width="66" height="20"/>
                                 <animations/>
                                 <constraints>
@@ -400,7 +400,28 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mC9-5Z-H2R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2162.5" y="502.5"/>
+            <point key="canvasLocation" x="2172.5" y="433.5"/>
+        </scene>
+        <!--CalendarVC-->
+        <scene sceneID="Oh6-qh-eyh">
+            <objects>
+                <viewController title="CalendarVC" id="sTJ-T6-kfL" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jbc-9a-cws"/>
+                        <viewControllerLayoutGuide type="bottom" id="zdT-KE-5E5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eWx-OU-env">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="VA7-3p-DDc"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f2d-U8-4Lj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2600.5" y="433.5"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="vZk-wx-8V6">
@@ -1151,10 +1172,10 @@
                                         <rect key="frame" x="0.0" y="22" width="383" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pLQ-Pz-6n9" id="N6u-US-uAV">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="54"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zed-Ul-qvZ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zed-Ul-qvZ">
                                                     <rect key="frame" x="339" y="14" width="28" height="28"/>
                                                     <animations/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -1525,11 +1546,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         <color key="barTintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="UjB-Ok-0q0" kind="relationship" relationship="viewControllers" id="hkj-Yr-R0b"/>
-                        <segue destination="LWK-IF-Qh9" kind="relationship" relationship="viewControllers" id="hE2-5q-E4L"/>
-                        <segue destination="9Rc-cM-4J1" kind="relationship" relationship="viewControllers" id="i1P-er-4KZ"/>
-                        <segue destination="wnP-ci-rxq" kind="relationship" relationship="viewControllers" id="zsM-Yj-1F9"/>
-                        <segue destination="EL5-7o-osE" kind="relationship" relationship="viewControllers" id="L7H-4x-eFX"/>
+                        <segue destination="UjB-Ok-0q0" kind="relationship" relationship="viewControllers" id="UA4-ow-U8x"/>
+                        <segue destination="LWK-IF-Qh9" kind="relationship" relationship="viewControllers" id="oIY-kU-G5W"/>
+                        <segue destination="sTJ-T6-kfL" kind="relationship" relationship="viewControllers" id="qDh-IV-Y7r"/>
+                        <segue destination="wnP-ci-rxq" kind="relationship" relationship="viewControllers" id="nsZ-UI-OVi"/>
+                        <segue destination="EL5-7o-osE" kind="relationship" relationship="viewControllers" id="7ce-bW-JFl"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rDp-jC-nLY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1594,7 +1615,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QGe-SS-ZL3" id="P3h-p7-48l">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
                                         </tableViewCellContentView>
@@ -1604,7 +1625,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="anv-ml-d6c" id="l7D-Zj-ocV">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
                                         </tableViewCellContentView>
@@ -1614,7 +1635,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <rect key="frame" x="0.0" y="88" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dg3-oI-wrx" id="pD0-jH-yM5">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
                                         </tableViewCellContentView>
@@ -1651,7 +1672,4 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="right_arrow" width="50" height="50"/>
         <image name="seprator" width="300" height="300"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="i1P-er-4KZ"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -12,6 +12,7 @@
 {
     NSMutableArray *filteredArray;
     NSMutableArray *searchedData;
+    NSArray *newFilteredArray;
     BOOL isFiltered;
 
 }
@@ -26,14 +27,16 @@
     
     //set current user
     self.currentUser = [PFUser currentUser];
-    NSString *currentUsername = self.currentUser.username;
+   // NSString *currentUsername = self.currentUser.username;
     
     //create predicate for filtering
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"username != %@", currentUsername];
+  //  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"username != %@", currentUsername];
     
     
     //query ALL USERS and sort alphabetically.
-    PFQuery *query = [PFUser queryWithPredicate:predicate];
+    //PFQuery *query = [PFUser queryWithPredicate:predicate];
+    PFQuery *query = [PFUser query];
+
     
     [query orderByAscending:@"username"];
     [query findObjectsInBackgroundWithBlock: ^(NSArray *objects, NSError *error)
@@ -52,7 +55,7 @@
                  
                  if ([self isFriend:user])
                  {
-                     [newArray removeObject:user];
+                     //[newArray removeObject:user];
                      
                  }
                  
@@ -172,7 +175,9 @@
     
     NSString *searchString = self.searchController.searchBar.text;
     
-    NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"username == %@", searchString];
+    //NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"username == %@", searchString];  <-- for exact match
+    NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"username contains[c] %@", searchString]; //<-- so tableview loads while user is typing
+
     filteredArray = [[self.allUsers filteredArrayUsingPredicate:searchPredicate] mutableCopy];
     
     [self.searchTableView reloadData];
@@ -214,7 +219,7 @@
     
     UILabel *userLabel = (UILabel *)[cell.contentView viewWithTag:2];
     UIImageView *userImage = (UIImageView *)[cell.contentView viewWithTag:1];
-    UIImage *notAvailable = [UIImage imageNamed:@"notAvailable_icon.png"];
+    UIImage *notAvailable = [UIImage imageNamed:@"profile_grey.png"];
     userImage.image = notAvailable;
     
     //hide elements
@@ -230,17 +235,33 @@
         
         //fetch user profile image for table cell
         PFFile *userImageFile = user[@"profileImage"];
-        [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
-            if (!error) {
+        if (userImageFile == nil)
+        {
+            [userImage setImage:notAvailable];
+            userImage.layer.cornerRadius = userImage.frame.size.width/2;
+            userImage.clipsToBounds = YES;
+            userImage.layer.borderWidth = 1.0f;
+            userImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
+
+        }
+        else
+        {
+        
+            [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
+        {
+            if (!error)
+            {
                 UIImage *image = [UIImage imageWithData:imageData];
+
                 [userImage setImage:image];
                 userImage.layer.cornerRadius = userImage.frame.size.width/2;
                 userImage.clipsToBounds = YES;
                 userImage.layer.borderWidth = 1.0f;
                 userImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
-
             }
+
         }];
+        }
         
         
         return cell;
