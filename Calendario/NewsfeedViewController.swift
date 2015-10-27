@@ -293,11 +293,31 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     }
     
     
+    func ReportView()
+    {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        var reportVC = sb.instantiateViewControllerWithIdentifier("report") as! ReportTableViewController
+        let NC = UINavigationController(rootViewController: reportVC)
+        self.presentViewController(NC, animated: true, completion: nil)
+        
+        
+    }
+    
+    
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
             print("report was tapped")
+            
+            
+
             let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
+            
+            let defaults = NSUserDefaults.standardUserDefaults()
+            
+            defaults.setObject(statusupdate.objectId, forKey: "reported")
+            
+            self.ReportView()
             
             
             var reportquery = PFQuery(className: "StatusUpdate")
