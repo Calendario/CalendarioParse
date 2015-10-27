@@ -69,6 +69,9 @@
          
      }];
     
+    [self.searchTableView reloadData];
+
+    
 }
 
 - (void)viewDidLoad {
@@ -83,7 +86,7 @@
     self.searchController.delegate = self;
     self.searchController.searchBar.delegate = self;
     self.searchController.searchResultsUpdater = self;
-
+    
     
     //override default background color of searchbar's textfield
     for (UIView *subView in self.searchController.searchBar.subviews)
@@ -130,13 +133,11 @@
     self.searchController.searchBar.layer.borderColor = [UIColor colorWithRed:33/255.0f green:135/255.0f blue:75/255.0f alpha:1.0].CGColor;
     self.searchController.searchBar.layer.borderWidth = 1;
     
-
-
-
+    //add search bar to tableview header
     self.searchTableView.tableHeaderView = self.searchController.searchBar;
     self.definesPresentationContext = YES;
     
-    
+    //create filtered array
     filteredArray = [[NSMutableArray alloc] init];
 }
 
@@ -171,6 +172,7 @@
 #pragma mark Search Bar Methods
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
+
     [filteredArray removeAllObjects];
     
     NSString *searchString = self.searchController.searchBar.text;
@@ -186,9 +188,49 @@
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+    
     //force lowercase typing
     searchBar.text = searchText.lowercaseString;
     
+}
+
+- (void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    self.searchTableView.backgroundView = nil;
+    self.searchTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+
+    [self.searchTableView reloadData];
+
+}
+
+- (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    self.searchTableView.backgroundView = nil;
+    self.searchTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    
+    [self.searchTableView reloadData];
+}
+
+- (void) searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    if (filteredArray.count < 1)
+    {
+        // Display a message when the table is empty
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        messageLabel.text = @"user not found";
+        messageLabel.textColor = [UIColor darkGrayColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        messageLabel.font = [UIFont systemFontOfSize:16];
+        [messageLabel sizeToFit];
+        
+        self.searchTableView.backgroundView = messageLabel;
+        self.searchTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        [self.searchTableView reloadData];
+
+    }
 }
 
 
@@ -196,7 +238,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
+    // Return the number of sections.
+    if (filteredArray.count > 0)
+    {
     return 1;
+        
+    }
+    else
+    {
+        
+    }
+    
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -208,14 +261,17 @@
     }
     else
     {
-        
-        return self.allUsers.count;
+        return 0;
     }
+    
+   
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
+    
+    cell.userInteractionEnabled = NO;
     
     UILabel *userLabel = (UILabel *)[cell.contentView viewWithTag:2];
     UIImageView *userImage = (UIImageView *)[cell.contentView viewWithTag:1];
@@ -231,63 +287,46 @@
         PFUser *user = [filteredArray objectAtIndex:indexPath.row];
         userLabel.hidden = NO;
         userImage.hidden = NO;
+        cell.userInteractionEnabled = YES;
         userLabel.text = user.username;
         
-        //fetch user profile image for table cell
-        PFFile *userImageFile = user[@"profileImage"];
-        if (userImageFile == nil)
-        {
-            [userImage setImage:notAvailable];
-            userImage.layer.cornerRadius = userImage.frame.size.width/2;
-            userImage.clipsToBounds = YES;
-            userImage.layer.borderWidth = 1.0f;
-            userImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
+                        //fetch user profile image for table cell
+                        PFFile *userImageFile = user[@"profileImage"];
+                        if (userImageFile == nil)
+                        {
+                            [userImage setImage:notAvailable];
+                            userImage.layer.cornerRadius = userImage.frame.size.width/2;
+                            userImage.clipsToBounds = YES;
+                            userImage.layer.borderWidth = 1.0f;
+                            userImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
 
-        }
-        else
-        {
-        
-            [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
-        {
-            if (!error)
-            {
-                UIImage *image = [UIImage imageWithData:imageData];
+                        }
+                        else
+                        {
+                        
+                            [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
+                        {
+                            if (!error)
+                            {
+                                UIImage *image = [UIImage imageWithData:imageData];
 
-                [userImage setImage:image];
-                userImage.layer.cornerRadius = userImage.frame.size.width/2;
-                userImage.clipsToBounds = YES;
-                userImage.layer.borderWidth = 1.0f;
-                userImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
-            }
+                                [userImage setImage:image];
+                                userImage.layer.cornerRadius = userImage.frame.size.width/2;
+                                userImage.clipsToBounds = YES;
+                                userImage.layer.borderWidth = 1.0f;
+                                userImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
+                            }
 
-        }];
-        }
+                        }];
+                        }
         
         
-        return cell;
+    return cell;
     }
     
     else
     {
-        /*PFUser *user = [self.allUsers objectAtIndex:indexPath.row];
-        userLabel.text = user.username;
         
-        //NEED TO IMPLEMENT USER PROFILE IMAGE ONCE AVAILABLE****
-        
-        PFFile *userImageFile = user[@"profileImage"];
-        [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
-            if (!error) {
-                UIImage *image = [UIImage imageWithData:imageData];
-                [userImage setImage:image];
-                userImage.layer.cornerRadius = userImage.frame.size.width/2;
-                userImage.clipsToBounds = YES;
-                userImage.layer.borderWidth = 1.0f;
-                userImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
-                
-            }
-        }];
-        
-        return cell;*/
     }
     
     
@@ -322,7 +361,10 @@
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
     
+    [self.searchTableView reloadData];
+    
     //NAVIGATE TO SELECTED USER'S PROFILE PAGE
+    [self performSegueWithIdentifier:@"goToProfile" sender:self];
     
 }
 

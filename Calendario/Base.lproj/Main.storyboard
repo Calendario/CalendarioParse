@@ -189,6 +189,7 @@
                     <connections>
                         <outlet property="searchTableView" destination="esI-F5-Fps" id="lWp-85-p6M"/>
                         <outlet property="statusBarBackground" destination="ef0-Ce-UCZ" id="V0N-0G-bCC"/>
+                        <segue destination="EL5-7o-osE" kind="show" identifier="goToProfile" id="jbQ-WG-YYd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OyA-zl-nYg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1672,4 +1673,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="right_arrow" width="50" height="50"/>
         <image name="seprator" width="300" height="300"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="jbQ-WG-YYd"/>
+    </inferredMetricsTieBreakers>
 </document>
