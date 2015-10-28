@@ -649,11 +649,10 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Reset Password" id="lPy-kJ-PwT">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="KD6-Ix-wW9">
-                                            <inset key="imageInsets" minX="0.0" minY="18" maxX="35" maxY="16"/>
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="c2G-0U-OQc">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
-                                                <action selector="cancel:" destination="rVN-tt-w2a" id="C3H-Sg-S9n"/>
+                                                <action selector="cancel:" destination="rVN-tt-w2a" id="rdR-4C-i8S"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -737,33 +736,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HPZ-Rs-yi7" userLabel="Status Bar BG">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFi-bv-r1B">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.2156862745" green="0.60784313729999995" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="21"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="textShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Sign Up" id="ZKc-5v-Xkl">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="xke-f7-ct1">
-                                            <inset key="imageInsets" minX="0.0" minY="18" maxX="35" maxY="16"/>
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <action selector="cancel:" destination="3Oo-Ed-qme" id="02R-CI-iep"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z4p-c8-OZn">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
@@ -1082,20 +1054,62 @@
                                 </subviews>
                                 <animations/>
                             </scrollView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HPZ-Rs-yi7" userLabel="Status Bar BG">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFi-bv-r1B">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.2156862745" green="0.60784313729999995" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="21"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Sign Up" id="ZKc-5v-Xkl">
+                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="Azl-tl-UDw">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="cancel:" destination="3Oo-Ed-qme" id="f55-vq-oXA"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qwo-8O-dDu">
+                                <rect key="frame" x="106" y="286" width="164" height="94"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bwE-VJ-vNW">
+                                        <rect key="frame" x="63" y="28" width="37" height="37"/>
+                                        <animations/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.53098606418918914" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="backButton" destination="Azl-tl-UDw" id="lc1-0d-9AE"/>
                         <outlet property="descField" destination="ZQd-Gb-9i3" id="nZl-KY-zr1"/>
                         <outlet property="descFieldPlaceholder" destination="ntD-4L-7eN" id="r0f-eG-Hgt"/>
                         <outlet property="emailField" destination="pcF-vl-98b" id="0Lk-2o-9Fa"/>
                         <outlet property="fullNameField" destination="rEn-oS-TcI" id="Rl6-oU-Sfi"/>
+                        <outlet property="loadingView" destination="qwo-8O-dDu" id="wYl-Hu-fQI"/>
                         <outlet property="passField" destination="BFh-Xm-ARM" id="R4Y-n6-xk6"/>
+                        <outlet property="privacyPolicyButton" destination="rLj-S9-HX1" id="dnT-8w-tVR"/>
                         <outlet property="profilePicture" destination="E4d-z0-hQ5" id="0eB-19-nrf"/>
                         <outlet property="profileScroll" destination="Z4p-c8-OZn" id="cml-A2-AdI"/>
                         <outlet property="rePassField" destination="x6p-Jw-12s" id="Llp-of-fnu"/>
+                        <outlet property="submitButton" destination="ox6-rP-8eJ" id="8nx-ci-AFR"/>
+                        <outlet property="tosButton" destination="hh9-Qa-Nvm" id="Keb-Aa-B0r"/>
                         <outlet property="userField" destination="cR7-Gw-o4U" id="ZF0-pk-LHR"/>
                         <outlet property="webField" destination="pHn-JQ-TlX" id="sh5-3w-efj"/>
                     </connections>
@@ -1358,11 +1372,10 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Privacy Policy" id="EQ4-ce-091">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="3hz-Rf-9a9">
-                                            <inset key="imageInsets" minX="0.0" minY="18" maxX="35" maxY="16"/>
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="9E5-UC-k6E">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
-                                                <action selector="cancel:" destination="BPW-dE-MxM" id="WH0-ti-hJ6"/>
+                                                <action selector="cancel:" destination="BPW-dE-MxM" id="prR-gs-3jr"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -1467,11 +1480,10 @@ Children Privacy: Calendario does not knowingly collect or solicit any informati
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Terms of Service" id="tlS-IQ-aCg">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="6ui-8F-baH">
-                                            <inset key="imageInsets" minX="0.0" minY="18" maxX="35" maxY="16"/>
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="t8o-Dk-7xu">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
-                                                <action selector="cancel:" destination="agt-dC-blh" id="Jj6-8q-miY"/>
+                                                <action selector="cancel:" destination="agt-dC-blh" id="iEB-Wd-Uei"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -1650,7 +1662,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="comment" width="60" height="60"/>
         <image name="default_profile_pic" width="120" height="120"/>
         <image name="email_grey" width="256" height="256"/>
-        <image name="left_icon" width="60" height="60"/>
+        <image name="left_icon" width="30" height="30"/>
         <image name="like button " width="60" height="60"/>
         <image name="lock_icon" width="120" height="120"/>
         <image name="loginViewBackground" width="375" height="667"/>

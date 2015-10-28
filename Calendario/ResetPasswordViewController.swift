@@ -33,9 +33,6 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
     
     @IBAction func resetPassword(sender: UIButton) {
     
-        // Dismiss the keyboard.
-        self.view.resignFirstResponder()
-        
         // Check the entered email address.
         self.checkEmailAddress()
     }
@@ -80,6 +77,7 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
                     
                 else {
                     
+                    self.emailField.becomeFirstResponder()
                     self.checkAlertAction = false
                     self.displayAlert("Error", alertMessage: error!.userInfo["error"] as! String)
                 }
@@ -112,7 +110,12 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
         if (checkAlertAction == true) {
             
             let nextHandler = { (action:UIAlertAction!) -> Void in
-                self.openLoginPage()
+                
+                // Dismiss the keyboard.
+                self.emailField.resignFirstResponder()
+                
+                // Go back to the login page.
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
             let next = UIAlertAction(title: "Continue", style: .Default, handler: nextHandler)
             alertController.addAction(next)
@@ -130,16 +133,11 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
     
     // Other methods.
     
-    func openLoginPage() {
-        
-        // Go to the login page.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewC = storyboard.instantiateViewControllerWithIdentifier("LoginPage") as! LoginViewController
-        self.presentViewController(viewC, animated: true, completion: nil)
-    }
-    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        
+        // Check the entered email address.
+        self.checkEmailAddress()
+        
         return true
     }
     

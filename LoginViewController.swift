@@ -67,7 +67,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.presentViewController(viewC, animated: true, completion: nil)
     }
     
-    // View Did Load method.
+    // View Did Appear method.
     
     override func viewDidAppear(animated: Bool) {
         
@@ -82,6 +82,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             self.GotoNewsfeed()
         }
     }
+    
+    // View Did Load method.
     
     override func viewDidLoad() {
         super.viewDidLoad()

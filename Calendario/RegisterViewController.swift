@@ -36,9 +36,17 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
     @IBOutlet weak var webField: UITextField!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var profileScroll: UIScrollView!
+    @IBOutlet weak var backButton: UIBarButtonItem!
+    @IBOutlet weak var privacyPolicyButton: UIButton!
+    @IBOutlet weak var tosButton: UIButton!
+    @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var loadingView: UIView!
     
     // Store the selected profile image data.
     var imageData : NSData!
+    
+    // Pofile image set by user check.
+    var userSetImage = false
     
     // Setup the on screen button actions.
     
@@ -83,7 +91,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         // Setup the alert controller.
         let imageAlert = UIAlertController(title: "Profile Picture", message: "Add a photo from your library or take a picture with the camera.", preferredStyle: .Alert)
         
-        // Setup the alert actions.
+        // Photo library action button.
         let libraryPicture = { (action:UIAlertAction!) -> Void in
             
             // Check if the device has a photo library.
@@ -130,6 +138,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         }
         let buttonOne = UIAlertAction(title: "Library", style: .Default, handler: libraryPicture)
         
+        // Take a picture button.
         let cameraPicture = { (action:UIAlertAction!) -> Void in
             
             // Check if the device has a camera.
@@ -158,12 +167,32 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         }
         let buttonTwo = UIAlertAction(title: "Camera", style: .Default, handler: cameraPicture)
         
-        let buttonThree = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        // Set to default picture button.
+        let defaultPicture = { (action:UIAlertAction!) -> Void in
+            
+            // The user has not set an image.
+            self.userSetImage = false
+            
+            // Set the image data to the default image.
+            self.imageData = UIImageJPEGRepresentation(UIImage(named: "default_profile_pic.png")!, 1.0)
+            
+            // Set the profile picture to the default image.
+            self.profilePicture.image = UIImage(named: "default_profile_pic.png")
+        }
+        let buttonThree = UIAlertAction(title: "Default picture", style: .Default, handler: defaultPicture)
+        
+        // Cancel button.
+        let buttonFour = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
         
         // Add the actions to the alert.
         imageAlert.addAction(buttonOne)
         imageAlert.addAction(buttonTwo)
-        imageAlert.addAction(buttonThree)
+        
+        if (userSetImage == true) {
+            imageAlert.addAction(buttonThree)
+        }
+    
+        imageAlert.addAction(buttonFour)
         
         // Present the alert on screen.
         self.presentViewController(imageAlert, animated: true, completion: nil)
@@ -177,6 +206,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         // Turn the profile picture into a cirlce.
         self.profilePicture.layer.cornerRadius = (self.profilePicture.frame.size.width / 2)
         self.profilePicture.clipsToBounds = true
+        
+        // Curve the edges of the loading view.
+        self.loadingView.layer.cornerRadius = 12
+        self.loadingView.clipsToBounds = true
         
         // Setup the scroll view.
         profileScroll.scrollEnabled = true
@@ -199,6 +232,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
     
     func checkData() {
         
+        // Disable access to the UI and
+        // show the loading indicator view.
+        changeUIAccess(false)
+        
         // Get the relevant user data.
         let userData = [self.emailField.text, self.userField.text, self.passField.text, self.rePassField.text, self.descField.text, self.fullNameField.text]
         
@@ -211,6 +248,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
             let data = userData[loop]
             
             if (data == nil) {
+                
+                // Enable access to the UI and
+                // hide the loading indicator view.
+                changeUIAccess(true)
                 
                 // Create the error message.
                 let errorMessage = "Please ensure you have completed the '\(errorStrings[loop])' field before continuing."
@@ -230,6 +271,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         let capitalresult = textData.evaluateWithObject(self.userField.text)
         
         if (capitalresult == true) {
+            
+            // Enable access to the UI and
+            // hide the loading indicator view.
+            changeUIAccess(true)
             
             // Alert the user that there are 
             // capital letters in the username.
@@ -264,15 +309,21 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         newUser["website"] = self.webField.text
         newUser["fullName"] = self.fullNameField.text
         
-        // Set the user profile picture if
-        // one has been set buy the user.
+        // Set the user profile picture if one has been 
+        // set otherwise upload the standard profile picture.
         
-        if (imageData != nil) {
+        if (userSetImage == false) {
             
-            let imageFile = PFFile(name: "prof.jpg", data: imageData!)
-            newUser["profileImage"] = imageFile
+            if (self.imageData == nil) {
+                self.imageData = UIImageJPEGRepresentation(UIImage(named: "default_profile_pic.png")!, 1.0)
+            }
         }
         
+        // Add the profile image in the form of a 
+        // PFFile object to the sign up api request.
+        let imageFile = PFFile(name: "prof.jpg", data: imageData!)
+        newUser["profileImage"] = imageFile
+    
         // Pass the details to the Parse API.
         newUser.signUpInBackgroundWithBlock { (succed, error) -> Void in
             
@@ -280,10 +331,19 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
             dispatch_async(dispatch_get_main_queue(),{
                 
                 if (error != nil) {
+                    
+                    // Enable access to the UI and
+                    // hide the loading indicator view.
+                    self.changeUIAccess(true)
+                    
+                    // Display the error message.
                     self.displayAlert("Error", alertMessage: "\(error)")
                 }
                     
                 else {
+                    
+                    // Hide the loading indicator view.
+                    self.loadingView.alpha = 0.0
                     
                     // Setup the alert controller.
                     let registerAlert = UIAlertController(title: "Welcome to Calendario", message: "You have successfully created a Calendario account.", preferredStyle: .Alert)
@@ -337,6 +397,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         // Dismiss the image picker view controller.
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             
+            // The user has set an image.
+            self.userSetImage = true
+            
             // Store the image for use in the registration.
             self.imageData = UIImageJPEGRepresentation(image, 1.0)
             
@@ -353,6 +416,34 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
             
         else {
             self.descFieldPlaceholder.alpha = 1.0
+        }
+    }
+    
+    func changeUIAccess(mode : Bool) {
+        
+        // True means we should enable access to the UI
+        // objects and false means we should disable access.
+        emailField.userInteractionEnabled = mode
+        userField.userInteractionEnabled = mode
+        passField.userInteractionEnabled = mode
+        rePassField.userInteractionEnabled = mode
+        descField.userInteractionEnabled = mode
+        fullNameField.userInteractionEnabled = mode
+        webField.userInteractionEnabled = mode
+        profileScroll.userInteractionEnabled = mode
+        backButton.enabled = mode
+        privacyPolicyButton.userInteractionEnabled = mode
+        tosButton.userInteractionEnabled = mode
+        submitButton.userInteractionEnabled = mode
+        
+        // Show or hide the loading indicator view.
+        
+        if (mode == true) {
+            loadingView.alpha = 0.0
+        }
+        
+        else if (mode == false) {
+            loadingView.alpha = 1.0
         }
     }
     
