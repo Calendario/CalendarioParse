@@ -50,6 +50,7 @@
 		E2E0D7541BC9977D00662E70 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7531BC9977D00662E70 /* libz.1.dylib */; };
 		E2E0D7561BC997BE00662E70 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E0D7551BC997BE00662E70 /* libsqlite3.dylib */; };
 		E2E0D7591BCA0CFD00662E70 /* Old.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E0D7581BCA0CFD00662E70 /* Old.storyboard */; };
+		E2F3EF901BE1C75600F42433 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3EF8F1BE1C75600F42433 /* CommentsTableViewCell.swift */; };
 		E2FE96481BDF1AEA003BEDD2 /* ReportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE96471BDF1AEA003BEDD2 /* ReportTableViewController.swift */; };
 		E2FE964C1BDFE07D003BEDD2 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE964B1BDFE07D003BEDD2 /* CommentsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -133,6 +134,7 @@
 		E2E0D7531BC9977D00662E70 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = /usr/lib/libz.1.dylib; sourceTree = "<absolute>"; };
 		E2E0D7551BC997BE00662E70 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = /usr/lib/libsqlite3.dylib; sourceTree = "<absolute>"; };
 		E2E0D7581BCA0CFD00662E70 /* Old.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Old.storyboard; sourceTree = "<group>"; };
+		E2F3EF8F1BE1C75600F42433 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
 		E2FE96471BDF1AEA003BEDD2 /* ReportTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReportTableViewController.swift; path = ../ReportTableViewController.swift; sourceTree = "<group>"; };
 		E2FE964B1BDFE07D003BEDD2 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentsViewController.swift; path = ../CommentsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -235,6 +237,7 @@
 				E2B420EA1BD585F900984E7B /* CalHashTagDetector.m */,
 				E2FE96471BDF1AEA003BEDD2 /* ReportTableViewController.swift */,
 				E2FE964B1BDFE07D003BEDD2 /* CommentsViewController.swift */,
+				E2F3EF8F1BE1C75600F42433 /* CommentsTableViewCell.swift */,
 			);
 			name = Newsfeed;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 				E2D09C901BCCC575003F4651 /* DailyCalendarView.m in Sources */,
 				E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */,
 				E2D09C9A1BCCC59A003F4651 /* NSDate+CL.m in Sources */,
+				E2F3EF901BE1C75600F42433 /* CommentsTableViewCell.swift in Sources */,
 				A2E12C831BCE6E59007D8587 /* RegisterViewController.swift in Sources */,
 				E151AF721BD72D6500811A31 /* tabBarViewController.m in Sources */,
 				E2D09C9D1BCCC59A003F4651 /* UIImage+CL.m in Sources */,

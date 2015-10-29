@@ -90,6 +90,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         // set nav items in nav bar
         navigationbar.items = [navitems]
         self.view.addSubview(navigationbar)
+    
         
     
         
@@ -105,8 +106,9 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         self.TenseControl.tintColor = UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha:1)
-
-      
+        
+        // save current status id in NSUserDefaults incase its going to be used for a comment
+               
         
      
         
