@@ -69,6 +69,9 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
             // Run the alert code on the main thread.
             dispatch_async(dispatch_get_main_queue(),{
                 
+                // Notify the user that the app has stopped loading.
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                
                 if (success && (error == nil)) {
                     
                     self.checkAlertAction = true
@@ -90,6 +93,11 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
         // Check the entered email address.
         
         if (self.emailField.hasText()) {
+            
+            // Notify the user that the app is loading.
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            
+            // Reset the user password.
             self.resetPassword()
         }
             

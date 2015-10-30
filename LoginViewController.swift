@@ -166,6 +166,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             // Run the alert code on the main thread.
             dispatch_async(dispatch_get_main_queue(),{
                 
+                // Notify the user that the app has stopped loading.
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                
                 if (user != nil) {
                     
                     // Setup the alert controller.
@@ -208,6 +211,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
             
             else {
+                
+                // Notify the user that the app is loading.
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+                
+                // Log in the user account.
                 loginUser()
             }
         }

@@ -303,6 +303,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         
         else {
             
+            // Notify the user that the app is loading.
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            
             // The data meets all the requirements
             // go on to the actual registration.
             registerUser()
@@ -349,6 +352,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
             
             // Run the alert code on the main thread.
             dispatch_async(dispatch_get_main_queue(),{
+                
+                // Notify the user that the app has stopped loading.
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 
                 if (error != nil) {
                     
