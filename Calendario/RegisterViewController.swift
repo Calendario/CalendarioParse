@@ -198,10 +198,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         self.presentViewController(imageAlert, animated: true, completion: nil)
     }
     
-    // View Did Load.
+    // View Did Load method.
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // Hide the loading view to beign with.
+        self.loadingView.alpha = 0.0
         
         // Turn the profile picture into a cirlce.
         self.profilePicture.layer.cornerRadius = (self.profilePicture.frame.size.width / 2)
@@ -210,10 +214,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         // Curve the edges of the loading view.
         self.loadingView.layer.cornerRadius = 12
         self.loadingView.clipsToBounds = true
-        
-        // Setup the scroll view.
-        profileScroll.scrollEnabled = true
-        profileScroll.contentSize = CGSize(width:self.view.bounds.width, height: 880)
         
         // Allow the user to dismiss the keyboard with a toolabr.
         let editToolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.frame.size.width, 50))
@@ -226,6 +226,26 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         
         editToolbar.sizeToFit()
         descField.inputAccessoryView = editToolbar
+    }
+    
+    // View Did Layout Subviews method.
+    
+    override func viewDidLayoutSubviews() {
+        
+        // Calculate the appropriate scroll height.
+        var scrollHeight: CGFloat = 0.0
+        
+        if (self.profileScroll.bounds.height > 780) {
+            scrollHeight = self.profileScroll.bounds.height
+        }
+        
+        else {
+            scrollHeight = 780
+        }
+        
+        // Setup the profile scroll view.
+        self.profileScroll.scrollEnabled = true
+        self.profileScroll.contentSize = CGSizeMake(self.view.bounds.width, scrollHeight)
     }
     
     // Data check methods.

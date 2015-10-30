@@ -67,22 +67,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.presentViewController(viewC, animated: true, completion: nil)
     }
     
-    // View Did Appear method.
-    
-    override func viewDidAppear(animated: Bool) {
-        
-        // Automatically take the user to the
-        // new feed section if they are already
-        // logged in to the Calendario app.
-        var currentUser = PFUser.currentUser()
-        
-        if (currentUser != nil) {
-            
-            // The user is already logged in.
-            self.GotoNewsfeed()
-        }
-    }
-    
     // View Did Load method.
     
     override func viewDidLoad() {
@@ -120,6 +104,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         for (var loop = 0; loop < 10; loop++) {
             backgroundPhotos.append(UIImage(named: "\(imageName)\(loop + 1).png")!)
+        }
+        
+        // Automatically take the user to the
+        // new feed section if they are already
+        // logged in to the Calendario app.
+        var currentUser = PFUser.currentUser()
+        
+        if (currentUser != nil) {
+            
+            // The user is already logged in.
+            self.GotoNewsfeed()
         }
         
         // Run the animation.
