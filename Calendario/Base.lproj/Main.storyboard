@@ -358,12 +358,19 @@
                                 <action selector="PostTapped:" destination="9Rc-cM-4J1" id="QfQ-Cg-H36"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="jGc-dL-Dib"/>
+                        <barButtonItem image="left_icon" id="lNJ-Zv-djk">
+                            <connections>
+                                <action selector="backbuttonTapped:" destination="9Rc-cM-4J1" id="dSW-2s-Q5f"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="LocationLabel" destination="mwk-yB-n2C" id="deZ-2M-vwL"/>
                         <outlet property="PostButton" destination="m5J-1d-pHu" id="4BL-S0-kvo"/>
                         <outlet property="TenseControl" destination="P3y-v8-GPh" id="91B-37-4de"/>
+                        <outlet property="backbutton" destination="lNJ-Zv-djk" id="vEY-d0-RL9"/>
                         <outlet property="charlabel" destination="R26-bd-sTX" id="cCw-A3-l5a"/>
                         <outlet property="dateLabel" destination="6hn-TC-05F" id="ZCl-8w-nO6"/>
                         <outlet property="datepicker" destination="r46-FK-Xrz" id="S5c-lK-WC7"/>
@@ -386,22 +393,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEL-6q-sW6">
-                                <rect key="frame" x="296" y="585" width="36" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Send"/>
-                                <connections>
-                                    <action selector="SendTapped:" destination="F2z-l2-38J" eventType="touchUpInside" id="zv6-mQ-I5m"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Write Comment here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A2i-0L-BB3">
-                                <rect key="frame" x="11" y="528" width="352" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write Comment here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A2i-0L-BB3">
+                                <rect key="frame" x="5" y="556" width="352" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="206" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KJI-D7-2eT">
-                                <rect key="frame" x="-6" y="12" width="387" height="494"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="206" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KJI-D7-2eT">
+                                <rect key="frame" x="-12" y="7" width="387" height="494"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -412,23 +411,35 @@
                                             <rect key="frame" x="0.0" y="0.0" width="387" height="205"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1M-Wa-Ujd">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1M-Wa-Ujd">
                                                     <rect key="frame" x="288" y="13" width="42" height="21"/>
                                                     <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="42" id="Kdg-ey-IIv"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09y-oe-M55">
-                                                    <rect key="frame" x="0.0" y="32" width="379" height="94"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09y-oe-M55">
+                                                    <rect key="frame" x="16" y="44" width="347" height="117"/>
                                                     <animations/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <dataDetectorType key="dataDetectorTypes" link="YES" calendarEvent="YES"/>
                                                 </textView>
                                             </subviews>
                                             <animations/>
+                                            <constraints>
+                                                <constraint firstItem="09y-oe-M55" firstAttribute="leading" secondItem="idj-7P-aTH" secondAttribute="leadingMargin" constant="8" id="GXP-cq-lfd"/>
+                                                <constraint firstItem="h1M-Wa-Ujd" firstAttribute="top" secondItem="idj-7P-aTH" secondAttribute="topMargin" constant="5" id="OBd-si-rEm"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="09y-oe-M55" secondAttribute="bottom" constant="36" id="aNx-3I-MNA"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="09y-oe-M55" secondAttribute="trailing" constant="16" id="fed-zV-SSZ"/>
+                                                <constraint firstItem="09y-oe-M55" firstAttribute="top" secondItem="h1M-Wa-Ujd" secondAttribute="bottom" constant="10" id="iMe-Xb-uF8"/>
+                                                <constraint firstItem="09y-oe-M55" firstAttribute="centerY" secondItem="idj-7P-aTH" secondAttribute="centerY" id="jZx-1o-vZv"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="h1M-Wa-Ujd" secondAttribute="trailing" constant="49" id="kVq-hd-7ge"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
@@ -445,10 +456,34 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KJI-D7-2eT" firstAttribute="leading" secondItem="7xN-Kh-pjT" secondAttribute="leadingMargin" constant="-28" id="D4B-4c-r2j"/>
+                            <constraint firstAttribute="trailing" secondItem="KJI-D7-2eT" secondAttribute="trailing" id="Ee1-PS-uXq"/>
+                            <constraint firstItem="A2i-0L-BB3" firstAttribute="leading" secondItem="7xN-Kh-pjT" secondAttribute="leadingMargin" constant="-11" id="Elg-xW-QUf"/>
+                            <constraint firstItem="KJI-D7-2eT" firstAttribute="top" secondItem="7xN-Kh-pjT" secondAttribute="topMargin" constant="12" id="VJx-ch-2CZ"/>
+                            <constraint firstItem="pwH-dF-yIT" firstAttribute="top" secondItem="A2i-0L-BB3" secondAttribute="bottom" constant="37" id="glh-ar-Zg2"/>
+                            <constraint firstItem="A2i-0L-BB3" firstAttribute="top" secondItem="KJI-D7-2eT" secondAttribute="bottom" constant="50" id="mAz-0s-4eg"/>
+                            <constraint firstItem="A2i-0L-BB3" firstAttribute="centerX" secondItem="KJI-D7-2eT" secondAttribute="centerX" id="sDU-vv-XGF"/>
+                        </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem image="left_icon" id="gf0-dU-cex">
+                            <connections>
+                                <action selector="bacbuttontapped:" destination="F2z-l2-38J" id="yQH-co-yzs"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="1ix-7Z-7UM"/>
+                        <barButtonItem title="Send" id="y5a-dw-frM">
+                            <connections>
+                                <action selector="Sendtapped:" destination="F2z-l2-38J" id="BfN-hC-2YH"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="backbutton" destination="gf0-dU-cex" id="JaJ-cu-MNI"/>
                         <outlet property="commentTextView" destination="A2i-0L-BB3" id="5eD-19-JJG"/>
+                        <outlet property="sendbutton" destination="y5a-dw-frM" id="ESp-ww-hoX"/>
                         <outlet property="tableView" destination="KJI-D7-2eT" id="PcC-gR-Ofo"/>
                     </connections>
                 </viewController>

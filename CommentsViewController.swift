@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class CommentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -17,6 +17,10 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     var commentdata:NSMutableArray = NSMutableArray()
     
     var savedobjectID:AnyObject!
+    
+    @IBOutlet weak var backbutton: UIBarButtonItem!
+    
+    @IBOutlet weak var sendbutton: UIBarButtonItem!
     
     
     override func viewDidLoad() {
@@ -33,6 +37,31 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         savedobjectID = defaults.objectForKey("objectid")
         
         print(savedobjectID!)
+        
+        
+        
+        let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 55))
+        navigationbar.backgroundColor = UIColor.whiteColor()
+        navigationbar.delegate = self
+        navigationbar.barTintColor = UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha: 1)
+        navigationbar.tintColor = UIColor.whiteColor()
+        
+        // logo for nav title
+        
+        let logo = UIImage(named: "navtext")
+        let imageview = UIImageView(image: logo)
+        
+        
+        // navigation items
+        let navitems = UINavigationItem()
+        navitems.titleView = imageview
+        navitems.leftBarButtonItem = backbutton
+        navitems.rightBarButtonItem = sendbutton
+        navigationbar.items = [navitems]
+        self.view.addSubview(navigationbar)
+        
+        
+
         
      
     }
@@ -75,9 +104,28 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     
-    @IBAction func SendTapped(sender: AnyObject) {
+ 
+    
+    func GotoNewsfeed() {
+    
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+    let tabBarController: UITabBarController = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! tabBarViewController
+    appDelegate.window.makeKeyAndVisible()
+    appDelegate.window.rootViewController = tabBarController
+    }
+    
+    
+    @IBAction func bacbuttontapped(sender: AnyObject) {
+        GotoNewsfeed()
+    }
+    
+    @IBAction func Sendtapped(sender: AnyObject) {
         PostComment()
     }
+
+    
+    
     
     
     

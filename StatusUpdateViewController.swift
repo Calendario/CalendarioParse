@@ -34,6 +34,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     @IBOutlet weak var LocationLabel: UILabel!
     
+    @IBOutlet weak var backbutton: UIBarButtonItem!
     
     // tense
     var tensenum:Int!
@@ -86,6 +87,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         navitems.titleView = imageview
         
         navitems.rightBarButtonItem = PostButton
+        navitems.leftBarButtonItem = backbutton
         
         // set nav items in nav bar
         navigationbar.items = [navitems]
@@ -96,9 +98,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
 
         // Do any additional setup after loading the view.
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha: 1)
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationItem.setRightBarButtonItem(PostButton, animated: true)
         statusUpdateTextField.delegate = self
         dateLabel.hidden = true
         self.locationManager.delegate = self
@@ -197,6 +196,12 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         PostStatusUpdate()
     }
     
+    @IBAction func backbuttonTapped(sender: AnyObject) {
+        GotoNewsfeed()
+    }
+    
+    
+    
     
     
     
@@ -272,6 +277,19 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print(error.localizedDescription)
     }
+    
+    
+    func GotoNewsfeed() {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let tabBarController: UITabBarController = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! tabBarViewController
+        appDelegate.window.makeKeyAndVisible()
+        appDelegate.window.rootViewController = tabBarController
+    }
+    
+
+    
     
     
 

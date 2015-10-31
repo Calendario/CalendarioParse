@@ -14,7 +14,7 @@ class ReportTableViewController: UITableViewController {
     @IBOutlet weak var leftbutton: UIBarButtonItem!
     
     
-    var reasonsarray = ["Porn", "drugs"]
+    var reasonsarray = ["Pornography", "Drugs", "Graphic Violence", "Privacy Invasion"]
     var selectedreason:String = ""
     
     
@@ -22,7 +22,10 @@ class ReportTableViewController: UITableViewController {
     {
         case Porn = "pornography"
         case Drugs = "drugs"
+        case GrpahicVio = "Graphic Violence"
+        case Privacy = "Privacy"
         case Other = "other"
+        
         
     }
 
@@ -96,9 +99,17 @@ class ReportTableViewController: UITableViewController {
             // place objectid in repoted section of parse data 
             // the object id will link to the approate update
             
-            var reportedStatus = PFObject(className: "reports")
-                    case 1:
+            
+        case 1:
             selectedreason = Reasons.Drugs.rawValue
+            
+        case 2:
+            selectedreason = Reasons.GrpahicVio.rawValue
+        case 3:
+            selectedreason = Reasons.Privacy.rawValue
+            
+            
+            
             
         default:
             
@@ -118,6 +129,7 @@ class ReportTableViewController: UITableViewController {
             {
                 statusupdate!["reported"] = true
                 statusupdate!["reportedby"] = PFUser.currentUser()
+                statusupdate!["reason"] = self.selectedreason
                 statusupdate?.saveInBackground()
                 
                 
