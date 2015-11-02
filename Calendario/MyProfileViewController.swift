@@ -29,6 +29,9 @@ class MyProfileViewController : UIViewController {
     // code as it MUST be set to PUBLIC.
     public var passedUser:PFUser!
     
+    // User website link.
+    var userWebsiteLink:String!
+    
     // Setup the on screen button actions.
     
     @IBAction func editProfile(sender: UIButton) {
@@ -41,6 +44,21 @@ class MyProfileViewController : UIViewController {
     
     @IBAction func openUserWebsite(sender: UIButton) {
         
+        // Check the website URL before
+        // opening the web page view.
+        
+        if (userWebsiteLink != nil) {
+            
+            // Open the register view.
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewC = storyboard.instantiateViewControllerWithIdentifier("WebPage") as! WebPageViewController
+            viewC.passedURL = userWebsiteLink
+            self.presentViewController(viewC, animated: true, completion: nil)
+        }
+        
+        else {
+            self.displayAlert("Error", alertMessage: "This user does not have a website URL.")
+        }
     }
     
     @IBAction func dismissProfile(sender: UIButton) {
@@ -98,10 +116,21 @@ class MyProfileViewController : UIViewController {
             // User is logged in - get thier details and populate the UI.
             self.profName.text = currentUser?.objectForKey("fullName") as? String
             self.profDesc.text = currentUser?.objectForKey("userBio") as? String
-            self.profWeb.setTitle(currentUser?.objectForKey("website") as? String, forState: UIControlState.Normal)
             self.profPosts.text = "000"
             self.profFollowers.text = "000"
             self.profFollowing.text = "000"
+            
+            // Check the website URL link.
+            userWebsiteLink = currentUser?.objectForKey("website") as? String
+            
+            if (userWebsiteLink != nil) {
+                self.profWeb.setTitle(userWebsiteLink, forState: UIControlState.Normal)
+            }
+            
+            else {
+                self.profWeb.setTitle("No website set.", forState: UIControlState.Normal)
+                self.profWeb.userInteractionEnabled = false
+            }
             
             // Check if the user is verified.
             let verify = currentUser?.objectForKey("verifiedUser")
