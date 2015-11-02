@@ -7,6 +7,7 @@
 //
 
 #import "SearchViewController.h"
+#import "Calendario-Swift.h"
 
 @interface SearchViewController ()
 {
@@ -14,13 +15,11 @@
     NSMutableArray *searchedData;
     NSArray *newFilteredArray;
     BOOL isFiltered;
-
 }
 
 @end
 
 @implementation SearchViewController
-
 
 - (void) viewWillAppear:(BOOL)animated
 {
@@ -363,11 +362,15 @@
     
     [self.searchTableView reloadData];
     
-    //NAVIGATE TO SELECTED USER'S PROFILE PAGE
-    [self performSegueWithIdentifier:@"goToProfile" sender:self];
+    // GET THE PF USER DATA OBJECT.
+    PFUser *user = [filteredArray objectAtIndex:indexPath.row];
     
+    // NAVIGATE TO SELECTED USER'S PROFILE PAGE
+    UIStoryboard *mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    MyProfileViewController *profVC = [mainSB instantiateViewControllerWithIdentifier:@"My Profile"];
+    profVC.passedUser = user;
+    profVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:profVC animated:YES completion:NULL];
 }
-
-
 
 @end

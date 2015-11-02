@@ -34,8 +34,6 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
     //self.navigationItem.setRightBarButtonItem(sharebutton, animated: true)
 
         // Do any additional setup after loading the view.

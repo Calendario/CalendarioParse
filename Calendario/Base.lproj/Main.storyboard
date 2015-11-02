@@ -2183,7 +2183,14 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     <color key="textShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Profile" id="udu-gR-wf6"/>
+                                    <navigationItem title="Profile" id="udu-gR-wf6">
+                                        <barButtonItem key="leftBarButtonItem" enabled="NO" image="left_icon" id="SCD-1T-VYa">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="dismissProfile:" destination="EL5-7o-osE" id="YSo-Y5-bUF"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                         </subviews>
@@ -2206,6 +2213,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                     <tabBarItem key="tabBarItem" title="Item" id="mUf-hn-NYg"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="backButton" destination="SCD-1T-VYa" id="AUu-8G-9os"/>
                         <outlet property="editButton" destination="txi-P7-31H" id="YpO-wE-QK6"/>
                         <outlet property="profDesc" destination="KHj-Gr-57d" id="0PA-i0-IUw"/>
                         <outlet property="profFollowers" destination="ooQ-AE-zmV" id="bHt-X7-mDj"/>

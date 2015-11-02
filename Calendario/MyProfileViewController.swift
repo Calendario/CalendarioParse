@@ -23,6 +23,11 @@ class MyProfileViewController : UIViewController {
     @IBOutlet weak var profFollowing: UILabel!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var profileScroll: UIScrollView!
+    @IBOutlet weak var backButton: UIBarButtonItem!
+    
+    // Do NOT change the following line of
+    // code as it MUST be set to PUBLIC.
+    public var passedUser:PFUser!
     
     // Setup the on screen button actions.
     
@@ -38,11 +43,39 @@ class MyProfileViewController : UIViewController {
         
     }
     
+    @IBAction func dismissProfile(sender: UIButton) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     // View Did Load method.
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // Check to see if a user is being passed into the
+        // view controller and run the appropriate actions.
+        var currentUser:PFUser!
+        
+        if (passedUser == nil) {
+            
+            // Show the currently logged in user.
+            currentUser = PFUser.currentUser()
+            
+            // Hide the back button.
+            backButton.image = nil
+            backButton.enabled = false
+        }
+        
+        else {
+            
+            // Show the user being passed into the view.
+            currentUser = passedUser
+            
+            // Set the back button image and display it.
+            backButton.image = UIImage(named: "left_icon.png")
+            backButton.enabled = true
+        }
         
         // Notify the user that the app is loading.
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
@@ -59,10 +92,6 @@ class MyProfileViewController : UIViewController {
         // Curve the edges of the edit button.
         self.editButton.layer.cornerRadius = 6
         self.editButton.clipsToBounds = true
-        
-        // Check if a user is logged in
-        // and then retrieve their data.
-        var currentUser = PFUser.currentUser()
         
         if (currentUser != nil) {
             
@@ -93,33 +122,44 @@ class MyProfileViewController : UIViewController {
             }
             
             // Check if the user has a profile image.
-            let userImageFile = currentUser!["profileImage"] as! PFFile
+
+            if (currentUser.objectForKey("profileImage") == nil) {
+                self.profPicture.image = UIImage(named: "default_profile_pic.png")
+            }
             
-            userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+            else {
                 
-                if (error == nil) {
+                let userImageFile = currentUser!["profileImage"] as! PFFile
+                
+                userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                     
-                    if (imageData != nil) {
+                    if (error == nil) {
                         
-                        // Set the downloaded profile image.
-                        self.profPicture.image = UIImage(data:imageData!)
+                        // Check the profile image data first.
+                        let profileImage = UIImage(data:imageData!)
+                        
+                        if ((imageData != nil) && (profileImage != nil)) {
+                            
+                            // Set the downloaded profile image.
+                            self.profPicture.image = profileImage
+                        }
+                            
+                        else {
+                            
+                            // No profile picture set the standard image.
+                            self.profPicture.image = UIImage(named: "default_profile_pic.png")
+                        }
                     }
-                    
+                        
                     else {
                         
                         // No profile picture set the standard image.
                         self.profPicture.image = UIImage(named: "default_profile_pic.png")
                     }
-                }
-                
-                else {
                     
-                    // No profile picture set the standard image.
-                    self.profPicture.image = UIImage(named: "default_profile_pic.png")
+                    // Notify the user that the app has stopped loading.
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 }
-                
-                // Notify the user that the app has stopped loading.
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             }
         }
         
