@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate{
+class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate, FSCalendarDelegate, FSCalendarDataSource{
 
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var sharebutton: UIBarButtonItem!
@@ -38,12 +38,16 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
 
         // Do any additional setup after loading the view.
         
+        
+    // weekly calender
     let cal = CLWeeklyCalendarView(frame: CGRectMake(0, 0, self.view.bounds.size.width, 120))
         cal.delegate = self
         
         self.view.addSubview(cal)
         
         print(statausData.count)
+        
+        
         
         
         
@@ -143,8 +147,16 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         
      
         return [CLCalendarWeekStartDay: 1]
-        
-        
+    }
+    
+    func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
+        let rect = CGRectMake(0, 0, size.width, size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 
     override func didReceiveMemoryWarning() {
