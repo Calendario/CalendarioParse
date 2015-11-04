@@ -19,11 +19,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //retrieve today's date
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"dd"];
+    NSString *currentDate = [dateFormat stringFromDate:today];
+    
     //center Tab button properties
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *buttonImage = [UIImage imageNamed:@"statusUpdate_icon.png"];
+    UIImage *buttonImage = [UIImage imageNamed:@"alternateTimeLine_Icon.png"];
     button.frame = CGRectMake(0, 0, buttonImage.size.width*2, buttonImage.size.height*2);
     [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:20];
+    [button setTitle: currentDate forState:UIControlStateNormal];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, -23, 0)];
     
     
     CGFloat heightDifference = buttonImage.size.height - self.tabBar.frame.size.height + 31;
@@ -56,8 +65,8 @@
     fourthTab.selectedImage = [[UIImage imageNamed:@"notifications_icon.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     fifthTab.image = [[UIImage imageNamed:@"profile_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     fifthTab.selectedImage = [[UIImage imageNamed:@"profile_icon.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    thirdTab.image = [[UIImage imageNamed:@"statusUpdate_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    thirdTab.selectedImage = [[UIImage imageNamed:@"statusUpdate_icon.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    thirdTab.image = [[UIImage imageNamed:@"alternateTimeLine_Icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    thirdTab.selectedImage = [[UIImage imageNamed:@"alternateTimeLine_Icon.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     for(UITabBarItem * tabBarItem in self.tabBar.items){
         tabBarItem.title = @"";
