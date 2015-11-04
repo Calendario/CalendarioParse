@@ -28,6 +28,7 @@ class MyProfileViewController : UIViewController {
     // Do NOT change the following line of
     // code as it MUST be set to PUBLIC.
     public var passedUser:PFUser!
+    var userID:String!
     
     // User website link.
     var userWebsiteLink:String!
@@ -39,7 +40,27 @@ class MyProfileViewController : UIViewController {
         // Restore the size of the edit button.
         self.restoreEditSize()
         
-        // Open the edit profile section.
+        // Open the appropriate section depending
+        // on whether a user object has been passed in.
+        
+        if (passedUser == nil) {
+            
+            // No user passed in - edit current user button.
+        }
+            
+        else {
+            
+            if (userID != nil) {
+                
+                // User passed in - follow/unfollow user button.
+                let userClass = Follow()
+                userClass.Follow(userID)
+            }
+            
+            else {
+                self.displayAlert("Error", alertMessage: "The user follow request has failed.")
+            }
+        }
     }
     
     @IBAction func openUserWebsite(sender: UIButton) {
@@ -55,7 +76,7 @@ class MyProfileViewController : UIViewController {
             viewC.passedURL = userWebsiteLink
             self.presentViewController(viewC, animated: true, completion: nil)
         }
-        
+            
         else {
             self.displayAlert("Error", alertMessage: "This user does not have a website URL.")
         }
@@ -83,8 +104,11 @@ class MyProfileViewController : UIViewController {
             // Hide the back button.
             backButton.image = nil
             backButton.enabled = false
+            
+            // Set the edit button text.
+            self.editButton.setTitle("Edit Profile", forState: UIControlState.Normal)
         }
-        
+            
         else {
             
             // Show the user being passed into the view.
@@ -93,6 +117,12 @@ class MyProfileViewController : UIViewController {
             // Set the back button image and display it.
             backButton.image = UIImage(named: "left_icon.png")
             backButton.enabled = true
+            
+            // Get the username string.
+            userID = currentUser.username! as String
+            
+            // Set the edit button text.
+            self.editButton.setTitle("Follow \(userID)", forState: UIControlState.Normal)
         }
         
         // Notify the user that the app is loading.
@@ -126,7 +156,7 @@ class MyProfileViewController : UIViewController {
             if (userWebsiteLink != nil) {
                 self.profWeb.setTitle(userWebsiteLink, forState: UIControlState.Normal)
             }
-            
+                
             else {
                 self.profWeb.setTitle("No website set.", forState: UIControlState.Normal)
                 self.profWeb.userInteractionEnabled = false
@@ -138,24 +168,24 @@ class MyProfileViewController : UIViewController {
             if (verify == nil) {
                 self.profVerified.alpha = 0.0
             }
-            
+                
             else {
                 
                 if (verify as! Bool == true) {
                     self.profVerified.alpha = 1.0
                 }
-                
+                    
                 else {
                     self.profVerified.alpha = 0.0
                 }
             }
             
             // Check if the user has a profile image.
-
+            
             if (currentUser.objectForKey("profileImage") == nil) {
                 self.profPicture.image = UIImage(named: "default_profile_pic.png")
             }
-            
+                
             else {
                 
                 let userImageFile = currentUser!["profileImage"] as! PFFile
@@ -191,7 +221,7 @@ class MyProfileViewController : UIViewController {
                 }
             }
         }
-        
+            
         else {
             
             // There is currently no logged in user.
@@ -241,7 +271,7 @@ class MyProfileViewController : UIViewController {
         // Run the 'small' animation.
         UIView.animateWithDuration(0.3 , animations: {
             self.editButton.transform = CGAffineTransformMakeScale(0.75, 0.75)
-        }, completion: nil)
+            }, completion: nil)
     }
     
     func restoreEditSize() {
