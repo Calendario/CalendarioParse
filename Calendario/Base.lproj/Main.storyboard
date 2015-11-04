@@ -28,7 +28,7 @@
                                         <rect key="frame" x="0.0" y="28" width="390" height="195"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sGJ-qf-6wC" id="elz-Dq-uTm">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="195"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="194"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXy-RC-Kfz">
@@ -135,7 +135,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v4l-4r-4nc" id="1if-ng-4jI">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MeP-xu-Qpc" userLabel="User Profile Image">
@@ -255,7 +255,7 @@
                                     <action selector="tenseControlchanged:" destination="9Rc-cM-4J1" eventType="valueChanged" id="TQJ-7K-BpX"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R26-bd-sTX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="400" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R26-bd-sTX">
                                 <rect key="frame" x="309" y="546" width="66" height="20"/>
                                 <animations/>
                                 <constraints>
@@ -408,7 +408,7 @@
                                         <rect key="frame" x="0.0" y="28" width="387" height="206"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WYh-f2-f9g" id="idj-7P-aTH">
-                                            <rect key="frame" x="0.0" y="0.0" width="387" height="206"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="387" height="205"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1M-Wa-Ujd">
@@ -1562,10 +1562,10 @@
                                         <rect key="frame" x="0.0" y="22" width="383" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pLQ-Pz-6n9" id="N6u-US-uAV">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zed-Ul-qvZ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zed-Ul-qvZ">
                                                     <rect key="frame" x="339" y="14" width="28" height="28"/>
                                                     <animations/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -2139,6 +2139,14 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             <constraint firstItem="txi-P7-31H" firstAttribute="centerX" secondItem="WyR-tI-l4h" secondAttribute="centerX" id="RqN-pO-NhL"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qy7-d3-a4q">
+                                        <rect key="frame" x="290" y="416" width="44" height="30"/>
+                                        <animations/>
+                                        <state key="normal" title="Follow"/>
+                                        <connections>
+                                            <action selector="FollowButtonTapped:" destination="EL5-7o-osE" eventType="touchUpInside" id="Aq9-cb-FT6"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <animations/>
                                 <constraints>
@@ -2333,7 +2341,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sez-zi-hV3" id="ZYX-Pm-TpJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </tableViewCellContentView>

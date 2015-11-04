@@ -25,6 +25,8 @@ class MyProfileViewController : UIViewController {
     @IBOutlet weak var profileScroll: UIScrollView!
     @IBOutlet weak var backButton: UIBarButtonItem!
     
+    let followAPI = Follow()
+    
     // Do NOT change the following line of
     // code as it MUST be set to PUBLIC.
     public var passedUser:PFUser!
@@ -53,9 +55,7 @@ class MyProfileViewController : UIViewController {
             if (userID != nil) {
                 
                 // User passed in - follow/unfollow user button.
-                let userClass = Follow()
-                userClass.Follow(userID)
-            }
+                }
             
             else {
                 self.displayAlert("Error", alertMessage: "The user follow request has failed.")
@@ -90,6 +90,9 @@ class MyProfileViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        followAPI.loadData()
+        
         // Do any additional setup after loading the view, typically from a nib.
         
         // Check to see if a user is being passed into the
@@ -149,6 +152,10 @@ class MyProfileViewController : UIViewController {
             self.profPosts.text = "000"
             self.profFollowers.text = "000"
             self.profFollowing.text = "000"
+              print(profName.text)
+            
+            
+          
             
             // Check the website URL link.
             userWebsiteLink = currentUser?.objectForKey("website") as? String
@@ -288,4 +295,11 @@ class MyProfileViewController : UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    
+    @IBAction func FollowButtonTapped(sender: AnyObject) {
+        followAPI.Follow()
+}
+    
 }
