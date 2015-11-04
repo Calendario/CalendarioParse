@@ -32,6 +32,7 @@
 		E2B7D28A1BE86C9E002395F7 /* NSDate+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7D27B1BE86C9E002395F7 /* NSDate+FSExtension.m */; };
 		E2B7D28B1BE86C9E002395F7 /* NSString+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7D27D1BE86C9E002395F7 /* NSString+FSExtension.m */; };
 		E2B7D28C1BE86C9E002395F7 /* UIView+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7D27F1BE86C9E002395F7 /* UIView+FSExtension.m */; };
+		E2B9E05B1BE9AC6200B9154A /* Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B9E05A1BE9AC6200B9154A /* Follow.swift */; };
 		E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8A1BCCC575003F4651 /* CLWeeklyCalendarView.m */; };
 		E2D09C901BCCC575003F4651 /* DailyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8C1BCCC575003F4651 /* DailyCalendarView.m */; };
 		E2D09C911BCCC575003F4651 /* DayTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8E1BCCC575003F4651 /* DayTitleLabel.m */; };
@@ -130,6 +131,7 @@
 		E2B7D27D1BE86C9E002395F7 /* NSString+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FSExtension.m"; sourceTree = "<group>"; };
 		E2B7D27E1BE86C9E002395F7 /* UIView+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FSExtension.h"; sourceTree = "<group>"; };
 		E2B7D27F1BE86C9E002395F7 /* UIView+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FSExtension.m"; sourceTree = "<group>"; };
+		E2B9E05A1BE9AC6200B9154A /* Follow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Follow.swift; sourceTree = "<group>"; };
 		E2D09C891BCCC575003F4651 /* CLWeeklyCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWeeklyCalendarView.h; sourceTree = "<group>"; };
 		E2D09C8A1BCCC575003F4651 /* CLWeeklyCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWeeklyCalendarView.m; sourceTree = "<group>"; };
 		E2D09C8B1BCCC575003F4651 /* DailyCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyCalendarView.h; sourceTree = "<group>"; };
@@ -352,6 +354,14 @@
 			name = FSCalender;
 			sourceTree = "<group>";
 		};
+		E2B9E0591BE9AB2C00B9154A /* FollowUser */ = {
+			isa = PBXGroup;
+			children = (
+				E2B9E05A1BE9AC6200B9154A /* Follow.swift */,
+			);
+			name = FollowUser;
+			sourceTree = "<group>";
+		};
 		E2D09C9E1BCCC5BD003F4651 /* WeeklyCalender */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,6 +393,7 @@
 				E2E0D7001BC9950800662E70 /* Products */,
 				E2E0D7571BC997D000662E70 /* Parse */,
 				E25607AC1BCAF5EC0085B9B4 /* Calendario-Bridging-Header.h */,
+				E2B9E0591BE9AB2C00B9154A /* FollowUser */,
 				E2B7D2651BE86C68002395F7 /* FSCalender */,
 				E2D09C9E1BCCC5BD003F4651 /* WeeklyCalender */,
 			);
@@ -603,6 +614,7 @@
 			files = (
 				E2AE81531BCAFF320047D1FA /* NewsfeedViewController.swift in Sources */,
 				E2D09C9C1BCCC59A003F4651 /* UIColor+CL.m in Sources */,
+				E2B9E05B1BE9AC6200B9154A /* Follow.swift in Sources */,
 				E2B7D2801BE86C9E002395F7 /* FSCalendar.m in Sources */,
 				E2B7D2831BE86C9E002395F7 /* FSCalendarCell.m in Sources */,
 				E2B7D28A1BE86C9E002395F7 /* NSDate+FSExtension.m in Sources */,
