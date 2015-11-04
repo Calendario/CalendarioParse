@@ -275,7 +275,7 @@
     
     UILabel *userLabel = (UILabel *)[cell.contentView viewWithTag:2];
     UIImageView *userImage = (UIImageView *)[cell.contentView viewWithTag:1];
-    UIImage *notAvailable = [UIImage imageNamed:@"profile_grey.png"];
+    UIImage *notAvailable = [UIImage imageNamed:@"default_profile_pic.png"];
     userImage.image = notAvailable;
     
     //hide elements
