@@ -25,7 +25,7 @@ class MyProfileViewController : UIViewController {
     @IBOutlet weak var profileScroll: UIScrollView!
     @IBOutlet weak var backButton: UIBarButtonItem!
     
-    let followAPI = Follow()
+
     
     // Do NOT change the following line of
     // code as it MUST be set to PUBLIC.
@@ -91,7 +91,8 @@ class MyProfileViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        followAPI.loadData()
+       
+   
         
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -152,7 +153,14 @@ class MyProfileViewController : UIViewController {
             self.profPosts.text = "000"
             self.profFollowers.text = "000"
             self.profFollowing.text = "000"
-              print(profName.text)
+            
+                       
+            
+            // store current user full name is nsuserdefults to it can be used later to follow a user 
+            
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setObject(currentUser.username, forKey: "username")
+            
             
             
           
@@ -299,7 +307,6 @@ class MyProfileViewController : UIViewController {
     
     
     @IBAction func FollowButtonTapped(sender: AnyObject) {
-        followAPI.Follow()
 }
     
 }

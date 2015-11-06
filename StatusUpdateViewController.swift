@@ -92,6 +92,11 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         // set nav items in nav bar
         navigationbar.items = [navitems]
         self.view.addSubview(navigationbar)
+        
+        
+        statusUpdateTextField.layer.borderColor = UIColor.blackColor().CGColor
+        
+    
     
         
     
@@ -107,13 +112,19 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         self.TenseControl.tintColor = UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha:1)
         
         // save current status id in NSUserDefaults incase its going to be used for a comment
-               
         
-     
+        
+        
+        // gesture reconizer for date picker
+        
+        let tapgesture = UITapGestureRecognizer(target: self, action: "DatePickerAppear")
+        
+        dateLabel.userInteractionEnabled = true
+        
+        dateLabel.addGestureRecognizer(tapgesture)
         
     }
-
-    override func didReceiveMemoryWarning() {
+        override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -129,13 +140,23 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         dateLabel.hidden = false
         dateLabel.text = dateformatter.stringFromDate(datepicker.date)
         datepicker.hidden = true
+    
+
         
     }
     
     @IBAction func datePickerChanged(sender: AnyObject) {
-        
         setDate()
     }
+    
+    func DatePickerAppear()
+    {
+        print("tapped")
+        datepicker.hidden = false
+        dateLabel.hidden = true
+   
+    }
+    
     
     
     

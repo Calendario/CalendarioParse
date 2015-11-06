@@ -39,18 +39,6 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         // Do any additional setup after loading the view.
         
         
-    // weekly calender
-    let cal = CLWeeklyCalendarView(frame: CGRectMake(0, 0, self.view.bounds.size.width, 120))
-        cal.delegate = self
-        
-        self.view.addSubview(cal)
-        
-        print(statausData.count)
-        
-        
-        
-        
-        
         let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 55))
         navigationbar.backgroundColor = UIColor.whiteColor()
         navigationbar.delegate = self
