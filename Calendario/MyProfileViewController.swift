@@ -29,7 +29,7 @@ class MyProfileViewController : UIViewController {
     
     // follow method property
     var followdata:NSMutableArray = NSMutableArray()
-    var isFollowing = [PFObject:Bool]()
+    var isfollowing = false
     
 
     
@@ -97,7 +97,6 @@ class MyProfileViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadFollowData()
         
        
    
@@ -315,96 +314,44 @@ class MyProfileViewController : UIViewController {
     
     // follow method
     
-    func loadFollowData()
+    func follow()
     {
-        followdata.removeAllObjects()
-        isFollowing.removeAll(keepCapacity: true)
+        var followUser = PFObject(className: "Followers")
+        followUser["user"] = PFUser.currentUser()
+        followUser["followDate"] = String(NSDate())
+        followUser["followeduser"] = profName.text
+        followUser.saveInBackground()
+        print("followed")
+    }
+    @IBAction func followTapped(sender: AnyObject) {
         
-        // query user data
-        var userQuery = PFUser.query()
-        userQuery?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
-            if error != nil
+        follow()
+    }
+    
+    // query followes class by user method may not be used
+    
+    func qureyfollwersbycurrentUser(currentuser:PFUser)
+    {
+        var query = PFQuery(className: "Followers")
+        query.whereKey("user", equalTo: currentuser)
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil
             {
+                print("this user has followers")
                 
-            }
-            else
-            {
-                if let objects = objects
+                if let objects = objects as [PFObject]!
                 {
                     for object in objects
                     {
-                        if let user  = object as? PFObject
-                        {
-                            if user.objectId != PFUser.currentUser()?.objectId
-                            {
-                                self.followdata.addObject(user)
-                                
-                                // query the followers table 
-                                var followQuery:PFQuery = PFQuery(className: "Followers")
-                                followQuery.whereKey("follower", equalTo: PFUser.currentUser()!)
-                                followQuery.whereKey("user", equalTo: user)
-                                
-                                followQuery.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
-                                    if let object = objects
-                                    {
-                                        if objects?.count > 0
-                                        {
-                                            self.isFollowing[user] = true
-                                        }
-                                        else
-                                        {
-                                            self.isFollowing[user] = false
-                                        }
-                                    }
-                                    
-                                    
-                                })
-                            }
-                        }
+                        print(object.objectForKey("followeduser"))
                     }
                 }
             }
-        })
+        }
     }
     
     
     
-    @IBAction func FollowButtonTapped(sender: UIButton) {
-        
-        let userdata:PFObject = self.followdata.objectAtIndex(sender.tag) as! PFObject
-        
-        let followid = userdata["objectId"] as! PFObject
-        
-        if isFollowing[followid] == false
-        {
-            isFollowing[followid] = true
-            // set button text to unfollow here
-            
-            
-            // object id query
-            let getobjectidquery = PFUser.query()
-            getobjectidquery?.whereKey("objectId", equalTo: userdata.objectId!)
-            getobjectidquery?.getFirstObjectInBackgroundWithBlock({ (foundobject:PFObject?, error:NSError?) -> Void in
-                if let object = foundobject
-                {
-                    var followers:PFObject = PFObject(className: "Followers")
-                    followers["user"] = object
-                    followers["follower"] = PFUser.currentUser()
-                    
-                    followers.saveInBackgroundWithBlock({ (success, error) -> Void in
-                        if error != nil
-                        {
-                            print(error?.localizedDescription)
-                        }
-                        else
-                        {
-                            print("follower saved")
-                        }
-                    })
-                }
-            })
-            
-        }
-}
+    
     
 }
