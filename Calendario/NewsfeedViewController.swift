@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate, FSCalendarDelegate, FSCalendarDataSource{
 
@@ -137,17 +138,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         return [CLCalendarWeekStartDay: 1]
     }
     
-    func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
-        let rect = CGRectMake(0, 0, size.width, size.height)
-        UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        color.setFill()
-        UIRectFill(rect)
-        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
-    }
-
-    override func didReceiveMemoryWarning() {
+       override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -328,8 +319,23 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let facebook = UITableViewRowAction(style: .Normal, title: "Facebook", handler: { (action, index) -> Void in
+            print("facebook  was tapped")
+            
+              let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
+            let FBvc = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            FBvc.setInitialText(statusupdate.objectForKey("updatetext") as! String)
+            self.presentViewController(FBvc, animated: true, completion: nil)
+    
+            
+            
+            
+            
+        })
         let report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
             print("report was tapped")
+            
+            
             
             
 
@@ -375,10 +381,13 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
                     }
                 }
             })
+            
+            
          
         
         }
-        report.backgroundColor = UIColor.grayColor()
-        return [report]
+        report.backgroundColor = UIColor.flatWhiteColorDark()
+        facebook.backgroundColor = UIColor.flatSkyBlueColor()
+        return [report, facebook]
     }
 }

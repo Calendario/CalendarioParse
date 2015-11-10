@@ -36,6 +36,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     @IBOutlet weak var backbutton: UIBarButtonItem!
     
+    @IBOutlet weak var statusImageview: UIImageView?
     // tense
     var tensenum:Int!
 
@@ -61,6 +62,9 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     // location 
     let locationManager = CLLocationManager()
+    var imagedata:NSData?
+    var postingImage = false
+
     
     
     
@@ -165,30 +169,74 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     {
        var dateformatter = NSDateFormatter()
         
-        var statusupdate = PFObject(className: "StatusUpdate")
-        statusupdate["updatetext"] = statusUpdateTextField.text
-        statusupdate["user"] = PFUser.currentUser()
-        statusupdate["dateofevent"] = dateLabel.text
-        statusupdate["ID"] = Int(statusID)
-        statusupdate["tense"] = currenttense
-        statusupdate["location"] = LocationLabel.text
+        
+       
         
         
-        
-        
-        // saves object in background
-        statusupdate.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
-            if success
-            {
-                print("Update saved")
+        if statusImageview?.image != nil
+        {
+            postingImage = true
+            var statusupdatewithimage = PFObject(className: "StatusUpdate")
+            statusupdatewithimage["updatetext"] = statusUpdateTextField.text
+            statusupdatewithimage["user"] = PFUser.currentUser()
+            statusupdatewithimage["dateofevent"] = dateLabel.text
+            statusupdatewithimage["ID"] = Int(statusID)
+            statusupdatewithimage["tense"] = currenttense
+            statusupdatewithimage["location"] = LocationLabel.text
+            // image posting
+            imagedata = UIImageJPEGRepresentation(((statusImageview?.image))!, 0.5)
+            let imagefile = PFFile(name: "image.jpg", data: imagedata!)
+            statusupdatewithimage["image"] = imagefile!
+            // saves object in background
+            statusupdatewithimage.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+                if success
+                {
+                    print("Update saved")
+                }
+                else
+                {
+                    // prints error
+                    print(error?.localizedDescription)
+                }
             }
-            else
-            {
-                // prints error
-                print(error?.localizedDescription)
-            }
+
+
+
         }
-    }
+        else
+        {
+            var statusupdate = PFObject(className: "StatusUpdate")
+            statusupdate["updatetext"] = statusUpdateTextField.text
+            statusupdate["user"] = PFUser.currentUser()
+            statusupdate["dateofevent"] = dateLabel.text
+            statusupdate["ID"] = Int(statusID)
+            statusupdate["tense"] = currenttense
+            statusupdate["location"] = LocationLabel.text
+            
+            statusupdate.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+                if success
+                {
+                    print("Update saved")
+                }
+                else
+                {
+                    // prints error
+                    print(error?.localizedDescription)
+                }
+            }
+
+
+        }
+    
+    
+
+    
+        
+       
+        
+        
+        
+      }
     
     
     @IBAction func tenseControlchanged(sender: UISegmentedControl) {
@@ -242,12 +290,16 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     
     @IBAction func VideoTapped(sender: AnyObject) {
-        var camera = UIImagePickerController()
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            camera.delegate = self
-            
+        var photo = UIImagePickerController()
+        dispatch_async(dispatch_get_main_queue()) {
+            photo.delegate = self
+            photo.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            photo.allowsEditing = false
+            self.presentViewController(photo, animated: true, completion: nil)
         }
     }
+
+    
    
     
     
@@ -309,6 +361,19 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         appDelegate.window.rootViewController = tabBarController
     }
     
+    
+    // image picker delegate methods
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        statusImageview?.image = image
+        
+    }
+    
+
+    
+
+    
 
     
     
@@ -336,5 +401,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         // Pass the selected object to the new view controller.
     }
     */
+
 
 }

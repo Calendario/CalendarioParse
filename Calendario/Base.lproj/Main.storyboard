@@ -293,16 +293,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgG-Ce-fbo">
-                                <rect key="frame" x="69" y="598" width="64" height="67"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgG-Ce-fbo">
+                                <rect key="frame" x="80" y="598" width="64" height="67"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="tDu-5V-Brk"/>
                                 </constraints>
                                 <state key="normal" image="Video button"/>
                                 <connections>
-                                    <action selector="CameraTapped:" destination="9Rc-cM-4J1" eventType="touchUpInside" id="Yod-qh-UWX"/>
-                                    <action selector="VideoTapped:" destination="9Rc-cM-4J1" eventType="touchUpInside" id="xNU-pt-5Yb"/>
+                                    <action selector="VideoTapped:" destination="9Rc-cM-4J1" eventType="touchUpInside" id="P9O-jD-dnD"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXb-ik-p0Z">
@@ -315,9 +314,12 @@
                                 <state key="normal" image="camera_icon"/>
                                 <connections>
                                     <action selector="CameraTapped:" destination="9Rc-cM-4J1" eventType="touchUpInside" id="kdn-YF-PxT"/>
-                                    <action selector="VideoTapped:" destination="9Rc-cM-4J1" eventType="touchUpInside" id="Njq-fv-82k"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Tn-o2-CLr">
+                                <rect key="frame" x="304" y="616" width="85" height="51"/>
+                                <animations/>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -383,6 +385,7 @@
                         <outlet property="charlabel" destination="R26-bd-sTX" id="cCw-A3-l5a"/>
                         <outlet property="dateLabel" destination="6hn-TC-05F" id="ZCl-8w-nO6"/>
                         <outlet property="datepicker" destination="r46-FK-Xrz" id="S5c-lK-WC7"/>
+                        <outlet property="statusImageview" destination="3Tn-o2-CLr" id="QN2-el-wf5"/>
                         <outlet property="statusUpdateTextField" destination="2tv-95-hXK" id="wQi-Ad-S0s"/>
                     </connections>
                 </viewController>
