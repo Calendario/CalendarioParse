@@ -23,6 +23,10 @@ class NewsfeedTableViewCell: UITableViewCell {
     let filledlikebutton = UIImage(named: "like button filled")
     var counter = 1
     
+    var isLiked = false
+    let defaults = NSUserDefaults.standardUserDefaults()
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -34,7 +38,6 @@ class NewsfeedTableViewCell: UITableViewCell {
     
     @IBAction func LikeButtonTapped(sender: AnyObject) {
         LikeButton.setImage(filledlikebutton, forState: .Normal)
-        let defaults = NSUserDefaults.standardUserDefaults()
         
         var objid = defaults.stringForKey("objectid")
         print(objid!)
@@ -44,12 +47,23 @@ class NewsfeedTableViewCell: UITableViewCell {
             if error == nil
             {
                 statusupdate!["likes"] = self.counter++
+                self.isLiked = true
+                self.defaults.setBool(self.isLiked, forKey: "liked")
                 statusupdate?.saveInBackground()
             }
         }
+ 
+        
+
     }
     
+  
     
+
+    
+    
+    
+   
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

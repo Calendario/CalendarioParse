@@ -16,7 +16,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     var commentdata:NSMutableArray = NSMutableArray()
     
-    var savedobjectID:AnyObject!
+    var savedobjectID:String!
     
     @IBOutlet weak var backbutton: UIBarButtonItem!
     
@@ -34,7 +34,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         let defaults = NSUserDefaults.standardUserDefaults()
         
         
-        savedobjectID = defaults.objectForKey("objectid")
+        savedobjectID = defaults.objectForKey("objectid") as! String
         
         print(savedobjectID!)
         
@@ -80,7 +80,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         commentdata.removeAllObjects()
         
         var getcomments:PFQuery = PFQuery(className: "comment")
-        //getcomments.whereKey("statusOBJD", equalTo: String(savedobjectID))
+        getcomments.whereKey("statusOBJID", equalTo: savedobjectID)
         
         getcomments.findObjectsInBackgroundWithBlock { (comments:[PFObject]?, error:NSError?) -> Void in
             if error == nil
