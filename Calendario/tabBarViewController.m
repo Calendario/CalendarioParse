@@ -30,6 +30,8 @@
     UIImage *buttonImage = [UIImage imageNamed:@"alternateTimeLine_Icon.png"];
     button.frame = CGRectMake(0, 0, buttonImage.size.width*2, buttonImage.size.height*2);
     [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    button.contentMode = UIViewContentModeScaleAspectFit;
+    [button.imageView setContentMode:UIViewContentModeScaleAspectFit];
     button.titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:20];
     [button setTitle: currentDate forState:UIControlStateNormal];
     [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, -23, 0)];
