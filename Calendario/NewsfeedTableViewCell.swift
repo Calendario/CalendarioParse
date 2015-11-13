@@ -52,7 +52,7 @@ class NewsfeedTableViewCell: UITableViewCell {
                 statusupdate?.saveInBackground()
             }
         }
- 
+  
         
 
     }

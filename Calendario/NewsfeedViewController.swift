@@ -40,7 +40,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         // Do any additional setup after loading the view.
         
         
-        let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 55))
+        let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 80))
         navigationbar.backgroundColor = UIColor.whiteColor()
         navigationbar.delegate = self
         navigationbar.barTintColor = UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha: 1)
