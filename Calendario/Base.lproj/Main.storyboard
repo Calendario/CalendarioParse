@@ -571,6 +571,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginViewBackground" translatesAutoresizingMaskIntoConstraints="NO" id="X8g-s8-fXk">
+                                <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
+                                <animations/>
+                                <gestureRecognizers/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yil-Qb-tGA">
                                 <rect key="frame" x="117" y="347" width="142" height="62"/>
                                 <animations/>
@@ -713,11 +718,6 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="GRb-HE-0pS" secondAttribute="height" multiplier="274:77" constant="3.5584415584415297" id="Etp-Y3-1Qw"/>
                                 </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginViewBackground" translatesAutoresizingMaskIntoConstraints="NO" id="X8g-s8-fXk">
-                                <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
-                                <animations/>
-                                <gestureRecognizers/>
                             </imageView>
                         </subviews>
                         <animations/>
