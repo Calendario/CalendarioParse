@@ -29,6 +29,7 @@ class MyProfileViewController : UIViewController {
     // Follow method property
     var followdata:NSMutableArray = NSMutableArray()
     var isfollowing = false
+    var counter = 0
     
     // Do NOT change the following line of
     // code as it MUST be set to PUBLIC.
@@ -310,6 +311,7 @@ class MyProfileViewController : UIViewController {
         followUser["user"] = PFUser.currentUser()
         followUser["followDate"] = String(NSDate())
         followUser["followeduser"] = profName.text
+        followUser["follownNumber"] = counter++
         followUser.saveInBackground()
         print("followed")
     }
