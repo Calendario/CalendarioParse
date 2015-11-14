@@ -17,6 +17,7 @@ class NewsfeedTableViewCell: UITableViewCell {
 
     @IBOutlet weak var LikeButton: UIButton!
     
+    @IBOutlet weak var profileimageview: UIImageView!
 
     
     
