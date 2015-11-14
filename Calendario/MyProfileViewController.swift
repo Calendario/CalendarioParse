@@ -16,6 +16,7 @@ class MyProfileViewController : UIViewController {
     @IBOutlet weak var profPicture: UIImageView!
     @IBOutlet weak var profVerified: UIImageView!
     @IBOutlet weak var profName: UILabel!
+    @IBOutlet weak var profUserName: UILabel!
     @IBOutlet weak var profDesc: UITextView!
     @IBOutlet weak var profWeb: UIButton!
     @IBOutlet weak var profPosts: UILabel!
@@ -152,6 +153,10 @@ class MyProfileViewController : UIViewController {
             self.profPosts.text = "000"
             self.profFollowers.text = "000"
             self.profFollowing.text = "000"
+            
+            // Set the username label text.
+            let userString = "@\(currentUser.username!)"
+            self.profUserName.text = userString as String
             
             // Store current user full name is nsuserdefults to it can be used later to follow a user
             let defaults = NSUserDefaults.standardUserDefaults()

@@ -2045,7 +2045,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hs-SM-xUo">
-                                        <rect key="frame" x="20" y="104" width="335" height="37"/>
+                                        <rect key="frame" x="20" y="97" width="335" height="37"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="37" id="6ug-q9-1tZ"/>
@@ -2054,8 +2054,15 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <color key="textColor" red="0.19607843137254902" green="0.46666666666666667" blue="0.23137254901960785" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n96-OF-tOx">
+                                        <rect key="frame" x="20" y="116" width="335" height="37"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.1960784314" green="0.46666666670000001" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="User description text here..." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHj-Gr-57d">
-                                        <rect key="frame" x="20" y="136" width="335" height="76"/>
+                                        <rect key="frame" x="20" y="142" width="335" height="70"/>
                                         <animations/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -2199,7 +2206,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <animations/>
                                 <constraints>
                                     <constraint firstItem="MXD-Dt-bfb" firstAttribute="leading" secondItem="y1b-c5-gKS" secondAttribute="leading" constant="219" id="1CJ-B5-5jq"/>
-                                    <constraint firstItem="1hs-SM-xUo" firstAttribute="top" secondItem="56K-1f-kuh" secondAttribute="bottom" constant="11" id="96m-t7-Pji"/>
+                                    <constraint firstItem="1hs-SM-xUo" firstAttribute="top" secondItem="56K-1f-kuh" secondAttribute="bottom" constant="4" id="96m-t7-Pji"/>
                                     <constraint firstItem="KHj-Gr-57d" firstAttribute="leading" secondItem="q4B-oi-n0D" secondAttribute="leading" id="Cyq-hY-yiD"/>
                                     <constraint firstItem="F8F-aw-tyq" firstAttribute="top" secondItem="KHj-Gr-57d" secondAttribute="bottom" constant="32" id="FvJ-2e-jEO"/>
                                     <constraint firstItem="56K-1f-kuh" firstAttribute="top" secondItem="y1b-c5-gKS" secondAttribute="top" constant="15" id="I6i-Le-LBC"/>
@@ -2207,19 +2214,23 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     <constraint firstItem="MXD-Dt-bfb" firstAttribute="top" secondItem="y1b-c5-gKS" secondAttribute="top" constant="66" id="Jyn-1M-4qr"/>
                                     <constraint firstItem="KHj-Gr-57d" firstAttribute="leading" secondItem="1hs-SM-xUo" secondAttribute="leading" id="Uvh-aO-ZLg"/>
                                     <constraint firstItem="F8F-aw-tyq" firstAttribute="top" secondItem="q4B-oi-n0D" secondAttribute="bottom" constant="8" symbolic="YES" id="VHn-Zm-KIK"/>
+                                    <constraint firstItem="n96-OF-tOx" firstAttribute="leading" secondItem="1hs-SM-xUo" secondAttribute="leading" id="Vgd-Uu-yyQ"/>
                                     <constraint firstItem="F8F-aw-tyq" firstAttribute="leading" secondItem="WyR-tI-l4h" secondAttribute="leading" id="Vi9-Ez-jdG"/>
                                     <constraint firstItem="56K-1f-kuh" firstAttribute="centerX" secondItem="1hs-SM-xUo" secondAttribute="centerX" id="XMe-Pv-YhP"/>
-                                    <constraint firstItem="q4B-oi-n0D" firstAttribute="top" secondItem="1hs-SM-xUo" secondAttribute="bottom" constant="65" id="XZl-6m-ZpJ"/>
+                                    <constraint firstItem="q4B-oi-n0D" firstAttribute="top" secondItem="1hs-SM-xUo" secondAttribute="bottom" constant="72" id="XZl-6m-ZpJ"/>
                                     <constraint firstItem="1hs-SM-xUo" firstAttribute="trailing" secondItem="KHj-Gr-57d" secondAttribute="trailing" id="YWV-hi-nJ8"/>
-                                    <constraint firstItem="1hs-SM-xUo" firstAttribute="top" secondItem="MXD-Dt-bfb" secondAttribute="bottom" constant="1" id="ad0-ra-lXq"/>
+                                    <constraint firstItem="1hs-SM-xUo" firstAttribute="top" secondItem="MXD-Dt-bfb" secondAttribute="bottom" constant="-6" id="ad0-ra-lXq"/>
                                     <constraint firstItem="1hs-SM-xUo" firstAttribute="leading" secondItem="y1b-c5-gKS" secondAttribute="leading" constant="20" id="cXO-Gm-c1K"/>
+                                    <constraint firstItem="n96-OF-tOx" firstAttribute="top" secondItem="MXD-Dt-bfb" secondAttribute="bottom" constant="13" id="eUZ-1X-f4g"/>
                                     <constraint firstAttribute="bottom" secondItem="WyR-tI-l4h" secondAttribute="bottom" constant="185" id="if7-LO-yGI"/>
+                                    <constraint firstItem="n96-OF-tOx" firstAttribute="trailing" secondItem="1hs-SM-xUo" secondAttribute="trailing" id="jhl-zB-OiP"/>
+                                    <constraint firstItem="q4B-oi-n0D" firstAttribute="top" secondItem="n96-OF-tOx" secondAttribute="bottom" constant="53" id="lTz-9c-mSE"/>
                                     <constraint firstItem="WyR-tI-l4h" firstAttribute="top" secondItem="F8F-aw-tyq" secondAttribute="bottom" id="tXQ-Rm-Sb5"/>
                                     <constraint firstItem="F8F-aw-tyq" firstAttribute="centerX" secondItem="q4B-oi-n0D" secondAttribute="centerX" id="tj0-ou-0WZ"/>
                                     <constraint firstItem="F8F-aw-tyq" firstAttribute="centerX" secondItem="y1b-c5-gKS" secondAttribute="centerX" id="uNX-Ky-kB7"/>
                                     <constraint firstItem="F8F-aw-tyq" firstAttribute="leading" secondItem="y1b-c5-gKS" secondAttribute="leading" id="uXt-kt-qBw"/>
                                     <constraint firstAttribute="trailing" secondItem="F8F-aw-tyq" secondAttribute="trailing" id="uaf-VV-Zt2"/>
-                                    <constraint firstItem="KHj-Gr-57d" firstAttribute="top" secondItem="MXD-Dt-bfb" secondAttribute="bottom" constant="33" id="xiL-B5-O12"/>
+                                    <constraint firstItem="KHj-Gr-57d" firstAttribute="top" secondItem="MXD-Dt-bfb" secondAttribute="bottom" constant="39" id="xiL-B5-O12"/>
                                     <constraint firstItem="KHj-Gr-57d" firstAttribute="trailing" secondItem="q4B-oi-n0D" secondAttribute="trailing" id="yoQ-P3-Nvq"/>
                                 </constraints>
                             </scrollView>
@@ -2277,6 +2288,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         <outlet property="profName" destination="1hs-SM-xUo" id="9nd-Ow-0gC"/>
                         <outlet property="profPicture" destination="56K-1f-kuh" id="fwo-zm-td3"/>
                         <outlet property="profPosts" destination="3Bz-d2-7V4" id="n0D-gr-M0r"/>
+                        <outlet property="profUserName" destination="n96-OF-tOx" id="Nav-fj-X5c"/>
                         <outlet property="profVerified" destination="MXD-Dt-bfb" id="L7E-0g-nts"/>
                         <outlet property="profWeb" destination="q4B-oi-n0D" id="a3B-Lw-RIO"/>
                         <outlet property="profileScroll" destination="y1b-c5-gKS" id="1ag-Gv-5zu"/>
