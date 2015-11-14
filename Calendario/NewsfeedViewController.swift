@@ -205,6 +205,9 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         
         cell.statusTextView.text = statusupdate.objectForKey("updatetext") as! String
         
+        cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
+        cell.profileimageview.clipsToBounds = true
+        
         
         
         
@@ -222,8 +225,25 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
             {
                 let puser = (aobject as NSArray).lastObject as? PFUser
                 cell.UserNameLabel.text = puser?.username
+                
             }
         }
+        
+        var getImages:PFQuery = PFUser.query()!
+        getImages.whereKey("username", equalTo: cell.UserNameLabel.text!)
+        getImages.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil
+            {
+                self.getImageData(objects!, imageview: cell.profileimageview)
+            }
+            else
+            {
+                print("error")
+            }
+        }
+        
+        
+    
 
 
         StartDectingHastags(cell.statusTextView.text)
@@ -232,6 +252,28 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         
         return cell
 }
+    
+    func getImageData(objects:[PFObject], imageview:UIImageView)
+    {
+        for object in objects
+        {
+           if let image = object["profileImage"] as! PFFile?
+           {
+            image.getDataInBackgroundWithBlock({ (ImageData, error) -> Void in
+                if error == nil
+                {
+                    let image = UIImage(data: ImageData!)
+                    imageview.image = image
+                }
+                else
+                {
+                    imageview.image = UIImage(named: "profile_icon")
+                }
+            })
+            }
+
+            }
+              }
     
     
     
