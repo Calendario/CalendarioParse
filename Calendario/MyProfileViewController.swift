@@ -25,13 +25,9 @@ class MyProfileViewController : UIViewController {
     @IBOutlet weak var profileScroll: UIScrollView!
     @IBOutlet weak var backButton: UIBarButtonItem!
     
-    
-    
-    // follow method property
+    // Follow method property
     var followdata:NSMutableArray = NSMutableArray()
     var isfollowing = false
-    
-
     
     // Do NOT change the following line of
     // code as it MUST be set to PUBLIC.
@@ -97,10 +93,6 @@ class MyProfileViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-       
-   
-        
         // Do any additional setup after loading the view, typically from a nib.
         
         // Check to see if a user is being passed into the
@@ -161,16 +153,9 @@ class MyProfileViewController : UIViewController {
             self.profFollowers.text = "000"
             self.profFollowing.text = "000"
             
-                       
-            
-            // store current user full name is nsuserdefults to it can be used later to follow a user 
-            
+            // Store current user full name is nsuserdefults to it can be used later to follow a user
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setObject(currentUser.username, forKey: "username")
-            
-            
-            
-          
             
             // Check the website URL link.
             userWebsiteLink = currentUser?.objectForKey("website") as? String
@@ -349,9 +334,4 @@ class MyProfileViewController : UIViewController {
             }
         }
     }
-    
-    
-    
-    
-    
 }
