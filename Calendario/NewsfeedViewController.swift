@@ -230,7 +230,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         }
         
         var getImages:PFQuery = PFUser.query()!
-        getImages.whereKey("username", equalTo: cell.UserNameLabel.text!)
+        getImages.whereKey("objectId", equalTo: (statusupdate.objectForKey("user")?.objectId)!)
         getImages.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil
             {
