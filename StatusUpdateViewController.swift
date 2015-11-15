@@ -252,7 +252,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
            currenttense = Tense.currently.rawValue
             tensenum = 3
         default:
-            print("error")
+            currenttense = Tense.going.rawValue
+            tensenum = 1
         }
     }
     

@@ -248,7 +248,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
 
         StartDectingHastags(cell.statusTextView.text)
         
-       isDatePassed(statusupdate.createdAt!, date2: NSDate(), ParseID: statusupdate.objectId!)
+       isDatePassed(NSDate(), date2: statusupdate.createdAt!, ParseID: statusupdate.objectId!)
         
         return cell
 }
