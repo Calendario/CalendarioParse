@@ -48,7 +48,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
     }
     
-    var currenttense: String! = " "
+    var currenttense: String! = "going"
     
     
     
@@ -99,6 +99,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         
         statusUpdateTextField.layer.borderColor = UIColor.blackColor().CGColor
+        TenseControl.selectedSegmentIndex = 0
+        
         
     
     
@@ -254,6 +256,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         default:
             currenttense = Tense.going.rawValue
             tensenum = 1
+            sender.selectedSegmentIndex = 0
         }
     }
     
