@@ -30,6 +30,8 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     var reportedID:String!
     
+    var likesobjid:String!
+    
     
     
     override func viewDidLoad() {
@@ -43,7 +45,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 80))
         navigationbar.backgroundColor = UIColor.whiteColor()
         navigationbar.delegate = self
-        navigationbar.barTintColor = UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha: 1)
+        navigationbar.barTintColor =  UIColor(red:0.17, green:0.58, blue:0.38, alpha:1.0)
         navigationbar.tintColor = UIColor.whiteColor()
         
         // logo for nav title
@@ -241,6 +243,45 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
                 print("error")
             }
         }
+        
+        
+        
+        // like button
+        
+        var getlikes = PFQuery(className: "StatusUpdate")
+        getlikes.whereKey("likes", greaterThanOrEqualTo: 1)
+        getlikes.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil
+            {
+                if let objects = objects as [PFObject]!
+                {
+                    for object in objects
+                    {
+                       self.likesobjid = object.objectId
+                    }
+                    
+                    if self.likesobjid == statusupdate.objectId
+                    {
+                        
+                        let filledlikebutton = UIImage(named: "like button filled")
+                        cell.LikeButton.setImage(filledlikebutton, forState: .Normal)
+                    }
+                    
+
+                    
+                }
+            }
+        }
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
         
         
     
