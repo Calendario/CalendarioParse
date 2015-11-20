@@ -43,7 +43,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 55))
         navigationbar.backgroundColor = UIColor.whiteColor()
         navigationbar.delegate = self
-        navigationbar.barTintColor = UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha: 1)
+        navigationbar.barTintColor = UIColor(red:0.17, green:0.58, blue:0.38, alpha:1.0)
         navigationbar.tintColor = UIColor.whiteColor()
         
         // logo for nav title
