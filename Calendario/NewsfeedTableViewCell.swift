@@ -22,7 +22,7 @@ class NewsfeedTableViewCell: UITableViewCell {
     
     
     let filledlikebutton = UIImage(named: "like button filled")
-    var counter = 1
+    var counter:Int = 0
     
     var isLiked = false
     let defaults = NSUserDefaults.standardUserDefaults()
@@ -47,10 +47,11 @@ class NewsfeedTableViewCell: UITableViewCell {
         query.getObjectInBackgroundWithId(objid!) { (statusupdate:PFObject?, error:NSError?) -> Void in
             if error == nil
             {
-                statusupdate!["likes"] = self.counter++
-                self.isLiked = true
-                self.defaults.setBool(self.isLiked, forKey: "liked")
+                statusupdate!["likes"] = statusupdate?.objectForKey("likes") as! Int + 1
+                print("like button tapped")
+                
                 statusupdate?.saveInBackground()
+                print(self.counter++)
             }
         }
   

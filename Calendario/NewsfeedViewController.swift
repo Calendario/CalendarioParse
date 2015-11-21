@@ -32,6 +32,8 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     var likesobjid:String!
     
+    var likecount = 0
+    
     
     
     override func viewDidLoad() {
@@ -286,13 +288,15 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         
     
 
-
         StartDectingHastags(cell.statusTextView.text)
         
        isDatePassed(NSDate(), date2: statusupdate.createdAt!, ParseID: statusupdate.objectId!)
         
         return cell
 }
+    
+    
+    
     
     func getImageData(objects:[PFObject], imageview:UIImageView)
     {
