@@ -159,8 +159,12 @@ class MyProfileViewController : UIViewController {
             // User is logged in - get thier details and populate the UI.
             self.profName.text = currentUser?.objectForKey("fullName") as? String
             self.profDesc.text = currentUser?.objectForKey("userBio") as? String
+            
+            // Get and set the follower label.
+            qureyfollwersbycurrentUser(currentUser)
+            
+            // Set the count labels.
             self.profPosts.text = "000"
-            self.profFollowers.text = "000"
             self.profFollowing.text = "000"
             
             // Set the username label text.
@@ -271,6 +275,17 @@ class MyProfileViewController : UIViewController {
         self.profileScroll.contentSize = CGSizeMake(self.view.bounds.width, scrollHeight)
     }
     
+    // Label count set methods.
+    
+    func setFollowers(count: Int) {
+        
+        // Get the count information.
+        let followers = "\(count)"
+        
+        // Set the follower label.
+        self.profFollowers.text = followers
+    }
+    
     // Alert methods.
     
     func displayAlert(alertTitle: String, alertMessage: String) {
@@ -311,8 +326,7 @@ class MyProfileViewController : UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    // follow method
+    // Follow methods.
     
     func follow()
     {
@@ -333,6 +347,7 @@ class MyProfileViewController : UIViewController {
     
     func qureyfollwersbycurrentUser(currentuser:PFUser)
     {
+        
         var query = PFQuery(className: "Followers")
         query.whereKey("user", equalTo: currentuser)
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
@@ -346,6 +361,9 @@ class MyProfileViewController : UIViewController {
                     {
                         print(object.objectForKey("followeduser"))
                     }
+                    
+                    // Set the user followers label.
+                    self.setFollowers(objects.count)
                 }
             }
         }
