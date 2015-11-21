@@ -232,31 +232,45 @@
             </objects>
             <point key="canvasLocation" x="1275.5" y="1223.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Report Bug-->
         <scene sceneID="4Fn-09-kJ4">
             <objects>
-                <viewController id="4Iv-vW-lfV" sceneMemberID="viewController">
+                <viewController id="4Iv-vW-lfV" customClass="reportBug" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ByJ-55-1qt"/>
                         <viewControllerLayoutGuide type="bottom" id="2uT-Hb-v5C"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="OyH-Ll-kdG">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WeP-Pu-d8S">
-                                <rect key="frame" x="247" y="435" width="86" height="30"/>
+                                <rect key="frame" x="140" y="431" width="86" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Send Report"/>
+                                <connections>
+                                    <action selector="Send:" destination="4Iv-vW-lfV" eventType="touchUpInside" id="lBP-52-5JF"/>
+                                </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Emz-3s-UA0">
-                                <rect key="frame" x="140" y="109" width="315" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Bug Title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Emz-3s-UA0">
+                                <rect key="frame" x="40" y="108" width="315" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KSI-c8-jkL">
-                                <rect key="frame" x="148" y="217" width="296" height="30"/>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3o-Qq-xeg">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <animations/>
+                                <color key="barTintColor" red="0.1333333333" green="0.52941176469999995" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="19"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Report Bug" id="Az9-Mk-aFp"/>
+                                </items>
+                            </navigationBar>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tell us about the bug you experienced" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KSI-c8-jkL">
+                                <rect key="frame" x="49" y="214" width="296" height="159"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -265,10 +279,15 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="bugDesc" destination="KSI-c8-jkL" id="bGq-Ma-Raf"/>
+                        <outlet property="bugTitle" destination="Emz-3s-UA0" id="Hfn-5h-Rce"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YMM-eT-nen" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1116" y="1957"/>
+            <point key="canvasLocation" x="-94.5" y="1232.5"/>
         </scene>
         <!--Status Update-->
         <scene sceneID="dRe-1v-v2S">
