@@ -52,6 +52,9 @@ class MyProfileViewController : UIViewController {
         if (passedUser == nil) {
             
             // No user passed in - edit current user button.
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewC = storyboard.instantiateViewControllerWithIdentifier("EditView") as! EditProfileViewController
+            self.presentViewController(viewC, animated: true, completion: nil)
         }
             
         else {
@@ -94,8 +97,13 @@ class MyProfileViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    // View Did Appear method.
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         // Check to see if a user is being passed into the
         // view controller and run the appropriate actions.
@@ -159,9 +167,10 @@ class MyProfileViewController : UIViewController {
             let userString = "@\(currentUser.username!)"
             self.profUserName.text = userString as String
             
-            // Store current user full name is nsuserdefults to it can be used later to follow a user
+            // Store current username is NSUserDefults so it can be used later to follow a user.
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setObject(currentUser.username, forKey: "username")
+            defaults.synchronize()
             
             // Check the website URL link.
             userWebsiteLink = currentUser?.objectForKey("website") as? String

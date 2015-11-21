@@ -45,7 +45,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
     // Store the selected profile image data.
     var imageData : NSData!
     
-    // Pofile image set by user check.
+    // Profile image set by user check.
     var userSetImage = false
     
     // Setup the on screen button actions.
@@ -203,6 +203,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // Set the loading view background colour.
+        loadingView.backgroundColor = UIColor.clearColor()
+        
+        // Add a blur view to the loading view.
+        var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
+        visualEffectView.frame = loadingView.bounds
+        loadingView.insertSubview(visualEffectView, atIndex: 0)
         
         // Hide the loading view to beign with.
         self.loadingView.alpha = 0.0

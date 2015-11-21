@@ -15,27 +15,18 @@
 
 @implementation reportBug
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-
-
-
-
-
 - (IBAction)Send:(id)sender {
     
     NSString *titleString = _titleField.text;
     NSString *descString = _descField.text;
-    
-    
     
     PFObject *newReport = [PFObject objectWithClassName:@"reportBugs"];
     newReport[@"bugTitle"]= titleString;
@@ -48,5 +39,6 @@
             // There was a problem, check error.description
         }
     }];
-    
+}
+
 @end
