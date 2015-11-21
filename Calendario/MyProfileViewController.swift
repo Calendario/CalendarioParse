@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import Parse
 import QuartzCore
 
@@ -25,6 +26,7 @@ class MyProfileViewController : UIViewController {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var profileScroll: UIScrollView!
     @IBOutlet weak var backButton: UIBarButtonItem!
+    @IBOutlet weak var settingsButton: UIBarButtonItem!
     
     // Follow method property
     var followdata:NSMutableArray = NSMutableArray()
@@ -120,6 +122,10 @@ class MyProfileViewController : UIViewController {
             
             // Set the edit button text.
             self.editButton.setTitle("Edit Profile", forState: UIControlState.Normal)
+            
+            // Show the settings button.
+            settingsButton.enabled = true
+            settingsButton.image = UIImage(named: "SettingsV2.png")
         }
             
         else {
@@ -136,6 +142,10 @@ class MyProfileViewController : UIViewController {
             
             // Set the edit button text.
             self.editButton.setTitle("Follow \(userID)", forState: UIControlState.Normal)
+            
+            // Hide the settings button.
+            settingsButton.enabled = false
+            settingsButton.image = nil
         }
         
         // Notify the user that the app is loading.

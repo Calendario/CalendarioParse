@@ -1618,10 +1618,10 @@
             </objects>
             <point key="canvasLocation" x="870.5" y="-305.5"/>
         </scene>
-        <!--SettingsVC-->
+        <!--Settings View Controller-->
         <scene sceneID="8Tn-gR-RyT">
             <objects>
-                <viewController id="OWq-1u-gaZ" customClass="SettingsVC" sceneMemberID="viewController">
+                <viewController id="OWq-1u-gaZ" customClass="SettingsViewController" customModule="Calendario" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="z40-9X-k0a"/>
                         <viewControllerLayoutGuide type="bottom" id="4gQ-Zh-igq"/>
@@ -1651,9 +1651,11 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Settings" id="ppj-jy-ZIt">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="4rX-hd-dss">
-                                            <inset key="imageInsets" minX="0.0" minY="18" maxX="35" maxY="16"/>
+                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="kJz-3p-cTD">
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="goBack:" destination="OWq-1u-gaZ" id="bWo-Xj-bmk"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -1741,6 +1743,9 @@
                                             <color key="titleColor" red="0.89411764709999997" green="0.2274509804" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="signOutUser:" destination="OWq-1u-gaZ" eventType="touchUpInside" id="s0x-hm-atX"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <animations/>
@@ -2314,6 +2319,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <action selector="dismissProfile:" destination="EL5-7o-osE" id="YSo-Y5-bUF"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" image="SettingsV2" id="f2g-T3-bL4">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <segue destination="OWq-1u-gaZ" kind="showDetail" id="RMc-Kk-nXT"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -2349,6 +2360,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         <outlet property="profVerified" destination="MXD-Dt-bfb" id="L7E-0g-nts"/>
                         <outlet property="profWeb" destination="q4B-oi-n0D" id="a3B-Lw-RIO"/>
                         <outlet property="profileScroll" destination="y1b-c5-gKS" id="1ag-Gv-5zu"/>
+                        <outlet property="settingsButton" destination="f2g-T3-bL4" id="6I4-Nc-uZ9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2yN-br-bro" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3128,6 +3140,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         </scene>
     </scenes>
     <resources>
+        <image name="SettingsV2" width="33" height="33"/>
         <image name="Video button" width="32" height="32"/>
         <image name="bookmark_ribbon" width="120" height="120"/>
         <image name="camera_icon" width="120" height="120"/>

@@ -6,6 +6,8 @@
 //  Copyright © 2015 Calendario. All rights reserved.
 //
 
+import UIKit
+
 class WebPageViewController : UIViewController, UIWebViewDelegate {
     
     // Setup the various UI objects.

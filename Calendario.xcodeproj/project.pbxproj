@@ -15,6 +15,7 @@
 		A2C55BAC1BE7B77B00431EA0 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C55BAB1BE7B77B00431EA0 /* WebPageViewController.swift */; };
 		A2E12C831BCE6E59007D8587 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */; };
 		A2FBF5C61C00BADA0051A553 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FBF5C51C00BADA0051A553 /* EditProfileViewController.swift */; };
+		A2FBF5CA1C010B360051A553 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FBF5C91C010B360051A553 /* SettingsViewController.swift */; };
 		E151AF721BD72D6500811A31 /* tabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E151AF711BD72D6500811A31 /* tabBarViewController.m */; };
 		E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E187B5F51BD3368400845C2F /* SearchViewController.m */; };
 		E25607AE1BCAF5EC0085B9B4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25607AD1BCAF5EC0085B9B4 /* LoginViewController.swift */; };
@@ -112,6 +113,7 @@
 		A2C55BAB1BE7B77B00431EA0 /* WebPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
 		A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A2FBF5C51C00BADA0051A553 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		A2FBF5C91C010B360051A553 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E151AF701BD72D6500811A31 /* tabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tabBarViewController.h; sourceTree = "<group>"; };
 		E151AF711BD72D6500811A31 /* tabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tabBarViewController.m; sourceTree = "<group>"; };
 		E187B5F41BD3368400845C2F /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
@@ -272,8 +274,8 @@
 		78C1C01D1C006DBE00ACDCEC /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				78C1C01A1C006D9200ACDCEC /* reportBug.h */,
-				78C1C01B1C006D9200ACDCEC /* reportBug.m */,
+				A2FBF5C81C010B170051A553 /* Settings view */,
+				A2FBF5C71C010B0A0051A553 /* Bug Report view */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -371,6 +373,23 @@
 				A2FBF5C51C00BADA0051A553 /* EditProfileViewController.swift */,
 			);
 			name = "Edit Profile view";
+			sourceTree = "<group>";
+		};
+		A2FBF5C71C010B0A0051A553 /* Bug Report view */ = {
+			isa = PBXGroup;
+			children = (
+				78C1C01A1C006D9200ACDCEC /* reportBug.h */,
+				78C1C01B1C006D9200ACDCEC /* reportBug.m */,
+			);
+			name = "Bug Report view";
+			sourceTree = "<group>";
+		};
+		A2FBF5C81C010B170051A553 /* Settings view */ = {
+			isa = PBXGroup;
+			children = (
+				A2FBF5C91C010B360051A553 /* SettingsViewController.swift */,
+			);
+			name = "Settings view";
 			sourceTree = "<group>";
 		};
 		E151AF6F1BD72D3E00811A31 /* TabBar Controller */ = {
@@ -759,6 +778,7 @@
 				E2B7D2881BE86C9E002395F7 /* FSCalendarStickyHeader.m in Sources */,
 				E2B7D2821BE86C9E002395F7 /* FSCalendarAppearance.m in Sources */,
 				E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */,
+				A2FBF5CA1C010B360051A553 /* SettingsViewController.swift in Sources */,
 				E2D09C9A1BCCC59A003F4651 /* NSDate+CL.m in Sources */,
 				E2EE56611BF199F70064BA1D /* UIImage+ChameleonPrivate.m in Sources */,
 				E2B7D2861BE86C9E002395F7 /* FSCalendarFlowLayout.m in Sources */,
