@@ -18,11 +18,12 @@ class NewsfeedTableViewCell: UITableViewCell {
     @IBOutlet weak var LikeButton: UIButton!
     
     @IBOutlet weak var profileimageview: UIImageView!
-
+    
+    var counter = 0
     
     
     let filledlikebutton = UIImage(named: "like button filled")
-    var counter:Int = 0
+    
     
     var isLiked = false
     let defaults = NSUserDefaults.standardUserDefaults()
@@ -47,11 +48,16 @@ class NewsfeedTableViewCell: UITableViewCell {
         query.getObjectInBackgroundWithId(objid!) { (statusupdate:PFObject?, error:NSError?) -> Void in
             if error == nil
             {
-                statusupdate!["likes"] = statusupdate?.objectForKey("likes") as! Int + 1
+                
+            let newnum = self.counter + 1
+                print(newnum)
+            statusupdate!["likes"] = Int(newnum)
+            statusupdate!["likedBy"] = PFUser.currentUser()
                 print("like button tapped")
                 
+                
                 statusupdate?.saveInBackground()
-                print(self.counter++)
+               
             }
         }
   

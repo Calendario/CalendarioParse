@@ -34,6 +34,8 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     var likecount = 0
     
+    var likeduser:String!
+    
     
     
     override func viewDidLoad() {
@@ -251,7 +253,8 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         // like button
         
         var getlikes = PFQuery(className: "StatusUpdate")
-        getlikes.whereKey("likes", greaterThanOrEqualTo: 1)
+        //getlikes.whereKey("likes", greaterThanOrEqualTo: 1)
+        getlikes.whereKey("likedBy", equalTo: PFUser.currentUser()!)
         getlikes.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil
             {
@@ -259,16 +262,14 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
                 {
                     for object in objects
                     {
-                       self.likesobjid = object.objectId
-                    }
-                    
-                    if self.likesobjid == statusupdate.objectId
+                      print(object.objectId!)
+                    if statusupdate.objectId == object.objectId
                     {
-                        
                         let filledlikebutton = UIImage(named: "like button filled")
                         cell.LikeButton.setImage(filledlikebutton, forState: .Normal)
                     }
-                    
+                }
+                
 
                     
                 }
