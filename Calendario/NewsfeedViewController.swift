@@ -420,8 +420,10 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
             
             
         })
-        let report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
+        var report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
             print("report was tapped")
+            
+            
             
             
             
@@ -466,16 +468,32 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
                         
                         
                         
+                        
                     }
                 }
             })
             
             
+            
+            
+
+            
+            
+            
+            
          
         
         }
+        let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
+            print("see more was tapped")
+            
+
+        }
         report.backgroundColor = UIColor.flatWhiteColorDark()
         facebook.backgroundColor = UIColor.flatSkyBlueColor()
-        return [report, facebook]
+        seemore.backgroundColor = UIColor.flatGrayColor()
+        
+        return [report, facebook,seemore]
     }
 }
+
