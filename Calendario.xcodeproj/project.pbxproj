@@ -81,6 +81,7 @@
 		E2EE56631BF199F70064BA1D /* UINavigationController+Chameleon.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EE56561BF199F70064BA1D /* UINavigationController+Chameleon.m */; };
 		E2EE56641BF199F70064BA1D /* UIView+ChameleonPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EE56581BF199F70064BA1D /* UIView+ChameleonPrivate.m */; };
 		E2EE56651BF199F70064BA1D /* UIViewController+Chameleon.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EE565A1BF199F70064BA1D /* UIViewController+Chameleon.m */; };
+		E2EF8A811C02B9E80000A957 /* SeeMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EF8A801C02B9E80000A957 /* SeeMoreViewController.swift */; };
 		E2F3EF901BE1C75600F42433 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3EF8F1BE1C75600F42433 /* CommentsTableViewCell.swift */; };
 		E2FE96481BDF1AEA003BEDD2 /* ReportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE96471BDF1AEA003BEDD2 /* ReportTableViewController.swift */; };
 		E2FE964C1BDFE07D003BEDD2 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE964B1BDFE07D003BEDD2 /* CommentsViewController.swift */; };
@@ -224,6 +225,7 @@
 		E2EE56581BF199F70064BA1D /* UIView+ChameleonPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ChameleonPrivate.m"; sourceTree = "<group>"; };
 		E2EE56591BF199F70064BA1D /* UIViewController+Chameleon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Chameleon.h"; sourceTree = "<group>"; };
 		E2EE565A1BF199F70064BA1D /* UIViewController+Chameleon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Chameleon.m"; sourceTree = "<group>"; };
+		E2EF8A801C02B9E80000A957 /* SeeMoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeeMoreViewController.swift; sourceTree = "<group>"; };
 		E2F3EF8F1BE1C75600F42433 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
 		E2FE96471BDF1AEA003BEDD2 /* ReportTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReportTableViewController.swift; path = ../ReportTableViewController.swift; sourceTree = "<group>"; };
 		E2FE964B1BDFE07D003BEDD2 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentsViewController.swift; path = ../CommentsViewController.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 				E2FE964B1BDFE07D003BEDD2 /* CommentsViewController.swift */,
 				E2F3EF8F1BE1C75600F42433 /* CommentsTableViewCell.swift */,
 				E27ACC801BEDA64100503DD7 /* TimelineViewController.swift */,
+				E2EF8A801C02B9E80000A957 /* SeeMoreViewController.swift */,
 			);
 			name = "Newsfeed & Timeline";
 			sourceTree = "<group>";
@@ -774,6 +777,7 @@
 				E2EE565E1BF199F70064BA1D /* UIButton+Chameleon.m in Sources */,
 				E2EE565F1BF199F70064BA1D /* UIColor+Chameleon.m in Sources */,
 				E2D09C901BCCC575003F4651 /* DailyCalendarView.m in Sources */,
+				E2EF8A811C02B9E80000A957 /* SeeMoreViewController.swift in Sources */,
 				E2B7D2851BE86C9E002395F7 /* FSCalendarConstance.m in Sources */,
 				E2B7D2881BE86C9E002395F7 /* FSCalendarStickyHeader.m in Sources */,
 				E2B7D2821BE86C9E002395F7 /* FSCalendarAppearance.m in Sources */,

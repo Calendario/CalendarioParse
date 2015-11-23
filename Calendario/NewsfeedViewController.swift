@@ -486,6 +486,25 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         }
         let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
             print("see more was tapped")
+            let defaults = NSUserDefaults.standardUserDefaults()
+            
+            let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
+            print(statusupdate)
+            
+            
+            var updatetext = statusupdate.objectForKey("updatetext") as! String
+            
+            var currentobjectID = statusupdate.objectId
+            
+            print(updatetext)
+            
+            
+              defaults.setObject(updatetext, forKey: "updatetext")
+            defaults.setObject(currentobjectID, forKey: "objectId")
+            
+            self.Seemore()
+            
+            
             
 
         }
@@ -495,5 +514,14 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         
         return [report, facebook,seemore]
     }
+    
+    func Seemore()
+    {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let SMVC = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
+        let NC = UINavigationController(rootViewController: SMVC)
+        self.presentViewController(NC, animated: true, completion: nil)
+    }
+
 }
 
