@@ -253,7 +253,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         // like button
         
         var getlikes = PFQuery(className: "StatusUpdate")
-        //getlikes.whereKey("likes", greaterThanOrEqualTo: 1)
+        
         getlikes.whereKey("likedBy", equalTo: PFUser.currentUser()!)
         getlikes.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil
@@ -496,8 +496,9 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
             
             var currentobjectID = statusupdate.objectId
             
-            print(updatetext)
             
+            print(updatetext)
+                        
             
               defaults.setObject(updatetext, forKey: "updatetext")
             defaults.setObject(currentobjectID, forKey: "objectId")
