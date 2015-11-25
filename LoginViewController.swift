@@ -103,11 +103,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Add the appropriate images to the photos array.
         
         for (var loop = 0; loop < 10; loop++) {
-            backgroundPhotos.append(UIImage(named: "\(imageName)\(loop + 1).png")!)
+            
+            if ((loop + 1) != 2) {
+                backgroundPhotos.append(UIImage(named: "\(imageName)\(loop + 1).png")!)
+            }
         }
         
         // Automatically take the user to the
-        // new feed section if they are already
+        // news feed section if they are already
         // logged in to the Calendario app.
         var currentUser = PFUser.currentUser()
         
@@ -128,7 +131,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Set the array counter number.
         var count = num
         
-        if (count == 9) {
+        if ((count + 1) == backgroundPhotos.count) {
             count = 0
         }
         
