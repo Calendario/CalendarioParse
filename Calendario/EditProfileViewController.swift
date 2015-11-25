@@ -472,8 +472,9 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         
         // Set the user password if a new 
         // one has been created by the user.
+        let passCheck = (userPassword.text)!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         
-        if (userPassword.text != nil) {
+        if ((userPassword.hasText() == true) && (passCheck.characters.count > 0)) {
             currentUser.password = self.userPassword.text
         }
         
