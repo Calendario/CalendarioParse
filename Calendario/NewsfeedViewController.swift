@@ -407,19 +407,11 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let facebook = UITableViewRowAction(style: .Normal, title: "Facebook", handler: { (action, index) -> Void in
-            print("facebook  was tapped")
-            
-              let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
-            let FBvc = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-            FBvc.setInitialText(statusupdate.objectForKey("updatetext") as! String)
-            self.presentViewController(FBvc, animated: true, completion: nil)
-    
+        
             
             
             
-            
-        })
+        
         var report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
             print("report was tapped")
             
@@ -510,10 +502,9 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
 
         }
         report.backgroundColor = UIColor.flatWhiteColorDark()
-        facebook.backgroundColor = UIColor.flatSkyBlueColor()
         seemore.backgroundColor = UIColor.flatGrayColor()
         
-        return [report, facebook,seemore]
+        return [report, seemore]
     }
     
     func Seemore()

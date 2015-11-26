@@ -22,8 +22,7 @@ class SeeMoreViewController: UIViewController {
     @IBOutlet weak var backbutton: UIBarButtonItem!
     override func viewDidLoad() {
         
-        let logo = UIImage(named: "navtext")
-        let imageview = UIImageView(image: logo)
+        let likebuttonfilled = UIImage(named: "like button filled")
         
         
         super.viewDidLoad()
@@ -31,7 +30,7 @@ class SeeMoreViewController: UIViewController {
         self.navigationItem.setLeftBarButtonItem(backbutton, animated: true)
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.17, green: 0.58, blue: 0.38, alpha: 1.0)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationItem.titleView = imageview
+        self.navigationController?.navigationItem.title = "More Info"
         
 
         // Do any additional setup after loading the view.
@@ -56,9 +55,23 @@ class SeeMoreViewController: UIViewController {
                 {
                     for object in objects
                     {
+                        print(object)
                         var user = object.valueForKey("user")?.username!
                         print(user!)
                         self.UserLabel.text = user!
+                        
+                        var likes = object.valueForKey("likes") as! Int
+                        
+                        
+                        print(likes)
+                        
+                        if likes >= 1
+                        {
+                            self.LikeButton.setImage(likebuttonfilled, forState: .Normal)
+                        }
+                        
+                        
+                        
                        
                     }
                 }
