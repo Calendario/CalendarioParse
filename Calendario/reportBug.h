@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
-@interface reportBug : UIViewController
+@interface reportBug : UIViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (weak, nonatomic) IBOutlet UITextField *descField;
 - (IBAction)Send:(id)sender;
+- (IBAction)backgroundTap:(id)sender;
 
 @end

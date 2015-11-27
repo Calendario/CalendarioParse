@@ -23,6 +23,11 @@
     [super didReceiveMemoryWarning];
 }
 
+-(BOOL) textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
 - (IBAction)Send:(id)sender {
     
     NSString *titleString = _titleField.text;
@@ -39,6 +44,10 @@
             // There was a problem, check error.description
         }
     }];
+}
+
+- (IBAction)backgroundTap:(id)sender {
+    [self.view endEditing:YES];
 }
 
 @end
