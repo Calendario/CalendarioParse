@@ -20,9 +20,16 @@ class SeeMoreViewController: UIViewController {
     @IBOutlet weak var CommentButton: UIButton!
     
     @IBOutlet weak var backbutton: UIBarButtonItem!
+    
+    
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
+
     override func viewDidLoad() {
         
         let likebuttonfilled = UIImage(named: "like button filled")
+        
+       
         
         
         super.viewDidLoad()
@@ -32,14 +39,16 @@ class SeeMoreViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationItem.title = "More Info"
         
+        
+        var objectid = defaults.objectForKey("objectId") as? String
+
+        
 
         // Do any additional setup after loading the view.
         
-        let defaults = NSUserDefaults.standardUserDefaults()
         
         contentTextView.text = defaults.objectForKey("updatetext") as? String
         
-        var objectid = defaults.objectForKey("objectId") as? String
         
         print(objectid!)
         
@@ -56,11 +65,15 @@ class SeeMoreViewController: UIViewController {
                     for object in objects
                     {
                         print(object)
+                        
                         var user = object.valueForKey("user")?.username!
                         print(user!)
                         self.UserLabel.text = user!
                         
-                        var likes = object.valueForKey("likes") as! Int
+                        var likes = object.valueForKey("likes") as? Int
+                        
+                        
+                        self.defaults.setObject(object.objectId, forKey: "fromseemore")
                         
                         
                         print(likes)
@@ -107,12 +120,17 @@ class SeeMoreViewController: UIViewController {
         appDelegate.window.rootViewController = tabBarController
     }
     
-    func getLikes()
-    {
-        
-    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "seemore"
+        {
+            let vc = segue.destinationViewController as! CommentsViewController
+            
+              var objectid = defaults.objectForKey("objectId") as? String
+            
+            vc.savedobjectID = objectid
 
-    
+        }
+    }
     
     
 

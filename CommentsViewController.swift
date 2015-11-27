@@ -40,6 +40,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         
         
+        
         let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 55))
         navigationbar.backgroundColor = UIColor.whiteColor()
         navigationbar.delegate = self

@@ -501,10 +501,29 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
             
 
         }
+        
+
+        
+        let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in
+              let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
+            
+            statusupdate.deleteInBackgroundWithBlock({ (sucess, error) -> Void in
+                self.statausData.removeObjectAtIndex(indexPath.row)
+                statusupdate.saveInBackground()
+                print("deleted")
+                self.LoadData()
+                
+            })
+        }
+        
+        
+        
+        
         report.backgroundColor = UIColor.flatWhiteColorDark()
         seemore.backgroundColor = UIColor.flatGrayColor()
+        deletestatus.backgroundColor = UIColor.flatRedColor()
         
-        return [report, seemore]
+        return [report, seemore, deletestatus]
     }
     
     func Seemore()
