@@ -267,7 +267,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
     
     cell.userInteractionEnabled = NO;
@@ -289,38 +289,29 @@
         cell.userInteractionEnabled = YES;
         userLabel.text = user.username;
         
-                        //fetch user profile image for table cell
-                        PFFile *userImageFile = user[@"profileImage"];
-                        if (userImageFile == nil)
-                        {
-                            [userImage setImage:notAvailable];
-                            userImage.layer.cornerRadius = userImage.frame.size.width/2;
-                            userImage.clipsToBounds = YES;
-                            userImage.layer.borderWidth = 1.0f;
-                            userImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
-
-                        }
-                        else
-                        {
-                        
-                            [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
-                        {
-                            if (!error)
-                            {
-                                UIImage *image = [UIImage imageWithData:imageData];
-
-                                [userImage setImage:image];
-                                userImage.layer.cornerRadius = userImage.frame.size.width/2;
-                                userImage.clipsToBounds = YES;
-                                userImage.layer.borderWidth = 1.0f;
-                                userImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
-                            }
-
-                        }];
-                        }
+        //fetch user profile image for table cell
+        PFFile *userImageFile = user[@"profileImage"];
+        [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
+         {
+             if (!error)
+             {
+                 UIImage *image = [UIImage imageWithData:imageData];
+                 
+                 [userImage setImage:image];
+                 userImage.layer.cornerRadius = userImage.frame.size.width/2;
+                 userImage.clipsToBounds = YES;
+                 userImage.layer.borderWidth = 1.0f;
+                 userImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
+             }
+             else
+             {
+                 NSLog(@"%@", [error localizedDescription]);
+             }
+             
+         }];
         
         
-    return cell;
+        return cell;
     }
     
     else
@@ -357,7 +348,7 @@
 {
     //row automatically deselects so it doesn't stay highlighted
     [self.searchTableView deselectRowAtIndexPath:indexPath animated:NO];
-
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
     
     [self.searchTableView reloadData];
