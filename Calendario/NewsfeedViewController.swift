@@ -213,6 +213,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         
         cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
         cell.profileimageview.clipsToBounds = true
+        currentobjectID = statusupdate.objectId
         
         
         
@@ -334,7 +335,11 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(statusupdate.objectId, forKey: "objectid")
+        
+
     }
+    
+   
 
     // function that dectects hastags 
     
@@ -532,6 +537,14 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         let SMVC = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
         let NC = UINavigationController(rootViewController: SMVC)
         self.presentViewController(NC, animated: true, completion: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "comments"
+        {
+            let vc = segue.destinationViewController as! CommentsViewController
+            vc.savedobjectID = currentobjectID
+        }
     }
 
 }
