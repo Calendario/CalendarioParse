@@ -13,6 +13,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
 
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var sharebutton: UIBarButtonItem!
+    @IBOutlet weak var navigationbar: UINavigationBar!
     
   
     
@@ -46,25 +47,30 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         // Do any additional setup after loading the view.
         
         
-        let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 80))
+       /* let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 64))
         navigationbar.backgroundColor = UIColor.whiteColor()
         navigationbar.delegate = self
-        navigationbar.barTintColor =  UIColor(red:0.17, green:0.58, blue:0.38, alpha:1.0)
-        navigationbar.tintColor = UIColor.whiteColor()
+        navigationbar.barTintColor = UIColor(colorLiteralRed: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        navigationbar.tintColor = UIColor.whiteColor()*/
+
         
         // logo for nav title
         
-        let logo = UIImage(named: "navtext")
+        let logo = UIImage(named: "newsFeedTitle")
         let imageview = UIImageView(image: logo)
         
         
-        // navigation items
+       // navigation items
         let navitems = UINavigationItem()
         navitems.titleView = imageview
+        navitems.titleView?.contentMode = UIViewContentMode.Center
+        navitems.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
+        
         
         navitems.rightBarButtonItem = sharebutton
         navigationbar.items = [navitems]
-        self.view.addSubview(navigationbar)
+       // self.view.addSubview(navigationbar)
+        
 
         
         
