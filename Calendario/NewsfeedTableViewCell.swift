@@ -19,6 +19,12 @@ class NewsfeedTableViewCell: UITableViewCell {
     
     @IBOutlet weak var profileimageview: UIImageView!
     
+    @IBOutlet weak var uploaddatelabel: UILabel!
+    
+    
+    @IBOutlet weak var tenselabel: UILabel!
+    
+    
     var counter = 0
     
     

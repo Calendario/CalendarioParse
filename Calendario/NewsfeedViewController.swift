@@ -213,7 +213,19 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         
         cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
         cell.profileimageview.clipsToBounds = true
+        
+        let dateformatter = NSDateFormatter()
+        dateformatter.dateStyle = .ShortStyle
+        
+        let dateString = dateformatter.stringFromDate(statusupdate.createdAt!)
+        
+        cell.uploaddatelabel.text = "Uploaded on \(dateString)"
+        cell.tenselabel.text = statusupdate.objectForKey("tense") as! String
+        
+        
+        
         currentobjectID = statusupdate.objectId
+        
         
         
         
@@ -369,6 +381,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
                     print("tense is going to change")
                     aobject["tense"] = "went"
                     aobject.saveInBackground()
+                    self.table.reloadData()
                 }
             })
 
