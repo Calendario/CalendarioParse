@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		78C1C01C1C006D9200ACDCEC /* reportBug.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C1C01B1C006D9200ACDCEC /* reportBug.m */; };
+		94DF332B34BDBAF26FE8E428 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3365CD7E58EA21439D59FC6 /* libPods.a */; };
 		A26359E41BDA8342003F8FEB /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */; };
 		A28825F61BE3960500564EBF /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28825F51BE3960500564EBF /* MyProfileViewController.swift */; };
 		A2AE4A501BDCF7B8008E84B9 /* ToSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AE4A4F1BDCF7B8008E84B9 /* ToSViewController.swift */; };
@@ -18,6 +19,9 @@
 		A2FBF5CA1C010B360051A553 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FBF5C91C010B360051A553 /* SettingsViewController.swift */; };
 		E151AF721BD72D6500811A31 /* tabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E151AF711BD72D6500811A31 /* tabBarViewController.m */; };
 		E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E187B5F51BD3368400845C2F /* SearchViewController.m */; };
+		E24DA5E91C1154BE00901DF0 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E24DA5E81C1154BE00901DF0 /* Podfile */; };
+		E24DA5EB1C1156F900901DF0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24DA5EA1C1156F900901DF0 /* Social.framework */; };
+		E24DA5ED1C11579E00901DF0 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E24DA5EC1C11579E00901DF0 /* libstdc++.6.0.9.tbd */; };
 		E25607AE1BCAF5EC0085B9B4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25607AD1BCAF5EC0085B9B4 /* LoginViewController.swift */; };
 		E27ACC811BEDA64100503DD7 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27ACC801BEDA64100503DD7 /* TimelineViewController.swift */; };
 		E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */; };
@@ -107,6 +111,8 @@
 /* Begin PBXFileReference section */
 		78C1C01A1C006D9200ACDCEC /* reportBug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reportBug.h; sourceTree = "<group>"; };
 		78C1C01B1C006D9200ACDCEC /* reportBug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = reportBug.m; sourceTree = "<group>"; };
+		9CFC86F79C40E6D71F993D2D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		A0A3EB60EF24220E0D3A8FD9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A28825F51BE3960500564EBF /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		A2AE4A4F1BDCF7B8008E84B9 /* ToSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToSViewController.swift; sourceTree = "<group>"; };
@@ -115,10 +121,14 @@
 		A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A2FBF5C51C00BADA0051A553 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		A2FBF5C91C010B360051A553 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B3365CD7E58EA21439D59FC6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E151AF701BD72D6500811A31 /* tabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tabBarViewController.h; sourceTree = "<group>"; };
 		E151AF711BD72D6500811A31 /* tabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tabBarViewController.m; sourceTree = "<group>"; };
 		E187B5F41BD3368400845C2F /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		E187B5F51BD3368400845C2F /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		E24DA5E81C1154BE00901DF0 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E24DA5EA1C1156F900901DF0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		E24DA5EC1C11579E00901DF0 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		E25607AC1BCAF5EC0085B9B4 /* Calendario-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Calendario-Bridging-Header.h"; sourceTree = "<group>"; };
 		E25607AD1BCAF5EC0085B9B4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		E27ACC801BEDA64100503DD7 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
@@ -236,6 +246,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E24DA5ED1C11579E00901DF0 /* libstdc++.6.0.9.tbd in Frameworks */,
+				E24DA5EB1C1156F900901DF0 /* Social.framework in Frameworks */,
 				E2E0D7561BC997BE00662E70 /* libsqlite3.dylib in Frameworks */,
 				E2E0D7541BC9977D00662E70 /* libz.1.dylib in Frameworks */,
 				E2E0D7521BC9976400662E70 /* SystemConfiguration.framework in Frameworks */,
@@ -253,6 +265,7 @@
 				E2E0D73C1BC996C100662E70 /* Bolts.framework in Frameworks */,
 				E2E0D7411BC996C100662E70 /* ParseTwitterUtils.framework in Frameworks */,
 				E2E0D7401BC996C100662E70 /* ParseFacebookUtilsV4.framework in Frameworks */,
+				94DF332B34BDBAF26FE8E428 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +286,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		729F0A65E9D4AC6F465236E8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9CFC86F79C40E6D71F993D2D /* Pods.debug.xcconfig */,
+				A0A3EB60EF24220E0D3A8FD9 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		78C1C01D1C006DBE00ACDCEC /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -413,6 +435,16 @@
 			name = Search;
 			sourceTree = "<group>";
 		};
+		E298A963F9E10C208D5F8821 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E24DA5EC1C11579E00901DF0 /* libstdc++.6.0.9.tbd */,
+				E24DA5EA1C1156F900901DF0 /* Social.framework */,
+				B3365CD7E58EA21439D59FC6 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E2B7D2651BE86C68002395F7 /* FSCalender */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,6 +511,7 @@
 		E2E0D6F61BC9950800662E70 = {
 			isa = PBXGroup;
 			children = (
+				E24DA5E81C1154BE00901DF0 /* Podfile */,
 				E2E0D7011BC9950800662E70 /* Calendario */,
 				E2E0D71B1BC9950800662E70 /* CalendarioTests */,
 				E2E0D7261BC9950800662E70 /* CalendarioUITests */,
@@ -489,6 +522,8 @@
 				E2B9E0591BE9AB2C00B9154A /* FollowUser */,
 				E2B7D2651BE86C68002395F7 /* FSCalender */,
 				E2D09C9E1BCCC5BD003F4651 /* WeeklyCalender */,
+				729F0A65E9D4AC6F465236E8 /* Pods */,
+				E298A963F9E10C208D5F8821 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -611,9 +646,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E2E0D72C1BC9950800662E70 /* Build configuration list for PBXNativeTarget "Calendario" */;
 			buildPhases = (
+				D54A801E19F66CEA1A231290 /* Check Pods Manifest.lock */,
 				E2E0D6FB1BC9950800662E70 /* Sources */,
 				E2E0D6FC1BC9950800662E70 /* Frameworks */,
 				E2E0D6FD1BC9950800662E70 /* Resources */,
+				E95608CF4671C12E177826E6 /* Embed Pods Frameworks */,
+				6E9BF52CD81D13718515DFE3 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -709,6 +747,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E24DA5E91C1154BE00901DF0 /* Podfile in Resources */,
 				E2E0D7591BCA0CFD00662E70 /* Old.storyboard in Resources */,
 				E2E0D7121BC9950800662E70 /* LaunchScreen.storyboard in Resources */,
 				E2E0D70F1BC9950800662E70 /* Assets.xcassets in Resources */,
@@ -732,6 +771,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6E9BF52CD81D13718515DFE3 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D54A801E19F66CEA1A231290 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E95608CF4671C12E177826E6 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E2E0D6FB1BC9950800662E70 /* Sources */ = {
@@ -930,6 +1017,7 @@
 		};
 		E2E0D72D1BC9950800662E70 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9CFC86F79C40E6D71F993D2D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -942,6 +1030,39 @@
 				);
 				INFOPLIST_FILE = Calendario/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"CoreBluetooth\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.uk.calendario.Calendario;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -952,6 +1073,7 @@
 		};
 		E2E0D72E1BC9950800662E70 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A0A3EB60EF24220E0D3A8FD9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -964,6 +1086,39 @@
 				);
 				INFOPLIST_FILE = Calendario/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"CoreBluetooth\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.uk.calendario.Calendario;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

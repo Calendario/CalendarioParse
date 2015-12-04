@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import "tabBarViewController.h"
+@import GoogleMaps;
 
 @interface AppDelegate ()
 
@@ -37,6 +38,17 @@
     tabBar.barTintColor = [UIColor colorWithRed:46/255.0 green:153/255.0 blue:80/255.0 alpha:1.0];
     [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     [[UITabBar appearance] setShadowImage:nil];
+    
+    
+    
+    // Google Places API Set-up
+    
+    [GMSServices provideAPIKey:@"AIzaSyARYlkKdCJJ_NyvzroSOJauGj5CR450fT0"];
+    
+    
+    
+    
+    
     return YES;
 }
 
