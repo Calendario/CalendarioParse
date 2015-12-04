@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import "tabBarViewController.h"
-//#import <GoogleMaps/GoogleMaps.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 @interface AppDelegate ()
 
@@ -26,7 +26,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     
     //google places API key
-    //[GMSServices provideAPIKey:@"AIzaSyD6x0ApuhYzq8A_0M8mPjY670bHRDxsf4Y"];
+    [GMSServices provideAPIKey:@"AIzaSyD6x0ApuhYzq8A_0M8mPjY670bHRDxsf4Y"];
     
     // IMPORTANT: If this line does NOT execute, then the app will crash
     // when you try to interact with the Parse API - this line MUST be executed!
