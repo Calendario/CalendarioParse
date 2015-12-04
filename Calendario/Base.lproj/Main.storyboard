@@ -2162,6 +2162,93 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
             </objects>
             <point key="canvasLocation" x="1275.5" y="-305.5"/>
         </scene>
+        <!--Location View Controller-->
+        <scene sceneID="ESv-4d-fId">
+            <objects>
+                <viewController id="1L2-nD-jKL" customClass="locationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lsm-dO-Qwi"/>
+                        <viewControllerLayoutGuide type="bottom" id="21u-71-p8V"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="b2Y-8A-cV5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYh-kL-pBF">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="8HX-WG-z2I"/>
+                                </constraints>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cXQ-So-gfO">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Dyw-DS-xXq"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="21"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Location" id="jXg-o7-zc3">
+                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="DNU-kB-afD">
+                                            <inset key="imageInsets" minX="0.0" minY="3" maxX="4" maxY="1"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0We-XT-wy1">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ILe-dY-jaC">
+                                        <rect key="frame" x="8" y="8" width="359" height="29"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="28" id="3xL-Qd-gAf"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Nearby Location"/>
+                                            <segment title="Maps"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </segmentedControl>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="3fl-RI-9e1"/>
+                                    <constraint firstItem="ILe-dY-jaC" firstAttribute="centerX" secondItem="0We-XT-wy1" secondAttribute="centerX" id="ISk-dI-F2M"/>
+                                    <constraint firstItem="ILe-dY-jaC" firstAttribute="centerY" secondItem="0We-XT-wy1" secondAttribute="centerY" id="SRj-Lr-qR1"/>
+                                    <constraint firstAttribute="trailing" secondItem="ILe-dY-jaC" secondAttribute="trailing" constant="8" id="wvU-4W-GDj"/>
+                                    <constraint firstItem="ILe-dY-jaC" firstAttribute="leading" secondItem="0We-XT-wy1" secondAttribute="leading" constant="8" id="xzJ-aR-z30"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wYh-kL-pBF" firstAttribute="leading" secondItem="b2Y-8A-cV5" secondAttribute="leading" id="LQM-FZ-Io6"/>
+                            <constraint firstItem="cXQ-So-gfO" firstAttribute="leading" secondItem="b2Y-8A-cV5" secondAttribute="leading" id="TiO-0O-UvK"/>
+                            <constraint firstAttribute="trailing" secondItem="0We-XT-wy1" secondAttribute="trailing" id="ZXL-nN-83D"/>
+                            <constraint firstItem="cXQ-So-gfO" firstAttribute="top" secondItem="lsm-dO-Qwi" secondAttribute="bottom" id="aMt-UA-sB8"/>
+                            <constraint firstAttribute="trailing" secondItem="cXQ-So-gfO" secondAttribute="trailing" id="bIB-J7-MNd"/>
+                            <constraint firstItem="0We-XT-wy1" firstAttribute="top" secondItem="cXQ-So-gfO" secondAttribute="bottom" id="dr3-fl-2hc"/>
+                            <constraint firstItem="0We-XT-wy1" firstAttribute="leading" secondItem="b2Y-8A-cV5" secondAttribute="leading" id="gRJ-qG-iwk"/>
+                            <constraint firstItem="wYh-kL-pBF" firstAttribute="top" secondItem="b2Y-8A-cV5" secondAttribute="top" id="kZO-CG-3Ku"/>
+                            <constraint firstAttribute="trailing" secondItem="wYh-kL-pBF" secondAttribute="trailing" id="wK6-ZT-Bjj"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GcK-RB-bdy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1699.5" y="-305.5"/>
+        </scene>
         <!--Notifications-->
         <scene sceneID="wVB-ch-FSL">
             <objects>

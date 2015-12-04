@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,12 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="loginViewTitle" translatesAutoresizingMaskIntoConstraints="NO" id="cla-hv-uM2">
-                                <rect key="frame" x="67" y="133" width="240" height="49"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginViewTitle" translatesAutoresizingMaskIntoConstraints="NO" id="cla-hv-uM2">
+                                <rect key="frame" x="38" y="130" width="298" height="66"/>
                                 <animations/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeM-oU-eMM">
-                                <rect key="frame" x="20" y="626" width="340" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeM-oU-eMM">
+                                <rect key="frame" x="19" y="629" width="337" height="18"/>
                                 <animations/>
                                 <string key="text">Copyright © 2015 Calendario. All rights reserved.
 </string>
@@ -32,6 +33,13 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.1333333333" green="0.52941176469999995" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="cla-hv-uM2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6If-zD-ao9"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="YeM-oU-eMM" secondAttribute="bottom" constant="20" id="Vlb-8d-1Qk"/>
+                            <constraint firstItem="cla-hv-uM2" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="110" id="WSO-ML-fID"/>
+                            <constraint firstItem="YeM-oU-eMM" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bYz-es-GJP"/>
+                            <constraint firstItem="cla-hv-uM2" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.794" id="yqd-fd-ROg"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
