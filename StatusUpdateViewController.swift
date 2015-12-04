@@ -48,7 +48,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
     }
     
-    var currenttense: String! = "going"
+    var currenttense: String! = "Currently"
     
     
     
@@ -77,7 +77,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 55))
         navigationbar.backgroundColor = UIColor.whiteColor()
         navigationbar.delegate = self
-        navigationbar.barTintColor = UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha: 1)
+        navigationbar.barTintColor = UIColor(hexString: "#2c9560")
         navigationbar.tintColor = UIColor.whiteColor()
         
         // logo for nav title 
@@ -99,7 +99,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         
         statusUpdateTextField.layer.borderColor = UIColor.blackColor().CGColor
-        TenseControl.selectedSegmentIndex = 0
+        TenseControl.selectedSegmentIndex = 2
         
         
     
