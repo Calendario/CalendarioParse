@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import "tabBarViewController.h"
-@import GoogleMaps;
+#import <GoogleMaps/GoogleMaps.h>
 
 @interface AppDelegate ()
 
@@ -43,8 +43,9 @@
     
     // Google Places API Set-up
     
-    [GMSServices provideAPIKey:@"AIzaSyARYlkKdCJJ_NyvzroSOJauGj5CR450fT0"];
-    
+    NSString *api = @"AIzaSyApnJn0aau90PObyqdwr7D0-6raltR2lPk";
+//    [GMSServices provideAPIKey:@"AIzaSyARYlkKdCJJ_NyvzroSOJauGj5CR450fT0"];
+    [GMSServices provideAPIKey:api];
     
     
     

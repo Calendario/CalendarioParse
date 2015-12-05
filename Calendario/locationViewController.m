@@ -7,31 +7,86 @@
 //
 
 #import "locationViewController.h"
+@import CoreLocation;
+#import "AppDelegate.h"
+
 
 @interface locationViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *testLabel;
 
 @end
 
 @implementation locationViewController
+{
+    GMSPlacesClient *placesClient;
+    GMSPlace *currentPlace;
+    
+    NSMutableArray *locationsList;
+   
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    placesClient = [[GMSPlacesClient alloc] init];
+    locationsList = [NSMutableArray new];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)backPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
 }
-*/
+
+#pragma Mark Location Methods
+
+- (IBAction)getPlace:(id)sender {
+    [placesClient currentPlaceWithCallback:^(GMSPlaceLikelihoodList *placeLikelihoodList, NSError *error){
+        if (error != nil) {
+            NSLog(@"Pick Place error %@", [error localizedDescription]);
+            return;
+        }
+        
+        self.testLabel.text = @"No current place";
+       // self.addressLabel.text = @"";
+        
+        if (placeLikelihoodList != nil) {
+            GMSPlace *place = [[[placeLikelihoodList likelihoods] firstObject] place];
+            if (place != nil) {
+                //self.nameLabel.text = place.name;
+                self.testLabel.text = [[place.formattedAddress componentsSeparatedByString:@", "]
+                                          componentsJoinedByString:@"\n"];
+            }
+        }
+    }];
+}
+
+#pragma mark Table View Methods
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *identifier = @"locationCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: identifier forIndexPath:indexPath];
+    
+    
+    return cell;
+}
 
 @end
