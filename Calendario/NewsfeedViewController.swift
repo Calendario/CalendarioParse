@@ -69,7 +69,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         
         navitems.rightBarButtonItem = sharebutton
         navigationbar.items = [navitems]
-       // self.view.addSubview(navigationbar)
+        self.view.addSubview(navigationbar)
         
 
         

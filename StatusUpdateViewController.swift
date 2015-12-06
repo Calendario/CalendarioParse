@@ -37,6 +37,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     @IBOutlet weak var backbutton: UIBarButtonItem!
     
     @IBOutlet weak var statusImageview: UIImageView?
+     let deafaults = NSUserDefaults()
     // tense
     var tensenum:Int!
 
@@ -103,7 +104,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         
     
-    
         
     
         
@@ -129,6 +129,27 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         dateLabel.addGestureRecognizer(tapgesture)
         
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        deafaults.synchronize()
+        
+        var location = deafaults.valueForKey("location")
+        print(location)
+        
+        if location == nil
+        {
+            LocationLabel.text = "No Location"
+        }
+        else
+        {
+            LocationLabel.text = location as! String
+        }
+        
+        
+
     }
         override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

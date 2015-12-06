@@ -521,11 +521,11 @@
                                 <animations/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0o-HN-mRE">
-                                <rect key="frame" x="89" y="193" width="46" height="30"/>
+                                <rect key="frame" x="186" y="193" width="60" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Check in"/>
                                 <connections>
-                                    <segue destination="1L2-nD-jKL" kind="presentation" id="t0C-ez-x5t"/>
+                                    <segue destination="Y9v-Xx-H5c" kind="show" id="kUj-A7-V6a"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -731,6 +731,89 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f2d-U8-4Lj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2600.5" y="433.5"/>
+        </scene>
+        <!--Locaton View Controller-->
+        <scene sceneID="qRZ-YW-SAd">
+            <objects>
+                <viewController id="Y9v-Xx-H5c" customClass="LocatonViewController" customModule="Calendario" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3uR-eF-ZbD"/>
+                        <viewControllerLayoutGuide type="bottom" id="72p-PR-1XZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tXK-Jg-ueI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="q1p-P2-ecU">
+                                <rect key="frame" x="-3" y="58" width="380" height="565"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="q1p-P2-ecU" firstAttribute="top" secondItem="3uR-eF-ZbD" secondAttribute="bottom" constant="38" id="Ajy-Q2-CGi"/>
+                            <constraint firstItem="q1p-P2-ecU" firstAttribute="leading" secondItem="tXK-Jg-ueI" secondAttribute="leadingMargin" constant="-19" id="Nnq-fD-pdg"/>
+                            <constraint firstItem="q1p-P2-ecU" firstAttribute="bottom" secondItem="72p-PR-1XZ" secondAttribute="top" id="VYs-DO-8XY"/>
+                            <constraint firstItem="q1p-P2-ecU" firstAttribute="centerX" secondItem="tXK-Jg-ueI" secondAttribute="centerX" id="eex-zj-ndt"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem systemItem="search" id="AKg-lD-3qB">
+                            <connections>
+                                <action selector="ShowSearchBarController:" destination="Y9v-Xx-H5c" id="ePm-G5-78r"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="6LW-LF-eFd"/>
+                        <barButtonItem title="Back" id="Ds7-K6-Zis">
+                            <connections>
+                                <action selector="Backtapped:" destination="Y9v-Xx-H5c" id="U6k-di-UqV"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="backButton" destination="Ds7-K6-Zis" id="byL-V7-Xnh"/>
+                        <outlet property="mapViewContainer" destination="q1p-P2-ecU" id="TjA-aK-Nx7"/>
+                        <outlet property="searchButton" destination="AKg-lD-3qB" id="ZcL-jR-doJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gjz-0j-gjI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2232.5" y="-395.5"/>
+        </scene>
+        <!--Location Search Table View Controller-->
+        <scene sceneID="Cgc-YG-Nns">
+            <objects>
+                <tableViewController id="WjO-Yv-Dzo" customClass="LocationSearchTableViewController" customModule="Calendario" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="HJe-U9-Jel">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="eLL-Yg-VtC">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eLL-Yg-VtC" id="kpk-uB-DJm">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="WjO-Yv-Dzo" id="oky-e9-qCg"/>
+                            <outlet property="delegate" destination="WjO-Yv-Dzo" id="sOJ-Sr-EbH"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k1o-d1-wux" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2759" y="-414"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="vZk-wx-8V6">

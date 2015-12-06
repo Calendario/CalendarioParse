@@ -23,6 +23,8 @@
 		E24DA5E91C1154BE00901DF0 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E24DA5E81C1154BE00901DF0 /* Podfile */; };
 		E24DA5EB1C1156F900901DF0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24DA5EA1C1156F900901DF0 /* Social.framework */; };
 		E24DA5ED1C11579E00901DF0 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E24DA5EC1C11579E00901DF0 /* libstdc++.6.0.9.tbd */; };
+		E24DA5EF1C13E3AC00901DF0 /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24DA5EE1C13E3AC00901DF0 /* LocationSearchTableViewController.swift */; };
+		E24DA5F21C13EA7A00901DF0 /* LocatonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24DA5F11C13EA7A00901DF0 /* LocatonViewController.swift */; };
 		E25607AE1BCAF5EC0085B9B4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25607AD1BCAF5EC0085B9B4 /* LoginViewController.swift */; };
 		E27ACC811BEDA64100503DD7 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27ACC801BEDA64100503DD7 /* TimelineViewController.swift */; };
 		E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */; };
@@ -132,6 +134,8 @@
 		E24DA5E81C1154BE00901DF0 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E24DA5EA1C1156F900901DF0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		E24DA5EC1C11579E00901DF0 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		E24DA5EE1C13E3AC00901DF0 /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationSearchTableViewController.swift; path = Calendario/LocationSearchTableViewController.swift; sourceTree = "<group>"; };
+		E24DA5F11C13EA7A00901DF0 /* LocatonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocatonViewController.swift; sourceTree = "<group>"; };
 		E25607AC1BCAF5EC0085B9B4 /* Calendario-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Calendario-Bridging-Header.h"; sourceTree = "<group>"; };
 		E25607AD1BCAF5EC0085B9B4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		E27ACC801BEDA64100503DD7 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
@@ -447,6 +451,15 @@
 			name = Location;
 			sourceTree = "<group>";
 		};
+		E24DA5F01C13E3FE00901DF0 /* Location swift */ = {
+			isa = PBXGroup;
+			children = (
+				E24DA5EE1C13E3AC00901DF0 /* LocationSearchTableViewController.swift */,
+				E24DA5F11C13EA7A00901DF0 /* LocatonViewController.swift */,
+			);
+			name = "Location swift";
+			sourceTree = "<group>";
+		};
 		E298A963F9E10C208D5F8821 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -523,6 +536,7 @@
 		E2E0D6F61BC9950800662E70 = {
 			isa = PBXGroup;
 			children = (
+				E24DA5F01C13E3FE00901DF0 /* Location swift */,
 				E24DA5E81C1154BE00901DF0 /* Podfile */,
 				E2E0D7011BC9950800662E70 /* Calendario */,
 				E2E0D71B1BC9950800662E70 /* CalendarioTests */,
@@ -858,6 +872,7 @@
 				E2EE56641BF199F70064BA1D /* UIView+ChameleonPrivate.m in Sources */,
 				E2EE56601BF199F70064BA1D /* UIColor+ChameleonPrivate.m in Sources */,
 				E2D8D9FD1BCF51E800A40350 /* NewsfeedTableViewCell.swift in Sources */,
+				E24DA5F21C13EA7A00901DF0 /* LocatonViewController.swift in Sources */,
 				E2E0D7041BC9950800662E70 /* main.m in Sources */,
 				E2B7D2871BE86C9E002395F7 /* FSCalendarHeader.m in Sources */,
 				E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */,
@@ -870,6 +885,7 @@
 				E2B7D28B1BE86C9E002395F7 /* NSString+FSExtension.m in Sources */,
 				E2B420EB1BD585F900984E7B /* CalHashTagDetector.m in Sources */,
 				E2EE565D1BF199F70064BA1D /* NSArray+Chameleon.m in Sources */,
+				E24DA5EF1C13E3AC00901DF0 /* LocationSearchTableViewController.swift in Sources */,
 				E2EE56621BF199F70064BA1D /* UILabel+Chameleon.m in Sources */,
 				E2EE56631BF199F70064BA1D /* UINavigationController+Chameleon.m in Sources */,
 				E2B7D28C1BE86C9E002395F7 /* UIView+FSExtension.m in Sources */,
