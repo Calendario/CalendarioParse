@@ -43,9 +43,9 @@
     
     // Google Places API Set-up
     
-    NSString *api = @"AIzaSyApnJn0aau90PObyqdwr7D0-6raltR2lPk";
+    //NSString *api = @"AIzaSyApnJn0aau90PObyqdwr7D0-6raltR2lPk";
 //    [GMSServices provideAPIKey:@"AIzaSyARYlkKdCJJ_NyvzroSOJauGj5CR450fT0"];
-    [GMSServices provideAPIKey:api];
+    [GMSServices provideAPIKey: @"AIzaSyARYlkKdCJJ_NyvzroSOJauGj5CR450fT0"];
     
     
     

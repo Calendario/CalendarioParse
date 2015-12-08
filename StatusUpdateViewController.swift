@@ -16,6 +16,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     @IBOutlet weak var PostButton: UIBarButtonItem!
     
     
+    @IBOutlet weak var checkinbutton: UIButton!
     
     @IBOutlet weak var datepicker: UIDatePicker!
     
@@ -129,6 +130,16 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         dateLabel.addGestureRecognizer(tapgesture)
         
+        
+        
+        let locationtapReconizer = UITapGestureRecognizer(target: self, action: "LocationlabelTapped")
+        
+        LocationLabel.userInteractionEnabled = true
+        
+        LocationLabel.addGestureRecognizer(locationtapReconizer)
+        
+
+        
     }
     
     
@@ -145,6 +156,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         }
         else
         {
+            checkinbutton.hidden = true
             LocationLabel.text = location as! String
         }
         
@@ -183,6 +195,14 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         dateLabel.hidden = true
    
     }
+    
+    func LocationlabelTapped()
+    {
+        print("tapped locatiom")
+        checkinbutton.hidden = false
+    }
+    
+
     
     
     
@@ -340,41 +360,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         return (newLength > 400) ? false:true
     }
     
-    // core location delegate methods
     
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        CLGeocoder().reverseGeocodeLocation(manager.location!) { (placemarks, error:NSError?) -> Void in
-            if error != nil
-            {
-                if let pm = placemarks?.first
-                {
-                    self.DisplayLocationInfo(pm)
-                }
-                else
-                {
-                    print("error with data")
-                }
-            }
-        }
-    }
-    
-    
-    func DisplayLocationInfo(placemark:CLPlacemark)
-    {
-        self.locationManager.stopUpdatingLocation()
-        print(placemark.locality)
-        print(placemark.postalCode)
-        print(placemark.administrativeArea)
-        print(placemark.country)
-        
-        LocationLabel.text = placemark.country
-    }
-    
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print(error.localizedDescription)
-    }
     
     
     func GotoNewsfeed() {

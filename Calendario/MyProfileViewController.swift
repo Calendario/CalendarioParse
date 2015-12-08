@@ -351,7 +351,7 @@ class MyProfileViewController : UIViewController {
     {
         
         var query = PFQuery(className: "Followers")
-        query.whereKey("user", equalTo: currentuser)
+        query.whereKey("fromUser", equalTo: currentuser)
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil
             {
@@ -361,7 +361,7 @@ class MyProfileViewController : UIViewController {
                 {
                     for object in objects
                     {
-                        print(object.objectForKey("followeduser"))
+                        print(object.objectForKey("toUser"))
                     }
                     
                     // Set the user followers label.
