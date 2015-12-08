@@ -25,6 +25,7 @@
 		E24DA5ED1C11579E00901DF0 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E24DA5EC1C11579E00901DF0 /* libstdc++.6.0.9.tbd */; };
 		E24DA5EF1C13E3AC00901DF0 /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24DA5EE1C13E3AC00901DF0 /* LocationSearchTableViewController.swift */; };
 		E24DA5F21C13EA7A00901DF0 /* LocatonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24DA5F11C13EA7A00901DF0 /* LocatonViewController.swift */; };
+		E24DA65D1C172DB500901DF0 /* FollowHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24DA65C1C172DB500901DF0 /* FollowHelper.swift */; };
 		E25607AE1BCAF5EC0085B9B4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25607AD1BCAF5EC0085B9B4 /* LoginViewController.swift */; };
 		E27ACC811BEDA64100503DD7 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27ACC801BEDA64100503DD7 /* TimelineViewController.swift */; };
 		E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */; };
@@ -43,7 +44,6 @@
 		E2B7D28A1BE86C9E002395F7 /* NSDate+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7D27B1BE86C9E002395F7 /* NSDate+FSExtension.m */; };
 		E2B7D28B1BE86C9E002395F7 /* NSString+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7D27D1BE86C9E002395F7 /* NSString+FSExtension.m */; };
 		E2B7D28C1BE86C9E002395F7 /* UIView+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7D27F1BE86C9E002395F7 /* UIView+FSExtension.m */; };
-		E2B9E05B1BE9AC6200B9154A /* Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B9E05A1BE9AC6200B9154A /* Follow.swift */; };
 		E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8A1BCCC575003F4651 /* CLWeeklyCalendarView.m */; };
 		E2D09C901BCCC575003F4651 /* DailyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8C1BCCC575003F4651 /* DailyCalendarView.m */; };
 		E2D09C911BCCC575003F4651 /* DayTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8E1BCCC575003F4651 /* DayTitleLabel.m */; };
@@ -136,6 +136,7 @@
 		E24DA5EC1C11579E00901DF0 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		E24DA5EE1C13E3AC00901DF0 /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationSearchTableViewController.swift; path = Calendario/LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 		E24DA5F11C13EA7A00901DF0 /* LocatonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocatonViewController.swift; sourceTree = "<group>"; };
+		E24DA65C1C172DB500901DF0 /* FollowHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowHelper.swift; sourceTree = "<group>"; };
 		E25607AC1BCAF5EC0085B9B4 /* Calendario-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Calendario-Bridging-Header.h"; sourceTree = "<group>"; };
 		E25607AD1BCAF5EC0085B9B4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		E27ACC801BEDA64100503DD7 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
@@ -169,7 +170,6 @@
 		E2B7D27D1BE86C9E002395F7 /* NSString+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FSExtension.m"; sourceTree = "<group>"; };
 		E2B7D27E1BE86C9E002395F7 /* UIView+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FSExtension.h"; sourceTree = "<group>"; };
 		E2B7D27F1BE86C9E002395F7 /* UIView+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FSExtension.m"; sourceTree = "<group>"; };
-		E2B9E05A1BE9AC6200B9154A /* Follow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Follow.swift; sourceTree = "<group>"; };
 		E2D09C891BCCC575003F4651 /* CLWeeklyCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWeeklyCalendarView.h; sourceTree = "<group>"; };
 		E2D09C8A1BCCC575003F4651 /* CLWeeklyCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWeeklyCalendarView.m; sourceTree = "<group>"; };
 		E2D09C8B1BCCC575003F4651 /* DailyCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyCalendarView.h; sourceTree = "<group>"; };
@@ -506,7 +506,7 @@
 		E2B9E0591BE9AB2C00B9154A /* FollowUser */ = {
 			isa = PBXGroup;
 			children = (
-				E2B9E05A1BE9AC6200B9154A /* Follow.swift */,
+				E24DA65C1C172DB500901DF0 /* FollowHelper.swift */,
 			);
 			name = FollowUser;
 			sourceTree = "<group>";
@@ -856,7 +856,6 @@
 				E2EE565C1BF199F70064BA1D /* ChameleonConstants.m in Sources */,
 				E2AE81531BCAFF320047D1FA /* NewsfeedViewController.swift in Sources */,
 				E2D09C9C1BCCC59A003F4651 /* UIColor+CL.m in Sources */,
-				E2B9E05B1BE9AC6200B9154A /* Follow.swift in Sources */,
 				E2B7D2801BE86C9E002395F7 /* FSCalendar.m in Sources */,
 				E2B7D2831BE86C9E002395F7 /* FSCalendarCell.m in Sources */,
 				E2B7D28A1BE86C9E002395F7 /* NSDate+FSExtension.m in Sources */,
@@ -901,6 +900,7 @@
 				E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */,
 				A2FBF5CA1C010B360051A553 /* SettingsViewController.swift in Sources */,
 				E2D09C9A1BCCC59A003F4651 /* NSDate+CL.m in Sources */,
+				E24DA65D1C172DB500901DF0 /* FollowHelper.swift in Sources */,
 				E2EE56611BF199F70064BA1D /* UIImage+ChameleonPrivate.m in Sources */,
 				E2B7D2861BE86C9E002395F7 /* FSCalendarFlowLayout.m in Sources */,
 				E2F3EF901BE1C75600F42433 /* CommentsTableViewCell.swift in Sources */,

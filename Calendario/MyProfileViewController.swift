@@ -29,9 +29,8 @@ class MyProfileViewController : UIViewController {
     @IBOutlet weak var settingsButton: UIBarButtonItem!
     
     // Follow method property
-    var followdata:NSMutableArray = NSMutableArray()
-    var isfollowing = false
-    var counter = 0
+    var FollowObject = FollowHelper()
+    
     
     // Do NOT change the following line of
     // code as it MUST be set to PUBLIC.
@@ -337,20 +336,13 @@ class MyProfileViewController : UIViewController {
     }
     
     // Follow methods.
-    
-    func follow()
-    {
-        var followUser = PFObject(className: "Followers")
-        followUser["user"] = PFUser.currentUser()
-        followUser["followDate"] = String(NSDate())
-        followUser["followeduser"] = profName.text
-        followUser["follownNumber"] = counter++
-        followUser.saveInBackground()
-        print("followed")
-    }
-    @IBAction func followTapped(sender: AnyObject) {
+       @IBAction func followTapped(sender: AnyObject) {
         
-        follow()
+        let defaults = NSUserDefaults.standardUserDefaults()
+      var usertobefollowed = defaults.objectForKey("username") as! String
+        FollowObject.addFollowingRelationshipFromUser((PFUser.currentUser()?.username)!, toUser: usertobefollowed)
+        print("followed")
+        
     }
     
     // query followes class by user method may not be used
