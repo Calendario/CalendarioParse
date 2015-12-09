@@ -350,7 +350,7 @@ class MyProfileViewController : UIViewController {
         let defaults = NSUserDefaults.standardUserDefaults()
       var usertobefollowed = defaults.objectForKey("username") as! String
         FollowObject.addFollowingRelationshipFromUser((PFUser.currentUser()?.username)!, toUser: usertobefollowed)
-        isfollowing = true
+      
         
                 print("followed")
         

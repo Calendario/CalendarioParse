@@ -211,11 +211,15 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
         
         let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
         
-        cell.statusTextView.text = statusupdate.objectForKey("updatetext") as! String
+        
+        
+        cell.statusTextView.text = "               \( statusupdate.objectForKey("updatetext") as! String)"
         
         cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
         cell.profileimageview.clipsToBounds = true
@@ -372,7 +376,12 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     func isDatePassed(date1:NSDate, date2:NSDate, ParseID: String)
     {
-        if date1.timeIntervalSince1970 < date2.timeIntervalSince1970
+        let dateformatter = NSDateFormatter()
+        dateformatter.dateFormat = "MM/d/yy"
+        var newdate = dateformatter.stringFromDate(date2)
+
+        
+        if date2.timeIntervalSince1970 < date1.timeIntervalSince1970
         {
             print("Date1 has passed")
             
@@ -384,15 +393,32 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
                     
                     print(error)
                     
+                    print(aobject.objectForKey("dateofevent") as! String)
+                    print(newdate)
+                    
+                    if aobject.objectForKey("dateofevent") as! String == newdate
+                    {
+                        print("tense stays")
+                        aobject["tense"] = "Currently"
+                        aobject.saveInBackground()
+                        
+                    }
+                    else
+                    {
+                        
                     print("tense is going to change")
                     aobject["tense"] = "went"
                     aobject.saveInBackground()
-                    self.table.reloadData()
+                    }
+                    
                 }
             })
 
                     
                 }
+        
+        
+
         
         
         
@@ -407,6 +433,8 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
 
 }
+    
+    
     
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
