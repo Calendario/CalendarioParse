@@ -26,5 +26,37 @@ class FollowHelper: NSObject {
         followObject.saveInBackground()
     }
     
+    // unfollow method
+    
+    func RemoveFollowingRelationshipFromUser(user:String, toUser:String)
+    {
+        let query = PFQuery(className: "Followers")
+        query.whereKey(ParseFollowFromUser, equalTo: user)
+        query.whereKey(ParseFollowToUser, equalTo: toUser)
+        
+        query.findObjectsInBackgroundWithBlock { (results, error) -> Void in
+            if error == nil
+            {
+                let results = results! as [PFObject] ?? []
+                
+                for relationship in results
+                {
+                    relationship.deleteInBackgroundWithBlock({ (sucess, error) -> Void in
+                        if  sucess
+                        {
+                            print("Unfollowed")
+                        }
+                        else
+                        {
+                            print("error")
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
+    
+    
     
 }

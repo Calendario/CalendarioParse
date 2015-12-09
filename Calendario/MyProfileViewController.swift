@@ -28,9 +28,12 @@ class MyProfileViewController : UIViewController {
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var settingsButton: UIBarButtonItem!
     
+    
+    @IBOutlet weak var FollowButton: UIButton!
+    
     // Follow method property
     var FollowObject = FollowHelper()
-    
+        
     
     // Do NOT change the following line of
     // code as it MUST be set to PUBLIC.
@@ -99,6 +102,7 @@ class MyProfileViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
     }
     
     // View Did Appear method.
@@ -262,7 +266,12 @@ class MyProfileViewController : UIViewController {
             // There is currently no logged in user.
             self.displayAlert("Error", alertMessage: "You must login before using this section of the app.")
         }
+        
+        
+        
     }
+    
+
     
     // View Did Layout Subviews method.
     
@@ -341,7 +350,9 @@ class MyProfileViewController : UIViewController {
         let defaults = NSUserDefaults.standardUserDefaults()
       var usertobefollowed = defaults.objectForKey("username") as! String
         FollowObject.addFollowingRelationshipFromUser((PFUser.currentUser()?.username)!, toUser: usertobefollowed)
-        print("followed")
+        isfollowing = true
+        
+                print("followed")
         
     }
     
