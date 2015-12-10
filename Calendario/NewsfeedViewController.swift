@@ -219,7 +219,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         
         
         
-        cell.statusTextView.text = "               \( statusupdate.objectForKey("updatetext") as! String)"
+        cell.statusTextView.text = statusupdate.objectForKey("updatetext") as! String
         
         cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
         cell.profileimageview.clipsToBounds = true
