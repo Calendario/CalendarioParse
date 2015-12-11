@@ -231,10 +231,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
                 
         
         
-        if cell.locationLabel.text == "No Location"
-        {
-            cell.locationLabel.hidden = true
-        }
+   
         
 
         
@@ -320,7 +317,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
 
         StartDectingHastags(cell.statusTextView.text)
         
-       isDatePassed(NSDate(), date2: statusupdate.createdAt!, ParseID: statusupdate.objectId!)
+       isDatePassed(statusupdate.createdAt!, date2: NSDate(), ParseID: statusupdate.objectId!)
         
         return cell
 }

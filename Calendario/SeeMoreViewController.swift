@@ -21,6 +21,11 @@ class SeeMoreViewController: UIViewController {
     
     @IBOutlet weak var backbutton: UIBarButtonItem!
     
+    @IBOutlet weak var TenseLabel: UILabel!
+    
+    @IBOutlet weak var locationlabel: UILabel!
+    
+    
     
     let defaults = NSUserDefaults.standardUserDefaults()
     
@@ -37,7 +42,7 @@ class SeeMoreViewController: UIViewController {
         self.navigationItem.setLeftBarButtonItem(backbutton, animated: true)
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.17, green: 0.58, blue: 0.38, alpha: 1.0)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationItem.title = "More Info"
+        self.navigationController?.navigationItem.title = "see more"
         
         
         var objectid = defaults.objectForKey("objectId") as? String
@@ -82,6 +87,20 @@ class SeeMoreViewController: UIViewController {
                         {
                             self.LikeButton.setImage(likebuttonfilled, forState: .Normal)
                         }
+                        
+                        
+                        
+                        var tense = object.valueForKey("tense") as! String
+                        
+                        self.TenseLabel.text = tense
+                        
+                        
+                        var location = object.valueForKey("location") as! String
+                        
+                        self.locationlabel.text = location
+                        
+                        
+                        
                         
                         
                         

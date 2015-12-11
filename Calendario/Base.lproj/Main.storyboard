@@ -46,16 +46,16 @@
                                     <constraint firstAttribute="height" constant="20" id="nwQ-Ba-AHX"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="217" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ulr-ZQ-cuc">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="238" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ulr-ZQ-cuc">
                                 <rect key="frame" x="0.0" y="64" width="390" height="574"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="217" id="sGJ-qf-6wC" customClass="NewsfeedTableViewCell" customModule="Calendario" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="390" height="217"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="238" id="sGJ-qf-6wC" customClass="NewsfeedTableViewCell" customModule="Calendario" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="390" height="238"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sGJ-qf-6wC" id="elz-Dq-uTm">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="216"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="237"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3z0-mT-fxK">
@@ -89,17 +89,6 @@
                                                     <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ZU-z7-pYY">
-                                                    <rect key="frame" x="85" y="28" width="221" height="39"/>
-                                                    <animations/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="39" id="Vjb-YI-mbp"/>
-                                                        <constraint firstAttribute="width" constant="221" id="eAA-FF-Ilf"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bTC-UO-JBe" userLabel="User Profile Image">
                                                     <rect key="frame" x="10" y="1" width="38" height="38"/>
                                                     <animations/>
@@ -111,6 +100,7 @@
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXy-RC-Kfz">
                                                     <rect key="frame" x="8" y="112" width="345" height="74"/>
                                                     <animations/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
@@ -121,10 +111,21 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcp-UC-jQW">
-                                                    <rect key="frame" x="140" y="5" width="203" height="30"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Tense" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcp-UC-jQW">
+                                                    <rect key="frame" x="48" y="68" width="203" height="30"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ZU-z7-pYY">
+                                                    <rect key="frame" x="62" y="31" width="221" height="39"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="39" id="Vjb-YI-mbp"/>
+                                                        <constraint firstAttribute="width" constant="221" id="eAA-FF-Ilf"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -134,11 +135,14 @@
                                                 <constraint firstItem="vug-8I-4BZ" firstAttribute="top" secondItem="elz-Dq-uTm" secondAttribute="top" id="4Rc-pd-1l0"/>
                                                 <constraint firstItem="NXy-RC-Kfz" firstAttribute="top" secondItem="3z0-mT-fxK" secondAttribute="bottom" constant="39" id="7ZO-1t-OOW"/>
                                                 <constraint firstItem="bTC-UO-JBe" firstAttribute="top" secondItem="elz-Dq-uTm" secondAttribute="topMargin" constant="-7" id="8jM-d7-XUz"/>
+                                                <constraint firstItem="6ZU-z7-pYY" firstAttribute="top" secondItem="elz-Dq-uTm" secondAttribute="topMargin" constant="23" id="DhZ-3w-bII"/>
                                                 <constraint firstItem="NXy-RC-Kfz" firstAttribute="leading" secondItem="vQl-PN-6NQ" secondAttribute="leading" id="IfI-OP-y0I"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="NXy-RC-Kfz" secondAttribute="trailing" constant="29" id="L1C-Gl-dRc"/>
                                                 <constraint firstItem="vug-8I-4BZ" firstAttribute="leading" secondItem="elz-Dq-uTm" secondAttribute="leadingMargin" constant="69" id="NLE-Ap-hBe"/>
                                                 <constraint firstItem="vQl-PN-6NQ" firstAttribute="top" secondItem="vug-8I-4BZ" secondAttribute="bottom" constant="35" id="P59-Qz-pT8"/>
+                                                <constraint firstItem="Fcp-UC-jQW" firstAttribute="top" secondItem="6ZU-z7-pYY" secondAttribute="bottom" constant="-2" id="ROj-7C-oGQ"/>
                                                 <constraint firstItem="vQl-PN-6NQ" firstAttribute="top" secondItem="3z0-mT-fxK" secondAttribute="top" constant="33" id="Sif-VC-fJP"/>
+                                                <constraint firstItem="6ZU-z7-pYY" firstAttribute="centerX" secondItem="elz-Dq-uTm" secondAttribute="centerX" constant="-22.5" id="Skc-nV-k8d"/>
                                                 <constraint firstItem="bTC-UO-JBe" firstAttribute="leading" secondItem="elz-Dq-uTm" secondAttribute="leading" constant="10" id="VjQ-0P-fFZ"/>
                                                 <constraint firstItem="NXy-RC-Kfz" firstAttribute="leading" secondItem="bTC-UO-JBe" secondAttribute="leading" constant="-2" id="Zvt-qM-BE4"/>
                                                 <constraint firstItem="NXy-RC-Kfz" firstAttribute="leading" secondItem="3z0-mT-fxK" secondAttribute="leading" id="aFY-eY-VcC"/>
@@ -2887,12 +2891,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="l2e-MB-VRc">
                                 <rect key="frame" x="5" y="190" width="364" height="211"/>
                                 <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8HR-Xz-9xu">
-                                <rect key="frame" x="62" y="395" width="240" height="128"/>
+                                <rect key="frame" x="62" y="409" width="240" height="128"/>
                                 <animations/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVE-gk-5D2">
@@ -2904,18 +2907,32 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m4F-kH-7sB">
-                                <rect key="frame" x="274" y="539" width="67" height="30"/>
+                                <rect key="frame" x="279" y="551" width="67" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Comment"/>
                                 <connections>
                                     <segue destination="F2z-l2-38J" kind="show" identifier="seemore" id="xja-l6-MU2"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hg-Jk-Oeq">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hg-Jk-Oeq">
                                 <rect key="frame" x="53" y="95" width="217" height="25"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wl-dD-h9t">
+                                <rect key="frame" x="215" y="93" width="140" height="29"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJy-Fk-NUJ">
+                                <rect key="frame" x="28" y="135" width="293" height="39"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -2934,9 +2951,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                     <connections>
                         <outlet property="LikeButton" destination="yVE-gk-5D2" id="MYG-AY-yxE"/>
                         <outlet property="PostImage" destination="8HR-Xz-9xu" id="3zR-9M-y4x"/>
+                        <outlet property="TenseLabel" destination="3wl-dD-h9t" id="UvA-2p-aa8"/>
                         <outlet property="UserLabel" destination="1hg-Jk-Oeq" id="GsS-60-vOg"/>
                         <outlet property="backbutton" destination="5fR-cg-L5f" id="bQ3-gw-oIV"/>
                         <outlet property="contentTextView" destination="l2e-MB-VRc" id="1bD-sz-cRM"/>
+                        <outlet property="locationlabel" destination="OJy-Fk-NUJ" id="EAy-3V-rGL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AEb-FM-7Z3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3623,7 +3642,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="seprator" width="300" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BHY-8Q-BBy"/>
         <segue reference="jbQ-WG-YYd"/>
+        <segue reference="xja-l6-MU2"/>
     </inferredMetricsTieBreakers>
 </document>
