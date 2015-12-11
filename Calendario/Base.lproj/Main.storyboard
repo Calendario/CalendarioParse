@@ -46,16 +46,16 @@
                                     <constraint firstAttribute="height" constant="20" id="nwQ-Ba-AHX"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="195" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ulr-ZQ-cuc">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="217" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ulr-ZQ-cuc">
                                 <rect key="frame" x="0.0" y="64" width="390" height="574"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="195" id="sGJ-qf-6wC" customClass="NewsfeedTableViewCell" customModule="Calendario" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="390" height="195"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="217" id="sGJ-qf-6wC" customClass="NewsfeedTableViewCell" customModule="Calendario" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="390" height="217"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sGJ-qf-6wC" id="elz-Dq-uTm">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="194"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="216"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3z0-mT-fxK">
@@ -89,6 +89,17 @@
                                                     <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ZU-z7-pYY">
+                                                    <rect key="frame" x="85" y="28" width="221" height="39"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="39" id="Vjb-YI-mbp"/>
+                                                        <constraint firstAttribute="width" constant="221" id="eAA-FF-Ilf"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bTC-UO-JBe" userLabel="User Profile Image">
                                                     <rect key="frame" x="10" y="1" width="38" height="38"/>
                                                     <animations/>
@@ -97,7 +108,7 @@
                                                         <constraint firstAttribute="height" constant="38" id="xKX-WO-pb0"/>
                                                     </constraints>
                                                 </imageView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXy-RC-Kfz">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXy-RC-Kfz">
                                                     <rect key="frame" x="8" y="112" width="345" height="74"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -111,7 +122,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcp-UC-jQW">
-                                                    <rect key="frame" x="131" y="5" width="203" height="30"/>
+                                                    <rect key="frame" x="140" y="5" width="203" height="30"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -143,6 +154,7 @@
                                         <connections>
                                             <outlet property="LikeButton" destination="3z0-mT-fxK" id="mjk-yT-zEz"/>
                                             <outlet property="UserNameLabel" destination="vug-8I-4BZ" id="AKP-z6-y2t"/>
+                                            <outlet property="locationLabel" destination="6ZU-z7-pYY" id="o8Y-bq-4wb"/>
                                             <outlet property="profileimageview" destination="bTC-UO-JBe" id="ckT-nx-rZi"/>
                                             <outlet property="statusTextView" destination="NXy-RC-Kfz" id="bRR-Lc-dMb"/>
                                             <outlet property="tenselabel" destination="Fcp-UC-jQW" id="xrY-sV-Hpw"/>

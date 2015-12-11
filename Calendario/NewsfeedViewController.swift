@@ -224,13 +224,19 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
         cell.profileimageview.clipsToBounds = true
         
-        let dateformatter = NSDateFormatter()
-        dateformatter.dateStyle = .ShortStyle
         
-        let dateString = dateformatter.stringFromDate(statusupdate.createdAt!)
-        
-        cell.uploaddatelabel.text = "Uploaded on \(dateString)"
+        cell.uploaddatelabel.text = statusupdate.objectForKey("dateofevent") as! String
         cell.tenselabel.text = statusupdate.objectForKey("tense") as! String
+        cell.locationLabel.text = statusupdate.objectForKey("location") as! String
+                
+        
+        
+        if cell.locationLabel.text == "No Location"
+        {
+            cell.locationLabel.hidden = true
+        }
+        
+
         
         
         

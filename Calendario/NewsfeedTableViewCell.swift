@@ -24,6 +24,10 @@ class NewsfeedTableViewCell: UITableViewCell {
     
     @IBOutlet weak var tenselabel: UILabel!
     
+    @IBOutlet weak var locationLabel: UILabel!
+    
+    
+   
     
     var counter = 0
     
