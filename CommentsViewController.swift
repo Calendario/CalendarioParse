@@ -37,35 +37,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         savedobjectID = defaults.objectForKey("objectid") as! String
         
         print(savedobjectID!)
-        
-        
-        
-        
-        let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 55))
-        navigationbar.backgroundColor = UIColor.whiteColor()
-        navigationbar.delegate = self
-        navigationbar.barTintColor = UIColor(red:0.17, green:0.58, blue:0.38, alpha:1.0)
-        navigationbar.tintColor = UIColor.whiteColor()
-        
-        // logo for nav title
-        
-        let logo = UIImage(named: "navtext")
-        let imageview = UIImageView(image: logo)
-        
-        
-        // navigation items
-        let navitems = UINavigationItem()
-        navitems.titleView = imageview
-        navitems.leftBarButtonItem = backbutton
-        navitems.rightBarButtonItem = sendbutton
-        navigationbar.items = [navitems]
-        self.view.addSubview(navigationbar)
-        
-        
-
-        
-     
     }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         LoadCommentData()
@@ -99,13 +72,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
     }
-    
-    
-    
-    
-    
-    
- 
     
     func GotoNewsfeed() {
     

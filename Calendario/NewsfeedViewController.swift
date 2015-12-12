@@ -9,14 +9,10 @@
 import UIKit
 import Social
 
-class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate, FSCalendarDelegate, FSCalendarDataSource{
+class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegate, UINavigationBarDelegate, FSCalendarDelegate, FSCalendarDataSource {
 
     @IBOutlet weak var table: UITableView!
-    @IBOutlet weak var sharebutton: UIBarButtonItem!
-    @IBOutlet weak var navigationbar: UINavigationBar!
-    
-  
-    
+    @IBOutlet weak var activity: UIRefreshControl!
     
     var statausData:NSMutableArray = NSMutableArray()
     var currentDate = NSDate()
@@ -37,49 +33,40 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     var likeduser:String!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    //self.navigationItem.setRightBarButtonItem(sharebutton, animated: true)
-
         // Do any additional setup after loading the view.
         
+        // Set all items in the navigation bar
+        // to appear in the white tint colour.
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
-       /* let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 64))
-        navigationbar.backgroundColor = UIColor.whiteColor()
-        navigationbar.delegate = self
-        navigationbar.barTintColor = UIColor(colorLiteralRed: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-        navigationbar.tintColor = UIColor.whiteColor()*/
-
+        // Create the post "+" button.
+        let rightButton: UIButton = UIButton(type: UIButtonType.Custom)
+        rightButton.setImage(UIImage(named: "plus"), forState: UIControlState.Normal)
+        rightButton.addTarget(self, action: "openPostSection", forControlEvents: UIControlEvents.TouchUpInside)
+        rightButton.frame = CGRectMake(0, 0, 53, 31)
+                
+        // Set the navigation bar background colour.
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         
-        // logo for nav title
+        // Add the button to the right section.
+        let barButton = UIBarButtonItem(customView: rightButton)
+        self.navigationItem.rightBarButtonItem = barButton
         
+        // Logo for nav title.
         let logo = UIImage(named: "newsFeedTitle")
         let imageview = UIImageView(image: logo)
         
+        // Set the "Calendario" image int he navigation bar.
+        self.navigationItem.titleView = imageview
+        self.navigationItem.titleView?.contentMode = UIViewContentMode.Center
+        self.navigationItem.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
         
-       // navigation items
-        let navitems = UINavigationItem()
-        navitems.titleView = imageview
-        navitems.titleView?.contentMode = UIViewContentMode.Center
-        navitems.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
-        
-        
-        navitems.rightBarButtonItem = sharebutton
-        navigationbar.items = [navitems]
-        self.view.addSubview(navigationbar)
-        
-
-        
-        
-        
-        
-        
-        
-        
-        
+        // Setup the pull to refresh indicator.
+        //activity = UIRefreshControl()
+        activity.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        activity.addTarget(self, action: "LoadData", forControlEvents: UIControlEvents.ValueChanged)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -87,6 +74,24 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         LoadData()
     }
     
+    func openPostSection() {
+        
+        // Open the post section view.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewC = storyboard.instantiateViewControllerWithIdentifier("PostView") as! StatusUpdateViewController
+        self.presentViewController(viewC, animated: true, completion: nil)
+    }
+    
+    func setRefreshIndicators(state: Bool) {
+        
+        if (state == true) {
+            activity.beginRefreshing()
+        }
+        
+        else {
+            activity.endRefreshing()
+        }
+    }
     
     func dailyCalendarViewDidSelect(date: NSDate!) {
         /*statausData.removeAllObjects()
@@ -160,6 +165,10 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     func LoadData()
     {
+        
+        // Start the pull to refresh indicator.
+        self.setRefreshIndicators(true)
+        
         currentDate = NSDate()
         print("the current date is \(currentDate)")
         
@@ -175,10 +184,13 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
         
         
         getstatus.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
-            if error == nil
-            {
-                for object in objects!
-                {
+            
+            // Stop the pull to refresh indicator.
+            self.setRefreshIndicators(false)
+            
+            if error == nil {
+                
+                for object in objects! {
                     let statusupdate:PFObject = object as! PFObject
                     
                     
@@ -196,22 +208,28 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
                 
                 
             }
+            
+            else {
+                
+            }
         }
    }
 
     // Tableview delegate methods
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return statausData.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 238
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
         
@@ -349,7 +367,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
         
         print(statusupdate.objectId!)
@@ -440,11 +458,11 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     
     
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         // jdhdh
     }
     
@@ -461,7 +479,7 @@ class NewsfeedViewController: UIViewController, CLWeeklyCalendarViewDelegate, UI
     
     
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
             
             
