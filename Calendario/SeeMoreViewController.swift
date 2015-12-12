@@ -101,6 +101,26 @@ class SeeMoreViewController: UIViewController {
                         
                         
                         
+                        let image = object["image"] as? PFFile
+                        image?.getDataInBackgroundWithBlock({ (imagedata, error) -> Void in
+                            if error == nil
+                            {
+                                let image = UIImage(data: imagedata!)
+                                
+                                let defaults = NSUserDefaults.standardUserDefaults()
+                                defaults.setObject(UIImagePNGRepresentation(image!), forKey: "image")
+                                
+                                
+                                let tapgesture = UITapGestureRecognizer(target: self, action: "imageTapped")
+                                
+                                self.PostImage.image = image
+                                
+                                self.PostImage.addGestureRecognizer(tapgesture)
+                            }
+                        })
+                        
+                        
+                        
                         
                         
                         
@@ -120,6 +140,17 @@ class SeeMoreViewController: UIViewController {
         //print(defaults.objectForKey("username") as? String)
 
 }
+    
+    func imageTapped()
+    {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let PVC = sb.instantiateViewControllerWithIdentifier("photoviewer") as! CalPhotoViewerViewController
+        let NC = UINavigationController(rootViewController: PVC)
+        self.presentViewController(NC, animated: true, completion: nil)
+
+    }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
