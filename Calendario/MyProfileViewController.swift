@@ -180,6 +180,9 @@ class MyProfileViewController : UIViewController {
             self.profPosts.text = "000"
             self.profFollowing.text = "000"
             
+            // Set the posts count label.
+            self.setUserPostCount(currentUser)
+            
             // Set the username label text.
             let userString = "@\(currentUser.username!)"
             self.profUserName.text = userString as String
@@ -266,12 +269,7 @@ class MyProfileViewController : UIViewController {
             // There is currently no logged in user.
             self.displayAlert("Error", alertMessage: "You must login before using this section of the app.")
         }
-        
-        
-        
     }
-    
-
     
     // View Did Layout Subviews method.
     
@@ -291,6 +289,31 @@ class MyProfileViewController : UIViewController {
         // Setup the profile scroll view.
         self.profileScroll.scrollEnabled = true
         self.profileScroll.contentSize = CGSizeMake(self.view.bounds.width, scrollHeight)
+    }
+    
+    // Set the user post label counter.
+    
+    func setUserPostCount(currentuser:PFUser) {
+        
+        // Get the user posts number and set
+        // the label appropriately.
+        
+        var query = PFQuery(className: "StatusUpdate")
+        query.whereKey("user", equalTo: currentuser)
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            
+            if (error == nil) {
+                
+                if let objects = objects as [PFObject]! {
+                    
+                    // Get the posts count information.
+                    let posts = "\(objects.count)"
+                    
+                    // Set the posts label.
+                    self.profPosts.text = posts
+                }
+            }
+        }
     }
     
     // Label count set methods.

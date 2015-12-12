@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="16Q-ZH-5Rb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="16Q-ZH-5Rb">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -21,7 +21,6 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbD-yK-TgJ">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="2bx-kF-dxp"/>
                                 </constraints>
@@ -40,7 +39,6 @@
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vNH-nM-Ytg">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="nwQ-Ba-AHX"/>
@@ -48,7 +46,6 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="238" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ulr-ZQ-cuc">
                                 <rect key="frame" x="0.0" y="64" width="390" height="574"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="238" id="sGJ-qf-6wC" customClass="NewsfeedTableViewCell" customModule="Calendario" customModuleProvider="target">
@@ -60,7 +57,6 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3z0-mT-fxK">
                                                     <rect key="frame" x="8" y="43" width="32" height="32"/>
-                                                    <animations/>
                                                     <state key="normal" image="like button "/>
                                                     <connections>
                                                         <action selector="LikeButtonTapped:" destination="sGJ-qf-6wC" eventType="touchUpInside" id="612-A3-wXn"/>
@@ -68,7 +64,6 @@
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQl-PN-6NQ">
                                                     <rect key="frame" x="8" y="74" width="32" height="32"/>
-                                                    <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="0mF-bH-KAT"/>
                                                         <constraint firstAttribute="width" constant="32" id="Pkl-MJ-zo5"/>
@@ -80,7 +75,6 @@
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vug-8I-4BZ">
                                                     <rect key="frame" x="77" y="0.0" width="221" height="39"/>
-                                                    <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="221" id="39r-Dn-6DU"/>
                                                         <constraint firstAttribute="height" constant="39" id="7pz-3L-nZa"/>
@@ -91,7 +85,6 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bTC-UO-JBe" userLabel="User Profile Image">
                                                     <rect key="frame" x="10" y="1" width="38" height="38"/>
-                                                    <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="38" id="0pM-GM-NqK"/>
                                                         <constraint firstAttribute="height" constant="38" id="xKX-WO-pb0"/>
@@ -99,28 +92,24 @@
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXy-RC-Kfz">
                                                     <rect key="frame" x="8" y="112" width="345" height="74"/>
-                                                    <animations/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujM-9E-d7I">
                                                     <rect key="frame" x="244" y="5" width="211" height="29"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Tense" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcp-UC-jQW">
                                                     <rect key="frame" x="48" y="68" width="203" height="30"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ZU-z7-pYY">
                                                     <rect key="frame" x="62" y="31" width="221" height="39"/>
-                                                    <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="39" id="Vjb-YI-mbp"/>
                                                         <constraint firstAttribute="width" constant="221" id="eAA-FF-Ilf"/>
@@ -130,7 +119,6 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstItem="vug-8I-4BZ" firstAttribute="top" secondItem="elz-Dq-uTm" secondAttribute="top" id="4Rc-pd-1l0"/>
                                                 <constraint firstItem="NXy-RC-Kfz" firstAttribute="top" secondItem="3z0-mT-fxK" secondAttribute="bottom" constant="39" id="7ZO-1t-OOW"/>
@@ -154,7 +142,6 @@
                                                 <constraint firstItem="vQl-PN-6NQ" firstAttribute="leading" secondItem="elz-Dq-uTm" secondAttribute="leading" constant="8" id="y81-Xr-3Cj"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <animations/>
                                         <connections>
                                             <outlet property="LikeButton" destination="3z0-mT-fxK" id="mjk-yT-zEz"/>
                                             <outlet property="UserNameLabel" destination="vug-8I-4BZ" id="AKP-z6-y2t"/>
@@ -172,7 +159,6 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="vNH-nM-Ytg" firstAttribute="leading" secondItem="vb2-fj-8dB" secondAttribute="leading" id="7i1-WW-5vX"/>
@@ -221,7 +207,6 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ef0-Ce-UCZ" userLabel="TopLayoutGuide">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="nCA-3v-zK5"/>
@@ -229,7 +214,6 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="52" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="esI-F5-Fps">
                                 <rect key="frame" x="0.0" y="20" width="375" height="598"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" rowHeight="52" id="v4l-4r-4nc" customClass="searchCell">
@@ -241,7 +225,6 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MeP-xu-Qpc" userLabel="User Profile Image">
                                                     <rect key="frame" x="8" y="7" width="38" height="38"/>
-                                                    <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="38" id="93r-KM-E8O"/>
                                                         <constraint firstAttribute="width" constant="38" id="u3q-H3-Bb2"/>
@@ -249,13 +232,11 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7rJ-wq-Ucb" userLabel="Username">
                                                     <rect key="frame" x="54" y="16" width="313" height="20"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstItem="MeP-xu-Qpc" firstAttribute="leading" secondItem="1if-ng-4jI" secondAttribute="leading" constant="8" id="9tQ-yv-TS7"/>
                                                 <constraint firstItem="7rJ-wq-Ucb" firstAttribute="trailing" secondItem="1if-ng-4jI" secondAttribute="trailingMargin" id="QNK-v8-Vr9"/>
@@ -264,7 +245,6 @@
                                                 <constraint firstItem="7rJ-wq-Ucb" firstAttribute="leading" secondItem="MeP-xu-Qpc" secondAttribute="trailing" constant="8" id="yyb-bp-w8u"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <animations/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -273,7 +253,6 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="esI-F5-Fps" firstAttribute="top" secondItem="Icz-TE-WIm" secondAttribute="bottom" id="969-h7-Eil"/>
@@ -311,7 +290,6 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="knq-GY-qyM" userLabel="Status Bar View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="vz9-e7-v0y"/>
@@ -319,7 +297,6 @@
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Bug Title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Emz-3s-UA0">
                                 <rect key="frame" x="0.0" y="100" width="375" height="57"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="57" id="ZYr-UL-wlM"/>
@@ -329,7 +306,6 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tell us about the bug you experienced" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KSI-c8-jkL">
                                 <rect key="frame" x="0.0" y="179" width="374" height="239"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="239" id="WiR-Gh-eK3"/>
@@ -339,7 +315,6 @@
                             </textField>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3o-Qq-xeg">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="bNJ-aj-4hB"/>
                                 </constraints>
@@ -356,7 +331,6 @@
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WeP-Pu-d8S">
                                 <rect key="frame" x="128" y="463" width="119" height="30"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="8st-Hh-N0T"/>
                                     <constraint firstAttribute="width" constant="119" id="aAL-y5-Lqr"/>
@@ -370,7 +344,6 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
@@ -426,7 +399,6 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gcm-dB-nn2">
                                 <rect key="frame" x="25" y="72" width="36" height="21"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="bK2-fA-o0f"/>
                                 </constraints>
@@ -436,7 +408,6 @@
                             </label>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="r46-FK-Xrz">
                                 <rect key="frame" x="69" y="28" width="316" height="122"/>
-                                <animations/>
                                 <date key="date" timeIntervalSinceReferenceDate="466289147.49715197">
                                     <!--2015-10-11 20:45:47 +0000-->
                                 </date>
@@ -446,14 +417,12 @@
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwk-yB-n2C">
                                 <rect key="frame" x="24" y="197" width="384" height="21"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="P3y-v8-GPh">
                                 <rect key="frame" x="9" y="273" width="399" height="29"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="Cfm-oI-Ygw"/>
                                 </constraints>
@@ -469,7 +438,6 @@
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="400" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R26-bd-sTX">
                                 <rect key="frame" x="309" y="546" width="66" height="20"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="66" id="0uj-5g-G7o"/>
                                     <constraint firstAttribute="height" constant="20" id="7HC-9b-5Go"/>
@@ -480,38 +448,32 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seprator" translatesAutoresizingMaskIntoConstraints="NO" id="5Mx-Sv-ocw">
                                 <rect key="frame" x="-17" y="276" width="430" height="110"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="110" id="ZOc-Kp-HdA"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seprator" translatesAutoresizingMaskIntoConstraints="NO" id="9V3-fZ-HWV">
                                 <rect key="frame" x="-12" y="197" width="438" height="110"/>
-                                <animations/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hn-TC-05F">
                                 <rect key="frame" x="92" y="77" width="207" height="21"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seprator" translatesAutoresizingMaskIntoConstraints="NO" id="HhE-B9-o42">
                                 <rect key="frame" x="0.0" y="121" width="432" height="110"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="110" id="Q1g-sw-U9s"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Enter Update here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2tv-95-hXK">
                                 <rect key="frame" x="37" y="325" width="352" height="283"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgG-Ce-fbo">
                                 <rect key="frame" x="80" y="598" width="64" height="67"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="tDu-5V-Brk"/>
                                 </constraints>
@@ -522,7 +484,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXb-ik-p0Z">
                                 <rect key="frame" x="45" y="616" width="32" height="32"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="0lU-rw-WuB"/>
                                     <constraint firstAttribute="width" constant="32" id="tR4-DL-ZST"/>
@@ -534,18 +495,15 @@
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Tn-o2-CLr">
                                 <rect key="frame" x="304" y="616" width="85" height="51"/>
-                                <animations/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0o-HN-mRE">
                                 <rect key="frame" x="316" y="188" width="60" height="30"/>
-                                <animations/>
                                 <state key="normal" title="Check in"/>
                                 <connections>
                                     <segue destination="Y9v-Xx-H5c" kind="show" id="kUj-A7-V6a"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="r46-FK-Xrz" secondAttribute="trailing" constant="9" id="1C7-Mf-T30"/>
@@ -632,13 +590,11 @@
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write Comment here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A2i-0L-BB3">
                                 <rect key="frame" x="5" y="556" width="352" height="30"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="206" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KJI-D7-2eT">
                                 <rect key="frame" x="-12" y="7" width="387" height="494"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="206" id="WYh-f2-f9g" customClass="CommentsTableViewCell" customModule="Calendario" customModuleProvider="target">
@@ -650,7 +606,6 @@
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09y-oe-M55">
                                                     <rect key="frame" x="16" y="44" width="347" height="117"/>
-                                                    <animations/>
                                                     <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -658,7 +613,6 @@
                                                 </textView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1M-Wa-Ujd">
                                                     <rect key="frame" x="240" y="13" width="89" height="23"/>
-                                                    <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="42" id="Kdg-ey-IIv"/>
                                                     </constraints>
@@ -667,7 +621,6 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstItem="09y-oe-M55" firstAttribute="leading" secondItem="idj-7P-aTH" secondAttribute="leadingMargin" constant="8" id="GXP-cq-lfd"/>
                                                 <constraint firstItem="h1M-Wa-Ujd" firstAttribute="top" secondItem="idj-7P-aTH" secondAttribute="topMargin" constant="5" id="OBd-si-rEm"/>
@@ -678,7 +631,6 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="h1M-Wa-Ujd" secondAttribute="trailing" constant="49" id="kVq-hd-7ge"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <animations/>
                                         <connections>
                                             <outlet property="UserLabel" destination="h1M-Wa-Ujd" id="lwE-h7-62A"/>
                                             <outlet property="commentTextView" destination="09y-oe-M55" id="Jfh-BL-5q6"/>
@@ -691,7 +643,6 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="KJI-D7-2eT" firstAttribute="leading" secondItem="7xN-Kh-pjT" secondAttribute="leadingMargin" constant="-32" id="D4B-4c-r2j"/>
@@ -739,7 +690,6 @@
                     <view key="view" contentMode="scaleToFill" id="eWx-OU-env">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="VA7-3p-DDc"/>
@@ -763,11 +713,9 @@
                         <subviews>
                             <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="q1p-P2-ecU">
                                 <rect key="frame" x="-3" y="58" width="380" height="565"/>
-                                <animations/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="q1p-P2-ecU" firstAttribute="top" secondItem="3uR-eF-ZbD" secondAttribute="bottom" constant="38" id="Ajy-Q2-CGi"/>
@@ -808,7 +756,6 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="HJe-U9-Jel">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="eLL-Yg-VtC">
@@ -817,9 +764,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eLL-Yg-VtC" id="kpk-uB-DJm">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <animations/>
                                 </tableViewCellContentView>
-                                <animations/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -846,12 +791,10 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginViewBackground" translatesAutoresizingMaskIntoConstraints="NO" id="X8g-s8-fXk">
                                 <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
-                                <animations/>
                                 <gestureRecognizers/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yil-Qb-tGA">
                                 <rect key="frame" x="117" y="347" width="142" height="62"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Yil-Qb-tGA" secondAttribute="height" multiplier="30:13" id="WBr-2T-hKo"/>
@@ -873,7 +816,6 @@
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BZl-Nq-S4p">
                                                 <rect key="frame" x="8" y="17" width="298" height="34"/>
-                                                <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                 <connections>
@@ -881,7 +823,6 @@
                                                 </connections>
                                             </textField>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="BZl-Nq-S4p" firstAttribute="leading" secondItem="z7t-Qa-CmZ" secondAttribute="leading" constant="8" id="8Pf-mb-Za4"/>
@@ -894,7 +835,6 @@
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aOX-u4-fHG">
                                                 <rect key="frame" x="8" y="17" width="298" height="34"/>
-                                                <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                                 <connections>
@@ -902,7 +842,6 @@
                                                 </connections>
                                             </textField>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="aOX-u4-fHG" firstAttribute="centerY" secondItem="yby-wZ-NII" secondAttribute="centerY" id="1uL-vy-Uyo"/>
@@ -911,7 +850,6 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" red="0.76470588240000004" green="0.76470588240000004" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="z7t-Qa-CmZ" firstAttribute="centerX" secondItem="3Ia-ue-Ddh" secondAttribute="centerX" id="8OX-Nw-3Gq"/>
@@ -943,7 +881,6 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTN-ZI-x3W">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="57"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
                                         <state key="normal" title="Forgot Password? ">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -955,7 +892,6 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abZ-nv-x5u">
                                         <rect key="frame" x="212" y="0.0" width="102" height="57"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
                                         <state key="normal" title="Sign Up">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -966,7 +902,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="eTN-ZI-x3W" secondAttribute="bottom" id="BiF-iZ-wud"/>
@@ -987,13 +922,11 @@
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="loginViewTitle" translatesAutoresizingMaskIntoConstraints="NO" id="GRb-HE-0pS">
                                 <rect key="frame" x="28" y="43" width="321" height="89"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="GRb-HE-0pS" secondAttribute="height" multiplier="274:77" constant="3.5584415584415297" id="Etp-Y3-1Qw"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Z5k-ea-V7h" firstAttribute="centerX" secondItem="FzU-hL-4h4" secondAttribute="centerX" id="3fu-Co-E7Z"/>
@@ -1042,7 +975,6 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a35-6X-pk1">
                                 <rect key="frame" x="118" y="163" width="138" height="48"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="a35-6X-pk1" secondAttribute="height" multiplier="23:8" id="QKp-OW-uWW"/>
@@ -1063,11 +995,9 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="email_grey" translatesAutoresizingMaskIntoConstraints="NO" id="atS-6I-gDB">
                                         <rect key="frame" x="10" y="8" width="37" height="36"/>
-                                        <animations/>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lXI-5M-PDP">
                                         <rect key="frame" x="56" y="8" width="311" height="35"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done"/>
                                         <connections>
@@ -1075,7 +1005,6 @@
                                         </connections>
                                     </textField>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZG4-pF-y2Z" secondAttribute="height" multiplier="125:17" id="FhM-J0-Edw"/>
@@ -1084,7 +1013,6 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fsh-CM-4jx">
                                 <rect key="frame" x="-1" y="136" width="375" height="1"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="HkU-OC-2JD"/>
@@ -1095,7 +1023,6 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HxS-3J-uDp">
                                 <rect key="frame" x="-1" y="84" width="376" height="1"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Yme-b7-e3Q"/>
@@ -1106,12 +1033,10 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T9v-5c-ZaQ" userLabel="Status Bar BG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="utg-w4-yay">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.2156862745" green="0.60784313729999995" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="utg-w4-yay" secondAttribute="height" multiplier="375:44" id="KD1-5Z-Hcc"/>
@@ -1134,7 +1059,6 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="utg-w4-yay" firstAttribute="top" secondItem="z2e-Hh-R85" secondAttribute="bottom" id="2B2-mF-7Jt"/>
@@ -1191,12 +1115,10 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oxb-56-WW3" userLabel="UnderLay View">
                                         <rect key="frame" x="0.0" y="179" width="320" height="158"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KvH-Y3-eH0">
                                         <rect key="frame" x="0.0" y="95" width="376" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="cMO-lp-7bw"/>
@@ -1207,7 +1129,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G57-FC-YfZ">
                                         <rect key="frame" x="0.0" y="178" width="375" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="fuO-e9-fSJ"/>
@@ -1218,7 +1139,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qxs-zi-2Og">
                                         <rect key="frame" x="0.0" y="147" width="375" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="GZY-jW-ay5"/>
@@ -1232,14 +1152,12 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_grey" translatesAutoresizingMaskIntoConstraints="NO" id="Utl-4Z-0YN">
                                                 <rect key="frame" x="12" y="9" width="35" height="34"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="35" id="ElI-Rd-CAt"/>
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cR7-Gw-o4U">
                                                 <rect key="frame" x="55" y="17" width="312" height="17"/>
-                                                <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                 <connections>
@@ -1247,7 +1165,6 @@
                                                 </connections>
                                             </textField>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="cR7-Gw-o4U" firstAttribute="leading" secondItem="Utl-4Z-0YN" secondAttribute="trailing" constant="8" symbolic="YES" id="AK7-rc-DCa"/>
@@ -1264,14 +1181,12 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock_icon" translatesAutoresizingMaskIntoConstraints="NO" id="n5x-UD-PZR">
                                                 <rect key="frame" x="8" y="10" width="39" height="34"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="39" id="TMB-tC-N3p"/>
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BFh-Xm-ARM">
                                                 <rect key="frame" x="55" y="18" width="312" height="17"/>
-                                                <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                                 <connections>
@@ -1279,7 +1194,6 @@
                                                 </connections>
                                             </textField>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="BFh-Xm-ARM" firstAttribute="trailing" secondItem="j8A-cS-MXg" secondAttribute="trailingMargin" id="3IZ-ea-dQQ"/>
@@ -1292,7 +1206,6 @@
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4uz-7X-hsR">
                                         <rect key="frame" x="16" y="232" width="360" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="YLP-Si-BvG"/>
@@ -1306,7 +1219,6 @@
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-Enter Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x6p-Jw-12s">
                                                 <rect key="frame" x="55" y="17" width="312" height="17"/>
-                                                <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                                 <connections>
@@ -1315,13 +1227,11 @@
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock_icon" translatesAutoresizingMaskIntoConstraints="NO" id="1em-OB-SQZ">
                                                 <rect key="frame" x="8" y="9" width="39" height="34"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="39" id="BYD-nD-ukW"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="1em-OB-SQZ" firstAttribute="leading" secondItem="vJo-6H-mhc" secondAttribute="leadingMargin" id="7QX-AV-ExV"/>
@@ -1334,7 +1244,6 @@
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B7H-dc-oDU">
                                         <rect key="frame" x="16" y="284" width="360" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="4vz-gz-znC"/>
@@ -1345,7 +1254,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJm-mX-Yd4">
                                         <rect key="frame" x="0.0" y="336" width="373" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="xhn-wG-krM"/>
@@ -1356,7 +1264,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mi5-s2-O1T">
                                         <rect key="frame" x="0.0" y="368" width="375" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="pEh-1s-g2v"/>
@@ -1367,7 +1274,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhp-QY-riQ">
                                         <rect key="frame" x="0.0" y="469" width="375" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Kqy-5L-VrI"/>
@@ -1378,7 +1284,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIV-W2-XS7">
                                         <rect key="frame" x="0.0" y="498" width="375" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="bnH-yq-kv6"/>
@@ -1389,7 +1294,6 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ox6-rP-8eJ">
                                         <rect key="frame" x="119" y="661" width="138" height="48"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="138" id="DpZ-gF-W10"/>
@@ -1406,13 +1310,11 @@
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By tapping done you have agreed and read." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqB-3h-5FM">
                                         <rect key="frame" x="66" y="717" width="244" height="15"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLj-S9-HX1">
                                         <rect key="frame" x="91" y="730" width="79" height="27"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="Privacy Policy">
                                             <color key="titleColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1424,13 +1326,11 @@
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="and" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xMc-G4-sfn">
                                         <rect key="frame" x="178" y="736" width="21" height="15"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hh9-Qa-Nvm">
                                         <rect key="frame" x="207" y="730" width="93" height="27"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="Terms of Service">
                                             <color key="titleColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1445,7 +1345,6 @@
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="Profile description" translatesAutoresizingMaskIntoConstraints="NO" id="ntD-4L-7eN">
                                                 <rect key="frame" x="50" y="8" width="317" height="91"/>
-                                                <animations/>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1453,7 +1352,6 @@
                                             </textView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="ZQd-Gb-9i3">
                                                 <rect key="frame" x="50" y="8" width="317" height="91"/>
-                                                <animations/>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1462,15 +1360,13 @@
                                                     <outlet property="delegate" destination="3Oo-Ed-qme" id="Fw7-Us-TUL"/>
                                                 </connections>
                                             </textView>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="more_button_2" translatesAutoresizingMaskIntoConstraints="NO" id="iBe-K2-IQd">
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="comment" translatesAutoresizingMaskIntoConstraints="NO" id="iBe-K2-IQd">
                                                 <rect key="frame" x="8" y="8" width="40" height="36"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="Hk9-D3-2nf"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="ZQd-Gb-9i3" secondAttribute="bottom" id="3SJ-D1-j4n"/>
@@ -1492,14 +1388,12 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_grey" translatesAutoresizingMaskIntoConstraints="NO" id="y2e-xh-f5n">
                                                 <rect key="frame" x="11" y="8" width="37" height="36"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="dhQ-ya-Fko"/>
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rEn-oS-TcI">
                                                 <rect key="frame" x="56" y="17" width="311" height="18"/>
-                                                <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                                                 <connections>
@@ -1507,7 +1401,6 @@
                                                 </connections>
                                             </textField>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="y2e-xh-f5n" firstAttribute="leading" secondItem="esG-i2-EuE" secondAttribute="leading" constant="11" id="7Oe-jD-Moa"/>
@@ -1521,7 +1414,6 @@
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QY-jV-Hpe">
                                         <rect key="frame" x="0.0" y="549" width="376" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="xVj-IW-Rtz"/>
@@ -1532,7 +1424,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Uk-e4-ZAs">
                                         <rect key="frame" x="0.0" y="581" width="376" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="GlU-JH-cyI"/>
@@ -1543,7 +1434,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqw-iD-435">
                                         <rect key="frame" x="-1" y="634" width="376" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="vKb-xJ-EdY"/>
@@ -1557,14 +1447,12 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_grey" translatesAutoresizingMaskIntoConstraints="NO" id="OJU-ot-7lz">
                                                 <rect key="frame" x="11" y="8" width="37" height="36"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="2xR-0C-PZR"/>
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Website" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pHn-JQ-TlX">
                                                 <rect key="frame" x="56" y="17" width="311" height="18"/>
-                                                <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" returnKeyType="done"/>
                                                 <connections>
@@ -1572,7 +1460,6 @@
                                                 </connections>
                                             </textField>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="51" id="3pN-jY-19O"/>
@@ -1590,14 +1477,12 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email_grey" translatesAutoresizingMaskIntoConstraints="NO" id="Lp1-8J-C0o">
                                                 <rect key="frame" x="11" y="8" width="37" height="36"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="Y7y-dx-JkG"/>
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pcF-vl-98b">
                                                 <rect key="frame" x="56" y="17" width="311" height="18"/>
-                                                <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done"/>
                                                 <connections>
@@ -1605,7 +1490,6 @@
                                                 </connections>
                                             </textField>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="51" id="5ft-5w-bAt"/>
@@ -1620,7 +1504,6 @@
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_profile_pic" translatesAutoresizingMaskIntoConstraints="NO" id="E4d-z0-hQ5">
                                         <rect key="frame" x="156" y="5" width="64" height="64"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="64" id="10d-t1-F8u"/>
                                             <constraint firstAttribute="height" constant="64" id="XRh-nW-UoD"/>
@@ -1628,7 +1511,6 @@
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QSb-Xo-I7z">
                                         <rect key="frame" x="151" y="69" width="74" height="24"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="74" id="1Dh-7o-27e"/>
                                             <constraint firstAttribute="height" constant="24" id="h83-Dt-oxq"/>
@@ -1639,7 +1521,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <animations/>
                                 <constraints>
                                     <constraint firstItem="B7H-dc-oDU" firstAttribute="top" secondItem="4uz-7X-hsR" secondAttribute="bottom" constant="51" id="04U-PY-ETY"/>
                                     <constraint firstItem="gqB-3h-5FM" firstAttribute="leading" secondItem="Z4p-c8-OZn" secondAttribute="leading" constant="66" id="2e1-9h-vOZ"/>
@@ -1727,12 +1608,10 @@
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPZ-Rs-yi7" userLabel="Status Bar BG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFi-bv-r1B">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.2156862745" green="0.60784313729999995" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="barTintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
@@ -1756,10 +1635,8 @@
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bwE-VJ-vNW">
                                         <rect key="frame" x="63" y="28" width="37" height="37"/>
-                                        <animations/>
                                     </activityIndicatorView>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.53098606418918914" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="bwE-VJ-vNW" firstAttribute="centerY" secondItem="qwo-8O-dDu" secondAttribute="centerY" id="7RJ-d3-JXO"/>
@@ -1770,7 +1647,6 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="fFi-bv-r1B" firstAttribute="top" secondItem="HPZ-Rs-yi7" secondAttribute="bottom" id="3iz-RW-zkU"/>
@@ -1822,7 +1698,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lhZ-vo-Zp0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1847,7 +1722,6 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iaw-nU-zo4">
                                 <rect key="frame" x="-4" y="0.0" width="383" height="20"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="dvd-S0-nIf"/>
@@ -1855,7 +1729,6 @@
                             </view>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clj-h7-EcC">
                                 <rect key="frame" x="-4" y="20" width="383" height="44"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="DaQ-kB-b8z"/>
                                 </constraints>
@@ -1877,7 +1750,6 @@
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EvT-T1-8uo">
                                 <rect key="frame" x="-4" y="64" width="383" height="423"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingsCell" rowHeight="55" id="pLQ-Pz-6n9">
@@ -1889,7 +1761,6 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zed-Ul-qvZ">
                                                     <rect key="frame" x="339" y="14" width="28" height="28"/>
-                                                    <animations/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <accessibility key="accessibilityConfiguration">
@@ -1902,13 +1773,11 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXR-ii-UPM">
                                                     <rect key="frame" x="18" y="17" width="42" height="21"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstItem="YXR-ii-UPM" firstAttribute="centerY" secondItem="N6u-US-uAV" secondAttribute="centerY" id="D2w-dV-UxD"/>
                                                 <constraint firstItem="YXR-ii-UPM" firstAttribute="leading" secondItem="N6u-US-uAV" secondAttribute="leadingMargin" constant="10" id="D5N-PV-FlF"/>
@@ -1918,7 +1787,6 @@
                                                 <constraint firstItem="zed-Ul-qvZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YXR-ii-UPM" secondAttribute="trailing" constant="10" id="tyk-2k-Sx7"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </prototypes>
@@ -1928,13 +1796,11 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Posts Can Be Viewed By Your Followers Only" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yn1-mt-aJ7">
                                         <rect key="frame" x="51" y="18" width="282" height="15"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="yn1-mt-aJ7" firstAttribute="centerX" secondItem="lfA-at-5bA" secondAttribute="centerX" id="KSG-8h-zX1"/>
@@ -1952,7 +1818,6 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RHT-dH-rpX">
                                         <rect key="frame" x="158" y="21" width="67" height="33"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Sign Out">
                                             <color key="titleColor" red="0.89411764709999997" green="0.2274509804" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1963,7 +1828,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="RHT-dH-rpX" firstAttribute="centerX" secondItem="mKp-V1-JX0" secondAttribute="centerX" id="FKU-fk-fvs"/>
@@ -1975,18 +1839,15 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private Profile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTE-0U-e5C">
                                         <rect key="frame" x="18" y="17" width="106" height="21"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0iB-Lz-01B">
                                         <rect key="frame" x="318" y="11" width="51" height="31"/>
-                                        <animations/>
                                         <color key="tintColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="onTintColor" red="0.13725490200000001" green="0.58823529409999997" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                                     </switch>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="dTE-0U-e5C" firstAttribute="leading" secondItem="SDT-lY-l9Y" secondAttribute="leading" constant="18" id="6Wr-iw-luy"/>
@@ -1998,7 +1859,6 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -2053,7 +1913,6 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qSf-hN-AO4">
                                 <rect key="frame" x="-4" y="0.0" width="383" height="20"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="dgw-Ip-XvI"/>
@@ -2061,7 +1920,6 @@
                             </view>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gD2-R8-8py">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="5R5-T1-6Wd"/>
                                 </constraints>
@@ -2083,7 +1941,6 @@
                             </navigationBar>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8iv-Nb-UHn">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <animations/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <string key="text">Our Privacy Policy explains how we and some of the companies we work with collect, use, share and protect information in relation to our mobile services, web site, and any software provided on or in connection with Calendario.
 
@@ -2111,7 +1968,6 @@ Children Privacy: Calendario does not knowingly collect or solicit any informati
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="8iv-Nb-UHn" secondAttribute="trailing" constant="-20" id="0gm-O7-C6H"/>
@@ -2161,7 +2017,6 @@ Children Privacy: Calendario does not knowingly collect or solicit any informati
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e30-VA-d9H">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="xoL-ku-f91"/>
@@ -2169,7 +2024,6 @@ Children Privacy: Calendario does not knowingly collect or solicit any informati
                             </view>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FIe-x8-jhg">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="avE-ND-KkO"/>
                                 </constraints>
@@ -2191,7 +2045,6 @@ Children Privacy: Calendario does not knowingly collect or solicit any informati
                             </navigationBar>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XAw-fw-xcI">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <animations/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <string key="text">These Terms and conditions govern your access to and use of the services, including our various websites, SMS, APIs, email notifications, applications, buttons, and widgets, and any information, text, graphics, photos or other materials uploaded, downloaded or appearing on the Services. Your access to and use of the Services are conditioned on your acceptance of and compliance with these Terms. By accessing or using the Services you agree to be bound by these Terms.
 
@@ -2221,7 +2074,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="e30-VA-d9H" firstAttribute="top" secondItem="EeE-nZ-3dQ" secondAttribute="top" id="5Fi-38-RN9"/>
@@ -2254,7 +2106,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" itemPositioning="fill" id="ZXx-EZ-OOz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                         <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
@@ -2284,7 +2135,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYh-kL-pBF" userLabel="Status Bar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="8HX-WG-z2I"/>
@@ -2292,7 +2142,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                             </view>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cXQ-So-gfO">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Dyw-DS-xXq"/>
                                 </constraints>
@@ -2324,7 +2173,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ILe-dY-jaC">
                                         <rect key="frame" x="8" y="8" width="359" height="29"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="3xL-Qd-gAf"/>
                                         </constraints>
@@ -2335,7 +2183,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <color key="tintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </segmentedControl>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="3fl-RI-9e1"/>
@@ -2347,7 +2194,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CzY-bb-NHz">
                                 <rect key="frame" x="0.0" y="108" width="375" height="559"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="locationCell" rowHeight="58" id="xVQ-Pd-MJC">
@@ -2359,20 +2205,17 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LHJ-6f-9gb">
                                                     <rect key="frame" x="325" y="18" width="42" height="21"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRc-2f-RAX">
                                                     <rect key="frame" x="16" y="18" width="42" height="21"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstItem="LHJ-6f-9gb" firstAttribute="trailing" secondItem="mgK-ZZ-S8V" secondAttribute="trailingMargin" id="200-3H-vKO"/>
                                                 <constraint firstItem="dRc-2f-RAX" firstAttribute="centerY" secondItem="mgK-ZZ-S8V" secondAttribute="centerY" id="6if-tG-UTa"/>
@@ -2380,7 +2223,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <constraint firstItem="dRc-2f-RAX" firstAttribute="leading" secondItem="mgK-ZZ-S8V" secondAttribute="leadingMargin" constant="8" id="ufl-nj-ogk"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <animations/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -2390,7 +2232,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avk-S0-Z7r">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <animations/>
                                 <color key="backgroundColor" red="1" green="0.79607843140000001" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="elZ-Ls-J6H"/>
@@ -2400,7 +2241,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wYh-kL-pBF" firstAttribute="leading" secondItem="b2Y-8A-cV5" secondAttribute="leading" id="LQM-FZ-Io6"/>
@@ -2445,7 +2285,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g65-mZ-v1k">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Jmv-q9-R2j"/>
@@ -2453,7 +2292,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                             </view>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNl-RD-5hK">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="64F-mN-ah8"/>
                                 </constraints>
@@ -2468,7 +2306,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xmb-za-SdS">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="notificationCell" rowHeight="65" id="wcF-Lg-mmq">
@@ -2477,14 +2314,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wcF-Lg-mmq" id="cYt-mJ-hlS">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <animations/>
                                         </tableViewCellContentView>
-                                        <animations/>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="g65-mZ-v1k" secondAttribute="trailing" id="9HX-Qa-XuC"/>
@@ -2534,14 +2368,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <subviews>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="default_profile_pic" translatesAutoresizingMaskIntoConstraints="NO" id="56K-1f-kuh">
                                         <rect key="frame" x="147" y="15" width="81" height="78"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="81" id="jWU-85-4c1"/>
                                         </constraints>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="bookmark_ribbon" translatesAutoresizingMaskIntoConstraints="NO" id="MXD-Dt-bfb">
                                         <rect key="frame" x="219" y="66" width="32" height="37"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="32" id="jlF-ic-exD"/>
                                             <constraint firstAttribute="height" constant="37" id="uVS-Y0-jC8"/>
@@ -2549,7 +2381,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hs-SM-xUo">
                                         <rect key="frame" x="20" y="97" width="335" height="37"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="37" id="6ug-q9-1tZ"/>
                                         </constraints>
@@ -2559,21 +2390,18 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n96-OF-tOx">
                                         <rect key="frame" x="20" y="116" width="335" height="37"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.1960784314" green="0.46666666670000001" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="User description text here..." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHj-Gr-57d">
                                         <rect key="frame" x="20" y="142" width="335" height="70"/>
-                                        <animations/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4B-oi-n0D">
                                         <rect key="frame" x="20" y="206" width="335" height="30"/>
-                                        <animations/>
                                         <state key="normal" title="www.website.com"/>
                                         <connections>
                                             <action selector="openUserWebsite:" destination="EL5-7o-osE" eventType="touchUpInside" id="msF-yA-Dp7"/>
@@ -2584,7 +2412,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Bz-d2-7V4">
                                                 <rect key="frame" x="43" y="7" width="71" height="39"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="71" id="X64-bJ-m3k"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="71" id="tCF-uh-NKc"/>
@@ -2595,7 +2422,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="posts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thA-I9-tzL">
                                                 <rect key="frame" x="43" y="41" width="71" height="30"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="71" id="maR-pJ-oZj"/>
                                                 </constraints>
@@ -2605,7 +2431,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ooQ-AE-zmV">
                                                 <rect key="frame" x="150" y="7" width="71" height="39"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="71" id="uWp-vR-LDH"/>
                                                 </constraints>
@@ -2615,7 +2440,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="followers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hv9-Wy-shp">
                                                 <rect key="frame" x="147" y="41" width="76" height="30"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="76" id="4k3-A2-VGp"/>
                                                 </constraints>
@@ -2625,7 +2449,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mHe-Ss-VaZ">
                                                 <rect key="frame" x="265" y="7" width="71" height="39"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="71" id="pcI-TP-mxe"/>
                                                 </constraints>
@@ -2635,7 +2458,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="following" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11n-B5-YAw">
                                                 <rect key="frame" x="262" y="41" width="76" height="30"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="76" id="adR-zF-GCj"/>
                                                 </constraints>
@@ -2644,7 +2466,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="thA-I9-tzL" secondAttribute="bottom" constant="6" id="2Sb-PX-0pm"/>
@@ -2675,20 +2496,18 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WyR-tI-l4h">
                                         <rect key="frame" x="0.0" y="321" width="375" height="48"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="txi-P7-31H">
-                                                <rect key="frame" x="43" y="9" width="289" height="30"/>
-                                                <animations/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="txi-P7-31H">
+                                                <rect key="frame" x="43" y="7" width="289" height="34"/>
                                                 <color key="backgroundColor" red="0.1960784314" green="0.46666666670000001" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="289" id="vCu-Mi-6Wa"/>
                                                 </constraints>
-                                                <state key="normal" title="Edit Profile"/>
+                                                <state key="normal" title="Edit or Follow button"/>
                                                 <connections>
                                                     <action selector="editProfile:" destination="EL5-7o-osE" eventType="touchUpInside" id="Hrl-Bo-jcv"/>
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="txi-P7-31H" firstAttribute="centerY" secondItem="WyR-tI-l4h" secondAttribute="centerY" id="CoG-YP-v44"/>
@@ -2699,14 +2518,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qy7-d3-a4q">
                                         <rect key="frame" x="290" y="416" width="44" height="30"/>
-                                        <animations/>
                                         <state key="normal" title="Follow"/>
                                         <connections>
                                             <action selector="followTapped:" destination="EL5-7o-osE" eventType="touchUpInside" id="dBP-Qn-e8w"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <animations/>
                                 <constraints>
                                     <constraint firstItem="MXD-Dt-bfb" firstAttribute="leading" secondItem="y1b-c5-gKS" secondAttribute="leading" constant="219" id="1CJ-B5-5jq"/>
                                     <constraint firstItem="1hs-SM-xUo" firstAttribute="top" secondItem="56K-1f-kuh" secondAttribute="bottom" constant="4" id="96m-t7-Pji"/>
@@ -2739,12 +2556,10 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmq-eS-dSy" userLabel="Status Bar BG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkK-3t-QiM">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.2156862745" green="0.60784313729999995" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="barTintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
@@ -2770,7 +2585,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="y1b-c5-gKS" firstAttribute="trailing" secondItem="lmq-eS-dSy" secondAttribute="trailing" id="0In-ru-bsW"/>
@@ -2823,12 +2637,10 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ag-wc-2G7">
                                 <rect key="frame" x="-4" y="0.0" width="383" height="20"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxn-z7-dh5">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <animations/>
                                 <color key="barTintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="21"/>
@@ -2853,7 +2665,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                             </navigationBar>
                             <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OQC-HU-OTh">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
                                 <connections>
@@ -2862,13 +2673,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                             </webView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Web Viewer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ENv-tV-cj3">
                                 <rect key="frame" x="79" y="24" width="216" height="32"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="21"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ENv-tV-cj3" firstAttribute="top" secondItem="Gwj-4G-MGr" secondAttribute="bottom" constant="4" id="0nh-D3-ieu"/>
@@ -2905,7 +2714,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="3sy-Wp-cXu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DataCell" rowHeight="80" id="sez-zi-hV3">
@@ -2914,9 +2722,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sez-zi-hV3" id="ZYX-Pm-TpJ">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <animations/>
                                 </tableViewCellContentView>
-                                <animations/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -2955,17 +2761,14 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="l2e-MB-VRc">
                                 <rect key="frame" x="5" y="190" width="364" height="211"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8HR-Xz-9xu">
                                 <rect key="frame" x="62" y="409" width="240" height="128"/>
-                                <animations/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVE-gk-5D2">
                                 <rect key="frame" x="28" y="539" width="30" height="30"/>
-                                <animations/>
                                 <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2973,7 +2776,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m4F-kH-7sB">
                                 <rect key="frame" x="279" y="551" width="67" height="30"/>
-                                <animations/>
                                 <state key="normal" title="Comment"/>
                                 <connections>
                                     <segue destination="F2z-l2-38J" kind="show" identifier="seemore" id="xja-l6-MU2"/>
@@ -2981,27 +2783,23 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hg-Jk-Oeq">
                                 <rect key="frame" x="53" y="95" width="217" height="25"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wl-dD-h9t">
                                 <rect key="frame" x="215" y="93" width="140" height="29"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJy-Fk-NUJ">
                                 <rect key="frame" x="28" y="135" width="293" height="39"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems>
@@ -3041,7 +2839,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6uD-Jl-U3M">
                                 <rect key="frame" x="-8" y="408" width="383" height="259"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="HV2-bu-1uk">
@@ -3050,15 +2847,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HV2-bu-1uk" id="GH3-z0-A10">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <animations/>
                                         </tableViewCellContentView>
-                                        <animations/>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QTO-Jd-mOR" customClass="FSCalendar">
                                 <rect key="frame" x="6" y="20" width="377" height="389"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="qef-OK-Her" id="P0g-o4-rbK"/>
@@ -3066,7 +2860,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 </connections>
                             </view>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="6uD-Jl-U3M" firstAttribute="leading" secondItem="gAX-6G-Sds" secondAttribute="leadingMargin" constant="-28" id="A9j-D2-3aU"/>
@@ -3105,12 +2898,10 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OxJ-Sp-WVs" userLabel="UnderLay View">
                                         <rect key="frame" x="0.0" y="179" width="320" height="158"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpX-xC-dTz">
                                         <rect key="frame" x="0.0" y="95" width="376" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="E3I-uP-acf"/>
@@ -3121,7 +2912,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPh-Hp-KFD">
                                         <rect key="frame" x="0.0" y="178" width="375" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="xZf-P2-01R"/>
@@ -3132,7 +2922,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gu6-aS-fhV">
                                         <rect key="frame" x="0.0" y="147" width="375" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Lg0-Wa-v9s"/>
@@ -3146,14 +2935,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_grey" translatesAutoresizingMaskIntoConstraints="NO" id="VbA-TT-Jem">
                                                 <rect key="frame" x="12" y="9" width="35" height="34"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="35" id="ccg-rA-znH"/>
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VOs-n5-7uT">
                                                 <rect key="frame" x="55" y="17" width="312" height="17"/>
-                                                <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                 <connections>
@@ -3161,7 +2948,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 </connections>
                                             </textField>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="VbA-TT-Jem" firstAttribute="centerY" secondItem="00G-sv-oP0" secondAttribute="centerY" id="4Wg-Hi-HtZ"/>
@@ -3178,14 +2964,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock_icon" translatesAutoresizingMaskIntoConstraints="NO" id="M8t-cg-Mdz">
                                                 <rect key="frame" x="8" y="10" width="39" height="34"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="39" id="EW5-gp-6Mr"/>
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Create New Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hfr-QS-VCY">
                                                 <rect key="frame" x="55" y="18" width="312" height="17"/>
-                                                <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                                 <connections>
@@ -3193,7 +2977,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 </connections>
                                             </textField>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="M8t-cg-Mdz" firstAttribute="centerY" secondItem="hfr-QS-VCY" secondAttribute="centerY" id="03G-sP-vNX"/>
@@ -3206,7 +2989,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSm-Vo-yDS">
                                         <rect key="frame" x="16" y="232" width="360" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="BwR-JN-PbX"/>
@@ -3220,7 +3002,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-Enter New Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="436-Fs-jf3">
                                                 <rect key="frame" x="55" y="17" width="312" height="17"/>
-                                                <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                                 <connections>
@@ -3229,13 +3010,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock_icon" translatesAutoresizingMaskIntoConstraints="NO" id="DsI-zK-c7M">
                                                 <rect key="frame" x="8" y="9" width="39" height="34"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="39" id="gDk-vK-3tb"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="DsI-zK-c7M" firstAttribute="top" secondItem="klm-CQ-WUx" secondAttribute="top" constant="9" id="DfI-Hx-bjr"/>
@@ -3248,7 +3027,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80o-1q-WPE">
                                         <rect key="frame" x="16" y="284" width="360" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Zrb-Tq-Gk7"/>
@@ -3259,7 +3037,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNr-dV-BeZ">
                                         <rect key="frame" x="0.0" y="336" width="373" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="ej4-JQ-tF3"/>
@@ -3270,7 +3047,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0mJ-gc-XWy">
                                         <rect key="frame" x="0.0" y="368" width="375" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Qav-MT-Wub"/>
@@ -3281,7 +3057,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qw-cJ-tkK">
                                         <rect key="frame" x="0.0" y="469" width="375" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="szY-y1-08r"/>
@@ -3292,7 +3067,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mRn-eG-wRS">
                                         <rect key="frame" x="0.0" y="498" width="375" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="JbX-jG-Vy6"/>
@@ -3306,7 +3080,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="Profile description" translatesAutoresizingMaskIntoConstraints="NO" id="Ci2-jD-pIi">
                                                 <rect key="frame" x="50" y="8" width="317" height="91"/>
-                                                <animations/>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -3314,7 +3087,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             </textView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="8em-8T-lDc">
                                                 <rect key="frame" x="50" y="8" width="317" height="91"/>
-                                                <animations/>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -3323,15 +3095,13 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     <outlet property="delegate" destination="DHB-c0-nrG" id="QF0-40-T7B"/>
                                                 </connections>
                                             </textView>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="more_button_2" translatesAutoresizingMaskIntoConstraints="NO" id="0zA-g6-Hfv">
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="comment" translatesAutoresizingMaskIntoConstraints="NO" id="0zA-g6-Hfv">
                                                 <rect key="frame" x="8" y="8" width="40" height="36"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="h34-wW-rE1"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="Ci2-jD-pIi" firstAttribute="trailing" secondItem="8em-8T-lDc" secondAttribute="trailing" id="8tO-YY-xu2"/>
@@ -3353,14 +3123,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_grey" translatesAutoresizingMaskIntoConstraints="NO" id="PzN-Z2-OLv">
                                                 <rect key="frame" x="11" y="8" width="37" height="36"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="lsc-JT-2lt"/>
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gsl-3n-z7i">
                                                 <rect key="frame" x="56" y="17" width="311" height="18"/>
-                                                <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                                                 <connections>
@@ -3368,7 +3136,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 </connections>
                                             </textField>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="gsl-3n-z7i" firstAttribute="top" secondItem="Mbw-Qv-Y0Z" secondAttribute="top" constant="17" id="5Hp-Pb-yjc"/>
@@ -3382,7 +3149,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vqq-ev-MiH">
                                         <rect key="frame" x="0.0" y="549" width="376" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="KC9-Ch-PkK"/>
@@ -3393,7 +3159,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ssJ-Q7-Xwh">
                                         <rect key="frame" x="0.0" y="581" width="376" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="V9a-NM-ias"/>
@@ -3404,7 +3169,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLp-BE-CcF">
                                         <rect key="frame" x="-1" y="634" width="376" height="1"/>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="n6F-ou-txo"/>
@@ -3418,14 +3182,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_grey" translatesAutoresizingMaskIntoConstraints="NO" id="wa7-O0-rVm">
                                                 <rect key="frame" x="11" y="8" width="37" height="36"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="AJ9-In-yId"/>
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Website" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nvy-GH-nJs">
                                                 <rect key="frame" x="56" y="17" width="311" height="18"/>
-                                                <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" returnKeyType="done"/>
                                                 <connections>
@@ -3433,7 +3195,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 </connections>
                                             </textField>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="Nvy-GH-nJs" firstAttribute="centerY" secondItem="wa7-O0-rVm" secondAttribute="centerY" id="0Bz-NZ-7sy"/>
@@ -3451,14 +3212,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email_grey" translatesAutoresizingMaskIntoConstraints="NO" id="969-J2-NoD">
                                                 <rect key="frame" x="11" y="8" width="37" height="36"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="QNH-Xj-qyL"/>
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O3K-wg-bSt">
                                                 <rect key="frame" x="56" y="17" width="311" height="18"/>
-                                                <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done"/>
                                                 <connections>
@@ -3466,7 +3225,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 </connections>
                                             </textField>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="O3K-wg-bSt" firstAttribute="top" secondItem="Rfv-yE-orh" secondAttribute="top" constant="17" id="HSp-Zw-YXY"/>
@@ -3481,7 +3239,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_profile_pic" translatesAutoresizingMaskIntoConstraints="NO" id="Qq9-w3-Ayw">
                                         <rect key="frame" x="156" y="5" width="64" height="64"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="EpE-z2-dWO"/>
                                             <constraint firstAttribute="width" constant="64" id="cWW-td-4yD"/>
@@ -3489,7 +3246,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bax-3Z-nLG">
                                         <rect key="frame" x="151" y="69" width="74" height="24"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="6o4-dV-9QW"/>
                                             <constraint firstAttribute="width" constant="74" id="QUV-Jy-Bq8"/>
@@ -3500,7 +3256,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         </connections>
                                     </button>
                                 </subviews>
-                                <animations/>
                                 <constraints>
                                     <constraint firstItem="YPh-Hp-KFD" firstAttribute="leading" secondItem="00G-sv-oP0" secondAttribute="leading" id="0pc-Yu-NcI"/>
                                     <constraint firstItem="lvz-EY-u1y" firstAttribute="centerX" secondItem="rLp-BE-CcF" secondAttribute="centerX" id="122-2A-tfl"/>
@@ -3576,12 +3331,10 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nx9-De-wYg" userLabel="Status Bar BG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q81-Cz-zVD">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.2156862745" green="0.60784313729999995" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="barTintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
@@ -3611,10 +3364,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BsF-sp-Z88">
                                         <rect key="frame" x="63" y="28" width="37" height="37"/>
-                                        <animations/>
                                     </activityIndicatorView>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.53098606420000005" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="D3a-EI-fOf" secondAttribute="height" multiplier="82:47" id="GhH-vi-ddV"/>
@@ -3625,7 +3376,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 </constraints>
                             </view>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="tPh-Ex-3CT" firstAttribute="top" secondItem="D3a-EI-fOf" secondAttribute="bottom" constant="287" id="03u-rJ-FYd"/>
@@ -3675,7 +3425,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yaK-NM-cuk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -3700,7 +3449,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="lock_icon" width="120" height="120"/>
         <image name="loginViewBackground" width="375" height="667"/>
         <image name="loginViewTitle" width="345" height="66"/>
-        <image name="more_button_2" width="60" height="60"/>
         <image name="plus" width="30" height="30"/>
         <image name="profile_grey" width="30" height="30"/>
         <image name="right_arrow" width="50" height="50"/>
@@ -3708,6 +3456,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jbQ-WG-YYd"/>
-        <segue reference="xja-l6-MU2"/>
+        <segue reference="BHY-8Q-BBy"/>
     </inferredMetricsTieBreakers>
 </document>
