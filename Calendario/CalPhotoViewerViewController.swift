@@ -8,10 +8,11 @@
 
 import UIKit
 
-class CalPhotoViewerViewController: UIViewController {
+class CalPhotoViewerViewController: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet weak var Imageview: UIImageView!
     
+    @IBOutlet weak var scrollview: UIScrollView!
     
     @IBOutlet weak var closeButton: UIBarButtonItem!
     
@@ -20,6 +21,10 @@ class CalPhotoViewerViewController: UIViewController {
         
         self.navigationItem.setLeftBarButtonItem(closeButton, animated: true)
         self.navigationController?.hidesBarsOnTap = true
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.17, green: 0.58, blue: 0.38, alpha: 1.0)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        
+        
         
         addBlur()
 
@@ -28,6 +33,10 @@ class CalPhotoViewerViewController: UIViewController {
         let defaults = NSUserDefaults.standardUserDefaults()
         let imagedata:NSData = defaults.objectForKey("image") as! NSData
         let image = UIImage(data: imagedata)
+        
+        self.scrollview.minimumZoomScale = 1.0
+        self.scrollview.maximumZoomScale = 6.0
+        scrollview.delegate = self
         
         
         Imageview.image = image
@@ -45,12 +54,17 @@ class CalPhotoViewerViewController: UIViewController {
         blureffectview.frame = view.bounds
         blureffectview.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         view.addSubview(blureffectview)
-        blureffectview.addSubview(Imageview)
+        blureffectview.addSubview(scrollview)
+        //blureffectview.addSubview(Imageview)
        
     }
     
     @IBAction func CloseButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return self.Imageview
     }
     
     

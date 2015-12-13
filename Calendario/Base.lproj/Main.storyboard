@@ -2924,9 +2924,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m4F-kH-7sB">
-                                <rect key="frame" x="254" y="562" width="67" height="30"/>
+                                <rect key="frame" x="262" y="585" width="67" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Comment"/>
+                                <state key="normal" title="Comment">
+                                    <color key="titleColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="F2z-l2-38J" kind="show" identifier="seemore" id="xja-l6-MU2"/>
                                 </connections>
@@ -2935,14 +2937,14 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <rect key="frame" x="53" y="95" width="217" height="25"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wl-dD-h9t">
                                 <rect key="frame" x="215" y="93" width="140" height="29"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJy-Fk-NUJ">
@@ -2991,18 +2993,37 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lvO-JU-cZP">
-                                <rect key="frame" x="20" y="144" width="341" height="361"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gyU-lh-QoL">
+                                <rect key="frame" x="0.0" y="0.0" width="385" height="628"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8HN-Yx-f9r">
+                                        <rect key="frame" x="-12" y="0.0" width="410" height="628"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="628" id="rOS-PD-SbB"/>
+                                            <constraint firstAttribute="width" constant="415" id="yj4-oo-qsy"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
                                 <animations/>
-                            </imageView>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="8HN-Yx-f9r" secondAttribute="trailing" constant="-5" id="15w-MP-tmB"/>
+                                    <constraint firstAttribute="bottom" secondItem="8HN-Yx-f9r" secondAttribute="bottom" id="5Fp-co-wdt"/>
+                                    <constraint firstItem="8HN-Yx-f9r" firstAttribute="centerY" secondItem="gyU-lh-QoL" secondAttribute="centerY" id="Afd-Ac-1gt"/>
+                                    <constraint firstItem="8HN-Yx-f9r" firstAttribute="top" secondItem="gyU-lh-QoL" secondAttribute="top" id="V67-p0-2be"/>
+                                    <constraint firstItem="8HN-Yx-f9r" firstAttribute="leading" secondItem="gyU-lh-QoL" secondAttribute="leading" constant="-20" id="meh-1M-QOP"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="Igi-Ry-J67" id="gA9-8C-BCf"/>
+                                </connections>
+                            </scrollView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="lvO-JU-cZP" secondAttribute="trailing" constant="-2" id="5JF-3v-Ddn"/>
-                            <constraint firstItem="lvO-JU-cZP" firstAttribute="leading" secondItem="UWc-g4-jQw" secondAttribute="leadingMargin" constant="4" id="Eu2-eF-vpP"/>
-                            <constraint firstItem="lvO-JU-cZP" firstAttribute="top" secondItem="h5q-ew-Jww" secondAttribute="bottom" constant="124" id="d0P-IZ-N8u"/>
-                            <constraint firstItem="OrJ-1c-9rK" firstAttribute="top" secondItem="lvO-JU-cZP" secondAttribute="bottom" constant="118" id="qNt-u2-Wfq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gyU-lh-QoL" secondAttribute="trailing" constant="-26" id="3c0-8b-j6I"/>
+                            <constraint firstItem="gyU-lh-QoL" firstAttribute="top" secondItem="UWc-g4-jQw" secondAttribute="top" id="PXi-AY-DaN"/>
+                            <constraint firstItem="gyU-lh-QoL" firstAttribute="leading" secondItem="UWc-g4-jQw" secondAttribute="leading" id="rdC-wp-6zz"/>
                         </constraints>
                     </view>
                     <toolbarItems>
@@ -3015,8 +3036,9 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="Imageview" destination="lvO-JU-cZP" id="SPk-lk-J3c"/>
+                        <outlet property="Imageview" destination="8HN-Yx-f9r" id="AgW-ex-vDQ"/>
                         <outlet property="closeButton" destination="MZI-0F-bXz" id="8Su-jt-OA6"/>
+                        <outlet property="scrollview" destination="gyU-lh-QoL" id="TiY-om-Rlu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2us-Pf-ol8" userLabel="First Responder" sceneMemberID="firstResponder"/>
