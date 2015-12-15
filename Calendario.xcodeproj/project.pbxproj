@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		78C1C01C1C006D9200ACDCEC /* reportBug.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C1C01B1C006D9200ACDCEC /* reportBug.m */; };
 		94DF332B34BDBAF26FE8E428 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3365CD7E58EA21439D59FC6 /* libPods.a */; };
+		A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25179511C201B0300EA0A5E /* ReportUserViewController.swift */; };
 		A26359E41BDA8342003F8FEB /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */; };
 		A28825F61BE3960500564EBF /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28825F51BE3960500564EBF /* MyProfileViewController.swift */; };
 		A2AE4A501BDCF7B8008E84B9 /* ToSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AE4A4F1BDCF7B8008E84B9 /* ToSViewController.swift */; };
@@ -118,6 +119,7 @@
 		78C1C01B1C006D9200ACDCEC /* reportBug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = reportBug.m; sourceTree = "<group>"; };
 		9CFC86F79C40E6D71F993D2D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A0A3EB60EF24220E0D3A8FD9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A25179511C201B0300EA0A5E /* ReportUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportUserViewController.swift; sourceTree = "<group>"; };
 		A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A28825F51BE3960500564EBF /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		A2AE4A4F1BDCF7B8008E84B9 /* ToSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToSViewController.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				E25607AD1BCAF5EC0085B9B4 /* LoginViewController.swift */,
 				A2AE4A4F1BDCF7B8008E84B9 /* ToSViewController.swift */,
 				A2AE4A511BDCF82F008E84B9 /* PrivacyPolicyViewController.swift */,
+				A25179511C201B0300EA0A5E /* ReportUserViewController.swift */,
 			);
 			name = "Login/Register/Other pages";
 			sourceTree = "<group>";
@@ -891,6 +894,7 @@
 				E24DA5F21C13EA7A00901DF0 /* LocatonViewController.swift in Sources */,
 				E2E0D7041BC9950800662E70 /* main.m in Sources */,
 				E2B7D2871BE86C9E002395F7 /* FSCalendarHeader.m in Sources */,
+				A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */,
 				E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */,
 				A2AE4A521BDCF82F008E84B9 /* PrivacyPolicyViewController.swift in Sources */,
 				E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */,

@@ -39,6 +39,7 @@ class MyProfileViewController : UIViewController {
     // code as it MUST be set to PUBLIC.
     public var passedUser:PFUser!
     var userID:String!
+    var userString:String!
     
     // User block check.
     // 1 = You blocked the user.
@@ -47,6 +48,9 @@ class MyProfileViewController : UIViewController {
     
     // User website link.
     var userWebsiteLink:String!
+    
+    // User account data.
+    var currentUser:PFUser!
     
     // Setup the on screen button actions.
     
@@ -124,13 +128,13 @@ class MyProfileViewController : UIViewController {
                 
                 if (blockCheck == 1) {
                     
-                    alertDesc = "Unblock or report the user dislayed user account."
+                    alertDesc = "Unblock or report the displayed user account (\(userString))."
                     buttonOneTitle = "Unblock User"
                 }
                     
                 else {
                     
-                    alertDesc = "Block or report the user dislayed user account."
+                    alertDesc = "Block or report the displayed user account (\(userString))."
                     buttonOneTitle = "Block User"
                 }
                 
@@ -243,6 +247,12 @@ class MyProfileViewController : UIViewController {
                 }
                 
                 let reportUser = { (action:UIAlertAction!) -> Void in
+                    
+                    // Open the report user view controller.
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let viewC = storyboard.instantiateViewControllerWithIdentifier("reportUser") as! ReportUserViewController
+                    viewC.passedUser = self.currentUser
+                    self.presentViewController(viewC, animated: true, completion: nil)
                 }
                 
                 // Setuo the alert buttons.
@@ -300,7 +310,6 @@ class MyProfileViewController : UIViewController {
         
         // Check to see if a user is being passed into the
         // view controller and run the appropriate actions.
-        var currentUser:PFUser!
         
         if (passedUser == nil) {
             
@@ -425,7 +434,7 @@ class MyProfileViewController : UIViewController {
             self.setUserPostCount(currentUser)
             
             // Set the username label text.
-            let userString = "@\(currentUser.username!)"
+            userString = "@\(currentUser.username!)"
             self.profUserName.text = userString as String
             
             // Store current username is NSUserDefults so it can be used later to follow a user.
