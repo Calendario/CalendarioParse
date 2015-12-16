@@ -19,7 +19,7 @@
 		A2FBF5C61C00BADA0051A553 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FBF5C51C00BADA0051A553 /* EditProfileViewController.swift */; };
 		A2FBF5CA1C010B360051A553 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FBF5C91C010B360051A553 /* SettingsViewController.swift */; };
 		E151AF721BD72D6500811A31 /* tabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E151AF711BD72D6500811A31 /* tabBarViewController.m */; };
-		E1804EDF1C1BD8BC00A25C79 /* notificationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1804EDE1C1BD8BC00A25C79 /* notificationsTableViewController.m */; };
+		E17180521C21389600D591FA /* notificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17180511C21389600D591FA /* notificationsViewController.m */; };
 		E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E187B5F51BD3368400845C2F /* SearchViewController.m */; };
 		E1D759AC1C1243160017B53F /* locationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D759AB1C1243160017B53F /* locationViewController.m */; };
 		E24DA5E91C1154BE00901DF0 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E24DA5E81C1154BE00901DF0 /* Podfile */; };
@@ -131,8 +131,8 @@
 		B3365CD7E58EA21439D59FC6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E151AF701BD72D6500811A31 /* tabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tabBarViewController.h; sourceTree = "<group>"; };
 		E151AF711BD72D6500811A31 /* tabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tabBarViewController.m; sourceTree = "<group>"; };
-		E1804EDD1C1BD8BC00A25C79 /* notificationsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notificationsTableViewController.h; sourceTree = "<group>"; };
-		E1804EDE1C1BD8BC00A25C79 /* notificationsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = notificationsTableViewController.m; sourceTree = "<group>"; };
+		E17180501C21389600D591FA /* notificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notificationsViewController.h; sourceTree = "<group>"; };
+		E17180511C21389600D591FA /* notificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = notificationsViewController.m; sourceTree = "<group>"; };
 		E187B5F41BD3368400845C2F /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		E187B5F51BD3368400845C2F /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		E1D759AA1C1243160017B53F /* locationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = locationViewController.h; sourceTree = "<group>"; };
@@ -445,8 +445,8 @@
 		E1804EDC1C1BD89D00A25C79 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
-				E1804EDD1C1BD8BC00A25C79 /* notificationsTableViewController.h */,
-				E1804EDE1C1BD8BC00A25C79 /* notificationsTableViewController.m */,
+				E17180501C21389600D591FA /* notificationsViewController.h */,
+				E17180511C21389600D591FA /* notificationsViewController.m */,
 			);
 			name = Notifications;
 			sourceTree = "<group>";
@@ -756,7 +756,7 @@
 				TargetAttributes = {
 					E2E0D6FE1BC9950800662E70 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = 52K634K77W;
+						DevelopmentTeam = E787C92P66;
 					};
 					E2E0D7171BC9950800662E70 = {
 						CreatedOnToolsVersion = 7.0;
@@ -885,7 +885,6 @@
 				E2EE565B1BF199F70064BA1D /* Chameleon_.m in Sources */,
 				E2D09C911BCCC575003F4651 /* DayTitleLabel.m in Sources */,
 				E2FE96481BDF1AEA003BEDD2 /* ReportTableViewController.swift in Sources */,
-				E1804EDF1C1BD8BC00A25C79 /* notificationsTableViewController.m in Sources */,
 				A28825F61BE3960500564EBF /* MyProfileViewController.swift in Sources */,
 				E2EE56651BF199F70064BA1D /* UIViewController+Chameleon.m in Sources */,
 				E2EE56641BF199F70064BA1D /* UIView+ChameleonPrivate.m in Sources */,
@@ -921,6 +920,7 @@
 				E2B7D2821BE86C9E002395F7 /* FSCalendarAppearance.m in Sources */,
 				E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */,
 				A2FBF5CA1C010B360051A553 /* SettingsViewController.swift in Sources */,
+				E17180521C21389600D591FA /* notificationsViewController.m in Sources */,
 				E2D09C9A1BCCC59A003F4651 /* NSDate+CL.m in Sources */,
 				E24DA65D1C172DB500901DF0 /* FollowHelper.swift in Sources */,
 				E2EE56611BF199F70064BA1D /* UIImage+ChameleonPrivate.m in Sources */,
@@ -1025,6 +1025,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "8bf77890-b0ef-4a00-b845-003bd39acf68";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1062,6 +1063,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "8bf77890-b0ef-4a00-b845-003bd39acf68";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1115,7 +1117,7 @@
 					"-framework",
 					"\"SystemConfiguration\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.uk.calendario.Calendario;
+				PRODUCT_BUNDLE_IDENTIFIER = co.uk.calendario.CalendarioApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Calendario-Bridging-Header.h";
@@ -1171,7 +1173,7 @@
 					"-framework",
 					"\"SystemConfiguration\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.uk.calendario.Calendario;
+				PRODUCT_BUNDLE_IDENTIFIER = co.uk.calendario.CalendarioApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Calendario-Bridging-Header.h";
