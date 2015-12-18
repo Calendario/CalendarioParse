@@ -75,6 +75,27 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
         }
     }
+    
+    func getImageData(objects:[PFObject], imageView:UIImageView)
+    {
+        for object in objects
+        {
+            if let image = object["profileImage"] as! PFFile?
+            {
+                image.getDataInBackgroundWithBlock({ (imagedata, error) -> Void in
+                    if error == nil
+                    {
+                        let image = UIImage(data: imagedata!)
+                        imageView.image = image
+                    }
+                    else
+                    {
+                        imageView.image = UIImage(named: "profile_icon")
+                    }
+                })
+            }
+        }
+    }
 
 
 
@@ -97,6 +118,25 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         cell.userLabel.text = status.valueForKey("user")?.username!
         cell.tenseLabel.text = status.valueForKey("tense") as! String
         cell.updateTextView.text = status.valueForKey("updatetext") as! String
+        
+        cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
+        cell.profileimageview.clipsToBounds = true
+        
+        var getimages:PFQuery = PFUser.query()!
+        getimages.whereKey("objectId", equalTo: (status.objectForKey("user")?.objectId)!)
+        getimages.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil
+            {
+                self.getImageData(objects!, imageView: cell.profileimageview)
+            }
+            else
+            {
+                print("error")
+            }
+        }
+        
+        
+        
         
         return cell
         
