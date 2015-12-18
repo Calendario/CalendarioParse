@@ -235,7 +235,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
         
-        
+        isDatePassed(statusupdate.createdAt!, date2: NSDate(), ParseID: statusupdate.objectId!)
+
         
         cell.statusTextView.text = statusupdate.objectForKey("updatetext") as! String
         
@@ -335,7 +336,6 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
 
         StartDectingHastags(cell.statusTextView.text)
         
-       isDatePassed(statusupdate.createdAt!, date2: NSDate(), ParseID: statusupdate.objectId!)
         
         return cell
 }
@@ -402,7 +402,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         var newdate = dateformatter.stringFromDate(date2)
 
         
-        if date2.timeIntervalSince1970 < date1.timeIntervalSince1970
+        if date2.timeIntervalSince1970 > date1.timeIntervalSince1970
         {
             print("Date1 has passed")
             
@@ -422,14 +422,18 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                         print("tense stays")
                         aobject["tense"] = "Currently"
                         aobject.saveInBackground()
+                     
                         
                     }
+                    
+                        
                     else
                     {
                         
                     print("tense is going to change")
                     aobject["tense"] = "went"
                     aobject.saveInBackground()
+                        
                     }
                     
                 }

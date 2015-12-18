@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="16Q-ZH-5Rb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="16Q-ZH-5Rb">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -551,7 +551,7 @@
                         <viewControllerLayoutGuide type="bottom" id="pwH-dF-yIT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7xN-Kh-pjT">
-                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write Comment here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A2i-0L-BB3">
@@ -2812,10 +2812,10 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gyU-lh-QoL">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gyU-lh-QoL">
                                 <rect key="frame" x="0.0" y="0.0" width="385" height="628"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8HN-Yx-f9r">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8HN-Yx-f9r">
                                         <rect key="frame" x="-12" y="0.0" width="410" height="628"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="628" id="rOS-PD-SbB"/>
@@ -2823,19 +2823,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="8HN-Yx-f9r" secondAttribute="trailing" constant="-5" id="15w-MP-tmB"/>
-                                    <constraint firstAttribute="bottom" secondItem="8HN-Yx-f9r" secondAttribute="bottom" id="5Fp-co-wdt"/>
-                                    <constraint firstItem="8HN-Yx-f9r" firstAttribute="centerY" secondItem="gyU-lh-QoL" secondAttribute="centerY" id="Afd-Ac-1gt"/>
-                                    <constraint firstItem="8HN-Yx-f9r" firstAttribute="top" secondItem="gyU-lh-QoL" secondAttribute="top" id="V67-p0-2be"/>
-                                    <constraint firstItem="8HN-Yx-f9r" firstAttribute="leading" secondItem="gyU-lh-QoL" secondAttribute="leading" constant="-20" id="meh-1M-QOP"/>
-                                </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="Igi-Ry-J67" id="gA9-8C-BCf"/>
                                 </connections>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="gyU-lh-QoL" secondAttribute="trailing" constant="-26" id="3c0-8b-j6I"/>
                             <constraint firstItem="gyU-lh-QoL" firstAttribute="top" secondItem="UWc-g4-jQw" secondAttribute="top" id="PXi-AY-DaN"/>
@@ -3738,6 +3730,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Urg-qd-jmS"/>
-        <segue reference="6lO-Zx-iIM"/>
+        <segue reference="xja-l6-MU2"/>
     </inferredMetricsTieBreakers>
 </document>

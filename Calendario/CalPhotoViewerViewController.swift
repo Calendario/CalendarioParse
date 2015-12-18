@@ -26,20 +26,29 @@ class CalPhotoViewerViewController: UIViewController, UIScrollViewDelegate {
         
         
         
-        addBlur()
-
+      
         // Do any additional setup after loading the view.
         
         let defaults = NSUserDefaults.standardUserDefaults()
         let imagedata:NSData = defaults.objectForKey("image") as! NSData
         let image = UIImage(data: imagedata)
         
+        
+        
         self.scrollview.minimumZoomScale = 1.0
-        self.scrollview.maximumZoomScale = 6.0
+        self.scrollview.maximumZoomScale = 5.0
+        
         scrollview.delegate = self
         
+        addBlur()
         
-        Imageview.image = image
+        
+        Imageview.image = roatateImage(image!)
+        Imageview.contentMode = .ScaleAspectFit
+        
+        Imageview.transform = CGAffineTransformMakeScale(1.0, -1.0)
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,7 +58,7 @@ class CalPhotoViewerViewController: UIViewController, UIScrollViewDelegate {
     
     func addBlur()
     {
-        var blureffect = UIBlurEffect(style: .Dark)
+        var blureffect = UIBlurEffect(style: .Light)
         var blureffectview = UIVisualEffectView(effect: blureffect)
         blureffectview.frame = view.bounds
         blureffectview.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
@@ -59,12 +68,43 @@ class CalPhotoViewerViewController: UIViewController, UIScrollViewDelegate {
        
     }
     
-    @IBAction func CloseButton(sender: AnyObject) {
+    
+    func roatateImage(image:UIImage) -> UIImage
+    {
+        
+        let flipped = UIImage(CGImage: image.CGImage!, scale: image.scale, orientation: UIImageOrientation.RightMirrored)
+        let finalimage = flipped
+        
+        return finalimage
+        
+        
+    }
+    
+        @IBAction func CloseButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        return self.Imageview
+        var image = self.Imageview
+        
+        image.transform = CGAffineTransformMakeScale(1.0, -1.0)
+        
+        return image
+
+        
+       
+    }
+    
+    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        self.scrollview.scrollEnabled = false
+    }
+    
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        self.scrollview.scrollEnabled = false
+    }
+ 
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.All
     }
     
     
