@@ -46,6 +46,7 @@
 		E2B7D28A1BE86C9E002395F7 /* NSDate+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7D27B1BE86C9E002395F7 /* NSDate+FSExtension.m */; };
 		E2B7D28B1BE86C9E002395F7 /* NSString+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7D27D1BE86C9E002395F7 /* NSString+FSExtension.m */; };
 		E2B7D28C1BE86C9E002395F7 /* UIView+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7D27F1BE86C9E002395F7 /* UIView+FSExtension.m */; };
+		E2C2BC671C24731C00F810C9 /* TimeLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C2BC661C24731C00F810C9 /* TimeLineTableViewCell.swift */; };
 		E2C9223C1C1CB581004278E3 /* CalPhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C9223B1C1CB581004278E3 /* CalPhotoViewerViewController.swift */; };
 		E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8A1BCCC575003F4651 /* CLWeeklyCalendarView.m */; };
 		E2D09C901BCCC575003F4651 /* DailyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D09C8C1BCCC575003F4651 /* DailyCalendarView.m */; };
@@ -176,6 +177,7 @@
 		E2B7D27D1BE86C9E002395F7 /* NSString+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FSExtension.m"; sourceTree = "<group>"; };
 		E2B7D27E1BE86C9E002395F7 /* UIView+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FSExtension.h"; sourceTree = "<group>"; };
 		E2B7D27F1BE86C9E002395F7 /* UIView+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FSExtension.m"; sourceTree = "<group>"; };
+		E2C2BC661C24731C00F810C9 /* TimeLineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineTableViewCell.swift; sourceTree = "<group>"; };
 		E2C9223B1C1CB581004278E3 /* CalPhotoViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalPhotoViewerViewController.swift; sourceTree = "<group>"; };
 		E2D09C891BCCC575003F4651 /* CLWeeklyCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWeeklyCalendarView.h; sourceTree = "<group>"; };
 		E2D09C8A1BCCC575003F4651 /* CLWeeklyCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWeeklyCalendarView.m; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				E2FE964B1BDFE07D003BEDD2 /* CommentsViewController.swift */,
 				E2F3EF8F1BE1C75600F42433 /* CommentsTableViewCell.swift */,
 				E27ACC801BEDA64100503DD7 /* TimelineViewController.swift */,
+				E2C2BC661C24731C00F810C9 /* TimeLineTableViewCell.swift */,
 				E2EF8A801C02B9E80000A957 /* SeeMoreViewController.swift */,
 				E2C9223B1C1CB581004278E3 /* CalPhotoViewerViewController.swift */,
 			);
@@ -904,6 +907,7 @@
 				A26359E41BDA8342003F8FEB /* ResetPasswordViewController.swift in Sources */,
 				E2B7D28B1BE86C9E002395F7 /* NSString+FSExtension.m in Sources */,
 				E2B420EB1BD585F900984E7B /* CalHashTagDetector.m in Sources */,
+				E2C2BC671C24731C00F810C9 /* TimeLineTableViewCell.swift in Sources */,
 				E2EE565D1BF199F70064BA1D /* NSArray+Chameleon.m in Sources */,
 				E24DA5EF1C13E3AC00901DF0 /* LocationSearchTableViewController.swift in Sources */,
 				E2EE56621BF199F70064BA1D /* UILabel+Chameleon.m in Sources */,

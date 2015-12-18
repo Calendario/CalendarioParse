@@ -402,7 +402,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         var newdate = dateformatter.stringFromDate(date2)
 
         
-        if date2.timeIntervalSince1970 > date1.timeIntervalSince1970
+        if date2.timeIntervalSince1970 < date1.timeIntervalSince1970
         {
             print("Date1 has passed")
             

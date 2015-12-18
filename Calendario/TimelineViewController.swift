@@ -8,15 +8,25 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
+class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    var postsdata:NSMutableArray = NSMutableArray()
     
     @IBOutlet weak var calendar: FSCalendar!
+    
+    @IBOutlet weak var tableview: UITableView!
+    var user:String!
+    
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
         calendar.scrollDirection = .Vertical
         
         calendar.selectDate(NSDate())
+        
+        self.tableview.delegate = self
+        self.tableview.dataSource = self
 
         // Do any additional setup after loading the view.
     }
@@ -38,32 +48,57 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         var getdates:PFQuery = PFQuery(className: "StatusUpdate")
         getdates.whereKey("dateofevent", equalTo: newdate)
         print("passed date is \(String(newdate))")
+        getdates.includeKey("user")
+
         
+        postsdata.removeAllObjects()
         
         getdates.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
-            if error == nil
+                        if error == nil
             {
                 // print(objects!.count)
                 for object in objects!
                 {
                     let statusupdate:PFObject = object as! PFObject
-                    print(statusupdate.objectId)
+                    self.postsdata.addObject(statusupdate)
                     
-
+                
+                
+                    
+                    
+                }
+                
+                let array:NSArray = self.postsdata.reverseObjectEnumerator().allObjects
+                self.postsdata = NSMutableArray(array: array)
+                self.tableview.reloadData()
+                
     }
+        }
+    }
+
+
+
     
 
-    /*
-    // MARK: - Navigation
+    
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return postsdata.count
     }
-    */
-
-}
-}
-}
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableview.dequeueReusableCellWithIdentifier("TimelineCell") as! TimeLineTableViewCell
+        let status:PFObject = self.postsdata.objectAtIndex(indexPath.row) as! PFObject
+        cell.userLabel.text = status.valueForKey("user")?.username!
+        cell.tenseLabel.text = status.valueForKey("tense") as! String
+        cell.updateTextView.text = status.valueForKey("updatetext") as! String
+        
+        return cell
+        
+    }
 }
