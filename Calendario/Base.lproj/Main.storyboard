@@ -551,14 +551,9 @@
                         <viewControllerLayoutGuide type="bottom" id="pwH-dF-yIT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7xN-Kh-pjT">
-                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write Comment here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A2i-0L-BB3">
-                                <rect key="frame" x="5" y="556" width="352" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="206" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KJI-D7-2eT">
                                 <rect key="frame" x="-12" y="7" width="387" height="494"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -608,22 +603,38 @@
                                     <outlet property="delegate" destination="7xN-Kh-pjT" id="sOz-or-Xis"/>
                                 </connections>
                             </tableView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write Comment here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A2i-0L-BB3">
+                                <rect key="frame" x="11" y="515" width="341" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="KJI-D7-2eT" firstAttribute="leading" secondItem="7xN-Kh-pjT" secondAttribute="leadingMargin" constant="-32" id="D4B-4c-r2j"/>
                             <constraint firstAttribute="trailing" secondItem="KJI-D7-2eT" secondAttribute="trailing" id="Ee1-PS-uXq"/>
-                            <constraint firstItem="A2i-0L-BB3" firstAttribute="leading" secondItem="7xN-Kh-pjT" secondAttribute="leadingMargin" constant="-11" id="Elg-xW-QUf"/>
+                            <constraint firstItem="A2i-0L-BB3" firstAttribute="leading" secondItem="7xN-Kh-pjT" secondAttribute="leadingMargin" constant="-9" id="Elg-xW-QUf"/>
                             <constraint firstItem="KJI-D7-2eT" firstAttribute="top" secondItem="7xN-Kh-pjT" secondAttribute="topMargin" constant="7" id="VJx-ch-2CZ"/>
-                            <constraint firstItem="pwH-dF-yIT" firstAttribute="top" secondItem="A2i-0L-BB3" secondAttribute="bottom" constant="37" id="glh-ar-Zg2"/>
-                            <constraint firstItem="A2i-0L-BB3" firstAttribute="top" secondItem="KJI-D7-2eT" secondAttribute="bottom" constant="55" id="mAz-0s-4eg"/>
+                            <constraint firstItem="pwH-dF-yIT" firstAttribute="top" secondItem="A2i-0L-BB3" secondAttribute="bottom" constant="78" id="glh-ar-Zg2"/>
+                            <constraint firstItem="A2i-0L-BB3" firstAttribute="top" secondItem="KJI-D7-2eT" secondAttribute="bottom" constant="14" id="mAz-0s-4eg"/>
                             <constraint firstItem="A2i-0L-BB3" firstAttribute="centerX" secondItem="KJI-D7-2eT" secondAttribute="centerX" id="sDU-vv-XGF"/>
                         </constraints>
                     </view>
-                    <toolbarItems/>
+                    <toolbarItems>
+                        <barButtonItem title="Send" id="qLu-E1-tph">
+                            <connections>
+                                <action selector="Sendtapped:" destination="F2z-l2-38J" id="dJ1-q0-q9Y"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Kl2-IQ-cfd"/>
+                        <barButtonItem title="Back" id="ttY-Qb-aem"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="backbutton" destination="ttY-Qb-aem" id="KaM-e6-aig"/>
                         <outlet property="commentTextView" destination="A2i-0L-BB3" id="5eD-19-JJG"/>
+                        <outlet property="sendbutton" destination="qLu-E1-tph" id="7qP-oE-gSa"/>
                         <outlet property="tableView" destination="KJI-D7-2eT" id="PcC-gR-Ofo"/>
                     </connections>
                 </viewController>
@@ -675,6 +686,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I2l-HT-BTp">
                                                     <rect key="frame" x="17" y="107" width="47" height="47"/>
                                                     <state key="normal" image="comment"/>
+                                                    <connections>
+                                                        <segue destination="F2z-l2-38J" kind="show" identifier="timelineComments" id="sk0-vm-fWU"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="tense" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4b-BX-epB">
                                                     <rect key="frame" x="298" y="9" width="43" height="22"/>
@@ -722,11 +736,12 @@
                     <connections>
                         <outlet property="calendar" destination="Dkp-WD-e0g" id="3Cj-9w-MEt"/>
                         <outlet property="tableview" destination="ZJV-K3-Tez" id="ck8-GR-r8o"/>
+                        <segue destination="nhc-PG-guG" kind="show" id="Q92-9R-gKB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f2d-U8-4Lj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2600.5" y="433.5"/>
+            <point key="canvasLocation" x="2555.5" y="420.5"/>
         </scene>
         <!--Locaton View Controller-->
         <scene sceneID="qRZ-YW-SAd">
@@ -3751,6 +3766,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Urg-qd-jmS"/>
-        <segue reference="6lO-Zx-iIM"/>
+        <segue reference="sk0-vm-fWU"/>
+        <segue reference="Q92-9R-gKB"/>
     </inferredMetricsTieBreakers>
 </document>

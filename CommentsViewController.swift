@@ -28,6 +28,9 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+      self.navigationItem.rightBarButtonItem = sendbutton
+
 
         // Do any additional setup after loading the view.
         
