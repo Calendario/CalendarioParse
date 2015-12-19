@@ -37,6 +37,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         let defaults = NSUserDefaults.standardUserDefaults()
         
         
+                
+        
         savedobjectID = defaults.objectForKey("objectid") as! String
         
         print(savedobjectID!)
@@ -45,6 +47,25 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         LoadCommentData()
+        
+        
+        let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 53))
+        navigationbar.backgroundColor = UIColor.whiteColor()
+        navigationbar.delegate = self
+        navigationbar.barTintColor = UIColor(hexString: "#2c9560")
+        navigationbar.tintColor = UIColor.whiteColor()
+        
+        let navitems = UINavigationItem()
+        
+        navitems.rightBarButtonItem = sendbutton
+        navitems.leftBarButtonItem = backbutton
+        
+        // set nav items in nav bar
+        navigationbar.items = [navitems]
+        self.view.addSubview(navigationbar)
+        
+        
+
     }
 
     override func didReceiveMemoryWarning() {

@@ -18,11 +18,13 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     var currentObjectid:String!
     
+     let likebuttonfilled = UIImage(named: "like button filled")
+    
   
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        calendar.scrollDirection = .Vertical
+        calendar.scrollDirection = .Horizontal
         
         calendar.selectDate(NSDate())
         
@@ -31,9 +33,17 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        
+       
+
 
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -101,6 +111,11 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
             }
         }
     }
+    
+    
+        
+        
+    
 
 
 
@@ -124,6 +139,13 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         cell.tenseLabel.text = status.valueForKey("tense") as! String
         cell.updateTextView.text = status.valueForKey("updatetext") as! String
         currentObjectid = status.objectId
+        
+        var likes = status.valueForKey("likes") as? Int
+        
+        if likes >= 1
+        {
+            cell.likeButton.setImage(likebuttonfilled, forState: .Normal)
+        }
         
         cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
         cell.profileimageview.clipsToBounds = true

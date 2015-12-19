@@ -616,6 +616,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         {
             let vc = segue.destinationViewController as! CommentsViewController
             vc.savedobjectID = currentobjectID
+            
         }
     }
 
