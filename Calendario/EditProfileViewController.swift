@@ -28,6 +28,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var backButton: UIBarButtonItem!
+    @IBOutlet weak var privateSwitch: UISwitch!
     
     // Store the selected profile image data.
     var imageData : NSData!
@@ -202,6 +203,10 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         }
     }
     
+    @IBAction func switchChangeState(sender: UISwitch) {
+        editSavedCheck = false
+    }
+    
     // View Did Load method.
     
     override func viewDidLoad() {
@@ -280,6 +285,10 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         self.userFullName.text = currentUser?.objectForKey("fullName") as? String
         self.userDescription.text = currentUser?.objectForKey("userBio") as? String
         self.userEmail.text = currentUser?.objectForKey("email") as? String
+        let lockCheck = currentUser?.objectForKey("privateProfile") as? Bool
+        
+        // Update the private profile switch.
+        privateSwitch.setOn(lockCheck!, animated: true)
         
         // Update the description placeholder view.
         setPlaceholderAlpha()
@@ -464,6 +473,16 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         currentUser["email"] = self.userEmail.text
         currentUser["userBio"] = self.userDescription.text
         currentUser["website"] = self.userWebsite.text
+        
+        // Set the private profile property.
+        
+        if (privateSwitch.on == true) {
+            currentUser["privateProfile"] = true
+        }
+        
+        else {
+            currentUser["privateProfile"] = false
+        }
         
         // Store current username is NSUserDefults so it can be used later to follow a user.
         let defaults = NSUserDefaults.standardUserDefaults()

@@ -41,6 +41,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
     @IBOutlet weak var tosButton: UIButton!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var privateSwitch: UISwitch!
     
     // Store the selected profile image data.
     var imageData : NSData!
@@ -243,12 +244,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         // Calculate the appropriate scroll height.
         var scrollHeight: CGFloat = 0.0
         
-        if (self.profileScroll.bounds.height > 780) {
+        if (self.profileScroll.bounds.height > 880) {
             scrollHeight = self.profileScroll.bounds.height
         }
         
         else {
-            scrollHeight = 780
+            scrollHeight = 880
         }
         
         // Setup the profile scroll view.
@@ -339,6 +340,16 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         newUser["userBio"] = self.descField.text
         newUser["website"] = self.webField.text
         newUser["fullName"] = self.fullNameField.text
+        
+        // Set the private profile property.
+        
+        if (privateSwitch.on == true) {
+            newUser["privateProfile"] = true
+        }
+            
+        else {
+            newUser["privateProfile"] = false
+        }
         
         // Set the user profile picture if one has been 
         // set otherwise upload the standard profile picture.
