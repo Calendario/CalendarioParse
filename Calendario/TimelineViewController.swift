@@ -20,9 +20,10 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
      let likebuttonfilled = UIImage(named: "like button filled")
     
-    var eventsarray = [String]()
+    var dateofevent:String!
     
-     var image: UIImage!
+    var b:Bool = false
+    var eventsarray = [String]()
     
     
     
@@ -118,10 +119,10 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         }
     }
     
-    
-    func calendar(calendar: FSCalendar!, imageForDate date: NSDate!) -> UIImage! {
+    func calendar(calendar: FSCalendar!, hasEventForDate date: NSDate!) -> Bool {
+        
         var eventdate:String!
-               let dateformatter = NSDateFormatter()
+        let dateformatter = NSDateFormatter()
         dateformatter.dateFormat = "MM/dd/yy"
         var newdate = dateformatter.stringFromDate(date)
         var caldate = dateformatter.stringFromDate(calendar.selectedDate)
@@ -145,10 +146,16 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                         if self.eventsarray.contains(newdate)
                         {
                             print("contained")
+                            self.b = true
                         }
-
+                        else
                         
-                    
+                        {
+                           self.b = false
+                        }
+                        
+                        
+                        
                     }
                     
                     
@@ -157,24 +164,12 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                     
                     
                 }
-               
+                
             }
         }
-        
-        
-     
-        return UIImage(named: "bluecircle")
+        return b.boolValue
         
     }
-
-    
-    
-    
-    
-    
-        
-        
-    
     
 
     
@@ -203,6 +198,9 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         cell.tenseLabel.text = status.valueForKey("tense") as! String
         cell.updateTextView.text = status.valueForKey("updatetext") as! String
         currentObjectid = status.objectId
+          dateofevent = status.valueForKey("dateofevent") as! String
+        
+
         
         var likes = status.valueForKey("likes") as? Int
         
