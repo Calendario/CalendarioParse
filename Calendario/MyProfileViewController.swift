@@ -29,8 +29,7 @@ class MyProfileViewController : UIViewController {
     @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var blockedBlurView: UIView!
     @IBOutlet weak var blockedViewDesc: UITextView!
-    
-    @IBOutlet weak var FollowButton: UIButton!
+    @IBOutlet weak var privateView: UIView!
     
     // Follow method property
     var FollowObject = FollowHelper()
@@ -52,6 +51,12 @@ class MyProfileViewController : UIViewController {
     // User account data.
     var currentUser:PFUser!
     
+    // Private profile check.
+    var privateCheck:Bool!
+    
+    // Following passed in user check.
+    var followingCheck:Bool!
+    
     // Setup the on screen button actions.
     
     @IBAction func editProfile(sender: UIButton) {
@@ -62,7 +67,7 @@ class MyProfileViewController : UIViewController {
         // Open the appropriate section depending
         // on whether a user object has been passed in.
         
-        if (passedUser == nil) {
+        if ((passedUser == nil) || ((passedUser != nil) && (passedUser.username! == "\(PFUser.currentUser()!.username!)"))) {
             
             // No user passed in - edit current user button.
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -75,7 +80,49 @@ class MyProfileViewController : UIViewController {
             if (userID != nil) {
                 
                 // User passed in - follow/unfollow user button.
+                let defaults = NSUserDefaults.standardUserDefaults()
+                let usertobefollowed = defaults.objectForKey("username") as! String
+                
+                if (followingCheck == true) {
+                    
+                    // Unfollow the passed in user.
+                    FollowObject.RemoveFollowingRelationshipFromUser((PFUser.currentUser()?.username)!, toUser: usertobefollowed)
+                    
+                    // Set the following state to false.
+                    followingCheck = false
+                    
+                    // Set the edit button text.
+                    self.editButton.setTitle("Follow \(self.userID)", forState: UIControlState.Normal)
+                    
+                    // Alert the user of the change.
+                    self.displayAlert("Success", alertMessage: "You are no longer following @\(self.userID).")
+                    
+                    // Show the private profile view 
+                    // if the passed in user is private.
+                    
+                    if (privateCheck == true) {
+                        self.privateView.alpha = 1.0
+                    }
                 }
+                
+                else {
+                    
+                    // Follow the passed in user.
+                    FollowObject.addFollowingRelationshipFromUser((PFUser.currentUser()?.username)!, toUser: usertobefollowed)
+                    
+                    // Set the following check state to true.
+                    followingCheck = true
+                    
+                    // Set the edit button text.
+                    self.editButton.setTitle("Following \(self.userID)", forState: UIControlState.Normal)
+                    
+                    // Alert the user of the change.
+                    self.displayAlert("Success", alertMessage: "You are now following @\(self.userID).")
+                    
+                    // Hide the private profile view.
+                    self.privateView.alpha = 0.0
+                }
+            }
             
             else {
                 self.displayAlert("Error", alertMessage: "The user follow request has failed.")
@@ -111,7 +158,7 @@ class MyProfileViewController : UIViewController {
         // If the current user is being displayed then show the user 
         // settings menu otherwise display the more action sheet.
         
-        if (passedUser == nil) {
+        if ((passedUser == nil) || ((passedUser != nil) && (passedUser.username! == "\(PFUser.currentUser()!.username!)"))) {
             
             // No user passed in - show the settings menu.
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -300,6 +347,9 @@ class MyProfileViewController : UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        // Notify the user that the app is loading.
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        
         // By default the more button is diabled until
         // we have downloaded the appropriate user data.
         settingsButton.enabled = false
@@ -311,7 +361,7 @@ class MyProfileViewController : UIViewController {
         // Check to see if a user is being passed into the
         // view controller and run the appropriate actions.
         
-        if (passedUser == nil) {
+        if ((passedUser == nil) || ((passedUser != nil) && (passedUser.username! == "\(PFUser.currentUser()!.username!)"))) {
             
             // Allow scrolling access.
             self.profileScroll.userInteractionEnabled = true
@@ -319,9 +369,20 @@ class MyProfileViewController : UIViewController {
             // Show the currently logged in user.
             currentUser = PFUser.currentUser()
             
-            // Hide the back button.
-            backButton.image = nil
-            backButton.enabled = false
+            // Hide the back button if no
+            // user has been passed in.
+            
+            if (passedUser == nil) {
+                
+                backButton.image = nil
+                backButton.enabled = false
+            }
+            
+            else {
+                
+                backButton.image = UIImage(named: "left_icon.png")
+                backButton.enabled = true
+            }
             
             // Set the edit button text.
             self.editButton.setTitle("Edit Profile", forState: UIControlState.Normal)
@@ -375,6 +436,9 @@ class MyProfileViewController : UIViewController {
                                     
                                     // Allow access to the more button.
                                     self.settingsButton.enabled = true
+                                    
+                                    // Allow scrolling access.
+                                    self.profileScroll.userInteractionEnabled = true
                                 }
                             }
                         }
@@ -385,24 +449,63 @@ class MyProfileViewController : UIViewController {
             // Show the user being passed into the view.
             currentUser = passedUser
             
-            // Set the back button image and display it.
-            backButton.image = UIImage(named: "left_icon.png")
-            backButton.enabled = true
-            
             // Get the username string.
             userID = currentUser.username! as String
             
-            // Set the edit button text.
-            self.editButton.setTitle("Follow \(userID)", forState: UIControlState.Normal)
+            // Check if the user is a private account.
+            privateCheck = currentUser?.objectForKey("privateProfile") as? Bool
+            
+            // Check if the logged in user is following
+            // this passed in user object or not.
+            var queryFollowing = PFQuery(className: "Followers")
+            queryFollowing.whereKey("fromUser", equalTo: (PFUser.currentUser()?.username)!)
+            queryFollowing.whereKey("toUser", equalTo: passedUser.username!)
+            queryFollowing.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+                
+                if error == nil {
+                    
+                    if (objects?.count > 0) {
+                        
+                        // The logged in user is following
+                        // the passed in PFUser account.
+                        self.followingCheck = true
+                        
+                        // Set the edit button text.
+                        self.editButton.setTitle("Following \(self.userID)", forState: UIControlState.Normal)
+                    }
+                    
+                    else {
+                        
+                        // The logged in user is NOT following
+                        // the passed in PFUser account.
+                        self.followingCheck = false
+                        
+                        // Set the edit button text.
+                        self.editButton.setTitle("Follow \(self.userID)", forState: UIControlState.Normal)
+                        
+                        // If the user is private then show
+                        // the private view lock image/text.
+                        
+                        if (self.privateCheck == true) {
+                            self.privateView.alpha = 1.0
+                        }
+                        
+                        else {
+                            self.privateView.alpha = 0.0
+                        }
+                    }
+                }
+            }
+            
+            // Set the back button image and display it.
+            backButton.image = UIImage(named: "left_icon.png")
+            backButton.enabled = true
             
             // Change the setting button to
             // the more actions button.
             settingsButton.image = nil
             settingsButton.title = "More"
         }
-        
-        // Notify the user that the app is loading.
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
         // Add the edit button animation methods.
         self.editButton.addTarget(self, action: "makeEditSmaller", forControlEvents: .TouchDown)
@@ -617,34 +720,20 @@ class MyProfileViewController : UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // Follow methods.
-       @IBAction func followTapped(sender: AnyObject) {
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-      var usertobefollowed = defaults.objectForKey("username") as! String
-        FollowObject.addFollowingRelationshipFromUser((PFUser.currentUser()?.username)!, toUser: usertobefollowed)
-      
-        
-                print("followed")
-        
-    }
-    
     // query followes class by user method may not be used
     
-    func qureyfollwersbycurrentUser(currentuser:PFUser)
-    {
-        
+    func qureyfollwersbycurrentUser(currentuser:PFUser) {
+    
         var query = PFQuery(className: "Followers")
         query.whereKey("fromUser", equalTo: currentuser)
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if error == nil
-            {
+            
+            if error == nil {
                 print("this user has followers")
                 
-                if let objects = objects as [PFObject]!
-                {
-                    for object in objects
-                    {
+                if let objects = objects as [PFObject]! {
+                    
+                    for object in objects {
                         print(object.objectForKey("toUser"))
                     }
                     
