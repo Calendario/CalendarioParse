@@ -20,6 +20,12 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
      let likebuttonfilled = UIImage(named: "like button filled")
     
+    var eventsarray = [String]()
+    
+     var image: UIImage!
+    
+    
+    
   
 
     override func viewDidLoad() {
@@ -113,13 +119,71 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
     
     
+    func calendar(calendar: FSCalendar!, imageForDate date: NSDate!) -> UIImage! {
+        var eventdate:String!
+               let dateformatter = NSDateFormatter()
+        dateformatter.dateFormat = "MM/dd/yy"
+        var newdate = dateformatter.stringFromDate(date)
+        var caldate = dateformatter.stringFromDate(calendar.selectedDate)
+        var query = PFQuery(className: "StatusUpdate")
+        query.whereKey("dateofevent", equalTo: newdate)
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil
+            {
+                if let objects = objects
+                {
+                    for object in objects
+                    {
+                        //print(object.valueForKey("dateofevent") as! String)
+                        
+                        eventdate = object.valueForKey("dateofevent") as! String
+                        print(eventdate)
+                        
+                        self.eventsarray.append(eventdate)
+                        print(newdate)
+                        
+                        if self.eventsarray.contains(newdate)
+                        {
+                            print("contained")
+                        }
+
+                        
+                    
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+               
+            }
+        }
         
+        
+     
+        return UIImage(named: "bluecircle")
+        
+    }
+
+    
+    
+    
+    
+    
+        
+        
+    
+    
+
+    
         
     
 
 
 
-    
+
 
     
 
