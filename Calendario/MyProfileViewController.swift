@@ -716,10 +716,8 @@ class MyProfileViewController : UIViewController {
     // follow timeline method
     
     
-    @IBAction func FollowTimelinepressed(sender: AnyObject) {
-        GotoFollowTimeline()
-        
-    }
+    
+    
     
     func GotoFollowTimeline()
     {

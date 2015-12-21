@@ -766,35 +766,6 @@
             </objects>
             <point key="canvasLocation" x="2647.5" y="467.5"/>
         </scene>
-        <!--FollowTimeLine-->
-        <scene sceneID="Z2G-lZ-QvH">
-            <objects>
-                <tableViewController storyboardIdentifier="followtimeline" title="FollowTimeLine" id="Rhu-dg-KFM" customClass="FollowTableViewController" customModule="Calendario" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="V2k-UU-CaM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="S5n-qr-jyj">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S5n-qr-jyj" id="wlw-1q-fVr">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Rhu-dg-KFM" id="H4m-9d-3XF"/>
-                            <outlet property="delegate" destination="Rhu-dg-KFM" id="nal-Ny-hef"/>
-                        </connections>
-                    </tableView>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bJY-fi-K3O" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3151" y="507"/>
-        </scene>
         <!--Locaton View Controller-->
         <scene sceneID="qRZ-YW-SAd">
             <objects>
@@ -2641,13 +2612,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             <constraint firstItem="txi-P7-31H" firstAttribute="top" secondItem="WyR-tI-l4h" secondAttribute="top" constant="7" id="RtF-T8-haN"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jX1-jd-Grq">
-                                        <rect key="frame" x="134" y="175" width="106" height="30"/>
-                                        <state key="normal" title="Follow Timeline"/>
-                                        <connections>
-                                            <action selector="FollowTimelinepressed:" destination="EL5-7o-osE" eventType="touchUpInside" id="xNP-Kb-wfN"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="WyR-tI-l4h" firstAttribute="trailing" secondItem="F8F-aw-tyq" secondAttribute="trailing" id="2Am-aP-YaF"/>
