@@ -713,6 +713,22 @@ class MyProfileViewController : UIViewController {
         }
     }
     
+    // follow timeline method
+    
+    
+    @IBAction func FollowTimelinepressed(sender: AnyObject) {
+        GotoFollowTimeline()
+        
+    }
+    
+    func GotoFollowTimeline()
+    {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        var FTVC = sb.instantiateViewControllerWithIdentifier("followtimeline")
+        let NC = UINavigationController(rootViewController: FTVC)
+        self.presentViewController(NC, animated: true, completion: nil)
+    }
+    
     // Other methods.
     
     override func didReceiveMemoryWarning() {

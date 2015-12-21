@@ -22,6 +22,7 @@
 		E17180521C21389600D591FA /* notificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17180511C21389600D591FA /* notificationsViewController.m */; };
 		E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E187B5F51BD3368400845C2F /* SearchViewController.m */; };
 		E1D759AC1C1243160017B53F /* locationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D759AB1C1243160017B53F /* locationViewController.m */; };
+		E22159331C27AD8B005FBC34 /* FollowTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22159321C27AD8B005FBC34 /* FollowTableViewController.swift */; };
 		E24DA5E91C1154BE00901DF0 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E24DA5E81C1154BE00901DF0 /* Podfile */; };
 		E24DA5EB1C1156F900901DF0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24DA5EA1C1156F900901DF0 /* Social.framework */; };
 		E24DA5ED1C11579E00901DF0 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E24DA5EC1C11579E00901DF0 /* libstdc++.6.0.9.tbd */; };
@@ -138,6 +139,7 @@
 		E187B5F51BD3368400845C2F /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		E1D759AA1C1243160017B53F /* locationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = locationViewController.h; sourceTree = "<group>"; };
 		E1D759AB1C1243160017B53F /* locationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = locationViewController.m; sourceTree = "<group>"; };
+		E22159321C27AD8B005FBC34 /* FollowTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowTableViewController.swift; sourceTree = "<group>"; };
 		E24DA5E81C1154BE00901DF0 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E24DA5EA1C1156F900901DF0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		E24DA5EC1C11579E00901DF0 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
@@ -372,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				E2E0D70B1BC9950800662E70 /* Main.storyboard */,
+				E22159321C27AD8B005FBC34 /* FollowTableViewController.swift */,
 			);
 			name = "Main UI";
 			sourceTree = "<group>";
@@ -910,6 +913,7 @@
 				E2C2BC671C24731C00F810C9 /* TimeLineTableViewCell.swift in Sources */,
 				E2EE565D1BF199F70064BA1D /* NSArray+Chameleon.m in Sources */,
 				E24DA5EF1C13E3AC00901DF0 /* LocationSearchTableViewController.swift in Sources */,
+				E22159331C27AD8B005FBC34 /* FollowTableViewController.swift in Sources */,
 				E2EE56621BF199F70064BA1D /* UILabel+Chameleon.m in Sources */,
 				E2EE56631BF199F70064BA1D /* UINavigationController+Chameleon.m in Sources */,
 				E2B7D28C1BE86C9E002395F7 /* UIView+FSExtension.m in Sources */,

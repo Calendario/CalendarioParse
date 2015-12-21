@@ -146,6 +146,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                         if self.eventsarray.contains(newdate)
                         {
                             print("contained")
+                            calendar.selectDate(dateformatter.dateFromString(newdate))
                             self.b = true
                         }
                         else
