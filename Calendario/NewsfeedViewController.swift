@@ -398,7 +398,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     func isDatePassed(date1:NSDate, date2:NSDate, ParseID: String)
     {
         let dateformatter = NSDateFormatter()
-        dateformatter.dateFormat = "MM/dd/yy"
+        dateformatter.dateFormat = "MM/d/yy"
         var newdate = dateformatter.stringFromDate(date2)
 
         

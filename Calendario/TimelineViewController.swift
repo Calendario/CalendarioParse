@@ -62,7 +62,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         print("the date is \(date)")
         
         let dateformatter = NSDateFormatter()
-        dateformatter.dateFormat = "MM/dd/yy"
+        dateformatter.dateFormat = "MM/d/yy"
         var newdate = dateformatter.stringFromDate(date)
         
         
@@ -125,7 +125,6 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         let dateformatter = NSDateFormatter()
         dateformatter.dateFormat = "MM/dd/yy"
         var newdate = dateformatter.stringFromDate(date)
-        var caldate = dateformatter.stringFromDate(calendar.selectedDate)
         var query = PFQuery(className: "StatusUpdate")
         query.whereKey("dateofevent", equalTo: newdate)
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
@@ -140,35 +139,30 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                         eventdate = object.valueForKey("dateofevent") as! String
                         print(eventdate)
                         
-                        self.eventsarray.append(eventdate)
-                        print(newdate)
                         
-                        if self.eventsarray.contains(newdate)
+                        if dateformatter.dateFromString(eventdate) == date
                         {
-                            print("contained")
-                            calendar.selectDate(dateformatter.dateFromString(newdate))
                             self.b = true
+                            print(self.b)
                         }
-                        else
-                        
-                        {
-                           self.b = false
-                        }
+                            
+                        self.b = true
+                    
                         
                         
                         
                     }
                     
-                    
-                    
+                }
+                
                     
                     
                     
                 }
-                
+                print(self.b)
             }
-        }
-        return b.boolValue
+        
+        return b
         
     }
     
