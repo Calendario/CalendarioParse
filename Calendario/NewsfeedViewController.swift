@@ -398,13 +398,13 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     func isDatePassed(date1:NSDate, date2:NSDate, ParseID: String)
     {
         let dateformatter = NSDateFormatter()
-        dateformatter.dateFormat = "MM/d/yy"
+        dateformatter.dateFormat = "MM/dd/yy"
         var newdate = dateformatter.stringFromDate(date2)
 
         
-        if date2.timeIntervalSince1970 < date1.timeIntervalSince1970
+        if date1.timeIntervalSince1970 < date2.timeIntervalSince1970
         {
-            print("Date1 has passed")
+            print("Date2 has passed")
             
             var query = PFQuery(className: "StatusUpdate")
             query.getObjectInBackgroundWithId(ParseID, block: { (updates:PFObject?, error:NSError?) -> Void in
@@ -424,6 +424,13 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                         aobject.saveInBackground()
                      
                         
+                    }
+                        
+                    if aobject.objectForKey("dateofevent") as! String > newdate
+                    {
+                        print("going tense")
+                        aobject["tense"] = "Going"
+                        aobject.saveInBackground()
                     }
                     
                         
