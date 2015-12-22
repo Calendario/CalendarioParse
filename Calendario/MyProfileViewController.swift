@@ -37,8 +37,6 @@ class MyProfileViewController : UIViewController {
     // Do NOT change the following line of
     // code as it MUST be set to PUBLIC.
     public var passedUser:PFUser!
-    var userID:String!
-    var userString:String!
     
     // User block check.
     // 1 = You blocked the user.
@@ -48,14 +46,8 @@ class MyProfileViewController : UIViewController {
     // User website link.
     var userWebsiteLink:String!
     
-    // User account data.
-    var currentUser:PFUser!
-    
     // Private profile check.
     var privateCheck:Bool!
-    
-    // Following passed in user check.
-    var followingCheck:Bool!
     
     // Setup the on screen button actions.
     
@@ -77,56 +69,8 @@ class MyProfileViewController : UIViewController {
             
         else {
             
-            if (userID != nil) {
-                
-                // User passed in - follow/unfollow user button.
-                let defaults = NSUserDefaults.standardUserDefaults()
-                let usertobefollowed = defaults.objectForKey("username") as! String
-                
-                if (followingCheck == true) {
-                    
-                    // Unfollow the passed in user.
-                    FollowObject.RemoveFollowingRelationshipFromUser((PFUser.currentUser()?.username)!, toUser: usertobefollowed)
-                    
-                    // Set the following state to false.
-                    followingCheck = false
-                    
-                    // Set the edit button text.
-                    self.editButton.setTitle("Follow \(self.userID)", forState: UIControlState.Normal)
-                    
-                    // Alert the user of the change.
-                    self.displayAlert("Success", alertMessage: "You are no longer following @\(self.userID).")
-                    
-                    // Show the private profile view 
-                    // if the passed in user is private.
-                    
-                    if (privateCheck == true) {
-                        self.privateView.alpha = 1.0
-                    }
-                }
-                
-                else {
-                    
-                    // Follow the passed in user.
-                    FollowObject.addFollowingRelationshipFromUser((PFUser.currentUser()?.username)!, toUser: usertobefollowed)
-                    
-                    // Set the following check state to true.
-                    followingCheck = true
-                    
-                    // Set the edit button text.
-                    self.editButton.setTitle("Following \(self.userID)", forState: UIControlState.Normal)
-                    
-                    // Alert the user of the change.
-                    self.displayAlert("Success", alertMessage: "You are now following @\(self.userID).")
-                    
-                    // Hide the private profile view.
-                    self.privateView.alpha = 0.0
-                }
-            }
-            
-            else {
-                self.displayAlert("Error", alertMessage: "The user follow request has failed.")
-            }
+            // Follow/unfollow the passed in user.
+            self.followOrUnfolowUser(passedUser)
         }
     }
     
@@ -168,162 +112,155 @@ class MyProfileViewController : UIViewController {
             
         else {
             
-            if (userID != nil) {
+            var alertDesc:String!
+            var buttonOneTitle:String!
+            
+            if (blockCheck == 1) {
                 
-                var alertDesc:String!
-                var buttonOneTitle:String!
+                alertDesc = "Unblock or report the displayed user account @(\(passedUser.username!))."
+                buttonOneTitle = "Unblock User"
+            }
                 
-                if (blockCheck == 1) {
-                    
-                    alertDesc = "Unblock or report the displayed user account (\(userString))."
-                    buttonOneTitle = "Unblock User"
-                }
-                    
-                else {
-                    
-                    alertDesc = "Block or report the displayed user account (\(userString))."
-                    buttonOneTitle = "Block User"
-                }
+            else {
                 
-                // User passed in - show the more menu.
-                let moreMenu = UIAlertController(title: "Options", message: alertDesc, preferredStyle: .ActionSheet)
+                alertDesc = "Block or report the displayed user account @(\(passedUser.username!))."
+                buttonOneTitle = "Block User"
+            }
+            
+            // User passed in - show the more menu.
+            let moreMenu = UIAlertController(title: "Options", message: alertDesc, preferredStyle: .ActionSheet)
+            
+            // Setup the alert actions.
+            let blockUser = { (action:UIAlertAction!) -> Void in
                 
-                // Setup the alert actions.
-                let blockUser = { (action:UIAlertAction!) -> Void in
+                // Check if the user has already been blocked
+                // and then show the appropriate actions.
+                var query = PFQuery(className: "blockUser")
+                query.whereKey("userBlock", equalTo: self.passedUser)
+                query.whereKey("userBlocking", equalTo: PFUser.currentUser()!)
+                query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
                     
-                    // Check if the user has already been blocked
-                    // and then show the appropriate actions.
-                    var query = PFQuery(className: "blockUser")
-                    query.whereKey("userBlock", equalTo: self.passedUser)
-                    query.whereKey("userBlocking", equalTo: PFUser.currentUser()!)
-                    query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+                    if (error == nil) {
                         
-                        if (error == nil) {
+                        if (objects?.count > 0) {
                             
-                            if (objects?.count > 0) {
-                                
-                                // The user has already been blocked.
-                                let unblockAlert = UIAlertController(title: "Unblock user?", message: "You have already blocked this user. Would you like to unblock this user?", preferredStyle: .Alert)
-                                
-                                // Setup the alert actions.
-                                let unblockUser = { (action:UIAlertAction!) -> Void in
-                                    
-                                    // As all users are unique and there is only a 1-1
-                                    // relationship in each user block request we only 
-                                    // ever need to delete the first object from the array.
-                                    let objects = objects as [PFObject]!
-                                    
-                                    // Submit the unblock request.
-                                    objects[0].deleteInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
-                                        
-                                        if (success) {
-                                            
-                                            // Set to check to the default.
-                                            self.blockCheck = 0
-                                            
-                                            // The user has been unblocked.
-                                            self.blockedBlurView.alpha = 0.0
-                                        }
-                                        
-                                        else {
-                                            
-                                            // An error has occured.
-                                            self.displayAlert("Error", alertMessage: "\(error?.description)")
-                                        }
-                                    })
-                                }
-                                
-                                // Setup the alert buttons.
-                                let yes = UIAlertAction(title: "Yes", style: .Default, handler: unblockUser)
-                                let cancel = UIAlertAction(title: "No", style: .Default, handler: nil)
-                                
-                                // Add the actions to the alert.
-                                unblockAlert.addAction(yes)
-                                unblockAlert.addAction(cancel)
-                                
-                                // Present the alert on screen.
-                                self.presentViewController(unblockAlert, animated: true, completion: nil)
-                            }
+                            // The user has already been blocked.
+                            let unblockAlert = UIAlertController(title: "Unblock user?", message: "You have already blocked this user. Would you like to unblock this user?", preferredStyle: .Alert)
                             
-                            else {
+                            // Setup the alert actions.
+                            let unblockUser = { (action:UIAlertAction!) -> Void in
                                 
-                                // The user isn't currently blocked
-                                // therefore proceed with blocking.
+                                // As all users are unique and there is only a 1-1
+                                // relationship in each user block request we only
+                                // ever need to delete the first object from the array.
+                                let objects = objects as [PFObject]!
                                 
-                                // Set the user to block and the
-                                // user which is blocking that user.
-                                var blockUserData = PFObject(className:"blockUser")
-                                blockUserData["userBlock"] = self.passedUser
-                                blockUserData["userBlocking"] = PFUser.currentUser()
-                                
-                                // Submit the block request.
-                                blockUserData.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                                    
-                                    // Check if the user block data
-                                    // request was succesful or not.
+                                // Submit the unblock request.
+                                objects[0].deleteInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
                                     
                                     if (success) {
                                         
-                                        // The user has been blocked.
-                                        let blockUpdate = UIAlertController(title: "Success", message: "The user has been blocked.", preferredStyle: .Alert)
+                                        // Set to check to the default.
+                                        self.blockCheck = 0
                                         
-                                        // Setup the alert actions.
-                                        let close = { (action:UIAlertAction!) -> Void in
-                                            self.dismissViewControllerAnimated(true, completion: nil)
-                                        }
-                                        
-                                        // Setup the alert buttons.
-                                        let dismiss = UIAlertAction(title: "Dismiss", style: .Default, handler: close)
-                                        
-                                        // Add the actions to the alert.
-                                        blockUpdate.addAction(dismiss)
-                                        
-                                        // Present the alert on screen.
-                                        self.presentViewController(blockUpdate, animated: true, completion: nil)
+                                        // The user has been unblocked.
+                                        self.blockedBlurView.alpha = 0.0
                                     }
                                         
                                     else {
                                         
-                                        // There was a problem, check error.description.
+                                        // An error has occured.
                                         self.displayAlert("Error", alertMessage: "\(error?.description)")
                                     }
+                                })
+                            }
+                            
+                            // Setup the alert buttons.
+                            let yes = UIAlertAction(title: "Yes", style: .Default, handler: unblockUser)
+                            let cancel = UIAlertAction(title: "No", style: .Default, handler: nil)
+                            
+                            // Add the actions to the alert.
+                            unblockAlert.addAction(yes)
+                            unblockAlert.addAction(cancel)
+                            
+                            // Present the alert on screen.
+                            self.presentViewController(unblockAlert, animated: true, completion: nil)
+                        }
+                            
+                        else {
+                            
+                            // The user isn't currently blocked
+                            // therefore proceed with blocking.
+                            
+                            // Set the user to block and the
+                            // user which is blocking that user.
+                            var blockUserData = PFObject(className:"blockUser")
+                            blockUserData["userBlock"] = self.passedUser
+                            blockUserData["userBlocking"] = PFUser.currentUser()
+                            
+                            // Submit the block request.
+                            blockUserData.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                                
+                                // Check if the user block data
+                                // request was succesful or not.
+                                
+                                if (success) {
+                                    
+                                    // The user has been blocked.
+                                    let blockUpdate = UIAlertController(title: "Success", message: "The user has been blocked.", preferredStyle: .Alert)
+                                    
+                                    // Setup the alert actions.
+                                    let close = { (action:UIAlertAction!) -> Void in
+                                        self.dismissViewControllerAnimated(true, completion: nil)
+                                    }
+                                    
+                                    // Setup the alert buttons.
+                                    let dismiss = UIAlertAction(title: "Dismiss", style: .Default, handler: close)
+                                    
+                                    // Add the actions to the alert.
+                                    blockUpdate.addAction(dismiss)
+                                    
+                                    // Present the alert on screen.
+                                    self.presentViewController(blockUpdate, animated: true, completion: nil)
+                                }
+                                    
+                                else {
+                                    
+                                    // There was a problem, check error.description.
+                                    self.displayAlert("Error", alertMessage: "\(error?.description)")
                                 }
                             }
                         }
                     }
                 }
-                
-                let reportUser = { (action:UIAlertAction!) -> Void in
-                    
-                    // Open the report user view controller.
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let viewC = storyboard.instantiateViewControllerWithIdentifier("reportUser") as! ReportUserViewController
-                    viewC.passedUser = self.currentUser
-                    self.presentViewController(viewC, animated: true, completion: nil)
-                }
-                
-                // Setuo the alert buttons.
-                let buttonOne = UIAlertAction(title: buttonOneTitle, style: .Default, handler: blockUser)
-                let buttonTwo = UIAlertAction(title: "Report User", style: .Default, handler: reportUser)
-                let cancel = UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil)
-                
-                // Add the actions to the alert.
-                moreMenu.addAction(buttonOne)
-                moreMenu.addAction(buttonTwo)
-                moreMenu.addAction(cancel)
-                
-                // Present the alert on screen.
-                presentViewController(moreMenu, animated: true, completion: nil)
             }
+            
+            let reportUser = { (action:UIAlertAction!) -> Void in
                 
-            else {
-                self.displayAlert("Error", alertMessage: "You cannot view the more options menu as no user ID has been detected.")
+                // Open the report user view controller.
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let viewC = storyboard.instantiateViewControllerWithIdentifier("reportUser") as! ReportUserViewController
+                viewC.passedUser = self.passedUser
+                self.presentViewController(viewC, animated: true, completion: nil)
             }
+            
+            // Setuo the alert buttons.
+            let buttonOne = UIAlertAction(title: buttonOneTitle, style: .Default, handler: blockUser)
+            let buttonTwo = UIAlertAction(title: "Report User", style: .Default, handler: reportUser)
+            let cancel = UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil)
+            
+            // Add the actions to the alert.
+            moreMenu.addAction(buttonOne)
+            moreMenu.addAction(buttonTwo)
+            moreMenu.addAction(cancel)
+            
+            // Present the alert on screen.
+            presentViewController(moreMenu, animated: true, completion: nil)
         }
     }
-    
+
     // View Did Load method.
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -340,6 +277,19 @@ class MyProfileViewController : UIViewController {
         var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
         visualEffectView.frame = self.blockedBlurView.bounds
         blockedBlurView.insertSubview(visualEffectView, atIndex: 0)
+        
+        // Add the edit button animation methods.
+        self.editButton.addTarget(self, action: "makeEditSmaller", forControlEvents: .TouchDown)
+        self.editButton.addTarget(self, action: "restoreEditSize", forControlEvents: .TouchCancel)
+        self.editButton.addTarget(self, action: "restoreEditSize", forControlEvents: .TouchDragExit)
+        
+        // Turn the profile picture into a cirlce.
+        self.profPicture.layer.cornerRadius = (self.profPicture.frame.size.width / 2)
+        self.profPicture.clipsToBounds = true
+        
+        // Curve the edges of the edit button.
+        self.editButton.layer.cornerRadius = 6
+        self.editButton.clipsToBounds = true
     }
     
     // View Did Appear method.
@@ -366,8 +316,13 @@ class MyProfileViewController : UIViewController {
             // Allow scrolling access.
             self.profileScroll.userInteractionEnabled = true
             
-            // Show the currently logged in user.
-            currentUser = PFUser.currentUser()
+            // Set the edit button text.
+            self.editButton.setTitle("Edit Profile", forState: UIControlState.Normal)
+            
+            // Show the settings button.
+            settingsButton.enabled = true
+            settingsButton.image = UIImage(named: "SettingsV2.png")
+            settingsButton.title = nil
             
             // Hide the back button if no
             // user has been passed in.
@@ -377,27 +332,22 @@ class MyProfileViewController : UIViewController {
                 backButton.image = nil
                 backButton.enabled = false
             }
-            
+                
             else {
                 
                 backButton.image = UIImage(named: "left_icon.png")
                 backButton.enabled = true
             }
             
-            // Set the edit button text.
-            self.editButton.setTitle("Edit Profile", forState: UIControlState.Normal)
-            
-            // Show the settings button.
-            settingsButton.enabled = true
-            settingsButton.image = UIImage(named: "SettingsV2.png")
-            settingsButton.title = nil
+            // Update the rest of the profile view.
+            self.updateProfileView(PFUser.currentUser()!)
         }
             
         else {
             
             // Check if the user has already been blocked
-            // or if the user has blocked you and take
-            // the appropriate actions.
+            // or if the user has blocked you and take the
+            // appropriate actions.
             var query = PFQuery(className: "blockUser")
             query.whereKey("userBlock", equalTo: self.passedUser)
             query.whereKey("userBlocking", equalTo: PFUser.currentUser()!)
@@ -446,42 +396,27 @@ class MyProfileViewController : UIViewController {
                 }
             }
             
-            // Show the user being passed into the view.
-            currentUser = passedUser
-            
-            // Get the username string.
-            userID = currentUser.username! as String
-            
             // Check if the user is a private account.
-            privateCheck = currentUser?.objectForKey("privateProfile") as? Bool
+            privateCheck = passedUser?.objectForKey("privateProfile") as? Bool
             
             // Check if the logged in user is following
-            // this passed in user object or not.
-            var queryFollowing = PFQuery(className: "Followers")
-            queryFollowing.whereKey("fromUser", equalTo: (PFUser.currentUser()?.username)!)
-            queryFollowing.whereKey("toUser", equalTo: passedUser.username!)
+            // the passed in user object or not.
+            var queryFollowing = PFQuery(className: "User")
+            queryFollowing.whereKey("userFollowing", equalTo: passedUser)
             queryFollowing.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
                 
-                if error == nil {
+                if (error == nil) {
                     
                     if (objects?.count > 0) {
                         
-                        // The logged in user is following
-                        // the passed in PFUser account.
-                        self.followingCheck = true
-                        
                         // Set the edit button text.
-                        self.editButton.setTitle("Following \(self.userID)", forState: UIControlState.Normal)
+                        self.editButton.setTitle("Following \(self.passedUser.username!)", forState: UIControlState.Normal)
                     }
-                    
+                        
                     else {
                         
-                        // The logged in user is NOT following
-                        // the passed in PFUser account.
-                        self.followingCheck = false
-                        
                         // Set the edit button text.
-                        self.editButton.setTitle("Follow \(self.userID)", forState: UIControlState.Normal)
+                        self.editButton.setTitle("Follow \(self.passedUser.username!)", forState: UIControlState.Normal)
                         
                         // If the user is private then show
                         // the private view lock image/text.
@@ -489,7 +424,7 @@ class MyProfileViewController : UIViewController {
                         if (self.privateCheck == true) {
                             self.privateView.alpha = 1.0
                         }
-                        
+                            
                         else {
                             self.privateView.alpha = 0.0
                         }
@@ -505,122 +440,9 @@ class MyProfileViewController : UIViewController {
             // the more actions button.
             settingsButton.image = nil
             settingsButton.title = "More"
-        }
-        
-        // Add the edit button animation methods.
-        self.editButton.addTarget(self, action: "makeEditSmaller", forControlEvents: .TouchDown)
-        self.editButton.addTarget(self, action: "restoreEditSize", forControlEvents: .TouchCancel)
-        self.editButton.addTarget(self, action: "restoreEditSize", forControlEvents: .TouchDragExit)
-        
-        // Turn the profile picture into a cirlce.
-        self.profPicture.layer.cornerRadius = (self.profPicture.frame.size.width / 2)
-        self.profPicture.clipsToBounds = true
-        
-        // Curve the edges of the edit button.
-        self.editButton.layer.cornerRadius = 6
-        self.editButton.clipsToBounds = true
-        
-        if (currentUser != nil) {
             
-            // User is logged in - get thier details and populate the UI.
-            self.profName.text = currentUser?.objectForKey("fullName") as? String
-            self.profDesc.text = currentUser?.objectForKey("userBio") as? String
-            
-            // Get and set the follower label.
-            qureyfollwersbycurrentUser(currentUser)
-            
-            // Set the count labels.
-            self.profPosts.text = "000"
-            self.profFollowing.text = "000"
-            
-            // Set the posts count label.
-            self.setUserPostCount(currentUser)
-            
-            // Set the username label text.
-            userString = "@\(currentUser.username!)"
-            self.profUserName.text = userString as String
-            
-            // Store current username is NSUserDefults so it can be used later to follow a user.
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setObject(currentUser.username, forKey: "username")
-            defaults.synchronize()
-            
-            // Check the website URL link.
-            userWebsiteLink = currentUser?.objectForKey("website") as? String
-            
-            if (userWebsiteLink != nil) {
-                self.profWeb.setTitle(userWebsiteLink, forState: UIControlState.Normal)
-            }
-                
-            else {
-                self.profWeb.setTitle("No website set.", forState: UIControlState.Normal)
-                self.profWeb.userInteractionEnabled = false
-            }
-            
-            // Check if the user is verified.
-            let verify = currentUser?.objectForKey("verifiedUser")
-            
-            if (verify == nil) {
-                self.profVerified.alpha = 0.0
-            }
-                
-            else {
-                
-                if (verify as! Bool == true) {
-                    self.profVerified.alpha = 1.0
-                }
-                    
-                else {
-                    self.profVerified.alpha = 0.0
-                }
-            }
-            
-            // Check if the user has a profile image.
-            
-            if (currentUser.objectForKey("profileImage") == nil) {
-                self.profPicture.image = UIImage(named: "default_profile_pic.png")
-            }
-                
-            else {
-                
-                let userImageFile = currentUser!["profileImage"] as! PFFile
-                
-                userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-                    
-                    if (error == nil) {
-                        
-                        // Check the profile image data first.
-                        let profileImage = UIImage(data:imageData!)
-                        
-                        if ((imageData != nil) && (profileImage != nil)) {
-                            
-                            // Set the downloaded profile image.
-                            self.profPicture.image = profileImage
-                        }
-                            
-                        else {
-                            
-                            // No profile picture set the standard image.
-                            self.profPicture.image = UIImage(named: "default_profile_pic.png")
-                        }
-                    }
-                        
-                    else {
-                        
-                        // No profile picture set the standard image.
-                        self.profPicture.image = UIImage(named: "default_profile_pic.png")
-                    }
-                    
-                    // Notify the user that the app has stopped loading.
-                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                }
-            }
-        }
-            
-        else {
-            
-            // There is currently no logged in user.
-            self.displayAlert("Error", alertMessage: "You must login before using this section of the app.")
+            // Update the rest of the profile view.
+            self.updateProfileView(passedUser)
         }
     }
     
@@ -644,7 +466,99 @@ class MyProfileViewController : UIViewController {
         self.profileScroll.contentSize = CGSizeMake(self.view.bounds.width, scrollHeight)
     }
     
-    // Set the user post label counter.
+    // Profile data load method.
+    
+    func updateProfileView(userData: PFUser) {
+        
+        // User is logged in - get thier details and populate the UI.
+        self.profName.text = userData.objectForKey("fullName") as? String
+        self.profDesc.text = userData.objectForKey("userBio") as? String
+        
+        // Get and set the followers/following label.
+        self.setFollowDataCount(userData)
+        
+        // Set the post count label default.
+        self.profPosts.text = "0"
+        
+        // Set the posts count label.
+        self.setUserPostCount(userData)
+        
+        // Set the username label text.
+        self.profUserName.text = "\(userData.username!)"
+        
+        // Check the website URL link.
+        userWebsiteLink = userData.objectForKey("website") as? String
+        
+        if (userWebsiteLink != nil) {
+            self.profWeb.setTitle(userWebsiteLink, forState: UIControlState.Normal)
+        }
+            
+        else {
+            self.profWeb.setTitle("No website set.", forState: UIControlState.Normal)
+            self.profWeb.userInteractionEnabled = false
+        }
+        
+        // Check if the user is verified.
+        let verify = userData.objectForKey("verifiedUser")
+        
+        if (verify == nil) {
+            self.profVerified.alpha = 0.0
+        }
+            
+        else {
+            
+            if (verify as! Bool == true) {
+                self.profVerified.alpha = 1.0
+            }
+                
+            else {
+                self.profVerified.alpha = 0.0
+            }
+        }
+        
+        // Check if the user has a profile image.
+        
+        if (userData.objectForKey("profileImage") == nil) {
+            self.profPicture.image = UIImage(named: "default_profile_pic.png")
+        }
+            
+        else {
+            
+            let userImageFile = userData["profileImage"] as! PFFile
+            
+            userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                
+                if (error == nil) {
+                    
+                    // Check the profile image data first.
+                    let profileImage = UIImage(data:imageData!)
+                    
+                    if ((imageData != nil) && (profileImage != nil)) {
+                        
+                        // Set the downloaded profile image.
+                        self.profPicture.image = profileImage
+                    }
+                        
+                    else {
+                        
+                        // No profile picture set the standard image.
+                        self.profPicture.image = UIImage(named: "default_profile_pic.png")
+                    }
+                }
+                    
+                else {
+                    
+                    // No profile picture set the standard image.
+                    self.profPicture.image = UIImage(named: "default_profile_pic.png")
+                }
+                
+                // Notify the user that the app has stopped loading.
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            }
+        }
+    }
+    
+    // User post count label method.
     
     func setUserPostCount(currentuser:PFUser) {
         
@@ -669,17 +583,6 @@ class MyProfileViewController : UIViewController {
         }
     }
     
-    // Label count set methods.
-    
-    func setFollowers(count: Int) {
-        
-        // Get the count information.
-        let followers = "\(count)"
-        
-        // Set the follower label.
-        self.profFollowers.text = followers
-    }
-    
     // Alert methods.
     
     func displayAlert(alertTitle: String, alertMessage: String) {
@@ -702,25 +605,127 @@ class MyProfileViewController : UIViewController {
         // Run the 'small' animation.
         UIView.animateWithDuration(0.3 , animations: {
             self.editButton.transform = CGAffineTransformMakeScale(0.75, 0.75)
-            }, completion: nil)
+        }, completion: nil)
     }
     
     func restoreEditSize() {
         
         // Make the button bigger again.
-        UIView.animateWithDuration(0.3){
+        UIView.animateWithDuration(0.3) {
             self.editButton.transform = CGAffineTransformIdentity
         }
     }
     
-    // follow timeline method
+    // Follow methods.
     
+    func followOrUnfolowUser(userData: PFUser) {
+        
+        // Check the user following array and see if the
+        // user is already following the passed in user.
+        var query = PFQuery(className: "FollowersAndFollowing")
+        query.whereKey("userLink", equalTo: PFUser.currentUser()!)
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            
+            if (error == nil) {
+                
+                // Message string type.
+                var message:String!
+                
+                // Follow type.
+                var type = 0
+                
+                var dataQuery = PFQuery(className: "FollowersAndFollowing")
+                dataQuery.getObjectInBackgroundWithId((objects?[0].objectId)!, block: { (returnObject, error) -> Void in
+                    
+                    // You are not following the user yet
+                    // so follow the passed in user.
+                    returnObject!.addUniqueObject(userData.objectId!, forKey: "userFollowing")
+                    
+                    // Set the message to followed.
+                    message = "You are now following"
+                    
+                    // Set the edit button text.
+                    self.editButton.setTitle("Follow \(userData.username!)", forState: UIControlState.Normal)
+                    
+                    // Hide the privat profile view.
+                    self.privateView.alpha = 0.0
+                    
+                    // Set the type to follow.
+                    type = 1
+                    
+                    // Save the data for the logged in user
+                    // and the other (un)followed user.
+                    returnObject!.saveInBackground()
+                    self.updateOtherUserData(userData, mode: type, info: message)
+                })
+            }
+        }
+    }
     
+    func updateOtherUserData(userData: PFUser, mode: Int, info: String) {
+        
+        // Check the user following array and see if the
+        // user is already following the passed in user.
+        var query = PFQuery(className: "FollowersAndFollowing")
+        query.whereKey("userLink", equalTo: userData)
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            
+            if (error == nil) {
+                
+                var dataQuery = PFQuery(className: "FollowersAndFollowing")
+                dataQuery.getObjectInBackgroundWithId((objects?[0].objectId)!, block: { (returnObject, error) -> Void in
+                    
+                    // You are not following the user yet
+                    // so follow the passed in user.
+                    returnObject!.addUniqueObject((PFUser.currentUser()?.objectId)!, forKey: "userFollowers")
+
+                    // Save the data for the user being followed.
+                    returnObject!.saveInBackgroundWithBlock({ (success, error) -> Void in
+                        
+                        // Check if the data has been saved.
+                        
+                        if (success) {
+                            
+                            // Update the followers labels.
+                            self.setFollowDataCount(userData)
+                            
+                            // Display the (un)follow completed alert.
+                            self.displayAlert("Success", alertMessage: "\(info) @\(userData.username!)")
+                        }
+                            
+                        else {
+                            
+                            // Display the error alert.
+                            self.displayAlert("Error", alertMessage: "\(error?.description)")
+                        }
+                    })
+                })
+            }
+        }
+    }
     
+    func setFollowDataCount(userData: PFUser) {
+        
+        var queryObjectID = PFQuery(className: "FollowersAndFollowing")
+        queryObjectID.whereKey("userLink", equalTo: userData)
+        queryObjectID.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            
+            if (error == nil) {
+                
+                var dataQuery = PFQuery(className: "FollowersAndFollowing")
+                dataQuery.getObjectInBackgroundWithId((objects?[0].objectId)!, block: { (returnObject, error) -> Void in
+                    
+                    self.profFollowers.text = "\(returnObject!.valueForKey("userFollowers")!.count)"
+                    self.profFollowing.text = "\(returnObject!.valueForKey("userFollowing")!.count)"
+                })
+            }
+        }
+    }
     
+    // Follow timeline method
     
-    func GotoFollowTimeline()
-    {
+    func GotoFollowTimeline() {
+        
         let sb = UIStoryboard(name: "Main", bundle: nil)
         var FTVC = sb.instantiateViewControllerWithIdentifier("followtimeline")
         let NC = UINavigationController(rootViewController: FTVC)
@@ -732,29 +737,5 @@ class MyProfileViewController : UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    // query followes class by user method may not be used
-    
-    func qureyfollwersbycurrentUser(currentuser:PFUser) {
-    
-        var query = PFQuery(className: "Followers")
-        query.whereKey("fromUser", equalTo: currentuser)
-        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            
-            if error == nil {
-                print("this user has followers")
-                
-                if let objects = objects as [PFObject]! {
-                    
-                    for object in objects {
-                        print(object.objectForKey("toUser"))
-                    }
-                    
-                    // Set the user followers label.
-                    self.setFollowers(objects.count)
-                }
-            }
-        }
     }
 }
