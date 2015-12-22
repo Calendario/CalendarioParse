@@ -104,6 +104,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         TenseControl.selectedSegmentIndex = 2
         
         
+        
+        
     
         
     
@@ -137,6 +139,14 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         LocationLabel.userInteractionEnabled = true
         
         LocationLabel.addGestureRecognizer(locationtapReconizer)
+        
+        
+        
+        
+        // dismisses keyboard when background is tapped 
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
         
 
         
@@ -181,8 +191,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         datepicker.hidden = true
     
 
-        
-    }
+           }
     
     
     
@@ -204,6 +213,11 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         checkinbutton.hidden = false
     }
     
+    
+    func dismissKeyboard()
+    {
+        view.endEditing(true)
+    }
 
     
     
@@ -215,7 +229,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
        var dateformatter = NSDateFormatter()
         
         
-       
         
         
         if statusImageview?.image != nil
