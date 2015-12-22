@@ -184,6 +184,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
     }
     
+    
+    
     @IBAction func datePickerChanged(sender: AnyObject) {
         setDate()
     }

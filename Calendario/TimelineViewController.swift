@@ -33,7 +33,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         super.viewDidLoad()
         calendar.scrollDirection = .Horizontal
         
-        calendar.selectDate(NSDate())
+    
         
         self.tableview.delegate = self
         self.tableview.dataSource = self
@@ -61,6 +61,8 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     func calendar(calendar: FSCalendar!, didSelectDate date: NSDate!) {
         print("the date is \(date)")
         
+
+        
         let dateformatter = NSDateFormatter()
         dateformatter.dateFormat = "MM/d/yy"
         var newdate = dateformatter.stringFromDate(date)
@@ -83,6 +85,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                 {
                     let statusupdate:PFObject = object as! PFObject
                     self.postsdata.addObject(statusupdate)
+                    self.b = true
                     
                 
                 
@@ -121,9 +124,10 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     func calendar(calendar: FSCalendar!, hasEventForDate date: NSDate!) -> Bool {
         
+        var datesArray:[NSDate]!
         var eventdate:String!
         let dateformatter = NSDateFormatter()
-        dateformatter.dateFormat = "MM/dd/yy"
+        dateformatter.dateFormat = "MM/d/yy"
         var newdate = dateformatter.stringFromDate(date)
         var query = PFQuery(className: "StatusUpdate")
         query.whereKey("dateofevent", equalTo: newdate)
@@ -139,15 +143,25 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                         eventdate = object.valueForKey("dateofevent") as! String
                         print(eventdate)
                         
+                        datesArray = [dateformatter.dateFromString(eventdate)!]
+                        print(datesArray)
                         
-                        if dateformatter.dateFromString(eventdate) == date
+                        calendar.selectDate(dateformatter.dateFromString(eventdate))
+                        
+                        
+                        if datesArray.contains(calendar.selectedDate)
                         {
                             self.b = true
                             print(self.b)
+                            
+                        }
+                        else
+                        {
+                            self.b = false
+
                         }
                             
-                        self.b = true
-                    
+                        
                         
                         
                         
