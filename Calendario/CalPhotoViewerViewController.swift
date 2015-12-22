@@ -43,11 +43,20 @@ class CalPhotoViewerViewController: UIViewController, UIScrollViewDelegate {
         addBlur()
         
         
-        Imageview.image = roatateImage(image!)
+        //Imageview.image = image
+        
+        
+        
         Imageview.contentMode = .ScaleAspectFit
         
         Imageview.transform = CGAffineTransformMakeScale(1.0, -1.0)
         
+        
+                   Imageview.image = roatateImage(image!)
+        
+        print(image!.imageOrientation.rawValue)
+            
+
         
     }
 
@@ -70,15 +79,37 @@ class CalPhotoViewerViewController: UIViewController, UIScrollViewDelegate {
     
     
     func roatateImage(image:UIImage) -> UIImage
-    {
         
-        let flipped = UIImage(CGImage: image.CGImage!, scale: image.scale, orientation: UIImageOrientation.RightMirrored)
-        let finalimage = flipped
+        
+    {
+        var finalimage = UIImage()
+        
+        
+        
+        
+        
+        if image.imageOrientation.hashValue == 0
+        {
+            let flipped = UIImage(CGImage: image.CGImage!, scale: image.scale, orientation: UIImageOrientation.DownMirrored)
+            finalimage = flipped
+            
+            
+        }
+            
+    
+            
+            
+        else
+        {
+            print(image.imageOrientation.hashValue)
+        }
         
         return finalimage
-        
-        
+
     }
+
+    
+   
     
         @IBAction func CloseButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
