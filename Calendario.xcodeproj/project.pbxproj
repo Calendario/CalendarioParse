@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		78C1C01C1C006D9200ACDCEC /* reportBug.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C1C01B1C006D9200ACDCEC /* reportBug.m */; };
-		94DF332B34BDBAF26FE8E428 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3365CD7E58EA21439D59FC6 /* libPods.a */; };
+		9CE5A692AEA13F553B89DF70 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3354E761A083188ECD02163D /* Pods.framework */; };
 		A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25179511C201B0300EA0A5E /* ReportUserViewController.swift */; };
 		A26359E41BDA8342003F8FEB /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */; };
 		A28825F61BE3960500564EBF /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28825F51BE3960500564EBF /* MyProfileViewController.swift */; };
@@ -116,6 +116,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3354E761A083188ECD02163D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78C1C01A1C006D9200ACDCEC /* reportBug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reportBug.h; sourceTree = "<group>"; };
 		78C1C01B1C006D9200ACDCEC /* reportBug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = reportBug.m; sourceTree = "<group>"; };
 		9CFC86F79C40E6D71F993D2D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -129,7 +130,6 @@
 		A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A2FBF5C51C00BADA0051A553 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		A2FBF5C91C010B360051A553 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		B3365CD7E58EA21439D59FC6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E151AF701BD72D6500811A31 /* tabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tabBarViewController.h; sourceTree = "<group>"; };
 		E151AF711BD72D6500811A31 /* tabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tabBarViewController.m; sourceTree = "<group>"; };
 		E17180501C21389600D591FA /* notificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notificationsViewController.h; sourceTree = "<group>"; };
@@ -281,7 +281,7 @@
 				E2E0D73C1BC996C100662E70 /* Bolts.framework in Frameworks */,
 				E2E0D7411BC996C100662E70 /* ParseTwitterUtils.framework in Frameworks */,
 				E2E0D7401BC996C100662E70 /* ParseFacebookUtilsV4.framework in Frameworks */,
-				94DF332B34BDBAF26FE8E428 /* libPods.a in Frameworks */,
+				9CE5A692AEA13F553B89DF70 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,7 +486,7 @@
 			children = (
 				E24DA5EC1C11579E00901DF0 /* libstdc++.6.0.9.tbd */,
 				E24DA5EA1C1156F900901DF0 /* Social.framework */,
-				B3365CD7E58EA21439D59FC6 /* libPods.a */,
+				3354E761A083188ECD02163D /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

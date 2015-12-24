@@ -8,6 +8,7 @@
 
 import UIKit
 import Social
+import ActiveLabel
 
 class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegate, UINavigationBarDelegate, FSCalendarDelegate, FSCalendarDataSource {
 
@@ -323,9 +324,59 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         
 
+        // hastag dectection
+        if cell.statusTextView.text.hasPrefix("#")
+        {
+            print("hastag found")
+            
+            let label = ActiveLabel()
+            
+            label.numberOfLines = 0
+            
+            label.text = cell.statusTextView.text
+            label.textColor = UIColor.orangeColor()
+            label.hashtagColor = UIColor.grayColor()
+            
+            
+            // when a hastage is tapped
+            
+            label.handleHashtagTap({ (hashtag) -> () in
+                print("hashtag tapped")
+            })
+            
+            label.frame = CGRect(x: 85, y: 75, width: view.frame.width - 30, height: 500)
+            
+            cell.addSubview(label)
+
+
+            
+            
+        }
         
-        
-        
+        else if cell.statusTextView.text.hasPrefix("@")
+        {
+            print("user found")
+            let label = ActiveLabel()
+            
+            label.numberOfLines = 0
+            
+            label.text = cell.statusTextView.text
+            label.textColor = UIColor.orangeColor()
+            label.hashtagColor = UIColor.grayColor()
+            label.frame = CGRect(x: 92, y: 75, width: view.frame.width - 30, height: 500)
+            
+            label.handleMentionTap({ (mention) -> () in
+                print("mention tapped")
+            })
+            
+            cell.addSubview(label)
+            
+
+            
+            
+
+            
+        }
         
         
         
@@ -334,7 +385,9 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
     
 
-        StartDectingHastags(cell.statusTextView.text)
+        //StartDectingHastags(cell.statusTextView.text)
+        
+        
         
         
         return cell
@@ -390,7 +443,30 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     {
         let dector = CalHashTagDetector()
         
-        dector.decorateTags(text)
+        let label = ActiveLabel()
+        
+        if text.hasPrefix("#" )
+        {
+            //dector.decorateTags(text)
+           
+            
+            label.numberOfLines = 0
+            label.text = text
+            label.textColor = UIColor.orangeColor()
+            label.mentionColor = UIColor.greenColor()
+            
+            label.frame = CGRect(x: 85, y: 75, width: view.frame.width - 30, height: 500)
+            
+            self.view.addSubview(label)
+        }
+        else
+        {
+            label.hidden = true
+        }
+        
+        
+        
+        
     }
     
     

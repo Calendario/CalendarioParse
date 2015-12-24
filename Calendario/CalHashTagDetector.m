@@ -11,7 +11,7 @@
 
 @implementation CalHashTagDetector
 
-
+NSString *Pword;
 -(NSMutableAttributedString *) decorateTags:(NSString *)stringWithTags
 {
   
@@ -45,6 +45,10 @@
         [attString addAttribute:NSForegroundColorAttributeName value:foregroundColor range:wordRange];
         
         NSLog(@"Found tag %@", word);
+        
+        Pword = word;
+        
+        NSLog(@"the property is %@", Pword);
         
     }
     
