@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ActiveLabel
 
 class NewsfeedTableViewCell: UITableViewCell {
     
@@ -26,6 +27,8 @@ class NewsfeedTableViewCell: UITableViewCell {
     
     @IBOutlet weak var locationLabel: UILabel!
     
+    var hashlabel:ActiveLabel = ActiveLabel()
+    
     
    
     
@@ -37,11 +40,18 @@ class NewsfeedTableViewCell: UITableViewCell {
     
     var isLiked = false
     let defaults = NSUserDefaults.standardUserDefaults()
+    
+    
+    
 
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        
+        
+       
     }
     
     
@@ -74,6 +84,8 @@ class NewsfeedTableViewCell: UITableViewCell {
         
 
     }
+    
+    
     
   
     

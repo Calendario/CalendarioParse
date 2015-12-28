@@ -323,61 +323,48 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         }
         
         
+        
+        
+        
+        
+        
 
         // hastag dectection
         if cell.statusTextView.text.hasPrefix("#")
         {
             print("hastag found")
             
-            let label = ActiveLabel()
-            
-            label.numberOfLines = 0
-            
-            label.text = cell.statusTextView.text
-            label.textColor = UIColor.orangeColor()
-            label.hashtagColor = UIColor.grayColor()
-            
-            
-            // when a hastage is tapped
-            
-            label.handleHashtagTap({ (hashtag) -> () in
-                print("hashtag tapped")
+            cell.hashlabel.text = cell.statusTextView.text
+            cell.hashlabel.numberOfLines = 0
+            cell.hashlabel.hashtagColor = UIColor.flatBlueColor()
+            cell.hashlabel.handleHashtagTap({ (hastag) -> () in
+                print("hello from cell class")
             })
             
-            label.frame = CGRect(x: 85, y: 75, width: view.frame.width - 30, height: 500)
-            
-            cell.addSubview(label)
-
-
-            
-            
+               cell.hashlabel.frame = CGRect(x: 85, y: 75, width: view.frame.width - 30, height: 500)
+            cell.addSubview(cell.hashlabel)
         }
         
         else if cell.statusTextView.text.hasPrefix("@")
         {
-            print("user found")
-            let label = ActiveLabel()
+            print("mention found")
             
-            label.numberOfLines = 0
-            
-            label.text = cell.statusTextView.text
-            label.textColor = UIColor.orangeColor()
-            label.hashtagColor = UIColor.grayColor()
-            label.frame = CGRect(x: 92, y: 75, width: view.frame.width - 30, height: 500)
-            
-            label.handleMentionTap({ (mention) -> () in
-                print("mention tapped")
+            cell.hashlabel.text = cell.statusTextView.text
+            cell.hashlabel.numberOfLines = 0
+            cell.hashlabel.mentionColor = UIColor.flatGreenColor()
+            cell.hashlabel.handleHashtagTap({ (hastag) -> () in
+                print("hello from cell class")
             })
             
-            cell.addSubview(label)
-            
+            cell.hashlabel.frame = CGRect(x: 85, y: 75, width: view.frame.width - 30, height: 500)
+            cell.addSubview(cell.hashlabel)
 
-            
-            
-
-            
         }
         
+            
+            
+            
+                  
         
         
         
