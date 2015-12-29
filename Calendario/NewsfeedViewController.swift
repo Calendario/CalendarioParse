@@ -34,6 +34,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     
     var likeduser:String!
     
+    var mentionid:String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -352,9 +354,44 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             cell.hashlabel.text = cell.statusTextView.text
             cell.hashlabel.numberOfLines = 0
             cell.hashlabel.mentionColor = UIColor.flatGreenColor()
-            cell.hashlabel.handleHashtagTap({ (hastag) -> () in
-                print("hello from cell class")
+            cell.hashlabel.handleMentionTap({ (mention) -> () in
+                print("mention tapped")
+                
+                var query = PFUser.query()
+                query?.includeKey("user")
+                query?.whereKey("username", equalTo: mention)
+                query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                    if error == nil
+                    {
+                        print(objects?.count)
+                        
+                        if let objects = objects
+                        {
+                            for object in objects
+                            {
+                                print(object.objectId!)
+                                
+                                self.mentionid = object.objectId
+                                
+                                // get username based query 
+                                var userquery = PFUser.query()
+                                
+                                userquery?.getObjectInBackgroundWithId(self.mentionid, block: { (userobjects, error) -> Void in
+                                    if error == nil
+                                    {
+                                        var user = userobjects?.objectForKey("username") as! PFUser
+                                        print(user)
+                                    }
+                                })
+                            }
+                        }
+                    }
+                    
+                    
+                    
+                })
             })
+            
             
             cell.hashlabel.frame = CGRect(x: 85, y: 75, width: view.frame.width - 30, height: 500)
             cell.addSubview(cell.hashlabel)
@@ -379,6 +416,21 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         return cell
 }
+    
+    
+    func GotoProfile(username:String)
+    {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        var reportVC = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
+        
+        var pfuser:PFUser = username as! PFUser
+        
+        
+        let NC = UINavigationController(rootViewController: reportVC)
+        self.presentViewController(NC, animated: true, completion: nil)
+        
+
+    }
     
     
     

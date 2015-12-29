@@ -469,8 +469,9 @@ class MyProfileViewController : UIViewController {
     // Profile data load method.
     
     func updateProfileView(userData: PFUser) {
+     
         
-        // User is logged in - get thier details and populate the UI.
+               // User is logged in - get thier details and populate the UI.
         self.profName.text = userData.objectForKey("fullName") as? String
         self.profDesc.text = userData.objectForKey("userBio") as? String
         
@@ -722,17 +723,7 @@ class MyProfileViewController : UIViewController {
         }
     }
     
-    // Follow timeline method
-    
-    func GotoFollowTimeline() {
-        
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        var FTVC = sb.instantiateViewControllerWithIdentifier("followtimeline")
-        let NC = UINavigationController(rootViewController: FTVC)
-        self.presentViewController(NC, animated: true, completion: nil)
-    }
-    
-    // Other methods.
+            // Other methods.
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
