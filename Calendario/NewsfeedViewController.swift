@@ -357,46 +357,42 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             cell.hashlabel.handleMentionTap({ (mention) -> () in
                 print("mention tapped")
                 
-                var query = PFUser.query()
-                query?.includeKey("user")
-                query?.whereKey("username", equalTo: mention)
-                query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                var userquery = PFUser.query()
+                userquery?.whereKey("username", equalTo: mention)
+                userquery?.includeKey("user")
+                userquery?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                     if error == nil
                     {
-                        print(objects?.count)
-                        
+                        print(objects!.count)
                         if let objects = objects
                         {
                             for object in objects
                             {
-                                print(object.objectId!)
+                                var userid = object.objectId
+                                print(userid)
                                 
-                                self.mentionid = object.objectId
-                                
-                                // get username based query 
-                                var userquery = PFUser.query()
-                                
-                                userquery?.getObjectInBackgroundWithId(self.mentionid, block: { (userobjects, error) -> Void in
-                                    if error == nil
-                                    {
-                                        var user = userobjects?.objectForKey("username") as! PFUser
-                                        print(user)
-                                    }
+                                var query2 = PFUser.query()
+                                query2!.includeKey("user")
+                                query2?.getObjectInBackgroundWithId(userid!, block: { (object, ErrorType) -> Void in
+                                    var user:PFUser = object as! PFUser
+                                    print(user)
+                                    self.GotoProfile(user)
                                 })
                             }
+                            
+                            
                         }
                     }
-                    
-                    
-                    
                 })
+                
             })
-            
-            
+        }
+    
+    
             cell.hashlabel.frame = CGRect(x: 85, y: 75, width: view.frame.width - 30, height: 500)
             cell.addSubview(cell.hashlabel)
 
-        }
+    
         
             
             
@@ -418,16 +414,12 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
 }
     
     
-    func GotoProfile(username:String)
+    func GotoProfile(username:PFUser)
     {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         var reportVC = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
-        
-        var pfuser:PFUser = username as! PFUser
-        
-        
-        let NC = UINavigationController(rootViewController: reportVC)
-        self.presentViewController(NC, animated: true, completion: nil)
+        reportVC.passedUser = username
+            self.presentViewController(reportVC, animated: true, completion: nil)
         
 
     }
