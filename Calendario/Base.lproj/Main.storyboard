@@ -279,6 +279,12 @@
                                                 <action selector="LikeButtonTapped:" destination="vaR-8e-HVs" eventType="touchUpInside" id="Ult-d2-SWc"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wq-Ok-Hzx" customClass="KILabel">
+                                            <rect key="frame" x="201" y="9" width="0.0" height="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="cwP-EW-rcB" firstAttribute="top" secondItem="Niw-dS-Vbm" secondAttribute="topMargin" constant="23" id="3a6-at-TYs"/>
@@ -306,6 +312,7 @@
                                 <connections>
                                     <outlet property="LikeButton" destination="5qq-W1-0CH" id="BBl-3z-m8h"/>
                                     <outlet property="UserNameLabel" destination="KhO-HU-Fzo" id="sYJ-cV-QoW"/>
+                                    <outlet property="hashtagLabel" destination="2wq-Ok-Hzx" id="qld-fu-t8V"/>
                                     <outlet property="locationLabel" destination="cwP-EW-rcB" id="dj6-zV-F6N"/>
                                     <outlet property="profileimageview" destination="crA-RG-JUw" id="BbN-Yc-vz5"/>
                                     <outlet property="statusTextView" destination="7bW-iD-HSH" id="I0k-6N-mmP"/>
@@ -552,11 +559,11 @@
                         <viewControllerLayoutGuide type="bottom" id="pwH-dF-yIT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7xN-Kh-pjT">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="206" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KJI-D7-2eT">
-                                <rect key="frame" x="-12" y="7" width="387" height="430"/>
+                                <rect key="frame" x="-12" y="7" width="387" height="494"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="206" id="WYh-f2-f9g" customClass="CommentsTableViewCell" customModule="Calendario" customModuleProvider="target">
@@ -605,7 +612,7 @@
                                 </connections>
                             </tableView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write Comment here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A2i-0L-BB3">
-                                <rect key="frame" x="11" y="451" width="341" height="30"/>
+                                <rect key="frame" x="11" y="515" width="341" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -3868,8 +3875,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="seprator" width="300" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="xja-l6-MU2"/>
         <segue reference="Urg-qd-jmS"/>
         <segue reference="Q92-9R-gKB"/>
-        <segue reference="6lO-Zx-iIM"/>
     </inferredMetricsTieBreakers>
 </document>

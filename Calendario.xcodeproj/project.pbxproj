@@ -22,6 +22,7 @@
 		E17180521C21389600D591FA /* notificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17180511C21389600D591FA /* notificationsViewController.m */; };
 		E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E187B5F51BD3368400845C2F /* SearchViewController.m */; };
 		E1D759AC1C1243160017B53F /* locationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D759AB1C1243160017B53F /* locationViewController.m */; };
+		E22263601C34CAF400A77052 /* KILabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E222635F1C34CAF400A77052 /* KILabel.framework */; };
 		E24DA5E91C1154BE00901DF0 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E24DA5E81C1154BE00901DF0 /* Podfile */; };
 		E24DA5EB1C1156F900901DF0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24DA5EA1C1156F900901DF0 /* Social.framework */; };
 		E24DA5ED1C11579E00901DF0 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E24DA5EC1C11579E00901DF0 /* libstdc++.6.0.9.tbd */; };
@@ -138,6 +139,7 @@
 		E187B5F51BD3368400845C2F /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		E1D759AA1C1243160017B53F /* locationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = locationViewController.h; sourceTree = "<group>"; };
 		E1D759AB1C1243160017B53F /* locationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = locationViewController.m; sourceTree = "<group>"; };
+		E222635F1C34CAF400A77052 /* KILabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KILabel.framework; path = "Pods/../build/Debug-iphoneos/KILabel.framework"; sourceTree = "<group>"; };
 		E24DA5E81C1154BE00901DF0 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E24DA5EA1C1156F900901DF0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		E24DA5EC1C11579E00901DF0 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
@@ -262,6 +264,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E22263601C34CAF400A77052 /* KILabel.framework in Frameworks */,
 				E24DA5ED1C11579E00901DF0 /* libstdc++.6.0.9.tbd in Frameworks */,
 				E24DA5EB1C1156F900901DF0 /* Social.framework in Frameworks */,
 				E2E0D7561BC997BE00662E70 /* libsqlite3.dylib in Frameworks */,
@@ -484,6 +487,7 @@
 		E298A963F9E10C208D5F8821 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E222635F1C34CAF400A77052 /* KILabel.framework */,
 				E24DA5EC1C11579E00901DF0 /* libstdc++.6.0.9.tbd */,
 				E24DA5EA1C1156F900901DF0 /* Social.framework */,
 				3354E761A083188ECD02163D /* Pods.framework */,
@@ -1085,6 +1089,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = Calendario/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1141,6 +1146,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = Calendario/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

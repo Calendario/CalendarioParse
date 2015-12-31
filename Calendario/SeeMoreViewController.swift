@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import ActiveLabel
+
 
 class SeeMoreViewController: UIViewController {
 
@@ -53,6 +55,68 @@ class SeeMoreViewController: UIViewController {
         
         
         contentTextView.text = defaults.objectForKey("updatetext") as? String
+        
+        
+        
+        
+    // check hashtags and mentions 
+        
+        if contentTextView.text.hasPrefix("#")
+        {
+            let label = ActiveLabel()
+            
+            label.numberOfLines = 0
+            label.text = contentTextView.text
+            label.hashtagColor = UIColor.greenColor()
+            label.handleHashtagTap { hashtag in
+                print("Success. You just tapped the \(hashtag) hashtag")
+            }
+            label.frame = CGRect(x: 85, y: 75, width: view.frame.width - 30, height: 325)
+            self.view.addSubview(label)
+        }
+        
+        if contentTextView.text.hasPrefix("@")
+        {
+            let label = ActiveLabel()
+            label.numberOfLines = 0
+            label.text = contentTextView.text
+            label.mentionColor = UIColor.greenColor()
+            label.handleHashtagTap({ (handle) -> () in
+                print("tapped")
+                
+                var userquery = PFUser.query()
+                userquery?.whereKey("username", equalTo: handle)
+                userquery?.includeKey("user")
+                userquery?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                    if error == nil
+                    {
+                        print(objects?.count)
+                        if let objects = objects
+                        {
+                            for object in objects
+                            {
+                                var userid = object.objectId
+                                print(userid)
+                                
+                                var query2 = PFUser.query()
+                                query2?.includeKey("user")
+                                query2?.getObjectInBackgroundWithId(userid!, block: { (objects, error) -> Void in
+                                    var user:PFUser = object as! PFUser
+                                    print(user)
+                                    self.GotoProfile(user)
+                                })
+                            }
+                        }
+                    }
+                })
+            })
+            label.frame = CGRect(x: 85, y: 75, width: view.frame.width - 30, height: 500)
+            self.view.addSubview(label)
+
+        }
+    
+        
+        
         
         
         print(objectid!)
@@ -149,6 +213,18 @@ class SeeMoreViewController: UIViewController {
         self.presentViewController(NC, animated: true, completion: nil)
 
     }
+    
+    
+    func GotoProfile(user:PFUser)
+    {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        var profile = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
+        profile.passedUser = user
+        self.presentViewController(profile, animated: true, completion: nil)
+    }
+    
+    
+
     
     
 

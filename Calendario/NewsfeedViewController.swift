@@ -8,7 +8,7 @@
 
 import UIKit
 import Social
-import ActiveLabel
+
 
 class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegate, UINavigationBarDelegate, FSCalendarDelegate, FSCalendarDataSource {
 
@@ -324,85 +324,6 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             }
         }
         
-        
-        
-        
-        
-        
-        
-
-        // hastag dectection
-        if cell.statusTextView.text.hasPrefix("#")
-        {
-            print("hastag found")
-            
-            cell.hashlabel.text = cell.statusTextView.text
-            cell.hashlabel.numberOfLines = 0
-            cell.hashlabel.hashtagColor = UIColor.flatBlueColor()
-            cell.hashlabel.handleHashtagTap({ (hastag) -> () in
-                print("hello from cell class")
-            })
-            
-               cell.hashlabel.frame = CGRect(x: 85, y: 75, width: view.frame.width - 30, height: 500)
-            cell.addSubview(cell.hashlabel)
-        }
-        
-        else if cell.statusTextView.text.hasPrefix("@")
-        {
-            print("mention found")
-            
-            cell.hashlabel.text = cell.statusTextView.text
-            cell.hashlabel.numberOfLines = 0
-            cell.hashlabel.mentionColor = UIColor.flatGreenColor()
-            cell.hashlabel.handleMentionTap({ (mention) -> () in
-                print("mention tapped")
-                
-                var userquery = PFUser.query()
-                userquery?.whereKey("username", equalTo: mention)
-                userquery?.includeKey("user")
-                userquery?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
-                    if error == nil
-                    {
-                        print(objects!.count)
-                        if let objects = objects
-                        {
-                            for object in objects
-                            {
-                                var userid = object.objectId
-                                print(userid)
-                                
-                                var query2 = PFUser.query()
-                                query2!.includeKey("user")
-                                query2?.getObjectInBackgroundWithId(userid!, block: { (object, ErrorType) -> Void in
-                                    var user:PFUser = object as! PFUser
-                                    print(user)
-                                    self.GotoProfile(user)
-                                })
-                            }
-                            
-                            
-                        }
-                    }
-                })
-                
-            })
-        }
-    
-    
-            cell.hashlabel.frame = CGRect(x: 85, y: 75, width: view.frame.width - 30, height: 500)
-            cell.addSubview(cell.hashlabel)
-
-    
-        
-            
-            
-            
-                  
-        
-        
-        
-        
-        
     
 
         //StartDectingHastags(cell.statusTextView.text)
@@ -412,6 +333,9 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         return cell
 }
+
+    
+
     
     
     func GotoProfile(username:PFUser)
@@ -471,32 +395,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     // function that dectects hastags 
     
     func StartDectingHastags(text:String)
-    {
-        let dector = CalHashTagDetector()
-        
-        let label = ActiveLabel()
-        
-        if text.hasPrefix("#" )
-        {
-            //dector.decorateTags(text)
-           
-            
-            label.numberOfLines = 0
-            label.text = text
-            label.textColor = UIColor.orangeColor()
-            label.mentionColor = UIColor.greenColor()
-            
-            label.frame = CGRect(x: 85, y: 75, width: view.frame.width - 30, height: 500)
-            
-            self.view.addSubview(label)
-        }
-        else
-        {
-            label.hidden = true
-        }
-        
-        
-        
+    {        
         
     }
     

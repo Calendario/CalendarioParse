@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import ActiveLabel
+import  KILabel
+
 
 class NewsfeedTableViewCell: UITableViewCell {
     
@@ -27,7 +28,12 @@ class NewsfeedTableViewCell: UITableViewCell {
     
     @IBOutlet weak var locationLabel: UILabel!
     
-    var hashlabel:ActiveLabel = ActiveLabel()
+    
+    @IBOutlet weak var hashtagLabel: KILabel!
+    
+    
+    
+   
     
     
    
@@ -85,9 +91,6 @@ class NewsfeedTableViewCell: UITableViewCell {
 
     }
     
-    
-    
-  
     
 
     
