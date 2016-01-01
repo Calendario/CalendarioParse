@@ -8,7 +8,6 @@
 
 #import "SearchViewController.h"
 #import "Calendario-Swift.h"
-//#import "MyProfileViewController.swift"
 
 @interface SearchViewController ()
 {
@@ -363,7 +362,6 @@
     profVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:profVC animated:YES completion:NULL];
 }
-
 
 
 @end

@@ -5,7 +5,7 @@
 #import <ParseUI/ParseUI.h>
 #import <Parse/Parse.h>
 #import "CLWeeklyCalendarView.h"
-#import  "CalHashTagDetector.h"
+#import "CalHashTagDetector.h"
 #import "AppDelegate.h"
 #import "tabBarViewController.h"
 #import "FSCalendar.h"

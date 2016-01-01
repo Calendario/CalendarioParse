@@ -135,7 +135,8 @@ class MyProfileViewController : UIViewController {
                 
                 // Check if the user has already been blocked
                 // and then show the appropriate actions.
-                var query = PFQuery(className: "blockUser")
+                var query:PFQuery!
+                query = PFQuery(className: "blockUser")
                 query.whereKey("userBlock", equalTo: self.passedUser)
                 query.whereKey("userBlocking", equalTo: PFUser.currentUser()!)
                 query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
@@ -194,7 +195,8 @@ class MyProfileViewController : UIViewController {
                             
                             // Set the user to block and the
                             // user which is blocking that user.
-                            var blockUserData = PFObject(className:"blockUser")
+                            var blockUserData:PFObject!
+                            blockUserData = PFObject(className:"blockUser")
                             blockUserData["userBlock"] = self.passedUser
                             blockUserData["userBlocking"] = PFUser.currentUser()
                             
@@ -348,7 +350,8 @@ class MyProfileViewController : UIViewController {
             // Check if the user has already been blocked
             // or if the user has blocked you and take the
             // appropriate actions.
-            var query = PFQuery(className: "blockUser")
+            var query:PFQuery!
+            query = PFQuery(className: "blockUser")
             query.whereKey("userBlock", equalTo: self.passedUser)
             query.whereKey("userBlocking", equalTo: PFUser.currentUser()!)
             query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
@@ -367,7 +370,8 @@ class MyProfileViewController : UIViewController {
                     
                     else {
                         
-                        var queryTwo = PFQuery(className: "blockUser")
+                        var queryTwo:PFQuery!
+                        queryTwo = PFQuery(className: "blockUser")
                         queryTwo.whereKey("userBlock", equalTo: PFUser.currentUser()!)
                         queryTwo.whereKey("userBlocking", equalTo: self.passedUser)
                         queryTwo.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
@@ -401,36 +405,31 @@ class MyProfileViewController : UIViewController {
             
             // Check if the logged in user is following
             // the passed in user object or not.
-            var queryFollowing = PFQuery(className: "User")
-            queryFollowing.whereKey("userFollowing", equalTo: passedUser)
-            queryFollowing.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            ManageUser.alreadyFollowingUser(passedUser, currentUserCheckMode: true, completion: { (status, otherData) -> Void in
                 
-                if (error == nil) {
+                if (status == true) {
                     
-                    if (objects?.count > 0) {
-                        
-                        // Set the edit button text.
-                        self.editButton.setTitle("Following \(self.passedUser.username!)", forState: UIControlState.Normal)
+                    // Set the edit button text.
+                    self.editButton.setTitle("Following \(self.passedUser.username!)", forState: UIControlState.Normal)
+                }
+                
+                else {
+                    
+                    // Set the edit button text.
+                    self.editButton.setTitle("Follow \(self.passedUser.username!)", forState: UIControlState.Normal)
+                    
+                    // If the user is private then show
+                    // the private view lock image/text.
+                    
+                    if (self.privateCheck == true) {
+                        self.privateView.alpha = 1.0
                     }
                         
                     else {
-                        
-                        // Set the edit button text.
-                        self.editButton.setTitle("Follow \(self.passedUser.username!)", forState: UIControlState.Normal)
-                        
-                        // If the user is private then show
-                        // the private view lock image/text.
-                        
-                        if (self.privateCheck == true) {
-                            self.privateView.alpha = 1.0
-                        }
-                            
-                        else {
-                            self.privateView.alpha = 0.0
-                        }
+                        self.privateView.alpha = 0.0
                     }
                 }
-            }
+            })
             
             // Set the back button image and display it.
             backButton.image = UIImage(named: "left_icon.png")
@@ -470,8 +469,7 @@ class MyProfileViewController : UIViewController {
     
     func updateProfileView(userData: PFUser) {
      
-        
-               // User is logged in - get thier details and populate the UI.
+        // User is logged in - get thier details and populate the UI.
         self.profName.text = userData.objectForKey("fullName") as? String
         self.profDesc.text = userData.objectForKey("userBio") as? String
         
@@ -482,7 +480,9 @@ class MyProfileViewController : UIViewController {
         self.profPosts.text = "0"
         
         // Set the posts count label.
-        self.setUserPostCount(userData)
+        ManageUser.getUserPostCount(userData) { (result) -> Void in
+            self.profPosts.text = "\(result)"
+        }
         
         // Set the username label text.
         self.profUserName.text = "\(userData.username!)"
@@ -559,31 +559,6 @@ class MyProfileViewController : UIViewController {
         }
     }
     
-    // User post count label method.
-    
-    func setUserPostCount(currentuser:PFUser) {
-        
-        // Get the user posts number and set
-        // the label appropriately.
-        
-        var query = PFQuery(className: "StatusUpdate")
-        query.whereKey("user", equalTo: currentuser)
-        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            
-            if (error == nil) {
-                
-                if let objects = objects as [PFObject]! {
-                    
-                    // Get the posts count information.
-                    let posts = "\(objects.count)"
-                    
-                    // Set the posts label.
-                    self.profPosts.text = posts
-                }
-            }
-        }
-    }
-    
     // Alert methods.
     
     func displayAlert(alertTitle: String, alertMessage: String) {
@@ -621,109 +596,48 @@ class MyProfileViewController : UIViewController {
     
     func followOrUnfolowUser(userData: PFUser) {
         
-        // Check the user following array and see if the
-        // user is already following the passed in user.
-        var query = PFQuery(className: "FollowersAndFollowing")
-        query.whereKey("userLink", equalTo: PFUser.currentUser()!)
-        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+        // Send the user object to the ManageUser
+        // class to follor ow unfollow the user.
+        ManageUser.followOrUnfolowUser(userData) { (followUnfollowstatus: Bool, message, buttonTitle) -> Void in
             
-            if (error == nil) {
+            // Update the followers labels.
+            self.setFollowDataCount(userData)
+            
+            dispatch_async(dispatch_get_main_queue(), {
                 
-                // Message string type.
-                var message:String!
+                // Check to see if the follow/unfollow
+                // operation succeded or failed.
                 
-                // Follow type.
-                var type = 0
-                
-                var dataQuery = PFQuery(className: "FollowersAndFollowing")
-                dataQuery.getObjectInBackgroundWithId((objects?[0].objectId)!, block: { (returnObject, error) -> Void in
-                    
-                    // You are not following the user yet
-                    // so follow the passed in user.
-                    returnObject!.addUniqueObject(userData.objectId!, forKey: "userFollowing")
-                    
-                    // Set the message to followed.
-                    message = "You are now following"
+                if (followUnfollowstatus == true) {
                     
                     // Set the edit button text.
-                    self.editButton.setTitle("Follow \(userData.username!)", forState: UIControlState.Normal)
+                    self.editButton.setTitle("\(buttonTitle) \(self.passedUser.username!)", forState: UIControlState.Normal)
                     
-                    // Hide the privat profile view.
-                    self.privateView.alpha = 0.0
+                    // Display the success alert.
+                    self.displayAlert("Success", alertMessage: "The user @\(userData.username!) has been \(message).")
+                }
                     
-                    // Set the type to follow.
-                    type = 1
+                else {
                     
-                    // Save the data for the logged in user
-                    // and the other (un)followed user.
-                    returnObject!.saveInBackground()
-                    self.updateOtherUserData(userData, mode: type, info: message)
-                })
-            }
-        }
-    }
-    
-    func updateOtherUserData(userData: PFUser, mode: Int, info: String) {
-        
-        // Check the user following array and see if the
-        // user is already following the passed in user.
-        var query = PFQuery(className: "FollowersAndFollowing")
-        query.whereKey("userLink", equalTo: userData)
-        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            
-            if (error == nil) {
-                
-                var dataQuery = PFQuery(className: "FollowersAndFollowing")
-                dataQuery.getObjectInBackgroundWithId((objects?[0].objectId)!, block: { (returnObject, error) -> Void in
-                    
-                    // You are not following the user yet
-                    // so follow the passed in user.
-                    returnObject!.addUniqueObject((PFUser.currentUser()?.objectId)!, forKey: "userFollowers")
-
-                    // Save the data for the user being followed.
-                    returnObject!.saveInBackgroundWithBlock({ (success, error) -> Void in
-                        
-                        // Check if the data has been saved.
-                        
-                        if (success) {
-                            
-                            // Update the followers labels.
-                            self.setFollowDataCount(userData)
-                            
-                            // Display the (un)follow completed alert.
-                            self.displayAlert("Success", alertMessage: "\(info) @\(userData.username!)")
-                        }
-                            
-                        else {
-                            
-                            // Display the error alert.
-                            self.displayAlert("Error", alertMessage: "\(error?.description)")
-                        }
-                    })
-                })
-            }
+                    // Display the error alert.
+                    self.displayAlert("Error", alertMessage:"The user @\(userData.username!) has not been \(message).")
+                }
+            })
         }
     }
     
     func setFollowDataCount(userData: PFUser) {
         
-        var queryObjectID = PFQuery(className: "FollowersAndFollowing")
-        queryObjectID.whereKey("userLink", equalTo: userData)
-        queryObjectID.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+        // Get the user follow data.
+        ManageUser.getFollowDataCount(userData) { (countObject) -> Void in
             
-            if (error == nil) {
-                
-                var dataQuery = PFQuery(className: "FollowersAndFollowing")
-                dataQuery.getObjectInBackgroundWithId((objects?[0].objectId)!, block: { (returnObject, error) -> Void in
-                    
-                    self.profFollowers.text = "\(returnObject!.valueForKey("userFollowers")!.count)"
-                    self.profFollowing.text = "\(returnObject!.valueForKey("userFollowing")!.count)"
-                })
-            }
+            // Set the followers and following labels.
+            self.profFollowers.text = "\(countObject.valueForKey("userFollowers")!.count)"
+            self.profFollowing.text = "\(countObject.valueForKey("userFollowing")!.count)"
         }
     }
     
-            // Other methods.
+    // Other methods.
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
