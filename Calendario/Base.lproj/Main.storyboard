@@ -312,7 +312,6 @@
                                 <connections>
                                     <outlet property="LikeButton" destination="5qq-W1-0CH" id="BBl-3z-m8h"/>
                                     <outlet property="UserNameLabel" destination="KhO-HU-Fzo" id="sYJ-cV-QoW"/>
-                                    <outlet property="hashtagLabel" destination="2wq-Ok-Hzx" id="qld-fu-t8V"/>
                                     <outlet property="locationLabel" destination="cwP-EW-rcB" id="dj6-zV-F6N"/>
                                     <outlet property="profileimageview" destination="crA-RG-JUw" id="BbN-Yc-vz5"/>
                                     <outlet property="statusTextView" destination="7bW-iD-HSH" id="I0k-6N-mmP"/>
@@ -2914,6 +2913,19 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Opn-vO-qEd" customClass="KILabel">
+                                <rect key="frame" x="28" y="555" width="216" height="28"/>
+                                <color key="tintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLinkBackgroundColor">
+                                        <color key="value" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="systemURLStyle" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -2933,6 +2945,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         <outlet property="UserLabel" destination="1hg-Jk-Oeq" id="GsS-60-vOg"/>
                         <outlet property="backbutton" destination="5fR-cg-L5f" id="bQ3-gw-oIV"/>
                         <outlet property="contentTextView" destination="l2e-MB-VRc" id="1bD-sz-cRM"/>
+                        <outlet property="kilabel" destination="Opn-vO-qEd" id="Stp-hW-r3R"/>
                         <outlet property="locationlabel" destination="OJy-Fk-NUJ" id="EAy-3V-rGL"/>
                     </connections>
                 </viewController>

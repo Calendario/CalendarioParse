@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import ActiveLabel
+import KILabel
+
 
 
 class SeeMoreViewController: UIViewController {
@@ -28,6 +29,7 @@ class SeeMoreViewController: UIViewController {
     @IBOutlet weak var locationlabel: UILabel!
     
     
+    @IBOutlet weak var kilabel: KILabel!
     
     let defaults = NSUserDefaults.standardUserDefaults()
     
@@ -60,32 +62,23 @@ class SeeMoreViewController: UIViewController {
         
         
     // check hashtags and mentions 
-        
         if contentTextView.text.hasPrefix("#")
         {
-            let label = ActiveLabel()
-            
-            label.numberOfLines = 0
-            label.text = contentTextView.text
-            label.hashtagColor = UIColor.greenColor()
-            label.handleHashtagTap { hashtag in
-                print("Success. You just tapped the \(hashtag) hashtag")
-            }
-            label.frame = CGRect(x: 85, y: 75, width: view.frame.width - 30, height: 325)
-            self.view.addSubview(label)
-        }
-        
-        if contentTextView.text.hasPrefix("@")
-        {
-            let label = ActiveLabel()
-            label.numberOfLines = 0
-            label.text = contentTextView.text
-            label.mentionColor = UIColor.greenColor()
-            label.handleHashtagTap({ (handle) -> () in
-                print("tapped")
+            kilabel.text = contentTextView.text
+            kilabel.hashtagLinkTapHandler = { label,hashtag,range in
+                print(hashtag)
                 
+            }
+        }
+        else if contentTextView.text.hasPrefix("@")
+        {
+            kilabel.text = contentTextView.text
+            kilabel.userHandleLinkTapHandler = {label,mention,range in
                 var userquery = PFUser.query()
-                userquery?.whereKey("username", equalTo: handle)
+                print("mentiion is \(mention)")
+                let editedtext = mention.stringByReplacingOccurrencesOfString("@", withString: "")
+                print(editedtext)
+                userquery?.whereKey("username", equalTo: editedtext)
                 userquery?.includeKey("user")
                 userquery?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                     if error == nil
@@ -100,7 +93,7 @@ class SeeMoreViewController: UIViewController {
                                 
                                 var query2 = PFUser.query()
                                 query2?.includeKey("user")
-                                query2?.getObjectInBackgroundWithId(userid!, block: { (objects, error) -> Void in
+                                query2?.getObjectInBackgroundWithId(userid!, block: { (object, error) -> Void in
                                     var user:PFUser = object as! PFUser
                                     print(user)
                                     self.GotoProfile(user)
@@ -109,11 +102,29 @@ class SeeMoreViewController: UIViewController {
                         }
                     }
                 })
-            })
-            label.frame = CGRect(x: 85, y: 75, width: view.frame.width - 30, height: 500)
-            self.view.addSubview(label)
-
+            }
         }
+        
+        else if contentTextView.text.hasSuffix(".com")
+        {
+            kilabel.text = contentTextView.text
+            kilabel.urlLinkTapHandler = {label,url,range in
+                let nsurl = NSURL(string: "http://\(url)")
+                print(nsurl)
+                UIApplication.sharedApplication().openURL(nsurl!)
+            
+                
+                
+            }
+        }
+        
+        else
+        {
+            kilabel.hidden = true
+        }
+        
+        
+        
     
         
         
@@ -204,6 +215,7 @@ class SeeMoreViewController: UIViewController {
         //print(defaults.objectForKey("username") as? String)
 
 }
+    
     
     func imageTapped()
     {

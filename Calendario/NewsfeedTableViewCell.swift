@@ -29,8 +29,7 @@ class NewsfeedTableViewCell: UITableViewCell {
     @IBOutlet weak var locationLabel: UILabel!
     
     
-    @IBOutlet weak var hashtagLabel: KILabel!
-    
+        
     
     
    
