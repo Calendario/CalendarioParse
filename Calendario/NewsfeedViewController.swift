@@ -597,13 +597,65 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in
               let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
             
-            statusupdate.deleteInBackgroundWithBlock({ (sucess, error) -> Void in
+            var query = PFQuery(className: "StatusUpdate")
+            query.includeKey("user")
+            query.whereKey("objectId", equalTo: statusupdate.objectId!)
+            query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                if error == nil
+                {
+                    print(objects?.count)
+                    for object in objects!
+                    {
+                        print(object)
+                       let userstr = object["user"]?.username!
+                        print(userstr!)
+                        
+                        if userstr == PFUser.currentUser()?.username
+                        {
+                            statusupdate.deleteInBackgroundWithBlock({ (success, error) -> Void in
+                                if success
+                                {
+                                    self.statausData.removeObjectAtIndex(indexPath.row)
+                                    statusupdate.saveInBackground()
+                                    print("deleted")
+                                    self.LoadData()
+                                }
+                            })
+                        }
+                        
+                        else
+                        {
+                            print("user not the owner")
+                            let alert = UIAlertController(title: "Sorry", message: "You can only delete your own posts.", preferredStyle: .Alert)
+                            alert.view.tintColor = UIColor.flatGreenColor()
+                            let next = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                            alert.addAction(next)
+                            
+                            self.presentViewController(alert, animated: true, completion: nil)
+                            
+                            
+
+                        }
+                        
+                        
+                        
+                    }
+                }
+            })
+            
+            
+            
+            
+            
+            /*statusupdate.deleteInBackgroundWithBlock({ (sucess, error) -> Void in
                 self.statausData.removeObjectAtIndex(indexPath.row)
                 statusupdate.saveInBackground()
                 print("deleted")
                 self.LoadData()
                 
+
             })
+            */
         }
         
         
