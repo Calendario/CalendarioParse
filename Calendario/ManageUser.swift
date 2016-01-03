@@ -132,6 +132,58 @@ import Parse
         }
     }
     
+    // User follower/following data.
+    
+    class func getUserFollowersList(userData:PFUser , completion: (userFollowers: Array<String>) -> Void) {
+        
+        // Get the Object ID for passed in user and then
+        // use that to get the user's followers data array.
+        self.getObjectIDForFFClass(userData) { (idNumber) -> Void in
+            
+            // Setup followers query.
+            var queryFollowers:PFQuery!
+            queryFollowers = PFQuery(className: "FollowersAndFollowing")
+            
+            // Get the followers list.
+            queryFollowers.getObjectInBackgroundWithId(idNumber, block: { (objects, error) -> Void in
+                
+                // Create the followers list.
+                var followersData:Array<String>!
+                
+                // Get the followers information.
+                followersData = objects!.valueForKey("userFollowers") as! Array<String>!
+                
+                // Pass the follower data in the completion block.
+                completion(userFollowers: followersData)
+            })
+        }
+    }
+    
+    class func getUserFollowingList(userData:PFUser , completion: (userFollowing: Array<String>) -> Void) {
+        
+        // Get the Object ID for passed in user and then
+        // use that to get the user's followers data array.
+        self.getObjectIDForFFClass(userData) { (idNumber) -> Void in
+            
+            // Setup following query.
+            var queryFollowers:PFQuery!
+            queryFollowers = PFQuery(className: "FollowersAndFollowing")
+            
+            // Get the following list.
+            queryFollowers.getObjectInBackgroundWithId(idNumber, block: { (objects, error) -> Void in
+                
+                // Create the following list.
+                var followingData:Array<String>!
+                
+                // Get the following information.
+                followingData = objects!.valueForKey("userFollowing") as! Array<String>!
+                
+                // Pass the following data in the completion block.
+                completion(userFollowing: followingData)
+            })
+        }
+    }
+    
     // User object ID methods.
     
     class func getObjectIDForFFClass(userData:PFUser, completion: (idNumber: String) -> Void) {

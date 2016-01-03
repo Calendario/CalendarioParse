@@ -468,7 +468,7 @@ class MyProfileViewController : UIViewController {
     // Profile data load method.
     
     func updateProfileView(userData: PFUser) {
-     
+        
         // User is logged in - get thier details and populate the UI.
         self.profName.text = userData.objectForKey("fullName") as? String
         self.profDesc.text = userData.objectForKey("userBio") as? String
