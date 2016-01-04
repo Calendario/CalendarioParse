@@ -740,6 +740,12 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="todayColor">
                                         <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="subtitleTodayColor">
+                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="weekdayTextColor">
+                                        <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="dataSource" destination="sTJ-T6-kfL" id="gBf-8h-Qct"/>
@@ -3888,8 +3894,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="seprator" width="300" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xja-l6-MU2"/>
         <segue reference="Urg-qd-jmS"/>
+        <segue reference="sk0-vm-fWU"/>
         <segue reference="Q92-9R-gKB"/>
     </inferredMetricsTieBreakers>
 </document>

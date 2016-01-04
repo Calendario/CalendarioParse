@@ -151,7 +151,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                         
                         if datesArray.contains(calendar.selectedDate)
                         {
-                            self.b = true
+                            //self.b = true
                             print(self.b)
                             
                         }

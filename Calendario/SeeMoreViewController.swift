@@ -116,8 +116,39 @@ class SeeMoreViewController: UIViewController {
                 
                 
             }
+            
+            
+            
         }
-        
+            
+        else if contentTextView.text.hasSuffix(".org")
+        {
+            kilabel.text = contentTextView.text
+            kilabel.urlLinkTapHandler = {label,url,range in
+                let nsurl = NSURL(string: "http://\(url)")
+                print(nsurl)
+                UIApplication.sharedApplication().openURL(nsurl!)
+                
+                
+                
+            }
+
+        }
+            
+            
+        else if contentTextView.text.hasSuffix(".co.uk")
+        {
+            kilabel.text = contentTextView.text
+            kilabel.urlLinkTapHandler = {label,url,range in
+                let nsurl = NSURL(string: "http://\(url)")
+                print(nsurl)
+                UIApplication.sharedApplication().openURL(nsurl!)
+                
+                
+                
+            }
+
+        }
         else
         {
             kilabel.hidden = true

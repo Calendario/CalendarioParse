@@ -596,6 +596,9 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in
               let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
+        
+            
+            
             
             var query = PFQuery(className: "StatusUpdate")
             query.includeKey("user")
@@ -625,6 +628,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                         
                         else
                         {
+                          
                             print("user not the owner")
                             let alert = UIAlertController(title: "Sorry", message: "You can only delete your own posts.", preferredStyle: .Alert)
                             alert.view.tintColor = UIColor.flatGreenColor()
@@ -664,6 +668,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         report.backgroundColor = UIColor.flatWhiteColorDark()
         seemore.backgroundColor = UIColor.flatGrayColor()
         deletestatus.backgroundColor = UIColor.flatRedColor()
+        
         
         return [report, seemore, deletestatus]
     }
