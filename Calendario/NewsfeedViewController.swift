@@ -197,6 +197,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         //My getUserFollowersList now returns an array
         //full of PFUser objects :)
+        // thanks dude - Derek 
     
         
         currentDate = NSDate()
