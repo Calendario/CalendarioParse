@@ -36,6 +36,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     
     var mentionid:String!
     var followingusers = [String]()
+    var followinguser:String!
 
     
   
@@ -75,6 +76,17 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         //activity = UIRefreshControl()
         activity.attributedTitle = NSAttributedString(string: "Pull to refresh")
         activity.addTarget(self, action: "LoadData", forControlEvents: UIControlEvents.ValueChanged)
+        
+        
+        /*ManageUser.getUserFollowersList(PFUser.currentUser()!) { (userFollowers) -> Void in
+            print("User followers: \(userFollowers)")
+            
+            // EXAMPLE OF DATA USAGE:
+            let test = userFollowers[0] as! PFUser
+            print("pfuser objects are \(test.username)")
+        }
+        */
+
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -147,10 +159,11 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                 
                 
             }
-            */
         
         
+        */
     }
+
     
 
     
@@ -178,21 +191,13 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         self.setRefreshIndicators(true)
 
         
-        /*
         
-        HI DEREK! Below is the corrected example of what you want:
         
-        ManageUser.getUserFollowersList(PFUser.currentUser()!) { (userFollowers) -> Void in
-            print("User followers: \(userFollowers)")
-            
-            // EXAMPLE OF DATA USAGE:
-            let test = userFollowers[0] as! PFUser
-            print(test.username)
-        }
+        //HI DEREK! Below is the corrected example of what you want:
         
-        My getUserFollowersList now returns an array
-        full of PFUser objects :)
-        */
+        //My getUserFollowersList now returns an array
+        //full of PFUser objects :)
+    
         
         currentDate = NSDate()
         print("the current date is \(currentDate)")
@@ -202,9 +207,64 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         statausData.removeAllObjects()
         
-      
         
-        var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
+        
+        
+        
+        //print(followinguser)
+        ManageUser.getUserFollowingList(PFUser.currentUser()!) { (userFollowers) -> Void in
+            print(userFollowers)
+            
+            for users in userFollowers
+            {
+                let test = users as! PFUser
+                self.followinguser = test.username
+                print(test.username!)
+                
+                
+                var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
+                getstatus.includeKey("user")
+                getstatus.whereKey("user", equalTo: test)
+                getstatus.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
+                    
+                    // Stop the pull to refresh indicator.
+                    self.setRefreshIndicators(false)
+                    
+                    if error == nil {
+                        
+                        for object in objects! {
+                            let statusupdate:PFObject = object as! PFObject
+                            
+                            
+                            
+                            
+                            
+                            
+                            self.statausData.addObject(statusupdate)
+                            
+                        }
+                        let array:NSArray = self.statausData.reverseObjectEnumerator().allObjects
+                        self.statausData = NSMutableArray(array: array)
+                        
+                        self.table.reloadData()
+                        
+                        
+                    }
+                        
+                    else {
+                        
+                    }
+                }
+                
+                
+            }
+            
+
+
+            }
+            
+            
+                    /*var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
         getstatus.includeKey("user")
         //getstatus.whereKey("user", containedIn: self.followingusers)
         getstatus.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
@@ -237,7 +297,10 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                 
             }
         }
+        */
+
    }
+
 
     // Tableview delegate methods
     
