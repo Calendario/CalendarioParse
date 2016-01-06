@@ -35,6 +35,10 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     var likeduser:String!
     
     var mentionid:String!
+    var followingusers = [String]()
+
+    
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +53,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         rightButton.setImage(UIImage(named: "plus"), forState: UIControlState.Normal)
         rightButton.addTarget(self, action: "openPostSection", forControlEvents: UIControlEvents.TouchUpInside)
         rightButton.frame = CGRectMake(0, 0, 53, 31)
+        
                 
         // Set the navigation bar background colour.
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
@@ -172,6 +177,30 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         // Start the pull to refresh indicator.
         self.setRefreshIndicators(true)
         
+        
+        var followers = ManageUser.getUserFollowingList(PFUser.currentUser()!) { (userFollowing) -> Void in
+            //print(userFollowing)
+            
+            
+            var userquery = PFUser.query()
+            userquery?.whereKey("objectId", containedIn: userFollowing)
+            userquery?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                if error == nil
+                {
+                    print(objects!.count)
+                    
+                    if let objects = objects
+                    {
+                       for object in objects
+                       {
+                        self.followingusers.append(object.valueForKey("username") as! String)
+                        print(self.followingusers)
+                        }
+                    }
+                }
+            })
+        }
+        
         currentDate = NSDate()
         print("the current date is \(currentDate)")
         
@@ -183,9 +212,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
       
         
         var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
-        //getstatus.whereKey("tense", equalTo: "going")
-        
-        
+        getstatus.includeKey("user")
+        //getstatus.whereKey("user", containedIn: self.followingusers)
         getstatus.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
             
             // Stop the pull to refresh indicator.
@@ -393,11 +421,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
    
 
     // function that dectects hastags 
-    
-    func StartDectingHastags(text:String)
-    {        
-        
-    }
+   
     
     
     
@@ -636,6 +660,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                             alert.addAction(next)
                             
                             self.presentViewController(alert, animated: true, completion: nil)
+                            
+                            
                             
                             
 
