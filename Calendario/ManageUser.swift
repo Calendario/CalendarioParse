@@ -80,10 +80,10 @@ import Parse
                             if (status == false) {
                                 
                                 // Create the push notification message.s
-                                let pushMessage = "\(userData.username) has followed you."
+                                let pushMessage = "\(userData.username!) has followed you."
                                 
                                 // Submit the push notification.
-                                PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage])
+                                PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage, "User" : "\(userData.username!)"])
                             }
                             
                             dispatch_async(dispatch_get_main_queue(), {
