@@ -176,30 +176,23 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         // Start the pull to refresh indicator.
         self.setRefreshIndicators(true)
+
         
+        /*
         
-        var followers = ManageUser.getUserFollowingList(PFUser.currentUser()!) { (userFollowing) -> Void in
-            //print(userFollowing)
+        HI DEREK! Below is the corrected example of what you want:
+        
+        ManageUser.getUserFollowersList(PFUser.currentUser()!) { (userFollowers) -> Void in
+            print("User followers: \(userFollowers)")
             
-            
-            var userquery = PFUser.query()
-            userquery?.whereKey("objectId", containedIn: userFollowing)
-            userquery?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
-                if error == nil
-                {
-                    print(objects!.count)
-                    
-                    if let objects = objects
-                    {
-                       for object in objects
-                       {
-                        self.followingusers.append(object.valueForKey("username") as! String)
-                        print(self.followingusers)
-                        }
-                    }
-                }
-            })
+            // EXAMPLE OF DATA USAGE:
+            let test = userFollowers[0] as! PFUser
+            print(test.username)
         }
+        
+        My getUserFollowersList now returns an array
+        full of PFUser objects :)
+        */
         
         currentDate = NSDate()
         print("the current date is \(currentDate)")

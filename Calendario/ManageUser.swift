@@ -74,6 +74,18 @@ import Parse
                         // Update the follow/unfollow data for the other user.
                         self.updateOtherUserData(userData, completion: { (updateUserStatus) -> Void in
                             
+                            // Send a push notification if the
+                            // user follow request has worked.
+                            
+                            if (status == false) {
+                                
+                                // Create the push notification message.s
+                                let pushMessage = "\(userData.username) has followed you."
+                                
+                                // Submit the push notification.
+                                PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage])
+                            }
+                            
                             dispatch_async(dispatch_get_main_queue(), {
                                 
                                 // The follow/unfollow operation has succeded.
@@ -134,7 +146,7 @@ import Parse
     
     // User follower/following data.
     
-    class func getUserFollowersList(userData:PFUser , completion: (userFollowers: Array<String>) -> Void) {
+    class func getUserFollowersList(userData:PFUser , completion: (userFollowers: NSMutableArray) -> Void) {
         
         // Get the Object ID for passed in user and then
         // use that to get the user's followers data array.
@@ -153,24 +165,50 @@ import Parse
                 // Get the followers information.
                 followersData = objects!.valueForKey("userFollowers") as! Array<String>!
                 
-                // Pass the follower data in the completion block.
-                completion(userFollowers: followersData)
+                // Setup the user data array.
+                var finalData:NSMutableArray = []
+                
+                // Loop through the Object IDs and 
+                // convert them to PFUser objects.
+                
+                for (var loop = 0; loop < followersData.count; loop++) {
+                    
+                    // Convert the object IDs to PFUser objects.
+                    var queryUser:PFQuery!
+                    queryUser = PFUser.query()
+                    queryUser.whereKey("objectId", equalTo: followersData[loop])
+                    
+                    // Perform the object ID request.
+                    queryUser.getFirstObjectInBackgroundWithBlock({ (userObject, error) -> Void in
+                        
+                        // Pass the data back if correctly loaded.
+                        dispatch_async(dispatch_get_main_queue(), {
+                            
+                            // Add the correct data in.
+                            finalData.addObject(userObject as! PFUser)
+                            
+                            if (finalData.count == followersData.count) {
+                                completion(userFollowers: finalData)
+                            }
+                        })
+                    })
+                }
             })
         }
     }
     
-    class func getUserFollowingList(userData:PFUser , completion: (userFollowing: Array<String>) -> Void) {
+    class func getUserFollowingList(userData:PFUser , completion: (userFollowing: NSMutableArray) -> Void) {
         
         // Get the Object ID for passed in user and then
-        // use that to get the user's followers data array.
+        // use that to get the user's following data array.
         self.getObjectIDForFFClass(userData) { (idNumber) -> Void in
             
             // Setup following query.
-            var queryFollowers:PFQuery!
-            queryFollowers = PFQuery(className: "FollowersAndFollowing")
+            var queryFollowing:PFQuery!
+            queryFollowing = PFQuery(className: "FollowersAndFollowing")
             
             // Get the following list.
-            queryFollowers.getObjectInBackgroundWithId(idNumber, block: { (objects, error) -> Void in
+            queryFollowing.getObjectInBackgroundWithId(idNumber, block: { (objects, error) -> Void in
                 
                 // Create the following list.
                 var followingData:Array<String>!
@@ -178,8 +216,34 @@ import Parse
                 // Get the following information.
                 followingData = objects!.valueForKey("userFollowing") as! Array<String>!
                 
-                // Pass the following data in the completion block.
-                completion(userFollowing: followingData)
+                // Setup the user data array.
+                var finalData:NSMutableArray = []
+                
+                // Loop through the Object IDs and
+                // convert them to PFUser objects.
+                
+                for (var loop = 0; loop < followingData.count; loop++) {
+
+                    // Convert the object IDs to PFUser objects.
+                    var queryUser:PFQuery!
+                    queryUser = PFUser.query()
+                    queryUser.whereKey("objectId", equalTo: followingData[loop])
+                    
+                    // Perform the object ID request.
+                    queryUser.getFirstObjectInBackgroundWithBlock({ (userObject, error) -> Void in
+                        
+                        // Pass the data back if correctly loaded.
+                        dispatch_async(dispatch_get_main_queue(), {
+                            
+                            // Add the correct data in.
+                            finalData.addObject(userObject as! PFUser)
+                            
+                            if (finalData.count == followingData.count) {
+                                completion(userFollowing: finalData)
+                            }
+                        })
+                    })
+                }
             })
         }
     }
