@@ -301,7 +301,14 @@ class MyProfileViewController : UIViewController {
         let followgesturereconizer = UITapGestureRecognizer(target: self, action: "GotoFollowingView")
         self.profFollowing.userInteractionEnabled = true
         self.profFollowing.addGestureRecognizer(followgesturereconizer)
-            }
+        
+        
+        let followergesturereconizer = UITapGestureRecognizer(target: self, action: "GotoFollowerView")
+        
+        self.profFollowers.userInteractionEnabled = true
+        self.profFollowers.addGestureRecognizer(followergesturereconizer)
+        
+    }
     
     
     // gesture methods
@@ -315,6 +322,19 @@ class MyProfileViewController : UIViewController {
            let NC = UINavigationController(rootViewController: followingview)
         self.presentViewController(NC, animated: true, completion: nil)
     }
+    
+    func GotoFollowerView()
+    {
+        print("tapped")
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        var followingview = sb.instantiateViewControllerWithIdentifier("followers") as! FollowersTableViewController
+        let NC = UINavigationController(rootViewController: followingview)
+        self.presentViewController(NC, animated: true, completion: nil)
+
+    }
+    
+    
+    
     
     
     

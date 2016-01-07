@@ -25,6 +25,8 @@
 		E1D759AC1C1243160017B53F /* locationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D759AB1C1243160017B53F /* locationViewController.m */; };
 		E2065DA81C3E0EF30054AB2A /* FollowingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2065DA71C3E0EF30054AB2A /* FollowingTableViewController.swift */; };
 		E2065DAA1C3E25710054AB2A /* FollowingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2065DA91C3E25710054AB2A /* FollowingTableViewCell.swift */; };
+		E2065DAC1C3EDBB40054AB2A /* FollowersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2065DAB1C3EDBB40054AB2A /* FollowersTableViewController.swift */; };
+		E2065DAE1C3EEE9D0054AB2A /* FollowersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2065DAD1C3EEE9D0054AB2A /* FollowersTableViewCell.swift */; };
 		E22263601C34CAF400A77052 /* KILabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E222635F1C34CAF400A77052 /* KILabel.framework */; };
 		E24DA5E91C1154BE00901DF0 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E24DA5E81C1154BE00901DF0 /* Podfile */; };
 		E24DA5EB1C1156F900901DF0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24DA5EA1C1156F900901DF0 /* Social.framework */; };
@@ -145,6 +147,8 @@
 		E1D759AB1C1243160017B53F /* locationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = locationViewController.m; sourceTree = "<group>"; };
 		E2065DA71C3E0EF30054AB2A /* FollowingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTableViewController.swift; sourceTree = "<group>"; };
 		E2065DA91C3E25710054AB2A /* FollowingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowingTableViewCell.swift; path = Calendario/FollowingTableViewCell.swift; sourceTree = "<group>"; };
+		E2065DAB1C3EDBB40054AB2A /* FollowersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowersTableViewController.swift; path = Calendario/FollowersTableViewController.swift; sourceTree = "<group>"; };
+		E2065DAD1C3EEE9D0054AB2A /* FollowersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowersTableViewCell.swift; path = Calendario/FollowersTableViewCell.swift; sourceTree = "<group>"; };
 		E222635F1C34CAF400A77052 /* KILabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KILabel.framework; path = "Pods/../build/Debug-iphoneos/KILabel.framework"; sourceTree = "<group>"; };
 		E24DA5E81C1154BE00901DF0 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E24DA5EA1C1156F900901DF0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -325,6 +329,8 @@
 			children = (
 				E2065DA71C3E0EF30054AB2A /* FollowingTableViewController.swift */,
 				E2065DA91C3E25710054AB2A /* FollowingTableViewCell.swift */,
+				E2065DAB1C3EDBB40054AB2A /* FollowersTableViewController.swift */,
+				E2065DAD1C3EEE9D0054AB2A /* FollowersTableViewCell.swift */,
 			);
 			name = "Following/Followers List";
 			path = ..;
@@ -914,6 +920,7 @@
 				E2FE964C1BDFE07D003BEDD2 /* CommentsViewController.swift in Sources */,
 				A2C55BAC1BE7B77B00431EA0 /* WebPageViewController.swift in Sources */,
 				E2E0D7071BC9950800662E70 /* AppDelegate.m in Sources */,
+				E2065DAC1C3EDBB40054AB2A /* FollowersTableViewController.swift in Sources */,
 				E2B7D2841BE86C9E002395F7 /* FSCalendarCollectionView.m in Sources */,
 				A26701F21C369D5B0041E1D1 /* ManageUser.swift in Sources */,
 				E2EE565B1BF199F70064BA1D /* Chameleon_.m in Sources */,
@@ -962,6 +969,7 @@
 				E24DA65D1C172DB500901DF0 /* FollowHelper.swift in Sources */,
 				E2EE56611BF199F70064BA1D /* UIImage+ChameleonPrivate.m in Sources */,
 				E2B7D2861BE86C9E002395F7 /* FSCalendarFlowLayout.m in Sources */,
+				E2065DAE1C3EEE9D0054AB2A /* FollowersTableViewCell.swift in Sources */,
 				E2F3EF901BE1C75600F42433 /* CommentsTableViewCell.swift in Sources */,
 				A2E12C831BCE6E59007D8587 /* RegisterViewController.swift in Sources */,
 				E27ACC811BEDA64100503DD7 /* TimelineViewController.swift in Sources */,

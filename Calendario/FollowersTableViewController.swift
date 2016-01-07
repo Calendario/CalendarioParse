@@ -1,30 +1,28 @@
 //
-//  FollowingTableViewController.swift
+//  FollowersTableViewController.swift
 //  Calendario
 //
-//  Created by Derek Cacciotti on 1/6/16.
+//  Created by Derek Cacciotti on 1/7/16.
 //  Copyright © 2016 Calendario. All rights reserved.
 //
 
 import UIKit
 
-class FollowingTableViewController: UITableViewController {
+class FollowersTableViewController: UITableViewController {
     
-    var followingdata:NSMutableArray = NSMutableArray()
-    
+      var followersdata:NSMutableArray = NSMutableArray()
+
     @IBOutlet weak var backButton: UIBarButtonItem!
     
-    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.setLeftBarButtonItem(backButton, animated: true)
-        self.navigationItem.title = "Following"
+        self.navigationItem.title = "Followers"
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.17, green: 0.58, blue: 0.30, alpha: 1.0)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
         
+
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -35,23 +33,19 @@ class FollowingTableViewController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        // get user data from nsuserdefaults 
         LoadData()
-       
     }
     
     
-    // load data from Parse backend
+    // load data from parse
     
     func LoadData()
-    
     {
         let defaults = NSUserDefaults.standardUserDefaults()
         var userdata = defaults.objectForKey("userdata")
         print(userdata)
         
-        followingdata.removeAllObjects()
+        followersdata.removeAllObjects()
         
         var query = PFUser.query()
         query?.whereKey("username", equalTo: userdata!)
@@ -66,41 +60,39 @@ class FollowingTableViewController: UITableViewController {
                         var user:PFUser = object as! PFUser
                         print(user)
                         
-                        ManageUser.getUserFollowingList(user, completion: { (userFollowers) -> Void in
+                        ManageUser.getUserFollowersList(user, completion: { (userFollowers) -> Void in
                             print(userFollowers)
                             
                             for followers in userFollowers
                             {
-                               let user = followers.username!
+                                let user = followers.username!
                                 print(user)
                                 
                                 
-                                self.followingdata.addObject(followers as! PFObject)
+                                self.followersdata.addObject(followers as! PFObject)
                                 
-                                let array:NSArray = self.followingdata.reverseObjectEnumerator().allObjects
-                                self.followingdata = NSMutableArray(array: array)
+                                let array:NSArray = self.followersdata.reverseObjectEnumerator().allObjects
+                                self.followersdata = NSMutableArray(array: array)
                                 self.tableView.reloadData()
                                 
-                                print(self.followingdata.count)
+                                print(self.followersdata.count)
                             }
                             
                             
-                    })
+                        })
                     }
                 }
             }
         })
- 
-       
+        
+
     }
     
     
-    // when the backbutton is tapped
     
-    @IBAction func BackButtontapped(sender: AnyObject) {
+    @IBAction func backButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -116,31 +108,24 @@ class FollowingTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return followingdata.count
+        return followersdata.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FollowingCell", forIndexPath: indexPath) as! FollowingTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("FollowersCell", forIndexPath: indexPath) as! FollowersTableViewCell
         
+        let followdata:PFObject = self.followersdata.objectAtIndex(indexPath.row) as! PFObject
+        cell.usernameLabel.text = followdata.objectForKey("username") as! String
+        cell.realNameLabel.text = followdata.objectForKey("fullName") as! String
         
-        let followData:PFObject = self.followingdata.objectAtIndex(indexPath.row) as! PFObject
-        // setting the labels
-        cell.UserNameLabel.text = followData.objectForKey("username") as! String
-        cell.RealNameLabel.text = followData.objectForKey("fullName") as! String
-        
-        
-        // make the imageview into a circle 
-        
+        // make imageview into circle
         cell.imageview.layer.cornerRadius = (cell.imageview.frame.size.width / 2)
         cell.imageview.clipsToBounds = true
         
         
-        
-        // query to get images
-        
         var getImages:PFQuery = PFUser.query()!
-        getImages.whereKey("objectId", equalTo: followData.valueForKey("objectId")!)
+        getImages.whereKey("objectId", equalTo: followdata.valueForKey("objectId")!)
         getImages.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil
             {
@@ -152,6 +137,9 @@ class FollowingTableViewController: UITableViewController {
             }
         }
         
+
+        
+        
         
         
 
@@ -161,7 +149,7 @@ class FollowingTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let followData:PFObject = self.followingdata.objectAtIndex(indexPath.row) as! PFObject
+        let followData:PFObject = self.followersdata.objectAtIndex(indexPath.row) as! PFObject
         
         var username = followData.objectForKey("username") as! String
         print(username)
@@ -185,8 +173,10 @@ class FollowingTableViewController: UITableViewController {
             }
         })
     }
+
     
-    // go to user profile
+
+    
     func GotoProfile(user:PFUser)
     {
         let sb = UIStoryboard(name: "Main", bundle: nil)
