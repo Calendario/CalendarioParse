@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7864D1241C3AA70F0009A89F /* FollowinglistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7864D1231C3AA70F0009A89F /* FollowinglistViewController.swift */; };
-		7864D1271C3AA7440009A89F /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7864D1261C3AA7440009A89F /* FollowersViewController.swift */; };
-		7864D1291C3AB4830009A89F /* followingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7864D1281C3AB4820009A89F /* followingTableViewCell.swift */; };
 		78C1C01C1C006D9200ACDCEC /* reportBug.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C1C01B1C006D9200ACDCEC /* reportBug.m */; };
 		9CE5A692AEA13F553B89DF70 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3354E761A083188ECD02163D /* Pods.framework */; };
 		A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25179511C201B0300EA0A5E /* ReportUserViewController.swift */; };
@@ -26,7 +23,8 @@
 		E17180521C21389600D591FA /* notificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17180511C21389600D591FA /* notificationsViewController.m */; };
 		E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E187B5F51BD3368400845C2F /* SearchViewController.m */; };
 		E1D759AC1C1243160017B53F /* locationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D759AB1C1243160017B53F /* locationViewController.m */; };
-		E2065DA51C3B886B0054AB2A /* CalFollowingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2065DA41C3B886B0054AB2A /* CalFollowingTableViewController.swift */; };
+		E2065DA81C3E0EF30054AB2A /* FollowingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2065DA71C3E0EF30054AB2A /* FollowingTableViewController.swift */; };
+		E2065DAA1C3E25710054AB2A /* FollowingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2065DA91C3E25710054AB2A /* FollowingTableViewCell.swift */; };
 		E22263601C34CAF400A77052 /* KILabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E222635F1C34CAF400A77052 /* KILabel.framework */; };
 		E24DA5E91C1154BE00901DF0 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E24DA5E81C1154BE00901DF0 /* Podfile */; };
 		E24DA5EB1C1156F900901DF0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24DA5EA1C1156F900901DF0 /* Social.framework */; };
@@ -123,9 +121,6 @@
 
 /* Begin PBXFileReference section */
 		3354E761A083188ECD02163D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7864D1231C3AA70F0009A89F /* FollowinglistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowinglistViewController.swift; path = Calendario/FollowinglistViewController.swift; sourceTree = "<group>"; };
-		7864D1261C3AA7440009A89F /* FollowersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
-		7864D1281C3AB4820009A89F /* followingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = followingTableViewCell.swift; sourceTree = "<group>"; };
 		78C1C01A1C006D9200ACDCEC /* reportBug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reportBug.h; sourceTree = "<group>"; };
 		78C1C01B1C006D9200ACDCEC /* reportBug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = reportBug.m; sourceTree = "<group>"; };
 		9CFC86F79C40E6D71F993D2D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -148,7 +143,8 @@
 		E187B5F51BD3368400845C2F /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		E1D759AA1C1243160017B53F /* locationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = locationViewController.h; sourceTree = "<group>"; };
 		E1D759AB1C1243160017B53F /* locationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = locationViewController.m; sourceTree = "<group>"; };
-		E2065DA41C3B886B0054AB2A /* CalFollowingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalFollowingTableViewController.swift; sourceTree = "<group>"; };
+		E2065DA71C3E0EF30054AB2A /* FollowingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTableViewController.swift; sourceTree = "<group>"; };
+		E2065DA91C3E25710054AB2A /* FollowingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowingTableViewCell.swift; path = Calendario/FollowingTableViewCell.swift; sourceTree = "<group>"; };
 		E222635F1C34CAF400A77052 /* KILabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KILabel.framework; path = "Pods/../build/Debug-iphoneos/KILabel.framework"; sourceTree = "<group>"; };
 		E24DA5E81C1154BE00901DF0 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E24DA5EA1C1156F900901DF0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -327,10 +323,8 @@
 		7864D1251C3AA7290009A89F /* Following/Followers List */ = {
 			isa = PBXGroup;
 			children = (
-				7864D1281C3AB4820009A89F /* followingTableViewCell.swift */,
-				7864D1261C3AA7440009A89F /* FollowersViewController.swift */,
-				7864D1231C3AA70F0009A89F /* FollowinglistViewController.swift */,
-				E2065DA41C3B886B0054AB2A /* CalFollowingTableViewController.swift */,
+				E2065DA71C3E0EF30054AB2A /* FollowingTableViewController.swift */,
+				E2065DA91C3E25710054AB2A /* FollowingTableViewCell.swift */,
 			);
 			name = "Following/Followers List";
 			path = ..;
@@ -915,7 +909,6 @@
 				E2AE81531BCAFF320047D1FA /* NewsfeedViewController.swift in Sources */,
 				E2D09C9C1BCCC59A003F4651 /* UIColor+CL.m in Sources */,
 				E2B7D2801BE86C9E002395F7 /* FSCalendar.m in Sources */,
-				7864D1241C3AA70F0009A89F /* FollowinglistViewController.swift in Sources */,
 				E2B7D2831BE86C9E002395F7 /* FSCalendarCell.m in Sources */,
 				E2B7D28A1BE86C9E002395F7 /* NSDate+FSExtension.m in Sources */,
 				E2FE964C1BDFE07D003BEDD2 /* CommentsViewController.swift in Sources */,
@@ -923,7 +916,6 @@
 				E2E0D7071BC9950800662E70 /* AppDelegate.m in Sources */,
 				E2B7D2841BE86C9E002395F7 /* FSCalendarCollectionView.m in Sources */,
 				A26701F21C369D5B0041E1D1 /* ManageUser.swift in Sources */,
-				7864D1291C3AB4830009A89F /* followingTableViewCell.swift in Sources */,
 				E2EE565B1BF199F70064BA1D /* Chameleon_.m in Sources */,
 				E2D09C911BCCC575003F4651 /* DayTitleLabel.m in Sources */,
 				E2FE96481BDF1AEA003BEDD2 /* ReportTableViewController.swift in Sources */,
@@ -942,6 +934,7 @@
 				A2AE4A501BDCF7B8008E84B9 /* ToSViewController.swift in Sources */,
 				E2B7D2811BE86C9E002395F7 /* FSCalendar+IBExtension.m in Sources */,
 				E2D09C9B1BCCC59A003F4651 /* NSDictionary+CL.m in Sources */,
+				E2065DA81C3E0EF30054AB2A /* FollowingTableViewController.swift in Sources */,
 				E2C9223C1C1CB581004278E3 /* CalPhotoViewerViewController.swift in Sources */,
 				A26359E41BDA8342003F8FEB /* ResetPasswordViewController.swift in Sources */,
 				E2B7D28B1BE86C9E002395F7 /* NSString+FSExtension.m in Sources */,
@@ -954,17 +947,16 @@
 				E2B7D28C1BE86C9E002395F7 /* UIView+FSExtension.m in Sources */,
 				78C1C01C1C006D9200ACDCEC /* reportBug.m in Sources */,
 				E2EE565E1BF199F70064BA1D /* UIButton+Chameleon.m in Sources */,
+				E2065DAA1C3E25710054AB2A /* FollowingTableViewCell.swift in Sources */,
 				E1D759AC1C1243160017B53F /* locationViewController.m in Sources */,
 				E2EE565F1BF199F70064BA1D /* UIColor+Chameleon.m in Sources */,
 				E2D09C901BCCC575003F4651 /* DailyCalendarView.m in Sources */,
 				E2EF8A811C02B9E80000A957 /* SeeMoreViewController.swift in Sources */,
-				E2065DA51C3B886B0054AB2A /* CalFollowingTableViewController.swift in Sources */,
 				E2B7D2851BE86C9E002395F7 /* FSCalendarConstance.m in Sources */,
 				E2B7D2881BE86C9E002395F7 /* FSCalendarStickyHeader.m in Sources */,
 				E2B7D2821BE86C9E002395F7 /* FSCalendarAppearance.m in Sources */,
 				E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */,
 				A2FBF5CA1C010B360051A553 /* SettingsViewController.swift in Sources */,
-				7864D1271C3AA7440009A89F /* FollowersViewController.swift in Sources */,
 				E17180521C21389600D591FA /* notificationsViewController.m in Sources */,
 				E2D09C9A1BCCC59A003F4651 /* NSDate+CL.m in Sources */,
 				E24DA65D1C172DB500901DF0 /* FollowHelper.swift in Sources */,

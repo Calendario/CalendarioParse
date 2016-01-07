@@ -292,7 +292,33 @@ class MyProfileViewController : UIViewController {
         // Curve the edges of the edit button.
         self.editButton.layer.cornerRadius = 6
         self.editButton.clipsToBounds = true
+        
+        
+        
+        
+        // adding tap gesture reconizers to the following and follower labels 
+        
+        let followgesturereconizer = UITapGestureRecognizer(target: self, action: "GotoFollowingView")
+        self.profFollowing.userInteractionEnabled = true
+        self.profFollowing.addGestureRecognizer(followgesturereconizer)
+            }
+    
+    
+    // gesture methods
+    
+    
+    func GotoFollowingView()
+    {
+        print("tapped")
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        var followingview = sb.instantiateViewControllerWithIdentifier("following") as! FollowingTableViewController
+           let NC = UINavigationController(rootViewController: followingview)
+        self.presentViewController(NC, animated: true, completion: nil)
     }
+    
+    
+    
+    
     
     // View Did Appear method.
     
@@ -486,6 +512,9 @@ class MyProfileViewController : UIViewController {
         
         // Set the username label text.
         self.profUserName.text = "\(userData.username!)"
+        // store PFUser Data in NSUserDefaults t
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(userData.username, forKey: "userdata")
         
         // Check the website URL link.
         userWebsiteLink = userData.objectForKey("website") as? String

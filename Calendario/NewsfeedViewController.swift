@@ -214,7 +214,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         //print(followinguser)
         ManageUser.getUserFollowingList(PFUser.currentUser()!) { (userFollowers) -> Void in
-            print(userFollowers)
+            //print(userFollowers)
             
             for users in userFollowers
             {
