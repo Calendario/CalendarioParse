@@ -49,7 +49,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         LoadCommentData()
         
         
-        let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 53))
+       /* let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 53))
         navigationbar.backgroundColor = UIColor.whiteColor()
         navigationbar.delegate = self
         navigationbar.barTintColor = UIColor(hexString: "#2c9560")
@@ -64,7 +64,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         navigationbar.items = [navitems]
         self.view.addSubview(navigationbar)
         
-        
+        */
 
     }
 
@@ -130,6 +130,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         comment["commenttext"] = commentTextView.text
         comment["postedby"] = PFUser.currentUser()
         comment["statusOBJID"] = String(savedobjectID)
+        
         
         comment.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
             if success

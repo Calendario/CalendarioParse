@@ -226,6 +226,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                 var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
                 getstatus.includeKey("user")
                 getstatus.whereKey("user", equalTo: test)
+                //getstatus.whereKey("user", equalTo: PFUser.currentUser()!)
                 getstatus.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
                     
                     // Stop the pull to refresh indicator.

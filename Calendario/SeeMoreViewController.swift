@@ -31,6 +31,12 @@ class SeeMoreViewController: UIViewController {
     
     @IBOutlet weak var kilabel: KILabel!
     
+    
+    @IBOutlet weak var likeslabel: UILabel!
+    
+    @IBOutlet weak var commentnumlabel: UILabel!
+    
+    
     let defaults = NSUserDefaults.standardUserDefaults()
     
 
@@ -57,6 +63,9 @@ class SeeMoreViewController: UIViewController {
         
         
         contentTextView.text = defaults.objectForKey("updatetext") as? String
+        
+        likeslabel.hidden = true
+        commentnumlabel.hidden = true
         
         
         
@@ -187,11 +196,13 @@ class SeeMoreViewController: UIViewController {
                         self.defaults.setObject(object.objectId, forKey: "fromseemore")
                         
                         
-                        print(likes)
+                        //print(likes!)
                         
                         if likes >= 1
                         {
                             self.LikeButton.setImage(likebuttonfilled, forState: .Normal)
+                            self.likeslabel.hidden = false
+                            self.likeslabel.text = String(likes!)
                         }
                         
                         
@@ -226,12 +237,36 @@ class SeeMoreViewController: UIViewController {
                         })
                         
                         
+                    
+                        
+                        
                         
                         
                         
                         
                        
                     }
+                }
+            }
+        }
+        
+        
+        
+        // getting the number of comments
+        
+        var commmentquery = PFQuery(className: "comment")
+        commmentquery.whereKey("statusOBJID", equalTo: objectid!)
+        commmentquery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil
+            {
+                print("comments \(objects!.count)")
+                
+                // display label number of comments is greater than 0
+                
+                if objects!.count > 0
+                {
+                    self.commentnumlabel.text = String(objects!.count)
+                    self.commentnumlabel.hidden = false
                 }
             }
         }
