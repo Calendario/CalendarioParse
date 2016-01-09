@@ -42,6 +42,8 @@
     // Google Places API Set-up
     [GMSServices provideAPIKey: @"AIzaSyARYlkKdCJJ_NyvzroSOJauGj5CR450fT0"];
     
+    // Creating Installation with User
+     [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"]; [[PFInstallation currentInstallation] saveEventually];
     
     // Notifications Registration
     // Register for Push Notitications
