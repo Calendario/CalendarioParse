@@ -17,6 +17,7 @@
 		A2AE4A521BDCF82F008E84B9 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AE4A511BDCF82F008E84B9 /* PrivacyPolicyViewController.swift */; };
 		A2C55BAC1BE7B77B00431EA0 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C55BAB1BE7B77B00431EA0 /* WebPageViewController.swift */; };
 		A2E12C831BCE6E59007D8587 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */; };
+		A2FB92E51C41C0D900AB0E58 /* ProfileViewCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FB92E41C41C0D900AB0E58 /* ProfileViewCustomCell.swift */; };
 		A2FBF5C61C00BADA0051A553 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FBF5C51C00BADA0051A553 /* EditProfileViewController.swift */; };
 		A2FBF5CA1C010B360051A553 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FBF5C91C010B360051A553 /* SettingsViewController.swift */; };
 		E151AF721BD72D6500811A31 /* tabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E151AF711BD72D6500811A31 /* tabBarViewController.m */; };
@@ -135,6 +136,7 @@
 		A2AE4A511BDCF82F008E84B9 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		A2C55BAB1BE7B77B00431EA0 /* WebPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
 		A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		A2FB92E41C41C0D900AB0E58 /* ProfileViewCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewCustomCell.swift; sourceTree = "<group>"; };
 		A2FBF5C51C00BADA0051A553 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		A2FBF5C91C010B360051A553 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E151AF701BD72D6500811A31 /* tabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tabBarViewController.h; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 			isa = PBXGroup;
 			children = (
 				A28825F51BE3960500564EBF /* MyProfileViewController.swift */,
+				A2FB92E41C41C0D900AB0E58 /* ProfileViewCustomCell.swift */,
 			);
 			name = "Profile view";
 			sourceTree = "<group>";
@@ -795,7 +798,7 @@
 				TargetAttributes = {
 					E2E0D6FE1BC9950800662E70 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = N6BSX9PZT5;
+						DevelopmentTeam = 52K634K77W;
 					};
 					E2E0D7171BC9950800662E70 = {
 						CreatedOnToolsVersion = 7.0;
@@ -965,6 +968,7 @@
 				E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */,
 				A2FBF5CA1C010B360051A553 /* SettingsViewController.swift in Sources */,
 				E17180521C21389600D591FA /* notificationsViewController.m in Sources */,
+				A2FB92E51C41C0D900AB0E58 /* ProfileViewCustomCell.swift in Sources */,
 				E2D09C9A1BCCC59A003F4651 /* NSDate+CL.m in Sources */,
 				E24DA65D1C172DB500901DF0 /* FollowHelper.swift in Sources */,
 				E2EE56611BF199F70064BA1D /* UIImage+ChameleonPrivate.m in Sources */,

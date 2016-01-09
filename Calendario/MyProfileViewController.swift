@@ -11,7 +11,7 @@ import UIKit
 import Parse
 import QuartzCore
 
-class MyProfileViewController : UIViewController {
+class MyProfileViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // Setup the various user labels/etc.
     @IBOutlet weak var profPicture: UIImageView!
@@ -30,6 +30,7 @@ class MyProfileViewController : UIViewController {
     @IBOutlet weak var blockedBlurView: UIView!
     @IBOutlet weak var blockedViewDesc: UITextView!
     @IBOutlet weak var privateView: UIView!
+    @IBOutlet weak var statusList: UITableView!
     
     // Follow method property
     var FollowObject = FollowHelper()
@@ -48,6 +49,10 @@ class MyProfileViewController : UIViewController {
     
     // Private profile check.
     var privateCheck:Bool!
+    
+    // User status update data.
+    // (For the statusList table view).
+    var statusObjects:NSMutableArray = NSMutableArray()
     
     // Setup the on screen button actions.
     
@@ -293,29 +298,20 @@ class MyProfileViewController : UIViewController {
         self.editButton.layer.cornerRadius = 6
         self.editButton.clipsToBounds = true
         
-        
-        
-        
-        // adding tap gesture reconizers to the following and follower labels 
-        
+        // Adding tap gesture reconizers to the following and follower labels.
         let followgesturereconizer = UITapGestureRecognizer(target: self, action: "GotoFollowingView")
         self.profFollowing.userInteractionEnabled = true
         self.profFollowing.addGestureRecognizer(followgesturereconizer)
         
-        
         let followergesturereconizer = UITapGestureRecognizer(target: self, action: "GotoFollowerView")
-        
         self.profFollowers.userInteractionEnabled = true
         self.profFollowers.addGestureRecognizer(followergesturereconizer)
-        
     }
     
+    // Gesture methods.
     
-    // gesture methods
-    
-    
-    func GotoFollowingView()
-    {
+    func GotoFollowingView() {
+        
         print("tapped")
         let sb = UIStoryboard(name: "Main", bundle: nil)
         var followingview = sb.instantiateViewControllerWithIdentifier("following") as! FollowingTableViewController
@@ -323,8 +319,8 @@ class MyProfileViewController : UIViewController {
         self.presentViewController(NC, animated: true, completion: nil)
     }
     
-    func GotoFollowerView()
-    {
+    func GotoFollowerView() {
+        
         print("tapped")
         let sb = UIStoryboard(name: "Main", bundle: nil)
         var followingview = sb.instantiateViewControllerWithIdentifier("followers") as! FollowersTableViewController
@@ -332,13 +328,6 @@ class MyProfileViewController : UIViewController {
         self.presentViewController(NC, animated: true, completion: nil)
 
     }
-    
-    
-    
-    
-    
-    
-    
     
     // View Did Appear method.
     
@@ -525,11 +514,6 @@ class MyProfileViewController : UIViewController {
         // Set the post count label default.
         self.profPosts.text = "0"
         
-        // Set the posts count label.
-        ManageUser.getUserPostCount(userData) { (result) -> Void in
-            self.profPosts.text = "\(result)"
-        }
-        
         // Set the username label text.
         self.profUserName.text = "\(userData.username!)"
         // store PFUser Data in NSUserDefaults t
@@ -606,6 +590,155 @@ class MyProfileViewController : UIViewController {
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             }
         }
+        
+        // Set the posts count label.
+        ManageUser.getUserPostCount(userData) { (result) -> Void in
+            
+            // Set the posts counter label.
+            self.profPosts.text = "\(result)"
+            
+            // Set the status check.
+            
+            if (result > 0) {
+                
+                // Load in the user status updates data.
+                self.loadUserStatusUpdate()
+            }
+        }
+    }
+    
+    // Status updates data methods.
+    
+    func loadUserStatusUpdate() {
+        
+        // Setup the user status update query.
+        var queryStatusUpdate:PFQuery!
+        queryStatusUpdate = PFQuery(className: "StatusUpdate")
+        queryStatusUpdate.orderByAscending("createdAt")
+        queryStatusUpdate.whereKey("user", equalTo: PFUser.currentUser()!)
+        queryStatusUpdate.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                if (error == nil) {
+                    
+                    // Check if any objects matching
+                    // the passed in user are present.
+                    
+                    if (objects!.count > 0) {
+                        
+                        // Initialise the data array.
+                        self.statusObjects = NSMutableArray()
+                        
+                        // Save the status update data.
+                        
+                        for (var loop = 0; loop < objects!.count; loop++) {
+                            self.statusObjects.addObject(objects![loop])
+                        }
+                        
+                        // Show the table view.
+                        self.statusList.alpha = 1.0
+                        
+                        // Reload the table view.
+                        self.statusList.reloadData()
+                    }
+                        
+                    else {
+                        
+                        // Hide the table view.
+                        self.statusList.alpha = 0.0
+                    }
+                }
+                    
+                else {
+                    
+                    // Hide the table view.
+                    self.statusList.alpha = 0.0
+                }
+            })
+        }
+    }
+    
+    // UITableView methods.
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return statusObjects.count
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        // Setup the table view cell.
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ProfileViewCustomCell
+        
+        // Get the specific status object for this cell.
+        let currentObject:PFObject = statusObjects.objectAtIndex(indexPath.row) as! PFObject
+        
+        // Set the status labels.
+        cell.statusTextView.text = currentObject["updatetext"] as? String
+        cell.uploadDateLabel.text = currentObject["dateofevent"] as? String
+        cell.tenseLabel.text = currentObject["tense"] as? String
+        cell.locationLabel.text = currentObject["location"] as? String
+        
+        // Turn the profile picture into a cirlce.
+        cell.profileImageView.layer.cornerRadius = (cell.profileImageView.frame.size.width / 2)
+        cell.profileImageView.clipsToBounds = true
+        
+        // Get the user object data.
+        var findUser:PFQuery!
+        findUser = PFUser.query()!
+        findUser.whereKey("objectId", equalTo: (currentObject.objectForKey("user")?.objectId)!)
+        
+        findUser.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
+            
+            if let aobject = objects {
+                
+                let userObject = (aobject as NSArray).lastObject as? PFUser
+                
+                // Set the user name label.
+                cell.userNameLabel.text = userObject?.username
+                
+                // Setup the user profile image file.
+                let userImageFile = userObject!["profileImage"] as! PFFile
+                
+                // Download the profile image.
+                userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                    
+                    if (error == nil) {
+                        
+                        // Check the profile image data first.
+                        let profileImage = UIImage(data:imageData!)
+                        
+                        if ((imageData != nil) && (profileImage != nil)) {
+                            
+                            // Set the user profile picture.
+                            cell.profileImageView.image = profileImage
+                        }
+                            
+                        else {
+                            
+                            // No profile picture set the standard image.
+                           cell.profileImageView.image = UIImage(named: "default_profile_pic.png")
+                        }
+                    }
+                        
+                    else {
+                        
+                        // No profile picture set the standard image.
+                        cell.profileImageView.image = UIImage(named: "default_profile_pic.png")
+                    }
+                }
+            }
+        }
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 139
     }
     
     // Alert methods.
