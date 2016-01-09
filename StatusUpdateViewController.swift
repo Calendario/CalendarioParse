@@ -186,12 +186,13 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     {
         let dateformatter = NSDateFormatter()
         dateformatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        dateformatter.dateFormat = "MM/d/yy"
         dateLabel.hidden = false
         dateLabel.text = dateformatter.stringFromDate(datepicker.date)
+        print(dateLabel)
         datepicker.hidden = true
-    
 
-           }
+    }
     
     
     

@@ -137,7 +137,27 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             {
               
                 
+                var query = PFQuery(className: "StatusUpdate")
+                query.includeKey("user")
+                query.getObjectInBackgroundWithId(self.savedobjectID, block: { (object, error) -> Void in
+                    if error == nil
+                    {
+                        print(object!.valueForKey("user")!.username!)
+                        
+                        // create push notifcation
+                        
+                        let message = "\(PFUser.currentUser()!.username) has commented on your post"
+                        //PFCloud.callFunctionInBackground("", withParameters: <#T##[NSObject : AnyObject]?#>)
+                    }
+                })
+                
+                
+                
+                
+                
                 print("comment posted")
+                
+                
             }
             else
             {

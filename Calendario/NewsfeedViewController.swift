@@ -266,6 +266,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                     
                     var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
                     getstatus.includeKey("user")
+                    getstatus.orderByAscending("createdAt")
                     getstatus.whereKey("user", equalTo: PFUser.currentUser()!)
                     getstatus.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
                         
@@ -408,6 +409,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             {
                 let puser = (aobject as NSArray).lastObject as? PFUser
                 cell.UserNameLabel.text = puser?.username
+                
+                
                 
             }
         }
