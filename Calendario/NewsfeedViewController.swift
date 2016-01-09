@@ -8,6 +8,7 @@
 
 import UIKit
 import Social
+import DOFavoriteButton
 
 
 class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegate, UINavigationBarDelegate, FSCalendarDelegate, FSCalendarDataSource {
@@ -224,6 +225,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                 
                 
                 var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
+                getstatus.orderByAscending("createdAt")
                 getstatus.includeKey("user")
                 getstatus.whereKey("user", equalTo: test)
                 //getstatus.whereKey("user", equalTo: PFUser.currentUser()!)
@@ -356,6 +358,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         
         
+        
+        
         var findUser:PFQuery = PFUser.query()!
         
         findUser.whereKey("objectId", equalTo: (statusupdate.objectForKey("user")?.objectId)!)
@@ -386,6 +390,23 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         // like button
         
+        
+        // create action for like Button
+        
+        print(statusupdate.objectId!)
+        cell.likebutton.addTarget(self, action: "likeClicked:", forControlEvents: .TouchUpInside)
+        
+        // get update based on id 
+        
+        
+        
+        
+        
+        
+        
+        
+        /*cell.LikeButton.setImage(UIImage(named: "like button"), forState: .Normal)
+        
         var getlikes = PFQuery(className: "StatusUpdate")
         
         getlikes.whereKey("likedBy", equalTo: PFUser.currentUser()!)
@@ -397,11 +418,24 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                     for object in objects
                     {
                       print(object.objectId!)
-                    if statusupdate.objectId == object.objectId
+                    var numoflikes = object.valueForKey("likes") as! Int
+                    // storing the current object id with nsuserdefaults for the unlike method
+                        
+                        let defaults = NSUserDefaults.standardUserDefaults()
+                        defaults.setObject(object.objectId, forKey: "unlike")
+                        
+                    if numoflikes <= 1
                     {
                         let filledlikebutton = UIImage(named: "like button filled")
                         cell.LikeButton.setImage(filledlikebutton, forState: .Normal)
-                    }
+                        // adding a long press gesture reconizer 
+                        let longpressgesure = UILongPressGestureRecognizer(target: self, action: "unlike")
+                        longpressgesure.minimumPressDuration = 2.0
+                        cell.LikeButton.addGestureRecognizer(longpressgesure)
+                        print(numoflikes)
+                        }
+                       
+                    
                 }
                 
 
@@ -410,16 +444,84 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             }
         }
         
+*/
     
-
         //StartDectingHastags(cell.statusTextView.text)
         
         
         
         
         return cell
-}
+        }
+    
+    func likeClicked(sender:DOFavoriteButton)
+        {
+        
+            
+            print(currentobjectID)
+            
+            if sender.selected
+            {
+                
+                    print("unlike")
+                var query = PFQuery(className: "StatusUpdate")
+                query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
+                    if error == nil
+                    {
+                        var currentlikes = update?.valueForKey("likes") as! Int
+                        
+                        update!["likes"] = currentlikes - 1
+                        update?.saveInBackground()
+                        
+                        print(update?.valueForKey("likes") as! Int)
+                        
+                        let alert = UIAlertController(title: "Alert", message: "You have unlike this post.", preferredStyle: .Alert)
+                        alert.view.tintColor = UIColor.flatGreenColor()
+                        let next = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                        alert.addAction(next)
+                        
+                        self.presentViewController(alert, animated: true, completion: nil)
+                        
+                        
 
+                    }
+                })
+                
+                
+                
+                 sender.deselect()
+
+            }
+            else
+            {
+                print("like")
+                sender.select()
+                sender.imageColorOn = UIColor.flatRedColor()
+                var query = PFQuery(className: "StatusUpdate")
+                query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
+                    if error == nil
+                    {
+                        var currentlikes = update?.valueForKey("likes") as! Int
+                        
+                        update!["likes"] = currentlikes + 1
+                        update?.saveInBackground()
+                        
+                       print(update?.valueForKey("likes") as! Int)
+                    }
+                })
+
+            }
+            
+            
+            
+        }
+    
+
+    
+    
+    
+    
+   
     
 
     
@@ -467,6 +569,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         print(statusupdate.objectId!)
         currentobjectID = statusupdate.objectId
         print("the current object id is \(currentobjectID)")
+        
         
         // storing the object id in NSUserDefaults 
         

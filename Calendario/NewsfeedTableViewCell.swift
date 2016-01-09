@@ -8,6 +8,8 @@
 
 import UIKit
 import  KILabel
+import DOFavoriteButton
+
 
 
 class NewsfeedTableViewCell: UITableViewCell {
@@ -16,8 +18,9 @@ class NewsfeedTableViewCell: UITableViewCell {
     @IBOutlet weak var UserNameLabel: UILabel!
     
     @IBOutlet weak var statusTextView: UITextView!
-
-    @IBOutlet weak var LikeButton: UIButton!
+    
+    @IBOutlet var likebutton: DOFavoriteButton!
+    
     
     @IBOutlet weak var profileimageview: UIImageView!
     
@@ -63,37 +66,9 @@ class NewsfeedTableViewCell: UITableViewCell {
     
     // like button method
     
-    @IBAction func LikeButtonTapped(sender: AnyObject) {
-        LikeButton.setImage(filledlikebutton, forState: .Normal)
-        
-        var objid = defaults.stringForKey("objectid")
-        print(objid!)
-        
-        var query = PFQuery(className: "StatusUpdate")
-        query.getObjectInBackgroundWithId(objid!) { (statusupdate:PFObject?, error:NSError?) -> Void in
-            if error == nil
-            {
-                
-            let newnum = self.counter + 1
-                print(newnum)
-            statusupdate!["likes"] = Int(newnum)
-            statusupdate!["likedBy"] = PFUser.currentUser()
-                print("like button tapped")
-                
-                
-                statusupdate?.saveInBackground()
-               
-            }
-        }
-  
-        
-
-    }
-    
     
 
-    
-    
+
     
    
     override func setSelected(selected: Bool, animated: Bool) {
