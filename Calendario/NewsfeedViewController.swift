@@ -258,6 +258,45 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                     else {
                         
                     }
+                    
+                    
+                    
+                    
+                    // getting the current users status updates
+                    
+                    var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
+                    getstatus.includeKey("user")
+                    getstatus.whereKey("user", equalTo: PFUser.currentUser()!)
+                    getstatus.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
+                        
+                        // Stop the pull to refresh indicator.
+                        self.setRefreshIndicators(false)
+                        
+                        if error == nil {
+                            
+                            for object in objects! {
+                                let statusupdate:PFObject = object as! PFObject
+                                
+                                
+                                
+                                
+                                
+                                
+                                self.statausData.addObject(statusupdate)
+                                
+                            }
+                            let array:NSArray = self.statausData.reverseObjectEnumerator().allObjects
+                            self.statausData = NSMutableArray(array: array)
+                            
+                            self.table.reloadData()
+                            
+                            
+                        }
+                            
+                        else {
+                            
+                        }
+                    }
                 }
                 
                 
@@ -501,11 +540,20 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                 query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
                     if error == nil
                     {
-                        var currentlikes = update?.valueForKey("likes") as! Int
+                        var currentlikes = update?.valueForKey("likes") as? Int
                         
-                        update!["likes"] = currentlikes + 1
+                        if currentlikes == nil
+                        {
+                            currentlikes = 1
+                        }
+                        
+                        update!["likes"] = currentlikes! + 1
                         update?.saveInBackground()
                         
+                        let string = "\(PFUser.currentUser()?.username) has liked your post"
+                        print(string)
+                        
+                        PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : string, "user" : "\(PFUser.currentUser()?.username!)"])
                        print(update?.valueForKey("likes") as! Int)
                     }
                 })

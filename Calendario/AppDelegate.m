@@ -61,6 +61,7 @@
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation saveInBackground];
+    //[[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"]; [[PFInstallation currentInstallation] saveEventually];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {

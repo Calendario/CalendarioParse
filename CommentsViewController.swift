@@ -135,6 +135,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         comment.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
             if success
             {
+              
+                
                 print("comment posted")
             }
             else
