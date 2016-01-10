@@ -363,5 +363,37 @@
     [self presentViewController:profVC animated:YES completion:NULL];
 }
 
+/*
+ 
+ //SAVING METHOD HERE TO USE FOR OTHER VIEWCONTROLLERS
+ - (void) savingNotificationsMethod {
+ 
+ //retrieve the user's objectID from the profile that you are currently viewing
+ PFUser *userViewed = //(INSERT REFERENCE TO THE PFUser BEING VIEWED);
+ 
+ //create a string value for the action you are storing in the array
+ NSString *actionCompleted = [NSString stringWithFormat:@"%@ is now following you.", [PFUser currentUser].username];
+ 
+ //retrieve the user object from parse
+ PFQuery *getUser = [PFQuery queryWithClassName:@"User"];
+ [getUser getObjectInBackgroundWithId:userViewed.objectID block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+ if (error) {
+ //handle error
+ }
+ else
+ {
+ PFUser *retrievedUser = object;
+ 
+ //save action completed in retrieved user's notifications array
+ [object addObject:actionCompleted forKey:@"notifications"];
+ 
+ //save the updated info for user
+ [retrievedUser saveInBackground];
+ }
+ }];
+ 
+ }
+ */
+
 
 @end
