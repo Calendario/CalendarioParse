@@ -239,6 +239,12 @@ import Parse
                             finalData.addObject(userObject as! PFUser)
                             
                             if (finalData.count == followingData.count) {
+                                
+                                // As per Derek's request add the logged
+                                // in user to the following data array.
+                                finalData.addObject(PFUser.currentUser()!)
+                                
+                                // Send back the following data array.
                                 completion(userFollowing: finalData)
                             }
                         })
