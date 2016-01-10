@@ -40,12 +40,16 @@
     [[UITabBar appearance] setShadowImage:nil];
     
     // Google Places API Set-up
-    [GMSServices provideAPIKey: @"AIzaSyARYlkKdCJJ_NyvzroSOJauGj5CR450fT0"];
+    [GMSServices provideAPIKey:@"AIzaSyARYlkKdCJJ_NyvzroSOJauGj5CR450fT0"];
     
     // Creating Installation with User
     
+    // NOTE: The below line of code will crash if no
+    // user is currently logged in therefore I added
+    // a if statement in place - chaneg made by Dan.
     if ([PFUser currentUser] != nil) {
-        [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"]; [[PFInstallation currentInstallation] saveEventually];
+        [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
+        [[PFInstallation currentInstallation] saveEventually];
     }
     
     // Notifications Registration

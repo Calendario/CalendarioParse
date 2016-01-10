@@ -30,6 +30,10 @@ class SettingsViewController : UIViewController {
             
             if (error == nil) {
                 
+                // Remove the push notifications channel.
+                PFInstallation.currentInstallation().removeObjectForKey("user")
+                PFInstallation.currentInstallation().saveInBackground()
+                
                 // Go back to the login view controller.
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let viewC = storyboard.instantiateViewControllerWithIdentifier("LoginPage") as! LoginViewController
