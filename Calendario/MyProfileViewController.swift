@@ -515,7 +515,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         self.profPosts.text = "0"
         
         // Set the username label text.
-        self.profUserName.text = "\(userData.username!)"
+        self.profUserName.text = "@\(userData.username!)"
         // store PFUser Data in NSUserDefaults t
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(userData.username, forKey: "userdata")
@@ -602,20 +602,20 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             if (result > 0) {
                 
                 // Load in the user status updates data.
-                self.loadUserStatusUpdate()
+                self.loadUserStatusUpdate(userData)
             }
         }
     }
     
     // Status updates data methods.
     
-    func loadUserStatusUpdate() {
+    func loadUserStatusUpdate(userData: PFUser) {
         
         // Setup the user status update query.
         var queryStatusUpdate:PFQuery!
         queryStatusUpdate = PFQuery(className: "StatusUpdate")
         queryStatusUpdate.orderByAscending("createdAt")
-        queryStatusUpdate.whereKey("user", equalTo: PFUser.currentUser()!)
+        queryStatusUpdate.whereKey("user", equalTo: userData)
         queryStatusUpdate.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             
             dispatch_async(dispatch_get_main_queue(), {
