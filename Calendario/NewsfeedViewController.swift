@@ -225,7 +225,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                 
                 
                 var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
-                getstatus.orderByAscending("createdAt")
+                getstatus.orderByAscending("dateofevent")
                 getstatus.includeKey("user")
                 getstatus.whereKey("user", equalTo: test)
                 //getstatus.whereKey("user", equalTo: PFUser.currentUser()!)
@@ -263,40 +263,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                     
                     
                     // getting the current users status updates
-                    
-                    var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
-                    getstatus.includeKey("user")
-                    getstatus.orderByAscending("createdAt")
-                    getstatus.whereKey("user", equalTo: PFUser.currentUser()!)
-                    getstatus.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
-                        
-                        // Stop the pull to refresh indicator.
-                        self.setRefreshIndicators(false)
-                        
-                        if error == nil {
-                            
-                            for object in objects! {
-                                let statusupdate:PFObject = object as! PFObject
-                                
-                                
-                                
-                                
-                                
-                                
-                                self.statausData.addObject(statusupdate)
-                                
-                            }
-                            let array:NSArray = self.statausData.reverseObjectEnumerator().allObjects
-                            self.statausData = NSMutableArray(array: array)
-                            
-                            self.table.reloadData()
-                            
-                            
-                        }
-                            
-                        else {
-                            
-                        }
+                   
                     }
                 }
                 
@@ -305,7 +272,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             
 
 
-            }
+            
             
             
                     /*var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
@@ -379,11 +346,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         cell.tenselabel.text = statusupdate.objectForKey("tense") as! String
         cell.locationLabel.text = statusupdate.objectForKey("location") as! String
                 
-        
-        
-   
-        
-
+     
         
         
         
@@ -553,12 +516,12 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                         update!["likes"] = currentlikes! + 1
                         update?.saveInBackground()
                         
-                        let string = "\(PFUser.currentUser()?.username) has liked your post"
+                        let string = "\(PFUser.currentUser()?.username!) has liked your post"
                         print(string)
                         
                         PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : string, "user" : "\(PFUser.currentUser()?.username!)"])
                        print(update?.valueForKey("likes") as! Int)
-                    }
+                }
                 })
 
             }
@@ -567,7 +530,6 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             
         }
     
-
     
     
     
@@ -630,10 +592,12 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
 
     }
     
+    override func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+        currentobjectID = nil
+    }
+    
    
 
-    // function that dectects hastags 
-   
     
     
     

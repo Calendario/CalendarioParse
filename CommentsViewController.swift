@@ -146,8 +146,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                         
                         // create push notifcation
                         
-                        let message = "\(PFUser.currentUser()!.username) has commented on your post"
-                        //PFCloud.callFunctionInBackground("", withParameters: <#T##[NSObject : AnyObject]?#>)
+                        let message = "\(PFUser.currentUser()!.username!) has commented on your post"
+                        PFCloud.callFunctionInBackground("comment", withParameters: ["message" : message, "user" : "\(PFUser.currentUser()?.username!)"])
                     }
                 })
                 
