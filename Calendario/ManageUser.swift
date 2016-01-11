@@ -124,13 +124,13 @@ import Parse
                 if (status == true) {
                     
                     // Remove the follower.
-                    returnObject!.removeObject(userData.objectId!, forKey: "userFollowers")
+                    returnObject!.removeObject(PFUser.currentUser()!.objectId!, forKey: "userFollowers")
                 }
                     
                 else {
                     
                     // Add the user as a new follower.
-                    returnObject!.addUniqueObject(userData.objectId!, forKey: "userFollowers")
+                    returnObject!.addUniqueObject(PFUser.currentUser()!.objectId!, forKey: "userFollowers")
                 }
                 
                 // Save the data for the passed in user.

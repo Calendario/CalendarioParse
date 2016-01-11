@@ -387,23 +387,44 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
                     
                 else {
                     
-                    // Hide the loading indicator view.
-                    self.loadingView.alpha = 0.0
+                    // Create the user entry in the
+                    // FollowersAndFollowing Parse class.
+                    var userFollowData:PFObject!
+                    userFollowData = PFObject(className:"FollowersAndFollowing")
+                    userFollowData["userFollowing"] = []
+                    userFollowData["userFollowers"] = []
+                    userFollowData["userLink"] = PFUser.currentUser()
                     
-                    // Setup the alert controller.
-                    let registerAlert = UIAlertController(title: "Welcome to Calendario", message: "You have successfully created a Calendario account.", preferredStyle: .Alert)
-                    
-                    // Setup the alert actions.
-                    let nextHandler = { (action:UIAlertAction!) -> Void in
-                        self.GotoNewsfeed()
+                    // Save the follow data on Parse.
+                    userFollowData.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                        
+                        if (success) {
+                            
+                            // Hide the loading indicator view.
+                            self.loadingView.alpha = 0.0
+                            
+                            // Setup the alert controller.
+                            let registerAlert = UIAlertController(title: "Welcome to Calendario", message: "You have successfully created a Calendario account.", preferredStyle: .Alert)
+                            
+                            // Setup the alert actions.
+                            let nextHandler = { (action:UIAlertAction!) -> Void in
+                                self.GotoNewsfeed()
+                            }
+                            let next = UIAlertAction(title: "Continue", style: .Default, handler: nextHandler)
+                            
+                            // Add the actions to the alert.
+                            registerAlert.addAction(next)
+                            
+                            // Present the alert on screen.
+                            self.presentViewController(registerAlert, animated: true, completion: nil)
+                        }
+                        
+                        else {
+                            
+                            // An error has occured.
+                            self.displayAlert("Error", alertMessage: "\(error)")
+                        }
                     }
-                    let next = UIAlertAction(title: "Continue", style: .Default, handler: nextHandler)
-                    
-                    // Add the actions to the alert.
-                    registerAlert.addAction(next)
-                    
-                    // Present the alert on screen.
-                    self.presentViewController(registerAlert, animated: true, completion: nil)
                 }
             })
         }
