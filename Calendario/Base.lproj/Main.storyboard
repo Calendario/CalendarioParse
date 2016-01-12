@@ -1258,8 +1258,8 @@
                                                 <rect key="frame" x="0.0" y="161" width="375" height="160"/>
                                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="default_profile_pic" translatesAutoresizingMaskIntoConstraints="NO" id="E4d-z0-hQ5">
-                                                <rect key="frame" x="267" y="8" width="64" height="64"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_profile_pic" translatesAutoresizingMaskIntoConstraints="NO" id="E4d-z0-hQ5">
+                                                <rect key="frame" x="156" y="8" width="64" height="64"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="64" id="thq-yh-F8O"/>
                                                     <constraint firstAttribute="height" constant="64" id="zkI-0q-Suf"/>
@@ -1275,8 +1275,8 @@
                                                 <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QSb-Xo-I7z">
-                                                <rect key="frame" x="262" y="74" width="74" height="24"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QSb-Xo-I7z">
+                                                <rect key="frame" x="151" y="74" width="74" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="74" id="Z3D-uL-07p"/>
                                                     <constraint firstAttribute="height" constant="24" id="vYf-0O-QIi"/>
@@ -1465,13 +1465,6 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iR8-4k-kOZ" userLabel="profileDescBox">
                                                 <rect key="frame" x="0.0" y="330" width="375" height="99"/>
                                                 <subviews>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" keyboardDismissMode="onDrag" text="Profile description" translatesAutoresizingMaskIntoConstraints="NO" id="ntD-4L-7eN">
-                                                        <rect key="frame" x="50" y="8" width="317" height="91"/>
-                                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                        <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
-                                                    </textView>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="ZQd-Gb-9i3">
                                                         <rect key="frame" x="50" y="8" width="317" height="83"/>
                                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1481,6 +1474,13 @@
                                                         <connections>
                                                             <outlet property="delegate" destination="3Oo-Ed-qme" id="Fw7-Us-TUL"/>
                                                         </connections>
+                                                    </textView>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="Profile description" translatesAutoresizingMaskIntoConstraints="NO" id="ntD-4L-7eN">
+                                                        <rect key="frame" x="50" y="8" width="317" height="83"/>
+                                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                                                     </textView>
                                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="comment" translatesAutoresizingMaskIntoConstraints="NO" id="iBe-K2-IQd">
                                                         <rect key="frame" x="8" y="8" width="40" height="36"/>
@@ -1494,12 +1494,16 @@
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="ZQd-Gb-9i3" secondAttribute="bottom" constant="8" id="AHk-6A-4eW"/>
                                                     <constraint firstItem="ZQd-Gb-9i3" firstAttribute="centerY" secondItem="iBe-K2-IQd" secondAttribute="centerY" id="C4T-Sw-j3i"/>
+                                                    <constraint firstItem="ntD-4L-7eN" firstAttribute="centerY" secondItem="ZQd-Gb-9i3" secondAttribute="centerY" id="UC8-SE-6yL"/>
                                                     <constraint firstItem="ZQd-Gb-9i3" firstAttribute="top" secondItem="iBe-K2-IQd" secondAttribute="top" id="coY-3Q-icE"/>
                                                     <constraint firstItem="ZQd-Gb-9i3" firstAttribute="leading" secondItem="iBe-K2-IQd" secondAttribute="trailing" constant="2" id="d3T-bM-bRG"/>
                                                     <constraint firstAttribute="height" constant="99" id="e6v-PB-BAd"/>
+                                                    <constraint firstItem="ntD-4L-7eN" firstAttribute="height" secondItem="ZQd-Gb-9i3" secondAttribute="height" id="fIG-MT-Ljd"/>
                                                     <constraint firstItem="iBe-K2-IQd" firstAttribute="top" secondItem="iR8-4k-kOZ" secondAttribute="top" constant="8" id="ldk-yw-lBi"/>
+                                                    <constraint firstItem="ntD-4L-7eN" firstAttribute="centerX" secondItem="ZQd-Gb-9i3" secondAttribute="centerX" id="pLU-4d-rhc"/>
                                                     <constraint firstItem="iBe-K2-IQd" firstAttribute="leading" secondItem="iR8-4k-kOZ" secondAttribute="leading" constant="8" id="qxP-lw-2jF"/>
                                                     <constraint firstAttribute="trailing" secondItem="ZQd-Gb-9i3" secondAttribute="trailing" constant="8" id="s2m-Ue-kyJ"/>
+                                                    <constraint firstItem="ntD-4L-7eN" firstAttribute="width" secondItem="ZQd-Gb-9i3" secondAttribute="width" id="tIx-Wi-U6g"/>
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="constraints">
@@ -1670,8 +1674,8 @@
                                                 <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJ6-qJ-GUL" userLabel="Done Button Container">
-                                                <rect key="frame" x="179" y="620" width="240" height="104"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJ6-qJ-GUL" userLabel="Done Button Container">
+                                                <rect key="frame" x="68" y="620" width="240" height="104"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ox6-rP-8eJ">
                                                         <rect key="frame" x="51" y="16" width="138" height="48"/>
