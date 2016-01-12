@@ -184,15 +184,30 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         let comment:PFObject = self.commentdata.objectAtIndex(indexPath.row) as! PFObject
 
+        print(comment.valueForKey("postedby")?.objectId!)
+        
+        
+        var usernamequery = PFUser.query()
+        usernamequery?.getObjectInBackgroundWithId((comment.valueForKey("postedby")?.objectId!)!, block: { (object, error) -> Void in
+            if error == nil
+            {
+                cell.UserLabel.text = object?.valueForKey("username") as! String
+            }
+        })
         
 
         
         cell.commentTextView.text = comment.objectForKey("commenttext") as! String
-        cell.UserLabel.text = comment.objectForKey("postedby") as? String
-        
+
    
         return cell
     }
+    
+     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+
     
 
     /*
