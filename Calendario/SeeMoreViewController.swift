@@ -31,10 +31,8 @@ class SeeMoreViewController: UIViewController {
     
     @IBOutlet weak var kilabel: KILabel!
     
+    var propertyid:String!
     
-    @IBOutlet weak var likeslabel: UILabel!
-    
-    @IBOutlet weak var commentnumlabel: UILabel!
     
     
     let defaults = NSUserDefaults.standardUserDefaults()
@@ -56,16 +54,21 @@ class SeeMoreViewController: UIViewController {
         
         
         var objectid = defaults.objectForKey("objectId") as? String
+        
+        if objectid == nil
+        {
+            objectid = propertyid
+        }
 
         
 
         // Do any additional setup after loading the view.
         
+        contentTextView.textAlignment = .Center
+        
         
         contentTextView.text = defaults.objectForKey("updatetext") as? String
         
-        likeslabel.hidden = true
-        commentnumlabel.hidden = true
         
         
         
@@ -163,6 +166,59 @@ class SeeMoreViewController: UIViewController {
             kilabel.hidden = true
         }
         
+        if contentTextView.text.containsString("#")
+        {
+            kilabel.hidden = false
+            kilabel.text = contentTextView.text
+            kilabel.hashtagLinkTapHandler = { label,hashtag,range in
+                print(hashtag)
+                
+            }
+
+            
+        }
+        
+         if contentTextView.text.containsString("@")
+        {
+            kilabel.hidden = false
+            kilabel.text = contentTextView.text
+            kilabel.userHandleLinkTapHandler = {label,mention,range in
+                var userquery = PFUser.query()
+                print("mentiion is \(mention)")
+                let editedtext = mention.stringByReplacingOccurrencesOfString("@", withString: "")
+                print(editedtext)
+                userquery?.whereKey("username", equalTo: editedtext)
+                userquery?.includeKey("user")
+                userquery?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                    if error == nil
+                    {
+                        print(objects?.count)
+                        if let objects = objects
+                        {
+                            for object in objects
+                            {
+                                var userid = object.objectId
+                                print(userid)
+                                
+                                var query2 = PFUser.query()
+                                query2?.includeKey("user")
+                                query2?.getObjectInBackgroundWithId(userid!, block: { (object, error) -> Void in
+                                    var user:PFUser = object as! PFUser
+                                    print(user)
+                                    self.GotoProfile(user)
+                                })
+                            }
+                        }
+                    }
+                })
+            }
+
+        }
+        
+    
+        
+        
+        
         
         
     
@@ -194,16 +250,6 @@ class SeeMoreViewController: UIViewController {
                         
                         
                         self.defaults.setObject(object.objectId, forKey: "fromseemore")
-                        
-                        
-                        //print(likes!)
-                        
-                        if likes >= 1
-                        {
-                            self.LikeButton.setImage(likebuttonfilled, forState: .Normal)
-                            self.likeslabel.hidden = false
-                            self.likeslabel.text = String(likes!)
-                        }
                         
                         
                         
@@ -253,24 +299,6 @@ class SeeMoreViewController: UIViewController {
         
         
         // getting the number of comments
-        
-        var commmentquery = PFQuery(className: "comment")
-        commmentquery.whereKey("statusOBJID", equalTo: objectid!)
-        commmentquery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if error == nil
-            {
-                print("comments \(objects!.count)")
-                
-                // display label number of comments is greater than 0
-                
-                if objects!.count > 0
-                {
-                    self.commentnumlabel.text = String(objects!.count)
-                    self.commentnumlabel.hidden = false
-                }
-            }
-        }
-        
         
         
         

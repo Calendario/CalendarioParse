@@ -51,8 +51,8 @@ class CalPhotoViewerViewController: UIViewController, UIScrollViewDelegate {
         
         Imageview.transform = CGAffineTransformMakeScale(1.0, -1.0)
         
+            Imageview.image = roatateImage(image!)
         
-                   Imageview.image = roatateImage(image!)
         
         print(image!.imageOrientation.rawValue)
             

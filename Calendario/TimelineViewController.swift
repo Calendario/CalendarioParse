@@ -64,7 +64,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
 
         
         let dateformatter = NSDateFormatter()
-        dateformatter.dateFormat = "MM/d/yy"
+        dateformatter.dateFormat = "M/d/yy"
         var newdate = dateformatter.stringFromDate(date)
         
         
@@ -241,11 +241,30 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
     }
     
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let status:PFObject = self.postsdata.objectAtIndex(indexPath.row) as! PFObject
+        GotoPost(status.objectId!)
+        
+            }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "timelineComments"
         {
             let vc = segue.destinationViewController as! CommentsViewController
             vc.savedobjectID = currentObjectid
         }
+    }
+    
+    
+    func GotoPost(objectid:String)
+    {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        var seemore = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
+         let NC = UINavigationController(rootViewController: seemore)
+        seemore.propertyid = objectid
+        self.presentViewController(NC, animated: true, completion: nil)
+        
+
     }
 }

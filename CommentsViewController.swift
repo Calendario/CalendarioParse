@@ -181,7 +181,11 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CommentCell", forIndexPath: indexPath) as! CommentsTableViewCell
         
+        
         let comment:PFObject = self.commentdata.objectAtIndex(indexPath.row) as! PFObject
+
+        
+
         
         cell.commentTextView.text = comment.objectForKey("commenttext") as! String
         cell.UserLabel.text = comment.objectForKey("postedby") as? String

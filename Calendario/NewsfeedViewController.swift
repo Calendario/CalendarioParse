@@ -225,7 +225,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                 
                 
                 var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
-                getstatus.orderByAscending("dateofevent")
+                getstatus.orderByAscending("createdAt")
                 getstatus.includeKey("user")
                 getstatus.whereKey("user", equalTo: test)
                 //getstatus.whereKey("user", equalTo: PFUser.currentUser()!)
@@ -345,7 +345,38 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         cell.uploaddatelabel.text = statusupdate.objectForKey("dateofevent") as! String
         cell.tenselabel.text = statusupdate.objectForKey("tense") as! String
         cell.locationLabel.text = statusupdate.objectForKey("location") as! String
-                
+        var likesamount = statusupdate.objectForKey("likes") as? Int
+        
+        if likesamount == nil
+        {
+            cell.likeslabel.text = "0 likes "
+            
+        }
+        else
+        {
+            cell.likeslabel.text = "\(likesamount!) people liked this post"
+        }
+        
+        
+        
+        
+        /*var commentdata = PFQuery(className: "Comments")
+        commentdata.whereKey("objectId", equalTo: statusupdate.objectId!)
+        commentdata.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil
+            {
+                if objects?.count == 0
+                {
+                    cell.commentlabel.text = "no comments"
+                    
+                }
+                else
+                {
+                    cell.commentlabel.text = "\(objects!.count) comments"
+                }
+            }
+        } */
+        
      
         
         
@@ -401,7 +432,6 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         print(statusupdate.objectId!)
         cell.likebutton.addTarget(self, action: "likeClicked:", forControlEvents: .TouchUpInside)
         
-        // get update based on id 
         
         
         
@@ -458,6 +488,10 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         return cell
         }
+    
+    
+    
+    
     
     func likeClicked(sender:DOFavoriteButton)
         {
@@ -521,6 +555,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                         
                         PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : string, "user" : "\(PFUser.currentUser()?.username!)"])
                        print(update?.valueForKey("likes") as! Int)
+                        self.LoadData()
                 }
                 })
 
@@ -604,7 +639,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     func isDatePassed(date1:NSDate, date2:NSDate, ParseID: String)
     {
         let dateformatter = NSDateFormatter()
-        dateformatter.dateFormat = "MM/d/yy"
+        dateformatter.dateFormat = "M/d/yy"
         var newdate = dateformatter.stringFromDate(date2)
 
         
@@ -682,6 +717,13 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         // jdhdh
     }
+    
+    // dynamic cell height 
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+
     
     
     func ReportView()
