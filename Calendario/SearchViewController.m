@@ -273,8 +273,10 @@
     
     UILabel *userLabel = (UILabel *)[cell.contentView viewWithTag:2];
     UIImageView *userImage = (UIImageView *)[cell.contentView viewWithTag:1];
+    UIImageView *ribbonImage = (UIImageView *) [cell.contentView viewWithTag:3];
     UIImage *notAvailable = [UIImage imageNamed:@"default_profile_pic.png"];
     userImage.image = notAvailable;
+
     
     //hide elements
     userLabel.hidden = YES;
@@ -287,6 +289,16 @@
         userImage.hidden = NO;
         cell.userInteractionEnabled = YES;
         userLabel.text = user.username;
+        
+        //check if user is verified and display ribbon
+        BOOL verified = user[@"verifiedUser"];
+        if (verified) {
+            ribbonImage.hidden = NO;
+        }
+        else
+        {
+            ribbonImage.hidden = NO;
+        }
         
         //fetch user profile image for table cell
         PFFile *userImageFile = user[@"profileImage"];

@@ -22,6 +22,10 @@
     
     // Override point for customization after application launch.
     
+    //set badge number back to 0 once user opens the app
+    application.applicationIconBadgeNumber = 0;
+
+    
     //make status bar text white
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     
