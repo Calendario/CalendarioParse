@@ -25,6 +25,7 @@
     self.tableView.dataSource = self;
     
     notifications = [NSMutableArray new];
+    [self getNotifications];
 }
 
 - (void) getNotifications {
