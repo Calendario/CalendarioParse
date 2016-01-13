@@ -86,7 +86,7 @@ import Parse
                                 PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage, "User" : "\(userData.username!)"])
                                 
                                 // Save the push notification string on the User class.
-                                self.saveUserNotification(pushMessage, userData: userData)
+                                self.saveUserNotification(pushMessage, fromUser: PFUser.currentUser()!, toUser: userData)
                             }
                             
                             dispatch_async(dispatch_get_main_queue(), {
@@ -149,18 +149,21 @@ import Parse
     
     // Follow notification save method.
     
-    class func saveUserNotification(notifcation:String, userData:PFUser) {
+    class func saveUserNotification(notifcation:String, fromUser:PFUser, toUser:PFUser) {
         
         // Get the notifications object for the
         // currently logged in user account.
         var notificationQuery:PFQuery!
         notificationQuery = PFQuery(className: "userNotifications")
-        notificationQuery.whereKey("userLink", equalTo: userData)
+        notificationQuery.whereKey("userLink", equalTo: toUser)
         notificationQuery.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
             
             // Check for errors before continuing.
             
             if (error == nil) {
+                
+                // Add the from user object.
+                object?.addObject(fromUser, forKey: "fromUser")
                 
                 // Add the new notification.
                 object?.addObject(notifcation, forKey: "notificationStrings")
@@ -171,7 +174,7 @@ import Parse
         }
     }
     
-    class func getUserNotifications(userData:PFUser, completion: (userNotifications: NSArray) -> Void) {
+    class func getUserNotifications(userData:PFUser, completion: (notificationFromUser: NSArray, notificationStrings: NSArray) -> Void) {
         
         // Get the notifications for a particular user.
         var notificationQuery:PFQuery!
@@ -185,7 +188,7 @@ import Parse
                 
                 // Pass the data back if correctly loaded.
                 dispatch_async(dispatch_get_main_queue(), {
-                    completion(userNotifications: (object?.valueForKey("notificationStrings"))! as! NSArray)
+                    completion(notificationFromUser: (object?.valueForKey("fromUser"))! as! NSArray, notificationStrings: (object?.valueForKey("notificationStrings"))! as! NSArray)
                 })
             }
         }

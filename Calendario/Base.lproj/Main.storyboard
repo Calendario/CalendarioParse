@@ -2548,17 +2548,40 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IsB-bg-0TJ">
-                                                    <rect key="frame" x="8" y="21" width="359" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="notification string" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IsB-bg-0TJ">
+                                                    <rect key="frame" x="74" y="23" width="293" height="33"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="293" id="OQY-Ab-Ocm"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVV-IP-6Wc">
+                                                    <rect key="frame" x="74" y="0.0" width="293" height="33"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VmK-Dk-lCf">
+                                                    <rect key="frame" x="8" y="0.0" width="58" height="58"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="IsB-bg-0TJ" firstAttribute="centerY" secondItem="cYt-mJ-hlS" secondAttribute="centerY" id="26u-jO-UsR"/>
-                                                <constraint firstItem="IsB-bg-0TJ" firstAttribute="leading" secondItem="cYt-mJ-hlS" secondAttribute="leadingMargin" id="POS-XN-pdp"/>
-                                                <constraint firstItem="IsB-bg-0TJ" firstAttribute="trailing" secondItem="cYt-mJ-hlS" secondAttribute="trailingMargin" id="uxI-Zy-bhN"/>
+                                                <constraint firstItem="IsB-bg-0TJ" firstAttribute="leading" secondItem="VmK-Dk-lCf" secondAttribute="trailing" constant="8" symbolic="YES" id="3VA-Ww-5yI"/>
+                                                <constraint firstItem="VVV-IP-6Wc" firstAttribute="top" secondItem="VmK-Dk-lCf" secondAttribute="top" id="CNb-BJ-ro5"/>
+                                                <constraint firstItem="IsB-bg-0TJ" firstAttribute="bottom" secondItem="cYt-mJ-hlS" secondAttribute="bottomMargin" id="EXI-rF-42a"/>
+                                                <constraint firstItem="IsB-bg-0TJ" firstAttribute="top" secondItem="cYt-mJ-hlS" secondAttribute="topMargin" constant="15" id="FhR-zv-d8C"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="VmK-Dk-lCf" secondAttribute="bottom" constant="-2" id="ObA-ag-J1t"/>
+                                                <constraint firstItem="VmK-Dk-lCf" firstAttribute="leading" secondItem="cYt-mJ-hlS" secondAttribute="leadingMargin" id="Vtc-Kq-Xe0"/>
+                                                <constraint firstItem="IsB-bg-0TJ" firstAttribute="leading" secondItem="VVV-IP-6Wc" secondAttribute="leading" id="W1B-D3-3lW"/>
+                                                <constraint firstItem="VVV-IP-6Wc" firstAttribute="top" secondItem="cYt-mJ-hlS" secondAttribute="top" id="YBO-zi-chU"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="VVV-IP-6Wc" secondAttribute="bottom" constant="23" id="dn2-bD-E2u"/>
+                                                <constraint firstItem="VVV-IP-6Wc" firstAttribute="leading" secondItem="VmK-Dk-lCf" secondAttribute="trailing" constant="8" id="uJg-qd-WNe"/>
+                                                <constraint firstItem="VVV-IP-6Wc" firstAttribute="leading" secondItem="VmK-Dk-lCf" secondAttribute="trailing" constant="8" symbolic="YES" id="vBv-dx-sdN"/>
+                                                <constraint firstItem="IsB-bg-0TJ" firstAttribute="leading" secondItem="VmK-Dk-lCf" secondAttribute="trailing" constant="8" id="vVQ-fS-kU7"/>
+                                                <constraint firstItem="IsB-bg-0TJ" firstAttribute="trailing" secondItem="cYt-mJ-hlS" secondAttribute="trailingMargin" id="vdv-7o-uGF"/>
+                                                <constraint firstItem="IsB-bg-0TJ" firstAttribute="trailing" secondItem="VVV-IP-6Wc" secondAttribute="trailing" id="xwM-dC-CUF"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

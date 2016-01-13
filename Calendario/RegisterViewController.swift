@@ -402,6 +402,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
                         // userNotifications Parse class.
                         var userNotificationData:PFObject!
                         userNotificationData = PFObject(className:"userNotifications")
+                        userNotificationData["fromUser"] = []
                         userNotificationData["notificationStrings"] = []
                         userNotificationData["userLink"] = PFUser.currentUser()
                         
