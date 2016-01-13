@@ -138,7 +138,7 @@
     //create filtered array
     filteredArray = [[NSMutableArray alloc] init];
     
-    [self savingNotificationsMethod];
+   // [self savingNotificationsMethod];
 
     
 }
