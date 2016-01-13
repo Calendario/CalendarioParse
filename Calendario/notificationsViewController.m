@@ -23,6 +23,7 @@
     [super viewWillAppear:YES];
     
     [self getNotifications];
+
 }
 
 - (void)viewDidLoad {
@@ -31,19 +32,24 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    notifications = [NSMutableArray new];
+    
 }
 
 - (void) getNotifications {
     
-    notifications = [NSMutableArray new];
-    
     PFUser *currentUser = [PFUser currentUser];
     PFQuery *notifQuery = [PFUser query];
     [notifQuery whereKey:@"objectId" equalTo:currentUser.objectId];
+    
     [notifQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (!error) {
             PFUser *retrievedUser = object;
-            [notifications addObjectsFromArray: [retrievedUser objectForKey:@"notifications"]];
+            NSLog(@"%@ retrieved", retrievedUser.username);
+            notifications = retrievedUser[@"notifications"];
+            NSLog(@"%i objects in array", notifications.count);
+            
+            [self.tableView reloadData];
         }
         else
         {
