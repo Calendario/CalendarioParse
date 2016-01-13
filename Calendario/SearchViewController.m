@@ -138,6 +138,9 @@
     //create filtered array
     filteredArray = [[NSMutableArray alloc] init];
     
+    [self savingNotificationsMethod];
+
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -376,37 +379,50 @@
     [self presentViewController:profVC animated:YES completion:NULL];
 }
 
+
 /*
- 
  //SAVING METHOD HERE TO USE FOR OTHER VIEWCONTROLLERS
- - (void) savingNotificationsMethod {
- 
- //retrieve the user's objectID from the profile that you are currently viewing
- PFUser *userViewed = //(INSERT REFERENCE TO THE PFUser BEING VIEWED);
- 
- //create a string value for the action you are storing in the array
- NSString *actionCompleted = [NSString stringWithFormat:@"%@ is now following you.", [PFUser currentUser].username];
- 
- //retrieve the user object from parse
- PFQuery *getUser = [PFQuery queryWithClassName:@"User"];
- [getUser getObjectInBackgroundWithId:userViewed.objectID block:^(PFObject * _Nullable object, NSError * _Nullable error) {
- if (error) {
- //handle error
- }
- else
- {
- PFUser *retrievedUser = object;
- 
- //save action completed in retrieved user's notifications array
- [object addObject:actionCompleted forKey:@"notifications"];
- 
- //save the updated info for user
- [retrievedUser saveInBackground];
- }
- }];
- 
- }
- */
+- (void) savingNotificationsMethod {
+    
+    //retrieve the user's objectID from the profile that you are currently viewing
+    PFUser *userViewed = [PFUser currentUser];   //(INSERT REFERENCE TO THE PFUser BEING VIEWED);
+    
+    //create query to fetch user from parse
+    PFQuery *notifQuery = [PFUser query];
+    [notifQuery whereKey:@"objectId" equalTo:userViewed.objectId];
+    [notifQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (!error) {
+            
+            PFUser *retrievedUser = object;
+            
+            //retrieve previously stored notifications
+            NSMutableArray *notifications = [NSMutableArray new];
+            [notifications addObjectsFromArray: [retrievedUser objectForKey:@"notifications"]];
+            
+            //create a string value for the action you are storing in the array
+            NSString *actionCompleted = [NSString stringWithFormat:@"%@ is now following you.", [PFUser currentUser].username];
+            
+            //add new action to array
+            [notifications addObject:actionCompleted];
+            
+            //check to see if array has more than 30 items
+            if (notifications.count > 29) {
+                [notifications removeObjectAtIndex:0];
+            }
+            
+            //save array back to parse
+            retrievedUser[@"notifications"] = notifications;
+            [retrievedUser saveInBackground];
+            
+        }
+        else
+        {
+            NSLog(@"error: %@", [error localizedDescription]);
+        }
+    }];
+    
+}*/
+
 
 
 @end

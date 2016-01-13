@@ -18,27 +18,38 @@
 
 @implementation notificationsViewController
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    
+    [self getNotifications];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    notifications = [NSMutableArray new];
-    [self getNotifications];
 }
 
 - (void) getNotifications {
+    
+    notifications = [NSMutableArray new];
+    
     PFUser *currentUser = [PFUser currentUser];
-    PFQuery *notifQuery = [PFQuery queryWithClassName:@"User"];
-    [notifQuery getObjectInBackgroundWithId:currentUser.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+    PFQuery *notifQuery = [PFUser query];
+    [notifQuery whereKey:@"objectId" equalTo:currentUser.objectId];
+    [notifQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (!error) {
-            [notifications addObjectsFromArray: [object objectForKey:@"notifications"]];
+            PFUser *retrievedUser = object;
+            [notifications addObjectsFromArray: [retrievedUser objectForKey:@"notifications"]];
         }
         else
         {
             NSLog(@"error: %@", [error localizedDescription]);
         }
+
     }];
 }
 
