@@ -137,6 +137,7 @@
     
     //create filtered array
     filteredArray = [[NSMutableArray alloc] init];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -291,13 +292,13 @@
         userLabel.text = user.username;
         
         //check if user is verified and display ribbon
-        BOOL verified = user[@"verifiedUser"];
-        if (verified) {
+        BOOL verified = [user valueForKey:@"verifiedUser"];
+        if (verified == true) {
             ribbonImage.hidden = NO;
         }
         else
         {
-            ribbonImage.hidden = NO;
+            ribbonImage.hidden = YES;
         }
         
         //fetch user profile image for table cell
