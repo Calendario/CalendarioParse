@@ -550,11 +550,16 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                         update!["likes"] = currentlikes! + 1
                         update?.saveInBackground()
                         
-                        let string = "\(PFUser.currentUser()?.username!) has liked your post"
+                        let string = "\(PFUser.currentUser()!.username!) has liked your post"
                         print(string)
                         
                         PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : string, "user" : "\(PFUser.currentUser()?.username!)"])
                        print(update?.valueForKey("likes") as! Int)
+                        //self.SavingNotifacations(string)
+                        
+                        
+                        
+                        
                         self.LoadData()
                 }
                 })
@@ -564,6 +569,38 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             
             
         }
+    
+    func SavingNotifacations(notifcation:String)
+    {
+        var userviewed:PFUser = PFUser.currentUser()!
+        var notiQuery = PFUser.query()
+        notiQuery?.whereKey("objectId", equalTo: userviewed.objectId!)
+        notiQuery?.getFirstObjectInBackgroundWithBlock({ (object, error) -> Void in
+            if error == nil
+            {
+                let retreveduser:PFUser = object as! PFUser
+                var notifications:NSMutableArray = NSMutableArray()
+                notifications.addObjectsFromArray([retreveduser.objectForKey("notifications")!])
+                notifications.addObject(notifcation)
+                
+                if notifications.count > 29
+                {
+                    notifications.removeObjectAtIndex(0)
+                    
+                }
+                
+                retreveduser["notifications"] = notifications
+                retreveduser.saveInBackground()
+            
+                
+                
+            }
+        })
+        
+        
+    }
+    
+    
     
     
     

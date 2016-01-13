@@ -97,6 +97,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
+    
     func GotoNewsfeed() {
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -148,6 +149,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                         
                         let message = "\(PFUser.currentUser()!.username!) has commented on your post"
                         PFCloud.callFunctionInBackground("comment", withParameters: ["message" : message, "user" : "\(PFUser.currentUser()?.username!)"])
+                        self.SavingNotifacations(message)
                     }
                 })
                 
@@ -165,6 +167,39 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
     }
+    
+    
+    func SavingNotifacations(notifcation:String)
+    {
+        var userviewed:PFUser = PFUser.currentUser()!
+        var notiQuery = PFUser.query()
+        notiQuery?.whereKey("objectId", equalTo: userviewed.objectId!)
+        notiQuery?.getFirstObjectInBackgroundWithBlock({ (object, error) -> Void in
+            if error == nil
+            {
+                let retreveduser:PFUser = object as! PFUser
+                var notifications:NSMutableArray = NSMutableArray()
+                notifications.addObjectsFromArray([retreveduser.objectForKey("notifications")!])
+                notifications.addObject(notifcation)
+                
+                if notifications.count > 29
+                {
+                    notifications.removeObjectAtIndex(0)
+                    
+                }
+                
+                retreveduser["notifications"] = notifications
+                retreveduser.saveInBackground()
+                
+                
+                
+            }
+        })
+        
+        
+    }
+    
+
     
     
     
@@ -206,6 +241,11 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
      func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
+    
+    
+    
+    
+
     
 
     
