@@ -398,32 +398,43 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
                     // Save the follow data on Parse.
                     userFollowData.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                         
-                        if (success) {
-                            
-                            // Hide the loading indicator view.
-                            self.loadingView.alpha = 0.0
-                            
-                            // Setup the alert controller.
-                            let registerAlert = UIAlertController(title: "Welcome to Calendario", message: "You have successfully created a Calendario account.", preferredStyle: .Alert)
-                            
-                            // Setup the alert actions.
-                            let nextHandler = { (action:UIAlertAction!) -> Void in
-                                self.GotoNewsfeed()
-                            }
-                            let next = UIAlertAction(title: "Continue", style: .Default, handler: nextHandler)
-                            
-                            // Add the actions to the alert.
-                            registerAlert.addAction(next)
-                            
-                            // Present the alert on screen.
-                            self.presentViewController(registerAlert, animated: true, completion: nil)
-                        }
+                        // Create the user entry in the
+                        // userNotifications Parse class.
+                        var userNotificationData:PFObject!
+                        userNotificationData = PFObject(className:"userNotifications")
+                        userNotificationData["notificationStrings"] = []
+                        userNotificationData["userLink"] = PFUser.currentUser()
                         
-                        else {
+                        // Save the notification data on Parse.
+                        userNotificationData.saveInBackgroundWithBlock({ (notificationSuccess, notificationError) -> Void in
                             
-                            // An error has occured.
-                            self.displayAlert("Error", alertMessage: "\(error)")
-                        }
+                            if (notificationSuccess) {
+                                
+                                // Hide the loading indicator view.
+                                self.loadingView.alpha = 0.0
+                                
+                                // Setup the alert controller.
+                                let registerAlert = UIAlertController(title: "Welcome to Calendario", message: "You have successfully created a Calendario account.", preferredStyle: .Alert)
+                                
+                                // Setup the alert actions.
+                                let nextHandler = { (action:UIAlertAction!) -> Void in
+                                    self.GotoNewsfeed()
+                                }
+                                let next = UIAlertAction(title: "Continue", style: .Default, handler: nextHandler)
+                                
+                                // Add the actions to the alert.
+                                registerAlert.addAction(next)
+                                
+                                // Present the alert on screen.
+                                self.presentViewController(registerAlert, animated: true, completion: nil)
+                            }
+                                
+                            else {
+                                
+                                // An error has occured.
+                                self.displayAlert("Error", alertMessage: "\(notificationError)")
+                            }
+                        })
                     }
                 }
             })

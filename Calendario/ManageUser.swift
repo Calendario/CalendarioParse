@@ -84,6 +84,9 @@ import Parse
                                 
                                 // Submit the push notification.
                                 PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage, "User" : "\(userData.username!)"])
+                                
+                                // Save the push notification string on the User class.
+                                self.saveUserNotification(pushMessage, userData: userData)
                             }
                             
                             dispatch_async(dispatch_get_main_queue(), {
@@ -141,6 +144,50 @@ import Parse
                     })
                 })
             })
+        }
+    }
+    
+    // Follow notification save method.
+    
+    class func saveUserNotification(notifcation:String, userData:PFUser) {
+        
+        // Get the notifications object for the
+        // currently logged in user account.
+        var notificationQuery:PFQuery!
+        notificationQuery = PFQuery(className: "userNotifications")
+        notificationQuery.whereKey("userLink", equalTo: userData)
+        notificationQuery.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+            
+            // Check for errors before continuing.
+            
+            if (error == nil) {
+                
+                // Add the new notification.
+                object?.addObject(notifcation, forKey: "notificationStrings")
+                
+                // Save the notification data.
+                object?.saveInBackground()
+            }
+        }
+    }
+    
+    class func getUserNotifications(userData:PFUser, completion: (userNotifications: NSArray) -> Void) {
+        
+        // Get the notifications for a particular user.
+        var notificationQuery:PFQuery!
+        notificationQuery = PFQuery(className: "userNotifications")
+        notificationQuery.whereKey("userLink", equalTo: userData)
+        notificationQuery.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+            
+            // Check for errors before continuing.
+            
+            if (error == nil) {
+                
+                // Pass the data back if correctly loaded.
+                dispatch_async(dispatch_get_main_queue(), {
+                    completion(userNotifications: (object?.valueForKey("notificationStrings"))! as! NSArray)
+                })
+            }
         }
     }
     

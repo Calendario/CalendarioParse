@@ -572,6 +572,14 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     
     func SavingNotifacations(notifcation:String)
     {
+        
+        
+        
+        // ManageUser.saveUserNotification(" NOTIFICATION STRING ", userData: PFUserObject)
+        // Enjoy :)
+        
+        
+        
         var userviewed:PFUser = PFUser.currentUser()!
         var notiQuery = PFUser.query()
         notiQuery?.whereKey("objectId", equalTo: userviewed.objectId!)

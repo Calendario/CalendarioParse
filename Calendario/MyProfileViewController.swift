@@ -281,7 +281,8 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         self.profileScroll.addSubview(blockedBlurView)
         
         // Add the blur to the blocked view.
-        var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
+        var visualEffectView:UIVisualEffectView!
+        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
         visualEffectView.frame = self.blockedBlurView.bounds
         blockedBlurView.insertSubview(visualEffectView, atIndex: 0)
         
