@@ -10,7 +10,13 @@ import Foundation
 import UIKit
 import Parse
 
-class SettingsViewController : UIViewController {
+class SettingsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    
+    
+    let choicesarray = ["Report Bug", "Privacy Policy", "Terms of Service"]
+    
+    @IBOutlet weak var tableview: UITableView!
     
     // Setup the various UI objects.
     
@@ -53,6 +59,8 @@ class SettingsViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        tableview.delegate = self
+        tableview.dataSource = self
     }
     
     // Alert methods.
@@ -69,6 +77,74 @@ class SettingsViewController : UIViewController {
         // Present the alert on screen.
         presentViewController(alertController, animated: true, completion: nil)
     }
+    
+    
+    
+    // tableview methods
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+  
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return choicesarray.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableview.dequeueReusableCellWithIdentifier("settingsCell", forIndexPath: indexPath)
+        
+        cell.textLabel?.text = choicesarray[indexPath.row]
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        switch indexPath.row
+        {
+        case 0:
+        GotoBugReport()
+        case 1:
+            ViewPrivacyPolicy()
+        case 2:
+            ViewTermsOfService()
+            
+            
+            
+        default:
+            print("break")
+            
+        }
+    }
+    
+    
+    func GotoBugReport()
+    {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        var bugreportvc = sb.instantiateViewControllerWithIdentifier("bugreport") as! reportBug
+        self.presentViewController(bugreportvc, animated: true, completion: nil)
+    }
+    
+    func ViewPrivacyPolicy()
+    {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        var privacypolicyVC = sb.instantiateViewControllerWithIdentifier("privacypolicy") as! PrivacyPolicyViewController
+        self.presentViewController(privacypolicyVC, animated: true, completion: nil)
+    }
+    
+    func ViewTermsOfService()
+    {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        var termsofservice = sb.instantiateViewControllerWithIdentifier("tos") as! TosViewController
+        self.presentViewController(termsofservice, animated: true, completion: nil)
+        
+    }
+    
+    
+    
     
     // Other methods.
     
