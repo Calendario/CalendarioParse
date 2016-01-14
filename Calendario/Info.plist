@@ -2,6 +2,35 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>Search the app</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Search</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>co.uk.calendario.CalendarioApp.search</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>View your profile</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Profile</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>co.uk.calendario.CalendarioApp.profile</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>Check out your newsfeed</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>NewsFeed</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>co.uk.calendario.CalendarioApp.newsfeed</string>
+		</dict>
+	</array>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>

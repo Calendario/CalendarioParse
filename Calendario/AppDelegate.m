@@ -10,6 +10,8 @@
 #import <Parse/Parse.h>
 #import "tabBarViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import "Calendario-Swift.h"
+#import "SearchViewController.h"
 
 @interface AppDelegate ()
 
@@ -81,10 +83,65 @@
     [PFPush handlePush:userInfo];
 }
 
+- (void) createshortcuts
+
+{
+    
+    UIMutableApplicationShortcutItem *item1 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"co.uk.calendario.CalendarioApp.newsfeed" localizedTitle:@"Newsfeed" localizedSubtitle:@"View your newsfeed" icon:nil userInfo:nil];
+    UIMutableApplicationShortcutItem *item2 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"co.uk.calendario.CalendarioApp.profile" localizedTitle:@"Profile" localizedSubtitle:@"View your profile" icon:nil userInfo:nil];
+    UIMutableApplicationShortcutItem *item3 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"co.uk.calendario.CalendarioApp.search" localizedTitle:@"Search" localizedSubtitle:@"Search" icon:nil userInfo:nil];
+    
+    NSArray *items = @[item1,item2,item3];
+    
+    [UIApplication sharedApplication].shortcutItems = items;
+
+    
+    
+    
+}
+
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler
+{
+    NSLog(@"a shortcut item was pressed. it was %@", shortcutItem.localizedTitle);
+    
+    if ([shortcutItem.type isEqualToString:@"co.uk.calendario.CalendarioApp.newsfeed"])
+    {
+        [self launchNewsfeed];
+    }
+    
+    if ([shortcutItem.type isEqualToString:@"co.uk.calendario.CalendarioApp.search"])
+    {
+        [self launchSearch];
+    }
+    
+    
+}
+
+- (void) launchNewsfeed
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    tabBarViewController *tab = [storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
+    [self.window makeKeyAndVisible];
+    self.window.rootViewController = tab;
+    
+}
+
+-(void) launchSearch
+{
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    tabBarViewController *tab = [sb instantiateViewControllerWithIdentifier:@"tabBar"];
+    SearchViewController *sv = [sb instantiateViewControllerWithIdentifier:@"search"];
+    [self.window makeKeyAndVisible];
+    
+}
+
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
+
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
