@@ -10,7 +10,9 @@ import UIKit
 
 class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate {
     
-    var postsdata:NSMutableArray = NSMutableArray()
+    // Final correct data to be used for the timeline.
+    var filteredData:NSMutableArray = NSMutableArray()
+    //////
     
     @IBOutlet weak var calendar: FSCalendar!
     
@@ -61,12 +63,9 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     func calendar(calendar: FSCalendar!, didSelectDate date: NSDate!) {
         print("the date is \(date)")
         
-
-        
         let dateformatter = NSDateFormatter()
         dateformatter.dateFormat = "M/d/yy"
         var newdate = dateformatter.stringFromDate(date)
-        
         
         
         var getdates:PFQuery = PFQuery(className: "StatusUpdate")
@@ -74,7 +73,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         print("passed date is \(String(newdate))")
         getdates.includeKey("user")
 
-        
+        var postsdata:NSMutableArray = NSMutableArray()
         postsdata.removeAllObjects()
         
         getdates.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
@@ -84,19 +83,48 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                 for object in objects!
                 {
                     let statusupdate:PFObject = object as! PFObject
-                    self.postsdata.addObject(statusupdate)
+                    postsdata.addObject(statusupdate)
                     self.b = true
-                    
-                
-                
-                    
-                    
                 }
                 
-                let array:NSArray = self.postsdata.reverseObjectEnumerator().allObjects
-                self.postsdata = NSMutableArray(array: array)
-                self.tableview.reloadData()
+                let array:NSArray = postsdata.reverseObjectEnumerator().allObjects
+                postsdata = NSMutableArray(array: array)
+
+                // Reset the filtered data array.
+                self.filteredData.removeAllObjects()
                 
+                // Get the list of accounts the user is following.
+                ManageUser.getUserFollowingList(PFUser.currentUser()!, completion: { (userFollowing) -> Void in
+                    
+                    // We need to filter the post data so that we only
+                    // see the status updates of people we are folowing.
+                    
+                    for (var loop = 0; loop < postsdata.count; loop++) {
+                        
+                        // Get the current user from the
+                        // downloaded status update data.
+                        let loopUser:PFUser = postsdata[loop].valueForKey("user") as! PFUser
+                        
+                        // Loop through the following array and check if the user 
+                        // from the postsdata array is being followed or not.
+                        
+                        for (var loopTwo = 0; loopTwo < userFollowing.count; loopTwo++) {
+                            
+                            // Get the current user from the following array.
+                            let followingUser:PFUser = userFollowing[loopTwo] as! PFUser
+                            
+                            // If the user matches add the data
+                            // to the filtered data array.
+                            
+                            if (loopUser.objectId! == followingUser.objectId!) {
+                                self.filteredData.addObject(postsdata[loop])
+                            }
+                        }
+                    }
+                    
+                    // Now reload the table view.
+                    self.tableview.reloadData()
+                })
     }
         }
     }
@@ -192,7 +220,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return postsdata.count
+        return self.filteredData.count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -202,7 +230,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableview.dequeueReusableCellWithIdentifier("TimelineCell") as! TimeLineTableViewCell
-        let status:PFObject = self.postsdata.objectAtIndex(indexPath.row) as! PFObject
+        let status:PFObject = self.filteredData.objectAtIndex(indexPath.row) as! PFObject
         cell.userLabel.text = status.valueForKey("user")?.username!
         cell.tenseLabel.text = status.valueForKey("tense") as! String
         cell.updateTextView.text = status.valueForKey("updatetext") as! String
@@ -243,7 +271,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let status:PFObject = self.postsdata.objectAtIndex(indexPath.row) as! PFObject
+        let status:PFObject = self.filteredData.objectAtIndex(indexPath.row) as! PFObject
         GotoPost(status.objectId!)
         
             }
