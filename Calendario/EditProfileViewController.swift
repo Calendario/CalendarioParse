@@ -50,7 +50,8 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
     @IBAction func editPicture(sender: UIButton) {
         
         // Setup the image picker view controller.
-        var imagePicker = UIImagePickerController()
+        var imagePicker:UIImagePickerController!
+        imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         
@@ -216,7 +217,8 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         loadingView.backgroundColor = UIColor.clearColor()
         
         // Add a blur view to the loading view.
-        var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
+        var visualEffectView:UIVisualEffectView!
+        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
         visualEffectView.frame = loadingView.bounds
         loadingView.insertSubview(visualEffectView, atIndex: 0)
         

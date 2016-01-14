@@ -112,7 +112,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Automatically take the user to the
         // news feed section if they are already
         // logged in to the Calendario app.
-        var currentUser = PFUser.currentUser()
+        var currentUser:PFUser!
+        currentUser = PFUser.currentUser()
         
         if (currentUser != nil) {
             

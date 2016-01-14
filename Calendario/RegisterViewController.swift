@@ -85,7 +85,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
     @IBAction func addImage(sender: UIButton) {
     
         // Setup the image picker view controller.
-        var imagePicker = UIImagePickerController()
+        var imagePicker:UIImagePickerController!
+        imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         
@@ -209,7 +210,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         loadingView.backgroundColor = UIColor.clearColor()
         
         // Add a blur view to the loading view.
-        var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
+        var visualEffectView:UIVisualEffectView!
+        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
         visualEffectView.frame = loadingView.bounds
         loadingView.insertSubview(visualEffectView, atIndex: 0)
         
@@ -331,7 +333,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         let password = self.passField.text
         
         // Setup the new user details.
-        var newUser = PFUser()
+        var newUser:PFUser!
+        newUser = PFUser()
         newUser.username = username
         newUser.password = password
         newUser.email = email

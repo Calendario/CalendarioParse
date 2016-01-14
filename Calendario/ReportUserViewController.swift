@@ -142,7 +142,8 @@ class ReportUserViewController : UIViewController, UITextViewDelegate {
         
         // Set the user to report and the
         // user which is reporting that user.
-        var blockUserData = PFObject(className:"reportUser")
+        var blockUserData:PFObject!
+        blockUserData = PFObject(className:"reportUser")
         blockUserData["reportedUser"] = self.passedUser
         blockUserData["userReporting"] = PFUser.currentUser()
         blockUserData["reportCategory"] = self.reportCategoryString
