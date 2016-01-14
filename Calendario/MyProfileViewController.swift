@@ -597,12 +597,21 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             // Set the posts counter label.
             self.profPosts.text = "\(result)"
             
+            // Initialise the data array.
+            self.statusObjects = NSMutableArray()
+            
             // Set the status check.
             
             if (result > 0) {
                 
                 // Load in the user status updates data.
                 self.loadUserStatusUpdate(userData)
+            }
+            
+            else {
+                
+                // Ensure the table view remains clear.
+                self.statusList.reloadData()
             }
         }
     }
@@ -621,6 +630,9 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             dispatch_async(dispatch_get_main_queue(), {
                 
                 if (error == nil) {
+                    
+                    // Set the posts counter label.
+                    self.profPosts.text = "\(objects!.count)"
                     
                     // Check if any objects matching
                     // the passed in user are present.
@@ -746,7 +758,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        // jdhdh
     }
     
     // Dynamic cell height.

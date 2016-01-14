@@ -205,7 +205,6 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
             }
         
         return b
-        
     }
     
 
@@ -217,7 +216,141 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
 
 
 
+    // Table view methods.
     
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func ReportView() {
+        
+        // Open the report view.
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let reportVC = sb.instantiateViewControllerWithIdentifier("report") as! ReportTableViewController
+        let NC = UINavigationController(rootViewController: reportVC)
+        self.presentViewController(NC, animated: true, completion: nil)
+    }
+    
+    func Seemore() {
+        
+        // Open the see more view.
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let SMVC = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
+        let NC = UINavigationController(rootViewController: SMVC)
+        self.presentViewController(NC, animated: true, completion: nil)
+    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        var report:UITableViewRowAction!
+        report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
+            
+            let statusupdate:PFObject = self.filteredData.objectAtIndex(indexPath.row) as! PFObject
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setObject(statusupdate.objectId, forKey: "reported")
+            
+            self.ReportView()
+            
+            var reportquery:PFQuery!
+            reportquery = PFQuery(className: "StatusUpdate")
+            reportquery.whereKey("updatetext", equalTo: statusupdate.objectForKey("updatetext")!)
+            reportquery.findObjectsInBackgroundWithBlock({ (objects:[PFObject]?, error:NSError?) -> Void in
+                
+                if error == nil {
+                    
+                    if let objects = objects as [PFObject]! {
+                        
+                        var reportedID:String!
+                        
+                        for object in objects {
+                            reportedID = object.objectId
+                        }
+                        
+                        var reportstatus:PFQuery!
+                        reportstatus = PFQuery(className: "StatusUpdate")
+                        reportstatus.getObjectInBackgroundWithId(reportedID, block: { (status:PFObject?, error:NSError?) -> Void in
+                            
+                            if (error == nil) {
+                                
+                                status!["reported"] = true
+                                status?.saveInBackground()
+                            }
+                        })
+                    }
+                }
+            })
+        }
+        
+        let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
+            
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let statusupdate:PFObject = self.filteredData.objectAtIndex(indexPath.row) as! PFObject
+            let updatetext = statusupdate.objectForKey("updatetext") as! String
+            let currentobjectID = statusupdate.objectId
+            
+            defaults.setObject(updatetext, forKey: "updatetext")
+            defaults.setObject(currentobjectID, forKey: "objectId")
+            
+            self.Seemore()
+        }
+        
+        let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in
+            
+            let statusupdate:PFObject = self.filteredData.objectAtIndex(indexPath.row) as! PFObject
+            
+            var query:PFQuery!
+            query = PFQuery(className: "StatusUpdate")
+            query.includeKey("user")
+            query.whereKey("objectId", equalTo: statusupdate.objectId!)
+            query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                
+                if (error == nil) {
+                    
+                    for object in objects! {
+                        
+                        let userstr = object["user"]?.username!
+                        
+                        if (userstr == PFUser.currentUser()?.username) {
+                            
+                            statusupdate.deleteInBackgroundWithBlock({ (success, error) -> Void in
+                                
+                                if (success) {
+                                    
+                                    self.filteredData.removeObjectAtIndex(indexPath.row)
+                                    statusupdate.saveInBackground()
+                                    self.tableview.reloadData()
+                                }
+                            })
+                        }
+                            
+                        else {
+                            
+                            let alert = UIAlertController(title: "Sorry", message: "You can only delete your own posts.", preferredStyle: .Alert)
+                            alert.view.tintColor = UIColor.flatGreenColor()
+                            let next = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                            alert.addAction(next)
+                            
+                            self.presentViewController(alert, animated: true, completion: nil)
+                        }
+                    }
+                }
+            })
+        }
+        
+        // Set the button backgrond colours.
+        report.backgroundColor = UIColor.flatWhiteColorDark()
+        seemore.backgroundColor = UIColor.flatGrayColor()
+        deletestatus.backgroundColor = UIColor.flatRedColor()
+        
+        return [report, seemore, deletestatus]
+    }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.filteredData.count
@@ -252,47 +385,39 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         var getimages:PFQuery = PFUser.query()!
         getimages.whereKey("objectId", equalTo: (status.objectForKey("user")?.objectId)!)
         getimages.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if error == nil
-            {
+            
+            if error == nil {
                 self.getImageData(objects!, imageView: cell.profileimageview)
             }
-            else
-            {
+            
+            else {
                 print("error")
             }
         }
         
-        
-        
-        
         return cell
-        
     }
-    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let status:PFObject = self.filteredData.objectAtIndex(indexPath.row) as! PFObject
         GotoPost(status.objectId!)
-        
-            }
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "timelineComments"
-        {
+        
+        if segue.identifier == "timelineComments" {
             let vc = segue.destinationViewController as! CommentsViewController
             vc.savedobjectID = currentObjectid
         }
     }
     
     
-    func GotoPost(objectid:String)
-    {
+    func GotoPost(objectid:String) {
+        
         let sb = UIStoryboard(name: "Main", bundle: nil)
         var seemore = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
          let NC = UINavigationController(rootViewController: seemore)
         seemore.propertyid = objectid
         self.presentViewController(NC, animated: true, completion: nil)
-        
-
     }
 }

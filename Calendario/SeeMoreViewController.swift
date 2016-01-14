@@ -8,18 +8,24 @@
 
 import UIKit
 import KILabel
-
+import DOFavoriteButton
 
 
 class SeeMoreViewController: UIViewController {
 
     @IBOutlet weak var UserLabel: UILabel!
+
+    @IBOutlet weak var userProfileImage: UIImageView!
+    @IBOutlet var likeButton: DOFavoriteButton!
+    @IBOutlet weak var statusDateLabel: UILabel!
+    @IBOutlet weak var likeCountLabel: UILabel!
+    @IBOutlet weak var commentsCountLabel: UILabel!
+    
     
     @IBOutlet weak var contentTextView: UITextView!
     
     @IBOutlet weak var PostImage: UIImageView!
     
-    @IBOutlet weak var LikeButton: UIButton!
     @IBOutlet weak var CommentButton: UIButton!
     
     @IBOutlet weak var backbutton: UIBarButtonItem!
@@ -39,13 +45,14 @@ class SeeMoreViewController: UIViewController {
     
 
     override func viewDidLoad() {
-        
-        let likebuttonfilled = UIImage(named: "like button filled")
-        
        
         
         
         super.viewDidLoad()
+        
+        // Turn the profile picture into a cirlce.
+        self.userProfileImage.layer.cornerRadius = (self.userProfileImage.frame.size.width / 2)
+        self.userProfileImage.clipsToBounds = true
         
         self.navigationItem.setLeftBarButtonItem(backbutton, animated: true)
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.17, green: 0.58, blue: 0.38, alpha: 1.0)
@@ -246,7 +253,69 @@ class SeeMoreViewController: UIViewController {
                         print(user!)
                         self.UserLabel.text = user!
                         
-                        var likes = object.valueForKey("likes") as? Int
+                        
+                        
+                        // Get the user object from Parse.
+                        var imageQuery:PFQuery!
+                        imageQuery = PFUser.query()
+                        imageQuery.whereKey("objectId", equalTo: (object.valueForKey("user")?.objectId!)!)
+                        imageQuery.getFirstObjectInBackgroundWithBlock({ (userObject, error) -> Void in
+                            
+                            // Check if the user has a profile image.
+                            
+                            if (userObject!.objectForKey("profileImage") == nil) {
+                                
+                                // No profile image use the basic one.
+                                self.userProfileImage.image = UIImage(named: "default_profile_pic.png")
+                            }
+                                
+                            else {
+                                
+                                // Profile image is available for use.
+                                let userImageFile = userObject!["profileImage"] as! PFFile
+                                
+                                // Download the profile image data.
+                                userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                    
+                                    if (error == nil) {
+                                        
+                                        // Check the profile image data first.
+                                        let profileImage = UIImage(data:imageData!)
+                                        
+                                        if ((imageData != nil) && (profileImage != nil)) {
+                                            
+                                            // Set the downloaded profile image.
+                                            self.userProfileImage.image = profileImage
+                                        }
+                                            
+                                        else {
+                                            
+                                            // No profile picture set the standard image.
+                                            self.userProfileImage.image = UIImage(named: "default_profile_pic.png")
+                                        }
+                                    }
+                                        
+                                    else {
+                                        
+                                        // Error has occured show the standard image.
+                                        self.userProfileImage.image = UIImage(named: "default_profile_pic.png")
+                                    }
+                                }
+                            }
+                        })
+                        
+                        
+                        
+                        
+                        
+                        
+                        if let likes = object.valueForKey("likes") as? Int {
+                            self.likeCountLabel.text = "\(likes)"
+                        }
+                        
+                        else {
+                            self.likeCountLabel.text = "0"
+                        }
                         
                         
                         self.defaults.setObject(object.objectId, forKey: "fromseemore")
