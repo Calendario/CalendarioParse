@@ -114,6 +114,11 @@
         [self launchSearch];
     }
     
+    if ([shortcutItem.type isEqualToString:@"co.uk.calendario.CalendarioApp.profile"])
+    {
+        [self lanunchProfile];
+    }
+    
     
 }
 
@@ -130,9 +135,20 @@
 {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-    tabBarViewController *tab = [sb instantiateViewControllerWithIdentifier:@"tabBar"];
     SearchViewController *sv = [sb instantiateViewControllerWithIdentifier:@"search"];
+    self.window.rootViewController = sv;
     [self.window makeKeyAndVisible];
+   
+    
+}
+
+-(void) lanunchProfile
+{
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    MyProfileViewController *profile = [sb instantiateViewControllerWithIdentifier:@"My Profile"];
+    self.window.rootViewController = profile;
+    [self.window makeKeyAndVisible];
+    
     
 }
 

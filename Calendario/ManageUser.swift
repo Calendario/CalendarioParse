@@ -29,7 +29,7 @@ import Parse
         // already following the passed in user.
         self.alreadyFollowingUser(userData, currentUserCheckMode: true) { (status, objectID) -> Void in
             
-            // Setup the follow/unfollow request.
+            // Setup the follow/unfollow  .
             var dataQuery:PFQuery!
             dataQuery = PFQuery(className: "FollowersAndFollowing")
             dataQuery.getObjectInBackgroundWithId(objectID, block: { (returnObject, error) -> Void in
@@ -48,6 +48,7 @@ import Parse
                     
                     // Set the button title.
                     buttonTitle = "Follow"
+                   
                     
                     // Unfollow the user account.
                     returnObject!.removeObject(userData.objectId!, forKey: "userFollowing")
@@ -60,6 +61,7 @@ import Parse
                     
                     // Set the button title.
                     buttonTitle = "Following"
+                     FollowRequest(userData, DateofFollow: userData.createdAt!)
                     
                     // Follow the user account.
                     returnObject!.addUniqueObject(userData.objectId!, forKey: "userFollowing")
@@ -447,3 +449,83 @@ import Parse
         }
     }
 }
+
+
+
+
+// follow request function 
+/* I decieded to do this as a function rather than a closure because you can addd the function call to the into the source code of the approate closure and besides it just generates a request
+ please feel free to message me if you have questions-Derek 
+*/
+
+func FollowRequest(userData:PFUser, DateofFollow:NSDate)
+{
+    // see if passed user if a private profile 
+    
+    var userQuery = PFUser.query()
+    userQuery?.getObjectInBackgroundWithId(userData.objectId!, block: { (object, error) -> Void in
+        if error == nil
+        {
+            var profilestatus = object?.valueForKey("privateProfile") as! Bool
+            print(profilestatus)
+            print(DateofFollow)
+            
+            // if true the profile is private 
+            if profilestatus
+            {
+                // generate a date 30 days from created at
+                var datecommpoents:NSDateComponents = NSDateComponents()
+                datecommpoents.month = 1
+                var calendar: NSCalendar = NSCalendar.currentCalendar()
+                
+                var expiredate:NSDate = calendar.dateByAddingComponents(datecommpoents, toDate: DateofFollow, options: NSCalendarOptions())!
+                // convert the date into a more reaable form
+                let dateformatter = NSDateFormatter()
+                dateformatter.dateStyle = NSDateFormatterStyle.ShortStyle
+                dateformatter.dateFormat = "M/d/yy"
+                
+                let readabledate = dateformatter.stringFromDate(expiredate)
+                
+                
+                print(readabledate)
+                
+                // create user follow object 
+                
+                var followrequest = PFObject(className: "FollowRequest")
+                followrequest["Requester"] = PFUser.currentUser()
+                followrequest["desiredfollower"] = userData
+                followrequest["expiredate"] = readabledate
+                followrequest.saveInBackgroundWithBlock({ (success, error) -> Void in
+                    if success
+                    {
+                        print("the request has been generated")
+                    }
+                    else
+                    {
+                        print(error?.localizedDescription)
+                    }
+                })
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            }
+            else
+            {
+                print("profile is not private")
+            }
+            
+            
+        }
+    })
+}
+
+
+
