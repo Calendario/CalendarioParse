@@ -443,7 +443,10 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         // create action for like Button
         
         print(statusupdate.objectId!)
-        cell.likebutton.addTarget(self, action: "likeClicked:", forControlEvents: .TouchUpInside)
+        //cell.likebutton.userInteractionEnabled = true
+        cell.likebutton.translatesAutoresizingMaskIntoConstraints = true
+        cell.likebutton.clipsToBounds = false
+        cell.likebutton.addTarget(self, action: "likeclicked:", forControlEvents: .TouchUpInside)
         
         
         
@@ -502,88 +505,90 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         return cell
         }
     
-    
-    
-    
-    
-    func likeClicked(sender:DOFavoriteButton)
-        {
+    func likeclicked(sender:DOFavoriteButton)
+    {
         
+        
+        print(currentobjectID)
+        
+        if sender.selected
+        {
             
-            print(currentobjectID)
-            
-            if sender.selected
-            {
-                
-                    print("unlike")
-                var query = PFQuery(className: "StatusUpdate")
-                query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
-                    if error == nil
-                    {
-                        var currentlikes = update?.valueForKey("likes") as! Int
-                        
-                        update!["likes"] = currentlikes - 1
-                        update?.saveInBackground()
-                        
-                        print(update?.valueForKey("likes") as! Int)
-                        
-                        let alert = UIAlertController(title: "Alert", message: "You have unlike this post.", preferredStyle: .Alert)
-                        alert.view.tintColor = UIColor.flatGreenColor()
-                        let next = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                        alert.addAction(next)
-                        
-                        self.presentViewController(alert, animated: true, completion: nil)
-                        
-                        
-
-                    }
-                })
-                
-                
-                
-                 sender.deselect()
-
-            }
-            else
-            {
-                print("like")
-                sender.select()
-                sender.imageColorOn = UIColor.flatRedColor()
-                var query = PFQuery(className: "StatusUpdate")
-                query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
-                    if error == nil
-                    {
-                        var currentlikes = update?.valueForKey("likes") as? Int
-                        
-                        if currentlikes == nil
-                        {
-                            currentlikes = 1
-                        }
-                        
-                        update!["likes"] = currentlikes! + 1
-                        update?.saveInBackground()
-                        
-                        let string = "\(PFUser.currentUser()!.username!) has liked your post"
-                        print(string)
-                        
-                        PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : string, "user" : "\(PFUser.currentUser()?.username!)"])
-                       print(update?.valueForKey("likes") as! Int)
-                        //self.SavingNotifacations(string)
-                        
-                        
-                        
-                        
-                        self.LoadData()
+            print("unlike")
+            var query = PFQuery(className: "StatusUpdate")
+            query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
+                if error == nil
+                {
+                    var currentlikes = update?.valueForKey("likes") as! Int
+                    
+                    update!["likes"] = currentlikes - 1
+                    update?.saveInBackground()
+                    
+                    print(update?.valueForKey("likes") as! Int)
+                    
+                    let alert = UIAlertController(title: "Alert", message: "You have unlike this post.", preferredStyle: .Alert)
+                    alert.view.tintColor = UIColor.flatGreenColor()
+                    let next = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    alert.addAction(next)
+                    
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    
+                    
+                    
                 }
-                })
-
-            }
+            })
             
             
+            
+            sender.deselect()
             
         }
+        else
+        {
+            print("like")
+            sender.select()
+            sender.imageColorOn = UIColor.flatRedColor()
+            var query = PFQuery(className: "StatusUpdate")
+            query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
+                if error == nil
+                {
+                    var currentlikes = update?.valueForKey("likes") as? Int
+                    
+                    if currentlikes == nil
+                    {
+                        currentlikes = 1
+                    }
+                    
+                    update!["likes"] = currentlikes! + 1
+                    update?.saveInBackground()
+                    
+                    let string = "\(PFUser.currentUser()!.username!) has liked your post"
+                    print(string)
+                    
+                    PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : string, "user" : "\(PFUser.currentUser()?.username!)"])
+                    print(update?.valueForKey("likes") as! Int)
+                    //self.SavingNotifacations(string)
+                    
+                    
+                    
+                    
+                    self.LoadData()
+                }
+            })
+            
+        }
+        
+        
+        
+    }
     
-    func SavingNotifacations(notifcation:String)
+
+    
+    
+    
+    
+    
+        func SavingNotifacations(notifcation:String)
     {
         
         
