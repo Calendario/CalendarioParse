@@ -36,9 +36,10 @@ class WebPageViewController : UIViewController, UIWebViewDelegate {
             
             // Set the initial title to the passed in URL.
             titleLabel.text = passedURL
+            print(passedURL)
             
             // Load the website in the web view.
-            let url = NSURL(string: passedURL)
+            let url = NSURL(string: "http://\(passedURL)")
             let requestObj = NSURLRequest(URL: url!)
             webPage.loadRequest(requestObj)
         }
@@ -97,7 +98,18 @@ class WebPageViewController : UIViewController, UIWebViewDelegate {
         presentViewController(alertController, animated: true, completion: nil)
     }
     
+    
+    @IBAction func ActionPressed(sender: AnyObject) {
+        OpeninSafari(NSURL(string: "http://\(passedURL)")!)
+    }
+    
+    
     // Other methods.
+    
+    func OpeninSafari(url:NSURL)
+    {
+        UIApplication.sharedApplication().openURL(url)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

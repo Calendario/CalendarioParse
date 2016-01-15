@@ -27,7 +27,6 @@ class NewsfeedTableViewCell: UITableViewCell {
     @IBOutlet weak var uploaddatelabel: UILabel!
     
     
-    @IBOutlet weak var tenselabel: UILabel!
     
     @IBOutlet weak var locationLabel: UILabel!
     

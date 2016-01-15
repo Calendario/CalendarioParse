@@ -334,16 +334,29 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
         
         isDatePassed(statusupdate.createdAt!, date2: NSDate(), ParseID: statusupdate.objectId!)
-
         
-        cell.statusTextView.text = statusupdate.objectForKey("updatetext") as! String
+        
+        // NSMutableAttributedString
+        
+        var attrs = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)]
+        var tensestring = NSMutableAttributedString(string: statusupdate.objectForKey("tense") as! String, attributes: attrs)
+        var spacestring = NSMutableAttributedString (string: " ")
+        var updatestring = NSMutableAttributedString(string: statusupdate.objectForKey("updatetext") as! String)
+        
+        tensestring.appendAttributedString(spacestring)
+        tensestring.appendAttributedString(updatestring)
+        
+        cell.statusTextView.attributedText = tensestring
+        
+        
+        
+        //cell.statusTextView.text = statusupdate.objectForKey("updatetext") as! String
         
         cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
         cell.profileimageview.clipsToBounds = true
         
         
         cell.uploaddatelabel.text = statusupdate.objectForKey("dateofevent") as! String
-        cell.tenselabel.text = statusupdate.objectForKey("tense") as! String
         cell.locationLabel.text = statusupdate.objectForKey("location") as! String
         var likesamount = statusupdate.objectForKey("likes") as? Int
         

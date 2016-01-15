@@ -34,7 +34,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v4l-4r-4nc" id="1if-ng-4jI">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MeP-xu-Qpc" userLabel="User Profile Image">
@@ -230,11 +230,11 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="146"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vaR-8e-HVs" id="Niw-dS-Vbm">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="145.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="145"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KhO-HU-Fzo">
-                                            <rect key="frame" x="66" y="17" width="39.5" height="21"/>
+                                            <rect key="frame" x="66" y="17" width="40" height="21"/>
                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -247,25 +247,22 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5q3-2M-rR7">
-                                            <rect key="frame" x="340" y="23" width="27" height="14.5"/>
+                                            <rect key="frame" x="340" y="23" width="27" height="15"/>
                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="11"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tense" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31V-uF-omf">
-                                            <rect key="frame" x="66" y="67" width="33" height="15.5"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
-                                            <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwP-EW-rcB">
-                                            <rect key="frame" x="66" y="39" width="53.5" height="18.5"/>
+                                            <rect key="frame" x="66" y="39" width="54" height="19"/>
                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wq-Ok-Hzx" customClass="KILabel">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wq-Ok-Hzx" customClass="KILabel">
                                             <rect key="frame" x="177" y="8" width="90" height="14"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="90" id="lII-w0-nFd"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -297,49 +294,42 @@
                                                 <segue destination="F2z-l2-38J" kind="show" id="6lO-Zx-iIM"/>
                                             </connections>
                                         </button>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bW-iD-HSH">
-                                            <rect key="frame" x="107" y="67.5" width="260" height="70"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bW-iD-HSH">
+                                            <rect key="frame" x="87" y="68" width="279" height="70"/>
                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
                                         </textView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOW-cl-tPW">
-                                            <rect key="frame" x="66" y="122" width="27" height="15"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOW-cl-tPW">
+                                            <rect key="frame" x="65" y="122" width="27" height="15"/>
                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="11"/>
                                             <color key="textColor" red="0.2156862745" green="0.60784313729999995" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="eOW-cl-tPW" firstAttribute="leading" secondItem="31V-uF-omf" secondAttribute="leading" id="77O-IG-ofn"/>
-                                        <constraint firstItem="7bW-iD-HSH" firstAttribute="top" secondItem="31V-uF-omf" secondAttribute="top" id="7BX-qb-UFv"/>
                                         <constraint firstItem="KhO-HU-Fzo" firstAttribute="leading" secondItem="crA-RG-JUw" secondAttribute="trailing" constant="8" id="8dD-kb-JRB"/>
                                         <constraint firstAttribute="trailing" secondItem="5q3-2M-rR7" secondAttribute="trailing" constant="8" id="8sK-2q-Yrp"/>
                                         <constraint firstItem="crA-RG-JUw" firstAttribute="top" secondItem="Niw-dS-Vbm" secondAttribute="top" constant="8" id="9dn-fm-T5i"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="7bW-iD-HSH" secondAttribute="bottom" constant="-1" id="DRH-Yr-eXR"/>
+                                        <constraint firstItem="7bW-iD-HSH" firstAttribute="leading" secondItem="eOW-cl-tPW" secondAttribute="trailing" constant="14" id="DSw-Vw-twV"/>
                                         <constraint firstItem="ZTF-8Y-ySu" firstAttribute="top" secondItem="S5F-zL-UN7" secondAttribute="bottom" constant="2" id="H0G-an-Tdh"/>
-                                        <constraint firstItem="31V-uF-omf" firstAttribute="top" secondItem="cwP-EW-rcB" secondAttribute="bottom" constant="10" id="HoT-Oy-he8"/>
+                                        <constraint firstItem="eOW-cl-tPW" firstAttribute="leading" secondItem="cwP-EW-rcB" secondAttribute="leading" id="KvE-u9-d9a"/>
                                         <constraint firstItem="S5F-zL-UN7" firstAttribute="centerX" secondItem="crA-RG-JUw" secondAttribute="centerX" id="QXG-Qb-ZOn"/>
                                         <constraint firstItem="KhO-HU-Fzo" firstAttribute="top" secondItem="Niw-dS-Vbm" secondAttribute="top" constant="17" id="QfG-r3-xSH"/>
                                         <constraint firstItem="7bW-iD-HSH" firstAttribute="bottom" secondItem="Niw-dS-Vbm" secondAttribute="bottomMargin" id="VsI-lk-JzC"/>
                                         <constraint firstItem="7bW-iD-HSH" firstAttribute="trailing" secondItem="Niw-dS-Vbm" secondAttribute="trailingMargin" id="Vwg-Fw-Nnh"/>
+                                        <constraint firstItem="7bW-iD-HSH" firstAttribute="top" secondItem="cwP-EW-rcB" secondAttribute="bottom" constant="10" id="WSm-CM-zK4"/>
                                         <constraint firstItem="5q3-2M-rR7" firstAttribute="bottom" secondItem="KhO-HU-Fzo" secondAttribute="bottom" id="X0T-Ih-gyZ"/>
+                                        <constraint firstItem="2wq-Ok-Hzx" firstAttribute="top" secondItem="crA-RG-JUw" secondAttribute="top" id="ZED-eR-Yqp"/>
                                         <constraint firstItem="crA-RG-JUw" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" constant="8" id="ZYk-25-O86"/>
-                                        <constraint firstItem="31V-uF-omf" firstAttribute="leading" secondItem="cwP-EW-rcB" secondAttribute="leading" id="aTM-Qu-88a"/>
                                         <constraint firstAttribute="bottom" secondItem="eOW-cl-tPW" secondAttribute="bottom" constant="8" id="aeu-ko-7DW"/>
-                                        <constraint firstItem="7bW-iD-HSH" firstAttribute="top" secondItem="31V-uF-omf" secondAttribute="top" id="efZ-Sf-iJv"/>
                                         <constraint firstItem="ZTF-8Y-ySu" firstAttribute="centerX" secondItem="crA-RG-JUw" secondAttribute="centerX" id="j8X-6c-8un"/>
                                         <constraint firstItem="S5F-zL-UN7" firstAttribute="top" secondItem="crA-RG-JUw" secondAttribute="bottom" constant="8" id="k3Q-VF-LxI"/>
-                                        <constraint firstItem="31V-uF-omf" firstAttribute="centerY" secondItem="S5F-zL-UN7" secondAttribute="centerY" id="n1z-SE-XCw"/>
                                         <constraint firstItem="cwP-EW-rcB" firstAttribute="leading" secondItem="KhO-HU-Fzo" secondAttribute="leading" id="o1C-3Z-T6E"/>
+                                        <constraint firstItem="2wq-Ok-Hzx" firstAttribute="leading" secondItem="KhO-HU-Fzo" secondAttribute="trailing" constant="71" id="p4n-F2-Kwg"/>
                                         <constraint firstItem="cwP-EW-rcB" firstAttribute="bottom" secondItem="crA-RG-JUw" secondAttribute="bottom" id="qnH-BD-e2h"/>
-                                        <constraint firstItem="7bW-iD-HSH" firstAttribute="leading" secondItem="31V-uF-omf" secondAttribute="trailing" constant="8" id="x3Y-fm-oFF"/>
                                     </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="n1z-SE-XCw"/>
-                                            <exclude reference="efZ-Sf-iJv"/>
-                                        </mask>
-                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="UserNameLabel" destination="KhO-HU-Fzo" id="sYJ-cV-QoW"/>
@@ -348,7 +338,6 @@
                                     <outlet property="locationLabel" destination="cwP-EW-rcB" id="dj6-zV-F6N"/>
                                     <outlet property="profileimageview" destination="crA-RG-JUw" id="BbN-Yc-vz5"/>
                                     <outlet property="statusTextView" destination="7bW-iD-HSH" id="I0k-6N-mmP"/>
-                                    <outlet property="tenselabel" destination="31V-uF-omf" id="3T8-Zj-uUs"/>
                                     <outlet property="uploaddatelabel" destination="5q3-2M-rR7" id="YzW-1o-azi"/>
                                 </connections>
                             </tableViewCell>
@@ -591,7 +580,7 @@
                         <viewControllerLayoutGuide type="bottom" id="pwH-dF-yIT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7xN-Kh-pjT">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="206" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KJI-D7-2eT">
@@ -602,7 +591,7 @@
                                         <rect key="frame" x="0.0" y="28" width="387" height="206"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WYh-f2-f9g" id="idj-7P-aTH">
-                                            <rect key="frame" x="0.0" y="0.0" width="387" height="205.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="387" height="205"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09y-oe-M55">
@@ -708,7 +697,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="217"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uZa-OC-Tw6" id="5pX-3S-uf5">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="216.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="216"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAA-Mf-Sgt">
@@ -755,8 +744,8 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dkp-WD-e0g" customClass="FSCalendar">
-                                <rect key="frame" x="0.0" y="20" width="375" height="355"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dkp-WD-e0g" customClass="FSCalendar">
+                                <rect key="frame" x="0.0" y="40" width="375" height="355"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="titleDefaultColor">
                                         <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -789,13 +778,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ZJV-K3-Tez" firstAttribute="bottom" secondItem="zdT-KE-5E5" secondAttribute="top" id="IN8-Kf-kVA"/>
-                            <constraint firstItem="Dkp-WD-e0g" firstAttribute="top" secondItem="eWx-OU-env" secondAttribute="topMargin" constant="20" id="Qg4-q4-Vae"/>
-                            <constraint firstItem="zdT-KE-5E5" firstAttribute="top" secondItem="Dkp-WD-e0g" secondAttribute="bottom" constant="237" id="T61-X0-5O6"/>
+                            <constraint firstItem="Dkp-WD-e0g" firstAttribute="top" secondItem="eWx-OU-env" secondAttribute="topMargin" constant="40" id="Qg4-q4-Vae"/>
+                            <constraint firstItem="zdT-KE-5E5" firstAttribute="top" secondItem="Dkp-WD-e0g" secondAttribute="bottom" constant="223" id="T61-X0-5O6"/>
                             <constraint firstAttribute="trailing" secondItem="Dkp-WD-e0g" secondAttribute="trailing" id="VOu-kO-YBL"/>
                             <constraint firstItem="Dkp-WD-e0g" firstAttribute="leading" secondItem="eWx-OU-env" secondAttribute="leading" id="cLJ-mO-0To"/>
-                            <constraint firstItem="ZJV-K3-Tez" firstAttribute="leading" secondItem="eWx-OU-env" secondAttribute="leadingMargin" constant="-32" id="i4G-2G-7yc"/>
-                            <constraint firstItem="ZJV-K3-Tez" firstAttribute="top" secondItem="Dkp-WD-e0g" secondAttribute="bottom" constant="8" symbolic="YES" id="ncb-Gj-4tK"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ZJV-K3-Tez" secondAttribute="trailing" constant="-39" id="vdw-72-UDB"/>
+                            <constraint firstItem="ZJV-K3-Tez" firstAttribute="leading" secondItem="eWx-OU-env" secondAttribute="leadingMargin" constant="-36" id="i4G-2G-7yc"/>
+                            <constraint firstItem="ZJV-K3-Tez" firstAttribute="top" secondItem="Dkp-WD-e0g" secondAttribute="bottom" constant="-12" id="ncb-Gj-4tK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZJV-K3-Tez" secondAttribute="trailing" constant="-43" id="vdw-72-UDB"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="VA7-3p-DDc"/>
@@ -874,7 +863,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eLL-Yg-VtC" id="kpk-uB-DJm">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -2035,11 +2024,11 @@
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingsCell" rowHeight="55" id="pLQ-Pz-6n9">
                                         <rect key="frame" x="0.0" y="22" width="383" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pLQ-Pz-6n9" id="N6u-US-uAV">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="54.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="pLQ-Pz-6n9" id="N6u-US-uAV">
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zed-Ul-qvZ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zed-Ul-qvZ">
                                                     <rect key="frame" x="339" y="14" width="28" height="28"/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2404,7 +2393,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <rect key="frame" x="0.0" y="28" width="375" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xVQ-Pd-MJC" id="mgK-ZZ-S8V">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="57.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="57"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LHJ-6f-9gb">
@@ -2516,11 +2505,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wcF-Lg-mmq" id="cYt-mJ-hlS">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VVV-IP-6Wc">
-                                                    <rect key="frame" x="74" y="3" width="86.5" height="19.5"/>
+                                                    <rect key="frame" x="74" y="3" width="87" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -2532,8 +2521,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         <constraint firstAttribute="width" constant="58" id="hDr-rb-jEQ"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="notification string" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IsB-bg-0TJ">
-                                                    <rect key="frame" x="74" y="24.5" width="127" height="19.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="notification string" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IsB-bg-0TJ">
+                                                    <rect key="frame" x="74" y="25" width="127" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -2776,7 +2765,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 <rect key="frame" x="0.0" y="28" width="375" height="139"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4aE-O1-VGm" id="SHx-cD-L3b">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="138.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="138"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xw6-ES-kCb">
@@ -2798,7 +2787,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ya5-m5-e7V">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ya5-m5-e7V">
                                                                             <rect key="frame" x="106" y="38" width="40" height="20"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2810,7 +2799,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mPO-fv-iP8">
+                                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mPO-fv-iP8">
                                                                             <rect key="frame" x="8" y="66" width="359" height="65"/>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -3068,10 +3057,10 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <action selector="goBack:" destination="dDe-C1-0IX" id="LBw-QY-s8K"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="refresh" id="mSe-Qn-ZfU">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="mSe-Qn-ZfU">
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
-                                                <action selector="reload" destination="OQC-HU-OTh" id="czG-e2-GB9"/>
+                                                <action selector="ActionPressed:" destination="dDe-C1-0IX" id="602-nR-Gfa"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -3134,7 +3123,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sez-zi-hV3" id="ZYX-Pm-TpJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -3174,7 +3163,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <rect key="frame" x="0.0" y="28" width="600" height="118"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jcS-8H-Ors" id="D8t-dW-2aa">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="117.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="117"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UserLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzq-v7-kVp">
@@ -3235,7 +3224,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <rect key="frame" x="0.0" y="28" width="600" height="98"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="88i-Oj-5BM" id="4Xt-Z7-jcJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="97.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="97"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Real Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7E6-Xq-Qyn">
@@ -3341,7 +3330,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3J2-4P-xG3">
                                 <rect key="frame" x="253" y="87" width="109" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djb-8k-Z0j">
@@ -4364,8 +4353,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="seprator" width="300" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="sk0-vm-fWU"/>
         <segue reference="Q92-9R-gKB"/>
         <segue reference="jbQ-WG-YYd"/>
-        <segue reference="6lO-Zx-iIM"/>
     </inferredMetricsTieBreakers>
 </document>

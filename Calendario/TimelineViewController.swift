@@ -43,6 +43,24 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         
+        let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 55))
+        navigationbar.backgroundColor = UIColor.whiteColor()
+        navigationbar.delegate = self
+        navigationbar.barTintColor = UIColor(hexString: "#2c9560")
+        navigationbar.tintColor = UIColor.whiteColor()
+        
+        // logo for nav title
+        
+        let logo = UIImage(named: "navtext")
+        let imageview = UIImageView(image: logo)
+        
+        let navitems = UINavigationItem()
+        navitems.titleView = imageview
+        // set nav items in nav bar
+        navigationbar.items = [navitems]
+        self.view.addSubview(navigationbar)
+
+        
        
 
 
@@ -52,7 +70,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     override func viewDidAppear(animated: Bool) {
         
-
+        
     }
 
     override func didReceiveMemoryWarning() {
