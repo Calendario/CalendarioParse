@@ -18,7 +18,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var profVerified: UIImageView!
     @IBOutlet weak var profName: UILabel!
     @IBOutlet weak var profUserName: UILabel!
-    @IBOutlet weak var profDesc: UITextView!
+  //  @IBOutlet weak var profDesc: UITextView!
     @IBOutlet weak var profWeb: UIButton!
     @IBOutlet weak var profPosts: UILabel!
     @IBOutlet weak var profFollowers: UILabel!
@@ -29,6 +29,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var blockedBlurView: UIView!
     @IBOutlet weak var blockedViewDesc: UITextView!
     @IBOutlet weak var statusList: UITableView!
+    @IBOutlet weak var profDesc: UILabel!
     
     // Follow method property
     var FollowObject = FollowHelper()
