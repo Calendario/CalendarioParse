@@ -17,6 +17,7 @@ class ProfileViewCustomCell: UITableViewCell {
     @IBOutlet weak var uploadDateLabel: UILabel!
     @IBOutlet weak var tenseLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var privateView: UIView!
     
     // View Did Load method.
     

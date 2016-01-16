@@ -24,12 +24,10 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var profFollowers: UILabel!
     @IBOutlet weak var profFollowing: UILabel!
     @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var profileScroll: UIScrollView!
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var blockedBlurView: UIView!
     @IBOutlet weak var blockedViewDesc: UITextView!
-    @IBOutlet weak var privateView: UIView!
     @IBOutlet weak var statusList: UITableView!
     
     // Follow method property
@@ -49,6 +47,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     
     // Private profile check.
     var privateCheck:Bool!
+    var statusLoadCheck:Bool = true
     
     // User status update data.
     // (For the statusList table view).
@@ -276,9 +275,9 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         let width = UIScreen.mainScreen().bounds.size.width
         
         // Add the blocked blur view to the view.
-        blockedBlurView.frame = CGRectMake(0, 0, width, self.profileScroll.bounds.size.height)
+        blockedBlurView.frame = CGRectMake(0, 0, width, self.view.bounds.size.height)
         blockedBlurView.alpha = 0.0
-        self.profileScroll.addSubview(blockedBlurView)
+        self.view.addSubview(blockedBlurView)
         
         // Add the blur to the blocked view.
         var visualEffectView:UIVisualEffectView!
@@ -342,16 +341,13 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         settingsButton.enabled = false
         self.blockCheck = 0
         
-        // Disable scrolling access.
-        self.profileScroll.userInteractionEnabled = false
-        
         // Check to see if a user is being passed into the
         // view controller and run the appropriate actions.
         
         if ((passedUser == nil) || ((passedUser != nil) && (passedUser.username! == "\(PFUser.currentUser()!.username!)"))) {
             
-            // Allow scrolling access.
-            self.profileScroll.userInteractionEnabled = true
+            // Allow status updates to be fetched.
+            self.statusLoadCheck = true
             
             // Set the edit button text.
             self.editButton.setTitle("Edit Profile", forState: UIControlState.Normal)
@@ -425,46 +421,12 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                                     
                                     // Allow access to the more button.
                                     self.settingsButton.enabled = true
-                                    
-                                    // Allow scrolling access.
-                                    self.profileScroll.userInteractionEnabled = true
                                 }
                             }
                         }
                     }
                 }
             }
-            
-            // Check if the user is a private account.
-            privateCheck = passedUser?.objectForKey("privateProfile") as? Bool
-            
-            // Check if the logged in user is following
-            // the passed in user object or not.
-            ManageUser.alreadyFollowingUser(passedUser, currentUserCheckMode: true, completion: { (status, otherData) -> Void in
-                
-                if (status == true) {
-                    
-                    // Set the edit button text.
-                    self.editButton.setTitle("Following \(self.passedUser.username!)", forState: UIControlState.Normal)
-                }
-                
-                else {
-                    
-                    // Set the edit button text.
-                    self.editButton.setTitle("Follow \(self.passedUser.username!)", forState: UIControlState.Normal)
-                    
-                    // If the user is private then show
-                    // the private view lock image/text.
-                    
-                    if (self.privateCheck == true) {
-                        self.privateView.alpha = 1.0
-                    }
-                        
-                    else {
-                        self.privateView.alpha = 0.0
-                    }
-                }
-            })
             
             // Set the back button image and display it.
             backButton.image = UIImage(named: "left_icon.png")
@@ -475,29 +437,43 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             settingsButton.image = nil
             settingsButton.title = "More"
             
-            // Update the rest of the profile view.
-            self.updateProfileView(passedUser)
-        }
-    }
-    
-    // View Did Layout Subviews method.
-    
-    override func viewDidLayoutSubviews() {
-        
-        // Calculate the appropriate scroll height.
-        var scrollHeight: CGFloat = 0.0
-        
-        if (self.profileScroll.bounds.height > 780) {
-            scrollHeight = self.profileScroll.bounds.height
-        }
+            // Check if the user is a private account.
+            privateCheck = passedUser?.objectForKey("privateProfile") as? Bool
             
-        else {
-            scrollHeight = 780
+            // Check if the logged in user is following
+            // the passed in user object or not.
+            ManageUser.alreadyFollowingUser(passedUser, currentUserCheckMode: true, completion: { (status, otherData) -> Void in
+                
+                if (status == true) {
+                    
+                    // Allow status updates to be fetched.
+                    self.statusLoadCheck = true
+                    
+                    // Set the edit button text.
+                    self.editButton.setTitle("Following \(self.passedUser.username!)", forState: UIControlState.Normal)
+                }
+                
+                else {
+                    
+                    // Set the edit button text.
+                    self.editButton.setTitle("Follow \(self.passedUser.username!)", forState: UIControlState.Normal)
+                    
+                    // If the user is private then disallow
+                    // the status updates to be fetched.
+                    
+                    if (self.privateCheck == true) {
+                        self.statusLoadCheck = false
+                    }
+                        
+                    else {
+                        self.statusLoadCheck = true
+                    }
+                }
+                
+                // Update the rest of the profile view.
+                self.updateProfileView(self.passedUser)
+            })
         }
-        
-        // Setup the profile scroll view.
-        self.profileScroll.scrollEnabled = true
-        self.profileScroll.contentSize = CGSizeMake(self.view.bounds.width, scrollHeight)
     }
     
     // Profile data load method.
@@ -516,7 +492,8 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         
         // Set the username label text.
         self.profUserName.text = "@\(userData.username!)"
-        // store PFUser Data in NSUserDefaults t
+        
+        // Store PFUser Data in NSUserDefaults.
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(userData.username, forKey: "userdata")
         
@@ -620,54 +597,51 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     
     func loadUserStatusUpdate(userData: PFUser) {
         
-        // Setup the user status update query.
-        var queryStatusUpdate:PFQuery!
-        queryStatusUpdate = PFQuery(className: "StatusUpdate")
-        queryStatusUpdate.orderByAscending("createdAt")
-        queryStatusUpdate.whereKey("user", equalTo: userData)
-        queryStatusUpdate.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+        // Only show the status updates if the check has passed
+        // otherwise show the private user table view cell only.
+        
+        if (self.statusLoadCheck == true) {
             
-            dispatch_async(dispatch_get_main_queue(), {
+            // Setup the user status update query.
+            var queryStatusUpdate:PFQuery!
+            queryStatusUpdate = PFQuery(className: "StatusUpdate")
+            queryStatusUpdate.orderByAscending("createdAt")
+            queryStatusUpdate.whereKey("user", equalTo: userData)
+            queryStatusUpdate.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
                 
-                if (error == nil) {
+                dispatch_async(dispatch_get_main_queue(), {
                     
-                    // Set the posts counter label.
-                    self.profPosts.text = "\(objects!.count)"
-                    
-                    // Check if any objects matching
-                    // the passed in user are present.
-                    
-                    if (objects!.count > 0) {
+                    if (error == nil) {
                         
-                        // Initialise the data array.
-                        self.statusObjects = NSMutableArray()
+                        // Set the posts counter label.
+                        self.profPosts.text = "\(objects!.count)"
                         
-                        // Save the status update data.
+                        // Check if any objects matching
+                        // the passed in user are present.
                         
-                        for (var loop = 0; loop < objects!.count; loop++) {
-                            self.statusObjects.addObject(objects![loop])
+                        if (objects!.count > 0) {
+                            
+                            // Initialise the data array.
+                            self.statusObjects = NSMutableArray()
+                            
+                            // Save the status update data.
+                            
+                            for (var loop = 0; loop < objects!.count; loop++) {
+                                self.statusObjects.addObject(objects![loop])
+                            }
+                            
+                            // Reload the table view.
+                            self.statusList.reloadData()
                         }
-                        
-                        // Show the table view.
-                        self.statusList.alpha = 1.0
-                        
-                        // Reload the table view.
-                        self.statusList.reloadData()
                     }
-                        
-                    else {
-                        
-                        // Hide the table view.
-                        self.statusList.alpha = 0.0
-                    }
-                }
-                    
-                else {
-                    
-                    // Hide the table view.
-                    self.statusList.alpha = 0.0
-                }
-            })
+                })
+            }
+        }
+        
+        else {
+            
+            // Reload the table view.
+            self.statusList.reloadData()
         }
     }
     
@@ -678,7 +652,16 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return statusObjects.count
+        
+        print("STATUS CHECK \(self.statusLoadCheck)")
+        
+        if (self.statusLoadCheck == true) {
+            return statusObjects.count
+        }
+        
+        else {
+            return 1
+        }
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -686,64 +669,84 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // Setup the table view cell.
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ProfileViewCustomCell
         
-        // Get the specific status object for this cell.
-        let currentObject:PFObject = statusObjects.objectAtIndex(indexPath.row) as! PFObject
-        
-        // Set the status labels.
-        cell.statusTextView.text = currentObject["updatetext"] as? String
-        cell.uploadDateLabel.text = currentObject["dateofevent"] as? String
-        cell.tenseLabel.text = currentObject["tense"] as? String
-        cell.locationLabel.text = currentObject["location"] as? String
-        
-        // Turn the profile picture into a cirlce.
-        cell.profileImageView.layer.cornerRadius = (cell.profileImageView.frame.size.width / 2)
-        cell.profileImageView.clipsToBounds = true
-        
-        // Get the user object data.
-        var findUser:PFQuery!
-        findUser = PFUser.query()!
-        findUser.whereKey("objectId", equalTo: (currentObject.objectForKey("user")?.objectId)!)
-        
-        findUser.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
+        if (self.statusLoadCheck == true) {
             
-            if let aobject = objects {
+            // Hide the private cell view.
+            cell.privateView.alpha = 0.0
+            
+            // Get the specific status object for this cell.
+            let currentObject:PFObject = statusObjects.objectAtIndex(indexPath.row) as! PFObject
+            
+            // Set the status labels.
+            cell.statusTextView.text = currentObject["updatetext"] as? String
+            cell.uploadDateLabel.text = currentObject["dateofevent"] as? String
+            cell.tenseLabel.text = currentObject["tense"] as? String
+            cell.locationLabel.text = currentObject["location"] as? String
+            
+            // Turn the profile picture into a cirlce.
+            cell.profileImageView.layer.cornerRadius = (cell.profileImageView.frame.size.width / 2)
+            cell.profileImageView.clipsToBounds = true
+            
+            // Get the user object data.
+            var findUser:PFQuery!
+            findUser = PFUser.query()!
+            findUser.whereKey("objectId", equalTo: (currentObject.objectForKey("user")?.objectId)!)
+            
+            findUser.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
                 
-                let userObject = (aobject as NSArray).lastObject as? PFUser
-                
-                // Set the user name label.
-                cell.userNameLabel.text = userObject?.username
-                
-                // Setup the user profile image file.
-                let userImageFile = userObject!["profileImage"] as! PFFile
-                
-                // Download the profile image.
-                userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                if let aobject = objects {
                     
-                    if (error == nil) {
+                    let userObject = (aobject as NSArray).lastObject as? PFUser
+                    
+                    // Set the user name label.
+                    cell.userNameLabel.text = userObject?.username
+                    
+                    // Setup the user profile image file.
+                    let userImageFile = userObject!["profileImage"] as! PFFile
+                    
+                    // Download the profile image.
+                    userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                         
-                        // Check the profile image data first.
-                        let profileImage = UIImage(data:imageData!)
-                        
-                        if ((imageData != nil) && (profileImage != nil)) {
+                        if (error == nil) {
                             
-                            // Set the user profile picture.
-                            cell.profileImageView.image = profileImage
+                            // Check the profile image data first.
+                            let profileImage = UIImage(data:imageData!)
+                            
+                            if ((imageData != nil) && (profileImage != nil)) {
+                                
+                                // Set the user profile picture.
+                                cell.profileImageView.image = profileImage
+                            }
+                                
+                            else {
+                                
+                                // No profile picture set the standard image.
+                                cell.profileImageView.image = UIImage(named: "default_profile_pic.png")
+                            }
                         }
                             
                         else {
                             
                             // No profile picture set the standard image.
-                           cell.profileImageView.image = UIImage(named: "default_profile_pic.png")
+                            cell.profileImageView.image = UIImage(named: "default_profile_pic.png")
                         }
-                    }
-                        
-                    else {
-                        
-                        // No profile picture set the standard image.
-                        cell.profileImageView.image = UIImage(named: "default_profile_pic.png")
                     }
                 }
             }
+        }
+            
+        else {
+            
+            // Hide the main cell views.
+            cell.statusTextView.alpha = 0.0
+            cell.uploadDateLabel.alpha = 0.0
+            cell.tenseLabel.alpha = 0.0
+            cell.locationLabel.alpha = 0.0
+            cell.profileImageView.alpha = 0.0
+            cell.userNameLabel.alpha = 0.0
+            
+            // Show the private cell view.
+            cell.privateView.alpha = 1.0
         }
         
         return cell
@@ -754,7 +757,14 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
+        
+        if (self.statusLoadCheck == true) {
+            return true
+        }
+            
+        else {
+            return false
+        }
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -909,7 +919,14 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         }
         
         else {
-            return [report, seemore]
+            
+            if (self.statusLoadCheck == true) {
+                return [report, seemore]
+            }
+            
+            else {
+                return nil
+            }
         }
     }
     
