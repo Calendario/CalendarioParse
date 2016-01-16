@@ -76,11 +76,11 @@
     // Get the cell UI objects.
     UIImageView *userImageView = (UIImageView *)[cell.contentView viewWithTag:1];
     UILabel *usernameLabel = (UILabel *)[cell.contentView viewWithTag:2];
-    UILabel *actionLabel = (UILabel *)[cell.contentView viewWithTag:3];
+    // UILabel *actionLabel = (UILabel *)[cell.contentView viewWithTag:3];
     
     // Set the notification label.
     NSString *notificationAction = notifications[indexPath.row];
-    actionLabel.text = notificationAction;
+    // actionLabel.text = notificationAction;
     
     // Download the user data.
     PFQuery *imageQuery = [PFUser query];
@@ -89,8 +89,21 @@
         
         if (error == nil) {
             
-            // Set the username label.
-            usernameLabel.text = [NSString stringWithFormat:@"@%@", ((PFUser *)object).username];
+            
+            NSString *originalString = [NSString stringWithFormat:@"%@ %@", [NSString stringWithFormat:@"@%@", ((PFUser *)object).username], notificationAction];
+            usernameLabel.text = originalString;
+            
+            
+            NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:usernameLabel.text];
+            NSArray *words = [usernameLabel.text componentsSeparatedByString:@" "];
+            for (NSString *word in words) {
+                if ([word hasPrefix:@"@"]) {
+                    NSRange range = [usernameLabel.text rangeOfString:word];
+                    [string addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:33/255.0f green:135/255.0f blue:75/255.0f alpha:1.0f] range:range];
+                }
+            }
+            
+            usernameLabel.attributedText = string;
             
             // Download the user image.
             PFFile *userImageFile = object[@"profileImage"];

@@ -18,7 +18,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var profVerified: UIImageView!
     @IBOutlet weak var profName: UILabel!
     @IBOutlet weak var profUserName: UILabel!
-  //  @IBOutlet weak var profDesc: UITextView!
     @IBOutlet weak var profWeb: UIButton!
     @IBOutlet weak var profPosts: UILabel!
     @IBOutlet weak var profFollowers: UILabel!
