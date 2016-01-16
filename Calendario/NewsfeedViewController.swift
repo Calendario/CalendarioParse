@@ -54,7 +54,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         let rightButton: UIButton = UIButton(type: UIButtonType.Custom)
         rightButton.setImage(UIImage(named: "plus"), forState: UIControlState.Normal)
         rightButton.addTarget(self, action: "openPostSection", forControlEvents: UIControlEvents.TouchUpInside)
-        rightButton.frame = CGRectMake(0, 0, 53, 31)
+        rightButton.frame = CGRectMake(0, 0, 60, 55)
         
                 
         // Set the navigation bar background colour.
@@ -686,7 +686,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(statusupdate.objectId, forKey: "objectid")
-        
+
 
     }
     

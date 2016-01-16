@@ -46,7 +46,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 55))
         navigationbar.backgroundColor = UIColor.whiteColor()
         navigationbar.delegate = self
-        navigationbar.barTintColor = UIColor(hexString: "#2c9560")
+        navigationbar.barTintColor =  UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         navigationbar.tintColor = UIColor.whiteColor()
         
         // logo for nav title
@@ -55,7 +55,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         let imageview = UIImageView(image: logo)
         
         let navitems = UINavigationItem()
-        navitems.titleView = imageview
+        navitems.title = "Timeline"
         // set nav items in nav bar
         navigationbar.items = [navitems]
         self.view.addSubview(navigationbar)
