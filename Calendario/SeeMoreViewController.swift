@@ -311,6 +311,11 @@ class SeeMoreViewController: UIViewController {
                         
                         if let likes = object.valueForKey("likes") as? Int {
                             self.likeCountLabel.text = "\(likes)"
+                            
+                            if likes >= 1
+                            {
+                                self.likeButton.setImage(UIImage(named: "like button filled"), forState: .Normal)
+                            }
                         }
                         
                         else {
@@ -331,7 +336,9 @@ class SeeMoreViewController: UIViewController {
                         
                         self.locationlabel.text = location
                         
+                        var dateofevent = object.valueForKey("dateofevent") as! String
                         
+                        self.statusDateLabel.text = dateofevent
                         
                         let image = object["image"] as? PFFile
                         image?.getDataInBackgroundWithBlock({ (imagedata, error) -> Void in
