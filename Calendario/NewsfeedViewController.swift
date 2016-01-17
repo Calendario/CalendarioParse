@@ -12,7 +12,7 @@ import DOFavoriteButton
 
 
 class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegate, UINavigationBarDelegate, FSCalendarDelegate, FSCalendarDataSource {
-
+    
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var activity: UIRefreshControl!
     
@@ -38,9 +38,9 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     var mentionid:String!
     var followingusers = [String]()
     var followinguser:String!
-
     
-  
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,19 +50,22 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         // to appear in the white tint colour.
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
-        // Create the post "+" button.
+       /* // Create the post "+" button.
         let rightButton: UIButton = UIButton(type: UIButtonType.Custom)
         rightButton.setImage(UIImage(named: "plus"), forState: UIControlState.Normal)
         rightButton.addTarget(self, action: "openPostSection", forControlEvents: UIControlEvents.TouchUpInside)
-        rightButton.frame = CGRectMake(0, 0, 60, 55)
+        rightButton.frame = CGRectMake (0, 0, 60, 55)
+
         
-                
+        
         // Set the navigation bar background colour.
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         
         // Add the button to the right section.
         let barButton = UIBarButtonItem(customView: rightButton)
         self.navigationItem.rightBarButtonItem = barButton
+        self.navigationItem.rightBarButtonItem?.imageInsets = UIEdgeInsetsMake(2, -6, 2, -2) */
+        
         
         // Logo for nav title.
         let logo = UIImage(named: "newsFeedTitle")
@@ -80,19 +83,22 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         
         /*ManageUser.getUserFollowersList(PFUser.currentUser()!) { (userFollowers) -> Void in
-            print("User followers: \(userFollowers)")
-            
-            // EXAMPLE OF DATA USAGE:
-            let test = userFollowers[0] as! PFUser
-            print("pfuser objects are \(test.username)")
+        print("User followers: \(userFollowers)")
+        
+        // EXAMPLE OF DATA USAGE:
+        let test = userFollowers[0] as! PFUser
+        print("pfuser objects are \(test.username)")
         }
         */
-
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         LoadData()
+    }
+    @IBAction func OpenPostButtonPressed(sender: UIBarButtonItem) {
+        openPostSection()
     }
     
     func openPostSection() {
@@ -108,7 +114,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         if (state == true) {
             activity.beginRefreshing()
         }
-        
+            
         else {
             activity.endRefreshing()
         }
@@ -117,7 +123,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     func dailyCalendarViewDidSelect(date: NSDate!) {
         /*statausData.removeAllObjects()
         
-       let dateformatter = NSDateFormatter()
+        let dateformatter = NSDateFormatter()
         dateformatter.dateFormat = "MM/dd/yy"
         var newdate = dateformatter.stringFromDate(date)
         
@@ -129,55 +135,55 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         
         getdates.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
-            if error == nil
-            {
-               // print(objects!.count)
-                for object in objects!
-                {
-                    let statusupdate:PFObject = object as! PFObject
-                    
-                
-                    
-                    self.statausData.addObject(statusupdate)
-                    
-                    
-                    
-                    
-
-                }
-                
-                
-                let array:NSArray = self.statausData.reverseObjectEnumerator().allObjects
-                self.statausData = NSMutableArray(array: array)
-                
-                self.table.reloadData()
-                
-                
-                
-
-                
-                }
-                
-                
-            }
+        if error == nil
+        {
+        // print(objects!.count)
+        for object in objects!
+        {
+        let statusupdate:PFObject = object as! PFObject
+        
+        
+        
+        self.statausData.addObject(statusupdate)
+        
+        
+        
+        
+        
+        }
+        
+        
+        let array:NSArray = self.statausData.reverseObjectEnumerator().allObjects
+        self.statausData = NSMutableArray(array: array)
+        
+        self.table.reloadData()
+        
+        
+        
+        
+        
+        }
+        
+        
+        }
         
         
         */
     }
-
     
-
+    
+    
     
     
     
     func CLCalendarBehaviorAttributes() -> [NSObject : AnyObject]! {
         
         
-     
+        
         return [CLCalendarWeekStartDay: 1]
     }
     
-       override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -190,7 +196,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         // Start the pull to refresh indicator.
         self.setRefreshIndicators(true)
-
+        
         
         
         
@@ -198,13 +204,13 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         //My getUserFollowersList now returns an array
         //full of PFUser objects :)
-        // thanks dude - Derek 
-    
+        // thanks dude - Derek
+        
         
         currentDate = NSDate()
         print("the current date is \(currentDate)")
         
-    
+        
         
         
         statausData.removeAllObjects()
@@ -263,62 +269,62 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                     
                     
                     // getting the current users status updates
-                   
-                    }
+                    
                 }
-                
-                
             }
             
-
-
             
-            
-            
-                    /*var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
+        }
+        
+        
+        
+        
+        
+        
+        /*var getstatus:PFQuery = PFQuery(className: "StatusUpdate")
         getstatus.includeKey("user")
         //getstatus.whereKey("user", containedIn: self.followingusers)
         getstatus.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
-            
-            // Stop the pull to refresh indicator.
-            self.setRefreshIndicators(false)
-            
-            if error == nil {
-                
-                for object in objects! {
-                    let statusupdate:PFObject = object as! PFObject
-                    
-                    
-                    
-                    
-                    
-                    
-                    self.statausData.addObject(statusupdate)
-                    
+        
+        // Stop the pull to refresh indicator.
+        self.setRefreshIndicators(false)
+        
+        if error == nil {
+        
+        for object in objects! {
+        let statusupdate:PFObject = object as! PFObject
+        
+        
+        
+        
+        
+        
+        self.statausData.addObject(statusupdate)
+        
         }
-                let array:NSArray = self.statausData.reverseObjectEnumerator().allObjects
-                self.statausData = NSMutableArray(array: array)
-                
-                self.table.reloadData()
-                
-                
-            }
-            
-            else {
-                
-            }
+        let array:NSArray = self.statausData.reverseObjectEnumerator().allObjects
+        self.statausData = NSMutableArray(array: array)
+        
+        self.table.reloadData()
+        
+        
+        }
+        
+        else {
+        
+        }
         }
         */
-
-   }
-
-
+        
+    }
+    
+    
     // Tableview delegate methods
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return statausData.count
     }
@@ -376,21 +382,21 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         /*var commentdata = PFQuery(className: "Comments")
         commentdata.whereKey("objectId", equalTo: statusupdate.objectId!)
         commentdata.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if error == nil
-            {
-                if objects?.count == 0
-                {
-                    cell.commentlabel.text = "no comments"
-                    
-                }
-                else
-                {
-                    cell.commentlabel.text = "\(objects!.count) comments"
-                }
-            }
+        if error == nil
+        {
+        if objects?.count == 0
+        {
+        cell.commentlabel.text = "no comments"
+        
+        }
+        else
+        {
+        cell.commentlabel.text = "\(objects!.count) comments"
+        }
+        }
         } */
         
-     
+        
         
         
         
@@ -462,48 +468,48 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         getlikes.whereKey("likedBy", equalTo: PFUser.currentUser()!)
         getlikes.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if error == nil
-            {
-                if let objects = objects as [PFObject]!
-                {
-                    for object in objects
-                    {
-                      print(object.objectId!)
-                    var numoflikes = object.valueForKey("likes") as! Int
-                    // storing the current object id with nsuserdefaults for the unlike method
-                        
-                        let defaults = NSUserDefaults.standardUserDefaults()
-                        defaults.setObject(object.objectId, forKey: "unlike")
-                        
-                    if numoflikes <= 1
-                    {
-                        let filledlikebutton = UIImage(named: "like button filled")
-                        cell.LikeButton.setImage(filledlikebutton, forState: .Normal)
-                        // adding a long press gesture reconizer 
-                        let longpressgesure = UILongPressGestureRecognizer(target: self, action: "unlike")
-                        longpressgesure.minimumPressDuration = 2.0
-                        cell.LikeButton.addGestureRecognizer(longpressgesure)
-                        print(numoflikes)
-                        }
-                       
-                    
-                }
-                
-
-                    
-                }
-            }
+        if error == nil
+        {
+        if let objects = objects as [PFObject]!
+        {
+        for object in objects
+        {
+        print(object.objectId!)
+        var numoflikes = object.valueForKey("likes") as! Int
+        // storing the current object id with nsuserdefaults for the unlike method
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(object.objectId, forKey: "unlike")
+        
+        if numoflikes <= 1
+        {
+        let filledlikebutton = UIImage(named: "like button filled")
+        cell.LikeButton.setImage(filledlikebutton, forState: .Normal)
+        // adding a long press gesture reconizer
+        let longpressgesure = UILongPressGestureRecognizer(target: self, action: "unlike")
+        longpressgesure.minimumPressDuration = 2.0
+        cell.LikeButton.addGestureRecognizer(longpressgesure)
+        print(numoflikes)
         }
         
-*/
-    
+        
+        }
+        
+        
+        
+        }
+        }
+        }
+        
+        */
+        
         //StartDectingHastags(cell.statusTextView.text)
         
         
         
         
         return cell
-        }
+    }
     
     func likeclicked(sender:DOFavoriteButton)
     {
@@ -582,13 +588,13 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
     }
     
-
     
     
     
     
     
-        func SavingNotifacations(notifcation:String)
+    
+    func SavingNotifacations(notifcation:String)
     {
         
         
@@ -617,7 +623,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                 
                 retreveduser["notifications"] = notifications
                 retreveduser.saveInBackground()
-            
+                
                 
                 
             }
@@ -632,9 +638,9 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     
     
     
-   
     
-
+    
+    
     
     
     func GotoProfile(username:PFUser)
@@ -642,9 +648,9 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         let sb = UIStoryboard(name: "Main", bundle: nil)
         var reportVC = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
         reportVC.passedUser = username
-            self.presentViewController(reportVC, animated: true, completion: nil)
+        self.presentViewController(reportVC, animated: true, completion: nil)
         
-
+        
     }
     
     
@@ -654,23 +660,23 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     {
         for object in objects
         {
-           if let image = object["profileImage"] as! PFFile?
-           {
-            image.getDataInBackgroundWithBlock({ (ImageData, error) -> Void in
-                if error == nil
-                {
-                    let image = UIImage(data: ImageData!)
-                    imageview.image = image
-                }
-                else
-                {
-                    imageview.image = UIImage(named: "profile_icon")
-                }
-            })
+            if let image = object["profileImage"] as! PFFile?
+            {
+                image.getDataInBackgroundWithBlock({ (ImageData, error) -> Void in
+                    if error == nil
+                    {
+                        let image = UIImage(data: ImageData!)
+                        imageview.image = image
+                    }
+                    else
+                    {
+                        imageview.image = UIImage(named: "profile_icon")
+                    }
+                })
             }
-
-            }
-              }
+            
+        }
+    }
     
     
     
@@ -682,20 +688,20 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         print("the current object id is \(currentobjectID)")
         
         
-        // storing the object id in NSUserDefaults 
+        // storing the object id in NSUserDefaults
         
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(statusupdate.objectId, forKey: "objectid")
-
-
+        
+        
     }
     
     override func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
         currentobjectID = nil
     }
     
-   
-
+    
+    
     
     
     
@@ -704,7 +710,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         let dateformatter = NSDateFormatter()
         dateformatter.dateFormat = "M/d/yy"
         var newdate = dateformatter.stringFromDate(date2)
-
+        
         
         if date1.timeIntervalSince1970 < date2.timeIntervalSince1970
         {
@@ -726,32 +732,32 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                         print("tense stays")
                         aobject["tense"] = "Currently"
                         aobject.saveInBackground()
-                     
+                        
                         
                     }
-                        
+                    
                     if aobject.objectForKey("dateofevent") as! String > newdate
                     {
                         print("going tense")
                         aobject["tense"] = "Going"
                         aobject.saveInBackground()
                     }
-                    
+                        
                         
                     else
                     {
                         
-                    print("tense is going to change")
-                    aobject["tense"] = "went"
-                    aobject.saveInBackground()
+                        print("tense is going to change")
+                        aobject["tense"] = "went"
+                        aobject.saveInBackground()
                         
                     }
                     
                 }
             })
-
-                    
-                }
+            
+            
+        }
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -762,12 +768,12 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         // jdhdh
     }
     
-    // dynamic cell height 
+    // dynamic cell height
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
-
+    
     
     
     func ReportView()
@@ -784,9 +790,9 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
-            
-            
-            
+        
+        
+        
         
         var report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
             print("report was tapped")
@@ -796,7 +802,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             
             
             
-
+            
             let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
             
             let defaults = NSUserDefaults.standardUserDefaults()
@@ -844,13 +850,13 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             
             
             
-
             
             
             
             
-         
-        
+            
+            
+            
         }
         let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
             print("see more was tapped")
@@ -866,23 +872,23 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             
             
             print(updatetext)
-                        
             
-              defaults.setObject(updatetext, forKey: "updatetext")
+            
+            defaults.setObject(updatetext, forKey: "updatetext")
             defaults.setObject(currentobjectID, forKey: "objectId")
             
             self.Seemore()
             
             
             
-
+            
         }
         
-
+        
         
         let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in
-              let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
-        
+            let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
+            
             
             
             
@@ -896,7 +902,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                     for object in objects!
                     {
                         print(object)
-                       let userstr = object["user"]?.username!
+                        let userstr = object["user"]?.username!
                         print(userstr!)
                         
                         if userstr == PFUser.currentUser()?.username
@@ -911,10 +917,10 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                                 }
                             })
                         }
-                        
+                            
                         else
                         {
-                          
+                            
                             print("user not the owner")
                             let alert = UIAlertController(title: "Sorry", message: "You can only delete your own posts.", preferredStyle: .Alert)
                             alert.view.tintColor = UIColor.flatGreenColor()
@@ -926,7 +932,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                             
                             
                             
-
+                            
                         }
                         
                         
@@ -940,12 +946,12 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             
             
             /*statusupdate.deleteInBackgroundWithBlock({ (sucess, error) -> Void in
-                self.statausData.removeObjectAtIndex(indexPath.row)
-                statusupdate.saveInBackground()
-                print("deleted")
-                self.LoadData()
-                
-
+            self.statausData.removeObjectAtIndex(indexPath.row)
+            statusupdate.saveInBackground()
+            print("deleted")
+            self.LoadData()
+            
+            
             })
             */
         }
@@ -977,6 +983,6 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             
         }
     }
-
+    
 }
 

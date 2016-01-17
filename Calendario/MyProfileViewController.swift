@@ -103,7 +103,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     
     @IBAction func openSettingsOrMoreSection(sender: UIButton) {
         
-        // If the current user is being displayed then show the user 
+        // If the current user is being displayed then show the user
         // settings menu otherwise display the more action sheet.
         
         if ((passedUser == nil) || ((passedUser != nil) && (passedUser.username! == "\(PFUser.currentUser()!.username!)"))) {
@@ -264,9 +264,9 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             presentViewController(moreMenu, animated: true, completion: nil)
         }
     }
-
+    
     // View Did Load method.
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -398,7 +398,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                         self.settingsButton.enabled = true
                         self.blockCheck = 1
                     }
-                    
+                        
                     else {
                         
                         var queryTwo:PFQuery!
@@ -416,7 +416,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                                     self.blockedViewDesc.text = "This user has blocked you."
                                     self.blockCheck = 2
                                 }
-                                
+                                    
                                 else {
                                     
                                     // Allow access to the more button.
@@ -452,7 +452,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                     // Set the edit button text.
                     self.editButton.setTitle("Following \(self.passedUser.username!)", forState: UIControlState.Normal)
                 }
-                
+                    
                 else {
                     
                     // Set the edit button text.
@@ -584,7 +584,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 // Load in the user status updates data.
                 self.loadUserStatusUpdate(userData)
             }
-            
+                
             else {
                 
                 // Ensure the table view remains clear.
@@ -637,7 +637,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 })
             }
         }
-        
+            
         else {
             
             // Reload the table view.
@@ -658,12 +658,12 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         if (self.statusLoadCheck == true) {
             return statusObjects.count
         }
-        
+            
         else {
             return 1
         }
     }
-
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // Setup the table view cell.
@@ -680,9 +680,20 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             // Set the status labels.
             cell.statusTextView.text = currentObject["updatetext"] as? String
             cell.uploadDateLabel.text = currentObject["dateofevent"] as? String
-            cell.tenseLabel.text = currentObject["tense"] as? String
-            cell.locationLabel.text = currentObject["location"] as? String
             
+            // NSMutableAttributedString
+            
+            let attrs = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)]
+            let tensestring = NSMutableAttributedString(string: currentObject.objectForKey("tense") as! String, attributes: attrs)
+            let spacestring = NSMutableAttributedString (string: " ")
+            let updatestring = NSMutableAttributedString(string: currentObject.objectForKey("location") as! String)
+            
+            tensestring.appendAttributedString(spacestring)
+            tensestring.appendAttributedString(updatestring)
+            
+            cell.tenseLabel.attributedText = tensestring
+            
+        
             // Turn the profile picture into a cirlce.
             cell.profileImageView.layer.cornerRadius = (cell.profileImageView.frame.size.width / 2)
             cell.profileImageView.clipsToBounds = true
@@ -741,7 +752,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             cell.statusTextView.alpha = 0.0
             cell.uploadDateLabel.alpha = 0.0
             cell.tenseLabel.alpha = 0.0
-            cell.locationLabel.alpha = 0.0
+            //cell.locationLabel.alpha = 0.0
             cell.profileImageView.alpha = 0.0
             cell.userNameLabel.alpha = 0.0
             
@@ -798,7 +809,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         
         var report:UITableViewRowAction!
         report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
-
+            
             let statusupdate:PFObject = self.statusObjects.objectAtIndex(indexPath.row) as! PFObject
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setObject(statusupdate.objectId, forKey: "reported")
@@ -847,7 +858,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             
             self.Seemore()
         }
-         
+        
         let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in
             
             let statusupdate:PFObject = self.statusObjects.objectAtIndex(indexPath.row) as! PFObject
@@ -881,7 +892,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                                         // Reload current user data.
                                         self.loadUserStatusUpdate(PFUser.currentUser()!)
                                     }
-                                    
+                                        
                                     else {
                                         
                                         // Reload other user account data.
@@ -917,13 +928,13 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         if ((self.passedUser == nil) || ((self.passedUser != nil) && (self.passedUser.username! == "\(PFUser.currentUser()!.username!)"))) {
             return [report, seemore, deletestatus]
         }
-        
+            
         else {
             
             if (self.statusLoadCheck == true) {
                 return [report, seemore]
             }
-            
+                
             else {
                 return nil
             }
@@ -952,7 +963,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // Run the 'small' animation.
         UIView.animateWithDuration(0.3 , animations: {
             self.editButton.transform = CGAffineTransformMakeScale(0.75, 0.75)
-        }, completion: nil)
+            }, completion: nil)
     }
     
     func restoreEditSize() {
