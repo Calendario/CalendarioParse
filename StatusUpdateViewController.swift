@@ -11,15 +11,21 @@ import CoreLocation
 
 
 
-class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UINavigationBarDelegate {
-
+class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UINavigationBarDelegate, UIGestureRecognizerDelegate {
+    
     @IBOutlet weak var PostButton: UIBarButtonItem!
+    @IBOutlet var dateTapRecognizer: UITapGestureRecognizer!
     
+    @IBOutlet weak var dateContainer: UIView!
     
-    @IBOutlet weak var checkinbutton: UIButton!
+  //  @IBOutlet weak var checkinbutton: UIButton!
     
     @IBOutlet weak var datepicker: UIDatePicker!
+    @IBOutlet weak var datePickerContainer: UIView!
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
+    @IBOutlet weak var placeholderLabel: UILabel!
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     
     @IBOutlet weak var charlabel: UILabel!
@@ -38,10 +44,10 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     @IBOutlet weak var backbutton: UIBarButtonItem!
     
     @IBOutlet weak var statusImageview: UIImageView?
-     let deafaults = NSUserDefaults()
+    let deafaults = NSUserDefaults()
     // tense
     var tensenum:Int!
-
+    
     enum Tense: String
     {
         case going = "going"
@@ -62,63 +68,35 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     var statusID = arc4random()
     
     
-    // location 
+    // location
     let locationManager = CLLocationManager()
     var imagedata:NSData?
     var postingImage = false
-
-    
-    
-    
-    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 55))
-        navigationbar.backgroundColor = UIColor.whiteColor()
-        navigationbar.delegate = self
-        navigationbar.barTintColor = UIColor(hexString: "#2c9560")
-        navigationbar.tintColor = UIColor.whiteColor()
-        
-        // logo for nav title 
-        
-        let logo = UIImage(named: "navtext")
-        let imageview = UIImageView(image: logo)
-        
-        
-        // navigation items
-        let navitems = UINavigationItem()
-        navitems.titleView = imageview
-        
-        navitems.rightBarButtonItem = PostButton
-        navitems.leftBarButtonItem = backbutton
-        
-        // set nav items in nav bar
-        navigationbar.items = [navitems]
-        self.view.addSubview(navigationbar)
-        
-        
         statusUpdateTextField.layer.borderColor = UIColor.blackColor().CGColor
         TenseControl.selectedSegmentIndex = 2
         
-        
-        
-        
-    
-        
-    
-        
-
         // Do any additional setup after loading the view.
         statusUpdateTextField.delegate = self
-        dateLabel.hidden = true
+        dateLabel.hidden = false
+        datepicker.hidden = true
+        datePickerContainer.hidden = true
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         self.TenseControl.tintColor = UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha:1)
+        self.datePickerContainer.layer.cornerRadius = 10.0
+        self.datepicker.layer.cornerRadius = 10.0
+        self.visualEffectView.layer.cornerRadius = 10.0
+        self.datePickerContainer.layer.borderColor = UIColor.lightGrayColor().CGColor
+        self.datePickerContainer.layer.borderWidth = 1.0
+        self.datePickerContainer.layoutIfNeeded()
+        
         
         // save current status id in NSUserDefaults incase its going to be used for a comment
         
@@ -141,14 +119,11 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         LocationLabel.addGestureRecognizer(locationtapReconizer)
         
         
-        
-        
-        // dismisses keyboard when background is tapped 
-        
+        // dismisses keyboard when background is tapped
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
-
+        
         
     }
     
@@ -162,18 +137,20 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         if location == nil
         {
-            LocationLabel.text = "No Location"
+           // LocationLabel.text = "No Location"
+            LocationLabel.textColor = UIColor.lightGrayColor()
         }
         else
         {
-            checkinbutton.hidden = true
+            //checkinbutton.hidden = true
             LocationLabel.text = location as! String
+            LocationLabel.textColor = UIColor.darkGrayColor()
         }
         
         
-
+        
     }
-        override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -185,15 +162,16 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     func setDate()
     {
         let dateformatter = NSDateFormatter()
-        dateformatter.dateStyle = NSDateFormatterStyle.ShortStyle
-        dateformatter.dateFormat = "M/d/yy"
+        dateformatter.dateStyle = NSDateFormatterStyle.LongStyle
+       // dateformatter.dateFormat = "M/d/yy"
         dateLabel.hidden = false
         dateLabel.text = dateformatter.stringFromDate(datepicker.date)
         print(dateLabel)
         datepicker.hidden = true
-
+        datePickerContainer.hidden = true
+        dateLabel.textColor = UIColor.darkGrayColor()
+        
     }
-    
     
     
     @IBAction func datePickerChanged(sender: AnyObject) {
@@ -205,13 +183,19 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         print("tapped")
         datepicker.hidden = false
         dateLabel.hidden = true
-   
+        datePickerContainer.hidden = false
+
+        
     }
     
     func LocationlabelTapped()
     {
         print("tapped locatiom")
-        checkinbutton.hidden = false
+        //checkinbutton.hidden = false
+        
+        let locationReference =  self.storyboard!.instantiateViewControllerWithIdentifier("LocationVC") as UIViewController!
+        self.presentViewController(locationReference, animated: true, completion: nil)
+        
     }
     
     
@@ -219,17 +203,11 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     {
         view.endEditing(true)
     }
-
-    
-    
-    
     
     
     func PostStatusUpdate()
     {
-       var dateformatter = NSDateFormatter()
-        
-        
+        var dateformatter = NSDateFormatter()
         
         
         if statusImageview?.image != nil
@@ -258,9 +236,9 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                     print(error?.localizedDescription)
                 }
             }
-
-
-
+            
+            
+            
         }
         else
         {
@@ -283,19 +261,19 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                     print(error?.localizedDescription)
                 }
             }
-
-
+            
+            
         }
-    
-    
-
-    
-        
-       
         
         
         
-      }
+        
+        
+        
+        
+        
+        
+    }
     
     
     @IBAction func tenseControlchanged(sender: UISegmentedControl) {
@@ -308,7 +286,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             currenttense = Tense.went.rawValue
             tensenum = 2
         case 2:
-           currenttense = Tense.currently.rawValue
+            currenttense = Tense.currently.rawValue
             tensenum = 3
         default:
             currenttense = Tense.going.rawValue
@@ -324,6 +302,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     @IBAction func PostTapped(sender: AnyObject) {
         PostStatusUpdate()
+        GotoNewsfeed()
     }
     
     @IBAction func backbuttonTapped(sender: AnyObject) {
@@ -339,7 +318,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     
     @IBAction func CameraTapped(sender: AnyObject) {
-        var camera = UIImagePickerController()
+        let camera = UIImagePickerController()
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             camera.delegate = self
             camera.sourceType = UIImagePickerControllerSourceType.Camera
@@ -359,9 +338,9 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             self.presentViewController(photo, animated: true, completion: nil)
         }
     }
-
     
-   
+    
+    
     
     
     
@@ -374,6 +353,10 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         var remainingchars:Int = 400 - newLength
         charlabel.text = "\(remainingchars)"
         return (newLength > 400) ? false:true
+    }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        self.placeholderLabel.hidden = true
     }
     
     
@@ -397,38 +380,4 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         statusImageview?.image = image
         
     }
-    
-
-    
-
-    
-
-    
-    
-    
-
-
-       
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-
 }
