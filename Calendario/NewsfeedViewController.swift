@@ -213,7 +213,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         
         
-        statausData.removeAllObjects()
+        //statausData.removeAllObjects()
         
         
         
@@ -235,6 +235,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                 getstatus.includeKey("user")
                 getstatus.whereKey("user", equalTo: test)
                 //getstatus.whereKey("user", equalTo: PFUser.currentUser()!)
+                getstatus.cachePolicy = .CacheThenNetwork
+                var cache = getstatus.hasCachedResult()
                 getstatus.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
                     
                     // Stop the pull to refresh indicator.
@@ -244,6 +246,13 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                         
                         for object in objects! {
                             let statusupdate:PFObject = object as! PFObject
+                            
+                            if cache
+                            {
+                                print("in cache")
+                            }
+                         
+                        
                             
                             
                             
@@ -255,17 +264,12 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                         }
                         let array:NSArray = self.statausData.reverseObjectEnumerator().allObjects
                         self.statausData = NSMutableArray(array: array)
+                        self.tableView.reloadData()
                         
-                        self.table.reloadData()
-                        
-                        
-                    }
-                        
-                    else {
+            
                         
                     }
-                    
-                    
+                        
                     
                     
                     // getting the current users status updates
@@ -966,6 +970,10 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         return [report, seemore, deletestatus]
     }
+    
+
+    
+    
     
     func Seemore()
     {
