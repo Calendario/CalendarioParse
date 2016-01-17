@@ -29,6 +29,8 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var blockedViewDesc: UITextView!
     @IBOutlet weak var statusList: UITableView!
     @IBOutlet weak var profDesc: UILabel!
+    @IBOutlet weak var topBar: UINavigationBar!
+    @IBOutlet weak var topBackground: UIView!
     
     // Follow method property
     var FollowObject = FollowHelper()
@@ -278,6 +280,8 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         blockedBlurView.frame = CGRectMake(0, 0, width, self.view.bounds.size.height)
         blockedBlurView.alpha = 0.0
         self.view.addSubview(blockedBlurView)
+        self.view.bringSubviewToFront(topBar)
+        self.view.bringSubviewToFront(topBackground)
         
         // Add the blur to the blocked view.
         var visualEffectView:UIVisualEffectView!
@@ -652,8 +656,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        print("STATUS CHECK \(self.statusLoadCheck)")
         
         if (self.statusLoadCheck == true) {
             return statusObjects.count
