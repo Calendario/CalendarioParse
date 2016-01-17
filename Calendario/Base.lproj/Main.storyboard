@@ -5,6 +5,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Search ViewController-->
@@ -2709,13 +2710,21 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <action selector="dismissProfile:" destination="EL5-7o-osE" id="YSo-Y5-bUF"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="SettingsV2" id="f2g-T3-bL4">
-                                            <inset key="imageInsets" minX="6" minY="2" maxX="-2" maxY="2"/>
-                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <connections>
-                                                <action selector="openSettingsOrMoreSection:" destination="EL5-7o-osE" id="sek-nF-e9f"/>
-                                            </connections>
-                                        </barButtonItem>
+                                        <rightBarButtonItems>
+                                            <barButtonItem enabled="NO" image="SettingsV2" id="f2g-T3-bL4">
+                                                <inset key="imageInsets" minX="-30" minY="2" maxX="1" maxY="2"/>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <action selector="openSettingsOrMoreSection:" destination="EL5-7o-osE" id="sek-nF-e9f"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem enabled="NO" image="inbox" style="plain" id="hsu-ok-Lbt">
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <segue destination="jxs-DV-u3B" kind="presentation" id="31B-nb-Fu0"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -3055,6 +3064,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         <outlet property="blockedBlurView" destination="36U-kS-yTL" id="WUT-Pz-Zzg"/>
                         <outlet property="blockedViewDesc" destination="mVO-HP-zm7" id="rc2-t8-X7h"/>
                         <outlet property="editButton" destination="txi-P7-31H" id="YpO-wE-QK6"/>
+                        <outlet property="inboxButton" destination="hsu-ok-Lbt" id="L37-tw-Kmy"/>
                         <outlet property="profDesc" destination="9ez-M7-OpE" id="Rbs-W1-HEi"/>
                         <outlet property="profFollowers" destination="ooQ-AE-zmV" id="bHt-X7-mDj"/>
                         <outlet property="profFollowing" destination="mHe-Ss-VaZ" id="itt-hb-Wk9"/>
@@ -4213,6 +4223,170 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
             </objects>
             <point key="canvasLocation" x="1275.5" y="1223.5"/>
         </scene>
+        <!--Follow Requests Table View Controller-->
+        <scene sceneID="Rcp-6T-sk8">
+            <objects>
+                <viewController id="jxs-DV-u3B" customClass="FollowRequestsTableViewController" customModule="Calendario" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mPG-ZH-k6O"/>
+                        <viewControllerLayoutGuide type="bottom" id="0DL-8T-f8p"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JcM-d1-Uan">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zg6-Fy-JkD">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="74" id="QDu-G9-lBy" customClass="FollowRequestCustomCell" customModule="Calendario" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="74"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QDu-G9-lBy" id="AaH-Xd-a14">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pnq-DP-Q1o">
+                                                    <rect key="frame" x="8" y="12" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="Irm-y8-UvZ"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="If5-WD-ojt">
+                                                    <rect key="frame" x="66" y="12" width="195" height="28"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDe-gB-zSH">
+                                                    <rect key="frame" x="66" y="38" width="195" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U2B-ZD-qZU">
+                                                    <rect key="frame" x="278" y="16" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="Zff-kz-NrC"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="hpY-ki-udR"/>
+                                                        <constraint firstAttribute="width" constant="40" id="vgv-bI-6Q9"/>
+                                                    </constraints>
+                                                    <color key="tintColor" red="0.68497850530000004" green="0.20723859489999999" blue="0.20493155069999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <state key="normal" image="decline"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yTP-Rv-N8T">
+                                                    <rect key="frame" x="327" y="16" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="4HC-aP-XLC"/>
+                                                        <constraint firstAttribute="height" constant="40" id="Dgb-4f-tKU"/>
+                                                    </constraints>
+                                                    <color key="tintColor" red="0.19607843137254902" green="0.46666666666666667" blue="0.23137254901960785" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <state key="normal" title="X" image="approve"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You do not have any follow requests." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygP-Bb-Ei3">
+                                                    <rect key="frame" x="55" y="24" width="265" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="If5-WD-ojt" firstAttribute="trailing" secondItem="nDe-gB-zSH" secondAttribute="trailing" id="0W2-9t-v2T"/>
+                                                <constraint firstItem="If5-WD-ojt" firstAttribute="top" secondItem="Pnq-DP-Q1o" secondAttribute="top" id="7aU-BR-kHC"/>
+                                                <constraint firstItem="nDe-gB-zSH" firstAttribute="top" secondItem="AaH-Xd-a14" secondAttribute="topMargin" constant="30" id="8P4-sg-9Dn"/>
+                                                <constraint firstItem="ygP-Bb-Ei3" firstAttribute="top" secondItem="AaH-Xd-a14" secondAttribute="topMargin" constant="16" id="FCR-0L-5Dz"/>
+                                                <constraint firstItem="ygP-Bb-Ei3" firstAttribute="centerY" secondItem="U2B-ZD-qZU" secondAttribute="centerY" id="H4L-Hc-g56"/>
+                                                <constraint firstItem="yTP-Rv-N8T" firstAttribute="bottom" secondItem="U2B-ZD-qZU" secondAttribute="bottom" id="K2x-ZZ-1a5"/>
+                                                <constraint firstItem="nDe-gB-zSH" firstAttribute="bottom" secondItem="Pnq-DP-Q1o" secondAttribute="bottom" id="LiD-mC-cGr"/>
+                                                <constraint firstItem="yTP-Rv-N8T" firstAttribute="leading" secondItem="U2B-ZD-qZU" secondAttribute="trailing" constant="9" id="QrI-ak-a0Q"/>
+                                                <constraint firstItem="ygP-Bb-Ei3" firstAttribute="centerX" secondItem="AaH-Xd-a14" secondAttribute="centerX" id="Tsq-my-QJp"/>
+                                                <constraint firstItem="Pnq-DP-Q1o" firstAttribute="top" secondItem="AaH-Xd-a14" secondAttribute="topMargin" constant="4" id="ZSf-qj-Hjj"/>
+                                                <constraint firstItem="U2B-ZD-qZU" firstAttribute="top" secondItem="yTP-Rv-N8T" secondAttribute="top" id="agM-T3-MMi"/>
+                                                <constraint firstItem="yTP-Rv-N8T" firstAttribute="centerY" secondItem="AaH-Xd-a14" secondAttribute="centerY" id="c47-PZ-mfQ"/>
+                                                <constraint firstItem="If5-WD-ojt" firstAttribute="leading" secondItem="Pnq-DP-Q1o" secondAttribute="trailing" constant="8" symbolic="YES" id="dWM-Bo-eu2"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="ygP-Bb-Ei3" secondAttribute="bottom" constant="17" id="emc-Zz-kHx"/>
+                                                <constraint firstItem="ygP-Bb-Ei3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AaH-Xd-a14" secondAttribute="leadingMargin" constant="37" id="ezg-6n-cUe"/>
+                                                <constraint firstItem="yTP-Rv-N8T" firstAttribute="leading" secondItem="ygP-Bb-Ei3" secondAttribute="trailing" constant="7" id="gBR-1E-awY"/>
+                                                <constraint firstItem="U2B-ZD-qZU" firstAttribute="top" secondItem="AaH-Xd-a14" secondAttribute="topMargin" constant="8" id="h17-Sz-q6o"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="If5-WD-ojt" secondAttribute="bottom" constant="25" id="hZY-Ie-egF"/>
+                                                <constraint firstItem="Pnq-DP-Q1o" firstAttribute="centerY" secondItem="AaH-Xd-a14" secondAttribute="centerY" id="htW-2k-uHK"/>
+                                                <constraint firstItem="nDe-gB-zSH" firstAttribute="leading" secondItem="If5-WD-ojt" secondAttribute="leading" id="kW8-bH-e2a"/>
+                                                <constraint firstItem="yTP-Rv-N8T" firstAttribute="trailing" secondItem="AaH-Xd-a14" secondAttribute="trailingMargin" id="qtc-Rb-BOt"/>
+                                                <constraint firstItem="Pnq-DP-Q1o" firstAttribute="leading" secondItem="AaH-Xd-a14" secondAttribute="leadingMargin" id="r1G-ea-Ucz"/>
+                                                <constraint firstItem="U2B-ZD-qZU" firstAttribute="leading" secondItem="If5-WD-ojt" secondAttribute="trailing" constant="17" id="uee-ZZ-ddg"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="emc-Zz-kHx"/>
+                                                    <exclude reference="ezg-6n-cUe"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="acceptButton" destination="yTP-Rv-N8T" id="3Ol-Cc-O29"/>
+                                            <outlet property="declineButton" destination="U2B-ZD-qZU" id="R0n-AS-idz"/>
+                                            <outlet property="noDataLabel" destination="ygP-Bb-Ei3" id="lSf-B4-mEi"/>
+                                            <outlet property="userFullNameLabel" destination="If5-WD-ojt" id="pe6-1J-miV"/>
+                                            <outlet property="userProfilePicture" destination="Pnq-DP-Q1o" id="Lgq-il-Gbv"/>
+                                            <outlet property="usernameLabel" destination="nDe-gB-zSH" id="R57-RH-i86"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="jxs-DV-u3B" id="ZpL-9V-vSH"/>
+                                    <outlet property="delegate" destination="jxs-DV-u3B" id="Jc7-9x-cxV"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xY1-D2-Ygh" userLabel="Status Bar BG">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BPF-BH-Q1L">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="backgroundColor" red="0.2156862745" green="0.60784313729999995" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="21"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Follow Requests" id="ZO8-Zf-MEE">
+                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="uck-u8-kai">
+                                            <inset key="imageInsets" minX="-2" minY="2" maxX="6" maxY="2"/>
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="close:" destination="jxs-DV-u3B" id="ngS-EU-g3P"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BPF-BH-Q1L" firstAttribute="top" secondItem="mPG-ZH-k6O" secondAttribute="bottom" id="2dH-aY-WoE"/>
+                            <constraint firstItem="zg6-Fy-JkD" firstAttribute="bottom" secondItem="0DL-8T-f8p" secondAttribute="top" id="PT2-6Z-aJz"/>
+                            <constraint firstItem="xY1-D2-Ygh" firstAttribute="top" secondItem="JcM-d1-Uan" secondAttribute="top" id="Phl-1s-QJr"/>
+                            <constraint firstItem="BPF-BH-Q1L" firstAttribute="trailing" secondItem="zg6-Fy-JkD" secondAttribute="trailing" id="W9N-HJ-TLl"/>
+                            <constraint firstItem="BPF-BH-Q1L" firstAttribute="trailing" secondItem="xY1-D2-Ygh" secondAttribute="trailing" id="XtS-dz-XhA"/>
+                            <constraint firstItem="zg6-Fy-JkD" firstAttribute="top" secondItem="BPF-BH-Q1L" secondAttribute="bottom" id="YN1-1r-TBd"/>
+                            <constraint firstItem="BPF-BH-Q1L" firstAttribute="leading" secondItem="zg6-Fy-JkD" secondAttribute="leading" id="bD6-AK-BB7"/>
+                            <constraint firstItem="BPF-BH-Q1L" firstAttribute="top" secondItem="xY1-D2-Ygh" secondAttribute="bottom" id="piA-kd-y2J"/>
+                            <constraint firstItem="zg6-Fy-JkD" firstAttribute="leading" secondItem="JcM-d1-Uan" secondAttribute="leading" id="so9-BG-fgT"/>
+                            <constraint firstItem="xY1-D2-Ygh" firstAttribute="leading" secondItem="BPF-BH-Q1L" secondAttribute="leading" id="uJG-wx-11e"/>
+                            <constraint firstAttribute="trailing" secondItem="zg6-Fy-JkD" secondAttribute="trailing" id="xX4-dc-0wP"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="requestList" destination="zg6-Fy-JkD" id="ZpW-QK-Dq5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Jj-2i-p9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1679.5" y="2783.5"/>
+        </scene>
         <!--Report User View Controller-->
         <scene sceneID="VMD-Wm-tgW">
             <objects>
@@ -4480,13 +4654,16 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
     <resources>
         <image name="SettingsV2" width="33" height="33"/>
         <image name="Video button" width="32" height="32"/>
+        <image name="approve" width="50" height="50"/>
         <image name="block" width="60" height="60"/>
         <image name="bookmark_ribbon" width="120" height="120"/>
         <image name="camera_icon" width="120" height="120"/>
         <image name="comment" width="60" height="60"/>
+        <image name="decline" width="50" height="50"/>
         <image name="default_profile_pic" width="120" height="120"/>
         <image name="email_grey" width="256" height="256"/>
         <image name="heart.png" width="128" height="128"/>
+        <image name="inbox" width="32" height="32"/>
         <image name="left_icon" width="30" height="30"/>
         <image name="like button " width="60" height="60"/>
         <image name="like button filled" width="60" height="60"/>
@@ -4498,8 +4675,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="right_arrow" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Urg-qd-jmS"/>
         <segue reference="Q92-9R-gKB"/>
-        <segue reference="xja-l6-MU2"/>
+        <segue reference="jbQ-WG-YYd"/>
+        <segue reference="sk0-vm-fWU"/>
     </inferredMetricsTieBreakers>
 </document>

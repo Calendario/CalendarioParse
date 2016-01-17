@@ -25,6 +25,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var settingsButton: UIBarButtonItem!
+    @IBOutlet weak var inboxButton: UIBarButtonItem!
     @IBOutlet weak var blockedBlurView: UIView!
     @IBOutlet weak var blockedViewDesc: UITextView!
     @IBOutlet weak var statusList: UITableView!
@@ -273,6 +274,11 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        // Hide the back/settings/inbox button by default.
+        self.backButton.image = nil
+        self.settingsButton.image = nil
+        self.inboxButton.image = nil
+        
         // Get the screen dimensions.
         let width = UIScreen.mainScreen().bounds.size.width
         
@@ -343,6 +349,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // By default the more button is diabled until
         // we have downloaded the appropriate user data.
         settingsButton.enabled = false
+        inboxButton.enabled = false
         self.blockCheck = 0
         
         // Check to see if a user is being passed into the
@@ -360,6 +367,11 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             settingsButton.enabled = true
             settingsButton.image = UIImage(named: "SettingsV2.png")
             settingsButton.title = nil
+            
+            // Show the inbox button.
+            inboxButton.enabled = true
+            inboxButton.image = UIImage(named: "inbox.png")
+            inboxButton.title = nil
             
             // Hide the back button if no
             // user has been passed in.
@@ -440,6 +452,10 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             // the more actions button.
             settingsButton.image = nil
             settingsButton.title = "More"
+            
+            // Hide the inbox button.
+            inboxButton.enabled = false
+            inboxButton.image = nil
             
             // Check if the user is a private account.
             privateCheck = passedUser?.objectForKey("privateProfile") as? Bool
@@ -998,13 +1014,13 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                     self.editButton.setTitle("\(buttonTitle) \(self.passedUser.username!)", forState: UIControlState.Normal)
                     
                     // Display the success alert.
-                    self.displayAlert("Success", alertMessage: "The user @\(userData.username!) has been \(message).")
+                    self.displayAlert("Success", alertMessage: message)
                 }
                     
                 else {
                     
                     // Display the error alert.
-                    self.displayAlert("Error", alertMessage:"The user @\(userData.username!) has not been \(message).")
+                    self.displayAlert("Error", alertMessage: message)
                 }
             })
         }

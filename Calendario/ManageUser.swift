@@ -35,85 +35,116 @@ var finalData:NSMutableArray = []
         // already following the passed in user.
         self.alreadyFollowingUser(userData, currentUserCheckMode: true) { (followStatus, objectID) -> Void in
             
-            // Setup the follow/unfollow.
-            var dataQuery:PFQuery!
-            dataQuery = PFQuery(className: "FollowersAndFollowing")
-            dataQuery.getObjectInBackgroundWithId(objectID, block: { (returnObject, error) -> Void in
+            // Get the user private profile status.
+            let privateCheck = userData["privateProfile"] as! Bool
+            
+            // If the user is not being followed and the user is private then call
+            // the follow request method otherwise continue with the follow code.
+            
+            if ((privateCheck == true) && (followStatus == false)) {
                 
-                // Follow/unfollow alert/button string.
-                var messageAlert:String!
-                var buttonTitle:String!
-                
-                // Follow or unfollow the user depending
-                // on the current user following status.
-                
-                if (followStatus == true) {
+                // Submit the follow request.
+                FollowRequest(userData, completion: { (requestStatus) -> Void in
                     
-                    // Set the message string.
-                    messageAlert = "unfollowed"
-                    
-                    // Set the button title.
-                    buttonTitle = "Follow"
-                   
-                    // Unfollow the user account.
-                    returnObject!.removeObject(userData.objectId!, forKey: "userFollowing")
-                }
-                
-                else {
-                    
-                    // Set the message string.
-                    messageAlert = "followed"
-                    
-                    // Set the button title.
-                    buttonTitle = "Following"
-                    FollowRequest(userData, DateofFollow: userData.createdAt!)
-                    
-                    // Follow the user account.
-                    returnObject!.addUniqueObject(userData.objectId!, forKey: "userFollowing")
-                }
-                
-                // Save the data for the logged in user
-                // and the other (un)followed user.
-                returnObject!.saveInBackgroundWithBlock({ (success, error) -> Void in
-                    
-                    if (success) {
+                    dispatch_async(dispatch_get_main_queue(), {
                         
-                        // Update the follow/unfollow data for the other user.
-                        self.updateOtherUserData(userData, followType: followStatus, completion: { (updateUserStatus) -> Void in
+                        var messageAlert:String!
+                        
+                        if (requestStatus == true) {
+                            messageAlert = "The follow request has been submitted. You will be able to view the users posts if they accept your request."
+                        }
+                        
+                        else {
+                            messageAlert = "The follow request has failed."
+                        }
+                        
+                        // Set the follow request completion.
+                        completion(followUnfollowstatus: requestStatus, messageAlert, "Follow")
+                    })
+                })
+            }
+                
+            else {
+                
+                // Setup the follow/unfollow.
+                var dataQuery:PFQuery!
+                dataQuery = PFQuery(className: "FollowersAndFollowing")
+                dataQuery.getObjectInBackgroundWithId(objectID, block: { (returnObject, error) -> Void in
+                    
+                    // Follow/unfollow alert/button string.
+                    var messageAlert:String!
+                    var buttonTitle:String!
+                    
+                    // Follow or unfollow the user depending
+                    // on the current user following status.
+                    
+                    if (followStatus == true) {
+                        
+                        // Set the message string.
+                        messageAlert = "The user @\(userData.username!) has been unfollowed."
+                        
+                        // Set the button title.
+                        buttonTitle = "Follow"
+                        
+                        // Unfollow the user account.
+                        returnObject!.removeObject(userData.objectId!, forKey: "userFollowing")
+                    }
+                        
+                    else {
+                        
+                        // Set the message string.
+                        messageAlert = "The user @\(userData.username!) has been followed."
+                        
+                        // Set the button title.
+                        buttonTitle = "Following"
+                        
+                        // Follow the user account.
+                        returnObject!.addUniqueObject(userData.objectId!, forKey: "userFollowing")
+                    }
+                    
+                    // Save the data for the logged in user
+                    // and the other (un)followed user.
+                    returnObject!.saveInBackgroundWithBlock({ (success, error) -> Void in
+                        
+                        if (success) {
                             
-                            // Send a push notification if the
-                            // user follow request has worked.
+                            // Update the follow/unfollow data for the other user.
+                            self.updateOtherUserData(userData, followType: followStatus, completion: { (updateUserStatus) -> Void in
+                                
+                                // Send a push notification if the
+                                // user follow request has worked.
+                                
+                                if (followStatus == false) {
+                                    
+                                    // Create the push notification message.s
+                                    let pushMessage = "\(PFUser.currentUser()!.username!) has followed you."
+                                    
+                                    // Submit the push notification.
+                                    PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage, "User" : "\(userData.username!)"])
+                                    
+                                    // Save the push notification string on the User class.
+                                    self.saveUserNotification(pushMessage, fromUser: PFUser.currentUser()!, toUser: userData)
+                                }
+                                
+                                dispatch_async(dispatch_get_main_queue(), {
+                                    
+                                    // The follow/unfollow operation has succeded.
+                                    completion(followUnfollowstatus: updateUserStatus, messageAlert, buttonTitle)
+                                })
+                            })
+                        }
                             
-                            if (followStatus == false) {
-                                
-                                // Create the push notification message.s
-                                let pushMessage = "\(PFUser.currentUser()!.username!) has followed you."
-                                
-                                // Submit the push notification.
-                                PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage, "User" : "\(userData.username!)"])
-                                
-                                // Save the push notification string on the User class.
-                                self.saveUserNotification(pushMessage, fromUser: PFUser.currentUser()!, toUser: userData)
-                            }
+                        else {
                             
                             dispatch_async(dispatch_get_main_queue(), {
                                 
-                                // The follow/unfollow operation has succeded.
-                                completion(followUnfollowstatus: updateUserStatus, messageAlert, buttonTitle)
+                                // The follow/unfollow operation has failed.
+                                completion(followUnfollowstatus: false, (error?.localizedDescription)!, buttonTitle)
                             })
-                        })
-                    }
-                    
-                    else {
-                        
-                        dispatch_async(dispatch_get_main_queue(), {
-                            
-                            // The follow/unfollow operation has failed.
-                            completion(followUnfollowstatus: false, messageAlert, buttonTitle)
-                        })
-                    }
+                        }
+                    })
                 })
-            })
+            }
         }
     }
     
@@ -150,6 +181,50 @@ var finalData:NSMutableArray = []
                         completion(updateUserStatus: success)
                     })
                 })
+            })
+        }
+    }
+    
+    class func acceptFollowRequest(requester:PFUser, completion: (followSuccess: Bool, error: String) -> Void) {
+        
+        // Get the logged in users follower array data.
+        var currentUserQuery:PFQuery!
+        currentUserQuery = PFQuery(className: "FollowersAndFollowing")
+        currentUserQuery.whereKey("userLink", equalTo: PFUser.currentUser()!)
+        currentUserQuery.getFirstObjectInBackgroundWithBlock { (currentUserObject, error) -> Void in
+            
+            // Add the requester to the logged in user's followers array.
+            currentUserObject!.addUniqueObject(requester.objectId!, forKey: "userFollowers")
+            
+            // Save the new follower to the data array.
+            currentUserObject!.saveInBackgroundWithBlock({ (success, error) -> Void in
+                
+                // Get the requesters following array data.
+                var requesterQuery:PFQuery!
+                requesterQuery = PFQuery(className: "FollowersAndFollowing")
+                requesterQuery.whereKey("userLink", equalTo: requester)
+                requesterQuery.getFirstObjectInBackgroundWithBlock({ (requesterObject, requesrtError) -> Void in
+                    
+                    // Add the logged in user as a user
+                    // that the requester is now following.
+                    requesterObject!.addUniqueObject(PFUser.currentUser()!.objectId!, forKey: "userFollowing")
+                    
+                    // Save the new following to the requesters data array.
+                    requesterObject!.saveInBackgroundWithBlock({ (success, error) -> Void in
+                        
+                        dispatch_async(dispatch_get_main_queue(), {
+                            
+                            if (error == nil) {
+                                completion(followSuccess: success, error: "n/a")
+                            }
+                            
+                            else {
+                                completion(followSuccess: success, error: (requesrtError?.localizedDescription)!)
+                            }
+                        })
+                    })
+                })
+                
             })
         }
     }
@@ -445,71 +520,65 @@ var finalData:NSMutableArray = []
 }
 
 
+// Follow request function.
 
-
-// follow request function 
-/* I decieded to do this as a function rather than a closure because you can addd the function call to the into the source code of the approate closure and besides it just generates a request
- please feel free to message me if you have questions-Derek
-
- I have questions, I'm just not sure what they are..... Dan (lol)
-*/
-
-func FollowRequest(userData:PFUser, DateofFollow:NSDate)
-{
-    // see if passed user if a private profile 
+func FollowRequest(userData:PFUser, completion:(requestStatus: Bool) -> Void) {
     
-    var userQuery = PFUser.query()
-    userQuery?.getObjectInBackgroundWithId(userData.objectId!, block: { (object, error) -> Void in
-        if error == nil
-        {
-            var profilestatus = object?.valueForKey("privateProfile") as! Bool
-            print(profilestatus)
-            print(DateofFollow)
+    // Check if the request has already been made.
+    var followQuery:PFQuery!
+    followQuery = PFQuery(className: "FollowRequest")
+    followQuery.whereKey("Requester", equalTo: PFUser.currentUser()!)
+    followQuery.whereKey("desiredfollower", equalTo: userData)
+    followQuery.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+        
+        // Check if the request already exists.
+        
+        if (object == nil) {
             
-            // if true the profile is private 
-            if profilestatus
-            {
-                // generate a date 30 days from created at
-                var datecommpoents:NSDateComponents = NSDateComponents()
-                datecommpoents.month = 1
-                var calendar: NSCalendar = NSCalendar.currentCalendar()
+            // Setup the expiry date limit (+1 month).
+            var dateCommpoents:NSDateComponents!
+            dateCommpoents = NSDateComponents()
+            dateCommpoents.month = 1
+            
+            // Get the current calendar data.
+            var calendar: NSCalendar!
+            calendar = NSCalendar.currentCalendar()
+            
+            // Set the expiry date to 30 days from the current date.
+            var expireDate:NSDate!
+            expireDate = calendar.dateByAddingComponents(dateCommpoents, toDate: NSDate(), options: NSCalendarOptions())!
+            
+            // Convert the date into a more reaable form
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+            dateFormatter.dateFormat = "M/d/yy"
+            
+            // Create the human readable date string.
+            let readableDate = dateFormatter.stringFromDate(expireDate)
+            
+            // Create user follow request object.
+            var followRequest:PFObject!
+            followRequest = PFObject(className: "FollowRequest")
+            followRequest["Requester"] = PFUser.currentUser()
+            followRequest["desiredfollower"] = userData
+            followRequest["expiredate"] = readableDate
+            
+            // Save the follow request on Parse.
+            followRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
                 
-                var expiredate:NSDate = calendar.dateByAddingComponents(datecommpoents, toDate: DateofFollow, options: NSCalendarOptions())!
-                // convert the date into a more reaable form
-                let dateformatter = NSDateFormatter()
-                dateformatter.dateStyle = NSDateFormatterStyle.ShortStyle
-                dateformatter.dateFormat = "M/d/yy"
-                
-                let readabledate = dateformatter.stringFromDate(expiredate)
-                
-                
-                print(readabledate)
-                
-                // create user follow object 
-                
-                var followrequest = PFObject(className: "FollowRequest")
-                followrequest["Requester"] = PFUser.currentUser()
-                followrequest["desiredfollower"] = userData
-                followrequest["expiredate"] = readabledate
-                followrequest.saveInBackgroundWithBlock({ (success, error) -> Void in
-                    if success
-                    {
-                        print("the request has been generated")
-                    }
-                    else
-                    {
-                        print(error?.localizedDescription)
-                    }
+                dispatch_async(dispatch_get_main_queue(), {
+                    completion(requestStatus: success)
                 })
-            }
-                
-            else
-            {
-                print("profile is not private")
-            }
+            })
         }
-    })
+            
+        else {
+            
+            // The request already exists so lets pass back true
+            // so that the user knows their request has been made.
+            dispatch_async(dispatch_get_main_queue(), {
+                completion(requestStatus: true)
+            })
+        }
+    }
 }
-
-
-
