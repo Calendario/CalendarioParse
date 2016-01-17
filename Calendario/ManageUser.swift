@@ -33,9 +33,9 @@ var finalData:NSMutableArray = []
         
         // Check if the logged in user is
         // already following the passed in user.
-        self.alreadyFollowingUser(userData, currentUserCheckMode: true) { (status, objectID) -> Void in
+        self.alreadyFollowingUser(userData, currentUserCheckMode: true) { (followStatus, objectID) -> Void in
             
-            // Setup the follow/unfollow  .
+            // Setup the follow/unfollow.
             var dataQuery:PFQuery!
             dataQuery = PFQuery(className: "FollowersAndFollowing")
             dataQuery.getObjectInBackgroundWithId(objectID, block: { (returnObject, error) -> Void in
@@ -47,7 +47,7 @@ var finalData:NSMutableArray = []
                 // Follow or unfollow the user depending
                 // on the current user following status.
                 
-                if (status == true) {
+                if (followStatus == true) {
                     
                     // Set the message string.
                     messageAlert = "unfollowed"
@@ -55,7 +55,6 @@ var finalData:NSMutableArray = []
                     // Set the button title.
                     buttonTitle = "Follow"
                    
-                    
                     // Unfollow the user account.
                     returnObject!.removeObject(userData.objectId!, forKey: "userFollowing")
                 }
@@ -67,7 +66,7 @@ var finalData:NSMutableArray = []
                     
                     // Set the button title.
                     buttonTitle = "Following"
-                     FollowRequest(userData, DateofFollow: userData.createdAt!)
+                    FollowRequest(userData, DateofFollow: userData.createdAt!)
                     
                     // Follow the user account.
                     returnObject!.addUniqueObject(userData.objectId!, forKey: "userFollowing")
@@ -80,12 +79,12 @@ var finalData:NSMutableArray = []
                     if (success) {
                         
                         // Update the follow/unfollow data for the other user.
-                        self.updateOtherUserData(userData, completion: { (updateUserStatus) -> Void in
+                        self.updateOtherUserData(userData, followType: followStatus, completion: { (updateUserStatus) -> Void in
                             
                             // Send a push notification if the
                             // user follow request has worked.
                             
-                            if (status == false) {
+                            if (followStatus == false) {
                                 
                                 // Create the push notification message.s
                                 let pushMessage = "\(PFUser.currentUser()!.username!) has followed you."
@@ -118,7 +117,7 @@ var finalData:NSMutableArray = []
         }
     }
     
-    class func updateOtherUserData(userData:PFUser, completion: (updateUserStatus: Bool) -> Void) {
+    class func updateOtherUserData(userData:PFUser, followType:Bool, completion: (updateUserStatus: Bool) -> Void) {
         
         // Get the passed in users following/followers
         // row objectID and add the new 'followers' data.
@@ -132,7 +131,7 @@ var finalData:NSMutableArray = []
                 // Add or remove the new follower depending on
                 // the current status of the 'followers' array.
                 
-                if (status == true) {
+                if (followType == true) {
                     
                     // Remove the follower.
                     returnObject!.removeObject(PFUser.currentUser()!.objectId!, forKey: "userFollowers")
