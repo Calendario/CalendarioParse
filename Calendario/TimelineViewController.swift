@@ -35,12 +35,12 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         super.viewDidLoad()
         calendar.scrollDirection = .Horizontal
         
-    
+        
         
         self.tableview.delegate = self
         self.tableview.dataSource = self
         
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        /*self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         
         let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 55))
@@ -58,13 +58,13 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         navitems.title = "Timeline"
         // set nav items in nav bar
         navigationbar.items = [navitems]
-        self.view.addSubview(navigationbar)
-
+        self.view.addSubview(navigationbar)*/
         
-       
-
-
-
+        
+        
+        
+        
+        
         // Do any additional setup after loading the view.
     }
     
@@ -72,7 +72,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -90,12 +90,12 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         getdates.whereKey("dateofevent", equalTo: newdate)
         print("passed date is \(String(newdate))")
         getdates.includeKey("user")
-
+        
         var postsdata:NSMutableArray = NSMutableArray()
         postsdata.removeAllObjects()
         
         getdates.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
-                        if error == nil
+            if error == nil
             {
                 // print(objects!.count)
                 for object in objects!
@@ -107,7 +107,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                 
                 let array:NSArray = postsdata.reverseObjectEnumerator().allObjects
                 postsdata = NSMutableArray(array: array)
-
+                
                 // Reset the filtered data array.
                 self.filteredData.removeAllObjects()
                 
@@ -123,7 +123,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                         // downloaded status update data.
                         let loopUser:PFUser = postsdata[loop].valueForKey("user") as! PFUser
                         
-                        // Loop through the following array and check if the user 
+                        // Loop through the following array and check if the user
                         // from the postsdata array is being followed or not.
                         
                         for (var loopTwo = 0; loopTwo < userFollowing.count; loopTwo++) {
@@ -143,7 +143,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                     // Now reload the table view.
                     self.tableview.reloadData()
                 })
-    }
+            }
         }
     }
     
@@ -204,9 +204,9 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                         else
                         {
                             self.b = false
-
-                        }
                             
+                        }
+                        
                         
                         
                         
@@ -215,25 +215,25 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                     
                 }
                 
-                    
-                    
-                    
-                }
-                print(self.b)
+                
+                
+                
             }
+            print(self.b)
+        }
         
         return b
     }
     
-
     
-        
     
-
-
-
-
-
+    
+    
+    
+    
+    
+    
+    
     // Table view methods.
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -369,7 +369,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
         return [report, seemore, deletestatus]
     }
-
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.filteredData.count
     }
@@ -386,9 +386,9 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         cell.tenseLabel.text = status.valueForKey("tense") as! String
         cell.updateTextView.text = status.valueForKey("updatetext") as! String
         currentObjectid = status.objectId
-          dateofevent = status.valueForKey("dateofevent") as! String
+        dateofevent = status.valueForKey("dateofevent") as! String
         
-
+        
         
         var likes = status.valueForKey("likes") as? Int
         
@@ -407,7 +407,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
             if error == nil {
                 self.getImageData(objects!, imageView: cell.profileimageview)
             }
-            
+                
             else {
                 print("error")
             }
@@ -434,7 +434,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
         let sb = UIStoryboard(name: "Main", bundle: nil)
         var seemore = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
-         let NC = UINavigationController(rootViewController: seemore)
+        let NC = UINavigationController(rootViewController: seemore)
         seemore.propertyid = objectid
         self.presentViewController(NC, animated: true, completion: nil)
     }

@@ -90,18 +90,18 @@
         if (error == nil) {
             
             
-            NSString *originalString = [NSString stringWithFormat:@"%@ %@", [NSString stringWithFormat:@"@%@", ((PFUser *)object).username], notificationAction];
+            NSString *originalString = notificationAction; //[NSString stringWithFormat:@"%@ %@", [NSString stringWithFormat:@"@%@", ((PFUser *)object).username], notificationAction];  --> for if you want to add "@" before the username
             usernameLabel.text = originalString;
             
             
             NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:usernameLabel.text];
             NSArray *words = [usernameLabel.text componentsSeparatedByString:@" "];
-            for (NSString *word in words) {
-                if ([word hasPrefix:@"@"]) {
-                    NSRange range = [usernameLabel.text rangeOfString:word];
+            //for (NSString *word in words) {
+                if  (words.firstObject) {            //([word hasPrefix:@"@"]) {
+                    NSRange range = [usernameLabel.text rangeOfString: words.firstObject];   //word];
                     [string addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:33/255.0f green:135/255.0f blue:75/255.0f alpha:1.0f] range:range];
                 }
-            }
+            //}
             
             usernameLabel.attributedText = string;
             
