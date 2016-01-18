@@ -203,7 +203,7 @@ class ReportUserViewController : UIViewController, UITextViewDelegate {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
         // Create the username string.
-        userString = "@\(passedUser.username!)"
+        userString = "\(passedUser.username!)"
         
         // Set the user profile labels.
         userFullName.text = passedUser?.objectForKey("fullName") as? String

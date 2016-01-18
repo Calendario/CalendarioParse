@@ -121,17 +121,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qss-d0-A9Q">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qss-d0-A9Q">
                                 <rect key="frame" x="0.0" y="174" width="375" height="259"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Provide details about the bug you are experiencing." textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xbj-sg-4Vr">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" text="Provide details about the bug you are experiencing." textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xbj-sg-4Vr">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="259"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FBR-4z-JfZ">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FBR-4z-JfZ">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="259"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -148,11 +148,17 @@
                                     <constraint firstAttribute="bottom" secondItem="FBR-4z-JfZ" secondAttribute="bottom" id="5TB-TJ-Oef"/>
                                     <constraint firstItem="xbj-sg-4Vr" firstAttribute="top" secondItem="FBR-4z-JfZ" secondAttribute="top" id="Hb6-ej-syc"/>
                                     <constraint firstItem="FBR-4z-JfZ" firstAttribute="bottom" secondItem="xbj-sg-4Vr" secondAttribute="bottom" id="JIU-J4-eIe"/>
+                                    <constraint firstAttribute="trailing" secondItem="xbj-sg-4Vr" secondAttribute="trailing" id="Kbv-nA-CR8"/>
                                     <constraint firstItem="xbj-sg-4Vr" firstAttribute="leading" secondItem="qss-d0-A9Q" secondAttribute="leading" id="Mb0-XA-3Kn"/>
                                     <constraint firstAttribute="trailing" secondItem="FBR-4z-JfZ" secondAttribute="trailing" id="TWn-Va-rpW"/>
                                     <constraint firstItem="xbj-sg-4Vr" firstAttribute="leading" secondItem="FBR-4z-JfZ" secondAttribute="leading" id="X7X-wL-eci"/>
                                     <constraint firstItem="xbj-sg-4Vr" firstAttribute="trailing" secondItem="FBR-4z-JfZ" secondAttribute="trailing" id="yue-QP-00p"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="yue-QP-00p"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="knq-GY-qyM" userLabel="Status Bar View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
@@ -161,7 +167,7 @@
                                     <constraint firstAttribute="height" constant="20" id="vz9-e7-v0y"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="  Bug report title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Emz-3s-UA0">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" placeholder="  Bug report title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Emz-3s-UA0">
                                 <rect key="frame" x="0.0" y="100" width="375" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -215,7 +221,11 @@
                             <constraint firstItem="2uT-Hb-v5C" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WeP-Pu-d8S" secondAttribute="bottom" constant="8" id="8JH-l2-uYH"/>
                             <constraint firstItem="WeP-Pu-d8S" firstAttribute="top" secondItem="qss-d0-A9Q" secondAttribute="bottom" constant="30" id="DK9-5V-Wd4"/>
                             <constraint firstItem="Emz-3s-UA0" firstAttribute="leading" secondItem="OyH-Ll-kdG" secondAttribute="leading" id="DSp-UD-HTz"/>
+                            <constraint firstItem="Emz-3s-UA0" firstAttribute="leading" secondItem="OyH-Ll-kdG" secondAttribute="leading" id="K0c-WH-LhT"/>
                             <constraint firstItem="C3o-Qq-xeg" firstAttribute="leading" secondItem="OyH-Ll-kdG" secondAttribute="leading" id="Op3-kn-Qnj"/>
+                            <constraint firstAttribute="trailing" secondItem="Emz-3s-UA0" secondAttribute="trailing" id="PwX-oi-CXL"/>
+                            <constraint firstItem="Emz-3s-UA0" firstAttribute="leading" secondItem="OyH-Ll-kdG" secondAttribute="leadingMargin" constant="-20" id="S65-gN-cVC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Emz-3s-UA0" secondAttribute="trailing" constant="-20" id="VYM-ri-QbX"/>
                             <constraint firstItem="qss-d0-A9Q" firstAttribute="top" secondItem="Emz-3s-UA0" secondAttribute="bottom" constant="17" id="WSb-nW-VfD"/>
                             <constraint firstItem="C3o-Qq-xeg" firstAttribute="top" secondItem="ByJ-55-1qt" secondAttribute="bottom" id="XjF-Jk-rYz"/>
                             <constraint firstItem="knq-GY-qyM" firstAttribute="top" secondItem="OyH-Ll-kdG" secondAttribute="topMargin" id="YaR-tU-l8B"/>
@@ -223,11 +233,25 @@
                             <constraint firstItem="2uT-Hb-v5C" firstAttribute="top" secondItem="WeP-Pu-d8S" secondAttribute="bottom" priority="250" constant="174" id="aLv-lH-rqb"/>
                             <constraint firstItem="qss-d0-A9Q" firstAttribute="leading" secondItem="Emz-3s-UA0" secondAttribute="leading" id="f6O-Ge-cEG"/>
                             <constraint firstAttribute="trailing" secondItem="knq-GY-qyM" secondAttribute="trailing" id="f72-zb-4U4"/>
+                            <constraint firstItem="Emz-3s-UA0" firstAttribute="leading" secondItem="OyH-Ll-kdG" secondAttribute="leading" id="hoM-zq-rfb"/>
                             <constraint firstItem="qss-d0-A9Q" firstAttribute="trailing" secondItem="Emz-3s-UA0" secondAttribute="trailing" id="iOA-V1-9ZX"/>
+                            <constraint firstAttribute="trailing" secondItem="Emz-3s-UA0" secondAttribute="trailing" id="ish-SR-R0P"/>
                             <constraint firstAttribute="trailing" secondItem="Emz-3s-UA0" secondAttribute="trailing" id="kzY-UZ-SBn"/>
                             <constraint firstItem="knq-GY-qyM" firstAttribute="leading" secondItem="OyH-Ll-kdG" secondAttribute="leading" id="lJr-NC-YCR"/>
                             <constraint firstItem="Emz-3s-UA0" firstAttribute="top" secondItem="C3o-Qq-xeg" secondAttribute="bottom" constant="36" id="soz-c7-pqL"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="DSp-UD-HTz"/>
+                                <exclude reference="K0c-WH-LhT"/>
+                                <exclude reference="PwX-oi-CXL"/>
+                                <exclude reference="S65-gN-cVC"/>
+                                <exclude reference="VYM-ri-QbX"/>
+                                <exclude reference="kzY-UZ-SBn"/>
+                                <exclude reference="f6O-Ge-cEG"/>
+                                <exclude reference="iOA-V1-9ZX"/>
+                            </mask>
+                        </variation>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="VJ5-Ot-hn0" appends="YES" id="tbx-KH-zKQ"/>
                         </connections>
@@ -291,7 +315,7 @@
                                             <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wq-Ok-Hzx" customClass="KILabel">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wq-Ok-Hzx" customClass="KILabel">
                                             <rect key="frame" x="177" y="8" width="90" height="14"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="90" id="lII-w0-nFd"/>
@@ -2980,7 +3004,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <constraint firstAttribute="width" constant="32" id="GEF-Tb-3bb"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1hs-SM-xUo">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hs-SM-xUo">
                                             <rect key="frame" x="123" y="102" width="130" height="23"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="23" id="QRg-Nk-3XW"/>
@@ -2994,13 +3018,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4B-oi-n0D">
-                                            <rect key="frame" x="126" y="179" width="123" height="30"/>
-                                            <state key="normal" title="www.website.com"/>
-                                            <connections>
-                                                <action selector="openUserWebsite:" destination="EL5-7o-osE" eventType="touchUpInside" id="msF-yA-Dp7"/>
-                                            </connections>
-                                        </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F8F-aw-tyq" userLabel="posts/follow container">
                                             <rect key="frame" x="0.0" y="210" width="375" height="81"/>
                                             <subviews>
@@ -3098,7 +3115,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9ez-M7-OpE">
-                                            <rect key="frame" x="168" y="151" width="40" height="20"/>
+                                            <rect key="frame" x="168" y="153" width="40" height="20"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -3116,8 +3133,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 </mask>
                                             </variation>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n96-OF-tOx">
-                                            <rect key="frame" x="153" y="125" width="71" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n96-OF-tOx">
+                                            <rect key="frame" x="152" y="127" width="71" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="18" id="Z9l-4e-D0e"/>
                                             </constraints>
@@ -3130,6 +3147,13 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 </mask>
                                             </variation>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4B-oi-n0D">
+                                            <rect key="frame" x="126" y="178" width="123" height="30"/>
+                                            <state key="normal" title="www.website.com"/>
+                                            <connections>
+                                                <action selector="openUserWebsite:" destination="EL5-7o-osE" eventType="touchUpInside" id="msF-yA-Dp7"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -3155,13 +3179,14 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <constraint firstItem="WyR-tI-l4h" firstAttribute="top" secondItem="F8F-aw-tyq" secondAttribute="bottom" id="f4J-M8-iXi"/>
                                         <constraint firstItem="9ez-M7-OpE" firstAttribute="centerX" secondItem="n96-OF-tOx" secondAttribute="centerX" id="gNJ-I0-Nsr"/>
                                         <constraint firstAttribute="bottom" secondItem="WyR-tI-l4h" secondAttribute="bottom" id="hF2-IE-gk1"/>
-                                        <constraint firstItem="F8F-aw-tyq" firstAttribute="top" secondItem="q4B-oi-n0D" secondAttribute="bottom" constant="1" id="kKx-DB-ivx"/>
+                                        <constraint firstItem="F8F-aw-tyq" firstAttribute="top" secondItem="q4B-oi-n0D" secondAttribute="bottom" constant="2" id="kKx-DB-ivx"/>
                                         <constraint firstItem="MXD-Dt-bfb" firstAttribute="leading" secondItem="56K-1f-kuh" secondAttribute="trailing" constant="-9" id="msY-Fz-4u7"/>
                                         <constraint firstItem="WyR-tI-l4h" firstAttribute="top" secondItem="F8F-aw-tyq" secondAttribute="bottom" id="qmZ-Hy-g8M"/>
-                                        <constraint firstItem="n96-OF-tOx" firstAttribute="top" secondItem="1hs-SM-xUo" secondAttribute="bottom" id="rZm-iw-foG"/>
+                                        <constraint firstItem="n96-OF-tOx" firstAttribute="top" secondItem="1hs-SM-xUo" secondAttribute="bottom" constant="2" id="rZm-iw-foG"/>
                                         <constraint firstItem="n96-OF-tOx" firstAttribute="centerX" secondItem="keW-E8-6mR" secondAttribute="centerX" id="u8s-Zb-Bum"/>
                                         <constraint firstItem="q4B-oi-n0D" firstAttribute="centerX" secondItem="F8F-aw-tyq" secondAttribute="centerX" id="up7-rt-64f"/>
                                         <constraint firstItem="1hs-SM-xUo" firstAttribute="top" secondItem="MXD-Dt-bfb" secondAttribute="bottom" constant="-1" id="vcO-zX-1YP"/>
+                                        <constraint firstItem="q4B-oi-n0D" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9ez-M7-OpE" secondAttribute="bottom" constant="5" id="xww-0A-Fad"/>
                                         <constraint firstItem="1hs-SM-xUo" firstAttribute="centerX" secondItem="keW-E8-6mR" secondAttribute="centerX" id="yCz-hy-Rha"/>
                                         <constraint firstAttribute="trailing" secondItem="F8F-aw-tyq" secondAttribute="trailing" id="zGI-tW-HAu"/>
                                     </constraints>
@@ -4517,7 +4542,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="You do not have any follow requests." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygP-Bb-Ei3">
                                                     <rect key="frame" x="55" y="28" width="265" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nDe-gB-zSH">

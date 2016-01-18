@@ -124,13 +124,13 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             
             if (blockCheck == 1) {
                 
-                alertDesc = "Unblock or report the displayed user account @(\(passedUser.username!))."
+                alertDesc = "Unblock or report the displayed user account \(passedUser.username!))."
                 buttonOneTitle = "Unblock User"
             }
                 
             else {
                 
-                alertDesc = "Block or report the displayed user account @(\(passedUser.username!))."
+                alertDesc = "Block or report the displayed user account \(passedUser.username!))."
                 buttonOneTitle = "Block User"
             }
             
@@ -153,7 +153,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                         if (objects?.count > 0) {
                             
                             // The user has already been blocked.
-                            let unblockAlert = UIAlertController(title: "Unblock user?", message: "You have already blocked this user. Would you like to unblock this user?", preferredStyle: .Alert)
+                            let unblockAlert = UIAlertController(title: "Unblock user?", message: "You have previously blocked this user. Would you like to unblock this user?", preferredStyle: .Alert)
                             
                             // Setup the alert actions.
                             let unblockUser = { (action:UIAlertAction!) -> Void in
