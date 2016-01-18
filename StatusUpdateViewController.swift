@@ -18,6 +18,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     @IBOutlet weak var dateContainer: UIView!
     
+    @IBOutlet weak var containerView: UIView!
   //  @IBOutlet weak var checkinbutton: UIButton!
     
     @IBOutlet weak var datepicker: UIDatePicker!
@@ -58,6 +59,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     var currenttense: String! = "Currently"
     
+    var viewGestureRecognizer: UITapGestureRecognizer!
     
     
     
@@ -100,8 +102,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         // save current status id in NSUserDefaults incase its going to be used for a comment
         
-        
-        
         // gesture reconizer for date picker
         
         let tapgesture = UITapGestureRecognizer(target: self, action: "DatePickerAppear")
@@ -110,6 +110,9 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         dateLabel.addGestureRecognizer(tapgesture)
         
+        viewGestureRecognizer = UITapGestureRecognizer(target: self, action: "setDate")
+        containerView.addGestureRecognizer(viewGestureRecognizer)
+        viewGestureRecognizer.enabled = false
         
         
         let locationtapReconizer = UITapGestureRecognizer(target: self, action: "LocationlabelTapped")
@@ -158,6 +161,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     
     
+
     
     func setDate()
     {
@@ -171,22 +175,27 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         datePickerContainer.hidden = true
         dateLabel.textColor = UIColor.darkGrayColor()
         
+        viewGestureRecognizer.enabled = false
+        
     }
     
     
     @IBAction func datePickerChanged(sender: AnyObject) {
-        setDate()
+        //setDate()
     }
     
     func DatePickerAppear()
     {
+        // gesture reconizer for date picker
+        viewGestureRecognizer.enabled = true
+
         print("tapped")
         datepicker.hidden = false
         dateLabel.hidden = true
         datePickerContainer.hidden = false
-
-        
     }
+    
+
     
     func LocationlabelTapped()
     {
@@ -266,13 +275,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         }
         
         
-        
-        
-        
-        
-        
-        
-        
     }
     
     
@@ -308,12 +310,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     @IBAction func backbuttonTapped(sender: AnyObject) {
         GotoNewsfeed()
     }
-    
-    
-    
-    
-    
-    
+
     // camera controls
     
     
@@ -339,13 +336,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
+
     // UITextfield delegate methods
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {

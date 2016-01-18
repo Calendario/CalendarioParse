@@ -57,7 +57,7 @@ class ReportUserViewController : UIViewController, UITextViewDelegate {
         let actionOne = { (action:UIAlertAction!) -> Void in
             
             self.reportCategoryString = "Harassment"
-            self.categorySelected("I am being harassed by \(self.userString)")
+            self.categorySelected("I am being harassed by @\(self.userString)")
         }
         
         let actionTwo = { (action:UIAlertAction!) -> Void in
@@ -73,7 +73,7 @@ class ReportUserViewController : UIViewController, UITextViewDelegate {
         }
 
         // Setup the alert buttons.
-        let buttonOne = UIAlertAction(title: "I am being harassed by \(userString)", style: .Default, handler: actionOne)
+        let buttonOne = UIAlertAction(title: "I am being harassed by @\(userString)", style: .Default, handler: actionOne)
         let buttonTwo = UIAlertAction(title: "I have witnessed abusive behavior.", style: .Default, handler: actionTwo)
         let buttonThree = UIAlertAction(title: "Other", style: .Default, handler: actionThree)
         let cancel = UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil)

@@ -559,7 +559,7 @@
                                                         <rect key="frame" x="0.0" y="-275" width="0.0" height="0.0"/>
                                                         <subviews>
                                                             <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="r46-FK-Xrz">
-                                                                <rect key="frame" x="-84" y="-56" width="168" height="112"/>
+                                                                <rect key="frame" x="-84" y="-56" width="167" height="112"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="112" id="bjB-d8-9bO"/>
                                                                     <constraint firstAttribute="width" constant="167" id="t3r-gV-3dJ"/>
@@ -657,6 +657,7 @@
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="nXI-zI-5GC" firstAttribute="leading" secondItem="LAj-Dh-mvx" secondAttribute="leading" id="2JM-6g-0Rr"/>
                                             <constraint firstItem="Vkp-V0-pcv" firstAttribute="top" secondItem="F6c-pq-6FY" secondAttribute="bottom" constant="8" id="5uM-3H-KZ8"/>
@@ -683,6 +684,9 @@
                                                 <exclude reference="hqA-3Q-sEE"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="bke-ci-0u1" appends="YES" id="d7d-Xo-GoH"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -739,47 +743,49 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kKQ-VP-KPM">
-                                <rect key="frame" x="56" y="121" width="337" height="211"/>
+                                <rect key="frame" x="56" y="121" width="311" height="195"/>
                                 <subviews>
-                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9IY-hB-SvH">
-                                        <rect key="frame" x="0.0" y="0.0" width="337" height="211"/>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9IY-hB-SvH">
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="194"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="qfA-A6-l6i">
-                                            <rect key="frame" x="0.0" y="0.0" width="337" height="211"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="311" height="194"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="2i5-dR-Oxc">
+                                                    <rect key="frame" x="10" y="8" width="293" height="179"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="474755618.79609197">
+                                                        <!--2016-01-17 20:33:38 +0000-->
+                                                    </date>
+                                                    <connections>
+                                                        <action selector="datePickerChanged:" destination="9Rc-cM-4J1" eventType="valueChanged" id="qKW-E7-rJU"/>
+                                                    </connections>
+                                                </datePicker>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2i5-dR-Oxc" firstAttribute="top" secondItem="qfA-A6-l6i" secondAttribute="top" constant="8" id="4qF-0o-Iug"/>
+                                                <constraint firstAttribute="trailing" secondItem="2i5-dR-Oxc" secondAttribute="trailing" constant="8" id="RUf-D2-DIT"/>
+                                                <constraint firstItem="2i5-dR-Oxc" firstAttribute="leading" secondItem="qfA-A6-l6i" secondAttribute="leading" constant="10" id="fqS-8i-Peg"/>
+                                                <constraint firstAttribute="bottom" secondItem="2i5-dR-Oxc" secondAttribute="bottom" constant="8" id="m8c-Zy-gEe"/>
+                                            </constraints>
                                         </view>
                                         <blurEffect style="extraLight"/>
                                     </visualEffectView>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="2i5-dR-Oxc">
-                                        <rect key="frame" x="8" y="8" width="321" height="195"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="474755618.79609197">
-                                            <!--2016-01-17 20:33:38 +0000-->
-                                        </date>
-                                        <connections>
-                                            <action selector="datePickerChanged:" destination="9Rc-cM-4J1" eventType="valueChanged" id="qKW-E7-rJU"/>
-                                        </connections>
-                                    </datePicker>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="9IY-hB-SvH" firstAttribute="leading" secondItem="kKQ-VP-KPM" secondAttribute="leading" id="1pL-mH-KZt"/>
-                                    <constraint firstAttribute="bottom" secondItem="2i5-dR-Oxc" secondAttribute="bottom" constant="8" id="2zX-KV-cVi"/>
                                     <constraint firstAttribute="width" secondItem="kKQ-VP-KPM" secondAttribute="height" multiplier="110:81" id="4Eb-5m-Cu3"/>
                                     <constraint firstItem="9IY-hB-SvH" firstAttribute="top" secondItem="kKQ-VP-KPM" secondAttribute="top" id="BGI-Jt-Cql"/>
-                                    <constraint firstAttribute="trailing" secondItem="2i5-dR-Oxc" secondAttribute="trailing" constant="8" id="Kcf-jT-slG"/>
                                     <constraint firstAttribute="bottom" secondItem="9IY-hB-SvH" secondAttribute="bottom" id="byu-9G-oTU"/>
                                     <constraint firstAttribute="width" secondItem="kKQ-VP-KPM" secondAttribute="height" multiplier="83:52" id="cwh-ZG-VO8"/>
-                                    <constraint firstAttribute="bottom" secondItem="2i5-dR-Oxc" secondAttribute="bottom" constant="46" id="d8c-re-32S"/>
                                     <constraint firstAttribute="width" constant="337" id="hZW-Il-8qf"/>
-                                    <constraint firstItem="2i5-dR-Oxc" firstAttribute="top" secondItem="kKQ-VP-KPM" secondAttribute="top" constant="8" id="i3s-fZ-CXt"/>
                                     <constraint firstAttribute="height" constant="243" id="lSS-Gh-UCP"/>
                                     <constraint firstAttribute="trailing" secondItem="9IY-hB-SvH" secondAttribute="trailing" id="thp-Ze-JMA"/>
-                                    <constraint firstItem="2i5-dR-Oxc" firstAttribute="leading" secondItem="kKQ-VP-KPM" secondAttribute="leading" constant="8" id="wFZ-Df-sMb"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="4Eb-5m-Cu3"/>
                                         <exclude reference="hZW-Il-8qf"/>
                                         <exclude reference="lSS-Gh-UCP"/>
-                                        <exclude reference="d8c-re-32S"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -790,7 +796,7 @@
                             <constraint firstItem="9Mk-aN-Sbi" firstAttribute="top" secondItem="Lxv-aI-vtP" secondAttribute="bottom" id="4cb-2p-uzN"/>
                             <constraint firstItem="9Mk-aN-Sbi" firstAttribute="top" secondItem="Lxv-aI-vtP" secondAttribute="bottom" id="4df-Iu-XMo"/>
                             <constraint firstAttribute="trailing" secondItem="Lxv-aI-vtP" secondAttribute="trailing" id="5cs-eK-OWj"/>
-                            <constraint firstItem="kKQ-VP-KPM" firstAttribute="width" secondItem="WyQ-Fc-Ez4" secondAttribute="width" multiplier="0.815" id="5qQ-LL-LIr"/>
+                            <constraint firstItem="kKQ-VP-KPM" firstAttribute="width" secondItem="WyQ-Fc-Ez4" secondAttribute="width" multiplier="0.75" id="5qQ-LL-LIr"/>
                             <constraint firstItem="Lxv-aI-vtP" firstAttribute="top" secondItem="xQJ-8T-iwD" secondAttribute="bottom" id="6NY-ch-SGD"/>
                             <constraint firstItem="Lxv-aI-vtP" firstAttribute="leading" secondItem="WyQ-Fc-Ez4" secondAttribute="leading" id="6TA-VK-26D"/>
                             <constraint firstItem="kKQ-VP-KPM" firstAttribute="centerX" secondItem="WyQ-Fc-Ez4" secondAttribute="centerX" id="7iA-oA-Zzw"/>
@@ -836,6 +842,7 @@
                         <outlet property="TenseControl" destination="P3y-v8-GPh" id="91B-37-4de"/>
                         <outlet property="backbutton" destination="lNJ-Zv-djk" id="vEY-d0-RL9"/>
                         <outlet property="charlabel" destination="R26-bd-sTX" id="cCw-A3-l5a"/>
+                        <outlet property="containerView" destination="LAj-Dh-mvx" id="Wjn-ES-s3C"/>
                         <outlet property="dateContainer" destination="F6c-pq-6FY" id="eMg-l5-6XK"/>
                         <outlet property="dateLabel" destination="6hn-TC-05F" id="ZCl-8w-nO6"/>
                         <outlet property="datePickerContainer" destination="kKQ-VP-KPM" id="ngl-Md-Nii"/>
@@ -849,6 +856,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0vf-oq-P8f" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="N7y-Lb-1bP"/>
+                <tapGestureRecognizer id="bke-ci-0u1"/>
             </objects>
             <point key="canvasLocation" x="1719" y="468"/>
         </scene>

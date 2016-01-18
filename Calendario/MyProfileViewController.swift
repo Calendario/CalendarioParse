@@ -124,13 +124,13 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             
             if (blockCheck == 1) {
                 
-                alertDesc = "Unblock or report the displayed user account \(passedUser.username!))."
+                alertDesc = "Unblock or report the displayed user account @\(passedUser.username!)."
                 buttonOneTitle = "Unblock User"
             }
                 
             else {
                 
-                alertDesc = "Block or report the displayed user account \(passedUser.username!))."
+                alertDesc = "Block or report the displayed user account @\(passedUser.username!)."
                 buttonOneTitle = "Block User"
             }
             
