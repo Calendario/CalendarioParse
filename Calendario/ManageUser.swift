@@ -229,7 +229,7 @@ var finalData:NSMutableArray = []
         }
     }
     
-    // Follow notification save method.
+    // User notification save method.
     
     class func saveUserNotification(notifcation:String, fromUser:PFUser, toUser:PFUser) {
         

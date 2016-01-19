@@ -97,7 +97,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    
+    /*
     func GotoNewsfeed() {
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -105,25 +105,17 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     let tabBarController: UITabBarController = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! tabBarViewController
     appDelegate.window.makeKeyAndVisible()
     appDelegate.window.rootViewController = tabBarController
-    }
+    }*/
     
     
     @IBAction func bacbuttontapped(sender: AnyObject) {
-        GotoNewsfeed()
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func Sendtapped(sender: AnyObject) {
         PostComment()
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
     
     func PostComment()
     {
@@ -146,10 +138,15 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                         print(object!.valueForKey("user")!.username!)
                         
                         // create push notifcation
-                        
                         let message = "\(PFUser.currentUser()!.username!) has commented on your post"
-                        PFCloud.callFunctionInBackground("comment", withParameters: ["message" : message, "user" : "\(PFUser.currentUser()?.username!)"])
-                        self.SavingNotifacations(message)
+                        
+                        // Send the notification.
+                        PFCloud.callFunctionInBackground("comment", withParameters: ["message" : message, "user" : "\((object!.valueForKey("user") as! PFUser).username!)"])
+                        
+                        // Save the user notification.
+                        ManageUser.saveUserNotification(message, fromUser: PFUser.currentUser()!, toUser: object!.valueForKey("user") as! PFUser)
+                        
+                        // DONT use the "SavingNotifacations" method it doesnt work.
                     }
                 })
                 
@@ -168,7 +165,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    
+    /*
     func SavingNotifacations(notifcation:String)
     {
         var userviewed:PFUser = PFUser.currentUser()!
@@ -190,14 +187,9 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 retreveduser["notifications"] = notifications
                 retreveduser.saveInBackground()
-                
-                
-                
             }
         })
-        
-        
-    }
+    }*/
     
 
     
