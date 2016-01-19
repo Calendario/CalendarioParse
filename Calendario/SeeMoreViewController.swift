@@ -54,11 +54,6 @@ class SeeMoreViewController: UIViewController {
         self.userProfileImage.layer.cornerRadius = (self.userProfileImage.frame.size.width / 2)
         self.userProfileImage.clipsToBounds = true
         
-        self.navigationItem.setLeftBarButtonItem(backbutton, animated: true)
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.17, green: 0.58, blue: 0.38, alpha: 1.0)
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationItem.title = "see more"
-        
         
         var objectid = defaults.objectForKey("objectId") as? String
         
