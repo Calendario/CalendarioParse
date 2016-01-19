@@ -11,14 +11,11 @@ import UIKit
 class TimeLineTableViewCell: UITableViewCell {
 
     @IBOutlet weak var profileimageview: UIImageView!
-    
     @IBOutlet weak var userLabel: UILabel!
-    
     @IBOutlet weak var tenseLabel: UILabel!
-    
     @IBOutlet weak var updateTextView: UITextView!
-    
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var dateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,5 +27,4 @@ class TimeLineTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

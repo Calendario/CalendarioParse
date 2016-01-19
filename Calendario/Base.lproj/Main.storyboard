@@ -1033,6 +1033,16 @@
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDq-T5-xiO">
+                                                    <rect key="frame" x="229" y="32" width="138" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="138" id="2V0-HX-RV8"/>
+                                                        <constraint firstAttribute="height" constant="21" id="hl3-ze-7xd"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="yOJ-vI-2Nd" firstAttribute="centerX" secondItem="jYB-FK-lg5" secondAttribute="centerX" id="14m-Vi-FXI"/>
@@ -1040,19 +1050,23 @@
                                                 <constraint firstItem="5U1-2M-f91" firstAttribute="top" secondItem="RAA-Mf-Sgt" secondAttribute="bottom" constant="30.5" id="9Q1-Ri-99s"/>
                                                 <constraint firstItem="5U1-2M-f91" firstAttribute="leading" secondItem="RAA-Mf-Sgt" secondAttribute="leading" id="AK1-Bs-wya"/>
                                                 <constraint firstAttribute="bottom" secondItem="5U1-2M-f91" secondAttribute="bottom" id="BQs-o4-yDB"/>
+                                                <constraint firstItem="fDq-T5-xiO" firstAttribute="top" secondItem="t4b-BX-epB" secondAttribute="bottom" constant="4" id="FyL-9V-qw0"/>
                                                 <constraint firstItem="I2l-HT-BTp" firstAttribute="centerX" secondItem="yOJ-vI-2Nd" secondAttribute="centerX" id="QOm-ea-va8"/>
                                                 <constraint firstItem="RAA-Mf-Sgt" firstAttribute="top" secondItem="5pX-3S-uf5" secondAttribute="topMargin" id="R9N-NT-lfS"/>
+                                                <constraint firstItem="5U1-2M-f91" firstAttribute="top" secondItem="fDq-T5-xiO" secondAttribute="bottom" constant="8" id="T85-Nc-DGg"/>
                                                 <constraint firstItem="t4b-BX-epB" firstAttribute="trailing" secondItem="5pX-3S-uf5" secondAttribute="trailingMargin" id="ZJj-kW-M8A"/>
                                                 <constraint firstItem="I2l-HT-BTp" firstAttribute="top" secondItem="yOJ-vI-2Nd" secondAttribute="bottom" constant="15" id="fLM-NR-Lom"/>
                                                 <constraint firstItem="jYB-FK-lg5" firstAttribute="top" secondItem="5pX-3S-uf5" secondAttribute="top" id="qL2-JT-MyO"/>
                                                 <constraint firstAttribute="trailing" secondItem="5U1-2M-f91" secondAttribute="trailing" constant="8" id="ta0-LD-PWP"/>
                                                 <constraint firstItem="jYB-FK-lg5" firstAttribute="leading" secondItem="5pX-3S-uf5" secondAttribute="leading" constant="8" id="trU-lH-4sz"/>
                                                 <constraint firstItem="t4b-BX-epB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RAA-Mf-Sgt" secondAttribute="trailing" constant="10" id="x7J-em-lCe"/>
+                                                <constraint firstItem="fDq-T5-xiO" firstAttribute="trailing" secondItem="5pX-3S-uf5" secondAttribute="trailingMargin" id="xdJ-Vv-jt0"/>
                                                 <constraint firstItem="RAA-Mf-Sgt" firstAttribute="leading" secondItem="jYB-FK-lg5" secondAttribute="trailing" constant="20" id="yh4-bs-72v"/>
                                                 <constraint firstItem="yOJ-vI-2Nd" firstAttribute="top" secondItem="jYB-FK-lg5" secondAttribute="bottom" constant="15" id="zOa-gd-cQn"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="dateLabel" destination="fDq-T5-xiO" id="JjS-bK-J1I"/>
                                             <outlet property="likeButton" destination="yOJ-vI-2Nd" id="whZ-Zv-Ru6"/>
                                             <outlet property="profileimageview" destination="jYB-FK-lg5" id="zs0-Mn-biN"/>
                                             <outlet property="tenseLabel" destination="t4b-BX-epB" id="3Cw-Mb-rYk"/>
@@ -4947,7 +4961,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Q92-9R-gKB"/>
+        <segue reference="sk0-vm-fWU"/>
         <segue reference="jbQ-WG-YYd"/>
-        <segue reference="xja-l6-MU2"/>
     </inferredMetricsTieBreakers>
 </document>

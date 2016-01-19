@@ -79,28 +79,30 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
     
     func calendar(calendar: FSCalendar!, didSelectDate date: NSDate!) {
+        
         print("the date is \(date)")
         
         let dateformatter = NSDateFormatter()
         dateformatter.dateFormat = "M/d/yy"
-        var newdate = dateformatter.stringFromDate(date)
+        let newdate_V1 = dateformatter.stringFromDate(date)
         
-        
-        var getdates:PFQuery = PFQuery(className: "StatusUpdate")
-        getdates.whereKey("dateofevent", equalTo: newdate)
-        print("passed date is \(String(newdate))")
+        var getdates:PFQuery!
+        getdates = PFQuery(className: "StatusUpdate")
+        getdates.whereKey("dateofevent", equalTo: newdate_V1)
+        print("V1 passed date is \(String(newdate_V1))")
         getdates.includeKey("user")
         
         var postsdata:NSMutableArray = NSMutableArray()
         postsdata.removeAllObjects()
         
         getdates.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
-            if error == nil
-            {
+            
+            if error == nil{
+                
                 // print(objects!.count)
-                for object in objects!
-                {
-                    let statusupdate:PFObject = object as! PFObject
+                for object in objects! {
+                    
+                    let statusupdate:PFObject = object
                     postsdata.addObject(statusupdate)
                     self.b = true
                 }
@@ -382,15 +384,19 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
         let cell = tableview.dequeueReusableCellWithIdentifier("TimelineCell") as! TimeLineTableViewCell
         let status:PFObject = self.filteredData.objectAtIndex(indexPath.row) as! PFObject
+        
+        print("\(status)")
+        
         cell.userLabel.text = status.valueForKey("user")?.username!
-        cell.tenseLabel.text = status.valueForKey("tense") as! String
+        cell.tenseLabel.text = status.valueForKey("tense") as? String
         cell.updateTextView.text = status.valueForKey("updatetext") as! String
+        cell.dateLabel.text = status.valueForKey("dateofevent") as? String
         currentObjectid = status.objectId
         dateofevent = status.valueForKey("dateofevent") as! String
         
         
         
-        var likes = status.valueForKey("likes") as? Int
+        let likes = status.valueForKey("likes") as? Int
         
         if likes >= 1
         {
@@ -400,7 +406,8 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
         cell.profileimageview.clipsToBounds = true
         
-        var getimages:PFQuery = PFUser.query()!
+        var getimages:PFQuery!
+        getimages = PFUser.query()!
         getimages.whereKey("objectId", equalTo: (status.objectForKey("user")?.objectId)!)
         getimages.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             
@@ -428,7 +435,6 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
             vc.savedobjectID = currentObjectid
         }
     }
-    
     
     func GotoPost(objectid:String) {
         
