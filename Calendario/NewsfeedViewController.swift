@@ -370,13 +370,14 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         // NSMutableAttributedString
         
-        var attrs = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)]
-        var tensestring = NSMutableAttributedString(string: statusupdate.objectForKey("tense") as! String, attributes: attrs)
-        var spacestring = NSMutableAttributedString (string: " ")
-        var updatestring = NSMutableAttributedString(string: statusupdate.objectForKey("updatetext") as! String)
+        let attrs = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 23.0)!]
+        let tensestring = NSMutableAttributedString(string: statusupdate.objectForKey("tense") as! String, attributes: attrs)
+        let spacestring = NSMutableAttributedString(string: " ")
+        
+        let attributedString = NSMutableAttributedString(string:statusupdate.objectForKey("updatetext") as! String, attributes:[NSFontAttributeName : UIFont(name: "Futura", size: 23.0)!])
         
         tensestring.appendAttributedString(spacestring)
-        tensestring.appendAttributedString(updatestring)
+        tensestring.appendAttributedString(attributedString)
         
         cell.statusTextView.attributedText = tensestring
         
