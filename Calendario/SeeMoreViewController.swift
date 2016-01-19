@@ -416,9 +416,13 @@ class SeeMoreViewController: UIViewController {
     }
     
     @IBAction func backButtonTapped(sender: AnyObject) {
-        GotoNewsfeed()
+        
+        // Dismiss the view instead of going back to the news feed;
+        // SeeMore/Report views are called by other controllers too.
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
    
+    /*
     func GotoNewsfeed() {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -427,6 +431,7 @@ class SeeMoreViewController: UIViewController {
         appDelegate.window.makeKeyAndVisible()
         appDelegate.window.rootViewController = tabBarController
     }
+    */
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "seemore"

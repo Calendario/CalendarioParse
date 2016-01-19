@@ -147,9 +147,13 @@ class ReportTableViewController: UITableViewController {
     
     
     @IBAction func leftButtonTapped(sender: AnyObject) {
-        GotoNewsfeed()
+        
+        // Dismiss the view instead of going back to the news feed;
+        // SeeMore/Report views are called by other controllers too.
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    /*
     func GotoNewsfeed() {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -158,7 +162,7 @@ class ReportTableViewController: UITableViewController {
         appDelegate.window.makeKeyAndVisible()
         appDelegate.window.rootViewController = tabBarController
     }
-
+    */
     
     
         

@@ -315,7 +315,7 @@
                                             <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wq-Ok-Hzx" customClass="KILabel">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wq-Ok-Hzx" customClass="KILabel">
                                             <rect key="frame" x="177" y="8" width="90" height="14"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="90" id="lII-w0-nFd"/>
@@ -869,7 +869,7 @@
                         <viewControllerLayoutGuide type="bottom" id="pwH-dF-yIT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7xN-Kh-pjT">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="206" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KJI-D7-2eT">
@@ -4946,8 +4946,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="right_arrow" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jbQ-WG-YYd"/>
         <segue reference="Q92-9R-gKB"/>
-        <segue reference="6lO-Zx-iIM"/>
+        <segue reference="jbQ-WG-YYd"/>
+        <segue reference="xja-l6-MU2"/>
     </inferredMetricsTieBreakers>
 </document>
