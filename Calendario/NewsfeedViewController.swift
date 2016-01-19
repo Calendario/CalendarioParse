@@ -409,6 +409,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         }
         
         
+        // Set the comments button status ID number.
+        cell.commentsButton.tag = 1
         
         
         /*var commentdata = PFQuery(className: "Comments")
