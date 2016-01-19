@@ -27,7 +27,7 @@ public class DOFavoriteButton: UIButton {
             }
         }
     }
-    @IBInspectable public var imageColorOff: UIColor! = UIColor(red: 136/255, green: 153/255, blue: 166/255, alpha: 1.0) {
+    @IBInspectable public var imageColorOff: UIColor! = UIColor(red: 147/255, green: 147/255, blue: 147/255, alpha: 1.0) {
         didSet {
             if (!selected) {
                 imageShape.fillColor = imageColorOff.CGColor
