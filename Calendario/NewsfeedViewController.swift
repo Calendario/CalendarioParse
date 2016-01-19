@@ -90,9 +90,12 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         //activity = UIRefreshControl()
         activity.attributedTitle = NSAttributedString(string: "Pull to refresh")
         activity.addTarget(self, action: "LoadData", forControlEvents: UIControlEvents.ValueChanged)
+    
         
-        
-        
+        //method to allow tableview cell resizing based on content
+        self.table.rowHeight = UITableViewAutomaticDimension;
+        self.table.estimatedRowHeight = 160.0;
+
         
         
         /*ManageUser.getUserFollowersList(PFUser.currentUser()!) { (userFollowers) -> Void in
@@ -352,9 +355,10 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         return statausData.count
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    /*override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 238
-    }
+    }*/
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         currentIndex = indexPath.row
@@ -368,18 +372,19 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         isDatePassed(statusupdate.createdAt!, date2: NSDate(), ParseID: statusupdate.objectId!)
         
         
-        // NSMutableAttributedString
+        // NSMutableAttributedString FOR USER STATUS
         
-        let attrs = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 23.0)!]
+        let attrs = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 14.0)!]
         let tensestring = NSMutableAttributedString(string: statusupdate.objectForKey("tense") as! String, attributes: attrs)
         let spacestring = NSMutableAttributedString(string: " ")
         
-        let attributedString = NSMutableAttributedString(string:statusupdate.objectForKey("updatetext") as! String, attributes:[NSFontAttributeName : UIFont(name: "Futura", size: 23.0)!])
+        let attributedString = NSMutableAttributedString(string:statusupdate.objectForKey("updatetext") as! String, attributes:[NSFontAttributeName : UIFont(name: "Futura", size: 14.0)!])
         
         tensestring.appendAttributedString(spacestring)
         tensestring.appendAttributedString(attributedString)
         
         cell.statusTextView.attributedText = tensestring
+        cell.statusTextView.sizeToFit()
         
         
         
