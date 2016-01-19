@@ -12,3 +12,4 @@
 #import "NSDate+FSExtension.h"
 #import "Chameleon.h"
 #import "reportBug.h"
+#import <SDWebImage/UIImageView+WebCache.h>

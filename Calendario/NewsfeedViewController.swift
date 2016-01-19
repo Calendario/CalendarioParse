@@ -9,6 +9,7 @@
 import UIKit
 import Social
 import DOFavoriteButton
+import SDWebImage
 
 
 class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegate, UINavigationBarDelegate, FSCalendarDelegate, FSCalendarDataSource {
@@ -213,7 +214,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         
         
-        //statausData.removeAllObjects()
+        statausData.removeAllObjects()
         
         
         
@@ -235,8 +236,12 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                 getstatus.includeKey("user")
                 getstatus.whereKey("user", equalTo: test)
                 //getstatus.whereKey("user", equalTo: PFUser.currentUser()!)
-                getstatus.cachePolicy = .CacheThenNetwork
+                getstatus.cachePolicy = .NetworkElseCache
                 var cache = getstatus.hasCachedResult()
+                if cache
+                {
+                    getstatus.clearCachedResult()
+                }
                 getstatus.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
                     
                     // Stop the pull to refresh indicator.
@@ -669,8 +674,16 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                 image.getDataInBackgroundWithBlock({ (ImageData, error) -> Void in
                     if error == nil
                     {
-                        let image = UIImage(data: ImageData!)
-                        imageview.image = image
+                        var imageurl = image.url
+                        var manager: SDWebImageManager = SDWebImageManager.sharedManager()
+                        manager.downloadWithURL(NSURL(string: imageurl!), options: SDWebImageOptions.ContinueInBackground, progress: { (sent, recived) -> Void in
+                            print(recived)
+                            }, completed: { (image, error, cache, finished) -> Void in
+                                if (image != nil)
+                                {
+                                    imageview.image = image
+                                }
+                        })
                     }
                     else
                     {

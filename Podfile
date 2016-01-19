@@ -4,3 +4,4 @@ use_frameworks!
 pod 'GoogleMaps'
 pod 'KILabel'
 pod 'DOFavoriteButton'
+pod 'SDWebImage', '~>3.7'
