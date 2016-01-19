@@ -179,7 +179,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             {
                 let retreveduser:PFUser = object as! PFUser
                 var notifications:NSMutableArray = NSMutableArray()
-                notifications.addObjectsFromArray([retreveduser.objectForKey("notifications")!])
+                notifications.addObjectsFromArray([retreveduser.objectForKey("notifications")!]) // bug here 
                 notifications.addObject(notifcation)
                 
                 if notifications.count > 29

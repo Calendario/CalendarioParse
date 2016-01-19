@@ -10,6 +10,8 @@ import UIKit
 import Social
 import DOFavoriteButton
 import SDWebImage
+import Foundation
+
 
 
 class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegate, UINavigationBarDelegate, FSCalendarDelegate, FSCalendarDataSource {
@@ -39,6 +41,13 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     var mentionid:String!
     var followingusers = [String]()
     var followinguser:String!
+    
+    var currentIndex:Int!
+    
+    
+    
+    
+    
     
     
     
@@ -81,6 +90,9 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         //activity = UIRefreshControl()
         activity.attributedTitle = NSAttributedString(string: "Pull to refresh")
         activity.addTarget(self, action: "LoadData", forControlEvents: UIControlEvents.ValueChanged)
+        
+        
+        
         
         
         /*ManageUser.getUserFollowersList(PFUser.currentUser()!) { (userFollowers) -> Void in
@@ -271,6 +283,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                         self.statausData = NSMutableArray(array: array)
                         self.tableView.reloadData()
                         
+                     
+                        
             
                         
                     }
@@ -343,6 +357,9 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        currentIndex = indexPath.row
+        print("the current index is \(currentIndex)")
+        
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
         
@@ -422,6 +439,10 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         
         
+        
+        
+        
+        
         var findUser:PFQuery = PFUser.query()!
         
         findUser.whereKey("objectId", equalTo: (statusupdate.objectForKey("user")?.objectId)!)
@@ -461,6 +482,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         //cell.likebutton.userInteractionEnabled = true
         cell.likebutton.translatesAutoresizingMaskIntoConstraints = true
         cell.likebutton.clipsToBounds = false
+        cell.likebutton.tag = indexPath.row
         cell.likebutton.addTarget(self, action: "likeclicked:", forControlEvents: .TouchUpInside)
         
         
@@ -520,21 +542,28 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         return cell
     }
     
+    
+
+    
     func likeclicked(sender:DOFavoriteButton)
     {
+        
         
         
         print(currentobjectID)
         
         if sender.selected
         {
-            
+        
+           
             print("unlike")
+             sender.imageColorOn = UIColor.flatOrangeColor()
             var query = PFQuery(className: "StatusUpdate")
             query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
                 if error == nil
                 {
                     var currentlikes = update?.valueForKey("likes") as! Int
+                    
                     
                     update!["likes"] = currentlikes - 1
                     update?.saveInBackground()
@@ -547,6 +576,9 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                     alert.addAction(next)
                     
                     self.presentViewController(alert, animated: true, completion: nil)
+                    self.currentobjectID = nil
+                    self.LoadData()
+                    
                     
                     
                     
@@ -556,14 +588,20 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             
             
             sender.deselect()
-            
+
         }
+
+
+
         else
         {
             print("like")
             sender.select()
+            print("the tag is \(sender.tag)")
             sender.imageColorOn = UIColor.flatRedColor()
             var query = PFQuery(className: "StatusUpdate")
+            
+            
             query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
                 if error == nil
                 {
@@ -571,7 +609,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                     
                     if currentlikes == nil
                     {
-                        currentlikes = 1
+                        currentlikes = 0
                     }
                     
                     update!["likes"] = currentlikes! + 1
@@ -582,6 +620,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                     
                     PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : string, "user" : "\(PFUser.currentUser()?.username!)"])
                     print(update?.valueForKey("likes") as! Int)
+                    self.currentobjectID = nil
                     //self.SavingNotifacations(string)
                     
                     
@@ -699,6 +738,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let statusupdate:PFObject = self.statausData.objectAtIndex(indexPath.row) as! PFObject
+        currentIndex = indexPath.row
+        
         
         print(statusupdate.objectId!)
         currentobjectID = statusupdate.objectId
@@ -999,6 +1040,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "comments"
         {
+            
             let vc = segue.destinationViewController as! CommentsViewController
             vc.savedobjectID = currentobjectID
             

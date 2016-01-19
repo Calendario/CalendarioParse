@@ -107,7 +107,7 @@ public class DOFavoriteButton: UIButton {
         self.layer.sublayers = nil
 
         let imageFrame = self.frame
-        let imgCenterPoint = CGPointMake(CGRectGetMidX(imageFrame), CGRectGetMidY(imageFrame))
+        let imgCenterPoint = CGPointMake(CGRectGetMidX(imageFrame) - 5.5 + 5, CGRectGetMidY(imageFrame) - 4.3)
         let lineFrame = self.frame
         
         //===============

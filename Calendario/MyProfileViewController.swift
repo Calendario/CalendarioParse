@@ -625,7 +625,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             // Setup the user status update query.
             var queryStatusUpdate:PFQuery!
             queryStatusUpdate = PFQuery(className: "StatusUpdate")
-            queryStatusUpdate.orderByAscending("createdAt")
+            queryStatusUpdate.orderByDescending("createdAt")
             queryStatusUpdate.whereKey("user", equalTo: userData)
             queryStatusUpdate.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
                 

@@ -38,6 +38,7 @@
 		E24DA5F21C13EA7A00901DF0 /* LocatonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24DA5F11C13EA7A00901DF0 /* LocatonViewController.swift */; };
 		E24DA65D1C172DB500901DF0 /* FollowHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24DA65C1C172DB500901DF0 /* FollowHelper.swift */; };
 		E25607AE1BCAF5EC0085B9B4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25607AD1BCAF5EC0085B9B4 /* LoginViewController.swift */; };
+		E25B09D61C4E0C0900529CCA /* LikeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B09D51C4E0C0900529CCA /* LikeHelper.swift */; };
 		E27ACC811BEDA64100503DD7 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27ACC801BEDA64100503DD7 /* TimelineViewController.swift */; };
 		E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */; };
 		E2AE81531BCAFF320047D1FA /* NewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE81521BCAFF320047D1FA /* NewsfeedViewController.swift */; };
@@ -164,6 +165,7 @@
 		E24DA65C1C172DB500901DF0 /* FollowHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowHelper.swift; sourceTree = "<group>"; };
 		E25607AC1BCAF5EC0085B9B4 /* Calendario-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Calendario-Bridging-Header.h"; sourceTree = "<group>"; };
 		E25607AD1BCAF5EC0085B9B4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
+		E25B09D51C4E0C0900529CCA /* LikeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeHelper.swift; sourceTree = "<group>"; };
 		E27ACC801BEDA64100503DD7 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusUpdateViewController.swift; path = ../StatusUpdateViewController.swift; sourceTree = "<group>"; };
 		E2AE81521BCAFF320047D1FA /* NewsfeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedViewController.swift; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 				E2C2BC661C24731C00F810C9 /* TimeLineTableViewCell.swift */,
 				E2EF8A801C02B9E80000A957 /* SeeMoreViewController.swift */,
 				E2C9223B1C1CB581004278E3 /* CalPhotoViewerViewController.swift */,
+				E25B09D51C4E0C0900529CCA /* LikeHelper.swift */,
 			);
 			name = "Newsfeed & Timeline & Status Update";
 			sourceTree = "<group>";
@@ -951,6 +954,7 @@
 				E24DA5F21C13EA7A00901DF0 /* LocatonViewController.swift in Sources */,
 				E2E0D7041BC9950800662E70 /* main.m in Sources */,
 				E2B7D2871BE86C9E002395F7 /* FSCalendarHeader.m in Sources */,
+				E25B09D61C4E0C0900529CCA /* LikeHelper.swift in Sources */,
 				A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */,
 				E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */,
 				A2AE4A521BDCF82F008E84B9 /* PrivacyPolicyViewController.swift in Sources */,

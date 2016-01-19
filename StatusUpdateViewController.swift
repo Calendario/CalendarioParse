@@ -303,8 +303,22 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     
     @IBAction func PostTapped(sender: AnyObject) {
-        PostStatusUpdate()
-        GotoNewsfeed()
+        if statusUpdateTextField.text.isEmpty
+        {
+            let reportalert = UIAlertController(title: "Error", message: "You must enter a status update and/or a valid date ", preferredStyle: .Alert)
+            let next = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            reportalert.addAction(next)
+            
+            self.presentViewController(reportalert, animated: true, completion: nil)
+            
+
+        }
+        else
+        {
+            PostStatusUpdate()
+            GotoNewsfeed()
+        }
+      
     }
     
     @IBAction func backbuttonTapped(sender: AnyObject) {
@@ -348,6 +362,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     func textViewDidBeginEditing(textView: UITextView) {
         self.placeholderLabel.hidden = true
+        
     }
     
     
