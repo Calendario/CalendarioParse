@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import  KILabel
+import KILabel
 import DOFavoriteButton
 
 

@@ -369,7 +369,10 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         seemore.backgroundColor = UIColor.flatGrayColor()
         deletestatus.backgroundColor = UIColor.flatRedColor()
         
-        return [report, seemore, deletestatus]
+        // For V1.0 we will not be adding access to
+        // the "See More" section as it is not needed.
+        // return [report, seemore, deletestatus]
+        return [report, deletestatus]
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

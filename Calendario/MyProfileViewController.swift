@@ -944,13 +944,17 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // want other users to be able to delete your posts.
         
         if ((self.passedUser == nil) || ((self.passedUser != nil) && (self.passedUser.username! == "\(PFUser.currentUser()!.username!)"))) {
-            return [report, seemore, deletestatus]
+            
+            // For V1.0 we will not be adding access to
+            // the "See More" section as it is not needed.
+            // return [report, seemore, deletestatus]
+            return [report, deletestatus]
         }
             
         else {
             
             if (self.statusLoadCheck == true) {
-                return [report, seemore]
+                return [report]
             }
                 
             else {
