@@ -35,12 +35,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     var likesobjid:String!
     
     var likecount = 0
-    
-    /*//TEST
-    var commentCount = 0
-    var commentData: NSMutableArray = []
-    var savedobjectID = ""*/
-    
+
+
     var likeduser:String!
     
     var mentionid:String!
@@ -48,6 +44,10 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     var followinguser:String!
     
     var currentIndex:Int!
+    
+    //TEST
+    var postImage: UIImage = UIImage()
+
     
     
     override func viewDidLoad() {
@@ -93,6 +93,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         //method to allow tableview cell resizing based on content
         self.table.rowHeight = UITableViewAutomaticDimension;
         self.table.estimatedRowHeight = 254.0;
+        self.table.separatorInset = UIEdgeInsetsZero
         
         
         
@@ -400,6 +401,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         isDatePassed(statusupdate.createdAt!, date2: NSDate(), ParseID: statusupdate.objectId!)
         
+        //set tableview separator to 0
+        cell.layoutMargins = UIEdgeInsetsZero
         
         // NSMutableAttributedString FOR USER STATUS
         
@@ -546,6 +549,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                 print(objects?.count)
                 
                 self.getPostImageData(objects!, imageview: cell.userPostedImage, objectID: statusupdate.objectId!)
+                    cell.setPostedImage(self.postImage)
                 }
                 else {
                     cell.userPostedImage.image = UIImage(named: "defaultPhotoPost.png")
@@ -834,8 +838,12 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                        if object.objectId == objectID
                        {
                         print("match")
-                        let image = UIImage(data: ImageData!)
-                        imageview.image = image
+                        //let image = UIImage(data: ImageData!)
+                        
+                        
+                        //TEST
+                        //imageview.image = image
+                        self.postImage = UIImage(data: ImageData!)!
                         }
                     }
                     else
