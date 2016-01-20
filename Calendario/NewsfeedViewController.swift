@@ -92,7 +92,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         //method to allow tableview cell resizing based on content
         self.table.rowHeight = UITableViewAutomaticDimension;
-        self.table.estimatedRowHeight = 160.0;
+        self.table.estimatedRowHeight = 254.0;
         
         
         
@@ -457,7 +457,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             {
                 var commentnum = objects?.count
                 
-                cell.commentsLabel.text = String(commentnum!)
+                cell.commentsLabel.text = String("\(commentnum!) comments")
             }
         }
         
@@ -542,9 +542,15 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         getPostImages.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil
             {
+                if objects?.count > 0 {
                 print(objects?.count)
                 
                 self.getPostImageData(objects!, imageview: cell.userPostedImage, objectID: statusupdate.objectId!)
+                }
+                else {
+                    cell.userPostedImage.image = UIImage(named: "defaultPhotoPost.png")
+                    
+                }
             }
             else
             {
