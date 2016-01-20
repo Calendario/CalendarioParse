@@ -280,7 +280,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                 getstatus.includeKey("user")
                 getstatus.whereKey("user", equalTo: test)
                 //getstatus.whereKey("user", equalTo: PFUser.currentUser()!)
-                getstatus.cachePolicy = .NetworkElseCache
+                getstatus.cachePolicy = .IgnoreCache
                 var cache = getstatus.hasCachedResult()
                 if cache
                 {
@@ -448,6 +448,20 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         }
         
         
+        // commemts label
+        
+        var commentquery = PFQuery(className: "comment")
+        commentquery.whereKey("statusOBJID", equalTo: statusupdate.objectId!)
+        commentquery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil
+            {
+                var commentnum = objects?.count
+                
+                cell.commentsLabel.text = String(commentnum!)
+            }
+        }
+        
+        
         // Set the comments button status ID number.
         cell.commentsButton.tag = 1
         
@@ -505,6 +519,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             }
         }
         
+        // profile images
         var getImages:PFQuery = PFUser.query()!
         getImages.whereKey("objectId", equalTo: (statusupdate.objectForKey("user")?.objectId)!)
         getImages.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
@@ -518,6 +533,24 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             }
         }
         
+        
+        // post images
+        
+        var getPostImages:PFQuery = PFQuery(className: "StatusUpdate")
+        getPostImages.includeKey("user")
+       getPostImages.whereKey("objectId", equalTo: statusupdate.objectId!)
+        getPostImages.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil
+            {
+                print(objects?.count)
+                
+                self.getPostImageData(objects!, imageview: cell.userPostedImage, objectID: statusupdate.objectId!)
+            }
+            else
+            {
+                print("Error")
+            }
+        }
         
         
         // like button
@@ -780,6 +813,35 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             
         }
     }
+    
+    func getPostImageData(objects:[PFObject], imageview:UIImageView, objectID:String)
+    {
+        
+        for object in objects
+        {
+            if let image = object["image"] as! PFFile?
+            {
+                image.getDataInBackgroundWithBlock({ (ImageData, error) -> Void in
+                    if error == nil
+                        
+                    {
+                       if object.objectId == objectID
+                       {
+                        print("match")
+                        let image = UIImage(data: ImageData!)
+                        imageview.image = image
+                        }
+                    }
+                    else
+                    {
+                        print("noImage")
+                    }
+                })
+            }
+        }
+    }
+    
+
     
     
     
