@@ -36,6 +36,11 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     
     var likecount = 0
     
+    /*//TEST
+    var commentCount = 0
+    var commentData: NSMutableArray = []
+    var savedobjectID = ""*/
+    
     var likeduser:String!
     
     var mentionid:String!
@@ -43,13 +48,6 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     var followinguser:String!
     
     var currentIndex:Int!
-    
-    
-    
-    
-    
-    
-    
     
     
     override func viewDidLoad() {
@@ -60,12 +58,12 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         // to appear in the white tint colour.
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
-       /* // Create the post "+" button.
+        /* // Create the post "+" button.
         let rightButton: UIButton = UIButton(type: UIButtonType.Custom)
         rightButton.setImage(UIImage(named: "plus"), forState: UIControlState.Normal)
         rightButton.addTarget(self, action: "openPostSection", forControlEvents: UIControlEvents.TouchUpInside)
         rightButton.frame = CGRectMake (0, 0, 60, 55)
-
+        
         
         
         // Set the navigation bar background colour.
@@ -90,12 +88,12 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         //activity = UIRefreshControl()
         activity.attributedTitle = NSAttributedString(string: "Pull to refresh")
         activity.addTarget(self, action: "LoadData", forControlEvents: UIControlEvents.ValueChanged)
-    
+        
         
         //method to allow tableview cell resizing based on content
         self.table.rowHeight = UITableViewAutomaticDimension;
         self.table.estimatedRowHeight = 160.0;
-
+        
         
         
         /*ManageUser.getUserFollowersList(PFUser.currentUser()!) { (userFollowers) -> Void in
@@ -113,6 +111,37 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         super.viewDidAppear(animated)
         LoadData()
     }
+    
+  /*  func getComments(objectID: String) -> Int?
+    {
+        self.commentData.removeAllObjects()
+        
+        var getcomments:PFQuery = PFQuery(className: "comment")
+        getcomments.whereKey("statusOBJID", equalTo: savedobjectID)
+        
+        getcomments.findObjectsInBackgroundWithBlock { (comments:[PFObject]?, error:NSError?) -> Void in
+            if error == nil
+            {
+                for comment in comments!
+                {
+                    let comments:PFObject = comment as! PFObject
+                    self.commentData.addObject(comment)
+                }
+                
+                let array:NSArray = self.commentData.reverseObjectEnumerator().allObjects
+                self.commentData = NSMutableArray(array: array)
+                self.tableView.reloadData()
+                
+                self.commentCount = self.commentData.count
+                
+                return self.commentCount
+                
+            }
+        }
+        
+    } */
+    
+    
     @IBAction func OpenPostButtonPressed(sender: UIBarButtonItem) {
         openPostSection()
     }
@@ -271,8 +300,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                             {
                                 print("in cache")
                             }
-                         
-                        
+                            
+                            
                             
                             
                             
@@ -286,12 +315,12 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                         self.statausData = NSMutableArray(array: array)
                         self.tableView.reloadData()
                         
-                     
                         
-            
+                        
+                        
                         
                     }
-                        
+                    
                     
                     
                     // getting the current users status updates
@@ -356,7 +385,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     }
     
     /*override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 238
+    return 238
     }*/
     
     
@@ -386,7 +415,16 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         cell.statusTextView.attributedText = tensestring
         cell.statusTextView.sizeToFit()
         
+        //TESTING COMMENTS LABEL
         
+       /* if statusupdate.objectId != nil {
+        let commentsArray: NSArray = getComments(statusupdate.objectId!)
+        cell.commentsLabel.text = "\(commentsArray.count) comments"
+            
+        }
+        else {
+        cell.commentsLabel.text = "0 comments"
+        } */
         
         //cell.statusTextView.text = statusupdate.objectForKey("updatetext") as! String
         
@@ -400,12 +438,13 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         if likesamount == nil
         {
-            cell.likeslabel.text = "0 likes "
+            cell.likeslabel.text = "0 Likes "
             
         }
         else
         {
-            cell.likeslabel.text = "\(likesamount!) people liked this post"
+            // cell.likeslabel.text = "\(likesamount!) people liked this post"
+            cell.likeslabel.text = "\(likesamount!) Likes"
         }
         
         
@@ -551,7 +590,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     }
     
     
-
+    
     
     func likeclicked(sender:DOFavoriteButton)
     {
@@ -562,10 +601,10 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         if sender.selected
         {
-        
-           
+            
+            
             print("unlike")
-             sender.imageColorOn = UIColor.flatOrangeColor()
+            sender.imageColorOn = UIColor.flatOrangeColor()
             var query = PFQuery(className: "StatusUpdate")
             query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
                 if error == nil
@@ -596,11 +635,11 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
             
             
             sender.deselect()
-
+            
         }
-
-
-
+            
+            
+            
         else
         {
             print("like")
@@ -1036,7 +1075,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         return [report, deletestatus]
     }
     
-
+    
     
     
     

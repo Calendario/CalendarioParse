@@ -16,6 +16,8 @@ class NewsfeedTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var UserNameLabel: UILabel!
+    @IBOutlet weak var commentsLabel: UILabel!
+    @IBOutlet weak var userPostedImage: UIImageView!
     
     //@IBOutlet weak var statusTextView: UITextView!
     

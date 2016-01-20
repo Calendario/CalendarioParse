@@ -30,7 +30,11 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         
       self.navigationItem.rightBarButtonItem = sendbutton
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 98.0;
 
+
+        
 
         // Do any additional setup after loading the view.
         
@@ -71,6 +75,11 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func refreshData() {
+        LoadCommentData()
+        self.tableView.reloadData()
     }
     
     func LoadCommentData()
@@ -114,6 +123,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBAction func Sendtapped(sender: AnyObject) {
         PostComment()
+//        self.refreshData()
     }
 
     
@@ -207,6 +217,9 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CommentCell", forIndexPath: indexPath) as! CommentsTableViewCell
+        
+        cell.userProfileImage.layer.cornerRadius = (cell.userProfileImage.frame.size.width / 2)
+        cell.userProfileImage.clipsToBounds = true
         
         
         let comment:PFObject = self.commentdata.objectAtIndex(indexPath.row) as! PFObject
