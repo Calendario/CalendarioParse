@@ -116,13 +116,13 @@ var finalData:NSMutableArray = []
                                 
                                 if (followStatus == false) {
                                     
-                                    // Create the push notification message.s
+                                    // Create the push notification message.
                                     let pushMessage = "\(PFUser.currentUser()!.username!) has followed you."
                                     
                                     // Submit the push notification.
                                     PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage, "User" : "\(userData.username!)"])
                                     
-                                    // Save the push notification string on the User class.
+                                    // Save the push notification string on the notification class.
                                     self.saveUserNotification(pushMessage, fromUser: PFUser.currentUser()!, toUser: userData)
                                 }
                                 
@@ -566,6 +566,15 @@ func FollowRequest(userData:PFUser, completion:(requestStatus: Bool) -> Void) {
             
             // Save the follow request on Parse.
             followRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
+                
+                // Create the push notification message.
+                let pushMessage = "\(PFUser.currentUser()!.username!) would like to follow you."
+                
+                // Submit the push notification.
+                PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage, "User" : "\(userData.username!)"])
+                
+                // Save the push notification string on the notification class.
+                ManageUser.saveUserNotification(pushMessage, fromUser: PFUser.currentUser()!, toUser: userData)
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     completion(requestStatus: success)

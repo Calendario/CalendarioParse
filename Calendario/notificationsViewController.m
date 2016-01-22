@@ -68,7 +68,29 @@
     return notifications.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // Get the user data before opening
+    // the profile view controller.
+    PFQuery *userQuery = [PFUser query];
+    [userQuery whereKey:@"objectId" equalTo:((PFUser *)notificationUsers[indexPath.row]).objectId];
+    [userQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        
+        if (error == nil) {
+            
+            // Show the notification user profile view.
+            UIStoryboard *mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            MyProfileViewController *profVC = [mainSB instantiateViewControllerWithIdentifier:@"My Profile"];
+            profVC.passedUser = (PFUser *)object;
+            profVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            [self presentViewController:profVC animated:YES completion:^{
+                [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            }];
+        }
+    }];
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // Setup the table view cell.
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notificationCell" forIndexPath:indexPath];
