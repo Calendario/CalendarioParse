@@ -47,8 +47,8 @@
             
             // Initialise the data arrays with the
             // downloaded user notification data.
-            notificationUsers = [[NSMutableArray alloc] initWithArray:userData];
-            notifications = [[NSMutableArray alloc] initWithArray:notificationData];
+            notificationUsers = [[NSMutableArray alloc] initWithArray:[[userData reverseObjectEnumerator] allObjects]];
+            notifications = [[NSMutableArray alloc] initWithArray:[[notificationData reverseObjectEnumerator] allObjects]];
             
             // Update the table view.
             [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
@@ -88,7 +88,6 @@
     [imageQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         
         if (error == nil) {
-            
             
             NSString *originalString = notificationAction; //[NSString stringWithFormat:@"%@ %@", [NSString stringWithFormat:@"@%@", ((PFUser *)object).username], notificationAction];  --> for if you want to add "@" before the username
             usernameLabel.text = originalString;

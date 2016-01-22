@@ -262,6 +262,7 @@ var finalData:NSMutableArray = []
         var notificationQuery:PFQuery!
         notificationQuery = PFQuery(className: "userNotifications")
         notificationQuery.whereKey("userLink", equalTo: userData)
+        notificationQuery.limit = 30
         notificationQuery.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
             
             // Check for errors before continuing.
