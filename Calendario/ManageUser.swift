@@ -245,10 +245,10 @@ var finalData:NSMutableArray = []
             if (error == nil) {
                 
                 // Add the from user object.
-                object?.addObject(fromUser, forKey: "fromUser")
+                object?.addUniqueObject(fromUser, forKey: "fromUser")
                 
                 // Add the new notification.
-                object?.addObject(notifcation, forKey: "notificationStrings")
+                object?.addUniqueObject(notifcation, forKey: "notificationStrings")
                 
                 // Save the notification data.
                 object?.saveInBackground()
