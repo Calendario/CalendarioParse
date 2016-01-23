@@ -39,6 +39,7 @@
 		E24DA65D1C172DB500901DF0 /* FollowHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24DA65C1C172DB500901DF0 /* FollowHelper.swift */; };
 		E25607AE1BCAF5EC0085B9B4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25607AD1BCAF5EC0085B9B4 /* LoginViewController.swift */; };
 		E25B09D61C4E0C0900529CCA /* LikeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B09D51C4E0C0900529CCA /* LikeHelper.swift */; };
+		E263EE1F1C53FBC80069B89A /* NewsFeedQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E263EE1E1C53FBC80069B89A /* NewsFeedQueryViewController.swift */; };
 		E27ACC811BEDA64100503DD7 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27ACC801BEDA64100503DD7 /* TimelineViewController.swift */; };
 		E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */; };
 		E2AE81531BCAFF320047D1FA /* NewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AE81521BCAFF320047D1FA /* NewsfeedViewController.swift */; };
@@ -166,6 +167,7 @@
 		E25607AC1BCAF5EC0085B9B4 /* Calendario-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Calendario-Bridging-Header.h"; sourceTree = "<group>"; };
 		E25607AD1BCAF5EC0085B9B4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		E25B09D51C4E0C0900529CCA /* LikeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeHelper.swift; sourceTree = "<group>"; };
+		E263EE1E1C53FBC80069B89A /* NewsFeedQueryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedQueryViewController.swift; sourceTree = "<group>"; };
 		E27ACC801BEDA64100503DD7 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusUpdateViewController.swift; path = ../StatusUpdateViewController.swift; sourceTree = "<group>"; };
 		E2AE81521BCAFF320047D1FA /* NewsfeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedViewController.swift; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 			children = (
 				E2D8D9FC1BCF51E800A40350 /* NewsfeedTableViewCell.swift */,
 				E2AE81521BCAFF320047D1FA /* NewsfeedViewController.swift */,
+				E263EE1E1C53FBC80069B89A /* NewsFeedQueryViewController.swift */,
 				E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */,
 				E2B420E91BD585F900984E7B /* CalHashTagDetector.h */,
 				E2FE96471BDF1AEA003BEDD2 /* ReportTableViewController.swift */,
@@ -956,6 +959,7 @@
 				E2B7D2871BE86C9E002395F7 /* FSCalendarHeader.m in Sources */,
 				E25B09D61C4E0C0900529CCA /* LikeHelper.swift in Sources */,
 				A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */,
+				E263EE1F1C53FBC80069B89A /* NewsFeedQueryViewController.swift in Sources */,
 				E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */,
 				A2AE4A521BDCF82F008E84B9 /* PrivacyPolicyViewController.swift in Sources */,
 				E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */,

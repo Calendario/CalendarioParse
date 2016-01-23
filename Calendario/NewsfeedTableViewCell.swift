@@ -12,12 +12,12 @@ import DOFavoriteButton
 
 
 
-class NewsfeedTableViewCell: UITableViewCell {
+class NewsfeedTableViewCell: PFTableViewCell {
     
     
     @IBOutlet weak var UserNameLabel: UILabel!
     @IBOutlet weak var commentsLabel: UILabel!
-    @IBOutlet weak var userPostedImage: UIImageView!
+    @IBOutlet weak var userPostedImage: PFImageView!
     
     //@IBOutlet weak var statusTextView: UITextView!
     
@@ -72,16 +72,7 @@ class NewsfeedTableViewCell: UITableViewCell {
         super.prepareForReuse()
         aspectConstraint = nil
     }
-    
-    func setPostedImage(image : UIImage) {
         
-        let aspect = image.size.width / image.size.height
-        
-        aspectConstraint = NSLayoutConstraint(item: userPostedImage, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: userPostedImage, attribute: NSLayoutAttribute.Height, multiplier: aspect, constant: 0.0)
-        
-        userPostedImage.image = image
-    }
-    
     
 
     

@@ -276,7 +276,7 @@
         <!--Calendario-->
         <scene sceneID="cPY-hO-QGp">
             <objects>
-                <tableViewController storyboardIdentifier="nf" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fk2-g8-CoW" customClass="NewsfeedViewController" customModule="Calendario" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="nf" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fk2-g8-CoW" customClass="NewsFeedQueryViewController" customModule="Calendario" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="263" sectionHeaderHeight="28" sectionFooterHeight="28" id="E2o-kT-016">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -358,7 +358,7 @@
                                                 </mask>
                                             </variation>
                                         </view>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="defaultPhotoPost" translatesAutoresizingMaskIntoConstraints="NO" id="MAk-zZ-i98">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="defaultPhotoPost" translatesAutoresizingMaskIntoConstraints="NO" id="MAk-zZ-i98" customClass="PFImageView">
                                             <rect key="frame" x="66" y="96" width="299" height="127"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="127" id="0FQ-n2-BhR"/>
@@ -625,7 +625,7 @@
                             <inset key="imageInsets" minX="5" minY="4" maxX="0.0" maxY="2"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="OpenPostButtonPressed:" destination="fk2-g8-CoW" id="hVM-3S-Hvv"/>
+                                <action selector="plusTapped:" destination="fk2-g8-CoW" id="ksW-xg-mtA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -633,10 +633,6 @@
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="IWp-si-Z0o">
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
-                    <connections>
-                        <outlet property="activity" destination="IWp-si-Z0o" id="hfl-Yi-c9J"/>
-                        <outlet property="table" destination="E2o-kT-016" id="ydN-Kb-Hyk"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5jt-SV-O2I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

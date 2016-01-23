@@ -614,8 +614,6 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                 if objects?.count > 0 {
                 print(objects?.count)
                 
-                self.getPostImageData(objects!, imageview: cell.userPostedImage, objectID: statusupdate.objectId!)
-                    cell.setPostedImage(self.postImage)
                 }
                 else {
                     cell.userPostedImage.image = UIImage(named: "defaultPhotoPost.png")

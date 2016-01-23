@@ -297,7 +297,7 @@ var finalData:NSMutableArray = []
             
             dispatch_async(dispatch_get_main_queue(), {
                 completion(userFollowing: userFollowData)
-            })
+            }) 
         }
     }
     
@@ -367,7 +367,7 @@ var finalData:NSMutableArray = []
                                 }
                                 
                                 // Send back the follow data array.
-                                completion(userFollowData: finalData)
+                                completion(userFollowData: finalData) // bug occured here during pull to refresh
                             }
                         })
                     })
