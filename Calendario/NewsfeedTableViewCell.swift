@@ -21,7 +21,7 @@ class NewsfeedTableViewCell: UITableViewCell {
     
     //@IBOutlet weak var statusTextView: UITextView!
     
-    @IBOutlet weak var statusTextView: UILabel!
+    @IBOutlet weak var statusTextView: KILabel!
     @IBOutlet var likebutton: DOFavoriteButton!
     
     

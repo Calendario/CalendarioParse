@@ -374,6 +374,17 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
     }
     
+    func GotoProfile(username:PFUser)
+    {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        var reportVC = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
+        reportVC.passedUser = username
+        self.presentViewController(reportVC, animated: true, completion: nil)
+        
+        
+    }
+
+    
     
     // Tableview delegate methods
     
@@ -404,6 +415,11 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         //set tableview separator to 0
         cell.layoutMargins = UIEdgeInsetsZero
         
+        
+        // checking for hashtags and mentions
+        
+        
+        
         // NSMutableAttributedString FOR USER STATUS
         
         let attrs = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 14.0)!]
@@ -414,6 +430,56 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         tensestring.appendAttributedString(spacestring)
         tensestring.appendAttributedString(attributedString)
+        
+        
+        
+          // checking for hashtags and mentions
+        
+        // hashtags
+        if ((cell.statusTextView.text?.hasPrefix("#")) != nil)
+        {
+            cell.statusTextView.text = cell.statusTextView.text
+            cell.statusTextView.hashtagLinkTapHandler = {label,hashtag,range in
+                print(hashtag)
+            }
+        }
+        
+        else if ((cell.statusTextView.text?.hasPrefix("@")) != nil)
+        {
+            cell.statusTextView.text = cell.statusTextView.text
+            cell.statusTextView.userHandleLinkTapHandler = {label,mention,range in
+                var userquery = PFUser.query()
+                let editedtext = mention.stringByReplacingOccurrencesOfString("@", withString: "")
+                print(editedtext)
+                userquery?.whereKey("username", equalTo: editedtext)
+                userquery?.includeKey("user")
+                userquery?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                    if error == nil
+                    {
+                        print(objects?.count)
+                        if let objects = objects
+                        {
+                            for object in objects
+                            {
+                                var userid = object.objectId
+                                var query2 = PFUser.query()
+                                query2?.includeKey("user")
+                                query2?.getFirstObjectInBackgroundWithBlock({ (userid, error) -> Void in
+                                    var user:PFUser = object as! PFUser
+                                    print(user)
+                                    self.GotoProfile(user)
+                                    
+                                  
+                                
+                                })
+                            }
+                        }
+                    }
+                
+                })
+            }
+        }
+        
         
         cell.statusTextView.attributedText = tensestring
         cell.statusTextView.sizeToFit()
@@ -631,8 +697,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         
         return cell
     }
-    
-    
+        
+        
     
     
     func likeclicked(sender:DOFavoriteButton)
@@ -781,15 +847,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     
     
     
-    func GotoProfile(username:PFUser)
-    {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        var reportVC = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
-        reportVC.passedUser = username
-        self.presentViewController(reportVC, animated: true, completion: nil)
-        
-        
-    }
+    
+    
     
     
     
