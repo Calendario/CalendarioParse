@@ -142,6 +142,11 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
             if error == nil
             {
                 self.getImageData(images!, imageview: cell.profileimageview)
+                
+                // make profile images circles
+                cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
+                cell.profileimageview.clipsToBounds = true
+
             }
             else
             {
@@ -150,22 +155,26 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         })
         
         
-        // image from posts 
-        
+        // image from posts
         let imagefile = object?.objectForKey("image") as? PFFile
-        cell.userPostedImage.image = UIImage(named: "defaultPhotoPost")
+        if imagefile == nil {
+             cell.userPostedImage.image = UIImage(named: "defaultPhotoPost")
+             cell.userPostedImage.contentMode = UIViewContentMode.ScaleAspectFit
+        }
+        else {
         imagefile?.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) -> Void in
             if error == nil {
                 if let imageData = imageData {
                     let image = UIImage(data: imageData)
-                    // make profile images circles
-                    cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
-                    cell.profileimageview.clipsToBounds = true
-
+                    
                     cell.setPostedImage(image!)
+                    cell.userPostedImage.layer.cornerRadius = 8.0
+                    cell.userPostedImage.clipsToBounds = true
+
                 }
             }
         })
+        }
         
         /*
         cell.userPostedImage.file = imagefile
