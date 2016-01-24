@@ -47,13 +47,10 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                 
                 
                 self.query.cachePolicy = .NetworkElseCache
-                self.query.orderByAscending("createdAt")
+                self.query.orderByDescending("createdAt")
                 self.query.includeKey("user")
                 self.query.whereKey("user", equalTo: test.username!)
-                
-                
-                
-                
+
             }
         }
         return query
@@ -176,22 +173,15 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         })
         }
         
-        /*
-        cell.userPostedImage.file = imagefile
-        cell.userPostedImage.loadInBackground()
-        cell.setPostedImage(cell.userPostedImage.image!)*/
-        
-        
-        
         // location label 
-        cell.locationLabel.text = object?.valueForKey("location") as! String
+        cell.locationLabel.text = (object?.valueForKey("location") as! String)
         
         
         // date label
-        cell.uploaddatelabel.text = object?.valueForKey("dateofevent") as! String
+        cell.uploaddatelabel.text = (object?.valueForKey("dateofevent") as! String)
         
         // likes label
-        var likesamount = object?.valueForKey("likes") as? Int
+        let likesamount = object?.valueForKey("likes") as? Int
         
         if likesamount == nil
         {
@@ -204,12 +194,12 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         
         // comments label
         
-        var commentquery = PFQuery(className: "comment")
+        let commentquery = PFQuery(className: "comment")
         commentquery.whereKey("statusOBJID", equalTo: object!.objectId!)
         commentquery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil
             {
-                var commentnum = objects?.count
+                let commentnum = objects?.count
                 
                 cell.commentsLabel.text = String("\(commentnum!) comments")
             }
@@ -231,7 +221,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         
         
         // getting usernames
-        var findUser:PFQuery = PFUser.query()!
+        let findUser:PFQuery = PFUser.query()!
         
         findUser.whereKey("objectId", equalTo: (object?.objectForKey("user")?.objectId)!)
         
@@ -244,7 +234,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                     {
                         print(object.valueForKey("username") as! String)
                         
-                        cell.UserNameLabel.text = object.valueForKey("username") as! String
+                        cell.UserNameLabel.text = (object.valueForKey("username") as! String)
                     }
                 }
             }
