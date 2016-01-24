@@ -10,11 +10,32 @@ import UIKit
 import SDWebImage
 import DOFavoriteButton
 class NewsFeedQueryViewController: PFQueryTableViewController {
+   // @IBOutlet var tableView: UITableView!
     
     var query = PFQuery(className: "StatusUpdate")
      var reportedID:String!
       var currentobjectID:String!
-    
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //set view properties
+        //method to allow tableview cell resizing based on content
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 254.0;
+        self.tableView.separatorInset = UIEdgeInsetsZero
+        
+        // Logo for nav title.
+        let logo = UIImage(named: "newsFeedTitle")
+        let imageview = UIImageView(image: logo)
+        
+        // Set the "Calendario" image int he navigation bar.
+        self.navigationItem.titleView = imageview
+        self.navigationItem.titleView?.contentMode = UIViewContentMode.Center
+        self.navigationItem.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
+
+
+    }
     
     override func queryForTable() -> PFQuery {
         
@@ -42,14 +63,15 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell? {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
         
+        //setting properties
+        
+        
         currentobjectID = object?.objectId
         
         // date passed method
         isDatePassed((object?.createdAt!)!, date2: NSDate(), ParseID: (object?.objectId!)!)
         
         // getting updates
-
-        
         let attrs = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 14.0)!]
         // tense
         let tensestring = NSMutableAttributedString(string: object?.objectForKey("tense") as! String, attributes: attrs)
@@ -136,8 +158,20 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         
         let imagefile = object?.objectForKey("image") as? PFFile
         cell.userPostedImage.image = UIImage(named: "defaultPhotoPost")
+        imagefile?.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) -> Void in
+            if error == nil {
+                if let imageData = imageData {
+                    let image = UIImage(data: imageData)
+                    cell.setPostedImage(image!)
+                }
+            }
+        })
+        
+        /*
         cell.userPostedImage.file = imagefile
         cell.userPostedImage.loadInBackground()
+        cell.setPostedImage(cell.userPostedImage.image!)*/
+        
         
         
         // location label 
@@ -176,6 +210,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         // like button
         cell.likebutton.translatesAutoresizingMaskIntoConstraints = true
         cell.likebutton.clipsToBounds = false
+        cell.likebutton.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
         cell.likebutton.tag = indexPath.row
         cell.likebutton.addTarget(self, action: "likeclicked:", forControlEvents: .TouchUpInside)
         

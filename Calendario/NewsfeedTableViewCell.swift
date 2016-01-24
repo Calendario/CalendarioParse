@@ -57,7 +57,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     
     //TEST
-    internal var aspectConstraint : NSLayoutConstraint? {
+    var aspectConstraint : NSLayoutConstraint? {
         didSet {
             if oldValue != nil {
                 userPostedImage.removeConstraint(oldValue!)
@@ -72,28 +72,25 @@ class NewsfeedTableViewCell: PFTableViewCell {
         super.prepareForReuse()
         aspectConstraint = nil
     }
-        
     
-
+    func setPostedImage(image : UIImage) {
+        
+        let aspect = image.size.width / image.size.height
+        
+        aspectConstraint = NSLayoutConstraint(item: userPostedImage, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: userPostedImage, attribute: NSLayoutAttribute.Height, multiplier: aspect, constant: 0.0)
+        
+        userPostedImage.image = image
+    }    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-        
-        
-       
     }
     
     
     
     // like button method
-    
-    
 
-
-    
-   
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
