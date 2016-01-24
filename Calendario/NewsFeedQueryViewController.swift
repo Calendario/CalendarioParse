@@ -99,15 +99,16 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
             }
         }
         
-        else if ((cell.statusTextView.text?.hasPrefix("@")) != nil)
+         if ((cell.statusTextView.text?.hasPrefix("@")) != nil)
         {
+            cell.statusTextView.userInteractionEnabled = true
             cell.statusTextView.text = cell.statusTextView.text
-            cell.statusTextView.userHandleLinkTapHandler = {label,mention,range in
+            cell.statusTextView.userHandleLinkTapHandler = {label2,mention,range in
+                print(mention)
                 var userquery = PFUser.query()
                 let editedtext = mention.stringByReplacingOccurrencesOfString("@", withString: "")
                 print(editedtext)
                 userquery?.whereKey("username", equalTo: editedtext)
-                userquery?.includeKey("user")
                 userquery?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                     if error == nil
                     {
@@ -118,19 +119,14 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                             {
                                 var userid = object.objectId
                                 var query2 = PFUser.query()
-                                query2?.includeKey("user")
-                                query2?.getFirstObjectInBackgroundWithBlock({ (userid, error) -> Void in
+                                query2?.getObjectInBackgroundWithId(userid!, block: { (object, error) -> Void in
                                     var user:PFUser = object as! PFUser
                                     print(user)
                                     self.GotoProfile(user)
-                                    
-                                    
-                                    
                                 })
                             }
                         }
                     }
-                    
                 })
             }
         }
@@ -162,6 +158,10 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
             if error == nil {
                 if let imageData = imageData {
                     let image = UIImage(data: imageData)
+                    // make profile images circles
+                    cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
+                    cell.profileimageview.clipsToBounds = true
+
                     cell.setPostedImage(image!)
                 }
             }
@@ -240,7 +240,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                 }
             }
         }
-        
+
         
         
 
