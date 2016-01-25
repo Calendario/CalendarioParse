@@ -30,6 +30,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         
       self.navigationItem.rightBarButtonItem = sendbutton
+        self.navigationItem.leftBarButtonItem = backbutton
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 98.0;
 
@@ -43,7 +44,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
                 
         
-        savedobjectID = defaults.objectForKey("objectid") as! String
+        //savedobjectID = defaults.objectForKey("objectid") as! String
         
         print(savedobjectID!)
     }
@@ -51,6 +52,11 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         LoadCommentData()
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        self.navigationItem.title  = "Comments"
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+
         
         
        /* let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 53))
@@ -101,6 +107,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                 let array:NSArray = self.commentdata.reverseObjectEnumerator().allObjects
                 self.commentdata = NSMutableArray(array: array)
                 self.tableView.reloadData()
+                
             }
         }
         

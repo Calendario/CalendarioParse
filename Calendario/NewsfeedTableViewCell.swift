@@ -33,9 +33,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     @IBOutlet weak var locationLabel: UILabel!
     
-
-    @IBOutlet weak var commentsButton: UIButton!
-        
     
     
     @IBOutlet weak var likeslabel: UILabel!

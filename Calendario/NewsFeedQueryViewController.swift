@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 import DOFavoriteButton
 class NewsFeedQueryViewController: PFQueryTableViewController {
-   // @IBOutlet var tableView: UITableView!
+  
     
     var query = PFQuery(className: "StatusUpdate")
      var reportedID:String!
@@ -33,7 +33,9 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         self.navigationItem.titleView = imageview
         self.navigationItem.titleView?.contentMode = UIViewContentMode.Center
         self.navigationItem.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
-
+        
+        
+      
 
     }
     
@@ -63,7 +65,10 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         //setting properties
         
         
+        
         currentobjectID = object?.objectId
+        let defaults = NSUserDefaults.standardUserDefaults().setObject(object?.objectId, forKey: "commentid")
+
         
         // date passed method
         isDatePassed((object?.createdAt!)!, date2: NSDate(), ParseID: (object?.objectId!)!)
@@ -128,8 +133,10 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
             }
         }
         
-
-
+        
+                
+        // function that is called when comments button is tapped
+        
         
         
         // profile images 
@@ -212,6 +219,9 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         cell.likebutton.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
         cell.likebutton.tag = indexPath.row
         cell.likebutton.addTarget(self, action: "likeclicked:", forControlEvents: .TouchUpInside)
+        
+        
+        
         
 
 
@@ -356,9 +366,21 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var statusupdate = objects![indexPath.row] as! PFObject
-        currentobjectID = statusupdate.objectId
+        GotoComments(statusupdate.objectId!)
+    }
+    
+    
+    func GotoComments(ObjectID:String)
+    {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        var commentvc = sb.instantiateViewControllerWithIdentifier("comments") as! CommentsViewController
+        commentvc.savedobjectID = ObjectID
+        let NC = UINavigationController(rootViewController: commentvc)
+        self.presentViewController(NC, animated: true, completion: nil)
+        
         
     }
+
     
     
     
@@ -592,13 +614,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "comments"
-        {
-            
-          let vc = segue.destinationViewController as! CommentsViewController
-            vc.savedobjectID = currentobjectID
-        }
-    }
+           }
     
     
     func SavingNotifacations(notifcation:String)
@@ -648,6 +664,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let postsview = sb.instantiateViewControllerWithIdentifier("PostView") as! StatusUpdateViewController
         self.presentViewController(postsview, animated: true, completion: nil)
+        
     }
     
     
