@@ -58,6 +58,14 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     
     // Setup the on screen button actions.
     
+    @IBAction func openFollowers(sender: UIButton) {
+        self.GotoFollowerView()
+    }
+    
+    @IBAction func openFollowing(sender: UIButton) {
+        self.GotoFollowingView()
+    }
+    
     @IBAction func editProfile(sender: UIButton) {
         
         // Restore the size of the edit button.

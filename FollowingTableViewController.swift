@@ -21,9 +21,9 @@ class FollowingTableViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationItem.setLeftBarButtonItem(backButton, animated: true)
         self.navigationItem.title = "Following"
+        self.navigationController?.setStatusBarStyle(UIStatusBarStyle.Default)
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.17, green: 0.58, blue: 0.30, alpha: 1.0)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        
         
 
         // Uncomment the following line to preserve selection between presentations
@@ -47,9 +47,13 @@ class FollowingTableViewController: UITableViewController {
     func LoadData()
     
     {
+        
+        // Disallow table view access until 
+        // the data has been fully loaded.
+        self.tableView.userInteractionEnabled = false
+        
         let defaults = NSUserDefaults.standardUserDefaults()
         var userdata = defaults.objectForKey("userdata")
-        print(userdata)
         
         followingdata.removeAllObjects()
         
@@ -58,30 +62,24 @@ class FollowingTableViewController: UITableViewController {
         query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if error == nil
             {
-                print(objects!.count)
                 if let objects = objects
                 {
                     for object in objects
                     {
                         var user:PFUser = object as! PFUser
-                        print(user)
                         
                         ManageUser.getUserFollowingList(user, completion: { (userFollowers) -> Void in
-                            print(userFollowers)
                             
                             for followers in userFollowers
                             {
                                let user = followers.username!
-                                print(user)
-                                
-                                
+
                                 self.followingdata.addObject(followers as! PFObject)
                                 
                                 let array:NSArray = self.followingdata.reverseObjectEnumerator().allObjects
                                 self.followingdata = NSMutableArray(array: array)
+                                self.tableView.userInteractionEnabled = true
                                 self.tableView.reloadData()
-                                
-                                print(self.followingdata.count)
                             }
                             
                             
@@ -164,7 +162,6 @@ class FollowingTableViewController: UITableViewController {
         let followData:PFObject = self.followingdata.objectAtIndex(indexPath.row) as! PFObject
         
         var username = followData.objectForKey("username") as! String
-        print(username)
         
         var query = PFUser.query()
         query?.includeKey("user")
@@ -172,13 +169,11 @@ class FollowingTableViewController: UITableViewController {
         query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if error == nil
             {
-                print(objects!.count)
                 if let objects = objects
                 {
                     for object in objects
                     {
                         var user:PFUser = object as! PFUser
-                        print(user)
                         self.GotoProfile(user)
                     }
                 }

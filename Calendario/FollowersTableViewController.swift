@@ -41,9 +41,13 @@ class FollowersTableViewController: UITableViewController {
     
     func LoadData()
     {
+        
+        // Disallow table view access until
+        // the data has been fully loaded.
+        self.tableView.userInteractionEnabled = false
+        
         let defaults = NSUserDefaults.standardUserDefaults()
         var userdata = defaults.objectForKey("userdata")
-        print(userdata)
         
         followersdata.removeAllObjects()
         
@@ -52,30 +56,25 @@ class FollowersTableViewController: UITableViewController {
         query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if error == nil
             {
-                print(objects!.count)
                 if let objects = objects
                 {
                     for object in objects
                     {
                         var user:PFUser = object as! PFUser
-                        print(user)
                         
                         ManageUser.getUserFollowersList(user, completion: { (userFollowers) -> Void in
-                            print(userFollowers)
                             
                             for followers in userFollowers
                             {
                                 let user = followers.username!
-                                print(user)
-                                
                                 
                                 self.followersdata.addObject(followers as! PFObject)
                                 
                                 let array:NSArray = self.followersdata.reverseObjectEnumerator().allObjects
                                 self.followersdata = NSMutableArray(array: array)
+                                self.tableView.userInteractionEnabled = true
                                 self.tableView.reloadData()
                                 
-                                print(self.followersdata.count)
                             }
                             
                             
@@ -152,7 +151,6 @@ class FollowersTableViewController: UITableViewController {
         let followData:PFObject = self.followersdata.objectAtIndex(indexPath.row) as! PFObject
         
         var username = followData.objectForKey("username") as! String
-        print(username)
         
         var query = PFUser.query()
         query?.includeKey("user")
@@ -160,13 +158,11 @@ class FollowersTableViewController: UITableViewController {
         query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if error == nil
             {
-                print(objects!.count)
                 if let objects = objects
                 {
                     for object in objects
                     {
                         var user:PFUser = object as! PFUser
-                        print(user)
                         self.GotoProfile(user)
                     }
                 }
