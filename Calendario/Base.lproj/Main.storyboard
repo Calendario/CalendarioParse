@@ -444,7 +444,7 @@
                                         <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3a3-5u-LcP" userLabel="buttons Container">
                                             <rect key="frame" x="8" y="105" width="50" height="109"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S5F-zL-UN7" customClass="DOFavoriteButton" customModule="DOFavoriteButton">
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S5F-zL-UN7" customClass="DOFavoriteButton" customModule="DOFavoriteButton">
                                                     <rect key="frame" x="9" y="12" width="32" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="33" id="3gc-gK-q1M"/>
@@ -477,11 +477,20 @@
                                                         </mask>
                                                     </variation>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHa-zv-rEg">
+                                                    <rect key="frame" x="7" y="52" width="34" height="33"/>
+                                                    <state key="normal" image="comment"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="60" id="HZG-8c-22V"/>
+                                                <constraint firstAttribute="trailing" secondItem="KHa-zv-rEg" secondAttribute="trailing" constant="9" id="K8x-Ew-rlX"/>
+                                                <constraint firstAttribute="bottom" secondItem="KHa-zv-rEg" secondAttribute="bottom" constant="24" id="TgU-Wg-3l8"/>
                                                 <constraint firstItem="S5F-zL-UN7" firstAttribute="top" secondItem="3a3-5u-LcP" secondAttribute="top" constant="12" id="XF5-YV-ttK"/>
                                                 <constraint firstAttribute="height" constant="109" id="XRn-sd-6QA"/>
+                                                <constraint firstItem="KHa-zv-rEg" firstAttribute="leading" secondItem="3a3-5u-LcP" secondAttribute="leading" constant="7" id="eVC-yE-8dN"/>
+                                                <constraint firstItem="KHa-zv-rEg" firstAttribute="top" secondItem="S5F-zL-UN7" secondAttribute="bottom" constant="8" symbolic="YES" id="k4k-rw-55T"/>
+                                                <constraint firstItem="KHa-zv-rEg" firstAttribute="trailing" secondItem="S5F-zL-UN7" secondAttribute="trailing" id="ld2-Ap-rp3"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
