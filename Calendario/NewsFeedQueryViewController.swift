@@ -372,12 +372,9 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var statusupdate = objects![indexPath.row] as! PFObject
         GotoComments(statusupdate.objectId!)
+        currentobjectID = statusupdate.objectId
     }
     
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-          var statusupdate = objects![indexPath.row] as! PFObject
-        print("deselected")
-           }
     
     
     func GotoComments(ObjectID:String)
