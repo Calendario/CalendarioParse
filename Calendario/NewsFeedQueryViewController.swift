@@ -73,25 +73,11 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         // date passed method
         isDatePassed((object?.createdAt!)!, date2: NSDate(), ParseID: (object?.objectId!)!)
         
-        // getting updates
-        let attrs = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 14.0)!]
-        // tense
-        let tensestring = NSMutableAttributedString(string: object?.objectForKey("tense") as! String, attributes: attrs)
-        let spacestring = NSMutableAttributedString(string: " ")
-        // the update
-        let updatestring = NSMutableAttributedString(string: object?.objectForKey("updatetext") as! String, attributes: [NSFontAttributeName: UIFont(name: "Futura", size: 14.0)!])
-        tensestring.appendAttributedString(spacestring)
-        tensestring.appendAttributedString(updatestring)
-        
-        cell.statusTextView.attributedText = tensestring
-        cell.statusTextView.sizeToFit()
         
         
+        // hastags and mentions
         
-        
-        // hastags and mentions 
-        
-        // hastags 
+        // hastags
         // hashtags
         if ((cell.statusTextView.text?.hasPrefix("#")) != nil)
         {
@@ -101,7 +87,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
             }
         }
         
-         if ((cell.statusTextView.text?.hasPrefix("@")) != nil)
+        if ((cell.statusTextView.text?.hasPrefix("@")) != nil)
         {
             cell.statusTextView.userInteractionEnabled = true
             cell.statusTextView.text = cell.statusTextView.text
@@ -134,7 +120,26 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         }
         
         
-                
+
+        
+        // getting updates
+        let attrs = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 14.0)!]
+        // tense
+        let tensestring = NSMutableAttributedString(string: object?.objectForKey("tense") as! String, attributes: attrs)
+        let spacestring = NSMutableAttributedString(string: " ")
+        // the update
+        let updatestring = NSMutableAttributedString(string: object?.objectForKey("updatetext") as! String, attributes: [NSFontAttributeName: UIFont(name: "Futura", size: 14.0)!])
+        tensestring.appendAttributedString(spacestring)
+        tensestring.appendAttributedString(updatestring)
+        
+        cell.statusTextView.attributedText = tensestring
+        cell.statusTextView.sizeToFit()
+        
+        
+       
+        
+    
+        
         // function that is called when comments button is tapped
         
         
@@ -369,6 +374,11 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         GotoComments(statusupdate.objectId!)
     }
     
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+          var statusupdate = objects![indexPath.row] as! PFObject
+        print("deselected")
+           }
+    
     
     func GotoComments(ObjectID:String)
     {
@@ -572,13 +582,20 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
 
         })
         
+        let getobjectid = UITableViewRowAction(style: .Normal, title: "") { (action, indexpath) -> Void in
+            var statusupdate = self.objects![indexpath.row] as! PFObject
+            self.currentobjectID = statusupdate.objectId
+            print("tapped")
+        }
+        
 
 
         
               report.backgroundColor = UIColor.blackColor()
             deletestatus.backgroundColor = UIColor.redColor()
+        getobjectid.backgroundColor = UIColor.clearColor()
             
-    return [report, deletestatus]
+    return [getobjectid, report, deletestatus]
         
     }
     
