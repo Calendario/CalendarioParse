@@ -34,6 +34,8 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         self.navigationItem.titleView?.contentMode = UIViewContentMode.Center
         self.navigationItem.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
         
+    
+        
         
       
 
@@ -49,7 +51,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                 
                 
                 self.query.cachePolicy = .NetworkElseCache
-                self.query.orderByDescending("dateofevent")
+                self.query.orderByDescending("createdAt")
                 self.query.includeKey("user")
                 self.query.whereKey("user", equalTo: test.username!)
 

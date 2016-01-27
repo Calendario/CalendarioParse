@@ -323,6 +323,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     @IBAction func backbuttonTapped(sender: AnyObject) {
         GotoNewsfeed()
+        self.view.endEditing(true)
     }
 
     // camera controls
