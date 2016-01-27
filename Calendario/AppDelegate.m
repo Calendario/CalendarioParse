@@ -12,7 +12,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "Calendario-Swift.h"
 #import "SearchViewController.h"
-@import IQKeyboardManagerSwift;
+
 
 @interface AppDelegate ()
 
