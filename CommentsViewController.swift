@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate {
+class CommentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -22,12 +22,18 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var sendbutton: UIBarButtonItem!
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.PostComment()
+        return true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        self.commentTextView.delegate = self
         
       self.navigationItem.rightBarButtonItem = sendbutton
         self.navigationItem.leftBarButtonItem = backbutton
@@ -56,8 +62,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         self.navigationItem.title  = "Comments"
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-
-        
         
        /* let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 53))
         navigationbar.backgroundColor = UIColor.whiteColor()
@@ -125,59 +129,88 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     @IBAction func bacbuttontapped(sender: AnyObject) {
+        
+        // Hide the keybaord if it has not
+        // already been hidden from the view.
+        self.commentTextView.resignFirstResponder()
+        
+        // Close the comments view.
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func Sendtapped(sender: AnyObject) {
-        PostComment()
+        
+        self.PostComment()
 //        self.refreshData()
     }
 
     
     func PostComment()
     {
-        var comment = PFObject(className: "comment")
-        comment["commenttext"] = commentTextView.text
-        comment["postedby"] = PFUser.currentUser()
-        comment["statusOBJID"] = String(savedobjectID)
         
+        // Hide the keyboard.
+        self.commentTextView.resignFirstResponder()
         
-        comment.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
-            if success
-            {
-              
+        if (self.commentTextView .hasText()) {
+            
+            var comment = PFObject(className: "comment")
+            comment["commenttext"] = commentTextView.text
+            comment["postedby"] = PFUser.currentUser()
+            comment["statusOBJID"] = String(savedobjectID)
+            
+            
+            comment.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
                 
-                var query = PFQuery(className: "StatusUpdate")
-                query.includeKey("user")
-                query.getObjectInBackgroundWithId(self.savedobjectID, block: { (object, error) -> Void in
-                    if error == nil
-                    {
-                        print(object!.valueForKey("user")!.username!)
-                        
-                        // create push notifcation
-                        let message = "\(PFUser.currentUser()!.username!) has commented on your post"
-                        
-                        // Send the notification.
-                        PFCloud.callFunctionInBackground("comment", withParameters: ["message" : message, "user" : "\((object!.valueForKey("user") as! PFUser).username!)"])
-                        
-                        // Save the user notification.
-                        ManageUser.saveUserNotification(message, fromUser: PFUser.currentUser()!, toUser: object!.valueForKey("user") as! PFUser)
-                        
+                // Clear the text field for the next comment.
+                self.commentTextView.text = nil
+                
+                if success
+                {
+                    
+                    
+                    var query = PFQuery(className: "StatusUpdate")
+                    query.includeKey("user")
+                    query.getObjectInBackgroundWithId(self.savedobjectID, block: { (object, error) -> Void in
+                        if error == nil
+                        {
+                            print(object!.valueForKey("user")!.username!)
+                            
+                            // create push notifcation
+                            let message = "\(PFUser.currentUser()!.username!) has commented on your post"
+                            
+                            // Send the notification.
+                            PFCloud.callFunctionInBackground("comment", withParameters: ["message" : message, "user" : "\((object!.valueForKey("user") as! PFUser).username!)"])
+                            
+                            // Save the user notification.
+                            ManageUser.saveUserNotification(message, fromUser: PFUser.currentUser()!, toUser: object!.valueForKey("user") as! PFUser)
+                            
+                            // Reload the comments table view.
+                            self.refreshData()
+                        }
+                    })
+                    
+                    print("comment posted")
+                    
+                    
                 }
-                })
-                
-                
-                
-                
-                
-                print("comment posted")
-                
-                
+                else
+                {
+                    print(error?.localizedDescription)
+                }
             }
-            else
-            {
-                print(error?.localizedDescription)
-            }
+        }
+            
+        else {
+            
+            // Setup the alert controller.
+            let alertController = UIAlertController(title: "No comment", message: "Please type a comment before pressing send.", preferredStyle: .Alert)
+            
+            // Setup the alert actions.
+            let cancel = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+            alertController.addAction(cancel)
+            
+            // Present the alert on screen.
+            presentViewController(alertController, animated: true, completion: nil)
         }
     }
     
@@ -199,9 +232,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.userProfileImage.layer.cornerRadius = (cell.userProfileImage.frame.size.width / 2)
         cell.userProfileImage.clipsToBounds = true
         
-        
         let comment:PFObject = self.commentdata.objectAtIndex(indexPath.row) as! PFObject
-
+        
         print(comment.valueForKey("postedby")?.objectId!)
         
         
@@ -210,6 +242,25 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             if error == nil
             {
                 cell.UserLabel.text = object?.valueForKey("username") as! String
+                
+                if let image = object!["profileImage"] as! PFFile? {
+                    
+                    image.getDataInBackgroundWithBlock({ (ImageData, error) -> Void in
+                        
+                        if error == nil {
+                            let image = UIImage(data: ImageData!)
+                            cell.userProfileImage.image = image
+                        }
+                            
+                        else {
+                            cell.userProfileImage.image = UIImage(named: "default_profile_pic.png")
+                        }
+                    })
+                }
+            }
+            
+            else {
+                cell.userProfileImage.image = UIImage(named: "default_profile_pic.png")
             }
         })
         
