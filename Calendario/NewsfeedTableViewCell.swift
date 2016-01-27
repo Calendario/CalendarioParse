@@ -25,6 +25,9 @@ class NewsfeedTableViewCell: PFTableViewCell {
     @IBOutlet var likebutton: DOFavoriteButton!
     
     
+    @IBOutlet weak var commentButton: UIButton!
+    
+    
     @IBOutlet weak var profileimageview: UIImageView!
     
     @IBOutlet weak var uploaddatelabel: UILabel!

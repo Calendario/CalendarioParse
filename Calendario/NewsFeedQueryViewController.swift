@@ -49,7 +49,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                 
                 
                 self.query.cachePolicy = .NetworkElseCache
-                self.query.orderByDescending("createdAt")
+                self.query.orderByDescending("dateofevent")
                 self.query.includeKey("user")
                 self.query.whereKey("user", equalTo: test.username!)
 
@@ -75,10 +75,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         
         
         
-        // hastags and mentions
-        
-        // hastags
-        // hashtags
+               // hashtags
         if ((cell.statusTextView.text?.hasPrefix("#")) != nil)
         {
             cell.statusTextView.text = cell.statusTextView.text
@@ -225,6 +222,12 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         cell.likebutton.tag = indexPath.row
         cell.likebutton.addTarget(self, action: "likeclicked:", forControlEvents: .TouchUpInside)
         
+        // comment button
+        
+        // set tthe tag to the current index path
+        cell.commentButton.tag = indexPath.row
+        cell.commentButton.addTarget(self, action: "Commentclicked:", forControlEvents: .TouchUpInside)
+        
         
         
         
@@ -272,6 +275,18 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         
         
     }
+    
+    func Commentclicked(sender:UIButton)
+    {
+        var index = sender.tag
+        print(index)
+        
+        // get current id 
+       var id = self.objects![index].objectId
+        GotoComments(id!!)
+        
+        
+    }
 
     
     
@@ -281,16 +296,18 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         
         
         
-        print(currentobjectID)
+       
         
         if sender.selected
         {
             
             
             print("unlike")
+            var index = sender.tag
+            var id = self.objects![index].objectId
             sender.imageColorOn = UIColor.flatOrangeColor()
             var query = PFQuery(className: "StatusUpdate")
-            query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
+            query.getObjectInBackgroundWithId(id!!, block: { (update, error) -> Void in
                 if error == nil
                 {
                     var currentlikes = update?.valueForKey("likes") as! Int
@@ -326,6 +343,8 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
             
         else
         {
+            var index = sender.tag
+            var id = self.objects![index].objectId
             print("like")
             sender.select()
             print("the tag is \(sender.tag)")
@@ -333,7 +352,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
             var query = PFQuery(className: "StatusUpdate")
             
             
-            query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
+            query.getObjectInBackgroundWithId(id!!, block: { (update, error) -> Void in
                 if error == nil
                 {
                     var currentlikes = update?.valueForKey("likes") as? Int
@@ -365,14 +384,6 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         
         
         
-    }
-    
-
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var statusupdate = objects![indexPath.row] as! PFObject
-        GotoComments(statusupdate.objectId!)
-        currentobjectID = statusupdate.objectId
     }
     
     
@@ -579,20 +590,15 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
 
         })
         
-        let getobjectid = UITableViewRowAction(style: .Normal, title: "") { (action, indexpath) -> Void in
-            var statusupdate = self.objects![indexpath.row] as! PFObject
-            self.currentobjectID = statusupdate.objectId
-            print("tapped")
-        }
         
 
 
         
               report.backgroundColor = UIColor.blackColor()
             deletestatus.backgroundColor = UIColor.redColor()
-        getobjectid.backgroundColor = UIColor.clearColor()
+       
             
-    return [getobjectid, report, deletestatus]
+    return [ report, deletestatus]
         
     }
     
