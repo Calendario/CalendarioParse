@@ -371,7 +371,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                     PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : string, "user" : "\(PFUser.currentUser()?.username!)"])
                     print(update?.valueForKey("likes") as! Int)
                     self.currentobjectID = nil
-                    //self.SavingNotifacations(string)
+                    self.SavingNotifacations(string)
                     
                     
                     
@@ -642,10 +642,8 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         
         
         
-        // ManageUser.saveUserNotification(" NOTIFICATION STRING ", userData: PFUserObject)
-        // Enjoy :)
         
-        
+      
         
         var userviewed:PFUser = PFUser.currentUser()!
         var notiQuery = PFUser.query()
@@ -654,18 +652,8 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
             if error == nil
             {
                 let retreveduser:PFUser = object as! PFUser
-                var notifications:NSMutableArray = NSMutableArray()
-                notifications.addObjectsFromArray([retreveduser.objectForKey("notifications")!])
-                notifications.addObject(notifcation)
                 
-                if notifications.count > 29
-                {
-                    notifications.removeObjectAtIndex(0)
-                    
-                }
-                
-                retreveduser["notifications"] = notifications
-                retreveduser.saveInBackground()
+                ManageUser.saveUserNotification(notifcation, fromUser: PFUser.currentUser()!, toUser: retreveduser )
                 
                 
                 

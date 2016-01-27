@@ -163,8 +163,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                         // Save the user notification.
                         ManageUser.saveUserNotification(message, fromUser: PFUser.currentUser()!, toUser: object!.valueForKey("user") as! PFUser)
                         
-                        // DONT use the "SavingNotifacations" method it doesnt work.
-                    }
+                }
                 })
                 
                 
@@ -181,34 +180,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
     }
-    
-    /*
-    func SavingNotifacations(notifcation:String)
-    {
-        var userviewed:PFUser = PFUser.currentUser()!
-        var notiQuery = PFUser.query()
-        notiQuery?.whereKey("objectId", equalTo: userviewed.objectId!)
-        notiQuery?.getFirstObjectInBackgroundWithBlock({ (object, error) -> Void in
-            if error == nil
-            {
-                let retreveduser:PFUser = object as! PFUser
-                var notifications:NSMutableArray = NSMutableArray()
-                notifications.addObjectsFromArray([retreveduser.objectForKey("notifications")!]) // bug here 
-                notifications.addObject(notifcation)
-                
-                if notifications.count > 29
-                {
-                    notifications.removeObjectAtIndex(0)
-                    
-                }
-                
-                retreveduser["notifications"] = notifications
-                retreveduser.saveInBackground()
-            }
-        })
-    }*/
-    
-
     
     
     
