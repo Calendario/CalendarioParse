@@ -19,8 +19,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     var savedobjectID:String!
     
     @IBOutlet weak var backbutton: UIBarButtonItem!
-    
-    @IBOutlet weak var sendbutton: UIBarButtonItem!
+    @IBOutlet weak var sendbutton: UIButton!
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.PostComment()
@@ -35,7 +34,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.commentTextView.delegate = self
         
-      self.navigationItem.rightBarButtonItem = sendbutton
+      
         self.navigationItem.leftBarButtonItem = backbutton
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 98.0;
@@ -62,6 +61,11 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         self.navigationItem.title  = "Comments"
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.translucent = false
+        self.sendbutton.layer.cornerRadius = 4.0
+        let font = UIFont(name: "Futura-Medium", size: 21)
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font!]
+        self.navigationController!.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
         
        /* let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 53))
         navigationbar.backgroundColor = UIColor.whiteColor()
