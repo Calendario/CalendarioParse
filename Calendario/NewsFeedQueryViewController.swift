@@ -184,21 +184,31 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
              cell.userPostedImage.contentMode = UIViewContentMode.ScaleAspectFit
         }
         else {
-        imagefile?.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) -> Void in
-            if error == nil {
-                if let imageData = imageData {
-                    let image = UIImage(data: imageData)
-                    
-                    cell.setPostedImage(image!)
-                    cell.userPostedImage.layer.cornerRadius = 8.0
-                    cell.userPostedImage.clipsToBounds = true
-
+            
+            imagefile?.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) -> Void in
+                if error == nil {
+                    if let imageData = imageData {
+                        let image = UIImage(data: imageData)
+                        
+                        cell.setPostedImage(image!)
+                        cell.userPostedImage.layer.cornerRadius = 8.0
+                        cell.userPostedImage.clipsToBounds = true
+                        
+                        // Allow user interaction.
+                        cell.userPostedImage.userInteractionEnabled = true
+                        
+                        // Set the image tag needed for image loading.
+                        cell.userPostedImage.tag = indexPath.row
+                        
+                        // Add the image viewer method to the image tap.
+                        let tapgesture = UITapGestureRecognizer(target: self, action: "imageTapped:")
+                        cell.userPostedImage.addGestureRecognizer(tapgesture)
+                    }
                 }
-            }
-        })
+            })
         }
         
-        // location label 
+        // location label
         cell.locationLabel.text = (object?.valueForKey("location") as! String)
         
         
@@ -244,16 +254,6 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         cell.commentButton.tag = indexPath.row
         cell.commentButton.addTarget(self, action: "Commentclicked:", forControlEvents: .TouchUpInside)
         
-        
-        
-        
-
-
-        
-        
-
-        
-        
         // getting usernames
         let findUser:PFQuery = PFUser.query()!
         
@@ -274,12 +274,24 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
             }
         }
 
-        
-        
-
-
-        
         return cell
+    }
+    
+    func imageTapped(sender: UITapGestureRecognizer) {
+        
+        // Get the image from the custom cell.
+        let indexPath = NSIndexPath(forRow: (sender.view?.tag)!, inSection: 0)
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! NewsfeedTableViewCell
+        
+        // Set the image to be shown in the photo view.
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(UIImagePNGRepresentation(cell.userPostedImage.image!), forKey: "image")
+        
+        // Open the photo view controller.
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let PVC = sb.instantiateViewControllerWithIdentifier("photoviewer") as! CalPhotoViewerViewController
+        let NC = UINavigationController(rootViewController: PVC)
+        self.presentViewController(NC, animated: true, completion: nil)
     }
     
     func GotoProfile(username:PFUser)
@@ -413,12 +425,8 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         commentvc.savedobjectID = ObjectID
         let NC = UINavigationController(rootViewController: commentvc)
         self.presentViewController(NC, animated: true, completion: nil)
-        
-        
     }
 
-    
-    
     
     func isDatePassed(date1:NSDate, date2:NSDate, ParseID: String)
     {

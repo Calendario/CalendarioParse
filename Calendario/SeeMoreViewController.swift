@@ -352,16 +352,6 @@ class SeeMoreViewController: UIViewController {
                                 self.PostImage.addGestureRecognizer(tapgesture)
                             }
                         })
-                        
-                        
-                    
-                        
-                        
-                        
-                        
-                        
-                        
-                       
                     }
                 }
             }
