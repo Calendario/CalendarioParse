@@ -365,10 +365,10 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         }
         
         // Set the button backgrond colours.
-        report.backgroundColor = UIColor.flatWhiteColorDark()
         seemore.backgroundColor = UIColor.flatGrayColor()
-        deletestatus.backgroundColor = UIColor.flatRedColor()
-        
+        report.backgroundColor = UIColor.blackColor()
+        deletestatus.backgroundColor = UIColor.redColor()
+
         // For V1.0 we will not be adding access to
         // the "See More" section as it is not needed.
         // return [report, seemore, deletestatus]

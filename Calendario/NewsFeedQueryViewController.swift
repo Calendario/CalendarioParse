@@ -527,26 +527,9 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                                 status?.saveInBackground()
                             }
                         })
-                        
-                        
-                        
-                        
-                        
-                        
                     }
                 }
             })
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
         }
         
         
@@ -582,7 +565,6 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                             
                         else
                         {
-                            
                             print("user not the owner")
                             let alert = UIAlertController(title: "Sorry", message: "You can only delete your own posts.", preferredStyle: .Alert)
                             alert.view.tintColor = UIColor.flatGreenColor()
@@ -590,34 +572,29 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                             alert.addAction(next)
                             
                             self.presentViewController(alert, animated: true, completion: nil)
-                            
-                            
-                            
-                            
-                            
                         }
-                        
-                        
-                        
                     }
                 }
             })
-            
-            
-            
-
         })
         
-        
+        // Set the button background colours.
+        report.backgroundColor = UIColor.blackColor()
+        deletestatus.backgroundColor = UIColor.redColor()
 
-
+        // Get the status object.
+        let statusObject = self.objects![indexPath.row] as! PFObject
         
-              report.backgroundColor = UIColor.blackColor()
-            deletestatus.backgroundColor = UIColor.redColor()
-       
-            
-    return [ report, deletestatus]
+        // Only show the delete button if the
+        // user is looking at one of their own posts.
         
+        if (((statusObject["user"]).objectId) == PFUser.currentUser()?.objectId) {
+            return [report, deletestatus]
+        }
+        
+        else {
+            return [report]
+        }
     }
     
     func getImageData(objects:[PFObject], imageview:UIImageView)
