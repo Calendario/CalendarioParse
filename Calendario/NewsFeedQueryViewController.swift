@@ -33,6 +33,11 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         self.navigationItem.titleView = imageview
         self.navigationItem.titleView?.contentMode = UIViewContentMode.Center
         self.navigationItem.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
+        self.pullToRefreshEnabled = true
+        self.paginationEnabled = false
+    
+        
+        
         
     
         
@@ -49,11 +54,11 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
             {
                 let test = user as! PFUser
                 
-                
+               self.query.orderByAscending("createdAt")
                 self.query.cachePolicy = .NetworkElseCache
-                self.query.orderByDescending("createdAt")
                 self.query.includeKey("user")
                 self.query.whereKey("user", equalTo: test.username!)
+                
 
             }
         }
@@ -369,6 +374,8 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                     
                     let string = "\(PFUser.currentUser()!.username!) has liked your post"
                     print(string)
+                    let defaults = NSUserDefaults.standardUserDefaults()
+                    defaults.setObject(id!!, forKey: "objectidliked")
                     
                     PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : string, "user" : "\(PFUser.currentUser()?.username!)"])
                     print(update?.valueForKey("likes") as! Int)
@@ -644,23 +651,22 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         
         
         
+        let defaults = NSUserDefaults.standardUserDefaults()
+        var likedpostid = defaults.objectForKey("objectidliked") as! String
+        print(likedpostid)
+        var query = PFQuery(className: "StatusUpdate")
         
-      
-        
-        var userviewed:PFUser = PFUser.currentUser()!
-        var notiQuery = PFUser.query()
-        notiQuery?.whereKey("objectId", equalTo: userviewed.objectId!)
-        notiQuery?.getFirstObjectInBackgroundWithBlock({ (object, error) -> Void in
+        query.whereKey("objectId", equalTo: likedpostid)
+        query.includeKey("user")
+        query.getObjectInBackgroundWithId(likedpostid) { (object, error) -> Void in
             if error == nil
             {
-                let retreveduser:PFUser = object as! PFUser
+                print(object?.objectForKey("user") as! PFUser)
                 
-                ManageUser.saveUserNotification(notifcation, fromUser: PFUser.currentUser()!, toUser: retreveduser )
-                
-                
-                
+                ManageUser.saveUserNotification(notifcation, fromUser: PFUser.currentUser()!, toUser: object?.objectForKey("user") as! PFUser)
             }
-        })
+        }
+        
         
         
     }
