@@ -32,7 +32,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         // Get the keyboard height when the comment text field is pressed - needed
         // in order to move the comment container view to the correct postion.
-        self.view.bringSubviewToFront(self.commentsContainerView)
+     
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         
         tableView.delegate = self
@@ -40,10 +40,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.commentTextView.delegate = self
       
-        self.navigationItem.leftBarButtonItem = backbutton
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
-        self.tableView.estimatedRowHeight = 98.0;
-
         // Do any additional setup after loading the view.
         
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -53,9 +49,11 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         print(savedobjectID!)
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        LoadCommentData()
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+            LoadCommentData()
+        
+           self.view.bringSubviewToFront(self.commentsContainerView)
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         self.navigationItem.title  = "Comments"
@@ -65,6 +63,11 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         let font = UIFont(name: "Futura-Medium", size: 21)
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font!]
         self.navigationController!.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
+        
+        self.navigationItem.leftBarButtonItem = backbutton
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 98.0;
+
         
        /* let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 53))
         navigationbar.backgroundColor = UIColor.whiteColor()

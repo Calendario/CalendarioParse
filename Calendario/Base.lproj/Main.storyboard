@@ -3818,37 +3818,37 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <scene sceneID="q7G-qe-b44">
             <objects>
                 <tableViewController storyboardIdentifier="following" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yOx-hD-syB" customClass="FollowingTableViewController" customModule="Calendario" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="118" sectionHeaderHeight="28" sectionFooterHeight="28" id="vII-RZ-BTc">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" sectionHeaderHeight="28" sectionFooterHeight="28" id="vII-RZ-BTc">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowingCell" rowHeight="118" id="jcS-8H-Ors" customClass="FollowingTableViewCell" customModule="Calendario" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="118"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowingCell" rowHeight="104" id="jcS-8H-Ors" customClass="FollowingTableViewCell" customModule="Calendario" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="600" height="104"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jcS-8H-Ors" id="D8t-dW-2aa">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="117"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="103"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VAo-l4-Q5R">
-                                            <rect key="frame" x="8" y="22" width="73" height="73"/>
+                                            <rect key="frame" x="8" y="19" width="65" height="65"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="73" id="4ZM-PS-1Ev"/>
-                                                <constraint firstAttribute="height" constant="73" id="OJU-0F-lG4"/>
+                                                <constraint firstAttribute="width" constant="65" id="4ZM-PS-1Ev"/>
+                                                <constraint firstAttribute="height" constant="65" id="OJU-0F-lG4"/>
                                             </constraints>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qd4-6x-aNx">
-                                            <rect key="frame" x="89" y="38" width="503" height="41"/>
+                                            <rect key="frame" x="81" y="31" width="511" height="41"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Real Name " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1L1-Uh-sff">
-                                                    <rect key="frame" x="0.0" y="26" width="64" height="15"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <rect key="frame" x="0.0" y="22" width="76" height="19"/>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzq-v7-kVp">
-                                                    <rect key="frame" x="0.0" y="0.0" width="62" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="73" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
                                                     <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3909,37 +3909,37 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <scene sceneID="5ae-Wa-TkC">
             <objects>
                 <tableViewController storyboardIdentifier="followers" useStoryboardIdentifierAsRestorationIdentifier="YES" id="P2l-NP-fhh" customClass="FollowersTableViewController" customModule="Calendario" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="98" sectionHeaderHeight="28" sectionFooterHeight="28" id="J3h-h0-CkA">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="89" sectionHeaderHeight="28" sectionFooterHeight="28" id="J3h-h0-CkA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowersCell" rowHeight="98" id="88i-Oj-5BM" customClass="FollowersTableViewCell" customModule="Calendario" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="98"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowersCell" rowHeight="89" id="88i-Oj-5BM" customClass="FollowersTableViewCell" customModule="Calendario" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="600" height="89"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="88i-Oj-5BM" id="4Xt-Z7-jcJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="97"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iLG-Vb-bfT">
-                                            <rect key="frame" x="8" y="12" width="73" height="73"/>
+                                            <rect key="frame" x="8" y="12" width="65" height="65"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="73" id="iFB-2k-dyE"/>
-                                                <constraint firstAttribute="width" constant="73" id="rYU-FR-KB1"/>
+                                                <constraint firstAttribute="height" constant="65" id="iFB-2k-dyE"/>
+                                                <constraint firstAttribute="width" constant="65" id="rYU-FR-KB1"/>
                                             </constraints>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aMf-Hv-pbZ">
-                                            <rect key="frame" x="89" y="28" width="503" height="41"/>
+                                            <rect key="frame" x="81" y="24" width="511" height="41"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Real Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7E6-Xq-Qyn">
-                                                    <rect key="frame" x="0.0" y="26" width="61" height="15"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <rect key="frame" x="0.0" y="22" width="72" height="19"/>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PiH-5p-fOX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="66" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="73" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
                                                     <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3988,68 +3988,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vbw-sG-yBb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2944" y="1248"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="rJE-Ib-u3x">
-            <objects>
-                <viewController id="tET-n5-IdT" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6S6-Qx-O49"/>
-                        <viewControllerLayoutGuide type="bottom" id="7w9-s9-cKz"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="bcJ-Pu-5Pq">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tgh-ry-Jag">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
-                                <color key="backgroundColor" red="0.12941176470588234" green="0.52941176470588236" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="WEN-eK-m9q"/>
-                                </constraints>
-                            </view>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rwq-pA-reC">
-                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="bT7-86-mE6"/>
-                                </constraints>
-                                <color key="barTintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="21"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Followers" id="4UE-qr-udi">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="moG-87-QSQ">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AZq-RJ-Vwu">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="AZq-RJ-Vwu" secondAttribute="trailing" id="06A-bA-E4e"/>
-                            <constraint firstItem="Tgh-ry-Jag" firstAttribute="top" secondItem="bcJ-Pu-5Pq" secondAttribute="top" id="0eU-3p-d7f"/>
-                            <constraint firstAttribute="trailing" secondItem="Tgh-ry-Jag" secondAttribute="trailing" id="3M7-F4-kEB"/>
-                            <constraint firstItem="Tgh-ry-Jag" firstAttribute="leading" secondItem="bcJ-Pu-5Pq" secondAttribute="leading" id="6AM-dg-RQR"/>
-                            <constraint firstItem="Rwq-pA-reC" firstAttribute="top" secondItem="6S6-Qx-O49" secondAttribute="bottom" id="IP5-Jp-c4f"/>
-                            <constraint firstItem="AZq-RJ-Vwu" firstAttribute="leading" secondItem="bcJ-Pu-5Pq" secondAttribute="leading" id="Lfn-Fu-mow"/>
-                            <constraint firstItem="AZq-RJ-Vwu" firstAttribute="top" secondItem="Rwq-pA-reC" secondAttribute="bottom" id="YrY-8O-jAR"/>
-                            <constraint firstAttribute="trailing" secondItem="Rwq-pA-reC" secondAttribute="trailing" id="cjE-ZG-ppT"/>
-                            <constraint firstItem="Rwq-pA-reC" firstAttribute="leading" secondItem="bcJ-Pu-5Pq" secondAttribute="leading" id="g6k-1S-D1a"/>
-                            <constraint firstItem="7w9-s9-cKz" firstAttribute="top" secondItem="AZq-RJ-Vwu" secondAttribute="bottom" id="ieI-AI-lGf"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VNH-RW-Z2R" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3587" y="1248"/>
+            <point key="canvasLocation" x="3121" y="1229"/>
         </scene>
         <!--See More View Controller-->
         <scene sceneID="km0-O3-GE1">
@@ -5492,55 +5431,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EOO-2f-JaJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2119.5" y="2672.5"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="2dP-zv-dJ3">
-            <objects>
-                <viewController id="C87-8t-FO8" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="CVX-QL-cm8"/>
-                        <viewControllerLayoutGuide type="bottom" id="0OV-29-OrV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Kn4-cQ-YgM">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CRf-C0-MBZ">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
-                                <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="DvW-LZ-ZMU"/>
-                                </constraints>
-                            </view>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BR9-Hz-DYd">
-                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="33q-gG-ZE3"/>
-                                </constraints>
-                                <color key="barTintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="21"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Following" id="v0j-ce-Elb"/>
-                                </items>
-                            </navigationBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="BR9-Hz-DYd" firstAttribute="leading" secondItem="Kn4-cQ-YgM" secondAttribute="leading" id="BKl-7o-TKb"/>
-                            <constraint firstItem="BR9-Hz-DYd" firstAttribute="top" secondItem="CVX-QL-cm8" secondAttribute="bottom" id="FeN-2h-JgK"/>
-                            <constraint firstItem="CRf-C0-MBZ" firstAttribute="leading" secondItem="Kn4-cQ-YgM" secondAttribute="leading" id="NZD-lm-wsS"/>
-                            <constraint firstItem="CRf-C0-MBZ" firstAttribute="top" secondItem="Kn4-cQ-YgM" secondAttribute="top" id="Zfg-xz-rOf"/>
-                            <constraint firstAttribute="trailing" secondItem="BR9-Hz-DYd" secondAttribute="trailing" id="b68-Av-QTO"/>
-                            <constraint firstAttribute="trailing" secondItem="CRf-C0-MBZ" secondAttribute="trailing" id="bCW-Z0-RxN"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="o4a-Ce-0dn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3880" y="513"/>
         </scene>
     </scenes>
     <resources>
