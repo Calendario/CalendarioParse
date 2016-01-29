@@ -453,7 +453,7 @@
                                                     <state key="normal" image="comment"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S5F-zL-UN7" customClass="DOFavoriteButton" customModule="DOFavoriteButton">
-                                                    <rect key="frame" x="6" y="0.0" width="25" height="25"/>
+                                                    <rect key="frame" x="4" y="0.0" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="33" id="3gc-gK-q1M"/>
                                                         <constraint firstAttribute="height" constant="43" id="95C-Ih-X5a"/>
@@ -490,7 +490,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="60" id="HZG-8c-22V"/>
                                                 <constraint firstItem="KHa-zv-rEg" firstAttribute="top" secondItem="S5F-zL-UN7" secondAttribute="bottom" constant="8" symbolic="YES" id="L57-PR-TK9"/>
-                                                <constraint firstItem="S5F-zL-UN7" firstAttribute="centerX" secondItem="3a3-5u-LcP" secondAttribute="centerX" id="ite-Pg-GSv"/>
+                                                <constraint firstItem="S5F-zL-UN7" firstAttribute="centerX" secondItem="3a3-5u-LcP" secondAttribute="centerX" constant="-2" id="ite-Pg-GSv"/>
                                                 <constraint firstItem="KHa-zv-rEg" firstAttribute="centerX" secondItem="3a3-5u-LcP" secondAttribute="centerX" id="ucf-jo-4XD"/>
                                                 <constraint firstItem="S5F-zL-UN7" firstAttribute="top" secondItem="3a3-5u-LcP" secondAttribute="top" id="wx4-9O-huq"/>
                                                 <constraint firstAttribute="width" constant="37" id="zAt-GV-9Fi"/>
