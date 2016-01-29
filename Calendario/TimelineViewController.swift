@@ -260,11 +260,11 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     func Seemore() {
         
-        // Open the see more view.
+      /*  // Open the see more view.
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let SMVC = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
         let NC = UINavigationController(rootViewController: SMVC)
-        self.presentViewController(NC, animated: true, completion: nil)
+        self.presentViewController(NC, animated: true, completion: nil) */
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
@@ -310,7 +310,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
         let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
             
-            let defaults = NSUserDefaults.standardUserDefaults()
+          /*  let defaults = NSUserDefaults.standardUserDefaults()
             let statusupdate:PFObject = self.filteredData.objectAtIndex(indexPath.row) as! PFObject
             let updatetext = statusupdate.objectForKey("updatetext") as! String
             let currentobjectID = statusupdate.objectId
@@ -318,7 +318,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
             defaults.setObject(updatetext, forKey: "updatetext")
             defaults.setObject(currentobjectID, forKey: "objectId")
             
-            self.Seemore()
+            self.Seemore() */
         }
         
         let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in

@@ -20,6 +20,8 @@ class TimeLineTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.updateTextView.textColor = UIColor.darkGrayColor()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

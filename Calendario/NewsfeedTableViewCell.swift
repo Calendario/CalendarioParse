@@ -55,7 +55,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     
     
-    
     //TEST
     var aspectConstraint : NSLayoutConstraint? {
         didSet {
@@ -71,6 +70,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         aspectConstraint = nil
+        self.statusTextView.textColor = UIColor.darkGrayColor()
     }
     
     func setPostedImage(image : UIImage) {

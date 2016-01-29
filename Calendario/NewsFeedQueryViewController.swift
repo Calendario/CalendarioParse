@@ -35,14 +35,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         self.navigationItem.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
         self.pullToRefreshEnabled = true
         self.paginationEnabled = false
-    
-        
-        
-        
-    
-        
-        
-      
+
 
     }
     

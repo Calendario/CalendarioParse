@@ -136,7 +136,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                 }
                 
                 let array:NSArray = self.commentdata.reverseObjectEnumerator().allObjects
-                self.commentdata = NSMutableArray(array: array)
+                let reverseArray = array.reverse()
+                self.commentdata = NSMutableArray(array: reverseArray)
                 self.tableView.reloadData()
                 
             }
