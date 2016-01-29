@@ -9,8 +9,6 @@
 import UIKit
 import CoreLocation
 
-
-
 class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UINavigationBarDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var PostButton: UIBarButtonItem!
@@ -61,11 +59,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     var viewGestureRecognizer: UITapGestureRecognizer!
     
-    
-    
-    
-    
-    
     //creates a id number for each status update
     var statusID = arc4random()
     
@@ -78,6 +71,18 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Allow the user to dismiss the keyboard with a toolabr.
+        let editToolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.frame.size.width, 50))
+        editToolbar.barStyle = UIBarStyle.Default
+        
+        editToolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "textViewDismissKeyboard")
+        ]
+        
+        editToolbar.sizeToFit()
+        self.statusUpdateTextField.inputAccessoryView = editToolbar
         
         statusUpdateTextField.layer.borderColor = UIColor.blackColor().CGColor
         TenseControl.selectedSegmentIndex = 2
@@ -125,9 +130,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         // dismisses keyboard when background is tapped
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
-        
-        
-        
     }
     
     
@@ -158,11 +160,10 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    
+    func textViewDismissKeyboard() {
+        self.statusUpdateTextField.resignFirstResponder()
+    }
 
-    
     func setDate()
     {
         let dateformatter = NSDateFormatter()
@@ -176,7 +177,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         dateLabel.textColor = UIColor.darkGrayColor()
         
         viewGestureRecognizer.enabled = false
-        
     }
     
     
@@ -204,7 +204,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         let locationReference =  self.storyboard!.instantiateViewControllerWithIdentifier("LocationVC") as UIViewController!
         self.presentViewController(locationReference, animated: true, completion: nil)
-        
     }
     
     
@@ -315,6 +314,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         }
         else
         {
+            self.textViewDismissKeyboard()
             PostStatusUpdate()
             GotoNewsfeed()
         }
@@ -322,6 +322,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     }
     
     @IBAction func backbuttonTapped(sender: AnyObject) {
+        self.textViewDismissKeyboard()
         GotoNewsfeed()
         self.view.endEditing(true)
     }

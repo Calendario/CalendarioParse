@@ -13,6 +13,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var commentTextView: UITextField!
+    @IBOutlet weak var commentsContainerView: UIView!
     
     var commentdata:NSMutableArray = NSMutableArray()
     
@@ -29,25 +30,23 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Get the keyboard height when the comment text field is pressed - needed
+        // in order to move the comment container view to the correct postion.
+        self.view.bringSubviewToFront(self.commentsContainerView)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        
         tableView.delegate = self
         tableView.dataSource = self
         
         self.commentTextView.delegate = self
-        
       
         self.navigationItem.leftBarButtonItem = backbutton
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 98.0;
 
-
-        
-
         // Do any additional setup after loading the view.
         
         let defaults = NSUserDefaults.standardUserDefaults()
-        
-        
-                
         
         //savedobjectID = defaults.objectForKey("objectid") as! String
         
@@ -83,7 +82,31 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         self.view.addSubview(navigationbar)
         
         */
-
+    }
+    
+    func keyboardWillShow(notification:NSNotification) {
+        
+        // Get the keyboard height.
+        let userInfo:NSDictionary = notification.userInfo!
+        let keyboardFrame:NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.CGRectValue()
+        var keyboardHeight = keyboardRectangle.height
+        
+        // Raise the comments container view.
+        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
+            self.commentsContainerView.transform = CGAffineTransformMakeTranslation(0.0, -keyboardHeight)
+        }, completion:nil)
+    }
+    
+    func dismissKeyboard() {
+        
+        // Hide the keyboard.
+        self.commentTextView.resignFirstResponder()
+        
+        // Lower the comments container view.
+        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
+            self.commentsContainerView.transform = CGAffineTransformMakeTranslation(0.0, 0.0)
+            }, completion:nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -131,12 +154,11 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     appDelegate.window.rootViewController = tabBarController
     }*/
     
-    
     @IBAction func bacbuttontapped(sender: AnyObject) {
         
         // Hide the keybaord if it has not
         // already been hidden from the view.
-        self.commentTextView.resignFirstResponder()
+        self.dismissKeyboard()
         
         // Close the comments view.
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -145,15 +167,14 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func Sendtapped(sender: AnyObject) {
         
         self.PostComment()
-//        self.refreshData()
+        // self.refreshData()
     }
-
     
     func PostComment()
     {
         
         // Hide the keyboard.
-        self.commentTextView.resignFirstResponder()
+        self.dismissKeyboard()
         
         if (self.commentTextView .hasText()) {
             
