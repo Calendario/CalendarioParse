@@ -12,7 +12,7 @@ import DOFavoriteButton
 class NewsFeedQueryViewController: PFQueryTableViewController {
   
     
-    var query = PFQuery(className: "StatusUpdate")
+    var query: PFQuery!
      var reportedID:String!
       var currentobjectID:String!
 
@@ -48,16 +48,24 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
     
     override func queryForTable() -> PFQuery {
         
+        query = PFQuery(className: "StatusUpdate")
+        query.orderByDescending("createdAt")
+        
         
         ManageUser.getUserFollowingList(PFUser.currentUser()!) { (userFollowing) -> Void in
+            
+            
+            
+            
             for user in userFollowing
             {
                 let test = user as! PFUser
                 
-               self.query.orderByAscending("createdAt")
-                self.query.cachePolicy = .NetworkElseCache
-                self.query.includeKey("user")
-                self.query.whereKey("user", equalTo: test.username!)
+                
+              
+        self.query.whereKey("user", equalTo: test.username!)
+                
+                
                 
 
             }
@@ -68,6 +76,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell? {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
+        
         
         //setting properties
         
@@ -691,6 +700,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
 
         // Do any additional setup after loading the view.
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        
     }
 
     override func didReceiveMemoryWarning() {
