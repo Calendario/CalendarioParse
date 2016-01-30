@@ -694,14 +694,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
     func likeclicked(sender:DOFavoriteButton)
     {
         
-        
-        
-        print(currentobjectID)
-        
         if sender.selected
         {
-            
-            
             print("unlike")
             sender.imageColorOn = UIColor.flatOrangeColor()
             var query = PFQuery(className: "StatusUpdate")
@@ -713,31 +707,14 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                     
                     update!["likes"] = currentlikes - 1
                     update?.saveInBackground()
-                    
-                    print(update?.valueForKey("likes") as! Int)
-                    
-                    let alert = UIAlertController(title: "Alert", message: "You have unlike this post.", preferredStyle: .Alert)
-                    alert.view.tintColor = UIColor.flatGreenColor()
-                    let next = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                    alert.addAction(next)
-                    
-                    self.presentViewController(alert, animated: true, completion: nil)
+                
                     self.currentobjectID = nil
                     self.LoadData()
-                    
-                    
-                    
-                    
                 }
             })
             
-            
-            
             sender.deselect()
-            
         }
-            
-            
             
         else
         {

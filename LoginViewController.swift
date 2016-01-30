@@ -174,21 +174,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 
                 if (user != nil) {
-                    
-                    // Setup the alert controller.
-                    let loginAlert = UIAlertController(title: "Success", message: "You have been logged into Calendario.", preferredStyle: .Alert)
-                    
-                    // Setup the alert actions.
-                    let nextHandler = { (action:UIAlertAction!) -> Void in
-                        self.GotoNewsfeed()
-                    }
-                    let next = UIAlertAction(title: "Continue", style: .Default, handler: nextHandler)
-                    
-                    // Add the actions to the alert.
-                    loginAlert.addAction(next)
-                    
-                    // Present the alert on screen.
-                    self.presentViewController(loginAlert, animated: true, completion: nil)
+                    self.GotoNewsfeed()
                 }
                     
                 else {

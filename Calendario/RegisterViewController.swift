@@ -417,20 +417,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
                                 // Hide the loading indicator view.
                                 self.loadingView.alpha = 0.0
                                 
-                                // Setup the alert controller.
-                                let registerAlert = UIAlertController(title: "Welcome to Calendario", message: "You have successfully created a Calendario account.", preferredStyle: .Alert)
-                                
-                                // Setup the alert actions.
-                                let nextHandler = { (action:UIAlertAction!) -> Void in
-                                    self.GotoNewsfeed()
-                                }
-                                let next = UIAlertAction(title: "Continue", style: .Default, handler: nextHandler)
-                                
-                                // Add the actions to the alert.
-                                registerAlert.addAction(next)
-                                
-                                // Present the alert on screen.
-                                self.presentViewController(registerAlert, animated: true, completion: nil)
+                                // Show the news feed.
+                                self.GotoNewsfeed()
                             }
                                 
                             else {

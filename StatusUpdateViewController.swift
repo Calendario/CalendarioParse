@@ -261,7 +261,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             statusupdate.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
                 if success
                 {
-                    print("Update saved")
+                    self.dismissViewControllerAnimated(true, completion: nil)
                 }
                 else
                 {
@@ -269,11 +269,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                     print(error?.localizedDescription)
                 }
             }
-            
-            
         }
-        
-        
     }
     
     
@@ -366,10 +362,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         self.placeholderLabel.hidden = true
         
     }
-    
-    
-    
-    
     
     func GotoNewsfeed() {
         

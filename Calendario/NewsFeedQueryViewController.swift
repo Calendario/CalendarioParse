@@ -314,15 +314,9 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
     
     func likeclicked(sender:DOFavoriteButton)
     {
-        
-        
-        
-       
-        
+
         if sender.selected
         {
-            
-            
             print("unlike")
             var index = sender.tag
             var id = self.objects![index].objectId
@@ -337,30 +331,13 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                     update!["likes"] = currentlikes - 1
                     update?.saveInBackground()
                     
-                    print(update?.valueForKey("likes") as! Int)
-                    
-                    let alert = UIAlertController(title: "Alert", message: "You have unlike this post.", preferredStyle: .Alert)
-                    alert.view.tintColor = UIColor.flatGreenColor()
-                    let next = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                    alert.addAction(next)
-                    
-                    self.presentViewController(alert, animated: true, completion: nil)
                     self.currentobjectID = nil
-                    
-                    
                     self.loadObjects()
-                    
-                    
                 }
             })
             
-            
-            
             sender.deselect()
-            
         }
-            
-            
             
         else
         {

@@ -520,21 +520,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
             // Check if the data has been saved.
             
             if (success) {
-                
-                // Setup the alert controller.
-                let saveAlert = UIAlertController(title: "Profile updated", message: "Your profile information has been successfully updated.", preferredStyle: .Alert)
-                
-                // Setup the alert action.
-                let dismiss = { (action:UIAlertAction!) -> Void in
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                }
-                let buttonOne = UIAlertAction(title: "Dismiss", style: .Default, handler: dismiss)
-                
-                // Add the button to the alert.
-                saveAlert.addAction(buttonOne)
-                
-                // Present the alert on screen.
-                self.presentViewController(saveAlert, animated: true, completion: nil)
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
                 
             else {

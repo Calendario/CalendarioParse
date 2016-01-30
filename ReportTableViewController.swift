@@ -131,16 +131,6 @@ class ReportTableViewController: UITableViewController {
                 statusupdate!["reportedby"] = PFUser.currentUser()
                 statusupdate!["reason"] = self.selectedreason
                 statusupdate?.saveInBackground()
-                
-                
-                
-                let reportalert = UIAlertController(title: "Report Saved", message: "The Status has been reported", preferredStyle: .Alert)
-                let next = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                reportalert.addAction(next)
-                
-                self.presentViewController(reportalert, animated: true, completion: nil)
-                
-
             }
         }
     }
