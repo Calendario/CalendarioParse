@@ -391,25 +391,13 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                     let defaults = NSUserDefaults.standardUserDefaults()
                     defaults.setObject(id!!, forKey: "objectidliked")
                     
-                    PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : string, "user" : "\(PFUser.currentUser()?.username!)"])
-                    print(update?.valueForKey("likes") as! Int)
                     self.currentobjectID = nil
                     self.SavingNotifacations(string)
-                    
-                    
-                    
-                    
-                 self.loadObjects()
+                    self.loadObjects()
                 }
             })
-            
         }
-        
-        
-        
     }
-    
-    
     
     func GotoComments(ObjectID:String)
     {
@@ -628,19 +616,13 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         }
     }
     
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-           }
-    
+    }
     
     func SavingNotifacations(notifcation:String)
     {
-        
-        
-        
         let defaults = NSUserDefaults.standardUserDefaults()
         var likedpostid = defaults.objectForKey("objectidliked") as! String
-        print(likedpostid)
         var query = PFQuery(className: "StatusUpdate")
         
         query.whereKey("objectId", equalTo: likedpostid)
@@ -648,14 +630,18 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         query.getObjectInBackgroundWithId(likedpostid) { (object, error) -> Void in
             if error == nil
             {
-                print(object?.objectForKey("user") as! PFUser)
                 
-                ManageUser.saveUserNotification(notifcation, fromUser: PFUser.currentUser()!, toUser: object?.objectForKey("user") as! PFUser)
+                // Only save the notification if the user recieving
+                // the notification is NOT the same as the logged in user.
+                
+                if (PFUser.currentUser()!.objectId != (object?.objectForKey("user") as! PFUser).objectId) {
+
+                    PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : notifcation, "user" : "\(PFUser.currentUser()?.username!)"])
+                    
+                    ManageUser.saveUserNotification(notifcation, fromUser: PFUser.currentUser()!, toUser: object?.objectForKey("user") as! PFUser)
+                }
             }
         }
-        
-        
-        
     }
 
     @IBAction func plusTapped(sender: AnyObject) {
@@ -667,25 +653,19 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let postsview = sb.instantiateViewControllerWithIdentifier("PostView") as! StatusUpdateViewController
         self.presentViewController(postsview, animated: true, completion: nil)
-        
     }
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
@@ -696,5 +676,4 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

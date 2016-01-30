@@ -195,32 +195,31 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 if success
                 {
-                    
-                    
                     var query = PFQuery(className: "StatusUpdate")
                     query.includeKey("user")
                     query.getObjectInBackgroundWithId(self.savedobjectID, block: { (object, error) -> Void in
                         if error == nil
                         {
-                            print(object!.valueForKey("user")!.username!)
                             
-                            // create push notifcation
-                            let message = "\(PFUser.currentUser()!.username!) has commented on your post"
+                            // Only save the notification if the user recieving
+                            // the notification is NOT the same as the logged in user.
                             
-                            // Send the notification.
-                            PFCloud.callFunctionInBackground("comment", withParameters: ["message" : message, "user" : "\((object!.valueForKey("user") as! PFUser).username!)"])
-                            
-                            // Save the user notification.
-                            ManageUser.saveUserNotification(message, fromUser: PFUser.currentUser()!, toUser: object!.valueForKey("user") as! PFUser)
+                            if (PFUser.currentUser()!.objectId != (object?.objectForKey("user") as! PFUser).objectId) {
+                                
+                                // create push notifcation
+                                let message = "\(PFUser.currentUser()!.username!) has commented on your post"
+                                
+                                // Send the notification.
+                                PFCloud.callFunctionInBackground("comment", withParameters: ["message" : message, "user" : "\((object!.valueForKey("user") as! PFUser).username!)"])
+                                
+                                // Save the user notification.
+                                ManageUser.saveUserNotification(message, fromUser: PFUser.currentUser()!, toUser: object!.valueForKey("user") as! PFUser)
+                            }
                             
                             // Reload the comments table view.
                             self.refreshData()
                         }
                     })
-                    
-                    print("comment posted")
-                    
-                    
                 }
                 else
                 {

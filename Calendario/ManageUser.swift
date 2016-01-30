@@ -233,25 +233,31 @@ var finalData:NSMutableArray = []
     
     class func saveUserNotification(notifcation:String, fromUser:PFUser, toUser:PFUser) {
         
-        // Get the notifications object for the
-        // currently logged in user account.
-        var notificationQuery:PFQuery!
-        notificationQuery = PFQuery(className: "userNotifications")
-        notificationQuery.whereKey("userLink", equalTo: toUser)
-        notificationQuery.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+        // Only save the notification if the user recieving
+        // the notification is NOT the same as the logged in user.
+        
+        if (fromUser.objectId != toUser.objectId) {
             
-            // Check for errors before continuing.
-            
-            if (error == nil) {
+            // Get the notifications object for the
+            // currently logged in user account.
+            var notificationQuery:PFQuery!
+            notificationQuery = PFQuery(className: "userNotifications")
+            notificationQuery.whereKey("userLink", equalTo: toUser)
+            notificationQuery.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
                 
-                // Add the from user object.
-                object?.addUniqueObject(fromUser, forKey: "fromUser")
+                // Check for errors before continuing.
                 
-                // Add the new notification.
-                object?.addUniqueObject(notifcation, forKey: "notificationStrings")
-                
-                // Save the notification data.
-                object?.saveInBackground()
+                if (error == nil) {
+                    
+                    // Add the from user object.
+                    object?.addUniqueObject(fromUser, forKey: "fromUser")
+                    
+                    // Add the new notification.
+                    object?.addUniqueObject(notifcation, forKey: "notificationStrings")
+                    
+                    // Save the notification data.
+                    object?.saveInBackground()
+                }
             }
         }
     }

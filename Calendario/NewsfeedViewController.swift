@@ -639,13 +639,6 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         cell.likebutton.addTarget(self, action: "likeclicked:", forControlEvents: .TouchUpInside)
         
         
-        
-        
-        
-        
-        
-        
-        
         /*cell.LikeButton.setImage(UIImage(named: "like button"), forState: .Normal)
         
         var getlikes = PFQuery(className: "StatusUpdate")
@@ -774,81 +767,12 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
                     PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : string, "user" : "\(PFUser.currentUser()?.username!)"])
                     print(update?.valueForKey("likes") as! Int)
                     self.currentobjectID = nil
-                    //self.SavingNotifacations(string)
-                    
-                    
-                    
-                    
+
                     self.LoadData()
                 }
             })
-            
         }
-        
-        
-        
     }
-    
-    
-    
-    
-    
-    
-    
-    func SavingNotifacations(notifcation:String)
-    {
-        
-        
-        
-        // ManageUser.saveUserNotification(" NOTIFICATION STRING ", userData: PFUserObject)
-        // Enjoy :)
-        
-        
-        
-        var userviewed:PFUser = PFUser.currentUser()!
-        var notiQuery = PFUser.query()
-        notiQuery?.whereKey("objectId", equalTo: userviewed.objectId!)
-        notiQuery?.getFirstObjectInBackgroundWithBlock({ (object, error) -> Void in
-            if error == nil
-            {
-                let retreveduser:PFUser = object as! PFUser
-                var notifications:NSMutableArray = NSMutableArray()
-                notifications.addObjectsFromArray([retreveduser.objectForKey("notifications")!])
-                notifications.addObject(notifcation)
-                
-                if notifications.count > 29
-                {
-                    notifications.removeObjectAtIndex(0)
-                    
-                }
-                
-                retreveduser["notifications"] = notifications
-                retreveduser.saveInBackground()
-                
-                
-                
-            }
-        })
-        
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     func getImageData(objects:[PFObject], imageview:UIImageView)
     {
