@@ -397,7 +397,8 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         currentObjectid = status.objectId
         dateofevent = status.valueForKey("dateofevent") as! String
         
-        
+        cell.commentButton.tag = indexPath.row
+        cell.commentButton.addTarget(self, action: "Commentclicked:", forControlEvents: .TouchUpInside)
         
         let likes = status.valueForKey("likes") as? Int
         
@@ -427,15 +428,35 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let status:PFObject = self.filteredData.objectAtIndex(indexPath.row) as! PFObject
-        GotoPost(status.objectId!)
+        
+        // We dont want to show the see more section in V1.0
+        //let status:PFObject = self.filteredData.objectAtIndex(indexPath.row) as! PFObject
+        //GotoPost(status.objectId!)
+    }
+    
+    func Commentclicked(sender:UIButton)
+    {
+        let index = sender.tag
+        
+        // get current id
+        let id = self.filteredData[index].objectId
+        GotoComments(id!!)
+    }
+    
+    func GotoComments(ObjectID:String)
+    {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        var commentvc = sb.instantiateViewControllerWithIdentifier("comments") as! CommentsViewController
+        commentvc.savedobjectID = ObjectID
+        let NC = UINavigationController(rootViewController: commentvc)
+        self.presentViewController(NC, animated: true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "timelineComments" {
-            let vc = segue.destinationViewController as! CommentsViewController
-            vc.savedobjectID = currentObjectid
+            //let vc = segue.destinationViewController as! CommentsViewController
+            //vc.savedobjectID = currentObjectid
         }
     }
     

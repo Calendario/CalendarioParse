@@ -36,7 +36,6 @@ class WebPageViewController : UIViewController, UIWebViewDelegate {
             
             // Set the initial title to the passed in URL.
             titleLabel.text = passedURL
-            print(passedURL)
             
             // Load the website in the web view.
             let url = NSURL(string: "http://\(passedURL)")
@@ -80,7 +79,7 @@ class WebPageViewController : UIViewController, UIWebViewDelegate {
     func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         
         // Display the error message to the user.
-        self.displayAlert("Error", alertMessage: "An error has occured: \(error)")
+        self.displayAlert("Error", alertMessage: "An error has occured: \(error!.localizedDescription)")
     }
     
     // Alert methods.

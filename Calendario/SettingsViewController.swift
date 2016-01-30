@@ -12,13 +12,10 @@ import Parse
 
 class SettingsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
-    
-    let choicesarray = ["Report Bug", "Privacy Policy", "Terms of Service"]
-    
-    @IBOutlet weak var tableview: UITableView!
+    let choicesarray = ["Report Bug", "Privacy Policy", "Terms of Service", "Acknowledgments"]
     
     // Setup the various UI objects.
+    @IBOutlet weak var tableview: UITableView!
     
     // Setup the on screen button actions.
     
@@ -78,14 +75,11 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
         presentViewController(alertController, animated: true, completion: nil)
     }
     
-    
-    
-    // tableview methods
+    // Tableview methods
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    
   
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return choicesarray.count
@@ -103,6 +97,9 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        self.tableview.deselectRowAtIndexPath(indexPath, animated: true)
+        
         switch indexPath.row
         {
         case 0:
@@ -111,12 +108,10 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
             ViewPrivacyPolicy()
         case 2:
             ViewTermsOfService()
+        case 3:
+            viewAcknowledgments()
             
-            
-            
-        default:
-            print("break")
-            
+        default: print("break")
         }
     }
     
@@ -140,11 +135,16 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
         let sb = UIStoryboard(name: "Main", bundle: nil)
         var termsofservice = sb.instantiateViewControllerWithIdentifier("tos") as! TosViewController
         self.presentViewController(termsofservice, animated: true, completion: nil)
-        
     }
     
-    
-    
+    func viewAcknowledgments() {
+        
+        // Open the webpage view.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewC = storyboard.instantiateViewControllerWithIdentifier("WebPage") as! WebPageViewController
+        viewC.passedURL = "http://calendario.co.uk/acknowledgements"
+        self.presentViewController(viewC, animated: true, completion: nil)
+    }
     
     // Other methods.
     

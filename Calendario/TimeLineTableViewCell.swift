@@ -16,6 +16,7 @@ class TimeLineTableViewCell: UITableViewCell {
     @IBOutlet weak var updateTextView: UITextView!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var commentButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

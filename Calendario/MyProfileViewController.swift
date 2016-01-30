@@ -96,7 +96,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         
         if (userWebsiteLink != nil) {
             
-            // Open the register view.
+            // Open the webpage view.
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let viewC = storyboard.instantiateViewControllerWithIdentifier("WebPage") as! WebPageViewController
             viewC.passedURL = userWebsiteLink
