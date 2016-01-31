@@ -59,6 +59,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     var viewGestureRecognizer: UITapGestureRecognizer!
     
+    var locationtapReconizer:UITapGestureRecognizer!
+    
     //creates a id number for each status update
     var statusID = arc4random()
     
@@ -120,7 +122,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         viewGestureRecognizer.enabled = false
         
         
-        let locationtapReconizer = UITapGestureRecognizer(target: self, action: "LocationlabelTapped")
+        locationtapReconizer = UITapGestureRecognizer(target: self, action: "LocationlabelTapped")
         
         LocationLabel.userInteractionEnabled = true
         
@@ -137,7 +139,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         deafaults.synchronize()
         
-        var location = deafaults.valueForKey("location")
+        var location = deafaults.valueForKey("location") as? String
         print(location)
         
         if location == nil
@@ -147,6 +149,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         }
         else
         {
+            LocationLabel.text = location
             //checkinbutton.hidden = true
             //LocationLabel.text = location as! String
             //LocationLabel.textColor = UIColor.darkGrayColor()
@@ -227,8 +230,9 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             statusupdatewithimage["dateofevent"] = dateLabel.text
             statusupdatewithimage["ID"] = Int(statusID)
             statusupdatewithimage["tense"] = currenttense
-            
             statusupdatewithimage["location"] = LocationLabel.text
+            
+      
         
             // image posting
             imagedata = UIImageJPEGRepresentation(((statusImageview?.image))!, 0.5)
@@ -259,6 +263,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             statusupdate["ID"] = Int(statusID)
             statusupdate["tense"] = currenttense
             statusupdate["location"] = LocationLabel.text
+            
             
             statusupdate.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
                 if success
@@ -310,6 +315,12 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             
 
         }
+        
+        
+        
+            
+        
+        
         else
         {
             self.textViewDismissKeyboard()
@@ -366,6 +377,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     func textViewDidBeginEditing(textView: UITextView) {
         self.placeholderLabel.hidden = true
+        
+        
         
     }
     

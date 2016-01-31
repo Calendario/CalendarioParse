@@ -396,7 +396,7 @@ var finalData:NSMutableArray = []
         queryID.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             
             dispatch_async(dispatch_get_main_queue(), {
-                completion(idNumber: (objects?[0].objectId)!) // bug here 
+                completion(idNumber: (objects?[0].objectId)!) // bug here
             })
         }
     }

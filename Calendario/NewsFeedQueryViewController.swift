@@ -15,6 +15,8 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
     var query: PFQuery!
     var reportedID:String!
     var currentobjectID:String!
+    var likesarray:[String] = [""]
+    var likesmaster: NSMutableArray!
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -70,10 +72,15 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell? {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
         
+        print(object?.valueForKey("likedby") as? String)
         
-        //setting properties
         
+        var likedpost = object?.valueForKey("likedby") as? String
         
+        if likedpost == PFUser.currentUser()?.objectId
+        {
+            cell.likebutton.select()
+        }
         
         currentobjectID = object?.objectId
         let defaults = NSUserDefaults.standardUserDefaults().setObject(object?.objectId, forKey: "commentid")
@@ -202,13 +209,16 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         }
         
         // location label
-        if (object?.valueForKey("location") as! String) == "" {
-            cell.locationLabel.text = ""
+        cell.locationLabel.text = object?.valueForKey("location") as! String
+        if cell.locationLabel.text == "tap to select location..."
+        {
+            cell.locationLabel.text = "No Location"
         }
-        else {
-            cell.locationLabel.text = (object?.valueForKey("location") as! String)
-            
+        else
+        {
+            cell.locationLabel.hidden = false
         }
+        
         
         
         // date label
@@ -335,6 +345,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                     
                     
                     update!["likes"] = currentlikes - 1
+                    update!["likedby"] = ""
                     update?.saveInBackground()
                     
                     self.currentobjectID = nil
@@ -354,6 +365,8 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
             print("the tag is \(sender.tag)")
             sender.imageColorOn = UIColor.flatRedColor()
             var query = PFQuery(className: "StatusUpdate")
+            likesarray.append((PFUser.currentUser()?.objectId)!)
+            print(likesarray)
             
             
             query.getObjectInBackgroundWithId(id!!, block: { (update, error) -> Void in
@@ -367,6 +380,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                     }
                     
                     update!["likes"] = currentlikes! + 1
+                    update!["likedby"] = PFUser.currentUser()?.objectId
                     update?.saveInBackground()
                     
                     let string = "\(PFUser.currentUser()!.username!) has liked your post"
