@@ -174,6 +174,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 
                 if (user != nil) {
+                    
+                    // Ensure that the recomendations view is not shown
+                    // as the user has already seen the view before.
+                    let defaults = NSUserDefaults.standardUserDefaults()
+                    defaults.setObject(false, forKey: "recoCheck")
+                    defaults.synchronize()
+                    
+                    // Show the home view.
                     self.GotoNewsfeed()
                 }
                     

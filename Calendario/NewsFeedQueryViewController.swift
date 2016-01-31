@@ -637,6 +637,24 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
 
         // Do any additional setup after loading the view.
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        
+        // Automatically show the recommended users
+        // view if the user has just registered.
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let showRecommendations = defaults.objectForKey("recoCheck") as! Bool
+                
+        if (showRecommendations == true) {
+            
+            // Open the user recommendations view.
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let postsview = sb.instantiateViewControllerWithIdentifier("recommend") as! RecommendedUsersViewController
+            self.presentViewController(postsview, animated: true, completion:{
+                
+                // Make sure the view does not appear every time.
+                defaults.setObject(false, forKey: "recoCheck")
+                defaults.synchronize()
+            })
+        }
     }
 
     override func didReceiveMemoryWarning() {

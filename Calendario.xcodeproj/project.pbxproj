@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		78C1C01C1C006D9200ACDCEC /* reportBug.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C1C01B1C006D9200ACDCEC /* reportBug.m */; };
 		9CE5A692AEA13F553B89DF70 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3354E761A083188ECD02163D /* Pods.framework */; };
+		A22038021C5D332F000080AC /* RecommendedUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22038011C5D332F000080AC /* RecommendedUsersViewController.swift */; };
+		A22038041C5D35FF000080AC /* RecommendedUsersCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22038031C5D35FF000080AC /* RecommendedUsersCustomCell.swift */; };
 		A2267D171C4BD9C200180C6D /* FollowRequestsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2267D161C4BD9C200180C6D /* FollowRequestsTableViewController.swift */; };
 		A2267D191C4BE15700180C6D /* FollowRequestCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2267D181C4BE15700180C6D /* FollowRequestCustomCell.swift */; };
 		A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25179511C201B0300EA0A5E /* ReportUserViewController.swift */; };
@@ -132,6 +134,8 @@
 		78C1C01B1C006D9200ACDCEC /* reportBug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = reportBug.m; sourceTree = "<group>"; };
 		9CFC86F79C40E6D71F993D2D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A0A3EB60EF24220E0D3A8FD9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A22038011C5D332F000080AC /* RecommendedUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendedUsersViewController.swift; sourceTree = "<group>"; };
+		A22038031C5D35FF000080AC /* RecommendedUsersCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendedUsersCustomCell.swift; sourceTree = "<group>"; };
 		A2267D161C4BD9C200180C6D /* FollowRequestsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowRequestsTableViewController.swift; sourceTree = "<group>"; };
 		A2267D181C4BE15700180C6D /* FollowRequestCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowRequestCustomCell.swift; sourceTree = "<group>"; };
 		A25179511C201B0300EA0A5E /* ReportUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportUserViewController.swift; sourceTree = "<group>"; };
@@ -395,6 +399,8 @@
 		A2E12C811BCE6E27007D8587 /* Login/Register/Other pages */ = {
 			isa = PBXGroup;
 			children = (
+				A22038011C5D332F000080AC /* RecommendedUsersViewController.swift */,
+				A22038031C5D35FF000080AC /* RecommendedUsersCustomCell.swift */,
 				A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */,
 				A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */,
 				E25607AD1BCAF5EC0085B9B4 /* LoginViewController.swift */,
@@ -939,11 +945,13 @@
 				E2D09C9C1BCCC59A003F4651 /* UIColor+CL.m in Sources */,
 				E2B7D2801BE86C9E002395F7 /* FSCalendar.m in Sources */,
 				E2B7D2831BE86C9E002395F7 /* FSCalendarCell.m in Sources */,
+				A22038041C5D35FF000080AC /* RecommendedUsersCustomCell.swift in Sources */,
 				E2B7D28A1BE86C9E002395F7 /* NSDate+FSExtension.m in Sources */,
 				E2FE964C1BDFE07D003BEDD2 /* CommentsViewController.swift in Sources */,
 				A2C55BAC1BE7B77B00431EA0 /* WebPageViewController.swift in Sources */,
 				E2E0D7071BC9950800662E70 /* AppDelegate.m in Sources */,
 				E2065DAC1C3EDBB40054AB2A /* FollowersTableViewController.swift in Sources */,
+				A22038021C5D332F000080AC /* RecommendedUsersViewController.swift in Sources */,
 				E2B7D2841BE86C9E002395F7 /* FSCalendarCollectionView.m in Sources */,
 				A26701F21C369D5B0041E1D1 /* ManageUser.swift in Sources */,
 				E2EE565B1BF199F70064BA1D /* Chameleon_.m in Sources */,

@@ -437,6 +437,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
     
     func GotoNewsfeed() {
         
+        // Ensure that the recomendations view is shown.
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(true, forKey: "recoCheck")
+        defaults.synchronize()
+        
+        // Show the home view (news feed).
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let tabBarController: UITabBarController = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! tabBarViewController

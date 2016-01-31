@@ -12,7 +12,7 @@ import Parse
 
 class SettingsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let choicesarray = ["Report Bug", "Privacy Policy", "Terms of Service", "Acknowledgments"]
+    let choicesarray = ["Report Bug", "Privacy Policy", "Terms of Service", "Acknowledgments", "Recommended Users"]
     
     // Setup the various UI objects.
     @IBOutlet weak var tableview: UITableView!
@@ -40,7 +40,7 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
                 // Go back to the login view controller.
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let viewC = storyboard.instantiateViewControllerWithIdentifier("LoginPage") as! LoginViewController
-                self.presentViewController(viewC, animated: true, completion: nil)
+                self.presentViewController(viewC, animated: true, completion:nil)
             }
             
             else {
@@ -102,16 +102,12 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
         
         switch indexPath.row
         {
-        case 0:
-        GotoBugReport()
-        case 1:
-            ViewPrivacyPolicy()
-        case 2:
-            ViewTermsOfService()
-        case 3:
-            viewAcknowledgments()
-            
-        default: print("break")
+            case 0: GotoBugReport()
+            case 1: ViewPrivacyPolicy()
+            case 2: ViewTermsOfService()
+            case 3: viewAcknowledgments()
+            case 4: viewRecommendations()
+            default: break
         }
     }
     
@@ -144,6 +140,14 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
         let viewC = storyboard.instantiateViewControllerWithIdentifier("WebPage") as! WebPageViewController
         viewC.passedURL = "http://calendario.co.uk/acknowledgements"
         self.presentViewController(viewC, animated: true, completion: nil)
+    }
+    
+    func viewRecommendations() {
+        
+        // Open the user recommendations view.
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let postsview = sb.instantiateViewControllerWithIdentifier("recommend") as! RecommendedUsersViewController
+        self.presentViewController(postsview, animated: true, completion: nil)
     }
     
     // Other methods.
