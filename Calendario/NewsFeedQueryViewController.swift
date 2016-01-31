@@ -10,12 +10,12 @@ import UIKit
 import SDWebImage
 import DOFavoriteButton
 class NewsFeedQueryViewController: PFQueryTableViewController {
-  
+    
     
     var query: PFQuery!
-     var reportedID:String!
-      var currentobjectID:String!
-
+    var reportedID:String!
+    var currentobjectID:String!
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -35,8 +35,8 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         self.navigationItem.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
         self.pullToRefreshEnabled = true
         self.paginationEnabled = false
-
-
+        
+        
     }
     
     override func queryForTable() -> PFQuery {
@@ -55,16 +55,16 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                 let test = user as! PFUser
                 
                 
-              
-        self.query.whereKey("user", equalTo: test.username!)
+                
+                self.query.whereKey("user", equalTo: test.username!)
                 
                 
                 
-
+                
             }
         }
         return query
-
+        
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell? {
@@ -77,14 +77,14 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         
         currentobjectID = object?.objectId
         let defaults = NSUserDefaults.standardUserDefaults().setObject(object?.objectId, forKey: "commentid")
-
+        
         
         // date passed method
         isDatePassed((object?.createdAt!)!, date2: NSDate(), ParseID: (object?.objectId!)!)
         
         
         
-               // hashtags
+        // hashtags
         if ((cell.statusTextView.text?.hasPrefix("#")) != nil)
         {
             cell.statusTextView.text = cell.statusTextView.text
@@ -126,7 +126,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         }
         
         
-
+        
         
         // getting updates
         let attrs = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 14.0)!]
@@ -142,15 +142,15 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         cell.statusTextView.sizeToFit()
         
         
-       
         
-    
+        
+        
         
         // function that is called when comments button is tapped
         
         
         
-        // profile images 
+        // profile images
         var getprofileimages = PFUser.query()
         getprofileimages?.whereKey("objectId", equalTo: (object?.objectForKey("user")?.objectId)!)
         getprofileimages?.findObjectsInBackgroundWithBlock({ (images, error) -> Void in
@@ -161,7 +161,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                 // make profile images circles
                 cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
                 cell.profileimageview.clipsToBounds = true
-
+                
             }
             else
             {
@@ -173,8 +173,8 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         // image from posts
         let imagefile = object?.objectForKey("image") as? PFFile
         if imagefile == nil {
-             cell.userPostedImage.image = UIImage(named: "defaultPhotoPost")
-             cell.userPostedImage.contentMode = UIViewContentMode.ScaleAspectFit
+            cell.userPostedImage.image = UIImage(named: "defaultPhotoPost")
+            cell.userPostedImage.contentMode = UIViewContentMode.ScaleAspectFit
         }
         else {
             
@@ -202,7 +202,13 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         }
         
         // location label
-        cell.locationLabel.text = (object?.valueForKey("location") as! String)
+        if (object?.valueForKey("location") as! String) == "" {
+            cell.locationLabel.text = ""
+        }
+        else {
+            cell.locationLabel.text = (object?.valueForKey("location") as! String)
+            
+        }
         
         
         // date label
@@ -266,7 +272,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                 }
             }
         }
-
+        
         return cell
     }
     
@@ -302,19 +308,19 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         var index = sender.tag
         print(index)
         
-        // get current id 
-       var id = self.objects![index].objectId
+        // get current id
+        var id = self.objects![index].objectId
         GotoComments(id!!)
         
         
     }
-
+    
     
     
     
     func likeclicked(sender:DOFavoriteButton)
     {
-
+        
         if sender.selected
         {
             print("unlike")
@@ -384,7 +390,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         let NC = UINavigationController(rootViewController: commentvc)
         self.presentViewController(NC, animated: true, completion: nil)
     }
-
+    
     
     func isDatePassed(date1:NSDate, date2:NSDate, ParseID: String)
     {
@@ -440,25 +446,25 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
             
         }
     }
-
+    
     
     func ReportView()
     {
-    let sb = UIStoryboard(name: "Main", bundle: nil)
-    var reportVC = sb.instantiateViewControllerWithIdentifier("report") as! ReportTableViewController
-    let NC = UINavigationController(rootViewController: reportVC)
-    self.presentViewController(NC, animated: true, completion: nil)
-    
-    
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        var reportVC = sb.instantiateViewControllerWithIdentifier("report") as! ReportTableViewController
+        let NC = UINavigationController(rootViewController: reportVC)
+        self.presentViewController(NC, animated: true, completion: nil)
+        
+        
     }
-
+    
     // side out menu
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         // reporting statusupdates
         var report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
-              var statusupdate = self.objects![indexPath.row] as! PFObject
+            var statusupdate = self.objects![indexPath.row] as! PFObject
             print("report was tapped")
             
             let defaults = NSUserDefaults.standardUserDefaults()
@@ -524,7 +530,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                                     self.tableView.reloadData()
                                     statusupdate.saveInBackground()
                                     print("deleted")
-                             
+                                    
                                 }
                             })
                         }
@@ -547,7 +553,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         // Set the button background colours.
         report.backgroundColor = UIColor.blackColor()
         deletestatus.backgroundColor = UIColor.redColor()
-
+        
         // Get the status object.
         let statusObject = self.objects![indexPath.row] as! PFObject
         
@@ -557,7 +563,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         if (((statusObject["user"]).objectId) == PFUser.currentUser()?.objectId) {
             return [report, deletestatus]
         }
-        
+            
         else {
             return [report]
         }
@@ -612,7 +618,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
                 // the notification is NOT the same as the logged in user.
                 
                 if (PFUser.currentUser()!.objectId != (object?.objectForKey("user") as! PFUser).objectId) {
-
+                    
                     PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : notifcation, "user" : "\(PFUser.currentUser()?.username!)"])
                     
                     ManageUser.saveUserNotification(notifcation, fromUser: PFUser.currentUser()!, toUser: object?.objectForKey("user") as! PFUser)
@@ -620,7 +626,7 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
             }
         }
     }
-
+    
     @IBAction func plusTapped(sender: AnyObject) {
         GotoPostView()
     }
@@ -634,15 +640,15 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
         // Automatically show the recommended users
         // view if the user has just registered.
         let defaults = NSUserDefaults.standardUserDefaults()
-        let showRecommendations = defaults.objectForKey("recoCheck") as! Bool
-                
+        let showRecommendations = defaults.objectForKey("recoCheck") as? Bool
+        
         if (showRecommendations == true) {
             
             // Open the user recommendations view.
@@ -656,19 +662,19 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
             })
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
 }

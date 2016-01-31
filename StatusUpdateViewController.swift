@@ -142,14 +142,14 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         if location == nil
         {
-           // LocationLabel.text = "No Location"
-            LocationLabel.textColor = UIColor.lightGrayColor()
+            //LocationLabel.text = "No Location"
+            //LocationLabel.textColor = UIColor.lightGrayColor()
         }
         else
         {
             //checkinbutton.hidden = true
-            LocationLabel.text = location as! String
-            LocationLabel.textColor = UIColor.darkGrayColor()
+            //LocationLabel.text = location as! String
+            //LocationLabel.textColor = UIColor.darkGrayColor()
         }
         
         
@@ -227,7 +227,9 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             statusupdatewithimage["dateofevent"] = dateLabel.text
             statusupdatewithimage["ID"] = Int(statusID)
             statusupdatewithimage["tense"] = currenttense
+            
             statusupdatewithimage["location"] = LocationLabel.text
+        
             // image posting
             imagedata = UIImageJPEGRepresentation(((statusImageview?.image))!, 0.5)
             let imagefile = PFFile(name: "image.jpg", data: imagedata!)
@@ -313,6 +315,10 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             self.textViewDismissKeyboard()
             PostStatusUpdate()
             GotoNewsfeed()
+            
+            //reset userDefaults
+            deafaults.removeObjectForKey("location")
+            deafaults.synchronize()
         }
       
     }

@@ -34,7 +34,8 @@ class LocatonViewController: UIViewController, UINavigationBarDelegate, LocateOn
         let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 64))
         navigationbar.backgroundColor = UIColor.whiteColor()
         navigationbar.delegate = self
-        navigationbar.barTintColor = UIColor(colorLiteralRed: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        navigationbar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        navigationbar.translucent = false
         navigationbar.tintColor = UIColor.whiteColor()
         let navitems = UINavigationItem()
         navitems.titleView?.contentMode = UIViewContentMode.Center
