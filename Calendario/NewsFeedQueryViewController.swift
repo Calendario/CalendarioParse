@@ -627,11 +627,11 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         query.getObjectInBackgroundWithId(likedpostid) { (object, error) -> Void in
             if error == nil
             {
-                
+
                 // Only save the notification if the user recieving
                 // the notification is NOT the same as the logged in user.
                 
-                if (PFUser.currentUser()!.objectId != (object?.objectForKey("user") as! PFUser).objectId) {
+                if (PFUser.currentUser()!.objectId! != (object?.objectForKey("user") as! PFUser).objectId!) {
                     
                     PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : notifcation, "user" : "\(PFUser.currentUser()?.username!)"])
                     

@@ -203,8 +203,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                             
                             // Only save the notification if the user recieving
                             // the notification is NOT the same as the logged in user.
-                            
-                            if (PFUser.currentUser()!.objectId != (object?.objectForKey("user") as! PFUser).objectId) {
+
+                            if (PFUser.currentUser()!.objectId! != (object?.objectForKey("user") as! PFUser).objectId!) {
                                 
                                 // create push notifcation
                                 let message = "\(PFUser.currentUser()!.username!) has commented on your post"
