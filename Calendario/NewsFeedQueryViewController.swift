@@ -34,11 +34,6 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         let defaults = NSUserDefaults.standardUserDefaults()
         let showRecommendations = defaults.objectForKey("recoCheck") as? Bool
         
-        
-        
-        
-        
-        
         if (showRecommendations == true) {
             
             // Open the user recommendations view.

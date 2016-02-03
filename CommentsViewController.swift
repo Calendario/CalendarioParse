@@ -187,7 +187,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             comment["postedby"] = PFUser.currentUser()
             comment["statusOBJID"] = String(savedobjectID)
             
-            
             comment.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
                 
                 // Clear the text field for the next comment.
@@ -211,7 +210,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                                 
                                 // Send the notification.
                                 PFCloud.callFunctionInBackground("comment", withParameters: ["message" : message, "user" : "\((object!.valueForKey("user") as! PFUser).username!)"])
-                                
+                                                                
                                 // Save the user notification.
                                 ManageUser.saveUserNotification(message, fromUser: PFUser.currentUser()!, toUser: object!.valueForKey("user") as! PFUser)
                             }

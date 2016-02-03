@@ -58,7 +58,8 @@ class FollowingTableViewController: UITableViewController {
         
         followingdata.removeAllObjects()
         
-        var query = PFUser.query()
+        var query:PFQuery!
+        query = PFUser.query()
         query?.whereKey("username", equalTo: userdata!)
         query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if error == nil
@@ -70,7 +71,7 @@ class FollowingTableViewController: UITableViewController {
                         var user:PFUser = object as! PFUser
                         
                         ManageUser.getUserFollowingList(user, completion: { (userFollowers) -> Void in
-                            
+                                                        
                             for followers in userFollowers
                             {
                                let user = followers.username!

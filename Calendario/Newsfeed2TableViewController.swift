@@ -21,13 +21,30 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        // Automatically show the recommended users
+        // view if the user has just registered.
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let showRecommendations = defaults.objectForKey("recoCheck") as? Bool
+        
+        if (showRecommendations == true) {
+            
+            // Open the user recommendations view.
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let postsview = sb.instantiateViewControllerWithIdentifier("recommend") as! RecommendedUsersViewController
+            self.presentViewController(postsview, animated: true, completion:{
+                
+                // Make sure the view does not appear every time.
+                defaults.setObject(false, forKey: "recoCheck")
+                defaults.synchronize()
+            })
+        }
     }
     
     // activity indictor method
@@ -428,12 +445,8 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                     update?.saveInBackground()
                     
                     let string = "\(PFUser.currentUser()!.username!) has liked your post"
-                    print(string)
-                    
-                    PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : string, "user" : "\(PFUser.currentUser()?.username!)"])
-                    print(update?.valueForKey("likes") as! Int)
                     self.currentobjectID = nil
-                    
+                    self.SavingNotifacations(string)
                     self.LoadData()
                     self.tableView.reloadData()
                 }
@@ -441,7 +454,31 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         }
     }
     
-
+    
+    func SavingNotifacations(notifcation:String)
+    {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        var likedpostid = defaults.objectForKey("objectidliked") as! String
+        var query = PFQuery(className: "StatusUpdate")
+        
+        query.whereKey("objectId", equalTo: likedpostid)
+        query.includeKey("user")
+        query.getObjectInBackgroundWithId(likedpostid) { (object, error) -> Void in
+            if error == nil
+            {
+                
+                // Only save the notification if the user recieving
+                // the notification is NOT the same as the logged in user.
+                
+                if (PFUser.currentUser()!.objectId! != (object?.objectForKey("user") as! PFUser).objectId!) {
+                    
+                    PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : notifcation, "user" : "\(PFUser.currentUser()?.username!)"])
+                    
+                    ManageUser.saveUserNotification(notifcation, fromUser: PFUser.currentUser()!, toUser: object?.objectForKey("user") as! PFUser)
+                }
+            }
+        }
+    }
     
     
     func isDatePassed(date1:NSDate, date2:NSDate, ParseID: String)
