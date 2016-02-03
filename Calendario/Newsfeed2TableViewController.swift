@@ -149,6 +149,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return self.statusData.count
+        //// 
     }
 
     
