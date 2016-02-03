@@ -285,7 +285,7 @@ var finalData:NSMutableArray = []
     
     // User follower/following data.
     
-    class func getUserFollowersList(userData:PFUser , completion: (userFollowers: NSMutableArray) -> Void) {
+    @objc class func getUserFollowersList(userData:PFUser , completion: (userFollowers: NSMutableArray) -> Void) {
         
         // Get the user followers data.
         self.downloadFFClassData(userData, type: 1) { (userFollowData) -> Void in

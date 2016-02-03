@@ -17,6 +17,45 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
     var currentobjectID:String!
     var likesarray:[String] = [""]
     var likesmaster: NSMutableArray!
+    var guser:PFUser!
+    var username:String!
+    var Follower:[String]!
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        
+        // Automatically show the recommended users
+        // view if the user has just registered.
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let showRecommendations = defaults.objectForKey("recoCheck") as? Bool
+        
+        
+        
+        
+        
+        
+        if (showRecommendations == true) {
+            
+            // Open the user recommendations view.
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let postsview = sb.instantiateViewControllerWithIdentifier("recommend") as! RecommendedUsersViewController
+            self.presentViewController(postsview, animated: true, completion:{
+                
+                // Make sure the view does not appear every time.
+                defaults.setObject(false, forKey: "recoCheck")
+                defaults.synchronize()
+            })
+        }
+    }
+    
+    
+
+
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -41,7 +80,19 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         
     }
     
+    
+   
+
+
+    
+    
+    
+    
+    
+
+    
     override func queryForTable() -> PFQuery {
+        
         
         query = PFQuery(className: "StatusUpdate")
         query.orderByDescending("createdAt")
@@ -66,8 +117,17 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
             }
         }
         return query
-        
     }
+    
+   
+    
+    
+    
+    
+    
+        
+    
+  
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell? {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
@@ -652,30 +712,8 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         self.presentViewController(postsview, animated: true, completion: nil)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        
-        // Automatically show the recommended users
-        // view if the user has just registered.
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let showRecommendations = defaults.objectForKey("recoCheck") as? Bool
-        
-        if (showRecommendations == true) {
-            
-            // Open the user recommendations view.
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let postsview = sb.instantiateViewControllerWithIdentifier("recommend") as! RecommendedUsersViewController
-            self.presentViewController(postsview, animated: true, completion:{
-                
-                // Make sure the view does not appear every time.
-                defaults.setObject(false, forKey: "recoCheck")
-                defaults.synchronize()
-            })
-        }
-    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

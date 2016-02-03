@@ -697,6 +697,8 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         if sender.selected
         {
             print("unlike")
+            var index = sender.tag
+            var id = self.statausData[index].objectId
             sender.imageColorOn = UIColor.flatOrangeColor()
             var query = PFQuery(className: "StatusUpdate")
             query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
@@ -720,7 +722,9 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         {
             print("like")
             sender.select()
-            print("the tag is \(sender.tag)")
+            print("the tag is\(sender.tag)")
+            var index = sender.tag
+            var id = self.statausData[index].objectId
             sender.imageColorOn = UIColor.flatRedColor()
             var query = PFQuery(className: "StatusUpdate")
             
@@ -781,37 +785,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         }
     }
     
-    func getPostImageData(objects:[PFObject], imageview:UIImageView, objectID:String)
-    {
-        
-        for object in objects
-        {
-            if let image = object["image"] as! PFFile?
-            {
-                image.getDataInBackgroundWithBlock({ (ImageData, error) -> Void in
-                    if error == nil
-                        
-                    {
-                       if object.objectId == objectID
-                       {
-                        print("match")
-                        //let image = UIImage(data: ImageData!)
-                        
-                        
-                        //TEST
-                        //imageview.image = image
-                        self.postImage = UIImage(data: ImageData!)!
-                        }
-                    }
-                    else
-                    {
-                        print("noImage")
-                    }
-                })
-            }
-        }
-    }
-    
+       
 
     
     
