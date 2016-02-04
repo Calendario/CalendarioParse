@@ -22,7 +22,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        LoadData()
+        //LoadData()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -56,7 +56,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
     override func viewDidAppear(animated: Bool) {
         
        
-          LoadData()
+        LoadData()
         
         //set view properties
         //method to allow tableview cell resizing based on content
@@ -210,7 +210,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             }
         }
             
-        else if ((cell.statusTextView.text?.hasPrefix("@")) != nil)
+         if ((cell.statusTextView.text?.hasPrefix("@")) != nil)
         {
             cell.statusTextView.text = cell.statusTextView.text
             cell.statusTextView.userHandleLinkTapHandler = {label,mention,range in
@@ -230,13 +230,11 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                                 var userid = object.objectId
                                 var query2 = PFUser.query()
                                 query2?.includeKey("user")
-                                query2?.getFirstObjectInBackgroundWithBlock({ (userid, error) -> Void in
+                                query2?.getObjectInBackgroundWithId(userid!, block: { (object, error) -> Void in
                                     var user:PFUser = object as! PFUser
                                     print(user)
                                     self.GotoProfile(user)
-                                    
-                                    
-                                    
+
                                 })
                             }
                         }
@@ -345,12 +343,14 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         
         // user image posts-THIS MIGHT NOT WORK
         
+        
         let imagefile = statusUpdate.objectForKey("image") as? PFFile
         
         if imagefile == nil
         {
             cell.userPostedImage.image = UIImage(named: "defaultPhotoPost")
             cell.userPostedImage.contentMode = UIViewContentMode.ScaleAspectFit
+            
             
             
         }
@@ -365,8 +365,11 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                     cell.userPostedImage.layer.cornerRadius = 0.0
                     cell.userPostedImage.clipsToBounds = true
                     cell.userPostedImage.tag = indexPath.row
-
-                }
+                    cell.userPostedImage.userInteractionEnabled = true
+                    let tapgesture = UITapGestureRecognizer(target: self, action: "imageTapped:")
+                    cell.userPostedImage.addGestureRecognizer(tapgesture)
+                    
+                    }
             }
         })
         
@@ -378,6 +381,25 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
 
         return cell
     }
+    
+    
+    
+    func imageTapped(sender: UITapGestureRecognizer) {
+        // Get the image from the custom cell.
+        let indexPath = NSIndexPath(forRow: (sender.view?.tag)!, inSection: 0)
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! NewsfeedTableViewCell
+        
+        // Set the image to be shown in the photo view.
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(UIImagePNGRepresentation(cell.userPostedImage.image!), forKey: "image")
+        
+        // Open the photo view controller.
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let PVC = sb.instantiateViewControllerWithIdentifier("photoviewer") as! CalPhotoViewerViewController
+        let NC = UINavigationController(rootViewController: PVC)
+        self.presentViewController(NC, animated: true, completion: nil)
+    }
+
     
     func GotoComments(ObjectID:String)
     {
