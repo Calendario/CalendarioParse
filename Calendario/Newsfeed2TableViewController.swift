@@ -21,6 +21,8 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        LoadData()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -111,6 +113,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                 var username = test.username!
                 var getposts:PFQuery = PFQuery(className: "StatusUpdate")
                 getposts.orderByAscending("createdAt")
+                getposts.cachePolicy = .NetworkElseCache
                 getposts.includeKey("user")
                 print(username)
                 getposts.whereKey("user", equalTo: test)
@@ -128,7 +131,10 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                         
                         let array:NSArray = self.statusData.reverseObjectEnumerator().allObjects
                         self.statusData = NSMutableArray(array: array)
-                        self.tableView.reloadData()
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.tableView.reloadData()
+                        })
+                        //self.tableView.reloadData()
                     }
                 })
                 
