@@ -20,8 +20,7 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
     
     // Setup the on screen button actions.
     
-    @IBAction func cancel(sender: UIButton) {
-        
+    @IBAction func done(sender: UIBarButtonItem) {
         // Go back to the login page.
         self.dismissViewControllerAnimated(true, completion: nil)
     }
