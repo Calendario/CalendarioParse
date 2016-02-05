@@ -13,8 +13,9 @@ import DOFavoriteButton
 
 class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelegate {
     
-    var activityindictor: UIRefreshControl!
-    var statusData:NSMutableArray = NSMutableArray()
+    @IBOutlet weak var refreshcontrol: UIRefreshControl!
+   
+        var statusData:NSMutableArray = NSMutableArray()
        var currentobjectID:String!
     
       var reportedID:String!
@@ -23,6 +24,8 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         super.viewDidLoad()
         
         //LoadData()
+        
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -32,6 +35,11 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         
         // Automatically show the recommended users
         // view if the user has just registered.
+        
+        refreshcontrol.attributedTitle = NSAttributedString(string: "Refresh")
+        refreshcontrol.addTarget(self, action: "LoadData", forControlEvents: .ValueChanged)
+        
+        
         let defaults = NSUserDefaults.standardUserDefaults()
         let showRecommendations = defaults.objectForKey("recoCheck") as? Bool
         
@@ -49,7 +57,19 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         }
     }
     
-    // activity indictor method
+    
+    
+    func setRefreshIndicators(state: Bool) {
+        
+        if (state == true) {
+            refreshcontrol.beginRefreshing()
+        }
+            
+        else {
+            refreshcontrol.endRefreshing()
+        }
+    }
+
     
     
     
@@ -72,6 +92,8 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         self.navigationItem.titleView = imageview
         self.navigationItem.titleView?.contentMode = UIViewContentMode.Center
         self.navigationItem.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
+        
+       
 
         
         
@@ -103,7 +125,8 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
     // this method loads all data from parse to the app
     func LoadData()
     {
-         statusData.removeAllObjects()
+        self.setRefreshIndicators(true)
+        statusData.removeAllObjects()
         // mange user call first
         ManageUser.getUserFollowingList(PFUser.currentUser()!) { (userFollowing) -> Void in
             for user in userFollowing
@@ -112,7 +135,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                 // create query 
                 var username = test.username!
                 var getposts:PFQuery = PFQuery(className: "StatusUpdate")
-                getposts.orderByAscending("createdAt")
+                getposts.orderByDescending("createdAt")
                 getposts.cachePolicy = .NetworkElseCache
                 getposts.includeKey("user")
                 print(username)
@@ -131,12 +154,19 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                         
                         let array:NSArray = self.statusData.reverseObjectEnumerator().allObjects
                         self.statusData = NSMutableArray(array: array)
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.tableView.reloadData()
-                        })
                         //self.tableView.reloadData()
+                        
                     }
+                    
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.tableView.reloadData()
+                        self.setRefreshIndicators(false)
+                       
+                    })
+
                 })
+                
+               
                 
                 
             }
@@ -251,8 +281,30 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         // cell profile image properties
         cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
         cell.profileimageview.clipsToBounds = true
+        
         // date label
-        cell.uploaddatelabel.text = statusUpdate.objectForKey("dateofevent") as! String
+        
+        let attrs2 = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 14.0)!]
+        let tensestring2 = NSMutableAttributedString(string: statusUpdate.objectForKey("tense") as! String, attributes: attrs2)
+        let spacestring2 = NSMutableAttributedString(string: " ")
+        let onstring = NSAttributedString(string: "on")
+        let spacestr3 = NSAttributedString(string: " ")
+        
+        tensestring2.appendAttributedString(spacestring2)
+        tensestring2.appendAttributedString(onstring)
+        tensestring2.appendAttributedString(spacestr3)
+        let dateattrstring = NSAttributedString(string: statusUpdate.objectForKey("dateofevent") as! String, attributes: attrs2)
+        tensestring2.appendAttributedString(dateattrstring)
+        
+        cell.uploaddatelabel.attributedText = tensestring2
+      
+        
+    
+        
+        
+        
+
+        //cell.uploaddatelabel.text = statusUpdate.objectForKey("dateofevent") as! String
         // location label
         cell.locationLabel.text = statusUpdate.objectForKey("location") as! String
         
