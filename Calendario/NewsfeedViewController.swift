@@ -524,9 +524,9 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         commentquery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil
             {
-                var commentnum = objects?.count
+                var commentnum = objects!.count
                 
-                cell.commentsLabel.text = String("\(commentnum!) comments")
+                cell.commentsLabel.text = String("\(commentnum) comments")
             }
         }
         

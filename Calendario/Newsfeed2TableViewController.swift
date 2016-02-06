@@ -125,8 +125,16 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
     // this method loads all data from parse to the app
     func LoadData()
     {
+         statusData.removeAllObjects()
+        
+        
+        
+        
+        
+        
+        
         self.setRefreshIndicators(true)
-        statusData.removeAllObjects()
+       
         // mange user call first
         ManageUser.getUserFollowingList(PFUser.currentUser()!) { (userFollowing) -> Void in
             for user in userFollowing
@@ -135,8 +143,8 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                 // create query 
                 var username = test.username!
                 var getposts:PFQuery = PFQuery(className: "StatusUpdate")
-                getposts.orderByDescending("createdAt")
-                getposts.cachePolicy = .NetworkElseCache
+                getposts.orderByAscending("createdAt")
+                
                 getposts.includeKey("user")
                 print(username)
                 getposts.whereKey("user", equalTo: test)
@@ -148,22 +156,18 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                         for object in objects!
                         {
                             let statusupdate:PFObject = object as! PFObject
+                                self.statusData.addObject(statusupdate)
+                                self.setRefreshIndicators(false)
                             
-                            self.statusData.addObject(statusupdate)
+                            
                         }
                         
                         let array:NSArray = self.statusData.reverseObjectEnumerator().allObjects
                         self.statusData = NSMutableArray(array: array)
-                        //self.tableView.reloadData()
+                        self.tableView.reloadData()
                         
                     }
-                    
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        self.tableView.reloadData()
-                        self.setRefreshIndicators(false)
-                       
-                    })
-
+                  
                 })
                 
                
@@ -172,6 +176,10 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             }
         }
     }
+    
+    
+    
+    
     
     
     
@@ -336,8 +344,9 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         commentsquery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil
             {
-                var commentnum = objects?.count
-                cell.commentsLabel.text = "\(commentnum!) comments"
+                var commentnum = objects!.count
+          
+                cell.commentsLabel.text = "\(commentnum) comments"
                 
             }
         }
@@ -600,7 +609,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                     }
                         
                         
-                    else
+                     else if aobject.objectForKey("dateofevent") as! String != newdate
                     {
                         
                         print("tense is going to change")
