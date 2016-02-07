@@ -134,6 +134,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         
         
         self.setRefreshIndicators(true)
+        self.tableView.userInteractionEnabled = false
        
         // mange user call first
         ManageUser.getUserFollowingList(PFUser.currentUser()!) { (userFollowing) -> Void in
@@ -165,7 +166,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                         let array:NSArray = self.statusData.reverseObjectEnumerator().allObjects
                         self.statusData = NSMutableArray(array: array)
                         self.tableView.reloadData()
-                        
+                        self.tableView.userInteractionEnabled = true
                     }
                   
                 })
