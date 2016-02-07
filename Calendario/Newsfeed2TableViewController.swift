@@ -17,8 +17,8 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
    
         var statusData:NSMutableArray = NSMutableArray()
        var currentobjectID:String!
-    
       var reportedID:String!
+    var likedstatus = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -393,7 +393,18 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         cell.likebutton.tag = indexPath.row
         cell.likebutton.addTarget(self, action: "likeclicked:", forControlEvents: .TouchUpInside)
         
+        var likedbyuser = statusUpdate.objectForKey("likedby") as? String
+        let username = likedbyuser
+        print(username)
         
+        if PFUser.currentUser()!.username! == username
+        {
+            cell.likebutton.select()
+        }
+        else
+        {
+            cell.likebutton.deselect()
+        }
         
         
         // commennt button
@@ -495,11 +506,21 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
                 if error == nil
                 {
-                    var currentlikes = update?.valueForKey("likes") as! Int
+                    var currentlikes = update?.valueForKey("likes") as? Int
                     
+                    if currentlikes > 0
+                    {
+                        update!["likes"] = currentlikes! - 1
+                    }
+                    else
+                    {
+                        currentlikes = 0
+                        update!["likes"] = currentlikes!
+                    }
                     
-                    update!["likes"] = currentlikes - 1
+                    update!["likedby"] =  nil
                     update?.saveInBackground()
+                    
                     
                     self.currentobjectID = nil
                     self.LoadData()
@@ -518,7 +539,12 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             var index = sender.tag
             var id = self.statusData[index].objectId
             sender.imageColorOn = UIColor.flatRedColor()
+            likedstatus = true
+            
+            let string = "\(PFUser.currentUser()!.username!) has liked your post"
+            self.SavingNotifacations(string, objectID: currentobjectID)
             var query = PFQuery(className: "StatusUpdate")
+            print(currentobjectID)
             
             
             query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
@@ -531,29 +557,41 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                         currentlikes = 0
                     }
                     
+                    update!["likedby"] = PFUser.currentUser()!.username!
                     update!["likes"] = currentlikes! + 1
                     update?.saveInBackground()
                     
-                    let string = "\(PFUser.currentUser()!.username!) has liked your post"
                     self.currentobjectID = nil
-                    self.SavingNotifacations(string)
-                    self.LoadData()
-                    self.tableView.reloadData()
+                    
+                    //self.LoadData()
+                    //.tableView.reloadData()
+                    try! update?.fetch()
                 }
             })
         }
     }
     
     
-    func SavingNotifacations(notifcation:String)
+    func SavingNotifacations(notifcation:String, objectID:String)
     {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        var likedpostid = defaults.objectForKey("objectidliked") as! String
         var query = PFQuery(className: "StatusUpdate")
         
-        query.whereKey("objectId", equalTo: likedpostid)
-        query.includeKey("user")
-        query.getObjectInBackgroundWithId(likedpostid) { (object, error) -> Void in
+        query.getObjectInBackgroundWithId(objectID) { (object, error) -> Void in
+            if error == nil
+            {
+                if (PFUser.currentUser()!.objectId! != (object?.objectForKey("user") as! PFUser).objectId!)
+                {
+                    PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : notifcation, "user" : "\(PFUser.currentUser()?.username!)"])
+                    
+                    ManageUser.saveUserNotification(notifcation, fromUser: PFUser.currentUser()!, toUser: object?.objectForKey("user") as! PFUser)
+
+                }
+            }
+        }
+        
+       /* var query = PFQuery(className: "StatusUpdate")
+        
+            query.getObjectInBackgroundWithId(likedpostid) { (object, error) -> Void in
             if error == nil
             {
                 
@@ -568,6 +606,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                 }
             }
         }
+*/
     }
     
     
