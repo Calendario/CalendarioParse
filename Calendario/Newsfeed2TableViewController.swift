@@ -225,9 +225,12 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         
         cell.layoutMargins = UIEdgeInsetsZero
         
+        
+        cell.statusTextView.text = statusUpdate.objectForKey("updatetext") as! String
+        
         // NSMutableAttributedString FOR USER STATUS
         
-        let attrs = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 14.0)!]
+        /*let attrs = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 14.0)!]
         let tensestring = NSMutableAttributedString(string: statusUpdate.objectForKey("tense") as! String, attributes: attrs)
         let spacestring = NSMutableAttributedString(string: " ")
         
@@ -235,7 +238,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         
         tensestring.appendAttributedString(spacestring)
         tensestring.appendAttributedString(attributedString)
-        
+       */
         
         
         // checking for hashtags and mentions
@@ -284,7 +287,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         }
         
         
-        cell.statusTextView.attributedText = tensestring
+        //cell.statusTextView.attributedText = tensestring
         cell.statusTextView.sizeToFit()
         
         // cell profile image properties
@@ -336,7 +339,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         }
         else
         {
-            cell.likeslabel.text = "\(likesamount) Likes"
+            cell.likeslabel.text = "\(likesamount!) Likes"
         }
         
         
@@ -524,7 +527,14 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                     
                     self.currentobjectID = nil
                     self.LoadData()
-                    self.tableView.reloadData()
+                    
+                    let QOS = QOS_CLASS_BACKGROUND
+                    let backgroundqueue = dispatch_get_global_queue(QOS, 0)
+                    dispatch_async(backgroundqueue, { () -> Void in
+                        self.tableView.reloadData()
+                    })
+                    
+                    //self.tableView.reloadData()
                 }
             })
             
@@ -565,7 +575,13 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                     
                     //self.LoadData()
                     //.tableView.reloadData()
-                    try! update?.fetch()
+                    
+                    // thsi will take the fetch request and move off the main thread
+                    let QOS = QOS_CLASS_BACKGROUND
+                    let backgroundqueue = dispatch_get_global_queue(QOS, 0)
+                    dispatch_async(backgroundqueue, { () -> Void in
+                        try! update?.fetch()
+                    })
                 }
             })
         }
