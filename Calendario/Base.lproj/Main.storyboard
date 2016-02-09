@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="16Q-ZH-5Rb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="16Q-ZH-5Rb">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -3698,19 +3698,19 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         <constraint firstAttribute="width" constant="50" id="hJl-L5-Sgw"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wEa-rU-qRh">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="wEa-rU-qRh">
                                                     <rect key="frame" x="66" y="8" width="44" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Siy-Xq-DsK">
-                                                    <rect key="frame" x="66" y="38" width="40" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="293" y="11" width="36" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mPO-fv-iP8">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mPO-fv-iP8">
                                                     <rect key="frame" x="8" y="66" width="359" height="120"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -3737,40 +3737,53 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qb4-uF-XxW">
-                                                    <rect key="frame" x="336" y="15" width="31" height="15"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <rect key="frame" x="331" y="11" width="36" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7nu-ZO-nGO">
+                                                    <rect key="frame" x="66" y="38" width="35" height="19"/>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
+                                                    <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="7nu-ZO-nGO" firstAttribute="leading" secondItem="wEa-rU-qRh" secondAttribute="leading" id="0Xg-ux-HCl"/>
                                                 <constraint firstItem="5PC-wb-Ubg" firstAttribute="top" secondItem="SHx-cD-L3b" secondAttribute="topMargin" constant="-3" id="1Nl-ge-zUZ"/>
                                                 <constraint firstItem="wEa-rU-qRh" firstAttribute="top" secondItem="xw6-ES-kCb" secondAttribute="top" id="7EC-g7-xQS"/>
-                                                <constraint firstItem="Siy-Xq-DsK" firstAttribute="bottom" secondItem="xw6-ES-kCb" secondAttribute="bottom" id="7k0-4n-e7n"/>
+                                                <constraint firstItem="qb4-uF-XxW" firstAttribute="leading" secondItem="Siy-Xq-DsK" secondAttribute="trailing" constant="2" id="AUU-1y-DqI"/>
                                                 <constraint firstItem="qb4-uF-XxW" firstAttribute="bottom" secondItem="wEa-rU-qRh" secondAttribute="bottom" id="AzH-Bd-e3f"/>
                                                 <constraint firstItem="xw6-ES-kCb" firstAttribute="top" secondItem="SHx-cD-L3b" secondAttribute="top" constant="8" id="C5o-1s-YoN"/>
+                                                <constraint firstItem="qb4-uF-XxW" firstAttribute="centerY" secondItem="wEa-rU-qRh" secondAttribute="centerY" id="Fns-M2-5TC"/>
                                                 <constraint firstAttribute="bottom" secondItem="mPO-fv-iP8" secondAttribute="bottom" id="GKO-p1-Uxc"/>
                                                 <constraint firstItem="xw6-ES-kCb" firstAttribute="leading" secondItem="SHx-cD-L3b" secondAttribute="leading" constant="8" id="VB5-D8-VGx"/>
                                                 <constraint firstItem="qb4-uF-XxW" firstAttribute="trailing" secondItem="SHx-cD-L3b" secondAttribute="trailingMargin" id="WHc-UW-6wb"/>
+                                                <constraint firstItem="Siy-Xq-DsK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wEa-rU-qRh" secondAttribute="trailing" constant="8" id="YI6-8i-tVO"/>
                                                 <constraint firstItem="5PC-wb-Ubg" firstAttribute="centerY" secondItem="SHx-cD-L3b" secondAttribute="centerY" id="ZPT-un-qfV"/>
                                                 <constraint firstItem="mPO-fv-iP8" firstAttribute="leading" secondItem="xw6-ES-kCb" secondAttribute="leading" id="bN2-ds-cdb"/>
                                                 <constraint firstItem="wEa-rU-qRh" firstAttribute="leading" secondItem="xw6-ES-kCb" secondAttribute="trailing" constant="8" id="bvi-yk-Miq"/>
-                                                <constraint firstItem="mPO-fv-iP8" firstAttribute="top" secondItem="Siy-Xq-DsK" secondAttribute="bottom" constant="8.5" id="cPM-ae-RK2"/>
-                                                <constraint firstItem="Siy-Xq-DsK" firstAttribute="leading" secondItem="wEa-rU-qRh" secondAttribute="leading" id="ejf-3Y-zN1"/>
+                                                <constraint firstItem="Siy-Xq-DsK" firstAttribute="centerY" secondItem="qb4-uF-XxW" secondAttribute="centerY" id="j8l-ba-Ddm"/>
+                                                <constraint firstItem="7nu-ZO-nGO" firstAttribute="top" secondItem="wEa-rU-qRh" secondAttribute="bottom" constant="8" id="jJ5-oW-OMP"/>
                                                 <constraint firstItem="5PC-wb-Ubg" firstAttribute="centerY" secondItem="SHx-cD-L3b" secondAttribute="centerY" id="jeb-Wx-pOA"/>
+                                                <constraint firstItem="7nu-ZO-nGO" firstAttribute="bottom" secondItem="xw6-ES-kCb" secondAttribute="bottom" id="ls5-kj-ZSi"/>
                                                 <constraint firstAttribute="trailing" secondItem="mPO-fv-iP8" secondAttribute="trailing" constant="8" id="oWp-P3-qpB"/>
                                                 <constraint firstItem="5PC-wb-Ubg" firstAttribute="leading" secondItem="xw6-ES-kCb" secondAttribute="trailing" constant="9" id="s4L-ga-E9q"/>
                                                 <constraint firstItem="5PC-wb-Ubg" firstAttribute="centerX" secondItem="SHx-cD-L3b" secondAttribute="centerX" id="yg8-tQ-ajv"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="ls5-kj-ZSi"/>
                                                     <exclude reference="1Nl-ge-zUZ"/>
                                                     <exclude reference="ZPT-un-qfV"/>
                                                     <exclude reference="s4L-ga-E9q"/>
+                                                    <exclude reference="AzH-Bd-e3f"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="locationLabel" destination="7nu-ZO-nGO" id="r0T-Jx-uo5"/>
                                             <outlet property="privateView" destination="5PC-wb-Ubg" id="D0E-2R-vfZ"/>
                                             <outlet property="profileImageView" destination="xw6-ES-kCb" id="peE-JC-lt5"/>
                                             <outlet property="statusTextView" destination="mPO-fv-iP8" id="dIZ-BR-P3D"/>
@@ -4211,7 +4224,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="KILabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Opn-vO-qEd" customClass="KILabel">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KILabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Opn-vO-qEd" customClass="KILabel">
                                                 <rect key="frame" x="127" y="89" width="45" height="18"/>
                                                 <color key="tintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="13"/>

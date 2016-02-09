@@ -707,19 +707,28 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             cell.statusTextView.text = currentObject["updatetext"] as? String
             cell.uploadDateLabel.text = currentObject["dateofevent"] as? String
             
-            // NSMutableAttributedString
+            // NSMutableAttributedString  <-- no longer needed as we have changed the layout of the elements
             
             let attrs = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)]
             let tensestring = NSMutableAttributedString(string: currentObject.objectForKey("tense") as! String, attributes: attrs)
             let spacestring = NSMutableAttributedString (string: " ")
             let updatestring = NSMutableAttributedString(string: currentObject.objectForKey("location") as! String)
             
-            tensestring.appendAttributedString(spacestring)
-            tensestring.appendAttributedString(updatestring)
+          /*  tensestring.appendAttributedString(spacestring)
+            tensestring.appendAttributedString(updatestring)*/
             
+            //setting tense label
             cell.tenseLabel.attributedText = tensestring
             
-        
+            //setting location label and checking contents
+            let locationValue: String = currentObject.objectForKey("location") as! String
+            if locationValue == "tap to select location..." {
+                cell.locationLabel.text = ""
+            }
+            else {
+            cell.locationLabel.text = currentObject.objectForKey("location") as! String
+            }
+
             // Turn the profile picture into a cirlce.
             cell.profileImageView.layer.cornerRadius = (cell.profileImageView.frame.size.width / 2)
             cell.profileImageView.clipsToBounds = true

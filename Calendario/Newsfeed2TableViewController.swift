@@ -329,7 +329,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         
         if cell.locationLabel.text == "tap to select location..."
         {
-            cell.locationLabel.text = "No Location"
+            cell.locationLabel.text = ""
         }
         else
         {
