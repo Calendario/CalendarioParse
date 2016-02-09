@@ -511,7 +511,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             var query = PFQuery(className: "StatusUpdate")
             query.orderByAscending("createdAt")
 
-            query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
+            query.getObjectInBackgroundWithId(id!!, block: { (update, error) -> Void in
                 if error == nil
                 {
                     update?.incrementKey("likes", byAmount: -1)
@@ -542,17 +542,18 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             print("the tag is\(sender.tag)")
             var index = sender.tag
             var id = self.statusData[index].objectId
+
             sender.imageColorOn = UIColor.flatRedColor()
             likedstatus = true
             
             let string = "\(PFUser.currentUser()!.username!) has liked your post"
-            self.SavingNotifacations(string, objectID: currentobjectID, notificationType:"like")
+            self.SavingNotifacations(string, objectID: id!!, notificationType:"like")
             var query = PFQuery(className: "StatusUpdate")
             query.orderByAscending("createdAt")
             print(currentobjectID)
             
             
-            query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
+            query.getObjectInBackgroundWithId(id!!, block: { (update, error) -> Void in
                 
                 if error == nil
                 {
