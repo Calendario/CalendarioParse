@@ -146,6 +146,8 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                 var getposts:PFQuery = PFQuery(className: "StatusUpdate")
                 getposts.orderByAscending("createdAt")
                 
+                
+                
                 getposts.includeKey("user")
                 print(username)
                 getposts.whereKey("user", equalTo: test)
@@ -309,9 +311,14 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         tensestring2.appendAttributedString(dateattrstring)
         
         cell.uploaddatelabel.attributedText = tensestring2
-      
         
-    
+        var likedbyuser = statusUpdate.objectForKey("likedby") as? String
+        let username = likedbyuser
+        print(username)
+        
+        
+        
+
         
         
         
@@ -343,19 +350,19 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         }
         
         
-        var commentsquery = PFQuery(className: "comment")
-        commentsquery.whereKey("statusOBJD", equalTo: statusUpdate.objectId!)
+        currentobjectID = statusUpdate.objectId
+        
+        
+        
+      var commentsquery = PFQuery(className: "comment")
+        commentsquery.whereKey("statusOBJID", equalTo: statusUpdate.objectId!)
         commentsquery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil
             {
-                var commentnum = objects!.count
-          
-                cell.commentsLabel.text = "\(commentnum) comments"
-                
+                print(objects!.count)
+                cell.commentsLabel.text = "\(String(objects!.count) ) Comments"
             }
         }
-        
-        currentobjectID = statusUpdate.objectId
         
         
         var findUser:PFQuery = PFUser.query()!
@@ -377,6 +384,8 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         //profile images
         var getImages:PFQuery = PFUser.query()!
         getImages.whereKey("objectId", equalTo: (statusUpdate.objectForKey("user")?.objectId)!)
+        getImages.orderByAscending("createdAt")
+
         getImages.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil
             {
@@ -396,18 +405,12 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         cell.likebutton.tag = indexPath.row
         cell.likebutton.addTarget(self, action: "likeclicked:", forControlEvents: .TouchUpInside)
         
-        var likedbyuser = statusUpdate.objectForKey("likedby") as? String
-        let username = likedbyuser
-        print(username)
-        
         if PFUser.currentUser()!.username! == username
         {
             cell.likebutton.select()
         }
-        else
-        {
-            cell.likebutton.deselect()
-        }
+
+        
         
         
         // commennt button
@@ -506,32 +509,23 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             var id = self.statusData[index].objectId
             sender.imageColorOn = UIColor.flatOrangeColor()
             var query = PFQuery(className: "StatusUpdate")
+            query.orderByAscending("createdAt")
+
             query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
                 if error == nil
                 {
-                    var currentlikes = update?.valueForKey("likes") as? Int
-                    
-                    if currentlikes > 0
-                    {
-                        update!["likes"] = currentlikes! - 1
-                    }
-                    else
-                    {
-                        currentlikes = 0
-                        update!["likes"] = currentlikes!
-                    }
-                    
-                    update!["likedby"] =  nil
+                    update?.incrementKey("likes", byAmount: -1)
                     update?.saveInBackground()
                     
                     
+                    
                     self.currentobjectID = nil
-                    self.LoadData()
+                    //self.LoadData()
                     
                     let QOS = QOS_CLASS_BACKGROUND
                     let backgroundqueue = dispatch_get_global_queue(QOS, 0)
                     dispatch_async(backgroundqueue, { () -> Void in
-                        self.tableView.reloadData()
+                       self.LoadData()
                     })
                     
                     //self.tableView.reloadData()
@@ -554,38 +548,33 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             let string = "\(PFUser.currentUser()!.username!) has liked your post"
             self.SavingNotifacations(string, objectID: currentobjectID)
             var query = PFQuery(className: "StatusUpdate")
+            query.orderByAscending("createdAt")
             print(currentobjectID)
             
             
             query.getObjectInBackgroundWithId(currentobjectID, block: { (update, error) -> Void in
+                
                 if error == nil
                 {
-                    var currentlikes = update?.valueForKey("likes") as? Int
+                    update!.incrementKey("likes", byAmount: 1)
+                    print("saved")
+                    update!.saveInBackground()
                     
-                    if currentlikes == nil
-                    {
-                        currentlikes = 0
-                    }
                     
-                    update!["likedby"] = PFUser.currentUser()!.username!
-                    update!["likes"] = currentlikes! + 1
-                    update?.saveInBackground()
-                    
-                    self.currentobjectID = nil
-                    
-                    //self.LoadData()
-                    //.tableView.reloadData()
-                    
-                    // thsi will take the fetch request and move off the main thread
                     let QOS = QOS_CLASS_BACKGROUND
                     let backgroundqueue = dispatch_get_global_queue(QOS, 0)
                     dispatch_async(backgroundqueue, { () -> Void in
-                        try! update?.fetch()
+                        self.LoadData()
+                      
+
                     })
+                    
                 }
             })
         }
     }
+    
+    
     
     
     func SavingNotifacations(notifcation:String, objectID:String)
@@ -628,16 +617,20 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
     
     func isDatePassed(date1:NSDate, date2:NSDate, ParseID: String)
     {
+        print(date1)
+        
         let dateformatter = NSDateFormatter()
         dateformatter.dateFormat = "M/d/yy"
         var newdate = dateformatter.stringFromDate(date2)
         
-        
+
+       
         if date1.timeIntervalSince1970 < date2.timeIntervalSince1970
         {
             print("Date2 has passed")
             
             var query = PFQuery(className: "StatusUpdate")
+            query.orderByAscending("createdAt")
             query.getObjectInBackgroundWithId(ParseID, block: { (updates:PFObject?, error:NSError?) -> Void in
                 if error == nil
                 {
@@ -665,15 +658,15 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                     }
                         
                         
-                     else if aobject.objectForKey("dateofevent") as! String != newdate
+                    else if aobject.objectForKey("dateofevent") as! String != newdate
                     {
                         
                         print("tense is going to change")
                         aobject["tense"] = "went"
                         aobject.saveInBackground()
                         
+        
                     }
-                    
                 }
             })
             
