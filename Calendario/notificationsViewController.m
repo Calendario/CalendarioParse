@@ -76,7 +76,7 @@
     // comment, etc.. in the future we will add support for like (see more view controller).
     UIStoryboard *mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-    if ([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"user"]) {
+    if (([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"user"]) || ([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"like"])) {
         
         // Get the user data before opening
         // the profile view controller.
@@ -108,11 +108,6 @@
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }];
     }
-    
-    /*
-     else if ([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"like"]) {
-     } // FUTURE ADDITION
-     */
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

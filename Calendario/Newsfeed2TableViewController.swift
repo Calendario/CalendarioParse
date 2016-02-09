@@ -546,7 +546,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             likedstatus = true
             
             let string = "\(PFUser.currentUser()!.username!) has liked your post"
-            self.SavingNotifacations(string, objectID: currentobjectID)
+            self.SavingNotifacations(string, objectID: currentobjectID, notificationType:"like")
             var query = PFQuery(className: "StatusUpdate")
             query.orderByAscending("createdAt")
             print(currentobjectID)
@@ -577,7 +577,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
     
     
     
-    func SavingNotifacations(notifcation:String, objectID:String)
+    func SavingNotifacations(notifcation:String, objectID:String, notificationType:String)
     {
         var query = PFQuery(className: "StatusUpdate")
         
@@ -588,8 +588,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                 {
                     PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : notifcation, "user" : "\(PFUser.currentUser()?.username!)"])
                     
-                    ManageUser.saveUserNotification(notifcation, fromUser: PFUser.currentUser()!, toUser: object?.objectForKey("user") as! PFUser, extType: "user", extObjectID: "n/a")
-
+                    ManageUser.saveUserNotification(notifcation, fromUser: PFUser.currentUser()!, toUser: object?.objectForKey("user") as! PFUser, extType: notificationType, extObjectID: objectID)
                 }
             }
         }
