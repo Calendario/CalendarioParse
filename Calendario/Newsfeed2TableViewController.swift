@@ -588,7 +588,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                 {
                     PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : notifcation, "user" : "\(PFUser.currentUser()?.username!)"])
                     
-                    ManageUser.saveUserNotification(notifcation, fromUser: PFUser.currentUser()!, toUser: object?.objectForKey("user") as! PFUser)
+                    ManageUser.saveUserNotification(notifcation, fromUser: PFUser.currentUser()!, toUser: object?.objectForKey("user") as! PFUser, extType: "user", extObjectID: "n/a")
 
                 }
             }

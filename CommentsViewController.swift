@@ -41,19 +41,18 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         self.commentTextView.delegate = self
       
         // Do any additional setup after loading the view.
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        
+    
+        //let defaults = NSUserDefaults.standardUserDefaults()
         //savedobjectID = defaults.objectForKey("objectid") as! String
         
-        print(savedobjectID!)
+        print("THIS is the comment status update ID: \(savedobjectID!)")
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-            LoadCommentData()
+        LoadCommentData()
         
-           self.view.bringSubviewToFront(self.commentsContainerView)
+        self.view.bringSubviewToFront(self.commentsContainerView)
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         self.navigationItem.title  = "Comments"
@@ -83,7 +82,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         // set nav items in nav bar
         navigationbar.items = [navitems]
         self.view.addSubview(navigationbar)
-        
         */
     }
     
@@ -93,7 +91,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         let userInfo:NSDictionary = notification.userInfo!
         let keyboardFrame:NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.CGRectValue()
-        var keyboardHeight = keyboardRectangle.height
+        let keyboardHeight = keyboardRectangle.height
         
         // Raise the comments container view.
         UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
@@ -109,7 +107,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         // Lower the comments container view.
         UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
             self.commentsContainerView.transform = CGAffineTransformMakeTranslation(0.0, 0.0)
-            }, completion:nil)
+        }, completion:nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -127,22 +125,25 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         commentdata.removeAllObjects()
         
         var getcomments:PFQuery = PFQuery(className: "comment")
-        getcomments.whereKey("statusOBJID", equalTo: savedobjectID)
+        getcomments.whereKey("statusOBJID", equalTo: savedobjectID!)
         
         getcomments.findObjectsInBackgroundWithBlock { (comments:[PFObject]?, error:NSError?) -> Void in
             if error == nil
             {
-                for comment in comments!
-                {
-                    let comments:PFObject = comment as! PFObject
-                    self.commentdata.addObject(comment)
+                
+                if ((comments != nil) && (comments!.count > 0)) {
+                    
+                    for comment in comments!
+                    {
+                        let comments:PFObject = comment as! PFObject
+                        self.commentdata.addObject(comment)
+                    }
+                    
+                    let array:NSArray = self.commentdata.reverseObjectEnumerator().allObjects
+                    let reverseArray = array.reverse()
+                    self.commentdata = NSMutableArray(array: reverseArray)
+                    self.tableView.reloadData()
                 }
-                
-                let array:NSArray = self.commentdata.reverseObjectEnumerator().allObjects
-                let reverseArray = array.reverse()
-                self.commentdata = NSMutableArray(array: reverseArray)
-                self.tableView.reloadData()
-                
             }
         }
         
@@ -212,7 +213,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                                 PFCloud.callFunctionInBackground("comment", withParameters: ["message" : message, "user" : "\((object!.valueForKey("user") as! PFUser).username!)"])
                                                                 
                                 // Save the user notification.
-                                ManageUser.saveUserNotification(message, fromUser: PFUser.currentUser()!, toUser: object!.valueForKey("user") as! PFUser)
+                                ManageUser.saveUserNotification(message, fromUser: PFUser.currentUser()!, toUser: object!.valueForKey("user") as! PFUser, extType: "comment", extObjectID: String(self.savedobjectID))
                             }
                             
                             // Reload the comments table view.
@@ -263,7 +264,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         print(comment.valueForKey("postedby")?.objectId!)
         
-        
         var usernamequery = PFUser.query()
         usernamequery?.getObjectInBackgroundWithId((comment.valueForKey("postedby")?.objectId!)!, block: { (object, error) -> Void in
             if error == nil
@@ -291,10 +291,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         })
         
-
         
         cell.commentTextView.text = comment.objectForKey("commenttext") as! String
-
    
         return cell
     }
@@ -302,14 +300,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
      func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
-    
-    
-    
-    
-
-    
-
-    
 
     /*
     // MARK: - Navigation
@@ -320,5 +310,4 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         // Pass the selected object to the new view controller.
     }
     */
-
 }

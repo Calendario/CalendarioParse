@@ -15,6 +15,7 @@
 {
     NSMutableArray *notificationUsers;
     NSMutableArray *notifications;
+    NSMutableArray *notificationsExtLinks;
 }
 
 @end
@@ -38,7 +39,7 @@
 - (void) getNotifications {
     
     // Download the user notifications.
-    [ManageUser getUserNotifications:[PFUser currentUser] completion:^(NSArray *userData, NSArray *notificationData) {
+    [ManageUser getUserNotifications:[PFUser currentUser] completion:^(NSArray *userData, NSArray *notificationData, NSArray *extLinks) {
         
         // Only load the data if one or
         // more notifications are present.
@@ -49,6 +50,7 @@
             // downloaded user notification data.
             notificationUsers = [[NSMutableArray alloc] initWithArray:[[userData reverseObjectEnumerator] allObjects]];
             notifications = [[NSMutableArray alloc] initWithArray:[[notificationData reverseObjectEnumerator] allObjects]];
+            notificationsExtLinks = [[NSMutableArray alloc] initWithArray:[[extLinks reverseObjectEnumerator] allObjects]];
             
             // Update the table view.
             [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
@@ -70,24 +72,47 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // Get the user data before opening
-    // the profile view controller.
-    PFQuery *userQuery = [PFUser query];
-    [userQuery whereKey:@"objectId" equalTo:((PFUser *)notificationUsers[indexPath.row]).objectId];
-    [userQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+    // Open the appropriate controller depending on the notification type - user,
+    // comment, etc.. in the future we will add support for like (see more view controller).
+    UIStoryboard *mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    if ([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"user"]) {
         
-        if (error == nil) {
+        // Get the user data before opening
+        // the profile view controller.
+        PFQuery *userQuery = [PFUser query];
+        [userQuery whereKey:@"objectId" equalTo:((PFUser *)notificationUsers[indexPath.row]).objectId];
+        [userQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
             
-            // Show the notification user profile view.
-            UIStoryboard *mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            MyProfileViewController *profVC = [mainSB instantiateViewControllerWithIdentifier:@"My Profile"];
-            profVC.passedUser = (PFUser *)object;
-            profVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-            [self presentViewController:profVC animated:YES completion:^{
-                [tableView deselectRowAtIndexPath:indexPath animated:YES];
-            }];
-        }
-    }];
+            if (error == nil) {
+                
+                // Show the notification user profile view.
+                MyProfileViewController *profVC = [mainSB instantiateViewControllerWithIdentifier:@"My Profile"];
+                profVC.passedUser = (PFUser *)object;
+                profVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                [self presentViewController:profVC animated:YES completion:^{
+                    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                }];
+            }
+        }];
+    }
+    
+    else if ([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"comment"]) {
+        
+        // Show the comments for this status update.
+        CommentsViewController *commentvc = [mainSB instantiateViewControllerWithIdentifier:@"comments"];
+        commentvc.savedobjectID = [NSString stringWithFormat:@"%@", [notificationsExtLinks[indexPath.row] objectAtIndex:1]];
+        commentvc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:commentvc];
+        [self presentViewController:navController animated:YES completion:^{
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        }];
+    }
+    
+    /*
+     else if ([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"like"]) {
+     } // FUTURE ADDITION
+     */
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

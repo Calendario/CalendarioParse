@@ -123,7 +123,7 @@ var finalData:NSMutableArray = []
                                     PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage, "User" : "\(userData.username!)"])
                                     
                                     // Save the push notification string on the notification class.
-                                    self.saveUserNotification(pushMessage, fromUser: PFUser.currentUser()!, toUser: userData)
+                                    self.saveUserNotification(pushMessage, fromUser: PFUser.currentUser()!, toUser: userData, extType: "user", extObjectID: "n/a")
                                 }
                                 
                                 dispatch_async(dispatch_get_main_queue(), {
@@ -231,7 +231,7 @@ var finalData:NSMutableArray = []
     
     // User notification save method.
     
-    class func saveUserNotification(notifcation:String, fromUser:PFUser, toUser:PFUser) {
+    class func saveUserNotification(notifcation:String, fromUser:PFUser, toUser:PFUser, extType:String, extObjectID:String) {
         
         // Only save the notification if the user recieving
         // the notification is NOT the same as the logged in user.
@@ -255,6 +255,11 @@ var finalData:NSMutableArray = []
                     // Add the new notification.
                     object?.addObject(notifcation, forKey: "notificationStrings")
                     
+                    // Add the external object ID - if the
+                    // ID is set to "n/a" - it wont be used by
+                    // the notifications view conroller.
+                    object?.addObject([extType, extObjectID], forKey: "extLink")
+                    
                     // Save the notification data.
                     object?.saveInBackground()
                 }
@@ -262,7 +267,7 @@ var finalData:NSMutableArray = []
         }
     }
     
-    class func getUserNotifications(userData:PFUser, completion: (notificationFromUser: NSArray, notificationStrings: NSArray) -> Void) {
+    class func getUserNotifications(userData:PFUser, completion: (notificationFromUser: NSArray, notificationStrings: NSArray, extLinks: NSArray) -> Void) {
         
         // Get the notifications for a particular user.
         var notificationQuery:PFQuery!
@@ -277,7 +282,7 @@ var finalData:NSMutableArray = []
                 
                 // Pass the data back if correctly loaded.
                 dispatch_async(dispatch_get_main_queue(), {
-                    completion(notificationFromUser: (object?.valueForKey("fromUser"))! as! NSArray, notificationStrings: (object?.valueForKey("notificationStrings"))! as! NSArray)
+                    completion(notificationFromUser: (object?.valueForKey("fromUser"))! as! NSArray, notificationStrings: (object?.valueForKey("notificationStrings"))! as! NSArray, extLinks: (object?.valueForKey("extLink"))! as! NSArray)
                 })
             }
         }
@@ -580,7 +585,7 @@ func FollowRequest(userData:PFUser, completion:(requestStatus: Bool) -> Void) {
                 PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage, "User" : "\(userData.username!)"])
                 
                 // Save the push notification string on the notification class.
-                ManageUser.saveUserNotification(pushMessage, fromUser: PFUser.currentUser()!, toUser: userData)
+                ManageUser.saveUserNotification(pushMessage, fromUser: PFUser.currentUser()!, toUser: userData, extType: "user", extObjectID: "user")
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     completion(requestStatus: success)
