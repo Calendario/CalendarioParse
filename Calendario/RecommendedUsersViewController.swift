@@ -154,12 +154,48 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
         // Set the follow user button state.
         ManageUser.alreadyFollowingUser(currentObject, currentUserCheckMode: true) { (followCheck, info) -> Void in
             
+            // Set the alpha and interaction proerties to the
+            // default (ma change depending on other states).
+            cell.followButton.alpha = 1.0
+            cell.followButton.userInteractionEnabled = true
+            
             if (followCheck == true) {
-                cell.followButton.setImage(UIImage(imageLiteral: "checkedUser"), forState: UIControlState.Normal)
+                cell.followButton.setImage(UIImage(imageLiteral: "checkedUserV2"), forState: UIControlState.Normal)
             }
             
             else {
-                cell.followButton.setImage(UIImage(imageLiteral: "addUser"), forState: UIControlState.Normal)
+                
+                // If the user is private then check if
+                // a follow request has been made otherwise
+                // show the 'addUser' follow button image.
+                
+                if ((currentObject.objectForKey("privateProfile") as? Bool) == true) {
+                    
+                    ManageUser.checkFollowRequest(currentObject, completion: { (requestCheck) -> Void in
+                        
+                        if (requestCheck == true) {
+                            
+                            // A follow request has been made so lower
+                            // the button alpha and do not allow the user
+                            // to select the follow button for that user.
+                            cell.followButton.alpha = 0.6
+                            cell.followButton.userInteractionEnabled = false
+                            cell.followButton.setImage(UIImage(imageLiteral: "waitingApproval"), forState: UIControlState.Normal)
+                        }
+                        
+                        else {
+                            
+                            // No follow request has been made.
+                            cell.followButton.setImage(UIImage(imageLiteral: "addUserV2"), forState: UIControlState.Normal)
+                        }
+                    })
+                }
+                    
+                else {
+                    
+                    // The logged in user is not follow the cell user.
+                    cell.followButton.setImage(UIImage(imageLiteral: "addUserV2"), forState: UIControlState.Normal)
+                }
             }
         }
         

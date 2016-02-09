@@ -290,6 +290,32 @@ var finalData:NSMutableArray = []
     
     // User follower/following data.
     
+    class func checkFollowRequest(toUser:PFUser , completion: (requestCheck: Bool) -> Void) {
+        
+        // Check if the "toUser" has a follow
+        // request from the logged in user.
+        var requestCheck:PFQuery!
+        requestCheck = PFQuery(className: "FollowRequest")
+        requestCheck.whereKey("Requester", equalTo: PFUser.currentUser()!)
+        requestCheck.whereKey("desiredfollower", equalTo: toUser)
+        requestCheck.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                // If the follow request has been made
+                // return true otherwise return false.
+                
+                if (object == nil) {
+                    completion(requestCheck: false)
+                }
+                
+                else {
+                    completion(requestCheck: true)
+                }
+            })
+        }
+    }
+    
     @objc class func getUserFollowersList(userData:PFUser , completion: (userFollowers: NSMutableArray) -> Void) {
         
         // Get the user followers data.

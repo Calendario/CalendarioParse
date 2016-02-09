@@ -21,6 +21,7 @@
 		A2AE4A521BDCF82F008E84B9 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AE4A511BDCF82F008E84B9 /* PrivacyPolicyViewController.swift */; };
 		A2C55BAC1BE7B77B00431EA0 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C55BAB1BE7B77B00431EA0 /* WebPageViewController.swift */; };
 		A2E12C831BCE6E59007D8587 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */; };
+		A2E881261C6A96F2008DFFAC /* MIBadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E881251C6A96F2008DFFAC /* MIBadgeButton.swift */; };
 		A2FB92E51C41C0D900AB0E58 /* ProfileViewCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FB92E41C41C0D900AB0E58 /* ProfileViewCustomCell.swift */; };
 		A2FBF5C61C00BADA0051A553 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FBF5C51C00BADA0051A553 /* EditProfileViewController.swift */; };
 		A2FBF5CA1C010B360051A553 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FBF5C91C010B360051A553 /* SettingsViewController.swift */; };
@@ -148,6 +149,7 @@
 		A2AE4A511BDCF82F008E84B9 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		A2C55BAB1BE7B77B00431EA0 /* WebPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
 		A2E12C821BCE6E59007D8587 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		A2E881251C6A96F2008DFFAC /* MIBadgeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIBadgeButton.swift; sourceTree = "<group>"; };
 		A2FB92E41C41C0D900AB0E58 /* ProfileViewCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewCustomCell.swift; sourceTree = "<group>"; };
 		A2FBF5C51C00BADA0051A553 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		A2FBF5C91C010B360051A553 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -475,6 +477,7 @@
 		A2FBF5C31C00BAA10051A553 /* Profile view */ = {
 			isa = PBXGroup;
 			children = (
+				A2E881251C6A96F2008DFFAC /* MIBadgeButton.swift */,
 				A28825F51BE3960500564EBF /* MyProfileViewController.swift */,
 				A2FB92E41C41C0D900AB0E58 /* ProfileViewCustomCell.swift */,
 			);
@@ -948,6 +951,7 @@
 				A2FBF5C61C00BADA0051A553 /* EditProfileViewController.swift in Sources */,
 				E2EE565C1BF199F70064BA1D /* ChameleonConstants.m in Sources */,
 				E2AE81531BCAFF320047D1FA /* NewsfeedViewController.swift in Sources */,
+				A2E881261C6A96F2008DFFAC /* MIBadgeButton.swift in Sources */,
 				E2D09C9C1BCCC59A003F4651 /* UIColor+CL.m in Sources */,
 				E2B7D2801BE86C9E002395F7 /* FSCalendar.m in Sources */,
 				E2B7D2831BE86C9E002395F7 /* FSCalendarCell.m in Sources */,

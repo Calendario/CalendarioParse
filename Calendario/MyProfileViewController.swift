@@ -25,7 +25,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var settingsButton: UIBarButtonItem!
-    @IBOutlet weak var inboxButton: UIBarButtonItem!
+    @IBOutlet weak var inboxButton: MIBadgeButton!
     @IBOutlet weak var blockedBlurView: UIView!
     @IBOutlet weak var blockedViewDesc: UITextView!
     @IBOutlet weak var statusList: UITableView!
@@ -110,6 +110,20 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     
     @IBAction func dismissProfile(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func openFollowRequestsSection(sender: UIButton) {
+        
+        // Only open the follow requests view
+        // if the current user profile is being viewed.
+        
+        if ((passedUser == nil) || ((passedUser != nil) && (passedUser.username! == "\(PFUser.currentUser()!.username!)"))) {
+            
+            // Open the users follow requests.
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewC = storyboard.instantiateViewControllerWithIdentifier("RequestsView") as! FollowRequestsTableViewController
+            self.presentViewController(viewC, animated: true, completion: nil)
+        }
     }
     
     @IBAction func openSettingsOrMoreSection(sender: UIButton) {
@@ -285,7 +299,8 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // Hide the back/settings/inbox button by default.
         self.backButton.image = nil
         self.settingsButton.image = nil
-        self.inboxButton.image = nil
+        self.inboxButton.setImage(nil, forState: .Normal)
+        self.inboxButton.alpha = 0.0
         
         // Get the screen dimensions.
         let width = UIScreen.mainScreen().bounds.size.width
@@ -358,6 +373,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // we have downloaded the appropriate user data.
         settingsButton.enabled = false
         inboxButton.enabled = false
+        inboxButton.alpha = 0.0
         self.blockCheck = 0
         
         // Check to see if a user is being passed into the
@@ -378,8 +394,8 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             
             // Show the inbox button.
             inboxButton.enabled = true
-            inboxButton.image = UIImage(named: "inbox.png")
-            inboxButton.title = nil
+            inboxButton.setImage(UIImage(named: "inbox.png"), forState: .Normal)
+            inboxButton.setTitle(nil, forState: .Normal)
             
             // Hide the back button if no
             // user has been passed in.
@@ -394,6 +410,32 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 
                 backButton.image = UIImage(named: "left_icon.png")
                 backButton.enabled = true
+            }
+            
+            // Update the follow requests badge.
+            var followQuery:PFQuery!
+            followQuery = PFQuery(className: "FollowRequest")
+            followQuery.whereKey("desiredfollower", equalTo: PFUser.currentUser()!)
+            followQuery.findObjectsInBackgroundWithBlock { (object, error) -> Void in
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    if (object!.count > 0) {
+                        
+                        // Set the inbox button badge properties.
+                        self.inboxButton.badgeTextColor = UIColor.whiteColor()
+                        self.inboxButton.badgeEdgeInsets = UIEdgeInsetsMake(13, 0, 0, 29)
+                        self.inboxButton.badgeString = "\(object!.count)"
+                    }
+                        
+                    else {
+                        self.inboxButton.badgeString = nil
+                    }
+                    
+                    // Show the inbox button after the
+                    // properties have been set.
+                    self.inboxButton.alpha = 1.0
+                })
             }
             
             // Update the rest of the profile view.
@@ -463,7 +505,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             
             // Hide the inbox button.
             inboxButton.enabled = false
-            inboxButton.image = nil
+            inboxButton.setImage(nil, forState: .Normal)
             
             // Check if the user is a private account.
             privateCheck = passedUser?.objectForKey("privateProfile") as? Bool
@@ -722,11 +764,13 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             
             //setting location label and checking contents
             let locationValue: String = currentObject.objectForKey("location") as! String
+            
             if locationValue == "tap to select location..." {
                 cell.locationLabel.text = ""
             }
+                
             else {
-            cell.locationLabel.text = currentObject.objectForKey("location") as! String
+                cell.locationLabel.text = currentObject.objectForKey("location") as! String
             }
 
             // Turn the profile picture into a cirlce.
