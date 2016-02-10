@@ -144,8 +144,8 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                 // create query 
                 var username = test.username!
                 var getposts:PFQuery = PFQuery(className: "StatusUpdate")
-                getposts.orderByAscending("createdAt")
-                
+                getposts.orderByDescending("createdAt")
+                                 
                 
                 
                 getposts.includeKey("user")
@@ -221,7 +221,12 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
 
         // Configure the cell..
+        
         let statusUpdate:PFObject = self.statusData.objectAtIndex(indexPath.row) as! PFObject
+        let dateformatter = NSDateFormatter()
+        dateformatter.dateFormat = "M/d/yy"
+        var newdate = dateformatter.dateFromString(statusUpdate.objectForKey("dateofevent") as! String)
+
         
         isDatePassed(statusUpdate.createdAt!, date2: NSDate(), ParseID: statusUpdate.objectId!)
         
@@ -263,6 +268,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                 print(editedtext)
                 userquery?.whereKey("username", equalTo: editedtext)
                 userquery?.includeKey("user")
+                userquery?.orderByDescending("createdAt")
                 userquery?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                     if error == nil
                     {
@@ -274,6 +280,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                                 var userid = object.objectId
                                 var query2 = PFUser.query()
                                 query2?.includeKey("user")
+                                query2?.orderByDescending("createdAt")
                                 query2?.getObjectInBackgroundWithId(userid!, block: { (object, error) -> Void in
                                     var user:PFUser = object as! PFUser
                                     print(user)
@@ -355,6 +362,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         
         
       var commentsquery = PFQuery(className: "comment")
+        commentsquery.orderByDescending("createdAt")
         commentsquery.whereKey("statusOBJID", equalTo: statusUpdate.objectId!)
         commentsquery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil
@@ -366,6 +374,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         
         
         var findUser:PFQuery = PFUser.query()!
+        findUser.orderByDescending("createdAt")
         
         findUser.whereKey("objectId", equalTo: (statusUpdate.objectForKey("user")?.objectId)!)
         
@@ -384,7 +393,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         //profile images
         var getImages:PFQuery = PFUser.query()!
         getImages.whereKey("objectId", equalTo: (statusUpdate.objectForKey("user")?.objectId)!)
-        getImages.orderByAscending("createdAt")
+        getImages.orderByDescending("createdAt")
 
         getImages.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil
@@ -509,12 +518,13 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             var id = self.statusData[index].objectId
             sender.imageColorOn = UIColor.flatOrangeColor()
             var query = PFQuery(className: "StatusUpdate")
-            query.orderByAscending("createdAt")
+            query.orderByDescending("createdAt")
 
             query.getObjectInBackgroundWithId(id!!, block: { (update, error) -> Void in
                 if error == nil
                 {
                     update?.incrementKey("likes", byAmount: -1)
+                    update!["likedby"] = ""
                     update?.saveInBackground()
                     
                     
@@ -549,7 +559,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             let string = "\(PFUser.currentUser()!.username!) has liked your post"
             self.SavingNotifacations(string, objectID: id!!, notificationType:"like")
             var query = PFQuery(className: "StatusUpdate")
-            query.orderByAscending("createdAt")
+            query.orderByDescending("createdAt")
             print(currentobjectID)
             
             
@@ -559,6 +569,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                 {
                     update!.incrementKey("likes", byAmount: 1)
                     print("saved")
+                    update!["likedby"] = PFUser.currentUser()!.username!
                     update!.saveInBackground()
                     
                     
@@ -623,14 +634,21 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         dateformatter.dateFormat = "M/d/yy"
         var newdate = dateformatter.stringFromDate(date2)
         
+        
+        
+        
+
+    
+    
+        
 
        
-        if date1.timeIntervalSince1970 < date2.timeIntervalSince1970
+    if date1.timeIntervalSince1970 < date2.timeIntervalSince1970
         {
             print("Date2 has passed")
             
             var query = PFQuery(className: "StatusUpdate")
-            query.orderByAscending("createdAt")
+            query.orderByDescending("createdAt")
             query.getObjectInBackgroundWithId(ParseID, block: { (updates:PFObject?, error:NSError?) -> Void in
                 if error == nil
                 {
@@ -650,7 +668,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                         
                     }
                     
-                    if aobject.objectForKey("dateofevent") as! String > newdate
+                    else  if aobject.objectForKey("dateofevent") as! String > newdate
                     {
                         print("going tense")
                         aobject["tense"] = "Going"
@@ -658,21 +676,22 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                     }
                         
                         
-                    else if aobject.objectForKey("dateofevent") as! String != newdate
+                    else 
                     {
                         
                         print("tense is going to change")
                         aobject["tense"] = "went"
                         aobject.saveInBackground()
                         
-        
                     }
                 }
             })
             
             
         }
+
     }
+
     
     
     func getImageData(objects:[PFObject], imageview:UIImageView)

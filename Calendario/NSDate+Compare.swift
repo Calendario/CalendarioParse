@@ -36,7 +36,7 @@ extension NSDate
         return isLess
     }
     
-    
+    // checks to see if the dates are equal
     func EqualtoDate(dateToCompare:NSDate) -> Bool
     {
         var isEqual = false
@@ -48,4 +48,17 @@ extension NSDate
         
         return isEqual
     }
+    
+    func DateisNotEqual(dateToCompare:NSDate) -> Bool
+    {
+        var notEqual = false
+        
+        if self.compare(dateToCompare) != NSComparisonResult.OrderedSame
+        {
+            notEqual = true
+            
+        }
+        return notEqual
+    }
+    
 }
