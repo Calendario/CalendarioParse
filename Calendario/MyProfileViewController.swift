@@ -770,7 +770,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             }
                 
             else {
-                cell.locationLabel.text = currentObject.objectForKey("location") as! String
+                cell.locationLabel.text = locationValue
             }
 
             // Turn the profile picture into a cirlce.
@@ -831,7 +831,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             cell.statusTextView.alpha = 0.0
             cell.uploadDateLabel.alpha = 0.0
             cell.tenseLabel.alpha = 0.0
-            //cell.locationLabel.alpha = 0.0
+            cell.locationLabel.alpha = 0.0
             cell.profileImageView.alpha = 0.0
             cell.userNameLabel.alpha = 0.0
             
