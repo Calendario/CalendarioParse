@@ -11,6 +11,8 @@ import SDWebImage
 import DOFavoriteButton
 
 
+
+
 class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelegate {
     
     @IBOutlet weak var refreshcontrol: UIRefreshControl!
@@ -228,7 +230,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         var newdate = dateformatter.dateFromString(statusUpdate.objectForKey("dateofevent") as! String)
 
         
-        isDatePassed(statusUpdate.createdAt!, date2: NSDate(), ParseID: statusUpdate.objectId!)
+        isDatePassed(newdate!, date2: NSDate(), ParseID: statusUpdate.objectId!)
         
         cell.layoutMargins = UIEdgeInsetsZero
         
@@ -634,16 +636,15 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         dateformatter.dateFormat = "M/d/yy"
         var newdate = dateformatter.stringFromDate(date2)
         
-        
-        
+        print("dates are equal")
+
         
 
     
-    
         
 
-       
-    if date1.timeIntervalSince1970 < date2.timeIntervalSince1970
+    
+    if date1.isGreaterThanDate(date2)
         {
             print("Date2 has passed")
             
@@ -676,9 +677,8 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                     }
                         
                         
-                    else 
+                    else
                     {
-                        
                         print("tense is going to change")
                         aobject["tense"] = "went"
                         aobject.saveInBackground()
@@ -689,6 +689,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             
             
         }
+
 
     }
 
@@ -786,6 +787,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             var statusupdate = self.statusData[indexPath.row] as! PFObject
             var query = PFQuery(className: "StatusUpdate")
             query.includeKey("user")
+            query.orderByDescending("createdAt")
             query.whereKey("objectId", equalTo: statusupdate.objectId!)
             query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                 if error == nil
