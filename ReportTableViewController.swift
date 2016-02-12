@@ -10,27 +10,19 @@ import UIKit
 
 class ReportTableViewController: UITableViewController {
     
-    
     @IBOutlet weak var leftbutton: UIBarButtonItem!
-    
     
     var reasonsarray = ["Pornography", "Drugs", "Graphic Violence", "Privacy Invasion"]
     var selectedreason:String = ""
     
-    
-    enum Reasons: String
-    {
-        case Porn = "pornography"
-        case Drugs = "drugs"
+    enum Reasons: String {
+        
+        case Porn = "Pornography"
+        case Drugs = "Drugs"
         case GrpahicVio = "Graphic Violence"
         case Privacy = "Privacy"
-        case Other = "other"
-        
-        
+        case Other = "Other"
     }
-
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,15 +32,16 @@ class ReportTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        print(reasonsarray.count)
         
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        self.navigationController?.navigationBar.translucent = false
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha: 1)
         
         self.navigationItem.title = "Report Status"
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Futura-Medium", size: 21.0)!]
         
         self.navigationItem.setLeftBarButtonItem(leftbutton, animated: true)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-      
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,13 +57,12 @@ class ReportTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-         print(reasonsarray.count)
         return reasonsarray.count
-        
-        
     }
 
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("DataCell", forIndexPath: indexPath)
@@ -83,58 +75,57 @@ class ReportTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        print(indexPath.row)
-        
         // get object id
         let defaults = NSUserDefaults.standardUserDefaults()
-      let repotedID =  defaults.objectForKey("reported")
-        print(repotedID!)
+        let repotedID =  defaults.objectForKey("reported")
         
         
-        switch indexPath.row
-        {
-        case 0:
-            selectedreason = Reasons.Porn.rawValue
+        switch indexPath.row {
             
-            // place objectid in repoted section of parse data 
+            case 0: selectedreason = Reasons.Porn.rawValue
+            
+            // place objectid in repoted section of parse data
             // the object id will link to the approate update
+        
+            case 1: selectedreason = Reasons.Drugs.rawValue
+            case 2: selectedreason = Reasons.GrpahicVio.rawValue
+            case 3: selectedreason = Reasons.Privacy.rawValue
             
-            
-        case 1:
-            selectedreason = Reasons.Drugs.rawValue
-            
-        case 2:
-            selectedreason = Reasons.GrpahicVio.rawValue
-        case 3:
-            selectedreason = Reasons.Privacy.rawValue
-            
-            
-            
-            
-        default:
-            
-            selectedreason = Reasons.Other.rawValue
-            
-            
-            
-            
-            
-            
+            default: selectedreason = Reasons.Other.rawValue
         }
         
         
-        var query = PFQuery(className: "StatusUpdate")
+        var query:PFQuery!
+        query = PFQuery(className: "StatusUpdate")
         query.getObjectInBackgroundWithId(repotedID! as! String) { (statusupdate:PFObject?, error:NSError?) -> Void in
-            if error == nil
-            {
+            
+            if error == nil {
+                
                 statusupdate!["reported"] = true
                 statusupdate!["reportedby"] = PFUser.currentUser()
                 statusupdate!["reason"] = self.selectedreason
                 statusupdate?.saveInBackground()
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
+            else {
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    // Setup the alert controller.
+                    let alertController = UIAlertController(title: "Report Unsuccessful", message: "The status update has not been reported (\(error!.localizedDescription))", preferredStyle: .Alert)
+                    
+                    // Setup the alert actions.
+                    let cancel = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+                    alertController.addAction(cancel)
+                    
+                    // Present the alert on screen.
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                })
             }
         }
     }
-    
     
     @IBAction func leftButtonTapped(sender: AnyObject) {
         
@@ -154,15 +145,6 @@ class ReportTableViewController: UITableViewController {
     }
     */
     
-    
-        
-        
-        
-    
-
-
-
-
     /*
     // Orride to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -207,5 +189,4 @@ class ReportTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

@@ -86,9 +86,13 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        // Setup the settings cell.
         let cell = tableview.dequeueReusableCellWithIdentifier("settingsCell", forIndexPath: indexPath)
         
+        // Set the setting name.
         cell.textLabel?.text = choicesarray[indexPath.row]
+        
         return cell
     }
     
@@ -100,8 +104,8 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
         
         self.tableview.deselectRowAtIndexPath(indexPath, animated: true)
         
-        switch indexPath.row
-        {
+        switch indexPath.row {
+            
             case 0: GotoBugReport()
             case 1: ViewPrivacyPolicy()
             case 2: ViewTermsOfService()
@@ -111,25 +115,27 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    
-    func GotoBugReport()
-    {
+    func GotoBugReport() {
+        
+        // Open the report view.
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        var bugreportvc = sb.instantiateViewControllerWithIdentifier("bugreport") as! reportBug
+        let bugreportvc = sb.instantiateViewControllerWithIdentifier("bugreport") as! reportBug
         self.presentViewController(bugreportvc, animated: true, completion: nil)
     }
     
-    func ViewPrivacyPolicy()
-    {
+    func ViewPrivacyPolicy() {
+        
+        // Open the privacy policy view.
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        var privacypolicyVC = sb.instantiateViewControllerWithIdentifier("privacypolicy") as! PrivacyPolicyViewController
+        let privacypolicyVC = sb.instantiateViewControllerWithIdentifier("privacypolicy") as! PrivacyPolicyViewController
         self.presentViewController(privacypolicyVC, animated: true, completion: nil)
     }
     
-    func ViewTermsOfService()
-    {
+    func ViewTermsOfService() {
+        
+        // Open the terms of service view.
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        var termsofservice = sb.instantiateViewControllerWithIdentifier("tos") as! TosViewController
+        let termsofservice = sb.instantiateViewControllerWithIdentifier("tos") as! TosViewController
         self.presentViewController(termsofservice, animated: true, completion: nil)
     }
     
