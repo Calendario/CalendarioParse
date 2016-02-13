@@ -146,7 +146,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                 // create query 
                 var username = test.username!
                 var getposts:PFQuery = PFQuery(className: "StatusUpdate")
-                getposts.orderByDescending("createdAt")
+                getposts.orderByAscending("dateofevent")
                                  
                 
                 
@@ -230,7 +230,6 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         var newdate = dateformatter.dateFromString(statusUpdate.objectForKey("dateofevent") as! String)
 
         
-        isDatePassed(newdate!, date2: NSDate(), ParseID: statusUpdate.objectId!)
         
         cell.layoutMargins = UIEdgeInsetsZero
         
@@ -464,6 +463,11 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         })
         
         
+        isDatePassed(statusUpdate.createdAt!, date2: NSDate(), ParseID: statusUpdate.objectId!)
+        
+    
+        
+        
     
 
     
@@ -636,15 +640,17 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         dateformatter.dateFormat = "M/d/yy"
         var newdate = dateformatter.stringFromDate(date2)
         
-        print("dates are equal")
-
+       
         
+       
+    
+
 
     
         
 
     
-    if date1.isGreaterThanDate(date2)
+        if date1.timeIntervalSince1970 < date2.timeIntervalSince1970
         {
             print("Date2 has passed")
             
@@ -668,22 +674,28 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                         
                         
                     }
-                    
-                    else  if aobject.objectForKey("dateofevent") as! String > newdate
+                        
+                    if  aobject.objectForKey("dateofevent") as! String > newdate
+                        
+                        
                     {
                         print("going tense")
                         aobject["tense"] = "Going"
                         aobject.saveInBackground()
                     }
                         
+
+                    
                         
-                    else
+                        
+                    else if newdate != aobject.objectForKey("dateofevent") as! String
                     {
                         print("tense is going to change")
                         aobject["tense"] = "went"
                         aobject.saveInBackground()
                         
                     }
+                    
                 }
             })
             
@@ -902,5 +914,6 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         // Pass the selected object to the new view controller.
     }
     */
+
 
 }

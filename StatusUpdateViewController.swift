@@ -232,6 +232,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             statusupdatewithimage["tense"] = currenttense
             statusupdatewithimage["location"] = LocationLabel.text
             
+            
+            
       
         
             // image posting
