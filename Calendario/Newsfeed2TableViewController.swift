@@ -137,7 +137,8 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         
         self.setRefreshIndicators(true)
         self.tableView.userInteractionEnabled = false
-       
+        
+         
         // mange user call first
         ManageUser.getUserFollowingList(PFUser.currentUser()!) { (userFollowing) -> Void in
             for user in userFollowing
@@ -146,7 +147,9 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                 // create query 
                 var username = test.username!
                 var getposts:PFQuery = PFQuery(className: "StatusUpdate")
-                getposts.orderByAscending("dateofevent")
+                getposts.orderByDescending("dateofevent")
+               getposts.addDescendingOrder("createdAt")
+                getposts.addDescendingOrder("updatedAt")
                                  
                 
                 
@@ -181,6 +184,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             }
         }
     }
+   
     
     
     
@@ -525,6 +529,8 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             sender.imageColorOn = UIColor.flatOrangeColor()
             var query = PFQuery(className: "StatusUpdate")
             query.orderByDescending("createdAt")
+            query.addDescendingOrder("dateofevent")
+
 
             query.getObjectInBackgroundWithId(id!!, block: { (update, error) -> Void in
                 if error == nil
@@ -656,6 +662,8 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             
             var query = PFQuery(className: "StatusUpdate")
             query.orderByDescending("createdAt")
+            query.addDescendingOrder("dateofevent")
+            query.addDescendingOrder("updateddAt")
             query.getObjectInBackgroundWithId(ParseID, block: { (updates:PFObject?, error:NSError?) -> Void in
                 if error == nil
                 {
