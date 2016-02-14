@@ -25,7 +25,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //LoadData()
+        LoadData()
         
         
 
@@ -76,9 +76,13 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
     
     
     override func viewDidAppear(animated: Bool) {
+        // this only calls the viewappearonce, so no reload happens after expanding images
+        if self.isBeingPresented() || self.isMovingToParentViewController()
+        {
+             LoadData()
+        }
         
-       
-        LoadData()
+        //LoadData()
         
         //set view properties
         //method to allow tableview cell resizing based on content
@@ -166,7 +170,6 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                             let statusupdate:PFObject = object as! PFObject
                                 self.statusData.addObject(statusupdate)
                                 self.setRefreshIndicators(false)
-                            
                             
                         }
                         
@@ -274,6 +277,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                 userquery?.whereKey("username", equalTo: editedtext)
                 userquery?.includeKey("user")
                 userquery?.orderByDescending("createdAt")
+                userquery?.addDescendingOrder("updatedAt")
                 userquery?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                     if error == nil
                     {
@@ -286,6 +290,9 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                                 var query2 = PFUser.query()
                                 query2?.includeKey("user")
                                 query2?.orderByDescending("createdAt")
+                                query2!.addDescendingOrder("updatedAt")
+                                
+
                                 query2?.getObjectInBackgroundWithId(userid!, block: { (object, error) -> Void in
                                     var user:PFUser = object as! PFUser
                                     print(user)
@@ -368,6 +375,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         
       var commentsquery = PFQuery(className: "comment")
         commentsquery.orderByDescending("createdAt")
+        commentsquery.addDescendingOrder("updatedAt")
         commentsquery.whereKey("statusOBJID", equalTo: statusUpdate.objectId!)
         commentsquery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil
@@ -380,6 +388,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         
         var findUser:PFQuery = PFUser.query()!
         findUser.orderByDescending("createdAt")
+        findUser.addDescendingOrder("updatedAt")
         
         findUser.whereKey("objectId", equalTo: (statusUpdate.objectForKey("user")?.objectId)!)
         
@@ -433,43 +442,47 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         cell.commentButton.addTarget(self, action: "Commentclicked:", forControlEvents: .TouchUpInside)
         
         
-        
-        // user image posts-THIS MIGHT NOT WORK
-        
-        
-        let imagefile = statusUpdate.objectForKey("image") as? PFFile
-        
-        if imagefile == nil
-        {
-            cell.userPostedImage.image = UIImage(named: "defaultPhotoPost")
-            cell.userPostedImage.contentMode = UIViewContentMode.ScaleAspectFit
+        let QOS = QOS_CLASS_BACKGROUND
+        let backgroundqueue = dispatch_get_global_queue(QOS, 0)
+        dispatch_async(backgroundqueue, { () -> Void in
+            // user image posts-THIS MIGHT NOT WORK
             
             
+            let imagefile = statusUpdate.objectForKey("image") as? PFFile
             
-        }
-        
-        imagefile?.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
-            if error == nil
+            if imagefile == nil
             {
-                if let ImageData = imageData
-                {
-                    let image = UIImage(data: ImageData)
-                    cell.setPostedImage(image!)
-                    cell.userPostedImage.layer.cornerRadius = 0.0
-                    cell.userPostedImage.clipsToBounds = true
-                    cell.userPostedImage.tag = indexPath.row
-                    cell.userPostedImage.userInteractionEnabled = true
-                    let tapgesture = UITapGestureRecognizer(target: self, action: "imageTapped:")
-                    cell.userPostedImage.addGestureRecognizer(tapgesture)
-                    
-                    }
+                cell.userPostedImage.image = UIImage(named: "defaultPhotoPost")
+                cell.userPostedImage.contentMode = UIViewContentMode.ScaleAspectFit
+                
+                
+                
             }
-        })
-        
+            
+            imagefile?.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
+                if error == nil
+                {
+                    if let ImageData = imageData
+                    {
+                        let image = UIImage(data: ImageData)
+                        cell.setPostedImage(image!)
+                        cell.userPostedImage.layer.cornerRadius = 0.0
+                        cell.userPostedImage.clipsToBounds = true
+                        cell.userPostedImage.tag = indexPath.row
+                        cell.userPostedImage.userInteractionEnabled = true
+                        let tapgesture = UITapGestureRecognizer(target: self, action: "imageTapped:")
+                        cell.userPostedImage.addGestureRecognizer(tapgesture)
+                        
+                    }
+                }
+            })
+
+            })
+            
         
         isDatePassed(statusUpdate.createdAt!, date2: NSDate(), ParseID: statusUpdate.objectId!)
         
-    
+        
         
         
     
@@ -754,6 +767,9 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         
         
     }
+    
+    
+
     
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
