@@ -347,7 +347,8 @@ var finalData:NSMutableArray = []
             // Setup following query.
             var queryFollowData:PFQuery!
             queryFollowData = PFQuery(className: "FollowersAndFollowing")
-            queryFollowData.orderByDescending("updatedAt")
+            queryFollowData.orderByDescending("createdAt")
+            queryFollowData.addDescendingOrder("updatedAt")
             
             // Get the follow list.
             queryFollowData.getObjectInBackgroundWithId(idNumber, block: { (objects, error) -> Void in

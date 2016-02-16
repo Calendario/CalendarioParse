@@ -173,9 +173,13 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                             
                         }
                         
-                        let array:NSArray = self.statusData.reverseObjectEnumerator().allObjects
-                        self.statusData = NSMutableArray(array: array)
-                        self.tableView.reloadData()
+                        //self.tableView.reloadData()
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            let array:NSArray = self.statusData.reverseObjectEnumerator().allObjects
+                            self.statusData = NSMutableArray(array: array)
+                            self.tableView.reloadData()
+                        })
+
                         self.tableView.userInteractionEnabled = true
                     }
                   
@@ -185,6 +189,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                 
                 
             }
+            
         }
     }
    
@@ -478,9 +483,11 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
             })
 
             })
-            
         
+              
         isDatePassed(statusUpdate.createdAt!, date2: NSDate(), ParseID: statusUpdate.objectId!)
+        //print(statusUpdate.createdAt)
+        //print(NSDate())
         
         
         

@@ -25,11 +25,9 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     var dateofevent:String!
     
     var b:Bool = false
-    var eventsarray = [String]()
+    var eventsarray = [NSDate]()
     
-    
-    
-  
+    var selectedDate:NSDate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +35,12 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
         
         
+        
         self.tableview.delegate = self
         self.tableview.dataSource = self
+        calendar.selectDate(NSDate())
+        
+        
         
         /*self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
@@ -81,19 +83,28 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     func calendar(calendar: FSCalendar!, didSelectDate date: NSDate!) {
         
         print("the date is \(date)")
+        selectedDate = date
+        eventsarray.append(date)
+        print("array is \(eventsarray)")
         
         let dateformatter = NSDateFormatter()
         dateformatter.dateFormat = "M/d/yy"
-        let newdate_V1 = dateformatter.stringFromDate(date)
+        var newdate_V1 = dateformatter.stringFromDate(date)
+        
         
         var getdates:PFQuery!
         getdates = PFQuery(className: "StatusUpdate")
         getdates.whereKey("dateofevent", equalTo: newdate_V1)
         print("V1 passed date is \(String(newdate_V1))")
         getdates.includeKey("user")
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(newdate_V1, forKey: "dateofevent")
         
-        var postsdata:NSMutableArray = NSMutableArray()
+
+
+    var postsdata:NSMutableArray = NSMutableArray()
         postsdata.removeAllObjects()
+    
         
         getdates.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
             
@@ -170,66 +181,16 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         }
     }
     
+    
     func calendar(calendar: FSCalendar!, hasEventForDate date: NSDate!) -> Bool {
+        var bool = false
         
-        var datesArray:[NSDate]!
-        var eventdate:String!
-        let dateformatter = NSDateFormatter()
-        dateformatter.dateFormat = "MM/d/yy"
-        var newdate = dateformatter.stringFromDate(date)
-        var query = PFQuery(className: "StatusUpdate")
-        query.whereKey("dateofevent", equalTo: newdate)
-        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if error == nil
-            {
-                if let objects = objects
-                {
-                    for object in objects
-                    {
-                        //print(object.valueForKey("dateofevent") as! String)
-                        
-                        eventdate = object.valueForKey("dateofevent") as! String
-                        print(eventdate)
-                        
-                        datesArray = [dateformatter.dateFromString(eventdate)!]
-                        print(datesArray)
-                        
-                        calendar.selectDate(dateformatter.dateFromString(eventdate))
-                        
-                        
-                        if datesArray.contains(calendar.selectedDate)
-                        {
-                            self.b = true
-                            print(self.b)
-                            
-                        }
-                        else
-                        {
-                            self.b = false
-                            
-                        }
-                        
-                        
-                        
-                        
-                        
-                    }
-                    
-                }
-                
-                
-                
-                
-            }
-            print(self.b)
+        if calendar.selectedDate == date
+        {
+            bool = true
         }
-        
-        return b
+        return bool
     }
-    
- 
-    
-    
     
     
     
