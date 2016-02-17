@@ -32,6 +32,7 @@ class CalPhotoViewerViewController: UIViewController, UIScrollViewDelegate {
         let defaults = NSUserDefaults.standardUserDefaults()
         let imagedata:NSData = defaults.objectForKey("image") as! NSData
         let image = UIImage(data: imagedata)
+          var finalimage = UIImage()
         
         
         
@@ -51,13 +52,21 @@ class CalPhotoViewerViewController: UIViewController, UIScrollViewDelegate {
         
         Imageview.transform = CGAffineTransformMakeScale(1.0, -1.0)
         
-            Imageview.image = roatateImage(image!)
+        
+                //roatateImage(image!)
         
         
         print(image!.imageOrientation.rawValue)
             
 
+        let flipped = UIImage(CGImage: image!.CGImage!, scale: image!.scale, orientation: UIImageOrientation.DownMirrored)
+        finalimage = flipped
         
+          Imageview.image = finalimage
+        
+        print(finalimage.imageOrientation.rawValue)
+        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,7 +92,7 @@ class CalPhotoViewerViewController: UIViewController, UIScrollViewDelegate {
         
     {
         var finalimage = UIImage()
-        // comment
+        
         
         
         
@@ -121,6 +130,11 @@ class CalPhotoViewerViewController: UIViewController, UIScrollViewDelegate {
         
         image.transform = CGAffineTransformMakeScale(1.0, -1.0)
         
+        let flipped = UIImage(CGImage: image.image!.CGImage!, scale: image.image!.scale, orientation: UIImageOrientation.DownMirrored)
+        image.image = flipped
+        
+        print(image.image?.imageOrientation.rawValue)
+        
         return image
 
         
@@ -137,6 +151,11 @@ class CalPhotoViewerViewController: UIViewController, UIScrollViewDelegate {
  
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.All
+    }
+    
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        scrollView.zoomScale = 1
+        
     }
     
     
