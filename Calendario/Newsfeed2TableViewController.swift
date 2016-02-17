@@ -131,7 +131,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
     // this method loads all data from parse to the app
     func LoadData()
     {
-         statusData.removeAllObjects()
+        statusData.removeAllObjects()
         
         
         
@@ -153,7 +153,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                 var getposts:PFQuery = PFQuery(className: "StatusUpdate")
                 getposts.orderByDescending("dateofevent")
                getposts.addDescendingOrder("createdAt")
-                getposts.addDescendingOrder("updatedAt")
+                //getposts.addDescendingOrder("updatedAt")
                                  
                 
                 
@@ -168,7 +168,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                         for object in objects!
                         {
                             let statusupdate:PFObject = object as! PFObject
-                                self.statusData.addObject(statusupdate)
+                                self.statusData.insertObject(statusupdate, atIndex: 0)
                                 self.setRefreshIndicators(false)
                             
                         }
@@ -177,6 +177,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
                             let array:NSArray = self.statusData.reverseObjectEnumerator().allObjects
                             self.statusData = NSMutableArray(array: array)
+                            print(self.statusData)
                             self.tableView.reloadData()
                         })
 
