@@ -41,6 +41,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     @IBOutlet weak var likeslabel: UILabel!
    
     
+    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     
    
     

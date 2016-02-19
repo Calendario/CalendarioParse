@@ -300,12 +300,16 @@ class NewsfeedV3: UITableViewController {
         
         if (currentObject.objectForKey("image") == nil) {
             cell.userPostedImage.alpha = 0.0
+            cell.imageViewHeightConstraint.constant = 1
+            cell.updateConstraintsIfNeeded()
         }
             
         else {
             
             // Show the edia image view.
             cell.userPostedImage.alpha = 1.0
+            cell.imageViewHeightConstraint.constant = 127
+            cell.updateConstraintsIfNeeded()
             
             // Setup the user profile image file.
             let statusImage = currentObject["image"] as! PFFile
