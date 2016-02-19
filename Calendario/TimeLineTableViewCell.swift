@@ -13,10 +13,13 @@ class TimeLineTableViewCell: UITableViewCell {
     @IBOutlet weak var profileimageview: UIImageView!
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var tenseLabel: UILabel!
-    @IBOutlet weak var updateTextView: UITextView!
+    @IBOutlet weak var updateTextView: UILabel!
+
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var colorStrip: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

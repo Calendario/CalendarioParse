@@ -34,11 +34,13 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         calendar.scrollDirection = .Horizontal
         
         
-        
-        
         self.tableview.delegate = self
         self.tableview.dataSource = self
         calendar.selectDate(NSDate())
+        self.tableview.rowHeight = UITableViewAutomaticDimension;
+        self.tableview.estimatedRowHeight = 199.0;
+        self.tableview.separatorInset = UIEdgeInsetsZero
+
         
         
         
@@ -370,6 +372,19 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
             cell.likeButton.setImage(likebuttonfilled, forState: .Normal)
         }
         
+        //set location label
+        // Set location label and checking contents.
+        let locationValue: String = status.objectForKey("location") as! String
+        
+        if locationValue == "tap to select location..." {
+            cell.locationLabel.text = ""
+        }
+            
+        else {
+            cell.locationLabel.text = locationValue
+        }
+
+        
         cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
         cell.profileimageview.clipsToBounds = true
         
@@ -385,6 +400,14 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
             else {
                 print("error")
             }
+        }
+        
+        //set cell strip color
+        if indexPath.row % 2 == 0 {
+            cell.colorStrip.backgroundColor = UIColor(red: 30/255.0, green: 206/255.0, blue: 241/255.0, alpha: 1.0)
+        }
+        else {
+            cell.colorStrip.backgroundColor = UIColor(red: 25/255.0, green: 181/255.0, blue: 215/255.0, alpha: 1.0)
         }
         
         return cell
