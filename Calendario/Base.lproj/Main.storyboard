@@ -497,10 +497,10 @@
                                             </variation>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fox-pi-vk9">
-                                            <rect key="frame" x="124" y="228" width="183" height="20"/>
+                                            <rect key="frame" x="66" y="228" width="183" height="20"/>
                                             <subviews>
-                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="50 Likes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eOW-cl-tPW">
-                                                    <rect key="frame" x="20" y="3" width="41" height="15"/>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50 Likes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eOW-cl-tPW">
+                                                    <rect key="frame" x="0.0" y="3" width="41" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="DxH-Sv-3aF"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="sBd-OS-PO7"/>
@@ -515,16 +515,16 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9U0-Lg-SJc">
-                                                    <rect key="frame" x="81" y="0.0" width="1" height="20"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9U0-Lg-SJc">
+                                                    <rect key="frame" x="61" y="0.0" width="1" height="20"/>
                                                     <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="1" id="jyD-9R-wgx"/>
                                                         <constraint firstAttribute="height" constant="20" id="r0b-FO-XDT"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="10 Comments" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9o0-GD-rNj" userLabel="commentsLabel">
-                                                    <rect key="frame" x="102" y="3" width="68" height="15"/>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 Comments" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9o0-GD-rNj" userLabel="commentsLabel">
+                                                    <rect key="frame" x="82" y="3" width="68" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="7hx-V6-bxO"/>
                                                     </constraints>
@@ -539,7 +539,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="eOW-cl-tPW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fox-pi-vk9" secondAttribute="leading" id="FmY-cd-i19"/>
+                                                <constraint firstItem="eOW-cl-tPW" firstAttribute="leading" secondItem="fox-pi-vk9" secondAttribute="leading" id="FmY-cd-i19"/>
                                                 <constraint firstItem="9U0-Lg-SJc" firstAttribute="top" secondItem="fox-pi-vk9" secondAttribute="top" id="Kgz-x6-7ma"/>
                                                 <constraint firstAttribute="bottom" secondItem="9U0-Lg-SJc" secondAttribute="bottom" id="M1F-iR-hYN"/>
                                                 <constraint firstItem="9U0-Lg-SJc" firstAttribute="centerY" secondItem="fox-pi-vk9" secondAttribute="centerY" id="NEY-ay-Wsi"/>
@@ -557,6 +557,7 @@
                                                     <exclude reference="ulp-Hn-KnH"/>
                                                     <exclude reference="M1F-iR-hYN"/>
                                                     <exclude reference="NEY-ay-Wsi"/>
+                                                    <exclude reference="Rjq-x0-KTj"/>
                                                 </mask>
                                             </variation>
                                         </view>
@@ -621,6 +622,12 @@
                                                 </mask>
                                             </variation>
                                         </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# hours ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="ScK-QL-CoL">
+                                            <rect key="frame" x="293" y="230" width="67" height="16"/>
+                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="top" secondItem="5ro-Py-vgq" secondAttribute="bottom" constant="11" id="02i-DV-pkd"/>
@@ -633,6 +640,7 @@
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="leading" secondItem="3a3-5u-LcP" secondAttribute="trailing" constant="8" id="F05-6c-BCv"/>
                                         <constraint firstItem="5ro-Py-vgq" firstAttribute="top" secondItem="cwP-EW-rcB" secondAttribute="bottom" constant="10" id="HoX-4m-OTM"/>
                                         <constraint firstItem="fox-pi-vk9" firstAttribute="top" secondItem="MAk-zZ-i98" secondAttribute="bottom" constant="6.5" id="I2C-P7-fdk"/>
+                                        <constraint firstItem="ScK-QL-CoL" firstAttribute="centerY" secondItem="9o0-GD-rNj" secondAttribute="centerY" id="IgI-SX-v0z"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="MAk-zZ-i98" secondAttribute="trailing" constant="2" id="MWw-VD-h1u"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MAk-zZ-i98" secondAttribute="trailing" constant="10" id="MlH-gz-V9k"/>
                                         <constraint firstItem="3a3-5u-LcP" firstAttribute="centerX" secondItem="crA-RG-JUw" secondAttribute="centerX" id="O3A-Y8-2cg"/>
@@ -642,6 +650,7 @@
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="3a3-5u-LcP" secondAttribute="bottom" constant="2" id="SLs-Z0-eT3"/>
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="leading" secondItem="cwP-EW-rcB" secondAttribute="leading" id="UgW-4h-vLx"/>
                                         <constraint firstItem="3a3-5u-LcP" firstAttribute="centerY" secondItem="5ro-Py-vgq" secondAttribute="centerY" priority="250" id="UoA-Z1-URk"/>
+                                        <constraint firstItem="ScK-QL-CoL" firstAttribute="trailing" secondItem="5q3-2M-rR7" secondAttribute="trailing" id="WCr-5O-yiK"/>
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="width" secondItem="Niw-dS-Vbm" secondAttribute="width" multiplier="0.321" id="WYv-gv-Ncb"/>
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="width" secondItem="5ro-Py-vgq" secondAttribute="width" id="Xiu-i7-BH1"/>
                                         <constraint firstItem="3a3-5u-LcP" firstAttribute="leading" secondItem="MAk-zZ-i98" secondAttribute="trailing" constant="2" id="YbH-H2-AU7"/>
@@ -649,6 +658,8 @@
                                         <constraint firstAttribute="trailing" secondItem="3a3-5u-LcP" secondAttribute="trailing" constant="15" id="aSS-n5-VFS"/>
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="leading" secondItem="KhO-HU-Fzo" secondAttribute="leading" id="brI-vy-wGm"/>
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="leading" secondItem="3a3-5u-LcP" secondAttribute="trailing" constant="8" id="ddC-yi-noM"/>
+                                        <constraint firstItem="ScK-QL-CoL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fox-pi-vk9" secondAttribute="trailing" constant="5" id="fiq-ne-cxF"/>
+                                        <constraint firstItem="fox-pi-vk9" firstAttribute="leading" secondItem="5ro-Py-vgq" secondAttribute="leading" id="gEL-Sd-WNU"/>
                                         <constraint firstItem="fox-pi-vk9" firstAttribute="top" secondItem="MAk-zZ-i98" secondAttribute="bottom" constant="5.5" id="gL3-Mr-4un"/>
                                         <constraint firstItem="fox-pi-vk9" firstAttribute="centerX" secondItem="MAk-zZ-i98" secondAttribute="centerX" id="gaD-Ss-75Q"/>
                                         <constraint firstItem="crA-RG-JUw" firstAttribute="width" secondItem="Niw-dS-Vbm" secondAttribute="width" multiplier="0.132" id="hum-LW-8sz"/>
@@ -693,6 +704,7 @@
                                             <exclude reference="nhy-GD-d4A"/>
                                             <exclude reference="rhz-0u-cfA"/>
                                             <exclude reference="uBh-eT-HpV"/>
+                                            <exclude reference="RwW-EP-OMy"/>
                                             <exclude reference="gL3-Mr-4un"/>
                                             <exclude reference="gaD-Ss-75Q"/>
                                             <exclude reference="qYk-FE-LAX"/>
@@ -706,6 +718,7 @@
                                     <outlet property="UserNameLabel" destination="KhO-HU-Fzo" id="sYJ-cV-QoW"/>
                                     <outlet property="commentButton" destination="KHa-zv-rEg" id="Fjl-WT-Rxr"/>
                                     <outlet property="commentsLabel" destination="9o0-GD-rNj" id="80q-lX-oE6"/>
+                                    <outlet property="createdAtLabel" destination="ScK-QL-CoL" id="UOk-9b-6eO"/>
                                     <outlet property="imageViewHeightConstraint" destination="11h-oJ-nlI" id="KZ1-HZ-faF"/>
                                     <outlet property="likebutton" destination="S5F-zL-UN7" id="c0a-p9-uH0"/>
                                     <outlet property="likeslabel" destination="eOW-cl-tPW" id="ZAF-zu-k0W"/>

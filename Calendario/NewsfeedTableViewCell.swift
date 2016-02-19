@@ -18,6 +18,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     @IBOutlet weak var UserNameLabel: UILabel!
     @IBOutlet weak var commentsLabel: UILabel!
     @IBOutlet weak var userPostedImage: PFImageView!
+    @IBOutlet weak var createdAtLabel: UILabel!
     
     //@IBOutlet weak var statusTextView: UITextView!
     
