@@ -369,6 +369,12 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // Notify the user that the app is loading.
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
+        // Allow tableview cell resizing based on content.
+        self.statusList.rowHeight = UITableViewAutomaticDimension;
+        self.statusList.estimatedRowHeight = 100;
+        self.statusList.separatorInset = UIEdgeInsetsZero
+
+        
         // By default the more button is diabled until
         // we have downloaded the appropriate user data.
         settingsButton.enabled = false
@@ -843,7 +849,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 139
+        return UITableViewAutomaticDimension
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -863,7 +869,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     // Dynamic cell height.
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return 100.0
     }
     
     func ReportView() {

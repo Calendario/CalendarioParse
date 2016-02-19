@@ -12,12 +12,12 @@ class ProfileViewCustomCell: UITableViewCell {
     
     // Custom cell objects.
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var statusTextView: UITextView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var uploadDateLabel: UILabel!
     @IBOutlet weak var tenseLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var privateView: UIView!
+    @IBOutlet weak var statusTextView: UILabel!
     
     // View Did Load method.
     
