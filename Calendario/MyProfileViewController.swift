@@ -736,7 +736,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         
         // Setup the table view cell.
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ProfileViewCustomCell
-        
+        cell.layoutMargins = UIEdgeInsetsZero
         if (self.statusLoadCheck == true) {
             
             // Hide the private cell view.
