@@ -77,12 +77,20 @@ class NewsfeedV3: UITableViewController {
         // Logo for navigation title.
         let logo = UIImage(named: "newsFeedTitle")
         let imageview = UIImageView(image: logo)
+        imageview.contentMode = .ScaleAspectFit
+
         
         // Set the "Calendario" image in the navigation bar.
         self.navigationItem.titleView = imageview
         self.navigationItem.titleView?.contentMode = UIViewContentMode.Center
         self.navigationItem.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
-        
+        self.navigationItem.titleView?.backgroundColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+   
+        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        self.navigationController?.navigationBar.translucent = false
+
         // Load in the news feed data.
         self.reloadNewsFeed()
     }
