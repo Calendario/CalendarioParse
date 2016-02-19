@@ -13,6 +13,9 @@
 		A22038041C5D35FF000080AC /* RecommendedUsersCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22038031C5D35FF000080AC /* RecommendedUsersCustomCell.swift */; };
 		A2267D171C4BD9C200180C6D /* FollowRequestsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2267D161C4BD9C200180C6D /* FollowRequestsTableViewController.swift */; };
 		A2267D191C4BE15700180C6D /* FollowRequestCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2267D181C4BE15700180C6D /* FollowRequestCustomCell.swift */; };
+		A23457961C765A9000376F2F /* NewsfeedV3.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457951C765A9000376F2F /* NewsfeedV3.swift */; };
+		A23457981C768A9B00376F2F /* LikesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457971C768A9B00376F2F /* LikesListViewController.swift */; };
+		A234579A1C768F5700376F2F /* LikesCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457991C768F5700376F2F /* LikesCustomCell.swift */; };
 		A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25179511C201B0300EA0A5E /* ReportUserViewController.swift */; };
 		A26359E41BDA8342003F8FEB /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */; };
 		A26701F21C369D5B0041E1D1 /* ManageUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26701F11C369D5B0041E1D1 /* ManageUser.swift */; };
@@ -143,6 +146,9 @@
 		A22038031C5D35FF000080AC /* RecommendedUsersCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendedUsersCustomCell.swift; sourceTree = "<group>"; };
 		A2267D161C4BD9C200180C6D /* FollowRequestsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowRequestsTableViewController.swift; sourceTree = "<group>"; };
 		A2267D181C4BE15700180C6D /* FollowRequestCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowRequestCustomCell.swift; sourceTree = "<group>"; };
+		A23457951C765A9000376F2F /* NewsfeedV3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedV3.swift; sourceTree = "<group>"; };
+		A23457971C768A9B00376F2F /* LikesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesListViewController.swift; sourceTree = "<group>"; };
+		A23457991C768F5700376F2F /* LikesCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesCustomCell.swift; sourceTree = "<group>"; };
 		A25179511C201B0300EA0A5E /* ReportUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportUserViewController.swift; sourceTree = "<group>"; };
 		A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A26701F11C369D5B0041E1D1 /* ManageUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageUser.swift; sourceTree = "<group>"; };
@@ -462,6 +468,9 @@
 		A2E12C8B1BCE6EF7007D8587 /* Newsfeed & Timeline & Status Update */ = {
 			isa = PBXGroup;
 			children = (
+				A23457991C768F5700376F2F /* LikesCustomCell.swift */,
+				A23457971C768A9B00376F2F /* LikesListViewController.swift */,
+				A23457951C765A9000376F2F /* NewsfeedV3.swift */,
 				E2672D861C61C25B00555286 /* Newsfeed2TableViewController.swift */,
 				E2D8D9FC1BCF51E800A40350 /* NewsfeedTableViewCell.swift */,
 				E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */,
@@ -835,7 +844,7 @@
 				TargetAttributes = {
 					E2E0D6FE1BC9950800662E70 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = 5P234F4KH9;
+						DevelopmentTeam = 52K634K77W;
 					};
 					E2E0D7171BC9950800662E70 = {
 						CreatedOnToolsVersion = 7.0;
@@ -977,11 +986,13 @@
 				E2E0D7041BC9950800662E70 /* main.m in Sources */,
 				E25B09D61C4E0C0900529CCA /* LikeHelper.swift in Sources */,
 				A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */,
+				A23457981C768A9B00376F2F /* LikesListViewController.swift in Sources */,
 				E263EE1F1C53FBC80069B89A /* NewsFeedQueryViewController.swift in Sources */,
 				E230836B1C7426EB001C0142 /* FSCalendarCell.m in Sources */,
 				E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */,
 				E23083691C7426EB001C0142 /* FSCalendar+IBExtension.m in Sources */,
 				A2AE4A521BDCF82F008E84B9 /* PrivacyPolicyViewController.swift in Sources */,
+				A234579A1C768F5700376F2F /* LikesCustomCell.swift in Sources */,
 				E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */,
 				A2AE4A501BDCF7B8008E84B9 /* ToSViewController.swift in Sources */,
 				E2D09C9B1BCCC59A003F4651 /* NSDictionary+CL.m in Sources */,
@@ -1016,6 +1027,7 @@
 				E230836C1C7426EB001C0142 /* FSCalendarCollectionView.m in Sources */,
 				E230836D1C7426EB001C0142 /* FSCalendarConstance.m in Sources */,
 				E17180521C21389600D591FA /* notificationsViewController.m in Sources */,
+				A23457961C765A9000376F2F /* NewsfeedV3.swift in Sources */,
 				A2FB92E51C41C0D900AB0E58 /* ProfileViewCustomCell.swift in Sources */,
 				E2D09C9A1BCCC59A003F4651 /* NSDate+CL.m in Sources */,
 				E24DA65D1C172DB500901DF0 /* FollowHelper.swift in Sources */,

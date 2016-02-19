@@ -119,7 +119,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
     func GotoProfile(username:PFUser)
     {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        var reportVC = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
+        let reportVC = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
         reportVC.passedUser = username
         self.presentViewController(reportVC, animated: true, completion: nil)
         

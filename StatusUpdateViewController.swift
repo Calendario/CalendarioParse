@@ -232,11 +232,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             statusupdatewithimage["ID"] = Int(statusID)
             statusupdatewithimage["tense"] = currenttense
             statusupdatewithimage["location"] = LocationLabel.text
+            statusupdatewithimage["likesarray"] = []
             
-            
-            
-      
-        
             // image posting
             imagedata = UIImageJPEGRepresentation(((statusImageview?.image))!, 0.5)
             let imagefile = PFFile(name: "image.jpg", data: imagedata!)
@@ -253,10 +250,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                     print(error?.localizedDescription)
                 }
             }
-            
-            
-            
         }
+
         else
         {
             var statusupdate = PFObject(className: "StatusUpdate")
@@ -266,7 +261,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             statusupdate["ID"] = Int(statusID)
             statusupdate["tense"] = currenttense
             statusupdate["location"] = LocationLabel.text
-            
+            statusupdate["likesarray"] = []
             
             statusupdate.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
                 if success
@@ -315,15 +310,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             reportalert.addAction(next)
             
             self.presentViewController(reportalert, animated: true, completion: nil)
-            
-
         }
-        
-        
-        
-            
-        
-        
+
         else
         {
             self.textViewDismissKeyboard()
@@ -339,7 +327,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     @IBAction func backbuttonTapped(sender: AnyObject) {
         self.textViewDismissKeyboard()
-        GotoNewsfeed()
+        self.dismissViewControllerAnimated(true, completion: nil)
         self.view.endEditing(true)
     }
 
