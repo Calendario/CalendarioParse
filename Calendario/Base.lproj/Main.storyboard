@@ -433,14 +433,19 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8vA-cB-3WP" userLabel="ContainerView">
                                             <rect key="frame" x="66" y="11" width="304" height="44"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cwP-EW-rcB">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwP-EW-rcB">
                                                     <rect key="frame" x="0.0" y="25" width="54" height="19"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="19" id="RxS-bw-WKY"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
-                                                    <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="RxS-bw-WKY"/>
+                                                        </mask>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5q3-2M-rR7">
                                                     <rect key="frame" x="264" y="5" width="30" height="16"/>
@@ -454,7 +459,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="b4w-nE-rQj"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -474,6 +479,7 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="axe-hL-vmm"/>
                                                     <exclude reference="k4U-4l-vuI"/>
                                                 </mask>
                                             </variation>
@@ -638,6 +644,7 @@
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3a3-5u-LcP" secondAttribute="trailing" constant="5" id="B6f-zX-tTz"/>
                                         <constraint firstAttribute="trailing" secondItem="8vA-cB-3WP" secondAttribute="trailing" constant="5" id="DDC-1B-RO6"/>
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="leading" secondItem="3a3-5u-LcP" secondAttribute="trailing" constant="8" id="F05-6c-BCv"/>
+                                        <constraint firstItem="KhO-HU-Fzo" firstAttribute="centerY" secondItem="crA-RG-JUw" secondAttribute="centerY" priority="250" id="G1y-CN-fHX"/>
                                         <constraint firstItem="5ro-Py-vgq" firstAttribute="top" secondItem="cwP-EW-rcB" secondAttribute="bottom" constant="10" id="HoX-4m-OTM"/>
                                         <constraint firstItem="fox-pi-vk9" firstAttribute="top" secondItem="MAk-zZ-i98" secondAttribute="bottom" constant="6.5" id="I2C-P7-fdk"/>
                                         <constraint firstItem="ScK-QL-CoL" firstAttribute="centerY" secondItem="9o0-GD-rNj" secondAttribute="centerY" id="IgI-SX-v0z"/>
