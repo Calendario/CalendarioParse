@@ -799,10 +799,10 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LAj-Dh-mvx" userLabel="containerView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="682"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="675"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6c-pq-6FY" userLabel="DateBox">
-                                                <rect key="frame" x="0.0" y="15" width="414" height="60"/>
+                                                <rect key="frame" x="0.0" y="68" width="414" height="60"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gcm-dB-nn2">
                                                         <rect key="frame" x="8" y="19" width="40" height="21"/>
@@ -828,7 +828,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vkp-V0-pcv" userLabel="locationBox">
-                                                <rect key="frame" x="0.0" y="83" width="414" height="60"/>
+                                                <rect key="frame" x="0.0" y="136" width="414" height="60"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNr-yN-czA">
                                                         <rect key="frame" x="8" y="19" width="66" height="21"/>
@@ -862,7 +862,7 @@
                                                 </variation>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nXI-zI-5GC" userLabel="TenseBox">
-                                                <rect key="frame" x="0.0" y="151" width="414" height="52"/>
+                                                <rect key="frame" x="0.0" y="8" width="414" height="52"/>
                                                 <subviews>
                                                     <segmentedControl opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="P3y-v8-GPh">
                                                         <rect key="frame" x="8" y="12" width="398" height="29"/>
@@ -888,7 +888,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zcS-nn-jvV">
-                                                <rect key="frame" x="0.0" y="211" width="414" height="296"/>
+                                                <rect key="frame" x="0.0" y="204" width="414" height="296"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2tv-95-hXK">
                                                         <rect key="frame" x="8" y="8" width="398" height="280"/>
@@ -915,13 +915,13 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R26-bd-sTX">
-                                                <rect key="frame" x="374" y="509" width="32" height="21"/>
+                                                <rect key="frame" x="374" y="502" width="32" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KVT-oa-tf6" userLabel="ImageContainer">
-                                                <rect key="frame" x="0.0" y="536" width="414" height="136"/>
+                                                <rect key="frame" x="0.0" y="529" width="414" height="136"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXb-ik-p0Z">
                                                         <rect key="frame" x="8" y="25" width="36" height="36"/>
@@ -977,9 +977,11 @@
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
+                                            <constraint firstItem="F6c-pq-6FY" firstAttribute="top" secondItem="nXI-zI-5GC" secondAttribute="bottom" constant="8" id="21B-4w-xSb"/>
                                             <constraint firstItem="nXI-zI-5GC" firstAttribute="leading" secondItem="LAj-Dh-mvx" secondAttribute="leading" id="2JM-6g-0Rr"/>
                                             <constraint firstItem="Vkp-V0-pcv" firstAttribute="top" secondItem="F6c-pq-6FY" secondAttribute="bottom" constant="8" id="5uM-3H-KZ8"/>
                                             <constraint firstItem="Vkp-V0-pcv" firstAttribute="leading" secondItem="LAj-Dh-mvx" secondAttribute="leading" id="8CL-Wg-QDc"/>
+                                            <constraint firstItem="Vkp-V0-pcv" firstAttribute="top" secondItem="F6c-pq-6FY" secondAttribute="bottom" constant="8" id="8HG-Qo-BUD"/>
                                             <constraint firstItem="KVT-oa-tf6" firstAttribute="top" secondItem="R26-bd-sTX" secondAttribute="bottom" constant="6.5" id="ECI-zW-s0s"/>
                                             <constraint firstAttribute="trailing" secondItem="zcS-nn-jvV" secondAttribute="trailing" id="FlY-PJ-Q4t"/>
                                             <constraint firstAttribute="bottom" secondItem="KVT-oa-tf6" secondAttribute="bottom" constant="10" id="H64-4U-r5e"/>
@@ -990,16 +992,24 @@
                                             <constraint firstAttribute="trailing" secondItem="R26-bd-sTX" secondAttribute="trailing" constant="8" id="X53-N4-bKd"/>
                                             <constraint firstItem="F6c-pq-6FY" firstAttribute="top" secondItem="LAj-Dh-mvx" secondAttribute="top" constant="15" id="cpc-zR-62S"/>
                                             <constraint firstItem="zcS-nn-jvV" firstAttribute="top" secondItem="nXI-zI-5GC" secondAttribute="bottom" constant="8" id="fjO-gH-pP6"/>
+                                            <constraint firstItem="zcS-nn-jvV" firstAttribute="top" secondItem="Vkp-V0-pcv" secondAttribute="bottom" constant="8" id="fjc-hK-MBE"/>
                                             <constraint firstItem="R26-bd-sTX" firstAttribute="top" secondItem="zcS-nn-jvV" secondAttribute="bottom" constant="2" id="hBE-5C-bE7"/>
                                             <constraint firstItem="F6c-pq-6FY" firstAttribute="centerX" secondItem="LAj-Dh-mvx" secondAttribute="centerX" id="hqA-3Q-sEE"/>
                                             <constraint firstAttribute="trailing" secondItem="F6c-pq-6FY" secondAttribute="trailing" id="iYC-4u-RoJ"/>
                                             <constraint firstItem="nXI-zI-5GC" firstAttribute="top" secondItem="Vkp-V0-pcv" secondAttribute="bottom" constant="8" id="kXA-y0-LPU"/>
                                             <constraint firstItem="zcS-nn-jvV" firstAttribute="leading" secondItem="LAj-Dh-mvx" secondAttribute="leading" id="mVE-9e-WaO"/>
+                                            <constraint firstItem="nXI-zI-5GC" firstAttribute="top" secondItem="LAj-Dh-mvx" secondAttribute="top" constant="8" id="o3D-AV-ckw"/>
+                                            <constraint firstItem="F6c-pq-6FY" firstAttribute="top" secondItem="nXI-zI-5GC" secondAttribute="bottom" constant="8" id="o8F-He-UJu"/>
                                             <constraint firstAttribute="trailing" secondItem="KVT-oa-tf6" secondAttribute="trailing" id="zzS-eV-A6Z"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="kXA-y0-LPU"/>
+                                                <exclude reference="cpc-zR-62S"/>
                                                 <exclude reference="hqA-3Q-sEE"/>
+                                                <exclude reference="o8F-He-UJu"/>
+                                                <exclude reference="5uM-3H-KZ8"/>
+                                                <exclude reference="fjO-gH-pP6"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -1060,8 +1070,8 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kKQ-VP-KPM">
-                                <rect key="frame" x="56" y="121" width="311" height="195"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kKQ-VP-KPM">
+                                <rect key="frame" x="56" y="361" width="311" height="195"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9IY-hB-SvH">
                                         <rect key="frame" x="0.0" y="0.0" width="311" height="194"/>
