@@ -49,9 +49,9 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     enum Tense: String
     {
-        case going = "going"
-        case went = "went"
-        case currently = "currently"
+        case going = "Going"
+        case went = "Went"
+        case currently = "Currently"
         
     }
     
@@ -167,8 +167,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     func setDate()
     {
         let dateformatter = NSDateFormatter()
-        dateformatter.dateStyle = NSDateFormatterStyle.LongStyle
-        dateformatter.dateFormat = "M/d/yy"
+        dateformatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        //dateformatter.dateFormat = "M/d/yy"
         dateformatter.timeZone = NSTimeZone(abbreviation: "UTC")
         dateLabel.hidden = false
         dateLabel.text = dateformatter.stringFromDate(datepicker.date)
@@ -185,7 +185,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     func changeSegmentControl (dateSelected: NSDate) {
         
         let dateformatter = NSDateFormatter()
-        dateformatter.dateStyle = NSDateFormatterStyle.LongStyle
+        dateformatter.dateStyle = NSDateFormatterStyle.MediumStyle
         dateformatter.dateFormat = "M/d/yy"
         
         let timeFormatter = NSDateFormatter()
