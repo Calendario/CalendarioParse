@@ -107,6 +107,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         self.datePickerContainer.layoutIfNeeded()
         
         
+        
         // save current status id in NSUserDefaults incase its going to be used for a comment
         
         // gesture reconizer for date picker
@@ -158,10 +159,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     func textViewDismissKeyboard() {
         self.statusUpdateTextField.resignFirstResponder()
@@ -199,7 +196,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         datePickerContainer.hidden = false
     }
     
-
+    
     
     func LocationlabelTapped()
     {
@@ -284,12 +281,17 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         case 0:
             currenttense = Tense.going.rawValue
             tensenum = 1
+            
         case 1:
             currenttense = Tense.went.rawValue
             tensenum = 2
+            
+                       
         case 2:
             currenttense = Tense.currently.rawValue
             tensenum = 3
+            
+                        
         default:
             currenttense = Tense.going.rawValue
             tensenum = 1
