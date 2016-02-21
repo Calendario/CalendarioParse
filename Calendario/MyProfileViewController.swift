@@ -765,10 +765,10 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
           /*  tensestring.appendAttributedString(spacestring)
             tensestring.appendAttributedString(updatestring)*/
             
-            //setting tense label
+            // Set the tense label.
             cell.tenseLabel.attributedText = tensestring
             
-            //setting location label and checking contents
+            // Set the location label and checking contents.
             let locationValue: String = currentObject.objectForKey("location") as! String
             
             if locationValue == "tap to select location..." {
@@ -777,6 +777,14 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 
             else {
                 cell.locationLabel.text = locationValue
+            }
+            
+            // If the status contains hashtags then highlight them.
+            
+            if ((cell.statusTextView.text?.hasPrefix("#")) != nil) {
+                
+                // Highlight the status hashtags.
+                cell.statusTextView.hashtagLinkTapHandler = {label, hashtag, range in}
             }
 
             // Turn the profile picture into a cirlce.

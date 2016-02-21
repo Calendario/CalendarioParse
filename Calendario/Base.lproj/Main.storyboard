@@ -1429,8 +1429,9 @@
                                                         <constraint firstAttribute="width" constant="6" id="RbM-NE-rAK"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZ1-TH-Jnn">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZ1-TH-Jnn" customClass="KILabel">
                                                     <rect key="frame" x="72" y="63" width="295" height="19"/>
+                                                    <color key="tintColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -1523,7 +1524,7 @@
                                             <outlet property="locationLabel" destination="FjI-Ae-pDv" id="zXp-xi-SR3"/>
                                             <outlet property="profileimageview" destination="jYB-FK-lg5" id="zs0-Mn-biN"/>
                                             <outlet property="tenseLabel" destination="t4b-BX-epB" id="3Cw-Mb-rYk"/>
-                                            <outlet property="updateTextView" destination="DZ1-TH-Jnn" id="pVF-mI-K3x"/>
+                                            <outlet property="updateTextView" destination="DZ1-TH-Jnn" id="9tf-7j-zKC"/>
                                             <outlet property="userLabel" destination="RAA-Mf-Sgt" id="vfh-sM-MyM"/>
                                         </connections>
                                     </tableViewCell>
@@ -3952,8 +3953,9 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0v-dI-1VI">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0v-dI-1VI" customClass="KILabel">
                                                     <rect key="frame" x="66" y="65" width="301" height="19"/>
+                                                    <color key="tintColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -4011,7 +4013,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             <outlet property="locationLabel" destination="7nu-ZO-nGO" id="r0T-Jx-uo5"/>
                                             <outlet property="privateView" destination="5PC-wb-Ubg" id="D0E-2R-vfZ"/>
                                             <outlet property="profileImageView" destination="xw6-ES-kCb" id="peE-JC-lt5"/>
-                                            <outlet property="statusTextView" destination="S0v-dI-1VI" id="z7y-DA-3XJ"/>
+                                            <outlet property="statusTextView" destination="S0v-dI-1VI" id="90K-bE-9X8"/>
                                             <outlet property="tenseLabel" destination="Siy-Xq-DsK" id="SL1-Ej-15T"/>
                                             <outlet property="uploadDateLabel" destination="qb4-uF-XxW" id="1ew-pR-emi"/>
                                             <outlet property="userNameLabel" destination="wEa-rU-qRh" id="Y3n-rq-X0T"/>

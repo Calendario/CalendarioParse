@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KILabel
 
 class ProfileViewCustomCell: UITableViewCell {
     
@@ -17,7 +18,7 @@ class ProfileViewCustomCell: UITableViewCell {
     @IBOutlet weak var tenseLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var privateView: UIView!
-    @IBOutlet weak var statusTextView: UILabel!
+    @IBOutlet weak var statusTextView: KILabel!
     
     // View Did Load method.
     

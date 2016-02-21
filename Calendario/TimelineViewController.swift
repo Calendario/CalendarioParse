@@ -372,6 +372,14 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
             cell.likeButton.setImage(likebuttonfilled, forState: .Normal)
         }
         
+        // If the status contains hashtags then highlight them.
+        
+        if ((cell.updateTextView.text?.hasPrefix("#")) != nil) {
+            
+            // Highlight the status hashtags.
+            cell.updateTextView.hashtagLinkTapHandler = {label, hashtag, range in}
+        }
+        
         //set location label
         // Set location label and checking contents.
         let locationValue: String = status.objectForKey("location") as! String
