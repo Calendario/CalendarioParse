@@ -144,7 +144,7 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
         // Open the webpage view.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewC = storyboard.instantiateViewControllerWithIdentifier("WebPage") as! WebPageViewController
-        viewC.passedURL = "http://calendario.co.uk/acknowledgements"
+        viewC.passedURL = "http://www.calendario.co.uk/acknowledgements.htm"
         self.presentViewController(viewC, animated: true, completion: nil)
     }
     

@@ -37,8 +37,24 @@ class WebPageViewController : UIViewController, UIWebViewDelegate {
             // Set the initial title to the passed in URL.
             titleLabel.text = passedURL
             
+            // Setup the URL scheme check.
+            var urlComp: NSURLComponents!
+            urlComp = NSURLComponents(string: passedURL)!
+            
+            // If the URL does not have a scheme then
+            // add the standard 'http' URL scheme in.
+            
+            if (urlComp.scheme == nil) {
+                
+                // Add the standard URL scheme.
+                urlComp.scheme = "http"
+                
+                // Update the URL string.
+                passedURL = urlComp.string!
+            }
+
             // Load the website in the web view.
-            let url = NSURL(string: "http://\(passedURL)")
+            let url = NSURL(string: passedURL)
             let requestObj = NSURLRequest(URL: url!)
             webPage.loadRequest(requestObj)
         }
@@ -65,7 +81,14 @@ class WebPageViewController : UIViewController, UIWebViewDelegate {
         // Set the website title.
         
         if (webTitle != nil) {
-             titleLabel.text = webTitle
+            
+            if ((webTitle == "") || (webTitle == " ") || (webTitle == nil)) {
+                titleLabel.text = passedURL
+            }
+            
+            else {
+                titleLabel.text = webTitle
+            }
         }
         
         else {
