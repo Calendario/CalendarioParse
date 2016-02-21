@@ -177,13 +177,45 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         datePickerContainer.hidden = true
         dateLabel.textColor = UIColor.darkGrayColor()
         
+        changeSegmentControl(datepicker.date)
+        
         viewGestureRecognizer.enabled = false
+    }
+    
+    func changeSegmentControl (dateSelected: NSDate) {
+        
+        let dateformatter = NSDateFormatter()
+        dateformatter.dateStyle = NSDateFormatterStyle.LongStyle
+        dateformatter.dateFormat = "M/d/yy"
+        
+        let timeFormatter = NSDateFormatter()
+        timeFormatter.dateStyle = NSDateFormatterStyle.LongStyle
+        timeFormatter.dateFormat = "HH"
+        
+        let currentDate = NSDate()
+        let currentDateString = dateformatter.stringFromDate(currentDate)
+        let currentTimeString = timeFormatter.stringFromDate(currentDate)
+        let dateSelectedString = dateformatter.stringFromDate(dateSelected)
+        let selectedTimeString = timeFormatter.stringFromDate(dateSelected)
+        
+        if (currentDateString == dateSelectedString) && (currentTimeString == selectedTimeString) {
+            TenseControl.selectedSegmentIndex = 2
+        }
+        else if currentDate.compare(dateSelected) == NSComparisonResult.OrderedDescending {
+            TenseControl.selectedSegmentIndex = 1
+        }
+        else if currentDate.compare(dateSelected) == NSComparisonResult.OrderedAscending{
+            TenseControl.selectedSegmentIndex = 0
+        }
+
     }
     
     
     @IBAction func datePickerChanged(sender: AnyObject) {
-        //setDate()
+        changeSegmentControl(datepicker.date)
     }
+    
+
     
     func DatePickerAppear()
     {

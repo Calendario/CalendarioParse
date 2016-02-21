@@ -82,6 +82,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
         aspectConstraint = NSLayoutConstraint(item: userPostedImage, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: userPostedImage, attribute: NSLayoutAttribute.Height, multiplier: aspect, constant: 0.0)
         
         userPostedImage.image = image
+
     }    
     
     override func awakeFromNib() {
