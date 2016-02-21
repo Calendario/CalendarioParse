@@ -308,7 +308,7 @@ class NewsfeedV3: UITableViewController {
         }
         
         // Create the tense/date all in one attributed string.
-        let attrs2 = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 14.0)!]
+        let attrs2 = [NSForegroundColorAttributeName:UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 14.0)!]
         let tensestring2 = NSMutableAttributedString(string: currentObject.objectForKey("tense") as! String, attributes: attrs2)
         let spacestring2 = NSMutableAttributedString(string: " ")
         let onstring = NSAttributedString(string: "on")
@@ -336,6 +336,10 @@ class NewsfeedV3: UITableViewController {
         // Turn the profile picture into a circle.
         cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
         cell.profileimageview.clipsToBounds = true
+        
+        //set radius of imageview on status
+        cell.userPostedImage.layer.cornerRadius = 4.0
+        cell.userPostedImage.clipsToBounds = true
         
         // Show or hide the media image view
         // depending on the cell data type.
