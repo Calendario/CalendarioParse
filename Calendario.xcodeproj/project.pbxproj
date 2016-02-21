@@ -16,6 +16,7 @@
 		A23457961C765A9000376F2F /* NewsfeedV3.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457951C765A9000376F2F /* NewsfeedV3.swift */; };
 		A23457981C768A9B00376F2F /* LikesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457971C768A9B00376F2F /* LikesListViewController.swift */; };
 		A234579A1C768F5700376F2F /* LikesCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457991C768F5700376F2F /* LikesCustomCell.swift */; };
+		A23457A21C79D4EF00376F2F /* PhotoViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457A11C79D4EF00376F2F /* PhotoViewV2.swift */; };
 		A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25179511C201B0300EA0A5E /* ReportUserViewController.swift */; };
 		A26359E41BDA8342003F8FEB /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */; };
 		A26701F21C369D5B0041E1D1 /* ManageUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26701F11C369D5B0041E1D1 /* ManageUser.swift */; };
@@ -149,6 +150,7 @@
 		A23457951C765A9000376F2F /* NewsfeedV3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedV3.swift; sourceTree = "<group>"; };
 		A23457971C768A9B00376F2F /* LikesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesListViewController.swift; sourceTree = "<group>"; };
 		A23457991C768F5700376F2F /* LikesCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesCustomCell.swift; sourceTree = "<group>"; };
+		A23457A11C79D4EF00376F2F /* PhotoViewV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewV2.swift; sourceTree = "<group>"; };
 		A25179511C201B0300EA0A5E /* ReportUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportUserViewController.swift; sourceTree = "<group>"; };
 		A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A26701F11C369D5B0041E1D1 /* ManageUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageUser.swift; sourceTree = "<group>"; };
@@ -384,6 +386,14 @@
 				A2267D181C4BE15700180C6D /* FollowRequestCustomCell.swift */,
 			);
 			name = "Follow Requests List";
+			sourceTree = "<group>";
+		};
+		A23457A01C79D4CE00376F2F /* Photo Viewer V2 */ = {
+			isa = PBXGroup;
+			children = (
+				A23457A11C79D4EF00376F2F /* PhotoViewV2.swift */,
+			);
+			name = "Photo Viewer V2";
 			sourceTree = "<group>";
 		};
 		A26701F01C369CBD0041E1D1 /* Manage User Class */ = {
@@ -672,6 +682,7 @@
 		E2E0D7011BC9950800662E70 /* Calendario */ = {
 			isa = PBXGroup;
 			children = (
+				A23457A01C79D4CE00376F2F /* Photo Viewer V2 */,
 				E1804EDC1C1BD89D00A25C79 /* Notifications */,
 				E1D759A91C12430B0017B53F /* Location */,
 				78C1C01D1C006DBE00ACDCEC /* Settings */,
@@ -988,6 +999,7 @@
 				A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */,
 				A23457981C768A9B00376F2F /* LikesListViewController.swift in Sources */,
 				E263EE1F1C53FBC80069B89A /* NewsFeedQueryViewController.swift in Sources */,
+				A23457A21C79D4EF00376F2F /* PhotoViewV2.swift in Sources */,
 				E230836B1C7426EB001C0142 /* FSCalendarCell.m in Sources */,
 				E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */,
 				E23083691C7426EB001C0142 /* FSCalendar+IBExtension.m in Sources */,

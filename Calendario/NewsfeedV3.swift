@@ -245,6 +245,7 @@ class NewsfeedV3: UITableViewController {
         cell.commentButton.tag = indexPath.row
         cell.likeslabel.tag = indexPath.row
         cell.commentsLabel.tag = indexPath.row
+        cell.userPostedImage.tag = indexPath.row
         
         // Setup the tag gesture recognizers, so we can open
         // the various different views, ie: comments view.
@@ -574,13 +575,10 @@ class NewsfeedV3: UITableViewController {
         let indexPath = NSIndexPath(forRow: (sender.view?.tag)!, inSection: 0)
         let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! NewsfeedTableViewCell
         
-        // Set the image to be shown in the photo view.
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(UIImagePNGRepresentation(cell.userPostedImage.image!), forKey: "image")
-        
         // Open the photo view controller.
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let PVC = sb.instantiateViewControllerWithIdentifier("photoviewer") as! CalPhotoViewerViewController
+        let PVC = sb.instantiateViewControllerWithIdentifier("PhotoV2") as! PhotoViewV2
+        PVC.passedImage = cell.userPostedImage.image!
         let NC = UINavigationController(rootViewController: PVC)
         self.presentViewController(NC, animated: true, completion: nil)
     }
