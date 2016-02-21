@@ -743,6 +743,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // Setup the table view cell.
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ProfileViewCustomCell
         cell.layoutMargins = UIEdgeInsetsZero
+        
         if (self.statusLoadCheck == true) {
             
             // Hide the private cell view.
@@ -779,6 +780,11 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 cell.locationLabel.text = locationValue
             }
             
+            // Set the createdAt date label.
+            DateManager.createDateDifferenceString(currentObject.createdAt!) { (difference) -> Void in
+                cell.createdAtLabel.text = difference
+            }
+            
             // If the status contains hashtags then highlight them.
             
             if ((cell.statusTextView.text?.hasPrefix("#")) != nil) {
@@ -787,6 +793,40 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 cell.statusTextView.hashtagLinkTapHandler = {label, hashtag, range in}
             }
 
+            // If the status contains @mentions then highligh
+            // and link them to the open profile view action.
+            
+            if ((cell.statusTextView.text?.hasPrefix("@")) != nil) {
+                
+                // Highlight the @username label.
+                cell.statusTextView.userHandleLinkTapHandler = {label2, mention, range in
+                    
+                    // Remove the '@' symbol from the username
+                    let userMention = mention.stringByReplacingOccurrencesOfString("@", withString: "")
+                    
+                    // Setup the user query.
+                    var query:PFQuery!
+                    query = PFUser.query()
+                    query.whereKey("username", equalTo: userMention)
+                    
+                    // Get the user data object.
+                    query.getFirstObjectInBackgroundWithBlock({ (userObject, error) -> Void in
+                        
+                        // Check for errors before passing
+                        // the user object to the profile view.
+                        
+                        if ((error == nil) && (userObject != nil)) {
+                            
+                            // Open the selected users profile.
+                            let sb = UIStoryboard(name: "Main", bundle: nil)
+                            let reportVC = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
+                            reportVC.passedUser = userObject as? PFUser
+                            self.presentViewController(reportVC, animated: true, completion: nil)
+                        }
+                    })
+                }
+            }
+            
             // Turn the profile picture into a cirlce.
             cell.profileImageView.layer.cornerRadius = (cell.profileImageView.frame.size.width / 2)
             cell.profileImageView.clipsToBounds = true

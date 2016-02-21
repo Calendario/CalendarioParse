@@ -19,7 +19,8 @@ class ProfileViewCustomCell: UITableViewCell {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var privateView: UIView!
     @IBOutlet weak var statusTextView: KILabel!
-    
+    @IBOutlet weak var createdAtLabel: UILabel!
+
     // View Did Load method.
     
     override func awakeFromNib() {

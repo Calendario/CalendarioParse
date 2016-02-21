@@ -15,7 +15,8 @@ class TimeLineTableViewCell: UITableViewCell {
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var tenseLabel: UILabel!
     @IBOutlet weak var updateTextView: KILabel!
-
+    @IBOutlet weak var createdAtLabel: UILabel!
+    
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var commentButton: UIButton!

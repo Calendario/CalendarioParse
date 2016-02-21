@@ -353,8 +353,6 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         let cell = tableview.dequeueReusableCellWithIdentifier("TimelineCell") as! TimeLineTableViewCell
         let status:PFObject = self.filteredData.objectAtIndex(indexPath.row) as! PFObject
         
-        print("\(status)")
-        
         cell.userLabel.text = status.valueForKey("user")?.username!
         cell.tenseLabel.text = status.valueForKey("tense") as? String
         cell.updateTextView.text = status.valueForKey("updatetext") as! String
@@ -372,12 +370,51 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
             cell.likeButton.setImage(likebuttonfilled, forState: .Normal)
         }
         
+        // Set the createdAt date label.
+        DateManager.createDateDifferenceString(status.createdAt!) { (difference) -> Void in
+            cell.createdAtLabel.text = difference
+        }
+        
         // If the status contains hashtags then highlight them.
         
         if ((cell.updateTextView.text?.hasPrefix("#")) != nil) {
             
             // Highlight the status hashtags.
             cell.updateTextView.hashtagLinkTapHandler = {label, hashtag, range in}
+        }
+        
+        // If the status contains @mentions then highligh
+        // and link them to the open profile view action.
+        
+        if ((cell.updateTextView.text?.hasPrefix("@")) != nil) {
+            
+            // Highlight the @username label.
+            cell.updateTextView.userHandleLinkTapHandler = {label2, mention, range in
+                
+                // Remove the '@' symbol from the username
+                let userMention = mention.stringByReplacingOccurrencesOfString("@", withString: "")
+                
+                // Setup the user query.
+                var query:PFQuery!
+                query = PFUser.query()
+                query.whereKey("username", equalTo: userMention)
+                
+                // Get the user data object.
+                query.getFirstObjectInBackgroundWithBlock({ (userObject, error) -> Void in
+                    
+                    // Check for errors before passing
+                    // the user object to the profile view.
+                    
+                    if ((error == nil) && (userObject != nil)) {
+                        
+                        // Open the selected users profile.
+                        let sb = UIStoryboard(name: "Main", bundle: nil)
+                        let reportVC = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
+                        reportVC.passedUser = userObject as? PFUser
+                        self.presentViewController(reportVC, animated: true, completion: nil)
+                    }
+                })
+            }
         }
         
         //set location label

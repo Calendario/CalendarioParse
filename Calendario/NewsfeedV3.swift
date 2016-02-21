@@ -273,6 +273,40 @@ class NewsfeedV3: UITableViewController {
             cell.statusTextView.hashtagLinkTapHandler = {label, hashtag, range in}
         }
         
+        // If the status contains @mentions then highligh
+        // and link them to the open profile view action.
+        
+        if ((cell.statusTextView.text?.hasPrefix("@")) != nil) {
+            
+            // Highlight the @username label.
+            cell.statusTextView.userHandleLinkTapHandler = {label2, mention, range in
+            
+                // Remove the '@' symbol from the username
+                let userMention = mention.stringByReplacingOccurrencesOfString("@", withString: "")
+                
+                // Setup the user query.
+                var query:PFQuery!
+                query = PFUser.query()
+                query.whereKey("username", equalTo: userMention)
+                
+                // Get the user data object.
+                query.getFirstObjectInBackgroundWithBlock({ (userObject, error) -> Void in
+                    
+                    // Check for errors before passing 
+                    // the user object to the profile view.
+                    
+                    if ((error == nil) && (userObject != nil)) {
+                        
+                        // Open the selected users profile.
+                        let sb = UIStoryboard(name: "Main", bundle: nil)
+                        let reportVC = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
+                        reportVC.passedUser = userObject as? PFUser
+                        self.presentViewController(reportVC, animated: true, completion: nil)
+                    }
+                })
+            }
+        }
+        
         // Create the tense/date all in one attributed string.
         let attrs2 = [NSForegroundColorAttributeName:UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 14.0)!]
         let tensestring2 = NSMutableAttributedString(string: currentObject.objectForKey("tense") as! String, attributes: attrs2)
@@ -372,6 +406,11 @@ class NewsfeedV3: UITableViewController {
         
         else {
             cell.likeslabel.text = "0 Likes"
+        }
+        
+        // Set the createdAt date label.
+        DateManager.createDateDifferenceString(currentObject.createdAt!) { (difference) -> Void in
+            cell.createdAtLabel.text = difference
         }
         
         // Update the comments label.

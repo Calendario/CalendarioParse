@@ -1477,9 +1477,19 @@
                                                     <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# hours ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="rN5-ir-sfO">
+                                                    <rect key="frame" x="300" y="174" width="67" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="67" id="Tnb-DT-XiM"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="yOJ-vI-2Nd" firstAttribute="centerX" secondItem="jYB-FK-lg5" secondAttribute="centerX" id="14m-Vi-FXI"/>
+                                                <constraint firstItem="rN5-ir-sfO" firstAttribute="trailing" secondItem="5pX-3S-uf5" secondAttribute="trailingMargin" id="1Ki-c2-5ZN"/>
                                                 <constraint firstItem="RAA-Mf-Sgt" firstAttribute="leading" secondItem="jYB-FK-lg5" secondAttribute="trailing" constant="8" id="1OS-op-K3v"/>
                                                 <constraint firstItem="jYB-FK-lg5" firstAttribute="leading" secondItem="38K-LY-qrh" secondAttribute="trailing" constant="8" id="4SV-ja-hWQ"/>
                                                 <constraint firstItem="DZ1-TH-Jnn" firstAttribute="top" secondItem="FjI-Ae-pDv" secondAttribute="bottom" constant="8" id="5XX-tJ-zRL"/>
@@ -1495,6 +1505,7 @@
                                                 <constraint firstItem="RAA-Mf-Sgt" firstAttribute="centerY" secondItem="jYB-FK-lg5" secondAttribute="centerY" priority="250" id="VDz-aR-ZgV"/>
                                                 <constraint firstAttribute="trailing" secondItem="fDq-T5-xiO" secondAttribute="trailing" constant="8" id="WeF-O5-1BL"/>
                                                 <constraint firstAttribute="bottom" secondItem="38K-LY-qrh" secondAttribute="bottom" id="ZFg-Qo-xii"/>
+                                                <constraint firstItem="rN5-ir-sfO" firstAttribute="bottom" secondItem="5pX-3S-uf5" secondAttribute="bottomMargin" id="aDh-ta-dQz"/>
                                                 <constraint firstItem="I2l-HT-BTp" firstAttribute="top" secondItem="yOJ-vI-2Nd" secondAttribute="bottom" constant="15" id="fLM-NR-Lom"/>
                                                 <constraint firstItem="fDq-T5-xiO" firstAttribute="leading" secondItem="t4b-BX-epB" secondAttribute="trailing" constant="2" id="fjK-eF-XZt"/>
                                                 <constraint firstItem="FjI-Ae-pDv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="RAA-Mf-Sgt" secondAttribute="bottom" constant="2" id="mmA-eK-G6A"/>
@@ -1519,6 +1530,7 @@
                                         <connections>
                                             <outlet property="colorStrip" destination="38K-LY-qrh" id="ph7-vc-Yhf"/>
                                             <outlet property="commentButton" destination="I2l-HT-BTp" id="OPF-nM-8vv"/>
+                                            <outlet property="createdAtLabel" destination="rN5-ir-sfO" id="sFc-Dd-dSd"/>
                                             <outlet property="dateLabel" destination="fDq-T5-xiO" id="JjS-bK-J1I"/>
                                             <outlet property="likeButton" destination="yOJ-vI-2Nd" id="whZ-Zv-Ru6"/>
                                             <outlet property="locationLabel" destination="FjI-Ae-pDv" id="zXp-xi-SR3"/>
@@ -3960,6 +3972,15 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# hours ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="BSV-ZQ-xTU">
+                                                    <rect key="frame" x="300" y="83" width="67" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="67" id="Nvf-kM-7CN"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="7nu-ZO-nGO" firstAttribute="leading" secondItem="wEa-rU-qRh" secondAttribute="leading" id="0Xg-ux-HCl"/>
@@ -3983,6 +4004,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <constraint firstItem="Siy-Xq-DsK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wEa-rU-qRh" secondAttribute="trailing" constant="8" id="YI6-8i-tVO"/>
                                                 <constraint firstItem="5PC-wb-Ubg" firstAttribute="centerY" secondItem="SHx-cD-L3b" secondAttribute="centerY" id="ZPT-un-qfV"/>
                                                 <constraint firstItem="wEa-rU-qRh" firstAttribute="leading" secondItem="xw6-ES-kCb" secondAttribute="trailing" constant="8" id="bvi-yk-Miq"/>
+                                                <constraint firstItem="BSV-ZQ-xTU" firstAttribute="trailing" secondItem="SHx-cD-L3b" secondAttribute="trailingMargin" id="czx-TT-bXz"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="BSV-ZQ-xTU" secondAttribute="bottom" constant="-8" id="fsC-CU-AxB"/>
                                                 <constraint firstAttribute="trailing" secondItem="7nu-ZO-nGO" secondAttribute="trailing" constant="8" id="gme-yJ-PtN"/>
                                                 <constraint firstItem="Siy-Xq-DsK" firstAttribute="centerY" secondItem="qb4-uF-XxW" secondAttribute="centerY" id="j8l-ba-Ddm"/>
                                                 <constraint firstItem="7nu-ZO-nGO" firstAttribute="top" secondItem="wEa-rU-qRh" secondAttribute="bottom" constant="8" id="jJ5-oW-OMP"/>
@@ -4010,6 +4033,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="createdAtLabel" destination="BSV-ZQ-xTU" id="d8C-9x-In6"/>
                                             <outlet property="locationLabel" destination="7nu-ZO-nGO" id="r0T-Jx-uo5"/>
                                             <outlet property="privateView" destination="5PC-wb-Ubg" id="D0E-2R-vfZ"/>
                                             <outlet property="profileImageView" destination="xw6-ES-kCb" id="peE-JC-lt5"/>

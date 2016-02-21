@@ -17,6 +17,7 @@
 		A23457981C768A9B00376F2F /* LikesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457971C768A9B00376F2F /* LikesListViewController.swift */; };
 		A234579A1C768F5700376F2F /* LikesCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457991C768F5700376F2F /* LikesCustomCell.swift */; };
 		A23457A21C79D4EF00376F2F /* PhotoViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457A11C79D4EF00376F2F /* PhotoViewV2.swift */; };
+		A23457AB1C79E6E500376F2F /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457AA1C79E6E500376F2F /* DateManager.swift */; };
 		A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25179511C201B0300EA0A5E /* ReportUserViewController.swift */; };
 		A26359E41BDA8342003F8FEB /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */; };
 		A26701F21C369D5B0041E1D1 /* ManageUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26701F11C369D5B0041E1D1 /* ManageUser.swift */; };
@@ -151,6 +152,7 @@
 		A23457971C768A9B00376F2F /* LikesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesListViewController.swift; sourceTree = "<group>"; };
 		A23457991C768F5700376F2F /* LikesCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesCustomCell.swift; sourceTree = "<group>"; };
 		A23457A11C79D4EF00376F2F /* PhotoViewV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewV2.swift; sourceTree = "<group>"; };
+		A23457AA1C79E6E500376F2F /* DateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		A25179511C201B0300EA0A5E /* ReportUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportUserViewController.swift; sourceTree = "<group>"; };
 		A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A26701F11C369D5B0041E1D1 /* ManageUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageUser.swift; sourceTree = "<group>"; };
@@ -396,6 +398,73 @@
 			name = "Photo Viewer V2";
 			sourceTree = "<group>";
 		};
+		A23457A31C79E60D00376F2F /* Likes List View */ = {
+			isa = PBXGroup;
+			children = (
+				A23457991C768F5700376F2F /* LikesCustomCell.swift */,
+				A23457971C768A9B00376F2F /* LikesListViewController.swift */,
+			);
+			name = "Likes List View";
+			sourceTree = "<group>";
+		};
+		A23457A41C79E64A00376F2F /* Newsfeed (Latest) */ = {
+			isa = PBXGroup;
+			children = (
+				A23457951C765A9000376F2F /* NewsfeedV3.swift */,
+				E2D8D9FC1BCF51E800A40350 /* NewsfeedTableViewCell.swift */,
+			);
+			name = "Newsfeed (Latest)";
+			sourceTree = "<group>";
+		};
+		A23457A51C79E65C00376F2F /* Status Update */ = {
+			isa = PBXGroup;
+			children = (
+				E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */,
+			);
+			name = "Status Update";
+			sourceTree = "<group>";
+		};
+		A23457A61C79E66A00376F2F /* Timeline View */ = {
+			isa = PBXGroup;
+			children = (
+				E27ACC801BEDA64100503DD7 /* TimelineViewController.swift */,
+				E2C2BC661C24731C00F810C9 /* TimeLineTableViewCell.swift */,
+			);
+			name = "Timeline View";
+			sourceTree = "<group>";
+		};
+		A23457A71C79E67700376F2F /* Comments View */ = {
+			isa = PBXGroup;
+			children = (
+				E2FE964B1BDFE07D003BEDD2 /* CommentsViewController.swift */,
+				E2F3EF8F1BE1C75600F42433 /* CommentsTableViewCell.swift */,
+			);
+			name = "Comments View";
+			sourceTree = "<group>";
+		};
+		A23457A81C79E68000376F2F /* See More View */ = {
+			isa = PBXGroup;
+			children = (
+				E2EF8A801C02B9E80000A957 /* SeeMoreViewController.swift */,
+			);
+			name = "See More View";
+			sourceTree = "<group>";
+		};
+		A23457A91C79E68F00376F2F /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				A23457AA1C79E6E500376F2F /* DateManager.swift */,
+				E2672D861C61C25B00555286 /* Newsfeed2TableViewController.swift */,
+				E2B420E91BD585F900984E7B /* CalHashTagDetector.h */,
+				E2FE96471BDF1AEA003BEDD2 /* ReportTableViewController.swift */,
+				E2B420EA1BD585F900984E7B /* CalHashTagDetector.m */,
+				E2C9223B1C1CB581004278E3 /* CalPhotoViewerViewController.swift */,
+				E25B09D51C4E0C0900529CCA /* LikeHelper.swift */,
+				E2CAAA3A1C69A2AB001C9E06 /* NSDate+Compare.swift */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
 		A26701F01C369CBD0041E1D1 /* Manage User Class */ = {
 			isa = PBXGroup;
 			children = (
@@ -478,23 +547,12 @@
 		A2E12C8B1BCE6EF7007D8587 /* Newsfeed & Timeline & Status Update */ = {
 			isa = PBXGroup;
 			children = (
-				A23457991C768F5700376F2F /* LikesCustomCell.swift */,
-				A23457971C768A9B00376F2F /* LikesListViewController.swift */,
-				A23457951C765A9000376F2F /* NewsfeedV3.swift */,
-				E2672D861C61C25B00555286 /* Newsfeed2TableViewController.swift */,
-				E2D8D9FC1BCF51E800A40350 /* NewsfeedTableViewCell.swift */,
-				E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */,
-				E2B420E91BD585F900984E7B /* CalHashTagDetector.h */,
-				E2FE96471BDF1AEA003BEDD2 /* ReportTableViewController.swift */,
-				E2B420EA1BD585F900984E7B /* CalHashTagDetector.m */,
-				E2FE964B1BDFE07D003BEDD2 /* CommentsViewController.swift */,
-				E2F3EF8F1BE1C75600F42433 /* CommentsTableViewCell.swift */,
-				E27ACC801BEDA64100503DD7 /* TimelineViewController.swift */,
-				E2C2BC661C24731C00F810C9 /* TimeLineTableViewCell.swift */,
-				E2EF8A801C02B9E80000A957 /* SeeMoreViewController.swift */,
-				E2C9223B1C1CB581004278E3 /* CalPhotoViewerViewController.swift */,
-				E25B09D51C4E0C0900529CCA /* LikeHelper.swift */,
-				E2CAAA3A1C69A2AB001C9E06 /* NSDate+Compare.swift */,
+				A23457A41C79E64A00376F2F /* Newsfeed (Latest) */,
+				A23457A51C79E65C00376F2F /* Status Update */,
+				A23457A81C79E68000376F2F /* See More View */,
+				A23457A71C79E67700376F2F /* Comments View */,
+				A23457A61C79E66A00376F2F /* Timeline View */,
+				A23457A91C79E68F00376F2F /* Other */,
 			);
 			name = "Newsfeed & Timeline & Status Update";
 			sourceTree = "<group>";
@@ -682,6 +740,7 @@
 		E2E0D7011BC9950800662E70 /* Calendario */ = {
 			isa = PBXGroup;
 			children = (
+				A23457A31C79E60D00376F2F /* Likes List View */,
 				A23457A01C79D4CE00376F2F /* Photo Viewer V2 */,
 				E1804EDC1C1BD89D00A25C79 /* Notifications */,
 				E1D759A91C12430B0017B53F /* Location */,
@@ -1015,6 +1074,7 @@
 				E23083731C7426EB001C0142 /* NSDate+FSExtension.m in Sources */,
 				E2C2BC671C24731C00F810C9 /* TimeLineTableViewCell.swift in Sources */,
 				E2672D871C61C25B00555286 /* Newsfeed2TableViewController.swift in Sources */,
+				A23457AB1C79E6E500376F2F /* DateManager.swift in Sources */,
 				E2EE565D1BF199F70064BA1D /* NSArray+Chameleon.m in Sources */,
 				E24DA5EF1C13E3AC00901DF0 /* LocationSearchTableViewController.swift in Sources */,
 				E2EE56621BF199F70064BA1D /* UILabel+Chameleon.m in Sources */,
