@@ -363,6 +363,10 @@ class NewsfeedV3: UITableViewController {
             if likesArray.contains(PFUser.currentUser()!.objectId!) {
                 cell.likebutton.select()
             }
+            
+            else {
+                cell.likebutton.deselect()
+            }
         }
         
         else {
