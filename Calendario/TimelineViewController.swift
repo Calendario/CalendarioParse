@@ -341,6 +341,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
         // Setup the table view custom cell.
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TimeLineTableViewCell
+        cell.layoutMargins = UIEdgeInsetsZero
         
         // Get the specific status object for this cell.
         let currentObject:PFObject = self.filteredData.objectAtIndex(indexPath.row) as! PFObject
