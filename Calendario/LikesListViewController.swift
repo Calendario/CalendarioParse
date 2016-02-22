@@ -26,7 +26,7 @@ class LikesListViewController: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
        
         // Set the navigation bar properties.
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         self.navigationItem.title = "Likes"
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.translucent = false

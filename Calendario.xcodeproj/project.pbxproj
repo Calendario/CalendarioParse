@@ -18,6 +18,7 @@
 		A234579A1C768F5700376F2F /* LikesCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457991C768F5700376F2F /* LikesCustomCell.swift */; };
 		A23457A21C79D4EF00376F2F /* PhotoViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457A11C79D4EF00376F2F /* PhotoViewV2.swift */; };
 		A23457AB1C79E6E500376F2F /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457AA1C79E6E500376F2F /* DateManager.swift */; };
+		A23457AE1C7B4AA300376F2F /* HashtagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457AD1C7B4AA300376F2F /* HashtagViewController.swift */; };
 		A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25179511C201B0300EA0A5E /* ReportUserViewController.swift */; };
 		A26359E41BDA8342003F8FEB /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */; };
 		A26701F21C369D5B0041E1D1 /* ManageUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26701F11C369D5B0041E1D1 /* ManageUser.swift */; };
@@ -153,6 +154,7 @@
 		A23457991C768F5700376F2F /* LikesCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesCustomCell.swift; sourceTree = "<group>"; };
 		A23457A11C79D4EF00376F2F /* PhotoViewV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewV2.swift; sourceTree = "<group>"; };
 		A23457AA1C79E6E500376F2F /* DateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		A23457AD1C7B4AA300376F2F /* HashtagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagViewController.swift; sourceTree = "<group>"; };
 		A25179511C201B0300EA0A5E /* ReportUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportUserViewController.swift; sourceTree = "<group>"; };
 		A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A26701F11C369D5B0041E1D1 /* ManageUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageUser.swift; sourceTree = "<group>"; };
@@ -401,8 +403,8 @@
 		A23457A31C79E60D00376F2F /* Likes List View */ = {
 			isa = PBXGroup;
 			children = (
-				A23457991C768F5700376F2F /* LikesCustomCell.swift */,
 				A23457971C768A9B00376F2F /* LikesListViewController.swift */,
+				A23457991C768F5700376F2F /* LikesCustomCell.swift */,
 			);
 			name = "Likes List View";
 			sourceTree = "<group>";
@@ -463,6 +465,14 @@
 				E2CAAA3A1C69A2AB001C9E06 /* NSDate+Compare.swift */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		A23457AC1C7B4A7F00376F2F /* Hashtag View */ = {
+			isa = PBXGroup;
+			children = (
+				A23457AD1C7B4AA300376F2F /* HashtagViewController.swift */,
+			);
+			name = "Hashtag View";
 			sourceTree = "<group>";
 		};
 		A26701F01C369CBD0041E1D1 /* Manage User Class */ = {
@@ -740,6 +750,7 @@
 		E2E0D7011BC9950800662E70 /* Calendario */ = {
 			isa = PBXGroup;
 			children = (
+				A23457AC1C7B4A7F00376F2F /* Hashtag View */,
 				A23457A31C79E60D00376F2F /* Likes List View */,
 				A23457A01C79D4CE00376F2F /* Photo Viewer V2 */,
 				E1804EDC1C1BD89D00A25C79 /* Notifications */,
@@ -1070,6 +1081,7 @@
 				E2065DA81C3E0EF30054AB2A /* FollowingTableViewController.swift in Sources */,
 				E2C9223C1C1CB581004278E3 /* CalPhotoViewerViewController.swift in Sources */,
 				A26359E41BDA8342003F8FEB /* ResetPasswordViewController.swift in Sources */,
+				A23457AE1C7B4AA300376F2F /* HashtagViewController.swift in Sources */,
 				E2B420EB1BD585F900984E7B /* CalHashTagDetector.m in Sources */,
 				E23083731C7426EB001C0142 /* NSDate+FSExtension.m in Sources */,
 				E2C2BC671C24731C00F810C9 /* TimeLineTableViewCell.swift in Sources */,

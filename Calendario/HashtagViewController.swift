@@ -1,8 +1,8 @@
 //
-//  NewsfeedV3.swift
+//  HashtagViewController.swift
 //  Calendario
 //
-//  Created by Daniel Sadjadian on 16/02/2016.
+//  Created by Daniel Sadjadian on 22/02/2016.
 //  Copyright © 2016 Calendario. All rights reserved.
 //
 
@@ -12,25 +12,15 @@ import Parse
 import QuartzCore
 import DOFavoriteButton
 
-class NewsfeedV3: UITableViewController {
+class HashtagViewController: UITableViewController {
     
     // Status update data array.
     var statusData:NSMutableArray = []
-    var followingData:NSMutableArray = []
     var sortedArray:NSMutableArray = []
+    var hashtagString:String!
     
     // Setup the on screen UI objects.
     @IBOutlet weak var menuIndicator: UIRefreshControl!
-    
-    // Setup the on screen button actions.
-    
-    @IBAction func postStatus(sender: UIButton) {
-        
-        // Open the status post view.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let postsview = sb.instantiateViewControllerWithIdentifier("PostView") as! StatusUpdateViewController
-        self.presentViewController(postsview, animated: true, completion: nil)
-    }
     
     // View Did Load.
     
@@ -38,26 +28,30 @@ class NewsfeedV3: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        // Load in the recommended view controller state.
+        // Load in the hashtag data.
         let defaults = NSUserDefaults.standardUserDefaults()
-        let showRecommendations = defaults.objectForKey("recoCheck") as? Bool
+        let hashtagData = defaults.objectForKey("HashtagData") as? NSMutableArray
         
-        // If the state is set to 'true' then the
-        // user is new and we must show the recommended
-        // view controller to help the user follow people.
+        // Set the hashtag string.
+        hashtagString = hashtagData![hashtagData![0] as! Int] as! String
         
-        if (showRecommendations == true) {
-            
-            // Open the user recommendations view.
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let postsview = sb.instantiateViewControllerWithIdentifier("recommend") as! RecommendedUsersViewController
-            self.presentViewController(postsview, animated: true, completion:{
-                
-                // Make sure the view does not appear every time.
-                defaults.setObject(false, forKey: "recoCheck")
-                defaults.synchronize()
-            })
-        }
+        // Set the navigation bar properties.
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        self.navigationItem.title = hashtagString
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.translucent = false
+        let font = UIFont(name: "Futura-Medium", size: 21)
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font!]
+        self.navigationController!.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
+        
+        // Set the back button.
+        let button: UIButton = UIButton(type: UIButtonType.Custom)
+        button.setImage(UIImage(named: "left_icon.png"), forState: UIControlState.Normal)
+        button.tintColor = UIColor.whiteColor()
+        button.addTarget(self, action: "closeView", forControlEvents: UIControlEvents.TouchUpInside)
+        button.frame = CGRectMake(0, 0, 30, 30)
+        let barButton = UIBarButtonItem(customView: button)
+        self.navigationItem.leftBarButtonItem = barButton
         
         // Link the pull to refresh to the refresh method.
         menuIndicator.addTarget(self, action: "reloadNewsFeed", forControlEvents: .ValueChanged)
@@ -74,29 +68,13 @@ class NewsfeedV3: UITableViewController {
         self.tableView.estimatedRowHeight = 254.0;
         self.tableView.separatorInset = UIEdgeInsetsZero
         
-        // Logo for navigation title.
-        let logo = UIImage(named: "newsFeedTitle")
-        let imageview = UIImageView(image: logo)
-        imageview.contentMode = .ScaleAspectFit
-
-        // Set the "Calendario" image in the navigation bar.
-        self.navigationItem.titleView = imageview
-        self.navigationItem.titleView?.contentMode = UIViewContentMode.Center
-        self.navigationItem.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
-        self.navigationItem.titleView?.backgroundColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-   
-        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-        self.navigationController?.navigationBar.translucent = false
-
-        // Load in the news feed data.
-        self.reloadNewsFeed()
+        // Load in the hashtag feed data.
+        self.reloadHashtagFeed()
     }
     
     // Data loading methods.
     
-    func reloadNewsFeed() {
+    func reloadHashtagFeed() {
         
         self.menuIndicator.beginRefreshing()
         
@@ -106,36 +84,19 @@ class NewsfeedV3: UITableViewController {
             self.statusData.removeAllObjects()
         }
         
-        // Download the user following data.
-        ManageUser.getUserFollowingList(PFUser.currentUser()!) { (userFollowing) -> Void in
-            
-            dispatch_async(dispatch_get_main_queue(),{
-                
-                if (userFollowing.count > 0) {
-                    
-                    self.followingData = userFollowing
-                    self.loadNewsFeedData(0)
-                }
-                    
-                else {
-                    
-                    // Show the no posts error message.
-                    self.menuIndicator.endRefreshing()
-                    self.displayAlert("No posts", alertMessage: "You are not folowing anyone.")
-                }
-            })
-        }
+        // Load in the hashtag feed data.
+        self.loadHashtagData()
     }
     
-    func loadNewsFeedData(currentPos: Int) {
+    func loadHashtagData() {
         
         // Setup the status update query.
         var query:PFQuery!
         query = PFQuery(className:"StatusUpdate")
-        query.limit = 100
-        query.whereKey("user", equalTo: self.followingData[currentPos] as! PFUser)
+        query.limit = 300
+        query.whereKey("updatetext", containsString: hashtagString)
         
-        // Get the status update(s).
+        // Get the hashtag status update(s).
         query.findObjectsInBackgroundWithBlock({ (statusUpdates, error) -> Void in
             
             if ((error == nil) && (statusUpdates?.count > 0)) {
@@ -145,17 +106,18 @@ class NewsfeedV3: UITableViewController {
                 }
             }
             
-            if ((currentPos + 1) < self.followingData.count) {
-                self.loadNewsFeedData(currentPos + 1)
-            }
-                
             else {
-                self.organizeNewsFeedData()
+                
+                // Stop the loading indicator.
+                self.menuIndicator.endRefreshing()
             }
+            
+            // Organize the downloaded data.
+            self.organizeHashtagData()
         })
     }
     
-    func organizeNewsFeedData() {
+    func organizeHashtagData() {
         
         // Only sort the data if there are
         // any status updates for the user.
@@ -176,12 +138,12 @@ class NewsfeedV3: UITableViewController {
             // Reload the table view.
             self.tableView.reloadData()
         }
-        
+            
         else {
             
             // Show the no posts error message.
             self.menuIndicator.endRefreshing()
-            self.displayAlert("No posts", alertMessage: "An error has occurred, the newsfeed posts have not been loaded. Make sure you are following at least one person to view posts on the news feed.")
+            self.displayAlert("No posts", alertMessage: "An error has occurred, the newsfeed posts have not been loaded. Make sure you are following at least one person to view posts on the hashtag feed.")
         }
     }
     
@@ -196,7 +158,7 @@ class NewsfeedV3: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
+        
         // Setup the table view custom cell.
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
         
@@ -217,7 +179,7 @@ class NewsfeedV3: UITableViewController {
                 
                 // Set the user name label.
                 cell.UserNameLabel.text = userObject?.username
-
+                
                 // Check the profile image data first.
                 var profileImage = UIImage(named: "default_profile_pic.png")
                 
@@ -271,10 +233,22 @@ class NewsfeedV3: UITableViewController {
             // Highlight the status hashtags.
             cell.statusTextView.hashtagLinkTapHandler = {label, hashtag, range in
                 
-                // Save the hashtag string.
-                var defaults:NSUserDefaults!
+                // Load in the hashtag data.
+                var defaults = NSUserDefaults.standardUserDefaults()
+                var hashtagData: NSMutableArray = []
+                hashtagData = ((defaults.objectForKey("HashtagData"))?.mutableCopy())! as! NSMutableArray
+                
+                // Set the correct index number.
+                var hashtagIndex = hashtagData[0] as! Int
+                hashtagIndex = hashtagIndex + 1
+                
+                // Add the new hashtag index number/string.
+                hashtagData.replaceObjectAtIndex(0, withObject: hashtagIndex)
+                hashtagData.addObject(hashtag)
+                
+                // Save the hashtag data.
                 defaults = NSUserDefaults.standardUserDefaults()
-                defaults.setObject(([1, hashtag]) as NSMutableArray, forKey: "HashtagData")
+                defaults.setObject(hashtagData, forKey: "HashtagData")
                 defaults.synchronize()
                 
                 // Open the hashtag view with status
@@ -292,7 +266,7 @@ class NewsfeedV3: UITableViewController {
             
             // Highlight the @username label.
             cell.statusTextView.userHandleLinkTapHandler = {label2, mention, range in
-            
+                
                 // Remove the '@' symbol from the username
                 let userMention = mention.stringByReplacingOccurrencesOfString("@", withString: "")
                 
@@ -304,7 +278,7 @@ class NewsfeedV3: UITableViewController {
                 // Get the user data object.
                 query.getFirstObjectInBackgroundWithBlock({ (userObject, error) -> Void in
                     
-                    // Check for errors before passing 
+                    // Check for errors before passing
                     // the user object to the profile view.
                     
                     if ((error == nil) && (userObject != nil)) {
@@ -379,7 +353,7 @@ class NewsfeedV3: UITableViewController {
                 if ((error == nil) && (mediaData != nil)) {
                     cell.userPostedImage.image = UIImage(data: mediaData!)
                 }
-                
+                    
                 else {
                     cell.userPostedImage.image = UIImage(imageLiteral: "no-image-icon + Rectangle 4")
                 }
@@ -404,7 +378,7 @@ class NewsfeedV3: UITableViewController {
             if (likesArray.count == 1) {
                 cell.likeslabel.text = "1 Like"
             }
-            
+                
             else {
                 cell.likeslabel.text = "\(likesArray.count) Likes"
             }
@@ -414,12 +388,12 @@ class NewsfeedV3: UITableViewController {
             if likesArray.contains(PFUser.currentUser()!.objectId!) {
                 cell.likebutton.select()
             }
-            
+                
             else {
                 cell.likebutton.deselect()
             }
         }
-        
+            
         else {
             cell.likeslabel.text = "0 Likes"
         }
@@ -442,12 +416,12 @@ class NewsfeedV3: UITableViewController {
                 if (objects!.count == 1) {
                     cell.commentsLabel.text = "1 Comment"
                 }
-                
+                    
                 else {
                     cell.commentsLabel.text = "\(String(objects!.count) ) Comments"
                 }
             }
-            
+                
             else {
                 cell.commentsLabel.text = "0 Comments"
             }
@@ -460,7 +434,7 @@ class NewsfeedV3: UITableViewController {
         
         // Get the current status update.
         let statusupdate:PFObject = self.sortedArray.objectAtIndex(indexPath.row) as! PFObject
-
+        
         // Setup the report status button.
         var report:UITableViewRowAction!
         report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
@@ -625,7 +599,7 @@ class NewsfeedV3: UITableViewController {
     }
     
     func imageTapped(sender: UITapGestureRecognizer) {
-    
+        
         // Get the image from the custom cell.
         let indexPath = NSIndexPath(forRow: (sender.view?.tag)!, inSection: 0)
         let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! NewsfeedTableViewCell
@@ -660,7 +634,7 @@ class NewsfeedV3: UITableViewController {
                 // so lets dislike the status update.
                 self.saveLikeForPost(currentObject, likePost: false, likeButton: sender)
             }
-            
+                
             else {
                 
                 // The user has not liked the status
@@ -668,7 +642,7 @@ class NewsfeedV3: UITableViewController {
                 self.saveLikeForPost(currentObject, likePost: true, likeButton: sender)
             }
         }
-        
+            
         else {
             
             // This status has zero likes so the logged
@@ -696,7 +670,7 @@ class NewsfeedV3: UITableViewController {
                     // Add the user to the post likes array.
                     object?.addUniqueObject(PFUser.currentUser()!.objectId!, forKey: "likesarray")
                 }
-                
+                    
                 else {
                     
                     // Remove the user from the post likes array.
@@ -711,7 +685,7 @@ class NewsfeedV3: UITableViewController {
                     
                     if ((success) && (likeError == nil)) {
                         
-                        // Make sure the local array data if 
+                        // Make sure the local array data if
                         // up to date otherwise the like button
                         // will be un-checked when the user scrolls.
                         self.sortedArray.replaceObjectAtIndex(likeButton.tag, withObject: object!)
@@ -752,7 +726,7 @@ class NewsfeedV3: UITableViewController {
                             let likeString = "\(PFUser.currentUser()!.username!) has liked your post"
                             self.SavingNotifacations(likeString, objectID: statusObject.objectId!, notificationType:"like")
                         }
-                        
+                            
                         else {
                             likeButton.deselect()
                         }
@@ -827,7 +801,7 @@ class NewsfeedV3: UITableViewController {
         defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(currentObject.objectId!, forKey: "likesListID")
         defaults.synchronize()
-
+        
         // Open the likes list view.
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let likesView = sb.instantiateViewControllerWithIdentifier("likesNav") as! UINavigationController
@@ -852,8 +826,33 @@ class NewsfeedV3: UITableViewController {
         self.presentViewController(NC, animated: true, completion: nil)
     }
     
+    func closeView() {
+        
+        // Load in the hashtag data.
+        var defaults = NSUserDefaults.standardUserDefaults()
+        var hashtagData: NSMutableArray = []
+        hashtagData = ((defaults.objectForKey("HashtagData"))?.mutableCopy())! as! NSMutableArray
+        
+        // Set the correct inex number.
+        var hashtagIndex = hashtagData[0] as! Int
+        hashtagIndex = hashtagIndex - 1
+        
+        // Remove the last hashtag string and
+        // update the hashtag array index number.
+        hashtagData.replaceObjectAtIndex(0, withObject: hashtagIndex)
+        hashtagData.removeLastObject()
+        
+        // Save the hashtag data.
+        defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(hashtagData, forKey: "HashtagData")
+        defaults.synchronize()
+        
+        // Close the hashtag view.
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }    
+    }
 }
