@@ -10,54 +10,22 @@ import UIKit
 import KILabel
 import DOFavoriteButton
 
-
-
 class NewsfeedTableViewCell: PFTableViewCell {
-    
     
     @IBOutlet weak var UserNameLabel: UILabel!
     @IBOutlet weak var commentsLabel: UILabel!
     @IBOutlet weak var userPostedImage: PFImageView!
     @IBOutlet weak var createdAtLabel: UILabel!
-    
-    //@IBOutlet weak var statusTextView: UITextView!
-    
     @IBOutlet weak var statusTextView: KILabel!
     @IBOutlet var likebutton: DOFavoriteButton!
-    
-    
     @IBOutlet weak var commentButton: UIButton!
-    
-    
     @IBOutlet weak var profileimageview: UIImageView!
-    
     @IBOutlet weak var uploaddatelabel: UILabel!
-    
-    
-    
     @IBOutlet weak var locationLabel: UILabel!
-    
-    
-    
     @IBOutlet weak var likeslabel: UILabel!
-   
-    
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var privateView: UIView!
     
-   
-    
-    var counter = 0
-    
-    
-    let filledlikebutton = UIImage(named: "like button filled")
-    
-    
-    var isLiked = false
-    let defaults = NSUserDefaults.standardUserDefaults()
-    
-    
-    
-    //TEST
     var aspectConstraint : NSLayoutConstraint? {
         didSet {
             if oldValue != nil {
@@ -82,15 +50,12 @@ class NewsfeedTableViewCell: PFTableViewCell {
         aspectConstraint = NSLayoutConstraint(item: userPostedImage, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: userPostedImage, attribute: NSLayoutAttribute.Height, multiplier: aspect, constant: 0.0)
         
         userPostedImage.image = image
-
-    }    
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
-    
     
     // like button method
 
@@ -99,5 +64,4 @@ class NewsfeedTableViewCell: PFTableViewCell {
 
         // Configure the view for the selected state
     }
-
 }
