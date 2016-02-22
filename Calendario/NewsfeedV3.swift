@@ -71,7 +71,7 @@ class NewsfeedV3: UITableViewController {
         
         // Allow tableview cell resizing based on content.
         self.tableView.rowHeight = UITableViewAutomaticDimension;
-        self.tableView.estimatedRowHeight = 254.0;
+        self.tableView.estimatedRowHeight = 292.0;
         self.tableView.separatorInset = UIEdgeInsetsZero
         
         // Logo for navigation title.

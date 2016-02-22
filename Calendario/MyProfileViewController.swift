@@ -372,7 +372,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         
         // Allow tableview cell resizing based on content.
         self.statusList.rowHeight = UITableViewAutomaticDimension;
-        self.statusList.estimatedRowHeight = 100;
+        self.statusList.estimatedRowHeight = 292;
         self.statusList.separatorInset = UIEdgeInsetsZero
 
         
@@ -1045,7 +1045,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     // Dynamic cell height.
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100.0
+        return 292.0
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {

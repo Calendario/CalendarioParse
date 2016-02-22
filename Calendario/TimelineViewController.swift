@@ -40,7 +40,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         self.tableview.delegate = self
         self.tableview.dataSource = self
         self.tableview.rowHeight = UITableViewAutomaticDimension;
-        self.tableview.estimatedRowHeight = 254.0;
+        self.tableview.estimatedRowHeight = 292.0;
         self.tableview.separatorInset = UIEdgeInsetsZero
         
         calendar.scrollDirection = .Horizontal
