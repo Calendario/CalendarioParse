@@ -44,8 +44,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
         //let defaults = NSUserDefaults.standardUserDefaults()
         //savedobjectID = defaults.objectForKey("objectid") as! String
-        
-        print("THIS is the comment status update ID: \(savedobjectID!)")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -255,6 +253,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("CommentCell", forIndexPath: indexPath) as! CommentsTableViewCell
         
         cell.userProfileImage.layer.cornerRadius = (cell.userProfileImage.frame.size.width / 2)
@@ -262,7 +261,77 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         let comment:PFObject = self.commentdata.objectAtIndex(indexPath.row) as! PFObject
         
-        print(comment.valueForKey("postedby")?.objectId!)
+        // Set the comment createdAt label.
+        DateManager.createDateDifferenceString(comment.createdAt!) { (difference) -> Void in
+            cell.createdAtLabel.text = difference
+        }
+        
+        // If the status contains hashtags then highlight them.
+        
+        if ((cell.commentTextView.text?.hasPrefix("#")) != nil) {
+            
+            // Highlight the status hashtags.
+            cell.commentTextView.hashtagLinkTapHandler = {label, hashtag, range in
+                
+                // Load in the hashtag data.
+                var defaults = NSUserDefaults.standardUserDefaults()
+                var hashtagData: NSMutableArray = []
+                hashtagData = ((defaults.objectForKey("HashtagData"))?.mutableCopy())! as! NSMutableArray
+                
+                // Set the correct index number.
+                var hashtagIndex = hashtagData[0] as! Int
+                hashtagIndex = hashtagIndex + 1
+                
+                // Add the new hashtag index number/string.
+                hashtagData.replaceObjectAtIndex(0, withObject: hashtagIndex)
+                hashtagData.addObject(hashtag)
+                
+                // Save the hashtag data.
+                defaults = NSUserDefaults.standardUserDefaults()
+                defaults.setObject(hashtagData, forKey: "HashtagData")
+                defaults.synchronize()
+                
+                // Open the hashtag view with status
+                // posts containing the selected #hashtag.
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                let hashView = sb.instantiateViewControllerWithIdentifier("HashtagNav") as! UINavigationController
+                self.presentViewController(hashView, animated: true, completion: nil)
+            }
+        }
+        
+        // If the status contains @mentions then highligh
+        // and link them to the open profile view action.
+        
+        if ((cell.commentTextView.text?.hasPrefix("@")) != nil) {
+            
+            // Highlight the @username label.
+            cell.commentTextView.userHandleLinkTapHandler = {label2, mention, range in
+                
+                // Remove the '@' symbol from the username
+                let userMention = mention.stringByReplacingOccurrencesOfString("@", withString: "")
+                
+                // Setup the user query.
+                var query:PFQuery!
+                query = PFUser.query()
+                query.whereKey("username", equalTo: userMention)
+                
+                // Get the user data object.
+                query.getFirstObjectInBackgroundWithBlock({ (userObject, error) -> Void in
+                    
+                    // Check for errors before passing
+                    // the user object to the profile view.
+                    
+                    if ((error == nil) && (userObject != nil)) {
+                        
+                        // Open the selected users profile.
+                        let sb = UIStoryboard(name: "Main", bundle: nil)
+                        let profView = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
+                        profView.passedUser = userObject as? PFUser
+                        self.presentViewController(profView, animated: true, completion: nil)
+                    }
+                })
+            }
+        }
         
         var usernamequery = PFUser.query()
         usernamequery?.getObjectInBackgroundWithId((comment.valueForKey("postedby")?.objectId!)!, block: { (object, error) -> Void in
@@ -291,7 +360,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         })
         
-        
         cell.commentTextView.text = comment.objectForKey("commenttext") as! String
    
         return cell
@@ -300,14 +368,86 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
      func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        // Get the current comment data.
+        let commentObject:PFObject = self.commentdata.objectAtIndex(indexPath.row) as! PFObject
+        
+        // Setup the delete comment button.
+        let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in
+            
+            commentObject.deleteInBackgroundWithBlock({ (success, error) -> Void in
+                
+                if (success) {
+                    
+                    // Remove the comment from the array.
+                    self.commentdata.removeObjectAtIndex(indexPath.row)
+                    
+                    // Remove the cell from the table view.
+                    self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                }
+                
+                else {
+                    
+                    let alert = UIAlertController(title: "Error", message: "The comment has not been deleted (Error: \(error?.localizedDescription))", preferredStyle: .Alert)
+                    alert.view.tintColor = UIColor.flatGreenColor()
+                    let next = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+                    alert.addAction(next)
+                    
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+            })
+        }
+        
+        // Setup the mention comment button.
+        let mentioncomment = UITableViewRowAction(style: .Normal, title: "Mention") { (actiom, indexPath) -> Void in
+            
+            // Get the username string.
+            var userObject: PFUser!
+            userObject = commentObject.objectForKey("postedby") as! PFUser!
+            userObject.fetchIfNeededInBackgroundWithBlock({ (object, error) -> Void in
+                
+                if ((object != nil) && (error == nil)) {
+                    
+                    // Set the comment text view label
+                    // with the @user reply + a space.
+                    
+                    if (self.commentTextView.hasText() == true) {
+                        self.commentTextView.text = "\(self.commentTextView.text!) @\((object as! PFUser).username!) "
+                    }
+                        
+                    else {
+                        self.commentTextView.text = "@\((object as! PFUser).username!) "
+                    }
+                    
+                    // Show the on screen keyboard.
+                    self.commentTextView.becomeFirstResponder()
+                }
+                
+                // Hide the swipe from right cell animation.
+                self.performSelector("hideCellButton:", withObject: nil, afterDelay: 0.1)
+            })
+        }
+        
+        // Set the button backgrond colour.
+        deletestatus.backgroundColor = UIColor.redColor()
+        mentioncomment.backgroundColor = UIColor.flatGreenColor()
+        
+        // Only show the delete button if the comment belongs to the 
+        // currently logged in user and conversly, only show the mention
+        // button if the comment does not belong to the logged in user.
+        
+        if ((commentObject.objectForKey("postedby") as! PFUser!).objectId! == PFUser.currentUser()?.objectId!) {
+            return [deletestatus]
+        }
+            
+        else {
+            return [mentioncomment]
+        }
     }
-    */
+    
+    func hideCellButton(obj: AnyObject) {
+        self.tableView.setEditing(false, animated: true)
+    }
 }

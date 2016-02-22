@@ -659,7 +659,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
         // Get the image from the custom cell.
         let indexPath = NSIndexPath(forRow: (sender.view?.tag)!, inSection: 0)
-        let cell = self.tableview.cellForRowAtIndexPath(indexPath) as! NewsfeedTableViewCell
+        let cell = self.tableview.cellForRowAtIndexPath(indexPath) as! TimeLineTableViewCell
         
         // Open the photo view controller.
         let sb = UIStoryboard(name: "Main", bundle: nil)
@@ -749,7 +749,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                         
                         // Get access to the cell.
                         let indexPath = NSIndexPath(forRow: (likeButton.tag), inSection: 0)
-                        let cell = self.tableview.cellForRowAtIndexPath(indexPath) as! NewsfeedTableViewCell
+                        let cell = self.tableview.cellForRowAtIndexPath(indexPath) as! TimeLineTableViewCell
                         
                         // Get the post likes data.
                         let likesArray:[String] = object!.objectForKey("likesarray") as! Array

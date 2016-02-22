@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KILabel
 
 class CommentsTableViewCell: UITableViewCell {
     
@@ -14,9 +15,10 @@ class CommentsTableViewCell: UITableViewCell {
    // @IBOutlet weak var commentTextView: UITextView!
     
     @IBOutlet weak var UserLabel: UILabel!
-    @IBOutlet weak var commentTextView: UILabel!
+    @IBOutlet weak var commentTextView: KILabel!
     @IBOutlet weak var userProfileImage: UIImageView!
-
+    @IBOutlet weak var createdAtLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

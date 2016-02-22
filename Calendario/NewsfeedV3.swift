@@ -39,7 +39,8 @@ class NewsfeedV3: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         // Load in the recommended view controller state.
-        let defaults = NSUserDefaults.standardUserDefaults()
+        var defaults: NSUserDefaults!
+        defaults = NSUserDefaults.standardUserDefaults()
         let showRecommendations = defaults.objectForKey("recoCheck") as? Bool
         
         // If the state is set to 'true' then the
@@ -58,6 +59,13 @@ class NewsfeedV3: UITableViewController {
                 defaults.synchronize()
             })
         }
+        
+        // Set the hashtag default key.
+        // Do NOT delete this code, if is important that
+        // this data is initialised and set before the
+        // hashtag view can be called from any view.
+        defaults.setObject(([1, "#test"]) as NSMutableArray, forKey: "HashtagData")
+        defaults.synchronize()
         
         // Link the pull to refresh to the refresh method.
         menuIndicator.addTarget(self, action: "reloadNewsFeed", forControlEvents: .ValueChanged)

@@ -143,7 +143,7 @@ class HashtagViewController: UITableViewController {
             
             // Show the no posts error message.
             self.menuIndicator.endRefreshing()
-            self.displayAlert("No posts", alertMessage: "An error has occurred, the newsfeed posts have not been loaded. Make sure you are following at least one person to view posts on the hashtag feed.")
+            self.displayAlert("No posts", alertMessage: "No posts have been found containing the \(hashtagString) hashtag.")
         }
     }
     
