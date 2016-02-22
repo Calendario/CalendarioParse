@@ -365,6 +365,10 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
      func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
@@ -391,7 +395,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                 else {
                     
                     let alert = UIAlertController(title: "Error", message: "The comment has not been deleted (Error: \(error?.localizedDescription))", preferredStyle: .Alert)
-                    alert.view.tintColor = UIColor.flatGreenColor()
+                    alert.view.tintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
                     let next = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
                     alert.addAction(next)
                     
@@ -431,8 +435,10 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         // Set the button backgrond colour.
-        deletestatus.backgroundColor = UIColor.redColor()
-        mentioncomment.backgroundColor = UIColor.flatGreenColor()
+        deletestatus.backgroundColor = UIColor(red: 255/255.0, green: 80/255.0, blue: 79/255.0, alpha: 1.0)
+
+        mentioncomment.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+
         
         // Only show the delete button if the comment belongs to the 
         // currently logged in user and conversly, only show the mention

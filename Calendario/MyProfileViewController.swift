@@ -1150,9 +1150,12 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         }
         
         // Set the button backgrond colours.
-        seemore.backgroundColor = UIColor.flatGrayColor()
-        report.backgroundColor = UIColor.blackColor()
-        deletestatus.backgroundColor = UIColor.redColor()
+        seemore.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+
+        report.backgroundColor = UIColor(red: 236/255.0, green: 236/255.0, blue: 236/255.0, alpha: 1.0)
+
+        deletestatus.backgroundColor = UIColor(red: 255/255.0, green: 80/255.0, blue: 79/255.0, alpha: 1.0)
+
         
         // Only show the delete button if the currently
         // logged in user's profile is being shown as we don't

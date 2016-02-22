@@ -26,6 +26,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // Setup the username and password text fields.
     @IBOutlet weak var userField: UITextField!
     @IBOutlet weak var passField: UITextField!
+    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var credentialsContainer: UIView!
+    @IBOutlet weak var usernameView: UIView!
+    @IBOutlet weak var passwordView: UIView!
     
     // Background animation image view.
     @IBOutlet weak var backgroundImage: UIImageView!
@@ -123,6 +127,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         // Run the animation.
         self.runBackgroundAnim(0)
+        
+        setupUI()
+    }
+    
+    private func setupUI() {
+        signInButton.layer.cornerRadius = 6.0
+        signInButton.clipsToBounds = true
+        //signInButton.layer.borderColor = UIColor.whiteColor().CGColor
+        signInButton.layer.borderColor = UIColor(red: 37/255.0, green: 151/255.0, blue: 85/255.0, alpha: 1.0).CGColor
+        signInButton.layer.borderWidth = 1.0
+        
+        credentialsContainer.layer.cornerRadius = 6.0
+        credentialsContainer.clipsToBounds = true
+        userField.clipsToBounds = true
+        passField.clipsToBounds = true
+        usernameView.clipsToBounds = true
+        passwordView.clipsToBounds = true
     }
     
     // Animation methods.
