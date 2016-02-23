@@ -937,14 +937,16 @@
                                                 <rect key="frame" x="0.0" y="528" width="414" height="136"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgG-Ce-fbo">
-                                                        <rect key="frame" x="85" y="42" width="50" height="50"/>
+                                                        <rect key="frame" x="85.5" y="46.5" width="41.5" height="41"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="Qet-u7-JXI"/>
                                                             <constraint firstAttribute="width" constant="50" id="lVG-dO-s3c"/>
+                                                            <constraint firstAttribute="width" secondItem="dgG-Ce-fbo" secondAttribute="height" multiplier="1:1" id="unY-By-On7"/>
                                                         </constraints>
                                                         <state key="normal" image="Video button"/>
                                                         <variation key="default">
                                                             <mask key="constraints">
+                                                                <exclude reference="Qet-u7-JXI"/>
                                                                 <exclude reference="lVG-dO-s3c"/>
                                                             </mask>
                                                         </variation>
@@ -967,7 +969,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXb-ik-p0Z">
-                                                        <rect key="frame" x="18" y="42" width="50" height="50"/>
+                                                        <rect key="frame" x="27.5" y="46.5" width="41" height="41"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="36" id="nCy-bE-vI2"/>
                                                             <constraint firstAttribute="height" constant="36" id="z4s-er-3lT"/>
@@ -988,7 +990,7 @@
                                                 <constraints>
                                                     <constraint firstItem="yXb-ik-p0Z" firstAttribute="width" secondItem="dgG-Ce-fbo" secondAttribute="width" id="1Ow-O6-ks5"/>
                                                     <constraint firstItem="dgG-Ce-fbo" firstAttribute="top" secondItem="yXb-ik-p0Z" secondAttribute="bottom" constant="18" id="4v1-2v-rvj"/>
-                                                    <constraint firstItem="dgG-Ce-fbo" firstAttribute="width" secondItem="KVT-oa-tf6" secondAttribute="width" multiplier="0.12" id="9ZW-fw-4UG"/>
+                                                    <constraint firstItem="dgG-Ce-fbo" firstAttribute="width" secondItem="KVT-oa-tf6" secondAttribute="width" multiplier="0.1" id="9ZW-fw-4UG"/>
                                                     <constraint firstAttribute="bottom" secondItem="dgG-Ce-fbo" secondAttribute="bottom" constant="21" id="9qV-et-iph"/>
                                                     <constraint firstItem="dgG-Ce-fbo" firstAttribute="leading" secondItem="yXb-ik-p0Z" secondAttribute="trailing" constant="17" id="Jji-fg-6nO"/>
                                                     <constraint firstItem="dgG-Ce-fbo" firstAttribute="centerY" secondItem="3Tn-o2-CLr" secondAttribute="centerY" id="OHN-1G-kUY"/>
@@ -997,7 +999,7 @@
                                                     <constraint firstItem="yXb-ik-p0Z" firstAttribute="height" secondItem="dgG-Ce-fbo" secondAttribute="height" id="e4Y-tU-WXC"/>
                                                     <constraint firstItem="yXb-ik-p0Z" firstAttribute="leading" secondItem="KVT-oa-tf6" secondAttribute="leading" constant="8" id="hZy-9m-PyT"/>
                                                     <constraint firstAttribute="bottom" secondItem="3Tn-o2-CLr" secondAttribute="bottom" constant="16" id="i8t-fR-aUC"/>
-                                                    <constraint firstItem="3Tn-o2-CLr" firstAttribute="leading" secondItem="dgG-Ce-fbo" secondAttribute="trailing" constant="18" id="jZN-68-Cip"/>
+                                                    <constraint firstItem="3Tn-o2-CLr" firstAttribute="leading" secondItem="dgG-Ce-fbo" secondAttribute="trailing" constant="26" id="jZN-68-Cip"/>
                                                     <constraint firstItem="yXb-ik-p0Z" firstAttribute="top" secondItem="KVT-oa-tf6" secondAttribute="top" constant="25" id="kmQ-FP-V14"/>
                                                     <constraint firstAttribute="bottom" secondItem="dgG-Ce-fbo" secondAttribute="bottom" constant="21" id="rQz-QT-oGa"/>
                                                     <constraint firstAttribute="height" constant="136" id="snr-aF-Xfv"/>
