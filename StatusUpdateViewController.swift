@@ -266,7 +266,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         // the @user mentions in lowercase.
         ManageUser.correctStringWithUsernames(self.statusUpdateTextField.text!, completion: { (correctString) -> Void in
             
-            if self.statusImageview?.image != nil {
+            if (self.statusImageview?.image != nil) && (self.statusImageview?.image != UIImage(named: "defaultPhotoPost")) {
                 
                 self.postingImage = true
                 
