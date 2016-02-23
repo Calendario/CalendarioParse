@@ -43,6 +43,10 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     @IBOutlet weak var backbutton: UIBarButtonItem!
     
     @IBOutlet weak var statusImageview: UIImageView?
+    
+    // Image upload check.
+    var imageCheck = false
+    
     let deafaults = NSUserDefaults()
     // tense
     var tensenum:Int!
@@ -227,36 +231,28 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         changeSegmentControl(datepicker.date)
     }
     
-
-    
     func DatePickerAppear()
     {
         // gesture reconizer for date picker
         viewGestureRecognizer.enabled = true
 
-        print("tapped")
         datepicker.hidden = false
         dateLabel.hidden = true
         datePickerContainer.hidden = false
     }
     
-    
-    
     func LocationlabelTapped()
     {
-        print("tapped locatiom")
         //checkinbutton.hidden = false
         
         let locationReference =  self.storyboard!.instantiateViewControllerWithIdentifier("LocationVC") as UIViewController!
         self.presentViewController(locationReference, animated: true, completion: nil)
     }
     
-    
     func dismissKeyboard()
     {
         view.endEditing(true)
     }
-    
     
     func PostStatusUpdate() {
         
@@ -266,7 +262,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         // the @user mentions in lowercase.
         ManageUser.correctStringWithUsernames(self.statusUpdateTextField.text!, completion: { (correctString) -> Void in
             
-            if (self.statusImageview?.image != nil) && (self.statusImageview?.image != UIImage(named: "defaultPhotoPost")) {
+            if ((self.statusImageview?.image != nil) && (self.imageCheck == true)) {
                 
                 self.postingImage = true
                 
@@ -350,10 +346,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         }
     }
     
-    
-    
     // posts update
-    
     
     @IBAction func PostTapped(sender: AnyObject) {
         if statusUpdateTextField.text.isEmpty
@@ -443,6 +436,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         statusImageview?.image = image
         statusImageview!.layer.cornerRadius = 4.0
         statusImageview!.clipsToBounds = true
-
+        self.imageCheck = true
     }
 }
