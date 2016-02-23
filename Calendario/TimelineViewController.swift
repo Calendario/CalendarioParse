@@ -99,19 +99,19 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     func loadCalendarData(selectedData: String) {
         
-        var getdates:PFQuery!
-        getdates = PFQuery(className: "StatusUpdate")
+        var getdates:PFQuery = PFQuery(className: "StatusUpdate")
         getdates.whereKey("dateofevent", equalTo: selectedData)
         getdates.includeKey("user")
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(selectedData, forKey: "dateofevent")
         
         var postsdata:NSMutableArray = NSMutableArray()
-        postsdata.removeAllObjects()
         
         getdates.findObjectsInBackgroundWithBlock { (objects:[PFObject]? , error:NSError?) -> Void in
             
-            if error == nil{
+            if error == nil {
+                
+                print(objects)
                 
                 // print(objects!.count)
                 for object in objects! {
@@ -123,6 +123,8 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                 
                 let array:NSArray = postsdata.reverseObjectEnumerator().allObjects
                 postsdata = NSMutableArray(array: array)
+                
+                print(postsdata)
                 
                 // Reset the filtered data array.
                 self.filteredData.removeAllObjects()
@@ -156,9 +158,18 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                         }
                     }
                     
-                    // Now reload the table view.
-                    self.tableview.reloadData()
+                    print(self.filteredData)
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        
+                        // Now reload the table view.
+                        self.tableview.reloadData()
+                    })
                 })
+            }
+            
+            else {
+                print(error?.localizedDescription)
             }
         }
     }
