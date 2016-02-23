@@ -217,6 +217,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         else if currentDate.compare(dateSelected) == NSComparisonResult.OrderedAscending{
             TenseControl.selectedSegmentIndex = 0
         }
+        
+        tenseControlchanged()
 
     }
     
@@ -323,7 +325,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         })
     }
     
-    @IBAction func tenseControlchanged(sender: UISegmentedControl) {
+    func tenseControlchanged () {
         
         switch TenseControl.selectedSegmentIndex {
             
@@ -344,7 +346,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         default:
             currenttense = Tense.going.rawValue
             tensenum = 1
-            sender.selectedSegmentIndex = 0
+            TenseControl.selectedSegmentIndex = 0
         }
     }
     
