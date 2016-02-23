@@ -41,6 +41,8 @@ class PhotoViewV2 : UIViewController {
         visualEffectView.frame = self.backgroundImage.bounds
         self.backgroundImage.insertSubview(visualEffectView, atIndex: 0)
         
+        self.navigationController?.navigationBar.hidden = true
+        
         // Set the scroll view properties.
         //self.imageScroll.scrollEnabled = true
     }
