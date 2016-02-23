@@ -248,72 +248,77 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     }
     
     
-    func PostStatusUpdate()
-    {
+    func PostStatusUpdate() {
+        
         var dateformatter = NSDateFormatter()
         
-        
-        if statusImageview?.image != nil
-        {
-            postingImage = true
-            var statusupdatewithimage = PFObject(className: "StatusUpdate")
+        // Make sure the updatetext contains all
+        // the @user mentions in lowercase.
+        ManageUser.correctStringWithUsernames(self.statusUpdateTextField.text!, completion: { (correctString) -> Void in
             
-            
-            statusupdatewithimage["updatetext"] = statusUpdateTextField.text
-            statusupdatewithimage["user"] = PFUser.currentUser()
-            statusupdatewithimage["dateofevent"] = dateLabel.text
-            statusupdatewithimage["ID"] = Int(statusID)
-            statusupdatewithimage["tense"] = currenttense
-            statusupdatewithimage["location"] = LocationLabel.text
-            statusupdatewithimage["likesarray"] = []
-            
-            // image posting
-            imagedata = UIImageJPEGRepresentation(((statusImageview?.image))!, 0.5)
-            let imagefile = PFFile(name: "image.jpg", data: imagedata!)
-            statusupdatewithimage["image"] = imagefile!
-            // saves object in background
-            statusupdatewithimage.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
-                if success
-                {
-                    print("Update saved")
-                }
-                else
-                {
-                    // prints error
-                    print(error?.localizedDescription)
-                }
-            }
-        }
-
-        else
-        {
-            var statusupdate = PFObject(className: "StatusUpdate")
-            statusupdate["updatetext"] = statusUpdateTextField.text
-            statusupdate["user"] = PFUser.currentUser()
-            statusupdate["dateofevent"] = dateLabel.text
-            statusupdate["ID"] = Int(statusID)
-            statusupdate["tense"] = currenttense
-            statusupdate["location"] = LocationLabel.text
-            statusupdate["likesarray"] = []
-            
-            statusupdate.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
-                if success
-                {
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                }
-                else
-                {
-                    // prints error
-                    print(error?.localizedDescription)
+            if self.statusImageview?.image != nil {
+                
+                self.postingImage = true
+                
+                var statusupdatewithimage: PFObject!
+                statusupdatewithimage = PFObject(className: "StatusUpdate")
+                statusupdatewithimage["updatetext"] = correctString
+                statusupdatewithimage["user"] = PFUser.currentUser()
+                statusupdatewithimage["dateofevent"] = self.dateLabel.text
+                statusupdatewithimage["ID"] = Int(self.statusID)
+                statusupdatewithimage["tense"] = self.currenttense
+                statusupdatewithimage["location"] = self.LocationLabel.text
+                statusupdatewithimage["likesarray"] = []
+                
+                // image posting
+                self.imagedata = UIImageJPEGRepresentation(((self.statusImageview?.image))!, 0.5)
+                let imagefile = PFFile(name: "image.jpg", data: self.imagedata!)
+                statusupdatewithimage["image"] = imagefile!
+                // saves object in background
+                statusupdatewithimage.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+                    
+                    if success {
+                        print("Update saved")
+                    }
+                        
+                    else {
+                        // prints error
+                        print(error?.localizedDescription)
+                    }
                 }
             }
-        }
+                
+            else {
+                
+                var statusupdate: PFObject!
+                statusupdate = PFObject(className: "StatusUpdate")
+                statusupdate["updatetext"] = correctString
+                statusupdate["user"] = PFUser.currentUser()
+                statusupdate["dateofevent"] = self.dateLabel.text
+                statusupdate["ID"] = Int(self.statusID)
+                statusupdate["tense"] = self.currenttense
+                statusupdate["location"] = self.LocationLabel.text
+                statusupdate["likesarray"] = []
+                
+                statusupdate.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+                    
+                    if success {
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    }
+                        
+                    else {
+                        // prints error
+                        print(error?.localizedDescription)
+                    }
+                }
+            }
+        })
     }
     
-    
     @IBAction func tenseControlchanged(sender: UISegmentedControl) {
-        switch TenseControl.selectedSegmentIndex
-        {
+        
+        switch TenseControl.selectedSegmentIndex {
+            
         case 0:
             currenttense = Tense.going.rawValue
             tensenum = 1

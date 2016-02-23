@@ -27,6 +27,97 @@ var finalData:NSMutableArray = []
 // in relations to the user account (ie: follow).
 @objc class ManageUser : NSObject {
     
+    // Check username string methods.
+    
+    class func correctStringWithUsernames(inputString: String, completion: (correctString: String) -> Void) {
+
+        dispatch_async(dispatch_get_main_queue(), {
+            
+            // Create the final string and get all
+            // the seperate strings from the data.
+            var finalString: String!
+            var commentSegments: NSArray!
+            commentSegments = inputString.componentsSeparatedByString(" ")
+            
+            if (commentSegments.count > 0) {
+                
+                for (var loop = 0; loop < commentSegments.count; loop++) {
+                    
+                    // Check the username to ensure that there
+                    // are no capital letters in the string.
+                    let currentString = commentSegments[loop] as! String
+                    let capitalLetterRegEx  = ".*[A-Z]+.*"
+                    let textData = NSPredicate(format:"SELF MATCHES %@", capitalLetterRegEx)
+                    let capitalResult = textData.evaluateWithObject(currentString)
+                    
+                    // Check if the current loop string
+                    // is a @user mention string or not.
+                    
+                    if (currentString.containsString("@")) {
+                        
+                        // If we are in the first loop then set the
+                        // string otherwise concatenate the string.
+                        
+                        if (loop == 0) {
+                            
+                            if (capitalResult == true) {
+                                
+                                // The username contains capital letters
+                                // so change it to a lower case version.
+                                finalString = currentString.lowercaseString
+                            }
+                                
+                            else {
+                                
+                                // The username does not contain capital letters.
+                                finalString = currentString
+                            }
+                        }
+                            
+                        else {
+                            
+                            if (capitalResult == true) {
+                                
+                                // The username contains capital letters
+                                // so change it to a lower case version.
+                                finalString = "\(finalString) \(currentString.lowercaseString)"
+                            }
+                                
+                            else {
+                                
+                                // The username does not contain capital letters.
+                                finalString = "\(finalString) \(currentString)"
+                            }
+                        }
+                    }
+                        
+                    else {
+                        
+                        // The current string is NOT a @user mention
+                        // so simply set or concatenate the finalString.
+                        
+                        if (loop == 0) {
+                            finalString = currentString
+                        }
+                            
+                        else {
+                            finalString = "\(finalString) \(currentString)"
+                        }
+                    }
+                }
+            }
+                
+            else {
+                
+                // No issues pass back the string.
+                finalString = inputString
+            }
+            
+            // Pass back the correct username string.
+            completion(correctString: finalString)
+        })
+    }
+    
     // Follow/Unfollow user methods.
     
     class func followOrUnfolowUser(userData:PFUser, completion: (followUnfollowstatus: Bool, String, String) -> Void) {

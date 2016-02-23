@@ -122,7 +122,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     {
         commentdata.removeAllObjects()
         
-        var getcomments:PFQuery = PFQuery(className: "comment")
+        var getcomments:PFQuery!
+        getcomments = PFQuery(className: "comment")
         getcomments.whereKey("statusOBJID", equalTo: savedobjectID!)
         
         getcomments.findObjectsInBackgroundWithBlock { (comments:[PFObject]?, error:NSError?) -> Void in
@@ -147,16 +148,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    /*
-    func GotoNewsfeed() {
-    
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-    let tabBarController: UITabBarController = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! tabBarViewController
-    appDelegate.window.makeKeyAndVisible()
-    appDelegate.window.rootViewController = tabBarController
-    }*/
-    
     @IBAction func bacbuttontapped(sender: AnyObject) {
         
         // Hide the keybaord if it has not
@@ -173,57 +164,65 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         // self.refreshData()
     }
     
-    func PostComment()
-    {
+    func PostComment() {
         
         // Hide the keyboard.
         self.dismissKeyboard()
         
         if (self.commentTextView .hasText()) {
             
-            var comment = PFObject(className: "comment")
-            comment["commenttext"] = commentTextView.text
-            comment["postedby"] = PFUser.currentUser()
-            comment["statusOBJID"] = String(savedobjectID)
-            
-            comment.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+            // Make sure the commenttext contains all
+            // the @user mentions in lowercase.
+            ManageUser.correctStringWithUsernames(self.commentTextView.text!, completion: { (correctString) -> Void in
                 
-                // Clear the text field for the next comment.
-                self.commentTextView.text = nil
+                // Setup the comment object.
+                var comment: PFObject!
+                comment = PFObject(className: "comment")
+                comment["postedby"] = PFUser.currentUser()
+                comment["statusOBJID"] = String(self.savedobjectID)
+                comment["commenttext"] = correctString
                 
-                if success
-                {
-                    var query = PFQuery(className: "StatusUpdate")
-                    query.includeKey("user")
-                    query.getObjectInBackgroundWithId(self.savedobjectID, block: { (object, error) -> Void in
-                        if error == nil
-                        {
+                // Submit the user comment.
+                comment.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+                    
+                    // Clear the text field for the next comment.
+                    self.commentTextView.text = nil
+                    
+                    if success {
+                        
+                        var query: PFQuery!
+                        query = PFQuery(className: "StatusUpdate")
+                        query.includeKey("user")
+                        query.getObjectInBackgroundWithId(self.savedobjectID, block: { (object, error) -> Void in
                             
-                            // Only save the notification if the user recieving
-                            // the notification is NOT the same as the logged in user.
-
-                            if (PFUser.currentUser()!.objectId! != (object?.objectForKey("user") as! PFUser).objectId!) {
+                            if error == nil {
                                 
-                                // create push notifcation
-                                let message = "\(PFUser.currentUser()!.username!) has commented on your post"
+                                // Only save the notification if the user recieving
+                                // the notification is NOT the same as the logged in user.
                                 
-                                // Send the notification.
-                                PFCloud.callFunctionInBackground("comment", withParameters: ["message" : message, "user" : "\((object!.valueForKey("user") as! PFUser).username!)"])
-                                                                
-                                // Save the user notification.
-                                ManageUser.saveUserNotification(message, fromUser: PFUser.currentUser()!, toUser: object!.valueForKey("user") as! PFUser, extType: "comment", extObjectID: String(self.savedobjectID))
+                                if (PFUser.currentUser()!.objectId! != (object?.objectForKey("user") as! PFUser).objectId!) {
+                                    
+                                    // create push notifcation
+                                    let message = "\(PFUser.currentUser()!.username!) has commented on your post"
+                                    
+                                    // Send the notification.
+                                    PFCloud.callFunctionInBackground("comment", withParameters: ["message" : message, "user" : "\((object!.valueForKey("user") as! PFUser).username!)"])
+                                    
+                                    // Save the user notification.
+                                    ManageUser.saveUserNotification(message, fromUser: PFUser.currentUser()!, toUser: object!.valueForKey("user") as! PFUser, extType: "comment", extObjectID: String(self.savedobjectID))
+                                }
+                                
+                                // Reload the comments table view.
+                                self.refreshData()
                             }
-                            
-                            // Reload the comments table view.
-                            self.refreshData()
-                        }
-                    })
+                        })
+                    }
+                        
+                    else {
+                        print(error?.localizedDescription)
+                    }
                 }
-                else
-                {
-                    print(error?.localizedDescription)
-                }
-            }
+            })
         }
             
         else {
@@ -240,9 +239,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    
-    
-    // table view methods
+    // Table view methods.
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return commentdata.count
