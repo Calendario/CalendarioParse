@@ -107,8 +107,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         self.datePickerContainer.layer.borderWidth = 1.0
         self.datePickerContainer.layoutIfNeeded()
         
-        self.statusImageview!.layer.cornerRadius = 4.0
-        self.statusImageview!.clipsToBounds = true
+        statusImageview!.layer.cornerRadius = 4.0
+        statusImageview!.clipsToBounds = true
         
         // save current status id in NSUserDefaults incase its going to be used for a comment
         
@@ -426,7 +426,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         self.dismissViewControllerAnimated(true, completion: nil)
         statusImageview?.image = image
-        self.statusImageview!.layer.cornerRadius = 4.0
-        self.statusImageview!.clipsToBounds = true
+        statusImageview!.layer.cornerRadius = 4.0
+        statusImageview!.clipsToBounds = true
+
     }
 }
