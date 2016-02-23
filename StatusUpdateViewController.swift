@@ -61,6 +61,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     var locationtapReconizer:UITapGestureRecognizer!
     
+    var shortStyleDateToBeSaved: String = ""
+    
     //creates a id number for each status update
     var statusID = arc4random()
     
@@ -169,11 +171,17 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     func setDate()
     {
         let dateformatter = NSDateFormatter()
-        dateformatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        //dateformatter.dateFormat = "M/d/yy"
+        dateformatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        dateformatter.dateFormat = "M/d/yy"
         dateformatter.timeZone = NSTimeZone(abbreviation: "UTC")
+        
+        let dateformatter2 = NSDateFormatter()
+        dateformatter2.dateStyle = NSDateFormatterStyle.MediumStyle
+        dateformatter2.timeZone = NSTimeZone(abbreviation: "UTC")
+        
+        shortStyleDateToBeSaved = dateformatter.stringFromDate(datepicker.date)
         dateLabel.hidden = false
-        dateLabel.text = dateformatter.stringFromDate(datepicker.date)
+        dateLabel.text = dateformatter2.stringFromDate(datepicker.date)
         print(dateLabel)
         datepicker.hidden = true
         datePickerContainer.hidden = true
@@ -264,7 +272,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 statusupdatewithimage = PFObject(className: "StatusUpdate")
                 statusupdatewithimage["updatetext"] = correctString
                 statusupdatewithimage["user"] = PFUser.currentUser()
-                statusupdatewithimage["dateofevent"] = self.dateLabel.text
+                statusupdatewithimage["dateofevent"] = self.shortStyleDateToBeSaved
                 statusupdatewithimage["ID"] = Int(self.statusID)
                 statusupdatewithimage["tense"] = self.currenttense
                 statusupdatewithimage["location"] = self.LocationLabel.text
@@ -294,7 +302,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 statusupdate = PFObject(className: "StatusUpdate")
                 statusupdate["updatetext"] = correctString
                 statusupdate["user"] = PFUser.currentUser()
-                statusupdate["dateofevent"] = self.dateLabel.text
+                statusupdate["dateofevent"] = self.shortStyleDateToBeSaved
                 statusupdate["ID"] = Int(self.statusID)
                 statusupdate["tense"] = self.currenttense
                 statusupdate["location"] = self.LocationLabel.text
