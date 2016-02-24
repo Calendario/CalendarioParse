@@ -355,6 +355,23 @@ class NewsfeedV3: UITableViewController {
             cell.locationLabel.text = locationValue
         }
         
+        //check for RSVP privacy
+        if currentObject.valueForKey("privateRsvp") != nil {
+        let rsvpPrivate: Bool = currentObject.valueForKey("privateRsvp") as! Bool
+        if rsvpPrivate == true {
+            cell.rsvpButton.enabled = false
+            
+            let rsvpPrivateImage: UIImage = UIImage(named: "rsvp_private_icon")!
+            cell.rsvpButton.image = rsvpPrivateImage
+        }
+        else if rsvpPrivate == false {
+            cell.rsvpButton.enabled = true
+            
+            let rsvpImage: UIImage = UIImage(named: "rsvpButtonFilled")!
+            cell.rsvpButton.image = rsvpImage
+        }
+        }
+        
         // Turn the profile picture into a circle.
         cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
         cell.profileimageview.clipsToBounds = true

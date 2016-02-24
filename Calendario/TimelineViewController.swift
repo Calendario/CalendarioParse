@@ -45,6 +45,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
         calendar.scrollDirection = .Horizontal
         calendar.selectDate(NSDate())
+        calendar.appearance.eventColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         
         let dateformatter = NSDateFormatter()
         dateformatter.dateFormat = "M/d/yy"
