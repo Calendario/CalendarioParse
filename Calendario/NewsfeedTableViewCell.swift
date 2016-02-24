@@ -39,6 +39,11 @@ class NewsfeedTableViewCell: PFTableViewCell {
         }
     }
     
+    func setupUI () {
+        self.likebutton.circleColor = UIColor.clearColor()
+        self.rsvpButton.circleColor = UIColor.clearColor()
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         aspectConstraint = nil

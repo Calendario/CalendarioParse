@@ -25,6 +25,8 @@ class TimeLineTableViewCell: PFTableViewCell {
     @IBOutlet weak var likeslabel: UILabel!
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var colorStrip: UIView!
+    @IBOutlet weak var rsvpButton: DOFavoriteButton!
+    @IBOutlet weak var rsvpLabel: UILabel!
     
     var aspectConstraint : NSLayoutConstraint? {
         didSet {
