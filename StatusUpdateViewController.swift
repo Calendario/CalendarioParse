@@ -43,6 +43,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     @IBOutlet weak var backbutton: UIBarButtonItem!
     
     @IBOutlet weak var statusImageview: UIImageView?
+    @IBOutlet weak var rsvpSwitch: UISwitch!
     
     // Image upload check.
     var imageCheck = false
@@ -276,6 +277,15 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 statusupdatewithimage["location"] = self.LocationLabel.text
                 statusupdatewithimage["likesarray"] = []
                 
+                if (self.rsvpSwitch.on == true) {
+                    statusupdatewithimage["privateRsvp"] = true
+                }
+                    
+                else if (self.rsvpSwitch.on == false){
+                    statusupdatewithimage["privateRsvp"] = false
+                }
+
+                
                 // image posting
                 self.imagedata = UIImageJPEGRepresentation(((self.statusImageview?.image))!, 0.5)
                 let imagefile = PFFile(name: "image.jpg", data: self.imagedata!)
@@ -305,6 +315,16 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 statusupdate["tense"] = self.currenttense
                 statusupdate["location"] = self.LocationLabel.text
                 statusupdate["likesarray"] = []
+                
+                if (self.rsvpSwitch.on == true) {
+                    statusupdate["privateRsvp"] = true
+                }
+                    
+                else if (self.rsvpSwitch.on == false){
+                    statusupdate["privateRsvp"] = false
+                }
+                
+
                 
                 statusupdate.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
                     
