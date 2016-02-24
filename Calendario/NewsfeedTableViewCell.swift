@@ -25,6 +25,8 @@ class NewsfeedTableViewCell: PFTableViewCell {
     @IBOutlet weak var likeslabel: UILabel!
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var privateView: UIView!
+    @IBOutlet weak var rsvpButton: DOFavoriteButton!
+    @IBOutlet weak var rsvpLabel: UILabel!
     
     var aspectConstraint : NSLayoutConstraint? {
         didSet {

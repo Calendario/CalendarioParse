@@ -253,6 +253,8 @@ class NewsfeedV3: UITableViewController {
         cell.likeslabel.tag = indexPath.row
         cell.commentsLabel.tag = indexPath.row
         cell.userPostedImage.tag = indexPath.row
+        cell.rsvpButton.tag = indexPath.row
+        cell.rsvpLabel.tag = indexPath.row
         
         // Setup the tag gesture recognizers, so we can open
         // the various different views, ie: comments view.
@@ -399,8 +401,19 @@ class NewsfeedV3: UITableViewController {
         cell.likebutton.clipsToBounds = false
         cell.likebutton.addTarget(self, action: "likeClicked:", forControlEvents: .TouchUpInside)
         
+        //setup the cell rsvp button
+        cell.rsvpButton.translatesAutoresizingMaskIntoConstraints = true
+        cell.rsvpButton.clipsToBounds = false
+        cell.rsvpButton.addTarget(self, action: "rsvpClicked:", forControlEvents: .TouchUpInside)
+        
         // Get the post likes data.
         let likesArray:[String] = currentObject.objectForKey("likesarray") as! Array
+        
+        //get the post RSVP data
+        var rsvpArray: [String] = []
+        if currentObject.objectForKey("rsvpArray") != nil {
+        rsvpArray = currentObject.objectForKey("rsvpArray") as! Array
+        }
         
         // Highlight the like button if the
         // logged in user has liked the post.
@@ -430,6 +443,34 @@ class NewsfeedV3: UITableViewController {
         
         else {
             cell.likeslabel.text = "0 Likes"
+        }
+        
+        //rsvp statement to match likes above
+        if (rsvpArray.count > 0) {
+            
+            // Update the status likes label.
+            
+            if (rsvpArray.count == 1) {
+                cell.rsvpLabel.text = "1 RSVP"
+            }
+                
+            else {
+                cell.rsvpLabel.text = "\(rsvpArray.count) RSVPs"
+            }
+            
+            // Update the like button.
+            
+            if rsvpArray.contains(PFUser.currentUser()!.objectId!) {
+                cell.rsvpButton.select()
+            }
+                
+            else {
+                cell.rsvpButton.deselect()
+            }
+        }
+            
+        else {
+            cell.rsvpLabel.text = "0 RSVPs"
         }
         
         // Set the createdAt date label.
@@ -688,6 +729,51 @@ class NewsfeedV3: UITableViewController {
         }
     }
     
+    func rsvpClicked(sender: DOFavoriteButton) {
+        
+        print("Clicked RSVP")
+        // Get the image from the custom cell.
+        let indexPath = NSIndexPath(forRow: (sender.tag), inSection: 0)
+        
+        // Get the specific status object for this cell.
+        let currentObject:PFObject = self.sortedArray.objectAtIndex(indexPath.row) as! PFObject
+        
+        // Get the post likes data.
+        var rsvpArray: [String] = []
+        if currentObject.objectForKey("rsvpArray") != nil {
+        rsvpArray = currentObject.objectForKey("rsvpArray") as! Array
+        }
+        
+        // Check if the logged in user has
+        // already like the selected status.
+        
+        if (rsvpArray.count > 0) {
+            
+            if rsvpArray.contains(PFUser.currentUser()!.objectId!) {
+                
+                // The user has already liked the status
+                // so lets dislike the status update.
+                self.saveRsvpForPost(currentObject, rsvpPost: false, rsvpButton: sender)
+            }
+                
+            else {
+                
+                // The user has not liked the status
+                // so lets go ahead and like it.
+                self.saveRsvpForPost(currentObject, rsvpPost: true, rsvpButton: sender)
+            }
+        }
+            
+        else {
+            
+            // This status has zero likes so the logged
+            // in user hasn't liked the post either so we
+            // can go ahead and save the like for the user.
+            self.saveRsvpForPost(currentObject, rsvpPost: true, rsvpButton: sender)
+        }
+
+    }
+    
     func saveLikeForPost(statusObject: PFObject, likePost: Bool, likeButton: DOFavoriteButton) {
         
         // Setup the likes query.
@@ -771,6 +857,91 @@ class NewsfeedV3: UITableViewController {
             }
         }
     }
+    
+    func saveRsvpForPost(statusObject: PFObject, rsvpPost: Bool, rsvpButton: DOFavoriteButton) {
+        
+        // Setup the likes query.
+        var query:PFQuery!
+        query = PFQuery(className: "StatusUpdate")
+        
+        // Get the status update object.
+        query.getObjectInBackgroundWithId(statusObject.objectId!) { (object, error) -> Void in
+            
+            // Check for errors before saving the like/dislike.
+            
+            if ((error == nil) && (object != nil)) {
+                
+                if (rsvpPost == true) {
+                    
+                    // Add the user to the post rsvp array.
+                    object?.addUniqueObject(PFUser.currentUser()!.objectId!, forKey: "rsvpArray")
+                }
+                    
+                else {
+                    
+                    // Remove the user from the post likes array.
+                    object?.removeObject(PFUser.currentUser()!.objectId!, forKey: "rsvpArray")
+                }
+                
+                // Save the like/dislike data.
+                object?.saveInBackgroundWithBlock({ (success, rsvpError) -> Void in
+                    
+                    // Only update the rsvp button if the
+                    // background data save was successful.
+                    
+                    if ((success) && (rsvpError == nil)) {
+                        
+                        // Make sure the local array data if
+                        // up to date otherwise the like button
+                        // will be un-checked when the user scrolls.
+                        self.sortedArray.replaceObjectAtIndex(rsvpButton.tag, withObject: object!)
+                        
+                        // Get access to the cell.
+                        let indexPath = NSIndexPath(forRow: (rsvpButton.tag), inSection: 0)
+                        let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! NewsfeedTableViewCell
+                        
+                        // Get the post rsvp data.
+                        let rsvpArray:[String] = object!.objectForKey("rsvpArray") as! Array
+                        
+                        // Update the rsvp label.
+                        
+                        if (rsvpArray.count > 0) {
+                            
+                            // Update the status rsvp label.
+                            
+                            if (rsvpArray.count == 1) {
+                                cell.rsvpLabel.text = "1 RSVP"
+                            }
+                                
+                            else {
+                                cell.rsvpLabel.text = "\(rsvpArray.count) RSVP"
+                            }
+                        }
+                            
+                        else {
+                            cell.rsvpLabel.text = "0 RSVPs"
+                        }
+                        
+                        // Update the rsvp button.
+                        
+                        if (rsvpPost == true) {
+                            
+                            rsvpButton.select()
+                            
+                            // Submit and save the rsvp notification.
+                            let rsvpString = "\(PFUser.currentUser()!.username!) has RSVP'd to your post"
+                            self.SavingNotifacations(rsvpString, objectID: statusObject.objectId!, notificationType:"rsvp")
+                        }
+                            
+                        else {
+                            rsvpButton.deselect()
+                        }
+                    }
+                })
+            }
+        }
+    }
+
     
     func SavingNotifacations(notifcation:String, objectID:String, notificationType:String) {
         
