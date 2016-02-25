@@ -39,6 +39,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         
         self.commentTextView.delegate = self
+        self.commentTextView.autocapitalizationType = .Sentences
       
         // Do any additional setup after loading the view.
     
