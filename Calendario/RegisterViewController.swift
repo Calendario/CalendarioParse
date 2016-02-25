@@ -43,6 +43,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var privateSwitch: UISwitch!
     
+    var usernameLowerCase: String = ""
+    
     // Store the selected profile image data.
     var imageData : NSData!
     
@@ -268,7 +270,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         changeUIAccess(false)
         
         // Get the relevant user data.
-        let userData = [self.emailField.text, self.userField.text, self.passField.text, self.rePassField.text, self.descField.text, self.fullNameField.text]
+        let userData = [self.emailField.text, self.userField.text?.lowercaseString, self.passField.text, self.rePassField.text, self.descField.text, self.fullNameField.text]
         
         // Setup the errors array.
         let errorStrings: [String] = ["email", "username", "password", "re-enter password", "description", "full name"]
@@ -329,7 +331,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         
         // Get the relevat data.
         let email = self.emailField.text
-        let username = self.userField.text
+        let username = self.userField.text?.lowercaseString
         let password = self.passField.text
         
         // Setup the new user details.
@@ -523,6 +525,15 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         }
     }
     
+    //force lowercase textfields
+    
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        if textField == self.userField {
+            self.userField.text = self.userField.text?.lowercaseString
+        }
+    }
+    
     func textViewDidEndEditing(textView: UITextView) {
         self.setPlaceholderAlpha()
     }
@@ -538,10 +549,5 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
