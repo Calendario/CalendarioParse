@@ -79,23 +79,15 @@ class NewsfeedV3: UITableViewController {
         
         // Allow tableview cell resizing based on content.
         self.tableView.rowHeight = UITableViewAutomaticDimension;
-        self.tableView.estimatedRowHeight = 292.0;
+        self.tableView.estimatedRowHeight = 449.0;
         self.tableView.separatorInset = UIEdgeInsetsZero
         
-        // Logo for navigation title.
-        let logo = UIImage(named: "newsFeedTitle")
-        let imageview = UIImageView(image: logo)
-        imageview.contentMode = .ScaleAspectFit
-
-        // Set the "Calendario" image in the navigation bar.
-        self.navigationItem.titleView = imageview
-        self.navigationItem.titleView?.contentMode = UIViewContentMode.Center
-        self.navigationItem.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
-        self.navigationItem.titleView?.backgroundColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-   
-        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        // Set the "Calendario" text and appearance in the navigation bar
+        let font = UIFont(name: "SignPainter-HouseScript", size: 26.0)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName : font!, NSForegroundColorAttributeName : UIColor.darkGrayColor()]
+        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 250/255.0, green: 250/255.0, blue: 250/255.0, alpha: 1.0)
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 250/255.0, green: 250/255.0, blue: 250/255.0, alpha: 1.0)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 250/255.0, green: 250/255.0, blue: 250/255.0, alpha: 1.0)
         self.navigationController?.navigationBar.translucent = false
 
         // Load in the news feed data.
@@ -256,6 +248,7 @@ class NewsfeedV3: UITableViewController {
         cell.rsvpButton.tag = indexPath.row
         cell.rsvpLabel.tag = indexPath.row
         
+        
         // Setup the tag gesture recognizers, so we can open
         // the various different views, ie: comments view.
         let tapGesturePostImage = UITapGestureRecognizer(target: self, action: "imageTapped:")
@@ -330,7 +323,7 @@ class NewsfeedV3: UITableViewController {
         }
         
         // Create the tense/date all in one attributed string.
-        let attrs2 = [NSForegroundColorAttributeName:UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 14.0)!]
+        let attrs2 = [NSForegroundColorAttributeName:UIColor.whiteColor(), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 14.0)!]
         let tensestring2 = NSMutableAttributedString(string: currentObject.objectForKey("tense") as! String, attributes: attrs2)
         let spacestring2 = NSMutableAttributedString(string: " ")
         let onstring = NSAttributedString(string: "on")
@@ -367,19 +360,24 @@ class NewsfeedV3: UITableViewController {
         else if rsvpPrivate == false {
             cell.rsvpButton.enabled = true
             
-            let rsvpImage: UIImage = UIImage(named: "rsvpButtonFilled")!
+            let rsvpImage: UIImage = UIImage(named: "attend_icon")!
             cell.rsvpButton.image = rsvpImage
         }
         }
         
         // Turn the profile picture into a circle.
-        cell.profileimageview.layer.cornerRadius = (cell.profileimageview.frame.size.width / 2)
+        cell.profileimageview.layer.cornerRadius =  2.0  //(cell.profileimageview.frame.size.width / 2)
         cell.profileimageview.clipsToBounds = true
         
-        //set radius of imageview on status
-        cell.userPostedImage.layer.cornerRadius = 4.0
-        cell.userPostedImage.clipsToBounds = true
+        //set corner radius for rsvp button
+        cell.rsvpButton.layer.cornerRadius = 2.0
+        cell.rsvpButton.clipsToBounds = true
         
+        //set corner radius for location box
+        cell.locationContainer.layer.cornerRadius = 2.0
+        cell.locationContainer.clipsToBounds = true
+        
+
         // Show or hide the media image view
         // depending on the cell data type.
         cell.userPostedImage.clipsToBounds = true
@@ -440,11 +438,11 @@ class NewsfeedV3: UITableViewController {
             // Update the status likes label.
             
             if (likesArray.count == 1) {
-                cell.likeslabel.text = "1 Like"
+                cell.likeslabel.text = "1"
             }
             
             else {
-                cell.likeslabel.text = "\(likesArray.count) Likes"
+                cell.likeslabel.text = "\(likesArray.count)"
             }
             
             // Update the like button.
@@ -459,7 +457,7 @@ class NewsfeedV3: UITableViewController {
         }
         
         else {
-            cell.likeslabel.text = "0 Likes"
+            cell.likeslabel.text = "0"
         }
         
         //rsvp statement to match likes above
@@ -468,11 +466,11 @@ class NewsfeedV3: UITableViewController {
             // Update the status likes label.
             
             if (rsvpArray.count == 1) {
-                cell.rsvpLabel.text = "1 RSVP"
+                cell.rsvpLabel.text = "1 person attending this event"
             }
                 
             else {
-                cell.rsvpLabel.text = "\(rsvpArray.count) RSVPs"
+                cell.rsvpLabel.text = "\(rsvpArray.count) people attending this event"
             }
             
             // Update the like button.
@@ -487,7 +485,7 @@ class NewsfeedV3: UITableViewController {
         }
             
         else {
-            cell.rsvpLabel.text = "0 RSVPs"
+            cell.rsvpLabel.text = "0 people attending this event"
         }
         
         // Set the createdAt date label.
@@ -506,16 +504,16 @@ class NewsfeedV3: UITableViewController {
             if (error == nil) {
                 
                 if (objects!.count == 1) {
-                    cell.commentsLabel.text = "1 Comment"
+                    cell.commentsLabel.text = "1"
                 }
                 
                 else {
-                    cell.commentsLabel.text = "\(String(objects!.count) ) Comments"
+                    cell.commentsLabel.text = "\(String(objects!.count))"
                 }
             }
             
             else {
-                cell.commentsLabel.text = "0 Comments"
+                cell.commentsLabel.text = "0"
             }
         }
         
@@ -843,16 +841,16 @@ class NewsfeedV3: UITableViewController {
                             // Update the status likes label.
                             
                             if (likesArray.count == 1) {
-                                cell.likeslabel.text = "1 Like"
+                                cell.likeslabel.text = "1"
                             }
                                 
                             else {
-                                cell.likeslabel.text = "\(likesArray.count) Likes"
+                                cell.likeslabel.text = "\(likesArray.count)"
                             }
                         }
                             
                         else {
-                            cell.likeslabel.text = "0 Likes"
+                            cell.likeslabel.text = "0"
                         }
                         
                         // Update the like button.
@@ -927,16 +925,16 @@ class NewsfeedV3: UITableViewController {
                             // Update the status rsvp label.
                             
                             if (rsvpArray.count == 1) {
-                                cell.rsvpLabel.text = "1 RSVP"
+                                cell.rsvpLabel.text = "1 person attending this event"
                             }
                                 
                             else {
-                                cell.rsvpLabel.text = "\(rsvpArray.count) RSVP"
+                                cell.rsvpLabel.text = "\(rsvpArray.count) person attending this event"
                             }
                         }
                             
                         else {
-                            cell.rsvpLabel.text = "0 RSVPs"
+                            cell.rsvpLabel.text = "0 people attending this event"
                         }
                         
                         // Update the rsvp button.
@@ -946,7 +944,7 @@ class NewsfeedV3: UITableViewController {
                             rsvpButton.select()
                             
                             // Submit and save the rsvp notification.
-                            let rsvpString = "\(PFUser.currentUser()!.username!) has RSVP'd to your post"
+                            let rsvpString = "\(PFUser.currentUser()!.username!) is attending your event"
                             self.SavingNotifacations(rsvpString, objectID: statusObject.objectId!, notificationType:"rsvp")
                         }
                             

@@ -27,8 +27,12 @@ class NewsfeedTableViewCell: PFTableViewCell {
     @IBOutlet weak var privateView: UIView!
     @IBOutlet weak var rsvpButton: DOFavoriteButton!
     @IBOutlet weak var rsvpLabel: UILabel!
+    @IBOutlet weak var locationContainer: UIView!
+    @IBOutlet weak var locationImageViewIcon: UIImageView!
+    @IBOutlet weak var locationBackgroundImageView: UIImageView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
-    var aspectConstraint : NSLayoutConstraint? {
+   /* var aspectConstraint : NSLayoutConstraint? {
         didSet {
             if oldValue != nil {
                 userPostedImage.removeConstraint(oldValue!)
@@ -37,25 +41,22 @@ class NewsfeedTableViewCell: PFTableViewCell {
                 userPostedImage.addConstraint(aspectConstraint!)
             }
         }
-    }
+    }*/
     
     func setupUI () {
-        self.likebutton.circleColor = UIColor.clearColor()
-        self.rsvpButton.circleColor = UIColor.clearColor()
+        self.statusTextView.textColor = UIColor.whiteColor()
+
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        aspectConstraint = nil
-        self.statusTextView.textColor = UIColor.darkGrayColor()
+      //  aspectConstraint = nil
+        setupUI()
     }
     
     func setPostedImage(image : UIImage) {
-        
         let aspect = image.size.width / image.size.height
-        
-        aspectConstraint = NSLayoutConstraint(item: userPostedImage, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: userPostedImage, attribute: NSLayoutAttribute.Height, multiplier: aspect, constant: 0.0)
-        
+       // aspectConstraint = NSLayoutConstraint(item: userPostedImage, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: userPostedImage, attribute: NSLayoutAttribute.Height, multiplier: aspect, constant: 0.0)
         userPostedImage.image = image
     }
     
