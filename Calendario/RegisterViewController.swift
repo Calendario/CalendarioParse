@@ -30,10 +30,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
     @IBOutlet weak var userField: UITextField!
     @IBOutlet weak var passField: UITextField!
     @IBOutlet weak var rePassField: UITextField!
-    @IBOutlet weak var descField: UITextView!
-    @IBOutlet weak var descFieldPlaceholder: UITextView!
     @IBOutlet weak var fullNameField: UITextField!
-    @IBOutlet weak var webField: UITextField!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var profileScroll: UIScrollView!
     @IBOutlet weak var backButton: UIBarButtonItem!
@@ -41,7 +38,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
     @IBOutlet weak var tosButton: UIButton!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var loadingView: UIView!
-    @IBOutlet weak var privateSwitch: UISwitch!
     
     var usernameLowerCase: String = ""
     
@@ -227,18 +223,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         // Curve the edges of the loading view.
         self.loadingView.layer.cornerRadius = 12
         self.loadingView.clipsToBounds = true
-        
-        // Allow the user to dismiss the keyboard with a toolabr.
-        let editToolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.frame.size.width, 50))
-        editToolbar.barStyle = UIBarStyle.Default
-        
-        editToolbar.items = [
-            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "textViewDismissKeyboard")
-        ]
-        
-        editToolbar.sizeToFit()
-        descField.inputAccessoryView = editToolbar
     }
     
     // View Did Layout Subviews method.
@@ -270,12 +254,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         changeUIAccess(false)
         
         // Get the relevant user data.
-        let userData = [self.emailField.text, self.userField.text?.lowercaseString, self.passField.text, self.rePassField.text, self.descField.text, self.fullNameField.text]
+        let userData = [self.emailField.text, self.userField.text?.lowercaseString, self.passField.text, self.rePassField.text, self.fullNameField.text]
         
         // Setup the errors array.
-        let errorStrings: [String] = ["email", "username", "password", "re-enter password", "description", "full name"]
+        let errorStrings: [String] = ["email", "username", "password", "re-enter password", "full name"]
         
-        for (var loop = 0; loop < 6; loop++) {
+        for (var loop = 0; loop < userData.count; loop++) {
             
             // Get the current string.
             let data = userData[loop]
@@ -311,17 +295,38 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
             
             // Alert the user that there are 
             // capital letters in the username.
-            self.displayAlert("Error", alertMessage: "Calendario usernames cannot include capital letters.")
+            self.displayAlert("Error", alertMessage: "Calendario usernames must not include capital letters.")
         }
         
         else {
             
-            // Notify the user that the app is loading.
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            // Check the username to make sure it only
+            // contains dots, underscores, letters and numbers.
+            var allowedSet: NSMutableCharacterSet!
+            allowedSet = NSMutableCharacterSet(charactersInString: "._")
+            allowedSet.formUnionWithCharacterSet(NSCharacterSet.alphanumericCharacterSet())
+            let forbiddenSet: NSCharacterSet = allowedSet.invertedSet
+            let r: NSRange = (self.userField.text! as NSString).rangeOfCharacterFromSet(forbiddenSet)
             
-            // The data meets all the requirements
-            // go on to the actual registration.
-            registerUser()
+            // Check the username against the character set.
+            
+            if (r.location != NSNotFound) {
+                
+                // Enable access to the UI and
+                // hide the loading indicator view.
+                changeUIAccess(true)
+                
+                // Alert the user that there are
+                // illegal characters in the username.
+                self.displayAlert("Error", alertMessage: "Calendario usernames must only contain lower case letters, numbers, dots and underscore characters.")
+            }
+            
+            else {
+                
+                // The data meets all the requirements
+                // go on to the actual registration.
+                registerUser()
+            }
         }
     }
     
@@ -342,19 +347,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         newUser.email = email
         
         // Set the other user data fields.
-        newUser["userBio"] = self.descField.text
-        newUser["website"] = self.webField.text
+        newUser["userBio"] = ""
+        newUser["website"] = ""
         newUser["fullName"] = self.fullNameField.text
-        
-        // Set the private profile property.
-        
-        if (privateSwitch.on == true) {
-            newUser["privateProfile"] = true
-        }
-            
-        else {
-            newUser["privateProfile"] = false
-        }
+        newUser["privateProfile"] = false
         
         // Set the user profile picture if one has been 
         // set otherwise upload the standard profile picture.
@@ -486,17 +482,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         })
     }
     
-    func setPlaceholderAlpha() {
-        
-        if (self.descField.hasText()) {
-            self.descFieldPlaceholder.alpha = 0.0
-        }
-            
-        else {
-            self.descFieldPlaceholder.alpha = 1.0
-        }
-    }
-    
     func changeUIAccess(mode : Bool) {
         
         // True means we should enable access to the UI
@@ -505,9 +490,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         userField.userInteractionEnabled = mode
         passField.userInteractionEnabled = mode
         rePassField.userInteractionEnabled = mode
-        descField.userInteractionEnabled = mode
         fullNameField.userInteractionEnabled = mode
-        webField.userInteractionEnabled = mode
         profileScroll.userInteractionEnabled = mode
         backButton.enabled = mode
         privacyPolicyButton.userInteractionEnabled = mode
@@ -525,25 +508,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         }
     }
     
-    //force lowercase textfields
-    
+    // Force lowercase textfields.
     
     func textFieldDidEndEditing(textField: UITextField) {
+        
         if textField == self.userField {
             self.userField.text = self.userField.text?.lowercaseString
         }
-    }
-    
-    func textViewDidEndEditing(textView: UITextView) {
-        self.setPlaceholderAlpha()
-    }
-    
-    func textViewDidChange(textView: UITextView) {
-        self.setPlaceholderAlpha()
-    }
-    
-    func textViewDismissKeyboard() {
-        descField.resignFirstResponder()
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
