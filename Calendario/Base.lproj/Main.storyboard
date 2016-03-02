@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LND-N1-zbS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LND-N1-zbS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -565,10 +565,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jRo-tg-5hv" userLabel="Likes Stack View">
-                                            <rect key="frame" x="311" y="34" width="22" height="39"/>
+                                            <rect key="frame" x="311" y="34" width="22" height="40"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S5F-zL-UN7" customClass="DOFavoriteButton" customModule="DOFavoriteButton">
-                                                    <rect key="frame" x="1" y="0.0" width="20" height="23"/>
+                                                    <rect key="frame" x="1" y="0.0" width="20" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="33" id="3gc-gK-q1M"/>
                                                         <constraint firstAttribute="height" constant="43" id="95C-Ih-X5a"/>
@@ -608,7 +608,7 @@
                                                     </variation>
                                                 </button>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eOW-cl-tPW">
-                                                    <rect key="frame" x="4" y="23" width="15" height="16"/>
+                                                    <rect key="frame" x="4" y="24" width="15" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="DxH-Sv-3aF"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="sBd-OS-PO7"/>
@@ -731,7 +731,7 @@
                                             </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="gmZ-Nz-AYI" userLabel="Comment Stack View">
-                                            <rect key="frame" x="345" y="33" width="22" height="39"/>
+                                            <rect key="frame" x="345" y="33" width="22" height="40"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHa-zv-rEg" customClass="DOFavoriteButton" customModule="DOFavoriteButton">
                                                     <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -742,7 +742,7 @@
                                                     <state key="normal" image="comment"/>
                                                 </button>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9o0-GD-rNj" userLabel="commentsLabel">
-                                                    <rect key="frame" x="5" y="28" width="13" height="11"/>
+                                                    <rect key="frame" x="5" y="28" width="13" height="12"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="7hx-V6-bxO"/>
                                                     </constraints>
