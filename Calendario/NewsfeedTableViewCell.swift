@@ -32,20 +32,14 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     var attendGestureRecognizer: UITapGestureRecognizer!
 
-    
-    func setupUI () {
-        self.statusTextView.textColor = UIColor.whiteColor()
-
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
     }
     
-    func setPostedImage(image : UIImage) {
-        //let aspect = image.size.width / image.size.height
-       // aspectConstraint = NSLayoutConstraint(item: userPostedImage, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: userPostedImage, attribute: NSLayoutAttribute.Height, multiplier: aspect, constant: 0.0)
-        userPostedImage.image = image
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state
     }
     
     override func awakeFromNib() {
@@ -56,12 +50,31 @@ class NewsfeedTableViewCell: PFTableViewCell {
         assignGestureRecognizers()
     }
     
-    // like button method
+    func setupUI () {
+        self.statusTextView.textColor = UIColor.whiteColor()
+       
+        // Setup the cell likes button.
+        likebutton.translatesAutoresizingMaskIntoConstraints = true
+        likebutton.layer.cornerRadius = 2.0
+        likebutton.clipsToBounds = false
+        
+        //setup the RSVP button
+        rsvpButton.layer.cornerRadius = 2.0
+        rsvpButton.clipsToBounds = true
+        attendantContainerView.layer.cornerRadius = 2.0
+        attendantContainerView.clipsToBounds = true
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+        //setup the profile Image
+        profileimageview.layer.cornerRadius =  2.0  //(cell.profileimageview.frame.size.width / 2)
+        profileimageview.clipsToBounds = true
 
-        // Configure the view for the selected state
+        
+    }
+    
+    func setPostedImage(image : UIImage) {
+        //let aspect = image.size.width / image.size.height
+        // aspectConstraint = NSLayoutConstraint(item: userPostedImage, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: userPostedImage, attribute: NSLayoutAttribute.Height, multiplier: aspect, constant: 0.0)
+        userPostedImage.image = image
     }
     
     func assignGestureRecognizers() {

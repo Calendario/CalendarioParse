@@ -497,8 +497,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    // Alert methods.
-    
     func displayAlert(alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
@@ -779,16 +777,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
             }
         }
         
-        // Turn the profile picture into a circle.
-        cell.profileimageview.layer.cornerRadius =  2.0  //(cell.profileimageview.frame.size.width / 2)
-        cell.profileimageview.clipsToBounds = true
-        
-        //set corner radius for rsvp button
-        cell.rsvpButton.layer.cornerRadius = 2.0
-        cell.rsvpButton.clipsToBounds = true
-        cell.attendantContainerView.layer.cornerRadius = 2.0
-        cell.attendantContainerView.clipsToBounds = true
-        
         //setup the cell rsvp button
         cell.rsvpButton.translatesAutoresizingMaskIntoConstraints = true
         cell.rsvpButton.addTarget(self, action: "rsvpClicked:", forControlEvents: .TouchUpInside)
@@ -826,11 +814,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                 }
             }
         }
-        
-        // Setup the cell likes button.
-        cell.likebutton.translatesAutoresizingMaskIntoConstraints = true
-        cell.likebutton.layer.cornerRadius = 2.0
-        cell.likebutton.clipsToBounds = false
         
         // Get the post likes data.
         let likesArray:[String] = currentObject.objectForKey("likesarray") as! Array
