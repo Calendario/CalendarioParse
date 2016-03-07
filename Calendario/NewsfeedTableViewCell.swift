@@ -30,16 +30,8 @@ class NewsfeedTableViewCell: PFTableViewCell {
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var likebutton: UIView!
     
-   /* var aspectConstraint : NSLayoutConstraint? {
-        didSet {
-            if oldValue != nil {
-                userPostedImage.removeConstraint(oldValue!)
-            }
-            if aspectConstraint != nil {
-                userPostedImage.addConstraint(aspectConstraint!)
-            }
-        }
-    }*/
+    var attendGestureRecognizer: UITapGestureRecognizer!
+
     
     func setupUI () {
         self.statusTextView.textColor = UIColor.whiteColor()
@@ -48,19 +40,20 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-      //  aspectConstraint = nil
-        setupUI()
     }
     
     func setPostedImage(image : UIImage) {
-        let aspect = image.size.width / image.size.height
+        //let aspect = image.size.width / image.size.height
        // aspectConstraint = NSLayoutConstraint(item: userPostedImage, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: userPostedImage, attribute: NSLayoutAttribute.Height, multiplier: aspect, constant: 0.0)
         userPostedImage.image = image
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+       
         // Initialization code
+        setupUI()
+        assignGestureRecognizers()
     }
     
     // like button method
@@ -70,4 +63,20 @@ class NewsfeedTableViewCell: PFTableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func assignGestureRecognizers() {
+        let commentGestureRecognizer = UITapGestureRecognizer(target: self, action: "commentClicked")
+        commentButton.addGestureRecognizer(commentGestureRecognizer)
+        
+        let likeGestureRecognizer = UITapGestureRecognizer(target: self, action: "likeClicked:")
+        likebutton.addGestureRecognizer(likeGestureRecognizer)
+        
+        self.attendGestureRecognizer = UITapGestureRecognizer(target: self, action: "rsvpClicked:")
+        attendantContainerView.addGestureRecognizer(attendGestureRecognizer)
+    }
+
+    
+    
+    
+    
 }
