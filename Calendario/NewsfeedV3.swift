@@ -12,12 +12,15 @@ import Parse
 import QuartzCore
 import DOFavoriteButton
 
-class NewsfeedV3: UITableViewController {
+class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     
     // Status update data array.
     var statusData:NSMutableArray = []
     var followingData:NSMutableArray = []
     var sortedArray:NSMutableArray = []
+    
+    //gesture recognizers
+    var attendGestureRecognizer: UITapGestureRecognizer!
     
     // Setup the on screen UI objects.
     @IBOutlet weak var menuIndicator: UIRefreshControl!
@@ -93,6 +96,18 @@ class NewsfeedV3: UITableViewController {
         // Load in the news feed data.
         self.reloadNewsFeed()
     }
+    
+    func assignGestureRecognizers(commentContainer: UIView, likeContainer: UIView, attendContainer: UIView) {
+        let commentGestureRecognizer = UITapGestureRecognizer(target: self, action: "commentClicked")
+        commentContainer.addGestureRecognizer(commentGestureRecognizer)
+        
+        let likeGestureRecognizer = UITapGestureRecognizer(target: self, action: "likeClicked:")
+        likeContainer.addGestureRecognizer(likeGestureRecognizer)
+        
+        self.attendGestureRecognizer = UITapGestureRecognizer(target: self, action: "rsvpClicked:")
+        attendContainer.addGestureRecognizer(attendGestureRecognizer)
+    }
+
     
     // Data loading methods.
     
@@ -247,21 +262,23 @@ class NewsfeedV3: UITableViewController {
         cell.userPostedImage.tag = indexPath.row
         cell.rsvpButton.tag = indexPath.row
         cell.rsvpLabel.tag = indexPath.row
+        cell.attendantContainerView.tag = indexPath.row
         
         
         // Setup the tag gesture recognizers, so we can open
         // the various different views, ie: comments view.
         let tapGesturePostImage = UITapGestureRecognizer(target: self, action: "imageTapped:")
         let tapGestureProfileImage = UITapGestureRecognizer(target: self, action: "goToProfile:")
-        let tapGestureLikesLabel = UITapGestureRecognizer(target: self, action: "goToLikesList:")
-        let tapGestureCommentLabel = UITapGestureRecognizer(target: self, action: "commentsLabelClicked:")
+       // let tapGestureLikesLabel = UITapGestureRecognizer(target: self, action: "goToLikesList:")
+        //let tapGestureCommentLabel = UITapGestureRecognizer(target: self, action: "commentsLabelClicked:")
         cell.userPostedImage.addGestureRecognizer(tapGesturePostImage)
         cell.profileimageview.addGestureRecognizer(tapGestureProfileImage)
-        cell.likeslabel.addGestureRecognizer(tapGestureLikesLabel)
-        cell.commentsLabel.addGestureRecognizer(tapGestureCommentLabel)
+       // cell.likeslabel.addGestureRecognizer(tapGestureLikesLabel)
+        //cell.commentsLabel.addGestureRecognizer(tapGestureCommentLabel)
         
-        // Link the comment button to the comment method.
-        cell.commentButton.addTarget(self, action: "commentClicked:", forControlEvents: .TouchUpInside)
+        // Link the gestureRecognizers to the appropriate UIViews to make them function like buttons
+        self.assignGestureRecognizers(cell.commentButton, likeContainer: cell.likebutton, attendContainer: cell.attendantContainerView)
+       
         
         // Set the status labels.
         cell.statusTextView.text = currentObject["updatetext"] as? String
@@ -353,6 +370,8 @@ class NewsfeedV3: UITableViewController {
         let rsvpPrivate: Bool = currentObject.valueForKey("privateRsvp") as! Bool
         if rsvpPrivate == true {
             cell.rsvpButton.enabled = false
+            cell.attendantContainerView.removeGestureRecognizer(attendGestureRecognizer)
+            cell.attendantContainerView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
             
             let rsvpPrivateImage: UIImage = UIImage(named: "rsvp_private_icon")!
             cell.rsvpButton.image = rsvpPrivateImage
@@ -372,11 +391,13 @@ class NewsfeedV3: UITableViewController {
         //set corner radius for rsvp button
         cell.rsvpButton.layer.cornerRadius = 2.0
         cell.rsvpButton.clipsToBounds = true
+        cell.attendantContainerView.layer.cornerRadius = 2.0
+        cell.attendantContainerView.clipsToBounds = true
         
-        //set corner radius for location box
-        cell.locationContainer.layer.cornerRadius = 2.0
-        cell.locationContainer.clipsToBounds = true
-        
+        //setup the cell rsvp button
+        cell.rsvpButton.translatesAutoresizingMaskIntoConstraints = true
+        cell.rsvpButton.addTarget(self, action: "rsvpClicked:", forControlEvents: .TouchUpInside)
+
 
         // Show or hide the media image view
         // depending on the cell data type.
@@ -413,13 +434,8 @@ class NewsfeedV3: UITableViewController {
         
         // Setup the cell likes button.
         cell.likebutton.translatesAutoresizingMaskIntoConstraints = true
+        cell.likebutton.layer.cornerRadius = 2.0
         cell.likebutton.clipsToBounds = false
-        cell.likebutton.addTarget(self, action: "likeClicked:", forControlEvents: .TouchUpInside)
-        
-        //setup the cell rsvp button
-        cell.rsvpButton.translatesAutoresizingMaskIntoConstraints = true
-        cell.rsvpButton.clipsToBounds = false
-        cell.rsvpButton.addTarget(self, action: "rsvpClicked:", forControlEvents: .TouchUpInside)
         
         // Get the post likes data.
         let likesArray:[String] = currentObject.objectForKey("likesarray") as! Array
@@ -448,11 +464,11 @@ class NewsfeedV3: UITableViewController {
             // Update the like button.
             
             if likesArray.contains(PFUser.currentUser()!.objectId!) {
-                cell.likebutton.select()
+                cell.likebutton.backgroundColor = UIColor.whiteColor()
             }
             
             else {
-                cell.likebutton.deselect()
+                cell.likebutton.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
             }
         }
         
@@ -473,14 +489,17 @@ class NewsfeedV3: UITableViewController {
                 cell.rsvpLabel.text = "\(rsvpArray.count) people attending this event"
             }
             
-            // Update the like button.
+            // Update the rsvp button.
             
             if rsvpArray.contains(PFUser.currentUser()!.objectId!) {
                 cell.rsvpButton.select()
+                cell.attendantContainerView.backgroundColor = UIColor.whiteColor()
             }
                 
             else {
                 cell.rsvpButton.deselect()
+                cell.attendantContainerView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
+
             }
         }
             

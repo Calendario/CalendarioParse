@@ -17,8 +17,8 @@ class NewsfeedTableViewCell: PFTableViewCell {
     @IBOutlet weak var userPostedImage: PFImageView!
     @IBOutlet weak var createdAtLabel: UILabel!
     @IBOutlet weak var statusTextView: KILabel!
-    @IBOutlet var likebutton: DOFavoriteButton!
-    @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var attendantContainerView: UIView!
+    @IBOutlet weak var commentButton: UIView!
     @IBOutlet weak var profileimageview: UIImageView!
     @IBOutlet weak var uploaddatelabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
@@ -27,10 +27,8 @@ class NewsfeedTableViewCell: PFTableViewCell {
     @IBOutlet weak var privateView: UIView!
     @IBOutlet weak var rsvpButton: DOFavoriteButton!
     @IBOutlet weak var rsvpLabel: UILabel!
-    @IBOutlet weak var locationContainer: UIView!
-    @IBOutlet weak var locationImageViewIcon: UIImageView!
-    @IBOutlet weak var locationBackgroundImageView: UIImageView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var likebutton: UIView!
     
    /* var aspectConstraint : NSLayoutConstraint? {
         didSet {
