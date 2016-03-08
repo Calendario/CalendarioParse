@@ -201,8 +201,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
         // Open the comments view.
         self.openComments(currentObject.objectId!)
     }
-
-
+    
     //MARK: STATUS CHECK METHODS
     func checkForHashtagsAndHighlight() {
         if ((self.statusTextView.text?.hasPrefix("#")) != nil) {

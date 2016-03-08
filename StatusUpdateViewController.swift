@@ -276,6 +276,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 statusupdatewithimage["tense"] = self.currenttense
                 statusupdatewithimage["location"] = self.LocationLabel.text
                 statusupdatewithimage["likesarray"] = []
+                statusupdatewithimage["rsvpArray"] = []
                 
                 if (self.rsvpSwitch.on == true) {
                     statusupdatewithimage["privateRsvp"] = true
@@ -315,6 +316,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 statusupdate["tense"] = self.currenttense
                 statusupdate["location"] = self.LocationLabel.text
                 statusupdate["likesarray"] = []
+                statusupdate["rsvpArray"] = []
                 
                 if (self.rsvpSwitch.on == true) {
                     statusupdate["privateRsvp"] = true
@@ -323,9 +325,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 else if (self.rsvpSwitch.on == false){
                     statusupdate["privateRsvp"] = false
                 }
-                
-
-                
+                                
                 statusupdate.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
                     
                     if success {

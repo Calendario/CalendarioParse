@@ -20,6 +20,7 @@
 		A23457A21C79D4EF00376F2F /* PhotoViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457A11C79D4EF00376F2F /* PhotoViewV2.swift */; };
 		A23457AB1C79E6E500376F2F /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457AA1C79E6E500376F2F /* DateManager.swift */; };
 		A23457AE1C7B4AA300376F2F /* HashtagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457AD1C7B4AA300376F2F /* HashtagViewController.swift */; };
+		A24DB1181C8F705E002D4897 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24DB1171C8F705E002D4897 /* EventManager.swift */; };
 		A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25179511C201B0300EA0A5E /* ReportUserViewController.swift */; };
 		A26359E41BDA8342003F8FEB /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */; };
 		A26701F21C369D5B0041E1D1 /* ManageUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26701F11C369D5B0041E1D1 /* ManageUser.swift */; };
@@ -53,6 +54,7 @@
 		D3DE979C1C80CC0400F4DE7B /* SF-UI-Text-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D3DE97871C80CC0400F4DE7B /* SF-UI-Text-RegularItalic.otf */; };
 		D3DE979D1C80CC0400F4DE7B /* SF-UI-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D3DE97881C80CC0400F4DE7B /* SF-UI-Text-Semibold.otf */; };
 		D3DE979E1C80CC0400F4DE7B /* SF-UI-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D3DE97891C80CC0400F4DE7B /* SF-UI-Text-SemiboldItalic.otf */; };
+		DF4456BE48282E22980A9FC7 /* Pods_Calendario.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07FB54643A3C7C4C36B98D84 /* Pods_Calendario.framework */; };
 		E151AF721BD72D6500811A31 /* tabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E151AF711BD72D6500811A31 /* tabBarViewController.m */; };
 		E17180521C21389600D591FA /* notificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17180511C21389600D591FA /* notificationsViewController.m */; };
 		E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E187B5F51BD3368400845C2F /* SearchViewController.m */; };
@@ -162,7 +164,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07FB54643A3C7C4C36B98D84 /* Pods_Calendario.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Calendario.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3354E761A083188ECD02163D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6226D36FBFFA1852A9570CBB /* Pods-Calendario.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calendario.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Calendario/Pods-Calendario.debug.xcconfig"; sourceTree = "<group>"; };
 		78C1C01A1C006D9200ACDCEC /* reportBug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reportBug.h; sourceTree = "<group>"; };
 		78C1C01B1C006D9200ACDCEC /* reportBug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = reportBug.m; sourceTree = "<group>"; };
 		78E4E0E41C86BE7800C37864 /* button-placeholder-primary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-placeholder-primary.png"; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 		A23457A11C79D4EF00376F2F /* PhotoViewV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewV2.swift; sourceTree = "<group>"; };
 		A23457AA1C79E6E500376F2F /* DateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		A23457AD1C7B4AA300376F2F /* HashtagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagViewController.swift; sourceTree = "<group>"; };
+		A24DB1171C8F705E002D4897 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		A25179511C201B0300EA0A5E /* ReportUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportUserViewController.swift; sourceTree = "<group>"; };
 		A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A26701F11C369D5B0041E1D1 /* ManageUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageUser.swift; sourceTree = "<group>"; };
@@ -189,6 +194,7 @@
 		A2E881251C6A96F2008DFFAC /* MIBadgeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIBadgeButton.swift; sourceTree = "<group>"; };
 		A2FBF5C51C00BADA0051A553 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		A2FBF5C91C010B360051A553 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		C36AC0B64436F7BA3A343F8E /* Pods-Calendario.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calendario.release.xcconfig"; path = "Pods/Target Support Files/Pods-Calendario/Pods-Calendario.release.xcconfig"; sourceTree = "<group>"; };
 		D3DE97721C7FBA3300F4DE7B /* SignPainter-HouseScript.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SignPainter-HouseScript.ttf"; sourceTree = "<group>"; };
 		D3DE97751C80CC0400F4DE7B /* SF-UI-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Black.otf"; sourceTree = "<group>"; };
 		D3DE97761C80CC0400F4DE7B /* SF-UI-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Bold.otf"; sourceTree = "<group>"; };
@@ -377,6 +383,7 @@
 				E2E0D7411BC996C100662E70 /* ParseTwitterUtils.framework in Frameworks */,
 				E2E0D7401BC996C100662E70 /* ParseFacebookUtilsV4.framework in Frameworks */,
 				9CE5A692AEA13F553B89DF70 /* Pods.framework in Frameworks */,
+				DF4456BE48282E22980A9FC7 /* Pods_Calendario.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +409,8 @@
 			children = (
 				9CFC86F79C40E6D71F993D2D /* Pods.debug.xcconfig */,
 				A0A3EB60EF24220E0D3A8FD9 /* Pods.release.xcconfig */,
+				6226D36FBFFA1852A9570CBB /* Pods-Calendario.debug.xcconfig */,
+				C36AC0B64436F7BA3A343F8E /* Pods-Calendario.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -517,6 +526,14 @@
 				A23457AD1C7B4AA300376F2F /* HashtagViewController.swift */,
 			);
 			name = "Hashtag View";
+			sourceTree = "<group>";
+		};
+		A24DB1161C8F703C002D4897 /* Event View Classes/Views */ = {
+			isa = PBXGroup;
+			children = (
+				A24DB1171C8F705E002D4897 /* EventManager.swift */,
+			);
+			name = "Event View Classes/Views";
 			sourceTree = "<group>";
 		};
 		A26701F01C369CBD0041E1D1 /* Manage User Class */ = {
@@ -756,6 +773,7 @@
 				E23083661C7426EB001C0142 /* UIView+FSExtension.m */,
 				E24DA5EA1C1156F900901DF0 /* Social.framework */,
 				3354E761A083188ECD02163D /* Pods.framework */,
+				07FB54643A3C7C4C36B98D84 /* Pods_Calendario.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -822,6 +840,7 @@
 		E2E0D7011BC9950800662E70 /* Calendario */ = {
 			isa = PBXGroup;
 			children = (
+				A24DB1161C8F703C002D4897 /* Event View Classes/Views */,
 				A23457AC1C7B4A7F00376F2F /* Hashtag View */,
 				A23457A31C79E60D00376F2F /* Likes List View */,
 				A23457A01C79D4CE00376F2F /* Photo Viewer V2 */,
@@ -999,7 +1018,7 @@
 				TargetAttributes = {
 					E2E0D6FE1BC9950800662E70 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = N6BSX9PZT5;
+						DevelopmentTeam = 52K634K77W;
 					};
 					E2E0D7171BC9950800662E70 = {
 						CreatedOnToolsVersion = 7.0;
@@ -1097,7 +1116,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Calendario/Pods-Calendario-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D54A801E19F66CEA1A231290 /* Check Pods Manifest.lock */ = {
@@ -1127,7 +1146,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Calendario/Pods-Calendario-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1179,6 +1198,7 @@
 				E2C9223C1C1CB581004278E3 /* CalPhotoViewerViewController.swift in Sources */,
 				A26359E41BDA8342003F8FEB /* ResetPasswordViewController.swift in Sources */,
 				A23457AE1C7B4AA300376F2F /* HashtagViewController.swift in Sources */,
+				A24DB1181C8F705E002D4897 /* EventManager.swift in Sources */,
 				E2B420EB1BD585F900984E7B /* CalHashTagDetector.m in Sources */,
 				E23083731C7426EB001C0142 /* NSDate+FSExtension.m in Sources */,
 				E2C2BC671C24731C00F810C9 /* TimeLineTableViewCell.swift in Sources */,
@@ -1360,7 +1380,7 @@
 		};
 		E2E0D72D1BC9950800662E70 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9CFC86F79C40E6D71F993D2D /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 6226D36FBFFA1852A9570CBB /* Pods-Calendario.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1417,7 +1437,7 @@
 		};
 		E2E0D72E1BC9950800662E70 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A0A3EB60EF24220E0D3A8FD9 /* Pods.release.xcconfig */;
+			baseConfigurationReference = C36AC0B64436F7BA3A343F8E /* Pods-Calendario.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

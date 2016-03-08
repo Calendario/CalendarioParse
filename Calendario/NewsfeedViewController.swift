@@ -636,7 +636,7 @@ class NewsfeedViewController: UITableViewController, CLWeeklyCalendarViewDelegat
         cell.likebutton.translatesAutoresizingMaskIntoConstraints = true
         cell.likebutton.clipsToBounds = false
         cell.likebutton.tag = indexPath.row
-        cell.likebutton.addTarget(self, action: "likeclicked:", forControlEvents: .TouchUpInside)
+        //cell.likebutton.addTarget(self, action: "likeclicked:", forControlEvents: .TouchUpInside)
         
         
         /*cell.LikeButton.setImage(UIImage(named: "like button"), forState: .Normal)
