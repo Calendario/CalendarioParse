@@ -27,11 +27,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     
     // Setup the on screen button actions.
     @IBAction func postStatus(sender: UIButton) {
-        
-        // Open the status post view.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let postsview = sb.instantiateViewControllerWithIdentifier("PostView") as! StatusUpdateViewController
-        self.presentViewController(postsview, animated: true, completion: nil)
+        showStatusPostView()
     }
     
     //MARK: LIFECYCLE METHODS
@@ -45,15 +41,11 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        //setup the UI
-        setupUserInterfaceProperties()
-        
-        // Load in the news feed data.
+        setupUI()
         self.reloadNewsFeed()
     }
     
-    func setupUserInterfaceProperties() {
+    func setupUI() {
         // Allow tableview cell resizing based on content.
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 449.0;
@@ -69,19 +61,20 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     }
     
     func setHashtagDefaultKey() {
-        // Set the hashtag default key.
-        // Do NOT delete this code, if is important that
-        // this data is initialised and set before the
-        // hashtag view can be called from any view.
         defaults.setObject(([1, "#test"]) as NSMutableArray, forKey: "HashtagData")
         defaults.synchronize()
-        
+    }
+    
+    func showStatusPostView() {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let postsview = sb.instantiateViewControllerWithIdentifier("PostView") as! StatusUpdateViewController
+        self.presentViewController(postsview, animated: true, completion: nil)
     }
     
     func setActivityIndicatorForRefreshing() {
         // Link the pull to refresh to the refresh method.
         menuIndicator.addTarget(self, action: "reloadNewsFeed", forControlEvents: .ValueChanged)
-        self.menuIndicator.beginRefreshing()
+        menuIndicatorActivity(true)
     }
     
     func checkForNewUser() -> Bool {
@@ -108,55 +101,9 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                 self.defaults.synchronize()
             })
         }
-        
-    }
-    
-    func goToProfile(sender: UITapGestureRecognizer) {
-        
-        // Get the specific status object for this cell.
-        let indexPath = NSIndexPath(forRow: (sender.view?.tag)!, inSection: 0)
-        let currentObject:PFObject = self.sortedArray.objectAtIndex(indexPath.row) as! PFObject
-        
-        // Setup the user query.
-        var userQuery:PFQuery!
-        userQuery = PFUser.query()!
-        userQuery.whereKey("objectId", equalTo: (currentObject.objectForKey("user")?.objectId)!)
-        
-        // Download the user object.
-        userQuery.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
-            
-            if let aobject = objects {
-                
-                // Open the selected users profile.
-                let sb = UIStoryboard(name: "Main", bundle: nil)
-                let reportVC = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
-                reportVC.passedUser = (aobject as NSArray).lastObject as? PFUser
-                self.presentViewController(reportVC, animated: true, completion: nil)
-            }
-        }
-    }
-    
-    func goToLikesList(sender: UITapGestureRecognizer) {
-        
-        // Get the specific status object for this cell.
-        let indexPath = NSIndexPath(forRow: (sender.view?.tag)!, inSection: 0)
-        let currentObject:PFObject = self.sortedArray.objectAtIndex(indexPath.row) as! PFObject
-        
-        // Save the status object ID.
-        var defaults:NSUserDefaults!
-        defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(currentObject.objectId!, forKey: "likesListID")
-        defaults.synchronize()
-        
-        // Open the likes list view.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let likesView = sb.instantiateViewControllerWithIdentifier("likesNav") as! UINavigationController
-        self.presentViewController(likesView, animated: true, completion: nil)
     }
     
     func ReportView() {
-        
-        // Open the report view.
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let reportVC = sb.instantiateViewControllerWithIdentifier("report") as! ReportTableViewController
         let NC = UINavigationController(rootViewController: reportVC)
@@ -171,332 +118,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         self.presentViewController(NC, animated: true, completion: nil)
     }
 
-    func commentClicked(sender: UIButton) {
-        
-        // Get the status array index.
-        let index = sender.tag
-        
-        // Open the comments view.
-        self.openComments((self.sortedArray.objectAtIndex(index) as! PFObject).objectId!)
-    }
-    
-    func commentsLabelClicked(sender: UITapGestureRecognizer) {
-        
-        // Get the specific status object for this cell.
-        let indexPath = NSIndexPath(forRow: (sender.view?.tag)!, inSection: 0)
-        let currentObject:PFObject = self.sortedArray.objectAtIndex(indexPath.row) as! PFObject
-        
-        // Open the comments view.
-        self.openComments(currentObject.objectId!)
-    }
-    
-    func openComments(commentsID: String) {
-        
-        // Open the comments view for the selected post.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let commentvc = sb.instantiateViewControllerWithIdentifier("comments") as! CommentsViewController
-        commentvc.savedobjectID = commentsID
-        let NC = UINavigationController(rootViewController: commentvc)
-        self.presentViewController(NC, animated: true, completion: nil)
-    }
-    
-    func imageTapped(sender: UITapGestureRecognizer) {
-        
-        // Get the image from the custom cell.
-        let indexPath = NSIndexPath(forRow: (sender.view?.tag)!, inSection: 0)
-        let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! NewsfeedTableViewCell
-        
-        // Open the photo view controller.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let PVC = sb.instantiateViewControllerWithIdentifier("PhotoV2") as! PhotoViewV2
-        PVC.passedImage = cell.userPostedImage.image!
-        let NC = UINavigationController(rootViewController: PVC)
-        self.presentViewController(NC, animated: true, completion: nil)
-    }
-    
-    func likeClicked(sender: DOFavoriteButton) {
-        
-        // Get the image from the custom cell.
-        let indexPath = NSIndexPath(forRow: (sender.tag), inSection: 0)
-        
-        // Get the specific status object for this cell.
-        let currentObject:PFObject = self.sortedArray.objectAtIndex(indexPath.row) as! PFObject
-        
-        // Get the post likes data.
-        let likesArray:[String] = currentObject.objectForKey("likesarray") as! Array
-        
-        // Check if the logged in user has
-        // already like the selected status.
-        
-        if (likesArray.count > 0) {
-            
-            if likesArray.contains(PFUser.currentUser()!.objectId!) {
-                
-                // The user has already liked the status
-                // so lets dislike the status update.
-                self.saveLikeForPost(currentObject, likePost: false, likeButton: sender)
-            }
-                
-            else {
-                
-                // The user has not liked the status
-                // so lets go ahead and like it.
-                self.saveLikeForPost(currentObject, likePost: true, likeButton: sender)
-            }
-        }
-            
-        else {
-            
-            // This status has zero likes so the logged
-            // in user hasn't liked the post either so we
-            // can go ahead and save the like for the user.
-            self.saveLikeForPost(currentObject, likePost: true, likeButton: sender)
-        }
-    }
-    
-    func rsvpClicked() {
-        
-        print("Clicked RSVP")
-        // Get the image from the custom cell.
-        let indexPath = NSIndexPath(forRow: (sender.tag), inSection: 0)
-        
-        // Get the specific status object for this cell.
-        let currentObject:PFObject = self.sortedArray.objectAtIndex(indexPath.row) as! PFObject
-        
-        // Get the post likes data.
-        var rsvpArray: [String] = []
-        if currentObject.objectForKey("rsvpArray") != nil {
-            rsvpArray = currentObject.objectForKey("rsvpArray") as! Array
-        }
-        
-        // Check if the logged in user has
-        // already like the selected status.
-        
-        if (rsvpArray.count > 0) {
-            
-            if rsvpArray.contains(PFUser.currentUser()!.objectId!) {
-                
-                // The user has already liked the status
-                // so lets dislike the status update.
-                self.saveRsvpForPost(currentObject, rsvpPost: false, rsvpButton: sender)
-            }
-                
-            else {
-                
-                // The user has not liked the status
-                // so lets go ahead and like it.
-                self.saveRsvpForPost(currentObject, rsvpPost: true, rsvpButton: sender)
-            }
-        }
-            
-        else {
-            
-            // This status has zero likes so the logged
-            // in user hasn't liked the post either so we
-            // can go ahead and save the like for the user.
-            self.saveRsvpForPost(currentObject, rsvpPost: true, rsvpButton: sender)
-        }
-        
-    }
-    
-    func saveLikeForPost(statusObject: PFObject, likePost: Bool, likeButton: DOFavoriteButton) {
-        
-        // Setup the likes query.
-        var query:PFQuery!
-        query = PFQuery(className: "StatusUpdate")
-        
-        // Get the status update object.
-        query.getObjectInBackgroundWithId(statusObject.objectId!) { (object, error) -> Void in
-            
-            // Check for errors before saving the like/dislike.
-            
-            if ((error == nil) && (object != nil)) {
-                
-                if (likePost == true) {
-                    
-                    // Add the user to the post likes array.
-                    object?.addUniqueObject(PFUser.currentUser()!.objectId!, forKey: "likesarray")
-                }
-                    
-                else {
-                    
-                    // Remove the user from the post likes array.
-                    object?.removeObject(PFUser.currentUser()!.objectId!, forKey: "likesarray")
-                }
-                
-                // Save the like/dislike data.
-                object?.saveInBackgroundWithBlock({ (success, likeError) -> Void in
-                    
-                    // Only update the like button if the
-                    // background data save was successful.
-                    
-                    if ((success) && (likeError == nil)) {
-                        
-                        // Make sure the local array data if
-                        // up to date otherwise the like button
-                        // will be un-checked when the user scrolls.
-                        self.sortedArray.replaceObjectAtIndex(likeButton.tag, withObject: object!)
-                        
-                        // Get access to the cell.
-                        let indexPath = NSIndexPath(forRow: (likeButton.tag), inSection: 0)
-                        let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! NewsfeedTableViewCell
-                        
-                        // Get the post likes data.
-                        let likesArray:[String] = object!.objectForKey("likesarray") as! Array
-                        
-                        // Update the likes label.
-                        
-                        if (likesArray.count > 0) {
-                            
-                            // Update the status likes label.
-                            
-                            if (likesArray.count == 1) {
-                                cell.likeslabel.text = "1"
-                            }
-                                
-                            else {
-                                cell.likeslabel.text = "\(likesArray.count)"
-                            }
-                        }
-                            
-                        else {
-                            cell.likeslabel.text = "0"
-                        }
-                        
-                        // Update the like button.
-                        
-                        if (likePost == true) {
-                            
-                            likeButton.select()
-                            
-                            // Submit and save the like notification.
-                            let likeString = "\(PFUser.currentUser()!.username!) has liked your post"
-                            self.SavingNotifacations(likeString, objectID: statusObject.objectId!, notificationType:"like")
-                        }
-                            
-                        else {
-                            likeButton.deselect()
-                        }
-                    }
-                })
-            }
-        }
-    }
-    
-    func saveRsvpForPost(statusObject: PFObject, rsvpPost: Bool, rsvpButton: DOFavoriteButton) {
-        
-        // Setup the likes query.
-        var query:PFQuery!
-        query = PFQuery(className: "StatusUpdate")
-        
-        // Get the status update object.
-        query.getObjectInBackgroundWithId(statusObject.objectId!) { (object, error) -> Void in
-            
-            // Check for errors before saving the like/dislike.
-            
-            if ((error == nil) && (object != nil)) {
-                
-                if (rsvpPost == true) {
-                    
-                    // Add the user to the post rsvp array.
-                    object?.addUniqueObject(PFUser.currentUser()!.objectId!, forKey: "rsvpArray")
-                }
-                    
-                else {
-                    
-                    // Remove the user from the post likes array.
-                    object?.removeObject(PFUser.currentUser()!.objectId!, forKey: "rsvpArray")
-                }
-                
-                // Save the like/dislike data.
-                object?.saveInBackgroundWithBlock({ (success, rsvpError) -> Void in
-                    
-                    // Only update the rsvp button if the
-                    // background data save was successful.
-                    
-                    if ((success) && (rsvpError == nil)) {
-                        
-                        // Make sure the local array data if
-                        // up to date otherwise the like button
-                        // will be un-checked when the user scrolls.
-                        self.sortedArray.replaceObjectAtIndex(rsvpButton.tag, withObject: object!)
-                        
-                        // Get access to the cell.
-                        let indexPath = NSIndexPath(forRow: (rsvpButton.tag), inSection: 0)
-                        let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! NewsfeedTableViewCell
-                        
-                        // Get the post rsvp data.
-                        let rsvpArray:[String] = object!.objectForKey("rsvpArray") as! Array
-                        
-                        // Update the rsvp label.
-                        
-                        if (rsvpArray.count > 0) {
-                            
-                            // Update the status rsvp label.
-                            
-                            if (rsvpArray.count == 1) {
-                                cell.rsvpLabel.text = "1 person attending this event"
-                            }
-                                
-                            else {
-                                cell.rsvpLabel.text = "\(rsvpArray.count) person attending this event"
-                            }
-                        }
-                            
-                        else {
-                            cell.rsvpLabel.text = "0 people attending this event"
-                        }
-                        
-                        // Update the rsvp button.
-                        
-                        if (rsvpPost == true) {
-                            
-                            rsvpButton.select()
-                            
-                            // Submit and save the rsvp notification.
-                            let rsvpString = "\(PFUser.currentUser()!.username!) is attending your event"
-                            self.SavingNotifacations(rsvpString, objectID: statusObject.objectId!, notificationType:"rsvp")
-                        }
-                            
-                        else {
-                            rsvpButton.deselect()
-                        }
-                    }
-                })
-            }
-        }
-    }
-    
-    
-    func SavingNotifacations(notifcation:String, objectID:String, notificationType:String) {
-        
-        // Setup the notificatios query.
-        var query:PFQuery!
-        query = PFQuery(className: "StatusUpdate")
-        
-        // Get the status update object.
-        query.getObjectInBackgroundWithId(objectID) { (object, error) -> Void in
-            
-            // Only post the notification if no
-            // errors have been returned.
-            
-            if (error == nil) {
-                
-                // Only post the notification if the user who
-                // performed the action is NOT the logged in user.
-                
-                if (PFUser.currentUser()!.objectId! != (object?.objectForKey("user") as! PFUser).objectId!) {
-                    
-                    // Submit the push notification.
-                    PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : notifcation, "user" : "\(PFUser.currentUser()?.username!)"])
-                    
-                    // Save the notification data.
-                    ManageUser.saveUserNotification(notifcation, fromUser: PFUser.currentUser()!, toUser: object?.objectForKey("user") as! PFUser, extType: notificationType, extObjectID: objectID)
-                }
-            }
-        }
-    }
-    
     func displayAlert(alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
@@ -510,10 +131,48 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         presentViewController(alertController, animated: true, completion: nil)
     }
     
+    func menuIndicatorActivity(start: Bool) {
+        if start == true {
+            self.menuIndicator.beginRefreshing()
+        } else {
+            self.menuIndicator.endRefreshing()
+        }
+    }
+    
+    func organizeNewsFeedData() {
+        
+        // Only sort the data if there are
+        // any status updates for the user.
+        
+        if (self.statusData.count > 0) {
+            
+            // Sort the status updates by the 'createdAt' date.
+            let newData:NSArray = (self.statusData.copy() as! NSArray).sortedArrayUsingComparator { (obj1, obj2) -> NSComparisonResult in
+                return ((obj2 as! PFObject).createdAt?.compare((obj1 as! PFObject).createdAt!))!
+            }
+            
+            // Save the sorted data to the mutable array.
+            sortedArray = NSMutableArray(array: newData)
+            
+            menuIndicatorActivity(false)
+            
+            // Reload the table view.
+            self.tableView.reloadData()
+        }
+            
+        else {
+            
+            menuIndicatorActivity(false)
+            // Show the no posts error message.
+            self.displayAlert("No posts", alertMessage: "An error has occurred, the newsfeed posts have not been loaded. Make sure you are following at least one person to view posts on the news feed.")
+        }
+    }
+
+    
     //MARK: LOAD DATA METHODS
     func reloadNewsFeed() {
-        self.menuIndicator.beginRefreshing()
-        
+        menuIndicatorActivity(true)
+       
         // Clear the status data array.
         if (self.statusData.count > 0) {
             self.statusData.removeAllObjects()
@@ -531,9 +190,9 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                 }
                     
                 else {
+                    self.menuIndicatorActivity(false)
                     
                     // Show the no posts error message.
-                    self.menuIndicator.endRefreshing()
                     self.displayAlert("No posts", alertMessage: "You are not folowing anyone.")
                 }
             })
@@ -566,36 +225,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                 self.organizeNewsFeedData()
             }
         })
-    }
-    
-    func organizeNewsFeedData() {
-        
-        // Only sort the data if there are
-        // any status updates for the user.
-        
-        if (self.statusData.count > 0) {
-            
-            // Sort the status updates by the 'createdAt' date.
-            let newData:NSArray = (self.statusData.copy() as! NSArray).sortedArrayUsingComparator { (obj1, obj2) -> NSComparisonResult in
-                return ((obj2 as! PFObject).createdAt?.compare((obj1 as! PFObject).createdAt!))!
-            }
-            
-            // Save the sorted data to the mutable array.
-            sortedArray = NSMutableArray(array: newData)
-            
-            // Stop the loading indicator.
-            self.menuIndicator.endRefreshing()
-            
-            // Reload the table view.
-            self.tableView.reloadData()
-        }
-            
-        else {
-            
-            // Show the no posts error message.
-            self.menuIndicator.endRefreshing()
-            self.displayAlert("No posts", alertMessage: "An error has occurred, the newsfeed posts have not been loaded. Make sure you are following at least one person to view posts on the news feed.")
-        }
     }
     
     //MARK: TABLEVIEW METHODS

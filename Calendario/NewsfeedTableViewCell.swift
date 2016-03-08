@@ -41,8 +41,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
     override func awakeFromNib() {
@@ -92,69 +90,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
         self.rsvpButton.addTarget(self, action: "rsvpClicked:", forControlEvents: .TouchUpInside)
     }
     
-    func getLikesData() {
-        let likesData:[String] = passedInObject.objectForKey("likesarray") as! Array
-        highlightLikedButton(likesData)
-        updateLikeCount(likesData)
-    }
-    
-    func highlightLikedButton(likesArray: [String]) {
-        if likesArray.contains(PFUser.currentUser()!.objectId!) {
-            self.likebutton.backgroundColor = UIColor.whiteColor()
-        }
-        else {
-            self.likebutton.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
-        }
-    }
-    
-    func updateLikeCount(likesArray: [String]) {
-        if (likesArray.count > 0) {
-            if (likesArray.count == 1) {
-                self.likeslabel.text = "1"
-            }
-            else
-            {
-                self.likeslabel.text = "\(likesArray.count)"
-            }
-        }
-        else {
-            self.likeslabel.text = "0"
-        }
-    }
-    
-    func getRsvpData() {
-        if passedInObject.objectForKey("rsvpArray") != nil {
-            rsvpArray = passedInObject.objectForKey("rsvpArray") as! Array
-        }
-        updateRsvpLabel()
-    }
-    
-    func updateRsvpLabel () {
-        if (rsvpArray.count > 0) {
-            
-            if (rsvpArray.count == 1) {
-                self.rsvpLabel.text = "1 person attending this event"
-            }
-            else {
-                self.rsvpLabel.text = "\(rsvpArray.count) people attending this event"
-            }
-            
-            // Update the rsvp button.
-            
-            if rsvpArray.contains(PFUser.currentUser()!.objectId!) {
-                self.rsvpButton.select()
-                self.attendantContainerView.backgroundColor = UIColor.whiteColor()
-            }
-            else {
-                self.rsvpButton.deselect()
-                self.attendantContainerView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
-            }
-        }
-        else {
-            self.rsvpLabel.text = "0 people attending this event"
-        }
-    }
-    
     func setCreatedAtLabel() {
         DateManager.createDateDifferenceString(passedInObject.createdAt!) { (difference) -> Void in
             self.createdAtLabel.text = difference
@@ -186,7 +121,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     func createTenseAndDateLabel() {
         // Create the tense/date all in one attributed string.
-        let attrs2 = [NSForegroundColorAttributeName:UIColor.whiteColor(), NSFontAttributeName : UIFont(name: "Futura-Medium", size: 14.0)!]
+        let attrs2 = [NSForegroundColorAttributeName:UIColor.whiteColor(), NSFontAttributeName : UIFont(name: "SF-UI-Display-Medium", size: 14.0)!]
         let tensestring2 = NSMutableAttributedString(string: passedInObject.objectForKey("tense") as! String, attributes: attrs2)
         let spacestring2 = NSMutableAttributedString(string: " ")
         let onstring = NSAttributedString(string: "on")
@@ -214,6 +149,61 @@ class NewsfeedTableViewCell: PFTableViewCell {
         }
     }
     
+    func goToLikesList(sender: UITapGestureRecognizer) {
+        
+        let currentObject:PFObject = self.passedInObject
+        // Save the status object ID.
+        var defaults:NSUserDefaults!
+        defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(currentObject.objectId!, forKey: "likesListID")
+        defaults.synchronize()
+        
+        self.showLikesView()
+    }
+    
+    func findUserDetails() {
+        // Setup the user details query.
+        var findUser:PFQuery!
+        findUser = PFUser.query()!
+        findUser.whereKey("objectId", equalTo: (passedInObject.objectForKey("user")?.objectId)!)
+        
+        // Download the user detials.
+        findUser.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
+            
+            if let aobject = objects {
+                
+                let userObject = (aobject as NSArray).lastObject as? PFUser
+                
+                // Set the user name label.
+                self.UserNameLabel.text = userObject?.username
+                
+                // Check the profile image data first.
+                var profileImage = UIImage(named: "default_profile_pic.png")
+                
+                // Setup the user profile image file.
+                let userImageFile = userObject!["profileImage"] as! PFFile
+                
+                // Download the profile image.
+                userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                    
+                    if ((error == nil) && (imageData != nil)) {
+                        profileImage = UIImage(data: imageData!)
+                    }
+                    
+                    self.profileimageview.image = profileImage
+                }
+            }
+        }
+    }
+    
+    func commentsLabelClicked(sender: UITapGestureRecognizer) {
+        let currentObject:PFObject = self.passedInObject
+        // Open the comments view.
+        self.openComments(currentObject.objectId!)
+    }
+
+
+    //MARK: STATUS CHECK METHODS
     func checkForHashtagsAndHighlight() {
         if ((self.statusTextView.text?.hasPrefix("#")) != nil) {
             
@@ -228,12 +218,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
                 self.presentHashtagsView()
             }
         }
-    }
-    
-    func presentHashtagsView() {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let likesView = sb.instantiateViewControllerWithIdentifier("HashtagNav") as! UINavigationController
-        self.parentViewController.presentViewController(likesView, animated: true, completion: nil)
     }
     
     func checkForMentionsAndHighlight() {
@@ -260,15 +244,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
                 })
             }
         }
-    }
-    
-    
-    func showProfileView(passedUserObject: PFObject) {
-        // Open the selected users profile.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let reportVC = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
-        reportVC.passedUser = passedUserObject as! PFUser
-        parentViewController.presentViewController(reportVC, animated: true, completion: nil)
     }
     
     func checkForRsvpPrivacy() {
@@ -318,6 +293,77 @@ class NewsfeedTableViewCell: PFTableViewCell {
         }
     }
     
+    //MARK: UPDATE UI METHODS
+    func updateLikesLabel(object: PFObject) {
+        // Get the post likes data.
+        let likesArray:[String] = object.objectForKey("likesarray") as! Array
+        
+        // Update the likes label.
+        
+        if (likesArray.count > 0) {
+            
+            // Update the status likes label.
+            
+            if (likesArray.count == 1) {
+                self.likeslabel.text = "1"
+            }
+            else {
+                self.likeslabel.text = "\(likesArray.count)"
+            }
+        }
+        else {
+            self.likeslabel.text = "0"
+        }
+        
+    }
+    
+    func updateLikesButton(likePost: Bool, objectId: String) {
+        
+        if (likePost == true) {
+            
+            self.likebutton.backgroundColor = UIColor.whiteColor()
+            
+            // Submit and save the like notification.
+            let likeString = "\(PFUser.currentUser()!.username!) has liked your post"
+            self.SavingNotifacations(likeString, objectID: objectId, notificationType:"like")
+        }
+        else {
+            self.likebutton.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
+        }
+    }
+    
+    func updateRsvpLabel(object: PFObject) {
+        
+        // Get the post rsvp data.
+        let rsvpArray:[String] = object.objectForKey("rsvpArray") as! Array
+        
+        if (rsvpArray.count > 0) {
+            if (rsvpArray.count == 1) {
+                self.rsvpLabel.text = "1 person attending this event"
+            }
+            else {
+                self.rsvpLabel.text = "\(rsvpArray.count) person attending this event"
+            }
+        }
+        else {
+            self.rsvpLabel.text = "0 people attending this event"
+        }
+    }
+    
+    func updateRsvpButton(rsvpPost: Bool, objectId: String) {
+        if (rsvpPost == true) {
+            self.rsvpButton.select()
+            
+            // Submit and save the rsvp notification.
+            let rsvpString = "\(PFUser.currentUser()!.username!) is attending your event"
+            self.SavingNotifacations(rsvpString, objectID: objectId, notificationType:"rsvp")
+        }
+        else {
+            self.rsvpButton.deselect()
+        }
+        
+    }
+    
     func updateCommentsLabel() {
         var commentsquery:PFQuery!
         commentsquery = PFQuery(className: "comment")
@@ -342,43 +388,321 @@ class NewsfeedTableViewCell: PFTableViewCell {
         
     }
     
-    func findUserDetails() {
-        // Setup the user details query.
-        var findUser:PFQuery!
-        findUser = PFUser.query()!
-        findUser.whereKey("objectId", equalTo: (passedInObject.objectForKey("user")?.objectId)!)
+    func highlightLikedButton(likesArray: [String]) {
+        if likesArray.contains(PFUser.currentUser()!.objectId!) {
+            self.likebutton.backgroundColor = UIColor.whiteColor()
+        }
+        else {
+            self.likebutton.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
+        }
+    }
+    
+    func updateLikeCount(likesArray: [String]) {
+        if (likesArray.count > 0) {
+            if (likesArray.count == 1) {
+                self.likeslabel.text = "1"
+            }
+            else
+            {
+                self.likeslabel.text = "\(likesArray.count)"
+            }
+        }
+        else {
+            self.likeslabel.text = "0"
+        }
+    }
+    
+    func updateRsvpLabel () {
+        if (rsvpArray.count > 0) {
+            
+            if (rsvpArray.count == 1) {
+                self.rsvpLabel.text = "1 person attending this event"
+            }
+            else {
+                self.rsvpLabel.text = "\(rsvpArray.count) people attending this event"
+            }
+            
+            // Update the rsvp button.
+            
+            if rsvpArray.contains(PFUser.currentUser()!.objectId!) {
+                self.rsvpButton.select()
+                self.attendantContainerView.backgroundColor = UIColor.whiteColor()
+            }
+            else {
+                self.rsvpButton.deselect()
+                self.attendantContainerView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
+            }
+        }
+        else {
+            self.rsvpLabel.text = "0 people attending this event"
+        }
+    }
+    
+    
+    //MARK: SHOW VIEWS METHODS
+    func showProfileView(passedUserObject: PFObject) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let reportVC = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
+        reportVC.passedUser = passedUserObject as! PFUser
+        self.parentViewController.presentViewController(reportVC, animated: true, completion: nil)
+    }
+    
+    func presentHashtagsView() {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let likesView = sb.instantiateViewControllerWithIdentifier("HashtagNav") as! UINavigationController
+        self.parentViewController.presentViewController(likesView, animated: true, completion: nil)
+    }
+    
+    func openComments(commentsID: String) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let commentvc = sb.instantiateViewControllerWithIdentifier("comments") as! CommentsViewController
+        commentvc.savedobjectID = commentsID
+        let NC = UINavigationController(rootViewController: commentvc)
+        self.parentViewController.presentViewController(NC, animated: true, completion: nil)
+    }
+    
+    func showPhotoViewer() {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let PVC = sb.instantiateViewControllerWithIdentifier("PhotoV2") as! PhotoViewV2
+        PVC.passedImage = self.userPostedImage.image!
+        let NC = UINavigationController(rootViewController: PVC)
+        self.parentViewController.presentViewController(NC, animated: true, completion: nil)
+    }
+    
+    func showLikesView() {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let likesView = sb.instantiateViewControllerWithIdentifier("likesNav") as! UINavigationController
+        self.parentViewController.presentViewController(likesView, animated: true, completion: nil)
+    }
+
+    
+    //MARK: TAP GESTURE METHODS
+    func likeClicked() {
         
-        // Download the user detials.
-        findUser.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
+        // Get the specific status object for this cell.
+        let currentObject:PFObject = passedInObject
+        
+        // Get the post likes data.
+        let likesArray:[String] = currentObject.objectForKey("likesarray") as! Array
+        
+        // Check if the logged in user has
+        // already like the selected status.
+        if (likesArray.count > 0) {
+            
+            if likesArray.contains(PFUser.currentUser()!.objectId!) {
+                
+                // The user has already liked the status
+                // so lets dislike the status update.
+                self.saveLikeForPost(currentObject, likePost: false)
+            }
+            else {
+                // The user has not liked the status
+                // so lets go ahead and like it.
+                self.saveLikeForPost(currentObject, likePost: true)
+            }
+        }
+        else {
+            // This status has zero likes so the logged
+            // in user hasn't liked the post either so we
+            // can go ahead and save the like for the user.
+            self.saveLikeForPost(currentObject, likePost: true)
+        }
+    }
+    
+    func rsvpClicked() {
+        // Get the specific status object for this cell.
+        let currentObject:PFObject = self.passedInObject
+        
+        // Get the post rsvp data.
+        var rsvpArray: [String] = []
+        if currentObject.objectForKey("rsvpArray") != nil {
+            rsvpArray = currentObject.objectForKey("rsvpArray") as! Array
+        }
+        
+        // Check if the logged in user has
+        // already rsvp'd the selected status.
+        if (rsvpArray.count > 0) {
+            
+            if rsvpArray.contains(PFUser.currentUser()!.objectId!) {
+                
+                // The user has already liked the status
+                // so lets dislike the status update.
+                self.saveRsvpForPost(currentObject, rsvpPost: false)
+            }
+            else {
+                
+                // The user has not liked the status
+                // so lets go ahead and like it.
+                self.saveRsvpForPost(currentObject, rsvpPost: true)
+            }
+        }
+        else {
+            
+            // This status has zero likes so the logged
+            // in user hasn't liked the post either so we
+            // can go ahead and save the like for the user.
+            self.saveRsvpForPost(currentObject, rsvpPost: true)
+        }
+    }
+    
+    func commentClicked(sender: UIButton) {
+        self.openComments(self.passedInObject.objectId!)
+    }
+    
+    func imageTapped(sender: UITapGestureRecognizer) {
+        self.showPhotoViewer()
+    }
+    
+    func goToProfile(sender: UITapGestureRecognizer) {
+        
+        let currentObject:PFObject = self.passedInObject
+        
+        // Setup the user query.
+        var userQuery:PFQuery!
+        userQuery = PFUser.query()!
+        userQuery.whereKey("objectId", equalTo: (currentObject.objectForKey("user")?.objectId)!)
+        
+        // Download the user object.
+        userQuery.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
             
             if let aobject = objects {
-                
-                let userObject = (aobject as NSArray).lastObject as? PFUser
-                
-                // Set the user name label.
-                self.UserNameLabel.text = userObject?.username
-                
-                // Check the profile image data first.
-                var profileImage = UIImage(named: "default_profile_pic.png")
-                
-                // Setup the user profile image file.
-                let userImageFile = userObject!["profileImage"] as! PFFile
-                
-                // Download the profile image.
-                userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-                    
-                    if ((error == nil) && (imageData != nil)) {
-                        profileImage = UIImage(data: imageData!)
-                    }
-                    
-                    self.profileimageview.image = profileImage
-                }
+                self.showProfileView(((aobject as NSArray).lastObject as? PFUser)!
+                )
             }
         }
     }
     
     
+    //MARK: SAVE DATA METHODS
     
+    func saveLikeForPost(statusObject: PFObject, likePost: Bool) {
+        
+        // Setup the likes query.
+        var query:PFQuery!
+        query = PFQuery(className: "StatusUpdate")
+        
+        // Get the status update object.
+        query.getObjectInBackgroundWithId(statusObject.objectId!) { (object, error) -> Void in
+            
+            // Check for errors before saving the like/dislike.
+            if ((error == nil) && (object != nil)) {
+                
+                if (likePost == true) {
+                    
+                    // Add the user to the post likes array.
+                    object?.addUniqueObject(PFUser.currentUser()!.objectId!, forKey: "likesarray")
+                }
+                else {
+                    
+                    // Remove the user from the post likes array.
+                    object?.removeObject(PFUser.currentUser()!.objectId!, forKey: "likesarray")
+                }
+                
+                // Save the like/dislike data.
+                object?.saveInBackgroundWithBlock({ (success, likeError) -> Void in
+                    
+                    // Only update the like button if the
+                    // background data save was successful.
+                    
+                    if ((success) && (likeError == nil)) {
+                        
+                        // Make sure the local array data if
+                        // up to date otherwise the like button
+                        // will be un-checked when the user scrolls.
+                        self.passedInObject = object!
+                        
+                        self.updateLikesLabel(object!)
+                        self.updateLikesButton(likePost, objectId: statusObject.objectId!)
+                    }
+                })
+            }
+        }
+    }
     
+    func SavingNotifacations(notifcation:String, objectID:String, notificationType:String) {
+        
+        // Setup the notificatios query.
+        var query:PFQuery!
+        query = PFQuery(className: "StatusUpdate")
+        
+        // Get the status update object.
+        query.getObjectInBackgroundWithId(objectID) { (object, error) -> Void in
+            
+            // Only post the notification if no
+            // errors have been returned.
+            
+            if (error == nil) {
+                
+                // Only post the notification if the user who
+                // performed the action is NOT the logged in user.
+                
+                if (PFUser.currentUser()!.objectId! != (object?.objectForKey("user") as! PFUser).objectId!) {
+                    
+                    // Submit the push notification.
+                    PFCloud.callFunctionInBackground("StatusUpdate", withParameters: ["message" : notifcation, "user" : "\(PFUser.currentUser()?.username!)"])
+                    
+                    // Save the notification data.
+                    ManageUser.saveUserNotification(notifcation, fromUser: PFUser.currentUser()!, toUser: object?.objectForKey("user") as! PFUser, extType: notificationType, extObjectID: objectID)
+                }
+            }
+        }
+    }
+    
+    func saveRsvpForPost(statusObject: PFObject, rsvpPost: Bool) {
+        
+        // Setup the likes query.
+        var query:PFQuery!
+        query = PFQuery(className: "StatusUpdate")
+        
+        // Get the status update object.
+        query.getObjectInBackgroundWithId(statusObject.objectId!) { (object, error) -> Void in
+            
+            // Check for errors before saving the like/dislike.
+            
+            if ((error == nil) && (object != nil)) {
+                
+                if (rsvpPost == true) {
+                    
+                    // Add the user to the post rsvp array.
+                    object?.addUniqueObject(PFUser.currentUser()!.objectId!, forKey: "rsvpArray")
+                }
+                else {
+                    // Remove the user from the post likes array.
+                    object?.removeObject(PFUser.currentUser()!.objectId!, forKey: "rsvpArray")
+                }
+                
+                // Save the like/dislike data.
+                object?.saveInBackgroundWithBlock({ (success, rsvpError) -> Void in
+                    
+                    // Only update the rsvp button if the
+                    // background data save was successful.
+                    
+                    if ((success) && (rsvpError == nil)) {
+                        
+                        // Make sure the local array data if
+                        // up to date otherwise the rsvp button
+                        // will be un-checked when the user scrolls.
+                        self.passedInObject = object!
+                        self.updateRsvpLabel(object!)
+                        self.updateRsvpButton(rsvpPost, objectId: statusObject.objectId!)
+                    }
+                })
+            }
+        }
+    }
+    
+    //MARK: LOAD DATA METHODS
+    func getLikesData() {
+        let likesData:[String] = passedInObject.objectForKey("likesarray") as! Array
+        highlightLikedButton(likesData)
+        updateLikeCount(likesData)
+    }
+    
+    func getRsvpData() {
+        if passedInObject.objectForKey("rsvpArray") != nil {
+            rsvpArray = passedInObject.objectForKey("rsvpArray") as! Array
+        }
+        updateRsvpLabel()
+    }
     
 }
