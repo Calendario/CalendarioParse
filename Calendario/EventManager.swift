@@ -33,11 +33,11 @@ import Parse
         }
     }
     
-    @objc class func getUserAttendingEvents(eventID: String, completion: (attendingEvents: Array<AnyObject>) -> Void) {
+    @objc class func getUserAttendingEvents(eventID: String, forUser: PFUser, completion: (attendingEvents: Array<AnyObject>) -> Void) {
         
         var userAttendingEventsQuery: PFQuery!
         userAttendingEventsQuery = PFQuery(className: "StatusUpdate")
-        userAttendingEventsQuery.whereKey("rsvpArray", containsString: PFUser.currentUser()?.objectId!)
+        userAttendingEventsQuery.whereKey("rsvpArray", containsString: forUser.objectId!)
         userAttendingEventsQuery.findObjectsInBackgroundWithBlock { (eventObjects, error) -> Void in
             
             dispatch_async(dispatch_get_main_queue(), {
