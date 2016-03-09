@@ -132,10 +132,10 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         
         var likedpost = object?.valueForKey("likedby") as? String
         
-        if likedpost == PFUser.currentUser()?.objectId
+      /*  if likedpost == PFUser.currentUser()?.objectId
         {
             cell.likebutton.select()
-        }
+        }  */
         
         currentobjectID = object?.objectId
         let defaults = NSUserDefaults.standardUserDefaults().setObject(object?.objectId, forKey: "commentid")
@@ -308,15 +308,15 @@ class NewsFeedQueryViewController: PFQueryTableViewController {
         // like button
         cell.likebutton.translatesAutoresizingMaskIntoConstraints = true
         cell.likebutton.clipsToBounds = false
-        cell.likebutton.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
+        //cell.likebutton.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
         cell.likebutton.tag = indexPath.row
-        cell.likebutton.addTarget(self, action: "likeclicked:", forControlEvents: .TouchUpInside)
+        //cell.likebutton.addTarget(self, action: "likeclicked:", forControlEvents: .TouchUpInside)
         
         // comment button
         
         // set tthe tag to the current index path
         cell.commentButton.tag = indexPath.row
-        cell.commentButton.addTarget(self, action: "Commentclicked:", forControlEvents: .TouchUpInside)
+        //cell.commentButton.addTarget(self, action: "Commentclicked:", forControlEvents: .TouchUpInside)
         
         // getting usernames
         let findUser:PFQuery = PFUser.query()!

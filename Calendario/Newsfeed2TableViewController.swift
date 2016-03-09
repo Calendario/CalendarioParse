@@ -427,7 +427,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         }
         
         
-        // like button
+    /*    // like button
         
         cell.likebutton.translatesAutoresizingMaskIntoConstraints = true
         cell.likebutton.clipsToBounds = false
@@ -437,7 +437,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         if PFUser.currentUser()!.username! == username
         {
             cell.likebutton.select()
-        }
+        }  */
 
         
         
@@ -445,7 +445,7 @@ class Newsfeed2TableViewController: UITableViewController, UINavigationBarDelega
         // commennt button
         
         cell.commentButton.tag = indexPath.row
-        cell.commentButton.addTarget(self, action: "Commentclicked:", forControlEvents: .TouchUpInside)
+      //  cell.commentButton.addTarget(self, action: "Commentclicked:", forControlEvents: .TouchUpInside)
         
         
         let QOS = QOS_CLASS_BACKGROUND
