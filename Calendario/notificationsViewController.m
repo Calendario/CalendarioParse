@@ -34,6 +34,8 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    
 }
 
 - (void) getNotifications {
@@ -58,6 +60,25 @@
             }];
         }
     }];
+}
+
+- (UIImage *) checkActionType: (NSString *)type {
+    if ([type isEqualToString:@"comment"]) {
+        UIImage *commentIcon = [UIImage imageNamed:@"comment-icon"];
+        return commentIcon;
+    }
+    else if ([type isEqualToString:@"like"]) {
+        UIImage *likeIcon = [UIImage imageNamed:@"like-icon"];
+        return likeIcon;
+    }
+    else if ([type isEqualToString:@"rsvp"]) {
+        UIImage *attendIcon = [UIImage imageNamed:@"attend-icon"];
+        return attendIcon;
+    }
+    else {
+        UIImage *likeIcon = [UIImage imageNamed:@"like-icon"];
+        return likeIcon;
+    }
 }
 
 #pragma mark - Table view data source
@@ -110,7 +131,7 @@
     }
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // Setup the table view cell.
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notificationCell" forIndexPath:indexPath];
@@ -118,11 +139,18 @@
     // Get the cell UI objects.
     UIImageView *userImageView = (UIImageView *)[cell.contentView viewWithTag:1];
     UILabel *usernameLabel = (UILabel *)[cell.contentView viewWithTag:2];
-    // UILabel *actionLabel = (UILabel *)[cell.contentView viewWithTag:3];
+    UIButton *actionButton = (UIButton *) [cell.contentView viewWithTag:3];
+    actionButton.layer.cornerRadius = 2.0;
+    
+    //check for action type
+    NSString *type = notificationsExtLinks[indexPath.row];
+    [actionButton setImage:[self checkActionType:type] forState:UIControlStateNormal];
     
     // Set the notification label.
     NSString *notificationAction = notifications[indexPath.row];
-    // actionLabel.text = notificationAction;
+    
+    //check for action type and set correct icon
+
     
     // Download the user data.
     PFQuery *imageQuery = [PFUser query];
@@ -131,18 +159,16 @@
         
         if (error == nil) {
             
-            NSString *originalString = notificationAction; //[NSString stringWithFormat:@"%@ %@", [NSString stringWithFormat:@"@%@", ((PFUser *)object).username], notificationAction];  --> for if you want to add "@" before the username
+            NSString *originalString = notificationAction;
             usernameLabel.text = originalString;
-            
             
             NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:usernameLabel.text];
             NSArray *words = [usernameLabel.text componentsSeparatedByString:@" "];
-            //for (NSString *word in words) {
-                if  (words.firstObject) {            //([word hasPrefix:@"@"]) {
-                    NSRange range = [usernameLabel.text rangeOfString: words.firstObject];   //word];
+    
+                if  (words.firstObject) {
+                    NSRange range = [usernameLabel.text rangeOfString: words.firstObject];
                     [string addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:33/255.0f green:135/255.0f blue:75/255.0f alpha:1.0f] range:range];
                 }
-            //}
             
             usernameLabel.attributedText = string;
             

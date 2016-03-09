@@ -43,6 +43,7 @@
             <string>SFUIDisplay-Regular</string>
             <string>SFUIDisplay-Regular</string>
             <string>SFUIDisplay-Regular</string>
+            <string>SFUIDisplay-Regular</string>
         </mutableArray>
         <mutableArray key="SF-UI-Display-Thin.otf">
             <string>SFUIDisplay-Thin</string>
@@ -1030,7 +1031,7 @@
                     <navigationItem key="navigationItem" title="Calendario" id="cGL-nu-eaR">
                         <barButtonItem key="rightBarButtonItem" image="plus" id="Vb9-pR-8x9">
                             <inset key="imageInsets" minX="5" minY="4" maxX="0.0" maxY="2"/>
-                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="postStatus:" destination="fk2-g8-CoW" id="X8L-AC-sMP"/>
                             </connections>
@@ -4002,11 +4003,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 </constraints>
                                 <color key="barTintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
-                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="21"/>
+                                    <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Notifications" id="GuO-cv-Mqt"/>
+                                    <navigationItem title="Activity" id="GuO-cv-Mqt"/>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xmb-za-SdS">
@@ -4021,30 +4022,56 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VVV-IP-6Wc">
-                                                    <rect key="frame" x="74" y="3" width="293" height="58"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <rect key="frame" x="65" y="23" width="83" height="20"/>
+                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
+                                                    <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VmK-Dk-lCf">
-                                                    <rect key="frame" x="8" y="3" width="58" height="58"/>
+                                                    <rect key="frame" x="8" y="8" width="49" height="49"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="58" id="Yby-Ww-g0p"/>
-                                                        <constraint firstAttribute="width" constant="58" id="hDr-rb-jEQ"/>
+                                                        <constraint firstAttribute="width" secondItem="VmK-Dk-lCf" secondAttribute="height" multiplier="1:1" id="Kjs-wB-YR7"/>
+                                                        <constraint firstAttribute="height" constant="54" id="Yby-Ww-g0p"/>
+                                                        <constraint firstAttribute="width" constant="54" id="hDr-rb-jEQ"/>
                                                     </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="Yby-Ww-g0p"/>
+                                                            <exclude reference="hDr-rb-jEQ"/>
+                                                        </mask>
+                                                    </variation>
                                                 </imageView>
+                                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mv5-kL-2dt">
+                                                    <rect key="frame" x="337" y="17" width="30" height="30"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="lvU-cm-4bN"/>
+                                                        <constraint firstAttribute="width" constant="30" id="qqu-3l-sJU"/>
+                                                    </constraints>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="VmK-Dk-lCf" firstAttribute="centerY" secondItem="cYt-mJ-hlS" secondAttribute="centerY" id="48r-xT-uEL"/>
                                                 <constraint firstItem="VVV-IP-6Wc" firstAttribute="top" secondItem="VmK-Dk-lCf" secondAttribute="top" id="4lk-xm-ghr"/>
                                                 <constraint firstItem="VmK-Dk-lCf" firstAttribute="leading" secondItem="cYt-mJ-hlS" secondAttribute="leadingMargin" id="KZ9-IH-iGy"/>
+                                                <constraint firstItem="VVV-IP-6Wc" firstAttribute="centerY" secondItem="VmK-Dk-lCf" secondAttribute="centerY" id="SOw-Rx-AOk"/>
                                                 <constraint firstItem="VVV-IP-6Wc" firstAttribute="trailing" secondItem="cYt-mJ-hlS" secondAttribute="trailingMargin" id="Vvr-R2-wHq"/>
+                                                <constraint firstItem="VmK-Dk-lCf" firstAttribute="top" secondItem="cYt-mJ-hlS" secondAttribute="top" constant="8" id="bx6-63-2EJ"/>
                                                 <constraint firstItem="VVV-IP-6Wc" firstAttribute="bottom" secondItem="VmK-Dk-lCf" secondAttribute="bottom" id="doP-6n-Dmh"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="VVV-IP-6Wc" secondAttribute="trailing" constant="10" id="gGV-zt-8Mr"/>
+                                                <constraint firstAttribute="bottom" secondItem="VmK-Dk-lCf" secondAttribute="bottom" constant="8" id="iLf-4H-p08"/>
+                                                <constraint firstItem="Mv5-kL-2dt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VVV-IP-6Wc" secondAttribute="trailing" constant="8" id="j3Q-H0-JI5"/>
                                                 <constraint firstItem="VVV-IP-6Wc" firstAttribute="leading" secondItem="VmK-Dk-lCf" secondAttribute="trailing" constant="8" id="kwo-pa-6Ry"/>
+                                                <constraint firstAttribute="trailing" secondItem="Mv5-kL-2dt" secondAttribute="trailing" constant="8" id="lgf-hf-whb"/>
+                                                <constraint firstItem="VmK-Dk-lCf" firstAttribute="leading" secondItem="cYt-mJ-hlS" secondAttribute="leading" constant="8" id="oLy-UI-mAp"/>
+                                                <constraint firstItem="Mv5-kL-2dt" firstAttribute="centerY" secondItem="cYt-mJ-hlS" secondAttribute="centerY" id="t2D-xs-1ZG"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="KZ9-IH-iGy"/>
+                                                    <exclude reference="4lk-xm-ghr"/>
+                                                    <exclude reference="Vvr-R2-wHq"/>
+                                                    <exclude reference="doP-6n-Dmh"/>
                                                     <exclude reference="gGV-zt-8Mr"/>
                                                 </mask>
                                             </variation>
