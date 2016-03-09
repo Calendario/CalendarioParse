@@ -47,18 +47,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        // Initialization code
-        setupUI()
-        assignGestureRecognizers()
-        createTenseAndDateLabel()
-        findUserDetails()
-        setLocationLabelAndCheckingContents()
-        checkForRsvpPrivacy()
-        checkForUserPostedImage()
-        getLikesData()
-        getRsvpData()
-        setCreatedAtLabel()
-        updateCommentsLabel()
     }
     
     func setupUI () {
@@ -120,7 +108,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     func createTenseAndDateLabel() {
         // Create the tense/date all in one attributed string.
-        let attrs2 = [NSForegroundColorAttributeName:UIColor.whiteColor(), NSFontAttributeName : UIFont(name: "SF-UI-Display-Medium", size: 14.0)!]
+        let attrs2 = [NSForegroundColorAttributeName:UIColor.whiteColor(), NSFontAttributeName : UIFont.systemFontOfSize(14)]
         let tensestring2 = NSMutableAttributedString(string: passedInObject.objectForKey("tense") as! String, attributes: attrs2)
         let spacestring2 = NSMutableAttributedString(string: " ")
         let onstring = NSAttributedString(string: "on")

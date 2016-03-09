@@ -36,6 +36,8 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         showRecommendedUsers(checkForNewUser())
         setActivityIndicatorForRefreshing()
         setHashtagDefaultKey()
+        organizeNewsFeedData()
+        reloadNewsFeed()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -240,9 +242,20 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         // Setup the table view custom cell.
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
         
-        // Get the specific status object for this cell.
+        // Get the specific status object for this cell and call all needed methods.
         cell.passedInObject = self.sortedArray[indexPath.row] as! PFObject
-        
+        cell.setupUI()
+        cell.assignGestureRecognizers()
+        cell.createTenseAndDateLabel()
+        cell.findUserDetails()
+        cell.setLocationLabelAndCheckingContents()
+        cell.checkForRsvpPrivacy()
+        cell.checkForUserPostedImage()
+        cell.getLikesData()
+        cell.getRsvpData()
+        cell.setCreatedAtLabel()
+        cell.updateCommentsLabel()
+
         return cell
     }
     
