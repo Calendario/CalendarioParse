@@ -47,18 +47,36 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     }
     
     func setupUI() {
+        createStatusBar()
+        setTableViewProperties()
+        setNavigationBarProperties()
+    }
+    
+    func createStatusBar() {
+        UIApplication .sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        let statusBar: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 20))
+        statusBar.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        self.view.addSubview(statusBar)
+    }
+    
+    func setNavigationBarProperties() {
+        let font = UIFont(name: "SignPainter-HouseScript", size: 30.0)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName : font!, NSForegroundColorAttributeName : UIColor.whiteColor()]
+        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        self.navigationController?.navigationBar.translucent = false
+
+        let image = UIImage()
+        self.navigationController?.navigationBar.shadowImage = image
+        self.navigationController?.navigationBar.setBackgroundImage(image, forBarMetrics: UIBarMetrics.Default)
+    }
+    
+    func setTableViewProperties() {
         // Allow tableview cell resizing based on content.
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 449.0;
         self.tableView.separatorInset = UIEdgeInsetsZero
-        
-        // Set the "Calendario" text and appearance in the navigation bar
-        let font = UIFont(name: "SignPainter-HouseScript", size: 26.0)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName : font!, NSForegroundColorAttributeName : UIColor.darkGrayColor()]
-        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 250/255.0, green: 250/255.0, blue: 250/255.0, alpha: 1.0)
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 250/255.0, green: 250/255.0, blue: 250/255.0, alpha: 1.0)
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 250/255.0, green: 250/255.0, blue: 250/255.0, alpha: 1.0)
-        self.navigationController?.navigationBar.translucent = false
     }
     
     func setHashtagDefaultKey() {
@@ -118,7 +136,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         let NC = UINavigationController(rootViewController: SMVC)
         self.presentViewController(NC, animated: true, completion: nil)
     }
-
+    
     func displayAlert(alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
@@ -168,12 +186,12 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
             self.displayAlert("No posts", alertMessage: "An error has occurred, the newsfeed posts have not been loaded. Make sure you are following at least one person to view posts on the news feed.")
         }
     }
-
+    
     
     //MARK: LOAD DATA METHODS
     func reloadNewsFeed() {
         menuIndicatorActivity(true)
-       
+        
         // Clear the status data array.
         if (self.statusData.count > 0) {
             self.statusData.removeAllObjects()
@@ -255,7 +273,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         cell.getRsvpData()
         cell.setCreatedAtLabel()
         cell.updateCommentsLabel()
-
+        
         return cell
     }
     
@@ -267,7 +285,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         // Setup the report status button.
         var report:UITableViewRowAction!
         report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
-           
+            
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setObject(statusupdate.objectId, forKey: "reported")
             self.ReportView()
