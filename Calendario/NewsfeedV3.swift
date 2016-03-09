@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import Parse
 import QuartzCore
-import DOFavoriteButton
 
 class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     
@@ -255,10 +254,9 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         // Setup the report status button.
         var report:UITableViewRowAction!
         report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
-            
+           
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setObject(statusupdate.objectId, forKey: "reported")
-            
             self.ReportView()
             
             var reportquery:PFQuery!
@@ -271,7 +269,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                     if let objects = objects as [PFObject]! {
                         
                         var reportedID:String!
-                        
                         for object in objects {
                             reportedID = object.objectId
                         }
@@ -335,7 +332,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                         }
                             
                         else {
-                            
                             let alert = UIAlertController(title: "Error", message: "You can only delete your own posts.", preferredStyle: .Alert)
                             alert.view.tintColor = UIColor.flatGreenColor()
                             let next = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
@@ -363,7 +359,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
             // return [report, seemore, deletestatus]
             return [report, deletestatus]
         }
-            
         else {
             return [report]
         }

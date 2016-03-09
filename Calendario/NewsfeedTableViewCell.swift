@@ -35,6 +35,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     var parentViewController: AnyObject!
     var rsvpArray: [String] = []
     
+    //MARK: LIFECYCLE METHODS
     override func prepareForReuse() {
         super.prepareForReuse()
     }
@@ -97,8 +98,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
     }
     
     func setPostedImage(image : UIImage) {
-        //let aspect = image.size.width / image.size.height
-        // aspectConstraint = NSLayoutConstraint(item: userPostedImage, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: userPostedImage, attribute: NSLayoutAttribute.Height, multiplier: aspect, constant: 0.0)
         userPostedImage.image = image
     }
     
@@ -147,59 +146,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
         else {
             self.locationLabel.text = locationValue
         }
-    }
-    
-    func goToLikesList(sender: UITapGestureRecognizer) {
-        
-        let currentObject:PFObject = self.passedInObject
-        // Save the status object ID.
-        var defaults:NSUserDefaults!
-        defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(currentObject.objectId!, forKey: "likesListID")
-        defaults.synchronize()
-        
-        self.showLikesView()
-    }
-    
-    func findUserDetails() {
-        // Setup the user details query.
-        var findUser:PFQuery!
-        findUser = PFUser.query()!
-        findUser.whereKey("objectId", equalTo: (passedInObject.objectForKey("user")?.objectId)!)
-        
-        // Download the user detials.
-        findUser.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
-            
-            if let aobject = objects {
-                
-                let userObject = (aobject as NSArray).lastObject as? PFUser
-                
-                // Set the user name label.
-                self.UserNameLabel.text = userObject?.username
-                
-                // Check the profile image data first.
-                var profileImage = UIImage(named: "default_profile_pic.png")
-                
-                // Setup the user profile image file.
-                let userImageFile = userObject!["profileImage"] as! PFFile
-                
-                // Download the profile image.
-                userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-                    
-                    if ((error == nil) && (imageData != nil)) {
-                        profileImage = UIImage(data: imageData!)
-                    }
-                    
-                    self.profileimageview.image = profileImage
-                }
-            }
-        }
-    }
-    
-    func commentsLabelClicked(sender: UITapGestureRecognizer) {
-        let currentObject:PFObject = self.passedInObject
-        // Open the comments view.
-        self.openComments(currentObject.objectId!)
     }
     
     //MARK: STATUS CHECK METHODS
@@ -473,9 +419,27 @@ class NewsfeedTableViewCell: PFTableViewCell {
         let likesView = sb.instantiateViewControllerWithIdentifier("likesNav") as! UINavigationController
         self.parentViewController.presentViewController(likesView, animated: true, completion: nil)
     }
-
+    
     
     //MARK: TAP GESTURE METHODS
+    func commentsLabelClicked(sender: UITapGestureRecognizer) {
+        let currentObject:PFObject = self.passedInObject
+        // Open the comments view.
+        self.openComments(currentObject.objectId!)
+    }
+    
+    func goToLikesList(sender: UITapGestureRecognizer) {
+        
+        let currentObject:PFObject = self.passedInObject
+        // Save the status object ID.
+        var defaults:NSUserDefaults!
+        defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(currentObject.objectId!, forKey: "likesListID")
+        defaults.synchronize()
+        
+        self.showLikesView()
+    }
+
     func likeClicked() {
         
         // Get the specific status object for this cell.
@@ -691,6 +655,41 @@ class NewsfeedTableViewCell: PFTableViewCell {
     }
     
     //MARK: LOAD DATA METHODS
+    func findUserDetails() {
+        // Setup the user details query.
+        var findUser:PFQuery!
+        findUser = PFUser.query()!
+        findUser.whereKey("objectId", equalTo: (passedInObject.objectForKey("user")?.objectId)!)
+        
+        // Download the user detials.
+        findUser.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
+            
+            if let aobject = objects {
+                
+                let userObject = (aobject as NSArray).lastObject as? PFUser
+                
+                // Set the user name label.
+                self.UserNameLabel.text = userObject?.username
+                
+                // Check the profile image data first.
+                var profileImage = UIImage(named: "default_profile_pic.png")
+                
+                // Setup the user profile image file.
+                let userImageFile = userObject!["profileImage"] as! PFFile
+                
+                // Download the profile image.
+                userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                    
+                    if ((error == nil) && (imageData != nil)) {
+                        profileImage = UIImage(data: imageData!)
+                    }
+                    
+                    self.profileimageview.image = profileImage
+                }
+            }
+        }
+    }
+
     func getLikesData() {
         let likesData:[String] = passedInObject.objectForKey("likesarray") as! Array
         highlightLikedButton(likesData)
