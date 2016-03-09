@@ -23,27 +23,18 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    
     //set current user
     self.currentUser = [PFUser currentUser];
-   // NSString *currentUsername = self.currentUser.username;
-    
-    //create predicate for filtering
-  //  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"username != %@", currentUsername];
-    
     
     //query ALL USERS and sort alphabetically.
-    //PFQuery *query = [PFUser queryWithPredicate:predicate];
     PFQuery *query = [PFUser query];
 
-    
     [query orderByAscending:@"username"];
     [query findObjectsInBackgroundWithBlock: ^(NSArray *objects, NSError *error)
      {
          if (error)
          {
              NSLog(@"Error: %@ %@", error, [error userInfo]);
-             
          }
          else
          {
@@ -51,41 +42,65 @@
              for (int i = 0; i < newArray.count; i++)
              {
                  PFUser *user = newArray[i];
-                 
                  if ([self isFriend:user])
                  {
-                     //[newArray removeObject:user];
-                     
+                   //do nothing
                  }
-                 
                  self.allUsers = newArray;
                  [self.searchTableView reloadData];
              }
-             
-             /* self.allUsers = objects;
-              [self.editFriendsTableView reloadData];*/
-         }
-         
+        }
      }];
     
+    self.tabBarController.hidesBottomBarWhenPushed = YES;
     [self.searchTableView reloadData];
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    //add search bar to tableview header
+    self.searchTableView.tableHeaderView = self.searchController.searchBar;
+    self.definesPresentationContext = YES;
     
-    self.searchTableView.dataSource = self;
-    self.searchTableView.delegate = self;
+    //create filtered array
+    filteredArray = [[NSMutableArray alloc] init];
     
+    [self setupUI];
+    [self setDataSources];
+    [self setDelegates];
+}
+
+- (void) setupUI {
     //configure search controller
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    self.searchController.delegate = self;
-    self.searchController.searchBar.delegate = self;
     self.searchController.searchResultsUpdater = self;
     
+    //set searchbar properties
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    [self.searchController.searchBar sizeToFit];
+    self.searchController.searchBar.translucent = NO;
+
+    //set search bar icon color
+    [self.searchController.searchBar setImage:[UIImage imageNamed:@"search_icon"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+
+    //hide 1px black line above searchbar
+    self.searchController.searchBar.layer.borderColor = [UIColor colorWithRed:33/255.0f green:135/255.0f blue:75/255.0f alpha:1.0].CGColor;
+    self.searchController.searchBar.layer.borderWidth = 1;
     
+    //set searchBar Text color
+    for (UIView *subview in self.searchController.searchBar.subviews) {
+        for (UIView *sv in subview.subviews) {
+            if ([NSStringFromClass([sv class]) isEqualToString:@"UISearchBarTextField"]) {
+                if ([sv respondsToSelector:@selector(setAttributedPlaceholder:)]) {
+                    ((UITextField *)sv).attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.searchController.searchBar.placeholder attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+                }
+                break;
+            }
+        }
+    }
+
     //override default background color of searchbar's textfield
     for (UIView *subView in self.searchController.searchBar.subviews)
     {
@@ -101,51 +116,17 @@
             }
         }
     }
-    
-    //set searchbar properties
-    self.searchController.dimsBackgroundDuringPresentation = NO;
-    [self.searchController.searchBar sizeToFit];
-    self.searchController.searchBar.backgroundColor = [UIColor colorWithRed:33/255.0f green:135/255.0f blue:75/255.0f alpha:1.0];
-    self.searchController.searchBar.barTintColor = [UIColor colorWithRed:33/255.0f green:135/255.0f blue:75/255.0f alpha:1.0];
-    self.searchController.searchBar.tintColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0];
-    self.searchController.searchBar.translucent = NO;
 
-    
-    //set searchBar Text color
-    for (UIView *subview in self.searchController.searchBar.subviews) {
-        for (UIView *sv in subview.subviews) {
-            if ([NSStringFromClass([sv class]) isEqualToString:@"UISearchBarTextField"]) {
-                
-                if ([sv respondsToSelector:@selector(setAttributedPlaceholder:)]) {
-                    ((UITextField *)sv).attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.searchController.searchBar.placeholder attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-                }
-                break;
-            }
-        }
-    }
-    
-    //set search bar icon color
-    [self.searchController.searchBar setImage:[UIImage imageNamed:@"search_icon"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
-    
-    //hide 1px black line above searchbar
-    self.searchController.searchBar.layer.borderColor = [UIColor colorWithRed:33/255.0f green:135/255.0f blue:75/255.0f alpha:1.0].CGColor;
-    self.searchController.searchBar.layer.borderWidth = 1;
-    
-    //add search bar to tableview header
-    self.searchTableView.tableHeaderView = self.searchController.searchBar;
-    self.definesPresentationContext = YES;
-    
-    //create filtered array
-    filteredArray = [[NSMutableArray alloc] init];
-    
-   // [self savingNotificationsMethod];
-
-    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void) setDataSources{
+     self.searchTableView.dataSource = self;
+}
+
+- (void) setDelegates{
+    self.searchTableView.delegate = self;
+    self.searchController.delegate = self;
+    self.searchController.searchBar.delegate = self;
 }
 
 - (BOOL) isFriend:(PFUser *)user
@@ -156,32 +137,29 @@
         {
             return YES;
         }
-        
-        
     }
     return NO;
 }
 
-
-
-- (IBAction)backButtonPressed:(id)sender {
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (void) showProfileView: (PFUser *)user {
+    UIStoryboard *mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    MyProfileViewController *profVC = [mainSB instantiateViewControllerWithIdentifier:@"My Profile"];
+    profVC.passedUser = user;
+    profVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:profVC animated:YES completion:NULL];
 }
-
-
 
 #pragma mark Search Bar Methods
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-
+    
     [filteredArray removeAllObjects];
     
     NSString *searchString = self.searchController.searchBar.text;
     
     //NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"username == %@", searchString];  <-- for exact match
     NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"username contains[c] %@", searchString]; //<-- so tableview loads while user is typing
-
+    
     filteredArray = [[self.allUsers filteredArrayUsingPredicate:searchPredicate] mutableCopy];
     
     [self.searchTableView reloadData];
@@ -190,7 +168,6 @@
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    
     //force lowercase typing
     searchBar.text = searchText.lowercaseString;
     
@@ -200,17 +177,16 @@
 {
     self.searchTableView.backgroundView = nil;
     self.searchTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-
     [self.searchTableView reloadData];
-
 }
 
 - (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
-    self.searchTableView.backgroundView = nil;
+    /*self.searchTableView.backgroundView = nil;
     self.searchTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    [self.searchTableView reloadData];*/
     
-    [self.searchTableView reloadData];
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (void) searchBarTextDidEndEditing:(UISearchBar *)searchBar
@@ -229,9 +205,7 @@
         
         self.searchTableView.backgroundView = messageLabel;
         self.searchTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
         [self.searchTableView reloadData];
-
     }
 }
 
@@ -239,34 +213,41 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    // Return the number of sections.
     if (filteredArray.count > 0)
     {
+        return 2;
+    }
     return 1;
-        
-    }
-    else
-    {
-        
-    }
-    
-    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    
+    if (section == 0) {
+    return 3;
+    }
+    else {
     if ([self.searchController isActive])
     {
         return filteredArray.count;
     }
-    else
-    {
-        return 0;
+    return 0;
     }
-    
-   
+}
+
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30)];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(31, view.frame.size.height/2, tableView.frame.size.width, 18)];
+    [title setFont:[UIFont fontWithName:@"SF-UI-Display-Medium" size:16.0]];
+    UIImageView *headerIcon = [[UIImageView alloc] init];
+    view.backgroundColor = [UIColor whiteColor];
+    if (section == 0) {
+        title.text = @"SUGGESTED USERS";
+        headerIcon.image = [UIImage imageNamed: @"star-icon.png"];
+    }
+    else {
+        title.text = @"SEARCH RESULTS";
+        headerIcon.image = [UIImage imageNamed: @"clock-icon.png"];
+    }
+    return view;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -276,23 +257,30 @@
     cell.userInteractionEnabled = NO;
     
     UILabel *userLabel = (UILabel *)[cell.contentView viewWithTag:2];
+    UILabel *nameLabel = (UILabel *)[cell.contentView viewWithTag:4];
     UIImageView *userImage = (UIImageView *)[cell.contentView viewWithTag:1];
     UIImageView *ribbonImage = (UIImageView *) [cell.contentView viewWithTag:3];
     UIImage *notAvailable = [UIImage imageNamed:@"default_profile_pic.png"];
     userImage.image = notAvailable;
-
     
     //hide elements
     userLabel.hidden = YES;
     userImage.hidden = YES;
+    nameLabel.hidden = YES;
     
     if ([self.searchController isActive])
     {
         PFUser *user = [filteredArray objectAtIndex:indexPath.row];
         userLabel.hidden = NO;
         userImage.hidden = NO;
+        nameLabel.hidden = NO;
         cell.userInteractionEnabled = YES;
         userLabel.text = user.username;
+        
+        NSString *name = [user valueForKey:@"fullName"];
+        if ((name != nil) && (name.length > 0)) {
+            nameLabel.text = name;
+        }
         
         //check if user is verified and display ribbon
         BOOL verified = [user valueForKey:@"verifiedUser"];
@@ -324,19 +312,9 @@
              }
              
          }];
-        
-        
         return cell;
     }
-    
-    else
-    {
-        
-    }
-    
-    
     return cell;
-    
 }
 
 //method to make sure there isn't an indention for uitableviewcell
@@ -363,66 +341,11 @@
 {
     //row automatically deselects so it doesn't stay highlighted
     [self.searchTableView deselectRowAtIndexPath:indexPath animated:NO];
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
-    
     [self.searchTableView reloadData];
     
     // GET THE PF USER DATA OBJECT.
     PFUser *user = [filteredArray objectAtIndex:indexPath.row];
-    
-    // NAVIGATE TO SELECTED USER'S PROFILE PAGE
-    UIStoryboard *mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    MyProfileViewController *profVC = [mainSB instantiateViewControllerWithIdentifier:@"My Profile"];
-    profVC.passedUser = user;
-    profVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:profVC animated:YES completion:NULL];
+    [self showProfileView:user];
 }
-
-
-/*
- //SAVING METHOD HERE TO USE FOR OTHER VIEWCONTROLLERS
-- (void) savingNotificationsMethod {
-    
-    //retrieve the user's objectID from the profile that you are currently viewing
-    PFUser *userViewed = [PFUser currentUser];   //(INSERT REFERENCE TO THE PFUser BEING VIEWED);
-    
-    //create query to fetch user from parse
-    PFQuery *notifQuery = [PFUser query];
-    [notifQuery whereKey:@"objectId" equalTo:userViewed.objectId];
-    [notifQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if (!error) {
-            
-            PFUser *retrievedUser = object;
-            
-            //retrieve previously stored notifications
-            NSMutableArray *notifications = [NSMutableArray new];
-            [notifications addObjectsFromArray: [retrievedUser objectForKey:@"notifications"]];
-            
-            //create a string value for the action you are storing in the array
-            NSString *actionCompleted = [NSString stringWithFormat:@"%@ is now following you.", [PFUser currentUser].username];
-            
-            //add new action to array
-            [notifications addObject:actionCompleted];
-            
-            //check to see if array has more than 30 items
-            if (notifications.count > 29) {
-                [notifications removeObjectAtIndex:0];
-            }
-            
-            //save array back to parse
-            retrievedUser[@"notifications"] = notifications;
-            [retrievedUser saveInBackground];
-            
-        }
-        else
-        {
-            NSLog(@"error: %@", [error localizedDescription]);
-        }
-    }];
-    
-}*/
-
-
 
 @end
