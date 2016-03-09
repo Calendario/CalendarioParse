@@ -14,75 +14,45 @@ import DOFavoriteButton
 
 class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate {
     
-    // Final correct data to be used for the timeline.
-    var filteredData:NSMutableArray = NSMutableArray()
-    //////
-    
     @IBOutlet weak var calendar: FSCalendar!
-    
     @IBOutlet weak var tableview: UITableView!
-    
+
+    var filteredData:NSMutableArray = NSMutableArray()
     var currentObjectid:String!
-    
-     let likebuttonfilled = UIImage(named: "like button filled")
-    
+    let likebuttonfilled = UIImage(named: "like button filled")
     var dateofevent:String!
-    
     var b:Bool = false
     var eventsarray = [NSDate]()
-    
     var selectedDate:NSDate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Allow tableview cell resizing based on content.
+ 
+        setupUI()
+        setCalendarProperties()
+        loadCalendarData(getCurrentDate())
+    }
+    
+    func setupUI() {
         self.tableview.delegate = self
         self.tableview.dataSource = self
         self.tableview.rowHeight = UITableViewAutomaticDimension;
         self.tableview.estimatedRowHeight = 292.0;
         self.tableview.separatorInset = UIEdgeInsetsZero
-        
+    }
+    
+    func setCalendarProperties() {
         calendar.scrollDirection = .Horizontal
         calendar.selectDate(NSDate())
         calendar.appearance.eventColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-        
+
+    }
+    
+    func getCurrentDate() -> String {
         let dateformatter = NSDateFormatter()
         dateformatter.dateFormat = "M/d/yy"
         let currentDate = dateformatter.stringFromDate(NSDate())
-        
-        // Load the calendar data for today.
-        self.loadCalendarData(currentDate)
-        
-        /*self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-        
-        let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 55))
-        navigationbar.backgroundColor = UIColor.whiteColor()
-        navigationbar.delegate = self
-        navigationbar.barTintColor =  UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-        navigationbar.tintColor = UIColor.whiteColor()
-        
-        // logo for nav title
-        
-        let logo = UIImage(named: "navtext")
-        let imageview = UIImageView(image: logo)
-        
-        let navitems = UINavigationItem()
-        navitems.title = "Timeline"
-        // set nav items in nav bar
-        navigationbar.items = [navitems]
-        self.view.addSubview(navigationbar)*/
-        
-        // Do any additional setup after loading the view.
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        return currentDate
     }
     
     func calendar(calendar: FSCalendar!, didSelectDate date: NSDate!) {
@@ -100,7 +70,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     func loadCalendarData(selectedData: String) {
         
-        var getdates:PFQuery = PFQuery(className: "StatusUpdate")
+        let getdates:PFQuery = PFQuery(className: "StatusUpdate")
         getdates.whereKey("dateofevent", equalTo: selectedData)
         getdates.includeKey("user")
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -206,13 +176,9 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         return bool
     }
     
-    // Table view methods.
-    
+    //MARK: TABLEVIEW METHODS
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
-    }
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
