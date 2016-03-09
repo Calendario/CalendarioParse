@@ -1,5 +1,5 @@
 //
-//  NewsfeedTableViewCell.swift
+//  NewsfeedTableView swift
 //  Calendario
 //
 //  Created by Derek Cacciotti on 10/14/15.
@@ -47,6 +47,22 @@ class NewsfeedTableViewCell: PFTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+    }
+    
+    override func layoutSubviews() {
+        // Get the specific status object for this cell and call all needed methods.
+         setupUI()
+         assignGestureRecognizers()
+         createTenseAndDateLabel()
+         findUserDetails()
+         setLocationLabelAndCheckingContents()
+         checkForRsvpPrivacy()
+         checkForUserPostedImage()
+         getLikesData()
+         getRsvpData()
+         setCreatedAtLabel()
+         updateCommentsLabel()
+
     }
     
     func setupUI () {
@@ -430,7 +446,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
 
     func likeClicked() {
         
-        // Get the specific status object for this cell.
+        // Get the specific status object for this  
         let currentObject:PFObject = passedInObject
         
         // Get the post likes data.
@@ -461,7 +477,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     }
     
     func rsvpClicked() {
-        // Get the specific status object for this cell.
+        // Get the specific status object for this
         let currentObject:PFObject = self.passedInObject
         
         // Get the post rsvp data.

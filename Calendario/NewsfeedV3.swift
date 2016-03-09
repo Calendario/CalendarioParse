@@ -261,18 +261,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
         
         // Get the specific status object for this cell and call all needed methods.
-        cell.passedInObject = self.sortedArray[indexPath.row] as! PFObject
-        cell.setupUI()
-        cell.assignGestureRecognizers()
-        cell.createTenseAndDateLabel()
-        cell.findUserDetails()
-        cell.setLocationLabelAndCheckingContents()
-        cell.checkForRsvpPrivacy()
-        cell.checkForUserPostedImage()
-        cell.getLikesData()
-        cell.getRsvpData()
-        cell.setCreatedAtLabel()
-        cell.updateCommentsLabel()
+       cell.passedInObject = self.sortedArray[indexPath.row] as! PFObject
         
         return cell
     }
