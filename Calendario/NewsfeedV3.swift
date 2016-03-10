@@ -73,9 +73,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     }
     
     func setTableViewProperties() {
-        // Allow tableview cell resizing based on content.
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
-        self.tableView.estimatedRowHeight = 449.0;
         self.tableView.separatorInset = UIEdgeInsetsZero
     }
     
@@ -253,6 +250,18 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.sortedArray.count
+    }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 511.0
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

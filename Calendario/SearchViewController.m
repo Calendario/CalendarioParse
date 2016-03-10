@@ -60,10 +60,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    //add search bar to tableview header
-    self.searchTableView.tableHeaderView = self.searchController.searchBar;
-    self.definesPresentationContext = YES;
-    
     //create filtered array
     filteredArray = [[NSMutableArray alloc] init];
     
@@ -73,6 +69,12 @@
 }
 
 - (void) setupUI {
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    [self setSearchControllerProperties];
+    self.definesPresentationContext = YES;
+}
+
+- (void) setSearchControllerProperties {
     //configure search controller
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
@@ -81,42 +83,15 @@
     self.searchController.dimsBackgroundDuringPresentation = NO;
     [self.searchController.searchBar sizeToFit];
     self.searchController.searchBar.translucent = NO;
-
-    //set search bar icon color
-    [self.searchController.searchBar setImage:[UIImage imageNamed:@"search_icon"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
-
-    //hide 1px black line above searchbar
-    self.searchController.searchBar.layer.borderColor = [UIColor colorWithRed:33/255.0f green:135/255.0f blue:75/255.0f alpha:1.0].CGColor;
-    self.searchController.searchBar.layer.borderWidth = 1;
+    self.searchController.searchBar.backgroundImage = nil;
+    self.searchController.searchBar.backgroundColor = [UIColor whiteColor];
     
-    //set searchBar Text color
-    for (UIView *subview in self.searchController.searchBar.subviews) {
-        for (UIView *sv in subview.subviews) {
-            if ([NSStringFromClass([sv class]) isEqualToString:@"UISearchBarTextField"]) {
-                if ([sv respondsToSelector:@selector(setAttributedPlaceholder:)]) {
-                    ((UITextField *)sv).attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.searchController.searchBar.placeholder attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-                }
-                break;
-            }
-        }
-    }
-
-    //override default background color of searchbar's textfield
-    for (UIView *subView in self.searchController.searchBar.subviews)
-    {
-        for (UIView *secondLevelSubview in subView.subviews){
-            if ([secondLevelSubview isKindOfClass:[UITextField class]])
-            {
-                UITextField *searchBarTextField = (UITextField *)secondLevelSubview;
-                
-                //set font color here
-                searchBarTextField.backgroundColor = [UIColor colorWithRed:24/255.0f green:99/255.0f blue:56/255.0f alpha:1.0];
-                searchBarTextField.textColor = [UIColor whiteColor];
-                break;
-            }
-        }
-    }
-
+    //set search bar icon color
+  //  [self.searchController.searchBar setImage:[UIImage imageNamed:@"search_icon"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+//    self.searchController.searchBar.layer.backgroundColor = [UIColor whiteColor].CGColor;
+    
+    //add search bar to tableview header
+    self.searchTableView.tableHeaderView = self.searchController.searchBar;
 }
 
 - (void) setDataSources{
@@ -237,6 +212,7 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30)];
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(31, view.frame.size.height/2, tableView.frame.size.width, 18)];
     [title setFont:[UIFont fontWithName:@"SF-UI-Display-Medium" size:16.0]];
+    title.textColor = [UIColor darkGrayColor];
     UIImageView *headerIcon = [[UIImageView alloc] init];
     view.backgroundColor = [UIColor whiteColor];
     if (section == 0) {

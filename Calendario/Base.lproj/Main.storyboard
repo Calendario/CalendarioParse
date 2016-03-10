@@ -43,7 +43,6 @@
             <string>SFUIDisplay-Regular</string>
             <string>SFUIDisplay-Regular</string>
             <string>SFUIDisplay-Regular</string>
-            <string>SFUIDisplay-Regular</string>
         </mutableArray>
         <mutableArray key="SF-UI-Display-Thin.otf">
             <string>SFUIDisplay-Thin</string>
@@ -68,7 +67,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Da4-WR-hCg" id="69G-w4-oPL">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_profile_pic" translatesAutoresizingMaskIntoConstraints="NO" id="j3k-ws-sU2" userLabel="User Profile Image">
@@ -147,7 +146,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2To-8o-TY8" id="S51-1d-psp">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_profile_pic" translatesAutoresizingMaskIntoConstraints="NO" id="e4K-gT-Fp1" userLabel="User Profile Image">
@@ -277,7 +276,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v4l-4r-4nc" id="1if-ng-4jI">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MeP-xu-Qpc" userLabel="User Profile Image">
@@ -548,16 +547,16 @@
         <scene sceneID="cPY-hO-QGp">
             <objects>
                 <tableViewController storyboardIdentifier="nf" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fk2-g8-CoW" customClass="NewsfeedV3" customModule="Calendario" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="468" sectionHeaderHeight="28" sectionFooterHeight="28" id="E2o-kT-016">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="511" sectionHeaderHeight="28" sectionFooterHeight="28" id="E2o-kT-016">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="468" id="vaR-8e-HVs" customClass="NewsfeedTableViewCell" customModule="Calendario" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="468"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="511" id="vaR-8e-HVs" customClass="NewsfeedTableViewCell" customModule="Calendario" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="511"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vaR-8e-HVs" id="Niw-dS-Vbm">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="467.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPb-Is-p8R" userLabel="Green Container">
@@ -567,12 +566,11 @@
                                                     <rect key="frame" x="8" y="14" width="54" height="54"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="55" id="066-dq-6b4"/>
-                                                        <constraint firstAttribute="height" constant="54" id="80A-cZ-G2j"/>
                                                         <constraint firstAttribute="width" secondItem="crA-RG-JUw" secondAttribute="height" multiplier="1:1" id="Mhy-RH-ou3"/>
                                                         <constraint firstAttribute="width" constant="55" id="MrD-mn-VJ6"/>
+                                                        <constraint firstAttribute="width" secondItem="crA-RG-JUw" secondAttribute="height" multiplier="1:1" id="Txp-WW-tat"/>
                                                         <constraint firstAttribute="height" constant="50" id="fcO-fZ-Emt"/>
                                                         <constraint firstAttribute="width" secondItem="crA-RG-JUw" secondAttribute="height" multiplier="1:1" id="umv-kD-jjC"/>
-                                                        <constraint firstAttribute="width" constant="54" id="ur9-w3-sEG"/>
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -629,31 +627,31 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2bk-oR-I48" userLabel="Attendant Container">
                                                     <rect key="frame" x="318" y="16" width="49" height="49"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="92w-7A-ze2">
-                                                            <rect key="frame" x="14" y="9" width="20" height="20"/>
-                                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="92w-7A-ze2" secondAttribute="height" multiplier="1:1" id="8mm-Od-QK4"/>
-                                                                <constraint firstAttribute="height" constant="20" id="zeT-Jv-pBU"/>
-                                                            </constraints>
-                                                        </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdg-qK-gUr">
                                                             <rect key="frame" x="17" y="30" width="15" height="15"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="12"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="92w-7A-ze2">
+                                                            <rect key="frame" x="14" y="8" width="20" height="20"/>
+                                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="20" id="gBE-V4-ipO"/>
+                                                                <constraint firstAttribute="height" constant="20" id="rcp-KP-UO8"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="rdg-qK-gUr" firstAttribute="centerX" secondItem="2bk-oR-I48" secondAttribute="centerX" id="L8b-1F-lcl"/>
-                                                        <constraint firstAttribute="height" constant="49" id="RxB-vs-pa5"/>
-                                                        <constraint firstAttribute="bottom" secondItem="rdg-qK-gUr" secondAttribute="bottom" constant="4" id="gHO-83-lXR"/>
-                                                        <constraint firstItem="rdg-qK-gUr" firstAttribute="top" secondItem="92w-7A-ze2" secondAttribute="bottom" constant="2" id="ivO-Vs-bPf"/>
+                                                        <constraint firstAttribute="width" constant="49" id="0Oc-cG-S2B"/>
+                                                        <constraint firstItem="rdg-qK-gUr" firstAttribute="top" secondItem="92w-7A-ze2" secondAttribute="bottom" constant="2" id="2RB-iy-Ar1"/>
+                                                        <constraint firstAttribute="height" constant="49" id="G52-aq-L4K"/>
+                                                        <constraint firstItem="rdg-qK-gUr" firstAttribute="centerX" secondItem="2bk-oR-I48" secondAttribute="centerX" id="NaH-6u-sxA"/>
+                                                        <constraint firstItem="92w-7A-ze2" firstAttribute="centerX" secondItem="2bk-oR-I48" secondAttribute="centerX" id="Sky-1k-shu"/>
+                                                        <constraint firstItem="92w-7A-ze2" firstAttribute="top" secondItem="2bk-oR-I48" secondAttribute="top" constant="8" id="WFN-fB-oek"/>
                                                         <constraint firstAttribute="height" constant="49" id="qv7-74-Pqw"/>
                                                         <constraint firstItem="92w-7A-ze2" firstAttribute="top" secondItem="2bk-oR-I48" secondAttribute="top" constant="2" id="tjj-oF-VhA"/>
-                                                        <constraint firstAttribute="width" secondItem="2bk-oR-I48" secondAttribute="height" multiplier="1:1" id="wzv-Ug-SGv"/>
-                                                        <constraint firstItem="92w-7A-ze2" firstAttribute="centerX" secondItem="2bk-oR-I48" secondAttribute="centerX" id="zgu-Nl-z37"/>
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -683,17 +681,23 @@
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tRm-vH-cFM">
                                                             <rect key="frame" x="14" y="8" width="20" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="20" id="IQa-i3-FLu"/>
+                                                                <constraint firstAttribute="height" constant="20" id="bxH-Ng-ugt"/>
+                                                            </constraints>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="width" constant="49" id="1bt-mU-DSd"/>
                                                         <constraint firstAttribute="height" constant="49" id="6yr-Ju-eib"/>
+                                                        <constraint firstItem="eOW-cl-tPW" firstAttribute="top" secondItem="tRm-vH-cFM" secondAttribute="bottom" constant="2" id="8Q6-lb-UPH"/>
+                                                        <constraint firstItem="tRm-vH-cFM" firstAttribute="centerX" secondItem="nKu-mN-9eq" secondAttribute="centerX" id="H1z-Fw-W4k"/>
                                                         <constraint firstAttribute="height" constant="49" id="Ih5-EO-zBE"/>
                                                         <constraint firstAttribute="width" secondItem="nKu-mN-9eq" secondAttribute="height" multiplier="1:1" id="ViO-a8-ZbK"/>
-                                                        <constraint firstItem="eOW-cl-tPW" firstAttribute="centerX" secondItem="nKu-mN-9eq" secondAttribute="centerX" id="ZUM-CT-qP3"/>
-                                                        <constraint firstItem="tRm-vH-cFM" firstAttribute="centerX" secondItem="nKu-mN-9eq" secondAttribute="centerX" id="d0I-JS-7Ci"/>
-                                                        <constraint firstItem="eOW-cl-tPW" firstAttribute="top" secondItem="tRm-vH-cFM" secondAttribute="bottom" constant="2" id="dQg-qJ-4Mh"/>
-                                                        <constraint firstAttribute="bottom" secondItem="eOW-cl-tPW" secondAttribute="bottom" constant="4" id="zyP-tB-5yY"/>
+                                                        <constraint firstItem="tRm-vH-cFM" firstAttribute="top" secondItem="nKu-mN-9eq" secondAttribute="top" constant="8" id="YKd-IN-iEY"/>
+                                                        <constraint firstAttribute="height" constant="49" id="Ybi-tU-dVf"/>
+                                                        <constraint firstItem="eOW-cl-tPW" firstAttribute="centerX" secondItem="nKu-mN-9eq" secondAttribute="centerX" id="xEF-62-vEd"/>
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -706,26 +710,22 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.19963944462507652" green="0.59966290998795813" blue="0.34588249119098247" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstItem="KhO-HU-Fzo" firstAttribute="top" secondItem="W0y-Pa-UKA" secondAttribute="bottom" constant="1" id="Ceq-AY-hjm"/>
-                                                <constraint firstItem="crA-RG-JUw" firstAttribute="centerY" secondItem="hPb-Is-p8R" secondAttribute="centerY" id="GwA-bN-tXU"/>
-                                                <constraint firstItem="2bk-oR-I48" firstAttribute="centerY" secondItem="hPb-Is-p8R" secondAttribute="centerY" id="IN9-W5-URt"/>
-                                                <constraint firstItem="KhO-HU-Fzo" firstAttribute="centerY" secondItem="crA-RG-JUw" secondAttribute="centerY" id="KwD-5X-mRS"/>
-                                                <constraint firstAttribute="height" constant="82" id="V22-hu-awv"/>
-                                                <constraint firstAttribute="trailing" secondItem="2bk-oR-I48" secondAttribute="trailing" constant="8" id="VYp-Oa-45C"/>
+                                                <constraint firstItem="KhO-HU-Fzo" firstAttribute="top" secondItem="W0y-Pa-UKA" secondAttribute="bottom" constant="1" id="6nf-hl-7Tv"/>
+                                                <constraint firstItem="nKu-mN-9eq" firstAttribute="centerY" secondItem="hPb-Is-p8R" secondAttribute="centerY" id="EDi-w1-igj"/>
+                                                <constraint firstItem="KhO-HU-Fzo" firstAttribute="centerY" secondItem="crA-RG-JUw" secondAttribute="centerY" id="FVs-Ol-isR"/>
+                                                <constraint firstItem="KhO-HU-Fzo" firstAttribute="leading" secondItem="crA-RG-JUw" secondAttribute="trailing" constant="8" id="GA1-GI-ty6"/>
+                                                <constraint firstItem="2bk-oR-I48" firstAttribute="leading" secondItem="nKu-mN-9eq" secondAttribute="trailing" constant="8" id="K5M-wc-kxe"/>
+                                                <constraint firstItem="W0y-Pa-UKA" firstAttribute="leading" secondItem="crA-RG-JUw" secondAttribute="trailing" constant="8" id="OhR-ET-y7o"/>
+                                                <constraint firstItem="crA-RG-JUw" firstAttribute="leading" secondItem="hPb-Is-p8R" secondAttribute="leading" constant="8" id="V1H-Qu-Uhg"/>
+                                                <constraint firstItem="2bk-oR-I48" firstAttribute="centerY" secondItem="hPb-Is-p8R" secondAttribute="centerY" id="WMP-56-AJC"/>
+                                                <constraint firstAttribute="height" constant="82" id="XKf-vp-r0p"/>
+                                                <constraint firstAttribute="trailing" secondItem="2bk-oR-I48" secondAttribute="trailing" constant="8" id="eZS-9H-aed"/>
                                                 <constraint firstItem="nKu-mN-9eq" firstAttribute="width" secondItem="nKu-mN-9eq" secondAttribute="height" multiplier="1:1" id="f2L-bY-sj6"/>
-                                                <constraint firstItem="nKu-mN-9eq" firstAttribute="height" secondItem="2bk-oR-I48" secondAttribute="height" id="f4z-h7-c7K"/>
-                                                <constraint firstItem="KhO-HU-Fzo" firstAttribute="leading" secondItem="crA-RG-JUw" secondAttribute="trailing" constant="8" id="j1o-al-u9V"/>
-                                                <constraint firstItem="cwP-EW-rcB" firstAttribute="top" secondItem="KhO-HU-Fzo" secondAttribute="bottom" constant="1" id="ka8-uq-ymn"/>
-                                                <constraint firstItem="nKu-mN-9eq" firstAttribute="centerY" secondItem="hPb-Is-p8R" secondAttribute="centerY" id="lTZ-HW-b00"/>
-                                                <constraint firstItem="tRm-vH-cFM" firstAttribute="height" secondItem="92w-7A-ze2" secondAttribute="height" id="mIc-8X-hes"/>
+                                                <constraint firstItem="cwP-EW-rcB" firstAttribute="leading" secondItem="crA-RG-JUw" secondAttribute="trailing" constant="8" id="koN-UV-eDW"/>
+                                                <constraint firstItem="crA-RG-JUw" firstAttribute="centerY" secondItem="hPb-Is-p8R" secondAttribute="centerY" id="mR3-qF-f99"/>
                                                 <constraint firstItem="KhO-HU-Fzo" firstAttribute="top" secondItem="W0y-Pa-UKA" secondAttribute="bottom" id="nIG-oo-Yl9"/>
-                                                <constraint firstItem="W0y-Pa-UKA" firstAttribute="leading" secondItem="KhO-HU-Fzo" secondAttribute="leading" id="qP3-aV-O8w"/>
-                                                <constraint firstItem="crA-RG-JUw" firstAttribute="leading" secondItem="hPb-Is-p8R" secondAttribute="leading" constant="8" id="qUN-RX-Scz"/>
-                                                <constraint firstItem="cwP-EW-rcB" firstAttribute="leading" secondItem="KhO-HU-Fzo" secondAttribute="leading" id="sBV-yK-qsl"/>
-                                                <constraint firstItem="2bk-oR-I48" firstAttribute="leading" secondItem="nKu-mN-9eq" secondAttribute="trailing" constant="8" id="uOx-J5-MgY"/>
-                                                <constraint firstItem="tRm-vH-cFM" firstAttribute="width" secondItem="92w-7A-ze2" secondAttribute="width" id="x7j-hQ-etm"/>
+                                                <constraint firstItem="cwP-EW-rcB" firstAttribute="top" secondItem="KhO-HU-Fzo" secondAttribute="bottom" constant="1" id="xs6-LA-TE8"/>
                                                 <constraint firstItem="cwP-EW-rcB" firstAttribute="top" secondItem="KhO-HU-Fzo" secondAttribute="bottom" constant="1" id="zMf-Cs-PeE"/>
-                                                <constraint firstItem="nKu-mN-9eq" firstAttribute="width" secondItem="2bk-oR-I48" secondAttribute="width" id="zrA-b1-4Vl"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -736,25 +736,25 @@
                                             </variation>
                                         </view>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Status" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ro-Py-vgq" customClass="KILabel">
-                                            <rect key="frame" x="8" y="123" width="359" height="17"/>
+                                            <rect key="frame" x="8" y="139" width="359" height="56"/>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="14"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4G-Fy-1FJ" customClass="DOFavoriteButton" customModule="DOFavoriteButton">
-                                            <rect key="frame" x="255" y="176" width="112" height="38"/>
+                                            <rect key="frame" x="255" y="231" width="112" height="38"/>
                                             <color key="backgroundColor" red="0.95795157068062831" green="0.95795157068062831" blue="0.95795157068062831" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="42" id="5Pv-cW-xLP"/>
-                                                <constraint firstAttribute="width" constant="112" id="6l5-Yp-BtM"/>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="AjM-qA-H6D"/>
                                                 <constraint firstAttribute="height" constant="25" id="EeU-0x-JtS"/>
+                                                <constraint firstAttribute="height" constant="38" id="J5F-va-wge"/>
                                                 <constraint firstAttribute="width" secondItem="l4G-Fy-1FJ" secondAttribute="height" multiplier="27:28" id="KQt-Ri-aC4"/>
                                                 <constraint firstAttribute="width" constant="27" id="LPL-jZ-JFH"/>
                                                 <constraint firstAttribute="width" constant="32" id="SCX-sx-tHh"/>
                                                 <constraint firstAttribute="height" constant="34" id="ZDJ-PI-YC0"/>
-                                                <constraint firstAttribute="width" secondItem="l4G-Fy-1FJ" secondAttribute="height" multiplier="56:19" id="bNF-Vk-Cz6"/>
+                                                <constraint firstAttribute="width" constant="112" id="Zpo-Qj-u1Q"/>
                                                 <constraint firstAttribute="width" constant="25" id="gau-FA-DRP"/>
                                                 <constraint firstAttribute="width" constant="91" id="mvf-Gz-GhF"/>
                                                 <constraint firstAttribute="height" constant="43" id="p6B-cl-O47"/>
@@ -793,43 +793,33 @@
                                                 </mask>
                                             </variation>
                                         </button>
-                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="5 people are attending this event" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QC0-df-dTK">
-                                            <rect key="frame" x="107" y="147" width="260" height="17"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="Nvy-ev-hYo"/>
-                                                <constraint firstAttribute="height" constant="15" id="muz-xU-KxT"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="14"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="Nvy-ev-hYo"/>
-                                                    <exclude reference="muz-xU-KxT"/>
-                                                </mask>
-                                            </variation>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6 hrs Ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="ScK-QL-CoL">
-                                            <rect key="frame" x="320" y="86" width="47" height="15"/>
+                                            <rect key="frame" x="320" y="103" width="47" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="15" id="Fht-q4-er4"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOING ON 2/25/16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5q3-2M-rR7">
-                                            <rect key="frame" x="8" y="94" width="119" height="17"/>
+                                            <rect key="frame" x="8" y="102" width="119" height="17"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="17" id="etC-og-NdB"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QS9-mh-IYB" userLabel="Comment Container">
-                                            <rect key="frame" x="8" y="180" width="107" height="30"/>
+                                            <rect key="frame" x="8" y="235" width="107" height="30"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHa-zv-rEg" customClass="DOFavoriteButton" customModule="DOFavoriteButton">
                                                     <rect key="frame" x="0.0" y="4" width="22" height="22"/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="22" id="1ty-so-iSN"/>
-                                                        <constraint firstAttribute="height" constant="22" id="sXc-eX-0TX"/>
+                                                        <constraint firstAttribute="width" constant="22" id="ULB-A5-yWH"/>
+                                                        <constraint firstAttribute="height" constant="22" id="fOw-ql-6Vs"/>
                                                     </constraints>
                                                     <state key="normal" image="comment"/>
                                                 </button>
@@ -848,64 +838,49 @@
                                                     </variation>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" priority="750" constant="106" id="0tO-x6-j5C"/>
-                                                <constraint firstItem="KHa-zv-rEg" firstAttribute="centerY" secondItem="QS9-mh-IYB" secondAttribute="centerY" id="Wfm-9Y-eNF"/>
-                                                <constraint firstItem="9o0-GD-rNj" firstAttribute="leading" secondItem="KHa-zv-rEg" secondAttribute="trailing" constant="8" id="Wo4-sU-kak"/>
-                                                <constraint firstItem="KHa-zv-rEg" firstAttribute="leading" secondItem="QS9-mh-IYB" secondAttribute="leading" id="YlE-hn-c0T"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9o0-GD-rNj" secondAttribute="trailing" constant="2" id="bW2-hH-6em"/>
-                                                <constraint firstAttribute="height" constant="30" id="lTl-vK-z8O"/>
-                                                <constraint firstItem="9o0-GD-rNj" firstAttribute="centerY" secondItem="QS9-mh-IYB" secondAttribute="centerY" id="zsg-6L-PZk"/>
+                                                <constraint firstItem="KHa-zv-rEg" firstAttribute="leading" secondItem="QS9-mh-IYB" secondAttribute="leading" id="3G1-Oo-pjz"/>
+                                                <constraint firstAttribute="height" constant="30" id="Hyr-B4-Djc"/>
+                                                <constraint firstItem="9o0-GD-rNj" firstAttribute="centerY" secondItem="QS9-mh-IYB" secondAttribute="centerY" id="dSg-tI-wxF"/>
+                                                <constraint firstAttribute="width" constant="107" id="hWG-eo-lSA"/>
+                                                <constraint firstItem="KHa-zv-rEg" firstAttribute="centerY" secondItem="QS9-mh-IYB" secondAttribute="centerY" id="isc-gn-ZLz"/>
+                                                <constraint firstAttribute="trailing" secondItem="9o0-GD-rNj" secondAttribute="trailing" constant="2" id="wqH-cE-b7E"/>
                                             </constraints>
                                         </view>
-                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e8E-7n-6jF">
-                                            <rect key="frame" x="8" y="380" width="359" height="55"/>
-                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="0oo-tf-m6j">
-                                                <rect key="frame" x="0.0" y="0.0" width="359" height="55"/>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e8E-7n-6jF">
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="0oo-tf-m6j">
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C0q-Jc-fX1">
-                                                        <rect key="frame" x="0.0" y="0.0" width="359" height="55"/>
-                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="wsG-A8-EbR">
-                                                            <rect key="frame" x="0.0" y="0.0" width="359" height="55"/>
+                                                    <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C0q-Jc-fX1">
+                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="wsG-A8-EbR">
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I love this place!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5AH-Wy-Hkx">
-                                                                    <rect key="frame" x="128" y="19" width="103" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I love this place!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5AH-Wy-Hkx">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="104" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="15"/>
                                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="5AH-Wy-Hkx" firstAttribute="centerX" secondItem="wsG-A8-EbR" secondAttribute="centerX" id="DnR-c9-qam"/>
-                                                                <constraint firstItem="5AH-Wy-Hkx" firstAttribute="centerY" secondItem="wsG-A8-EbR" secondAttribute="centerY" id="brn-HF-b7B"/>
-                                                            </constraints>
                                                         </view>
                                                         <vibrancyEffect>
                                                             <blurEffect style="light"/>
                                                         </vibrancyEffect>
                                                     </visualEffectView>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="bottom" secondItem="C0q-Jc-fX1" secondAttribute="bottom" id="LAi-Tp-ptr"/>
-                                                    <constraint firstAttribute="trailing" secondItem="C0q-Jc-fX1" secondAttribute="trailing" id="W8n-nw-Y4j"/>
-                                                    <constraint firstItem="C0q-Jc-fX1" firstAttribute="leading" secondItem="0oo-tf-m6j" secondAttribute="leading" id="lA6-Sa-zp5"/>
-                                                    <constraint firstItem="C0q-Jc-fX1" firstAttribute="top" secondItem="0oo-tf-m6j" secondAttribute="top" id="oFS-OW-lCy"/>
-                                                </constraints>
                                             </view>
                                             <blurEffect style="light"/>
                                         </visualEffectView>
                                         <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhotoPost" translatesAutoresizingMaskIntoConstraints="NO" id="MAk-zZ-i98" customClass="PFImageView">
-                                            <rect key="frame" x="8" y="230" width="359" height="205"/>
+                                            <rect key="frame" x="8" y="289" width="359" height="205"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="127" id="0FQ-n2-BhR"/>
                                                 <constraint firstAttribute="height" constant="127" id="11h-oJ-nlI"/>
                                                 <constraint firstAttribute="width" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="299:127" id="1OG-e1-rG9"/>
-                                                <constraint firstAttribute="height" constant="205" id="1ez-gh-tDz"/>
                                                 <constraint firstAttribute="width" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="299:127" id="4LB-Su-8uo"/>
                                                 <constraint firstAttribute="height" constant="241" id="69P-Wa-CLn"/>
+                                                <constraint firstAttribute="height" constant="205" id="Bdw-J9-fjP"/>
                                                 <constraint firstAttribute="height" constant="127" id="XsB-l2-BxM"/>
                                                 <constraint firstAttribute="width" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="375:253" id="zLk-XA-TDm"/>
                                             </constraints>
@@ -924,54 +899,48 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="MAk-zZ-i98" secondAttribute="bottom" id="00k-VF-CME"/>
-                                        <constraint firstItem="ScK-QL-CoL" firstAttribute="top" secondItem="hPb-Is-p8R" secondAttribute="bottom" constant="4" id="2XN-Rf-abo"/>
-                                        <constraint firstAttribute="trailing" secondItem="5ro-Py-vgq" secondAttribute="trailing" constant="8" id="306-yi-D9l"/>
-                                        <constraint firstItem="5ro-Py-vgq" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" constant="8" id="8x9-9O-o1t"/>
+                                        <constraint firstAttribute="trailing" secondItem="hPb-Is-p8R" secondAttribute="trailing" id="2ti-On-Skm"/>
+                                        <constraint firstItem="5ro-Py-vgq" firstAttribute="top" secondItem="5q3-2M-rR7" secondAttribute="bottom" constant="20" id="3MS-x1-PcU"/>
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" id="9hi-FN-Bjh"/>
-                                        <constraint firstAttribute="trailing" secondItem="ScK-QL-CoL" secondAttribute="trailing" constant="8" id="Bt6-Np-deN"/>
                                         <constraint firstItem="l4G-Fy-1FJ" firstAttribute="width" secondItem="Niw-dS-Vbm" secondAttribute="width" multiplier="0.242" id="Bul-RL-B9w"/>
-                                        <constraint firstItem="e8E-7n-6jF" firstAttribute="height" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="0.265" id="C0L-1Y-cvk"/>
-                                        <constraint firstItem="MAk-zZ-i98" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" constant="8" id="DRf-jp-AJq"/>
-                                        <constraint firstItem="QS9-mh-IYB" firstAttribute="top" secondItem="5ro-Py-vgq" secondAttribute="bottom" constant="40" id="Ep4-46-7ej"/>
-                                        <constraint firstItem="hPb-Is-p8R" firstAttribute="top" secondItem="Niw-dS-Vbm" secondAttribute="top" id="IIm-T2-sPp"/>
+                                        <constraint firstItem="5q3-2M-rR7" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" constant="8" id="Dt5-QY-9Nc"/>
+                                        <constraint firstItem="l4G-Fy-1FJ" firstAttribute="centerY" secondItem="QS9-mh-IYB" secondAttribute="centerY" id="FH9-K7-gca"/>
+                                        <constraint firstAttribute="trailing" secondItem="l4G-Fy-1FJ" secondAttribute="trailing" constant="8" id="IMC-Am-hln"/>
                                         <constraint firstAttribute="trailing" secondItem="5q3-2M-rR7" secondAttribute="trailing" constant="8" id="Ifg-Mx-MBU"/>
+                                        <constraint firstItem="MAk-zZ-i98" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" constant="8" id="J3B-aF-RWI"/>
                                         <constraint firstAttribute="trailing" secondItem="5ro-Py-vgq" secondAttribute="trailing" constant="8" id="JZF-E1-2YB"/>
-                                        <constraint firstAttribute="trailing" secondItem="QC0-df-dTK" secondAttribute="trailing" constant="8" id="KTi-ah-Ton"/>
-                                        <constraint firstItem="hPb-Is-p8R" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" id="Mff-30-ugz"/>
+                                        <constraint firstAttribute="bottom" secondItem="MAk-zZ-i98" secondAttribute="bottom" constant="32" id="LZA-Al-uJ8"/>
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="top" secondItem="l4G-Fy-1FJ" secondAttribute="bottom" constant="12" id="MxN-nC-vsZ"/>
-                                        <constraint firstItem="5q3-2M-rR7" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" constant="8" id="NtR-pb-Uac"/>
-                                        <constraint firstAttribute="trailing" secondItem="MAk-zZ-i98" secondAttribute="trailing" constant="8" id="PGl-qD-46W"/>
+                                        <constraint firstItem="QS9-mh-IYB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5ro-Py-vgq" secondAttribute="bottom" constant="40" id="N99-I4-ERT"/>
+                                        <constraint firstItem="5q3-2M-rR7" firstAttribute="top" secondItem="hPb-Is-p8R" secondAttribute="bottom" constant="20" id="OV9-wP-uIE"/>
                                         <constraint firstItem="5ro-Py-vgq" firstAttribute="top" secondItem="5q3-2M-rR7" secondAttribute="bottom" constant="8" id="QpT-mu-Pbz"/>
-                                        <constraint firstItem="QC0-df-dTK" firstAttribute="centerY" secondItem="l4G-Fy-1FJ" secondAttribute="centerY" id="Rak-3y-EQG"/>
+                                        <constraint firstItem="ScK-QL-CoL" firstAttribute="top" secondItem="hPb-Is-p8R" secondAttribute="bottom" constant="4" id="Qvm-4r-WiW"/>
                                         <constraint firstAttribute="bottom" secondItem="MAk-zZ-i98" secondAttribute="bottom" id="SJ0-yJ-54y"/>
-                                        <constraint firstAttribute="trailing" secondItem="e8E-7n-6jF" secondAttribute="trailing" constant="8" id="ZEB-AW-jUo"/>
+                                        <constraint firstAttribute="trailing" secondItem="ScK-QL-CoL" secondAttribute="trailing" constant="8" id="Wlc-0f-nC8"/>
+                                        <constraint firstItem="QS9-mh-IYB" firstAttribute="top" secondItem="5ro-Py-vgq" secondAttribute="bottom" constant="40" id="YoM-qX-xvD"/>
+                                        <constraint firstItem="hPb-Is-p8R" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" id="aBv-el-YaD"/>
                                         <constraint firstAttribute="trailing" secondItem="MAk-zZ-i98" secondAttribute="trailing" id="aEN-UE-cjP"/>
-                                        <constraint firstItem="QC0-df-dTK" firstAttribute="leading" secondItem="l4G-Fy-1FJ" secondAttribute="trailing" constant="8" id="aqX-Zv-ESa"/>
-                                        <constraint firstAttribute="trailing" secondItem="ScK-QL-CoL" secondAttribute="trailing" constant="8" id="bld-Ah-el2"/>
-                                        <constraint firstAttribute="bottom" secondItem="MAk-zZ-i98" secondAttribute="bottom" constant="32.5" id="dJZ-Au-ONn"/>
+                                        <constraint firstAttribute="trailing" secondItem="MAk-zZ-i98" secondAttribute="trailing" constant="8" id="b2O-Bn-ZgV"/>
                                         <constraint firstItem="l4G-Fy-1FJ" firstAttribute="leading" secondItem="5ro-Py-vgq" secondAttribute="leading" id="db8-Du-6zD"/>
                                         <constraint firstItem="5q3-2M-rR7" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" constant="8" id="dvE-GA-gXn"/>
+                                        <constraint firstItem="QS9-mh-IYB" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" constant="8" id="dyk-0W-gjt"/>
                                         <constraint firstItem="QS9-mh-IYB" firstAttribute="top" secondItem="5ro-Py-vgq" secondAttribute="bottom" constant="40" id="eCf-OU-BZq"/>
-                                        <constraint firstItem="QS9-mh-IYB" firstAttribute="top" secondItem="QC0-df-dTK" secondAttribute="bottom" constant="16" id="esX-iK-6j1"/>
+                                        <constraint firstAttribute="trailing" secondItem="5ro-Py-vgq" secondAttribute="trailing" constant="8" id="eSX-t0-xpG"/>
+                                        <constraint firstItem="MAk-zZ-i98" firstAttribute="top" secondItem="l4G-Fy-1FJ" secondAttribute="bottom" constant="20" id="f3r-dK-7pq"/>
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="top" secondItem="l4G-Fy-1FJ" secondAttribute="bottom" constant="12" id="fGD-U1-56o"/>
-                                        <constraint firstItem="e8E-7n-6jF" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" constant="8" id="g4a-xK-C7w"/>
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="top" secondItem="ScK-QL-CoL" secondAttribute="bottom" constant="2" id="gBR-A2-FRC"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MAk-zZ-i98" secondAttribute="bottom" id="hTw-d4-0fL"/>
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="top" secondItem="ScK-QL-CoL" secondAttribute="bottom" id="iKY-NU-AOk"/>
-                                        <constraint firstItem="5q3-2M-rR7" firstAttribute="top" secondItem="hPb-Is-p8R" secondAttribute="bottom" constant="12" id="iyC-HN-rEb"/>
-                                        <constraint firstItem="5ro-Py-vgq" firstAttribute="centerX" secondItem="Niw-dS-Vbm" secondAttribute="centerX" id="kAW-NH-Hb7"/>
-                                        <constraint firstItem="QS9-mh-IYB" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" constant="8" id="kIW-bn-gTM"/>
-                                        <constraint firstItem="5ro-Py-vgq" firstAttribute="top" secondItem="5q3-2M-rR7" secondAttribute="bottom" constant="12" id="laj-3M-MFr"/>
-                                        <constraint firstAttribute="trailing" secondItem="hPb-Is-p8R" secondAttribute="trailing" id="mxp-7q-01x"/>
-                                        <constraint firstAttribute="trailing" secondItem="l4G-Fy-1FJ" secondAttribute="trailing" constant="8" id="oF3-tX-yWT"/>
+                                        <constraint firstItem="5ro-Py-vgq" firstAttribute="centerX" secondItem="Niw-dS-Vbm" secondAttribute="centerX" id="mGN-hh-V6N"/>
+                                        <constraint firstItem="ScK-QL-CoL" firstAttribute="centerY" secondItem="5q3-2M-rR7" secondAttribute="centerY" id="rnE-bv-YKw"/>
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="top" secondItem="l4G-Fy-1FJ" secondAttribute="bottom" constant="24" id="sIT-9h-ZWp"/>
-                                        <constraint firstItem="l4G-Fy-1FJ" firstAttribute="centerY" secondItem="9o0-GD-rNj" secondAttribute="centerY" id="tNq-bT-Xm5"/>
+                                        <constraint firstItem="hPb-Is-p8R" firstAttribute="top" secondItem="Niw-dS-Vbm" secondAttribute="top" id="spV-aP-Y2e"/>
                                         <constraint firstItem="5ro-Py-vgq" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" constant="8" id="wJx-01-2Ez"/>
                                         <constraint firstItem="l4G-Fy-1FJ" firstAttribute="leading" secondItem="QS9-mh-IYB" secondAttribute="trailing" constant="159.5" id="wWp-1s-7gh"/>
+                                        <constraint firstAttribute="bottom" secondItem="MAk-zZ-i98" secondAttribute="bottom" constant="16" id="xCq-Hv-iN9"/>
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="top" secondItem="l4G-Fy-1FJ" secondAttribute="bottom" constant="12" id="yKL-51-fhD"/>
-                                        <constraint firstItem="MAk-zZ-i98" firstAttribute="top" secondItem="l4G-Fy-1FJ" secondAttribute="bottom" constant="16" id="yNT-xh-HMa"/>
-                                        <constraint firstItem="e8E-7n-6jF" firstAttribute="bottom" secondItem="MAk-zZ-i98" secondAttribute="bottom" id="yzi-jX-vbX"/>
                                         <constraint firstItem="l4G-Fy-1FJ" firstAttribute="top" secondItem="5ro-Py-vgq" secondAttribute="bottom" constant="24" id="zOy-gu-nAG"/>
+                                        <constraint firstItem="5ro-Py-vgq" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" constant="8" id="zlD-CF-zwO"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -981,11 +950,9 @@
                                             <exclude reference="QpT-mu-Pbz"/>
                                             <exclude reference="wJx-01-2Ez"/>
                                             <exclude reference="eCf-OU-BZq"/>
-                                            <exclude reference="esX-iK-6j1"/>
-                                            <exclude reference="Rak-3y-EQG"/>
-                                            <exclude reference="aqX-Zv-ESa"/>
                                             <exclude reference="00k-VF-CME"/>
                                             <exclude reference="9hi-FN-Bjh"/>
+                                            <exclude reference="LZA-Al-uJ8"/>
                                             <exclude reference="MxN-nC-vsZ"/>
                                             <exclude reference="SJ0-yJ-54y"/>
                                             <exclude reference="aEN-UE-cjP"/>
@@ -999,10 +966,20 @@
                                             <exclude reference="db8-Du-6zD"/>
                                             <exclude reference="wWp-1s-7gh"/>
                                             <exclude reference="zOy-gu-nAG"/>
+                                            <exclude reference="Qvm-4r-WiW"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
+                                <constraints>
+                                    <constraint firstItem="crA-RG-JUw" firstAttribute="height" secondItem="vaR-8e-HVs" secondAttribute="height" id="RZb-6d-SFW"/>
+                                    <constraint firstItem="crA-RG-JUw" firstAttribute="width" secondItem="vaR-8e-HVs" secondAttribute="width" multiplier="0.143" id="rl9-mJ-HNJ"/>
+                                </constraints>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="RZb-6d-SFW"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outlet property="UserNameLabel" destination="KhO-HU-Fzo" id="sYJ-cV-QoW"/>
                                     <outlet property="attendantContainerView" destination="2bk-oR-I48" id="Bgw-8i-3QU"/>
@@ -1016,7 +993,7 @@
                                     <outlet property="locationLabel" destination="cwP-EW-rcB" id="dj6-zV-F6N"/>
                                     <outlet property="profileimageview" destination="crA-RG-JUw" id="BbN-Yc-vz5"/>
                                     <outlet property="rsvpButton" destination="l4G-Fy-1FJ" id="Lp8-gr-ZHV"/>
-                                    <outlet property="rsvpLabel" destination="QC0-df-dTK" id="Hjl-iw-GCI"/>
+                                    <outlet property="rsvpLabel" destination="rdg-qK-gUr" id="9lF-0G-yXk"/>
                                     <outlet property="statusTextView" destination="5ro-Py-vgq" id="6B1-fk-7hj"/>
                                     <outlet property="uploaddatelabel" destination="5q3-2M-rR7" id="YzW-1o-azi"/>
                                     <outlet property="userPostedImage" destination="MAk-zZ-i98" id="4bl-zw-y6D"/>
@@ -1600,7 +1577,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="105"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WYh-f2-f9g" id="idj-7P-aTH">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="104.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="meN-0W-CH9">
@@ -1632,14 +1609,14 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuz-OU-xcm" customClass="KILabel">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuz-OU-xcm" customClass="KILabel">
                                                     <rect key="frame" x="60" y="50" width="307" height="22"/>
                                                     <color key="tintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="# hours ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="zaK-t9-QwS">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# hours ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="zaK-t9-QwS">
                                                     <rect key="frame" x="300" y="80" width="67" height="16"/>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1760,7 +1737,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="420"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W1B-LA-cow" id="RWo-FP-GFh">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="419.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="419"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultFeedBackground" translatesAutoresizingMaskIntoConstraints="NO" id="QGi-Be-9gz">
@@ -2197,7 +2174,7 @@
                                 </constraints>
                                 <color key="barTintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
-                                    <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="18"/>
+                                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="20"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
@@ -2230,25 +2207,37 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="weekdayTextColor">
                                         <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="useVeryShortWeekdaySymbols" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="useVeryShortWeekdaySymbols" value="NO"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="headerHeight">
-                                        <real key="value" value="50"/>
+                                        <real key="value" value="30"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="weekdayHeight">
-                                        <real key="value" value="25"/>
+                                        <real key="value" value="50"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="focusOnSingleSelectedDate" value="YES"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="titleTodayColor">
                                         <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="headerTitleTextSize">
-                                        <real key="value" value="0.0"/>
+                                        <real key="value" value="14"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="titleSelectionColor">
                                         <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="todaySelectionColor">
                                         <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="titleTextSize">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="subtitleTextSize">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="weekdayTextSize">
+                                        <real key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="firstWeekday">
+                                        <integer key="value" value="0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -2298,6 +2287,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="calendar" destination="Dkp-WD-e0g" id="3Cj-9w-MEt"/>
+                        <outlet property="navigationBar" destination="FYi-xH-6EZ" id="ieE-Sc-dq8"/>
                         <outlet property="tableview" destination="ZJV-K3-Tez" id="ck8-GR-r8o"/>
                         <segue destination="nhc-PG-guG" kind="show" id="Q92-9R-gKB"/>
                     </connections>
@@ -2369,7 +2359,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eLL-Yg-VtC" id="kpk-uB-DJm">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -2494,7 +2484,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z5k-ea-V7h" userLabel="Container for PW and Sign Up">
                                 <rect key="frame" x="30" y="321" width="315" height="56"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTN-ZI-x3W">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTN-ZI-x3W">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="57"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
                                         <state key="normal" title="Forgot Password? ">
@@ -2505,7 +2495,7 @@
                                             <action selector="resetPassword:" destination="16Q-ZH-5Rb" eventType="touchUpInside" id="apg-mo-otY"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abZ-nv-x5u">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abZ-nv-x5u">
                                         <rect key="frame" x="249" y="0.0" width="66" height="57"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
                                         <state key="normal" title="Sign Up">
@@ -3334,7 +3324,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Ju-AF-ADi" id="bSc-8H-yxl">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pdS-y4-KQA">
@@ -3494,11 +3484,11 @@
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="settingsCell" rowHeight="55" id="pLQ-Pz-6n9">
                                         <rect key="frame" x="0.0" y="22" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pLQ-Pz-6n9" id="N6u-US-uAV">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="54.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="pLQ-Pz-6n9" id="N6u-US-uAV">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zed-Ul-qvZ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zed-Ul-qvZ">
                                                     <rect key="frame" x="339" y="14" width="28" height="28"/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3906,7 +3896,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <rect key="frame" x="0.0" y="28" width="375" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xVQ-Pd-MJC" id="mgK-ZZ-S8V">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="57.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="57"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LHJ-6f-9gb">
@@ -4018,16 +4008,16 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wcF-Lg-mmq" id="cYt-mJ-hlS">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VVV-IP-6Wc">
+                                                <label opaque="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VVV-IP-6Wc">
                                                     <rect key="frame" x="65" y="23" width="83" height="20"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
                                                     <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VmK-Dk-lCf">
+                                                <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VmK-Dk-lCf">
                                                     <rect key="frame" x="8" y="8" width="49" height="49"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="VmK-Dk-lCf" secondAttribute="height" multiplier="1:1" id="Kjs-wB-YR7"/>
@@ -4404,7 +4394,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <rect key="frame" x="0.0" y="369" width="375" height="292"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bdu-EA-DmJ" id="LKj-aD-A1N">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="291.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="291"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_profile_pic" translatesAutoresizingMaskIntoConstraints="NO" id="UHf-gm-4xX" userLabel="User Profile Image">
@@ -4501,7 +4491,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JUZ-Hs-I0n">
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JUZ-Hs-I0n">
                                                     <rect key="frame" x="71" y="266" width="200" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50 Likes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TZp-Y2-4xD">
@@ -4520,7 +4510,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 </mask>
                                                             </variation>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gex-u0-qBV" userLabel="Divider">
+                                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gex-u0-qBV" userLabel="Divider">
                                                             <rect key="frame" x="52" y="0.0" width="1" height="20"/>
                                                             <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
@@ -4528,7 +4518,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 <constraint firstAttribute="height" constant="20" id="Ufe-AI-fA2"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qNg-6P-X4e" userLabel="Divider">
+                                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qNg-6P-X4e" userLabel="Divider">
                                                             <rect key="frame" x="145" y="0.0" width="1" height="20"/>
                                                             <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
@@ -4536,7 +4526,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 <constraint firstAttribute="height" constant="20" id="lbR-go-PY4"/>
                                                             </constraints>
                                                         </view>
-                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 Comments" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ut1-DO-Rae" userLabel="commentsLabel">
+                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="10 Comments" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ut1-DO-Rae" userLabel="commentsLabel">
                                                             <rect key="frame" x="65" y="3" width="68" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="eEv-kM-GSY"/>
@@ -4550,7 +4540,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 </mask>
                                                             </variation>
                                                         </label>
-                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 RSVPs" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7VO-wb-Zw3" userLabel="Rsvp Label">
+                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="5 RSVPs" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7VO-wb-Zw3" userLabel="Rsvp Label">
                                                             <rect key="frame" x="158" y="3" width="42" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="ylg-TO-1oV"/>
@@ -4715,7 +4705,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 <constraint firstAttribute="height" constant="60" id="wcx-g4-AnR"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="You must be following this user in order to view their posts." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="00K-dc-42A">
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" text="You must be following this user in order to view their posts." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="00K-dc-42A">
                                                             <rect key="frame" x="51" y="148" width="272" height="58"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
@@ -5014,7 +5004,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sez-zi-hV3" id="ZYX-Pm-TpJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -5055,7 +5045,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <rect key="frame" x="0.0" y="28" width="600" height="104"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jcS-8H-Ors" id="D8t-dW-2aa">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="103.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="103"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VAo-l4-Q5R">
@@ -5147,7 +5137,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <rect key="frame" x="0.0" y="28" width="600" height="89"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="88i-Oj-5BM" id="4Xt-Z7-jcJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="88.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iLG-Vb-bfT">
@@ -5976,7 +5966,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             <action selector="switchChangeState:" destination="DHB-c0-nrG" eventType="valueChanged" id="dhO-YV-L3m"/>
                                                         </connections>
                                                     </switch>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQm-WJ-rxc">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Private Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQm-WJ-rxc">
                                                         <rect key="frame" x="57" y="16" width="106" height="20"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -6247,7 +6237,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <rect key="frame" x="0.0" y="92" width="375" height="468"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HwC-sX-VCM" id="GIC-9z-IyP">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="467.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="467"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gmv-mH-Mqh" userLabel="Green Container">
@@ -6266,11 +6256,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="hTb-Yj-2Rf"/>
-                                                            <exclude reference="QNe-ji-Rop"/>
-                                                            <exclude reference="CiZ-oF-VFP"/>
                                                             <exclude reference="7Kw-IR-AHd"/>
+                                                            <exclude reference="CiZ-oF-VFP"/>
+                                                            <exclude reference="QNe-ji-Rop"/>
                                                             <exclude reference="aMV-IC-7O2"/>
+                                                            <exclude reference="hTb-Yj-2Rf"/>
                                                         </mask>
                                                     </variation>
                                                 </imageView>
@@ -6319,7 +6309,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCq-ux-Oua" userLabel="Attendant Container">
                                                     <rect key="frame" x="318" y="16" width="49" height="49"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bkr-P9-INh">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bkr-P9-INh">
                                                             <rect key="frame" x="14" y="9" width="20" height="20"/>
                                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
@@ -6366,8 +6356,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             <nil key="highlightedColor"/>
                                                             <variation key="default">
                                                                 <mask key="constraints">
-                                                                    <exclude reference="aI9-lK-nRQ"/>
                                                                     <exclude reference="PnT-rQ-PEf"/>
+                                                                    <exclude reference="aI9-lK-nRQ"/>
                                                                 </mask>
                                                             </variation>
                                                         </label>
@@ -6387,9 +6377,9 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="T4j-9T-8KM"/>
                                                             <exclude reference="1HP-pV-ufC"/>
                                                             <exclude reference="SkZ-2G-POA"/>
+                                                            <exclude reference="T4j-9T-8KM"/>
                                                         </mask>
                                                     </variation>
                                                 </view>
@@ -6468,18 +6458,18 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             </userDefinedRuntimeAttributes>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="Tcr-ug-h9f"/>
-                                                    <exclude reference="LXr-wr-GM5"/>
-                                                    <exclude reference="zwC-42-TdO"/>
-                                                    <exclude reference="vzb-69-lxU"/>
                                                     <exclude reference="2zJ-Su-7TT"/>
-                                                    <exclude reference="zby-DI-CFM"/>
-                                                    <exclude reference="EL0-P8-S42"/>
-                                                    <exclude reference="5kk-Wx-IJy"/>
-                                                    <exclude reference="a54-xM-yKM"/>
                                                     <exclude reference="5KJ-jh-quZ"/>
-                                                    <exclude reference="an3-ai-5m0"/>
+                                                    <exclude reference="5kk-Wx-IJy"/>
                                                     <exclude reference="6Th-tB-wT0"/>
+                                                    <exclude reference="EL0-P8-S42"/>
+                                                    <exclude reference="LXr-wr-GM5"/>
+                                                    <exclude reference="Tcr-ug-h9f"/>
+                                                    <exclude reference="a54-xM-yKM"/>
+                                                    <exclude reference="an3-ai-5m0"/>
+                                                    <exclude reference="vzb-69-lxU"/>
+                                                    <exclude reference="zby-DI-CFM"/>
+                                                    <exclude reference="zwC-42-TdO"/>
                                                 </mask>
                                             </variation>
                                         </button>
@@ -6561,7 +6551,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             <rect key="frame" x="0.0" y="0.0" width="359" height="55"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I love this place!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4f-Vp-QSn">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="I love this place!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4f-Vp-QSn">
                                                                     <rect key="frame" x="128" y="19" width="103" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="15"/>
                                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -6602,11 +6592,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="eRa-pI-bm9"/>
-                                                    <exclude reference="gpF-6d-9Tm"/>
-                                                    <exclude reference="wX5-5h-K7g"/>
                                                     <exclude reference="fuj-XO-W0t"/>
+                                                    <exclude reference="gpF-6d-9Tm"/>
                                                     <exclude reference="h6Q-cu-8zB"/>
                                                     <exclude reference="izu-L0-dq8"/>
+                                                    <exclude reference="wX5-5h-K7g"/>
                                                     <exclude reference="x6a-cv-Q4v"/>
                                                 </mask>
                                             </variation>
@@ -6667,28 +6657,28 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <mask key="constraints">
                                             <exclude reference="iv6-VM-N7G"/>
                                             <exclude reference="lzW-cJ-ev6"/>
-                                            <exclude reference="fPb-lq-Rqk"/>
-                                            <exclude reference="UEg-me-YfQ"/>
                                             <exclude reference="2bN-ba-i9D"/>
-                                            <exclude reference="wSN-58-mHd"/>
+                                            <exclude reference="UEg-me-YfQ"/>
+                                            <exclude reference="fPb-lq-Rqk"/>
                                             <exclude reference="3T2-Ic-wWw"/>
-                                            <exclude reference="yyi-AY-0yt"/>
+                                            <exclude reference="wSN-58-mHd"/>
                                             <exclude reference="KAR-st-NyE"/>
-                                            <exclude reference="YnC-6o-Y5L"/>
-                                            <exclude reference="2Mm-PQ-okA"/>
+                                            <exclude reference="yyi-AY-0yt"/>
                                             <exclude reference="1xb-xh-deA"/>
-                                            <exclude reference="b8H-hu-3RK"/>
-                                            <exclude reference="nnV-p1-02E"/>
-                                            <exclude reference="XTO-o7-fqo"/>
-                                            <exclude reference="d04-l7-gKM"/>
-                                            <exclude reference="aa9-Wf-hEE"/>
-                                            <exclude reference="mg0-fz-ilh"/>
-                                            <exclude reference="k5n-ZY-QDd"/>
+                                            <exclude reference="2Mm-PQ-okA"/>
                                             <exclude reference="6ZR-FK-KAz"/>
-                                            <exclude reference="o6E-ZI-7UT"/>
+                                            <exclude reference="XTO-o7-fqo"/>
+                                            <exclude reference="YnC-6o-Y5L"/>
+                                            <exclude reference="aa9-Wf-hEE"/>
+                                            <exclude reference="b8H-hu-3RK"/>
+                                            <exclude reference="d04-l7-gKM"/>
+                                            <exclude reference="k5n-ZY-QDd"/>
+                                            <exclude reference="mg0-fz-ilh"/>
+                                            <exclude reference="nnV-p1-02E"/>
                                             <exclude reference="6ZL-pS-HLq"/>
-                                            <exclude reference="o6Q-Dy-mq1"/>
                                             <exclude reference="8P3-Vh-g6N"/>
+                                            <exclude reference="o6E-ZI-7UT"/>
+                                            <exclude reference="o6Q-Dy-mq1"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -6876,7 +6866,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <rect key="frame" x="0.0" y="28" width="375" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QDu-G9-lBy" id="AaH-Xd-a14">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="73.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pnq-DP-Q1o">

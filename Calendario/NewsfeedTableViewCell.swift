@@ -66,7 +66,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     }
     
     func setupUI () {
-        self.statusTextView.textColor = UIColor.whiteColor()
+        self.statusTextView.textColor = UIColor.darkGrayColor()
         
         // Setup the cell likes button.
         likebutton.translatesAutoresizingMaskIntoConstraints = true
@@ -75,11 +75,15 @@ class NewsfeedTableViewCell: PFTableViewCell {
         
         //setup the RSVP button
         rsvpButton.layer.cornerRadius = 2.0
+        rsvpButton.layer.borderWidth = 2.0
+        rsvpButton.layer.borderColor = UIColor.darkGrayColor().CGColor
         rsvpButton.clipsToBounds = true
+        rsvpButton.backgroundColor = UIColor.whiteColor()
         attendantContainerView.layer.cornerRadius = 2.0
         attendantContainerView.clipsToBounds = true
         
         //setup User Posted Image
+        userPostedImage.layer.cornerRadius = 2.0
         userPostedImage.clipsToBounds = true
         
         //setup the profile Image
@@ -124,7 +128,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     func createTenseAndDateLabel() {
         // Create the tense/date all in one attributed string.
-        let attrs2 = [NSForegroundColorAttributeName:UIColor.whiteColor(), NSFontAttributeName : UIFont.systemFontOfSize(14)]
+        let attrs2 = [NSForegroundColorAttributeName:UIColor.lightGrayColor(), NSFontAttributeName : UIFont.systemFontOfSize(14)]
         let tensestring2 = NSMutableAttributedString(string: passedInObject.objectForKey("tense") as! String, attributes: attrs2)
         let spacestring2 = NSMutableAttributedString(string: " ")
         let onstring = NSAttributedString(string: "on")
@@ -288,14 +292,14 @@ class NewsfeedTableViewCell: PFTableViewCell {
         
         if (rsvpArray.count > 0) {
             if (rsvpArray.count == 1) {
-                self.rsvpLabel.text = "1 person attending this event"
+                self.rsvpLabel.text = "1"
             }
             else {
-                self.rsvpLabel.text = "\(rsvpArray.count) person attending this event"
+                self.rsvpLabel.text = "\(rsvpArray.count)"
             }
         }
         else {
-            self.rsvpLabel.text = "0 people attending this event"
+            self.rsvpLabel.text = "0"
         }
     }
     
@@ -324,14 +328,14 @@ class NewsfeedTableViewCell: PFTableViewCell {
             if (error == nil) {
                 
                 if (objects!.count == 1) {
-                    self.commentsLabel.text = "1"
+                    self.commentsLabel.text = "1 comment"
                 }
                 else {
-                    self.commentsLabel.text = "\(String(objects!.count))"
+                    self.commentsLabel.text = "\(String(objects!.count)) comments"
                 }
             }
             else {
-                self.commentsLabel.text = "0"
+                self.commentsLabel.text = "0 comments"
             }
         }
         
@@ -360,33 +364,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
             self.likeslabel.text = "0"
         }
     }
-    
-    func updateRsvpLabel () {
-        if (rsvpArray.count > 0) {
-            
-            if (rsvpArray.count == 1) {
-                self.rsvpLabel.text = "1 person attending this event"
-            }
-            else {
-                self.rsvpLabel.text = "\(rsvpArray.count) people attending this event"
-            }
-            
-            // Update the rsvp button.
-            
-            if rsvpArray.contains(PFUser.currentUser()!.objectId!) {
-                self.rsvpButton.select()
-                self.attendantContainerView.backgroundColor = UIColor.whiteColor()
-            }
-            else {
-                self.rsvpButton.deselect()
-                self.attendantContainerView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
-            }
-        }
-        else {
-            self.rsvpLabel.text = "0 people attending this event"
-        }
-    }
-    
     
     //MARK: SHOW VIEWS METHODS
     func showProfileView(passedUserObject: PFObject) {
@@ -704,7 +681,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
         if passedInObject.objectForKey("rsvpArray") != nil {
             rsvpArray = passedInObject.objectForKey("rsvpArray") as! Array
         }
-        updateRsvpLabel()
+        self.updateRsvpLabel(passedInObject)
     }
     
 }

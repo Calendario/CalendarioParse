@@ -16,6 +16,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
 
     var filteredData:NSMutableArray = NSMutableArray()
     var currentObjectid:String!
@@ -29,11 +30,17 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         super.viewDidLoad()
  
         setupUI()
-        setCalendarProperties()
         loadCalendarData(getCurrentDate())
     }
     
     func setupUI() {
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        setTableViewProperties()
+        setCalendarProperties()
+        setNavBarProperties()
+    }
+    
+    func setTableViewProperties() {
         self.tableview.delegate = self
         self.tableview.dataSource = self
         self.tableview.rowHeight = UITableViewAutomaticDimension;
@@ -41,11 +48,27 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         self.tableview.separatorInset = UIEdgeInsetsZero
     }
     
+    func setNavBarProperties() {
+        self.navigationBar.topItem?.title = "Timeline"
+        self.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "SFUIDisplay-Regular", size: 18)!, NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        let image = UIImage()
+        self.navigationController?.navigationBar.shadowImage = image
+        self.navigationController?.navigationBar.setBackgroundImage(image, forBarMetrics: UIBarMetrics.Default)
+
+    }
+    
     func setCalendarProperties() {
+        calendar.dataSource = self
+        calendar.delegate = self
         calendar.scrollDirection = .Horizontal
         calendar.selectDate(NSDate())
-        calendar.appearance.eventColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-
+        calendar.appearance.eventColor = UIColor.whiteColor()
+        calendar.appearance.titleSelectionColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        calendar.appearance.weekdayFont = UIFont(name: "SFUIDisplay-Regular", size: 14)
+        calendar.appearance.titleFont = UIFont(name: "SFUIDisplay-Light", size: 16)
+        calendar.appearance.subtitleFont = UIFont(name: "SFUIDisplay-Light", size: 16)
+        calendar.layoutIfNeeded()
     }
     
     func getCurrentDate() -> String {
