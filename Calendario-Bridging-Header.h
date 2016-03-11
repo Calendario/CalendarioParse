@@ -13,3 +13,4 @@
 #import "NSDate+FSExtension.h"
 #import "reportBug.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "SearchViewController.h"

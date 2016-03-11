@@ -24,9 +24,13 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     // Setup the on screen UI objects.
     @IBOutlet weak var menuIndicator: UIRefreshControl!
     
-    // Setup the on screen button actions.
-    @IBAction func postStatus(sender: UIButton) {
+    @IBAction func createStatus(sender: UIBarButtonItem) {
         showStatusPostView()
+    }
+    @IBAction func presentSearchController(sender: UIBarButtonItem) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let searchView = sb.instantiateViewControllerWithIdentifier("search") as! SearchViewController
+        self.presentViewController(searchView, animated: true, completion: nil)
     }
     
     //MARK: LIFECYCLE METHODS

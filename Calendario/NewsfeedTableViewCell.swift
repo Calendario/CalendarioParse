@@ -276,7 +276,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
             self.SavingNotifacations(likeString, objectID: objectId, notificationType:"like")
         }
         else {
-            self.likebutton.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
+            self.likebutton.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
         }
     }
     
@@ -341,7 +341,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
             self.likebutton.backgroundColor = UIColor.whiteColor()
         }
         else {
-            self.likebutton.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
+            self.likebutton.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
         }
     }
     
