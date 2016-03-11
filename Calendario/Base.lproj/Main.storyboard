@@ -582,8 +582,8 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="KhO-HU-Fzo">
-                                                    <rect key="frame" x="70" y="33" width="55" height="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="KhO-HU-Fzo">
+                                                    <rect key="frame" x="70" y="34" width="56" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="b4w-nE-rQj"/>
                                                     </constraints>
@@ -596,8 +596,8 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwP-EW-rcB">
-                                                    <rect key="frame" x="70" y="49" width="45" height="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="cwP-EW-rcB">
+                                                    <rect key="frame" x="70" y="49" width="47" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="19" id="RxS-bw-WKY"/>
                                                     </constraints>
@@ -610,8 +610,8 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0y-Pa-UKA">
-                                                    <rect key="frame" x="70" y="15" width="63" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0y-Pa-UKA">
+                                                    <rect key="frame" x="70" y="16" width="66" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="19" id="JQf-Ng-vci"/>
                                                     </constraints>
@@ -627,17 +627,17 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2bk-oR-I48" userLabel="Attendant Container">
                                                     <rect key="frame" x="318" y="16" width="49" height="49"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdg-qK-gUr">
-                                                            <rect key="frame" x="17" y="30" width="15" height="15"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdg-qK-gUr">
+                                                            <rect key="frame" x="18" y="30" width="14" height="14"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="12"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="92w-7A-ze2">
-                                                            <rect key="frame" x="14" y="8" width="20" height="20"/>
-                                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="attendants_icon" translatesAutoresizingMaskIntoConstraints="NO" id="92w-7A-ze2">
+                                                            <rect key="frame" x="12" y="8" width="24" height="20"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="20" id="gBE-V4-ipO"/>
+                                                                <constraint firstAttribute="width" constant="24" id="gBE-V4-ipO"/>
                                                                 <constraint firstAttribute="height" constant="20" id="rcp-KP-UO8"/>
                                                             </constraints>
                                                         </imageView>
@@ -663,8 +663,8 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nKu-mN-9eq" userLabel="Like Container">
                                                     <rect key="frame" x="261" y="16" width="49" height="49"/>
                                                     <subviews>
-                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eOW-cl-tPW">
-                                                            <rect key="frame" x="17" y="30" width="15" height="15"/>
+                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eOW-cl-tPW">
+                                                            <rect key="frame" x="18" y="30" width="14" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="DxH-Sv-3aF"/>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="sBd-OS-PO7"/>
@@ -679,7 +679,7 @@
                                                                 </mask>
                                                             </variation>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tRm-vH-cFM">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like_icon" translatesAutoresizingMaskIntoConstraints="NO" id="tRm-vH-cFM">
                                                             <rect key="frame" x="14" y="8" width="20" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="20" id="IQa-i3-FLu"/>
@@ -710,12 +710,16 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.19963944462507652" green="0.59966290998795813" blue="0.34588249119098247" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
+                                                <constraint firstItem="2bk-oR-I48" firstAttribute="centerY" secondItem="crA-RG-JUw" secondAttribute="centerY" id="17X-W7-nsb"/>
                                                 <constraint firstItem="KhO-HU-Fzo" firstAttribute="top" secondItem="W0y-Pa-UKA" secondAttribute="bottom" constant="1" id="6nf-hl-7Tv"/>
                                                 <constraint firstItem="nKu-mN-9eq" firstAttribute="centerY" secondItem="hPb-Is-p8R" secondAttribute="centerY" id="EDi-w1-igj"/>
                                                 <constraint firstItem="KhO-HU-Fzo" firstAttribute="centerY" secondItem="crA-RG-JUw" secondAttribute="centerY" id="FVs-Ol-isR"/>
                                                 <constraint firstItem="KhO-HU-Fzo" firstAttribute="leading" secondItem="crA-RG-JUw" secondAttribute="trailing" constant="8" id="GA1-GI-ty6"/>
+                                                <constraint firstItem="nKu-mN-9eq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cwP-EW-rcB" secondAttribute="trailing" constant="4" id="Ize-7K-Ob6"/>
                                                 <constraint firstItem="2bk-oR-I48" firstAttribute="leading" secondItem="nKu-mN-9eq" secondAttribute="trailing" constant="8" id="K5M-wc-kxe"/>
+                                                <constraint firstItem="nKu-mN-9eq" firstAttribute="centerY" secondItem="crA-RG-JUw" secondAttribute="centerY" id="LB0-mK-kBa"/>
                                                 <constraint firstItem="W0y-Pa-UKA" firstAttribute="leading" secondItem="crA-RG-JUw" secondAttribute="trailing" constant="8" id="OhR-ET-y7o"/>
+                                                <constraint firstItem="nKu-mN-9eq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="W0y-Pa-UKA" secondAttribute="trailing" constant="4" id="QPm-it-AYd"/>
                                                 <constraint firstItem="crA-RG-JUw" firstAttribute="leading" secondItem="hPb-Is-p8R" secondAttribute="leading" constant="8" id="V1H-Qu-Uhg"/>
                                                 <constraint firstItem="2bk-oR-I48" firstAttribute="centerY" secondItem="hPb-Is-p8R" secondAttribute="centerY" id="WMP-56-AJC"/>
                                                 <constraint firstAttribute="height" constant="82" id="XKf-vp-r0p"/>
@@ -724,32 +728,36 @@
                                                 <constraint firstItem="cwP-EW-rcB" firstAttribute="leading" secondItem="crA-RG-JUw" secondAttribute="trailing" constant="8" id="koN-UV-eDW"/>
                                                 <constraint firstItem="crA-RG-JUw" firstAttribute="centerY" secondItem="hPb-Is-p8R" secondAttribute="centerY" id="mR3-qF-f99"/>
                                                 <constraint firstItem="KhO-HU-Fzo" firstAttribute="top" secondItem="W0y-Pa-UKA" secondAttribute="bottom" id="nIG-oo-Yl9"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cwP-EW-rcB" secondAttribute="bottom" constant="8" id="wtk-Nv-vQQ"/>
                                                 <constraint firstItem="cwP-EW-rcB" firstAttribute="top" secondItem="KhO-HU-Fzo" secondAttribute="bottom" constant="1" id="xs6-LA-TE8"/>
                                                 <constraint firstItem="cwP-EW-rcB" firstAttribute="top" secondItem="KhO-HU-Fzo" secondAttribute="bottom" constant="1" id="zMf-Cs-PeE"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="nIG-oo-Yl9"/>
+                                                    <exclude reference="wtk-Nv-vQQ"/>
                                                     <exclude reference="zMf-Cs-PeE"/>
+                                                    <exclude reference="EDi-w1-igj"/>
                                                     <exclude reference="f2L-bY-sj6"/>
+                                                    <exclude reference="WMP-56-AJC"/>
                                                 </mask>
                                             </variation>
                                         </view>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Status" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ro-Py-vgq" customClass="KILabel">
-                                            <rect key="frame" x="8" y="139" width="359" height="56"/>
+                                            <rect key="frame" x="8" y="139" width="359" height="58"/>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="14"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4G-Fy-1FJ" customClass="DOFavoriteButton" customModule="DOFavoriteButton">
-                                            <rect key="frame" x="255" y="231" width="112" height="38"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4G-Fy-1FJ">
+                                            <rect key="frame" x="255" y="235" width="112" height="34"/>
                                             <color key="backgroundColor" red="0.95795157068062831" green="0.95795157068062831" blue="0.95795157068062831" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="42" id="5Pv-cW-xLP"/>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="AjM-qA-H6D"/>
                                                 <constraint firstAttribute="height" constant="25" id="EeU-0x-JtS"/>
-                                                <constraint firstAttribute="height" constant="38" id="J5F-va-wge"/>
+                                                <constraint firstAttribute="height" constant="34" id="J5F-va-wge"/>
                                                 <constraint firstAttribute="width" secondItem="l4G-Fy-1FJ" secondAttribute="height" multiplier="27:28" id="KQt-Ri-aC4"/>
                                                 <constraint firstAttribute="width" constant="27" id="LPL-jZ-JFH"/>
                                                 <constraint firstAttribute="width" constant="32" id="SCX-sx-tHh"/>
@@ -793,8 +801,8 @@
                                                 </mask>
                                             </variation>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6 hrs Ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="ScK-QL-CoL">
-                                            <rect key="frame" x="320" y="103" width="47" height="15"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="6 hrs Ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="ScK-QL-CoL">
+                                            <rect key="frame" x="315" y="103" width="52" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="15" id="Fht-q4-er4"/>
                                             </constraints>
@@ -802,8 +810,8 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOING ON 2/25/16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5q3-2M-rR7">
-                                            <rect key="frame" x="8" y="102" width="119" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="GOING ON 2/25/16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5q3-2M-rR7">
+                                            <rect key="frame" x="8" y="102" width="123" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="17" id="etC-og-NdB"/>
                                             </constraints>
@@ -812,11 +820,11 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QS9-mh-IYB" userLabel="Comment Container">
-                                            <rect key="frame" x="8" y="235" width="107" height="30"/>
+                                            <rect key="frame" x="8" y="237" width="119" height="30"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHa-zv-rEg" customClass="DOFavoriteButton" customModule="DOFavoriteButton">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHa-zv-rEg">
                                                     <rect key="frame" x="0.0" y="4" width="22" height="22"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="22" id="ULB-A5-yWH"/>
                                                         <constraint firstAttribute="height" constant="22" id="fOw-ql-6Vs"/>
@@ -824,11 +832,11 @@
                                                     <state key="normal" image="comment"/>
                                                 </button>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9o0-GD-rNj" userLabel="commentsLabel">
-                                                    <rect key="frame" x="30" y="7" width="75" height="15"/>
+                                                    <rect key="frame" x="30" y="7" width="87" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="7hx-V6-bxO"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -841,36 +849,60 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="KHa-zv-rEg" firstAttribute="leading" secondItem="QS9-mh-IYB" secondAttribute="leading" id="3G1-Oo-pjz"/>
+                                                <constraint firstItem="9o0-GD-rNj" firstAttribute="leading" secondItem="KHa-zv-rEg" secondAttribute="trailing" constant="8" id="7VP-WR-GUZ"/>
                                                 <constraint firstAttribute="height" constant="30" id="Hyr-B4-Djc"/>
+                                                <constraint firstAttribute="trailing" secondItem="9o0-GD-rNj" secondAttribute="trailing" constant="2" id="PI0-pS-2My"/>
                                                 <constraint firstItem="9o0-GD-rNj" firstAttribute="centerY" secondItem="QS9-mh-IYB" secondAttribute="centerY" id="dSg-tI-wxF"/>
                                                 <constraint firstAttribute="width" constant="107" id="hWG-eo-lSA"/>
                                                 <constraint firstItem="KHa-zv-rEg" firstAttribute="centerY" secondItem="QS9-mh-IYB" secondAttribute="centerY" id="isc-gn-ZLz"/>
                                                 <constraint firstAttribute="trailing" secondItem="9o0-GD-rNj" secondAttribute="trailing" constant="2" id="wqH-cE-b7E"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="hWG-eo-lSA"/>
+                                                    <exclude reference="wqH-cE-b7E"/>
+                                                </mask>
+                                            </variation>
                                         </view>
-                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e8E-7n-6jF">
-                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="0oo-tf-m6j">
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e8E-7n-6jF">
+                                            <rect key="frame" x="8" y="443" width="359" height="51"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="0oo-tf-m6j">
+                                                <rect key="frame" x="0.0" y="0.0" width="359" height="51"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C0q-Jc-fX1">
-                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="wsG-A8-EbR">
+                                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C0q-Jc-fX1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="359" height="51"/>
+                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="wsG-A8-EbR">
+                                                            <rect key="frame" x="0.0" y="0.0" width="359" height="51"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I love this place!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5AH-Wy-Hkx">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="104" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="I love this place!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5AH-Wy-Hkx">
+                                                                    <rect key="frame" x="126" y="17" width="109" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="15"/>
-                                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="5AH-Wy-Hkx" firstAttribute="centerY" secondItem="wsG-A8-EbR" secondAttribute="centerY" id="B1m-gs-mTt"/>
+                                                                <constraint firstItem="5AH-Wy-Hkx" firstAttribute="centerX" secondItem="wsG-A8-EbR" secondAttribute="centerX" id="KIT-GV-1TT"/>
+                                                            </constraints>
                                                         </view>
                                                         <vibrancyEffect>
                                                             <blurEffect style="light"/>
                                                         </vibrancyEffect>
                                                     </visualEffectView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="C0q-Jc-fX1" secondAttribute="trailing" id="7Nm-76-AYd"/>
+                                                    <constraint firstItem="C0q-Jc-fX1" firstAttribute="top" secondItem="0oo-tf-m6j" secondAttribute="top" id="JvQ-0m-hiB"/>
+                                                    <constraint firstAttribute="bottom" secondItem="C0q-Jc-fX1" secondAttribute="bottom" id="LTt-sN-cWO"/>
+                                                    <constraint firstItem="C0q-Jc-fX1" firstAttribute="leading" secondItem="0oo-tf-m6j" secondAttribute="leading" id="tpK-6b-ZSQ"/>
+                                                </constraints>
                                             </view>
-                                            <blurEffect style="light"/>
+                                            <vibrancyEffect>
+                                                <blurEffect style="light"/>
+                                            </vibrancyEffect>
                                         </visualEffectView>
                                         <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhotoPost" translatesAutoresizingMaskIntoConstraints="NO" id="MAk-zZ-i98" customClass="PFImageView">
                                             <rect key="frame" x="8" y="289" width="359" height="205"/>
@@ -899,6 +931,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="MAk-zZ-i98" secondAttribute="bottom" id="00k-VF-CME"/>
+                                        <constraint firstItem="e8E-7n-6jF" firstAttribute="bottom" secondItem="MAk-zZ-i98" secondAttribute="bottom" id="1y7-3m-bjo"/>
                                         <constraint firstAttribute="trailing" secondItem="hPb-Is-p8R" secondAttribute="trailing" id="2ti-On-Skm"/>
                                         <constraint firstItem="5ro-Py-vgq" firstAttribute="top" secondItem="5q3-2M-rR7" secondAttribute="bottom" constant="20" id="3MS-x1-PcU"/>
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" id="9hi-FN-Bjh"/>
@@ -916,7 +949,10 @@
                                         <constraint firstItem="5ro-Py-vgq" firstAttribute="top" secondItem="5q3-2M-rR7" secondAttribute="bottom" constant="8" id="QpT-mu-Pbz"/>
                                         <constraint firstItem="ScK-QL-CoL" firstAttribute="top" secondItem="hPb-Is-p8R" secondAttribute="bottom" constant="4" id="Qvm-4r-WiW"/>
                                         <constraint firstAttribute="bottom" secondItem="MAk-zZ-i98" secondAttribute="bottom" id="SJ0-yJ-54y"/>
+                                        <constraint firstItem="e8E-7n-6jF" firstAttribute="centerX" secondItem="Niw-dS-Vbm" secondAttribute="centerX" id="Sa0-5q-cgJ"/>
+                                        <constraint firstItem="e8E-7n-6jF" firstAttribute="height" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="0.25" id="Urr-Rp-iiY"/>
                                         <constraint firstAttribute="trailing" secondItem="ScK-QL-CoL" secondAttribute="trailing" constant="8" id="Wlc-0f-nC8"/>
+                                        <constraint firstItem="MAk-zZ-i98" firstAttribute="leading" secondItem="e8E-7n-6jF" secondAttribute="trailing" constant="8" id="XNb-b3-obC"/>
                                         <constraint firstItem="QS9-mh-IYB" firstAttribute="top" secondItem="5ro-Py-vgq" secondAttribute="bottom" constant="40" id="YoM-qX-xvD"/>
                                         <constraint firstItem="hPb-Is-p8R" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" id="aBv-el-YaD"/>
                                         <constraint firstAttribute="trailing" secondItem="MAk-zZ-i98" secondAttribute="trailing" id="aEN-UE-cjP"/>
@@ -935,6 +971,7 @@
                                         <constraint firstItem="ScK-QL-CoL" firstAttribute="centerY" secondItem="5q3-2M-rR7" secondAttribute="centerY" id="rnE-bv-YKw"/>
                                         <constraint firstItem="MAk-zZ-i98" firstAttribute="top" secondItem="l4G-Fy-1FJ" secondAttribute="bottom" constant="24" id="sIT-9h-ZWp"/>
                                         <constraint firstItem="hPb-Is-p8R" firstAttribute="top" secondItem="Niw-dS-Vbm" secondAttribute="top" id="spV-aP-Y2e"/>
+                                        <constraint firstItem="e8E-7n-6jF" firstAttribute="width" secondItem="MAk-zZ-i98" secondAttribute="width" id="wDs-6w-Gro"/>
                                         <constraint firstItem="5ro-Py-vgq" firstAttribute="leading" secondItem="Niw-dS-Vbm" secondAttribute="leading" constant="8" id="wJx-01-2Ez"/>
                                         <constraint firstItem="l4G-Fy-1FJ" firstAttribute="leading" secondItem="QS9-mh-IYB" secondAttribute="trailing" constant="159.5" id="wWp-1s-7gh"/>
                                         <constraint firstAttribute="bottom" secondItem="MAk-zZ-i98" secondAttribute="bottom" constant="16" id="xCq-Hv-iN9"/>
@@ -955,6 +992,7 @@
                                             <exclude reference="LZA-Al-uJ8"/>
                                             <exclude reference="MxN-nC-vsZ"/>
                                             <exclude reference="SJ0-yJ-54y"/>
+                                            <exclude reference="XNb-b3-obC"/>
                                             <exclude reference="aEN-UE-cjP"/>
                                             <exclude reference="fGD-U1-56o"/>
                                             <exclude reference="gBR-A2-FRC"/>
@@ -962,11 +1000,11 @@
                                             <exclude reference="iKY-NU-AOk"/>
                                             <exclude reference="sIT-9h-ZWp"/>
                                             <exclude reference="yKL-51-fhD"/>
+                                            <exclude reference="Qvm-4r-WiW"/>
                                             <exclude reference="Bul-RL-B9w"/>
                                             <exclude reference="db8-Du-6zD"/>
                                             <exclude reference="wWp-1s-7gh"/>
                                             <exclude reference="zOy-gu-nAG"/>
-                                            <exclude reference="Qvm-4r-WiW"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -988,11 +1026,11 @@
                                     <outlet property="commentsLabel" destination="9o0-GD-rNj" id="80q-lX-oE6"/>
                                     <outlet property="createdAtLabel" destination="ScK-QL-CoL" id="UOk-9b-6eO"/>
                                     <outlet property="imageViewHeightConstraint" destination="11h-oJ-nlI" id="KZ1-HZ-faF"/>
-                                    <outlet property="likebutton" destination="nKu-mN-9eq" id="xBn-4C-eld"/>
+                                    <outlet property="likebutton" destination="nKu-mN-9eq" id="FSA-2u-e8W"/>
                                     <outlet property="likeslabel" destination="eOW-cl-tPW" id="ZAF-zu-k0W"/>
                                     <outlet property="locationLabel" destination="cwP-EW-rcB" id="dj6-zV-F6N"/>
                                     <outlet property="profileimageview" destination="crA-RG-JUw" id="BbN-Yc-vz5"/>
-                                    <outlet property="rsvpButton" destination="l4G-Fy-1FJ" id="Lp8-gr-ZHV"/>
+                                    <outlet property="rsvpButton" destination="l4G-Fy-1FJ" id="UXl-wo-hbG"/>
                                     <outlet property="rsvpLabel" destination="rdg-qK-gUr" id="9lF-0G-yXk"/>
                                     <outlet property="statusTextView" destination="5ro-Py-vgq" id="6B1-fk-7hj"/>
                                     <outlet property="uploaddatelabel" destination="5q3-2M-rR7" id="YzW-1o-azi"/>
@@ -6264,8 +6302,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Cn5-pF-IYJ">
-                                                    <rect key="frame" x="70" y="33" width="55" height="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Cn5-pF-IYJ">
+                                                    <rect key="frame" x="70" y="34" width="56" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="ElG-S7-cp8"/>
                                                     </constraints>
@@ -6278,8 +6316,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vcn-ff-D9A">
-                                                    <rect key="frame" x="70" y="49" width="45" height="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vcn-ff-D9A">
+                                                    <rect key="frame" x="70" y="49" width="47" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="19" id="RyM-np-cVM"/>
                                                     </constraints>
@@ -6292,8 +6330,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yL-Ug-5xw">
-                                                    <rect key="frame" x="70" y="15" width="63" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yL-Ug-5xw">
+                                                    <rect key="frame" x="70" y="16" width="66" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="19" id="ywK-5n-hJf"/>
                                                     </constraints>
@@ -6317,8 +6355,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 <constraint firstAttribute="height" constant="20" id="h5c-eF-cfD"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtH-88-Yo8">
-                                                            <rect key="frame" x="17" y="30" width="15" height="15"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtH-88-Yo8">
+                                                            <rect key="frame" x="18" y="31" width="14" height="14"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="12"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -6345,8 +6383,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tjj-Dk-80E" userLabel="Like Container">
                                                     <rect key="frame" x="261" y="16" width="49" height="49"/>
                                                     <subviews>
-                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="A4q-R1-um0">
-                                                            <rect key="frame" x="17" y="30" width="15" height="15"/>
+                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="A4q-R1-um0">
+                                                            <rect key="frame" x="18" y="31" width="14" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="PnT-rQ-PEf"/>
                                                                 <constraint firstAttribute="height" constant="15" id="aI9-lK-nRQ"/>
@@ -6361,8 +6399,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 </mask>
                                                             </variation>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cxY-rr-G60">
-                                                            <rect key="frame" x="14" y="8" width="20" height="20"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cxY-rr-G60">
+                                                            <rect key="frame" x="14" y="9" width="20" height="20"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -6489,20 +6527,20 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6 hrs Ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="J1O-Mc-p4c">
-                                            <rect key="frame" x="320" y="86" width="47" height="15"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="6 hrs Ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="J1O-Mc-p4c">
+                                            <rect key="frame" x="315" y="86" width="52" height="14"/>
                                             <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOING ON 2/25/16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRe-sN-UZH">
-                                            <rect key="frame" x="8" y="94" width="119" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="GOING ON 2/25/16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRe-sN-UZH">
+                                            <rect key="frame" x="8" y="94" width="123" height="17"/>
                                             <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KVh-eR-Sbd" userLabel="Comment Container">
-                                            <rect key="frame" x="8" y="180" width="107" height="30"/>
+                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KVh-eR-Sbd" userLabel="Comment Container">
+                                            <rect key="frame" x="8" y="180" width="108" height="30"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kbw-xh-YUR" customClass="DOFavoriteButton" customModule="DOFavoriteButton">
                                                     <rect key="frame" x="0.0" y="4" width="22" height="22"/>
@@ -6513,8 +6551,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     </constraints>
                                                     <state key="normal" image="comment"/>
                                                 </button>
-                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEV-xk-Kxt" userLabel="commentsLabel">
-                                                    <rect key="frame" x="30" y="7" width="75" height="15"/>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="20 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEV-xk-Kxt" userLabel="commentsLabel">
+                                                    <rect key="frame" x="30" y="8" width="76" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="pBO-S3-Z6A"/>
                                                     </constraints>
@@ -7281,10 +7319,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="addUserV2" width="50" height="50"/>
         <image name="approve" width="50" height="50"/>
         <image name="attend_icon" width="19" height="19"/>
+        <image name="attendants_icon" width="30" height="23"/>
         <image name="block" width="60" height="60"/>
         <image name="bookmark_ribbon" width="120" height="120"/>
         <image name="camera_icon" width="94" height="94"/>
-        <image name="comment" width="32" height="26"/>
+        <image name="comment" width="31" height="30"/>
         <image name="decline" width="50" height="50"/>
         <image name="defaultFeedBackground" width="298" height="311"/>
         <image name="defaultPhotoPost" width="600" height="241"/>
@@ -7294,6 +7333,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="inbox" width="32" height="32"/>
         <image name="left_icon" width="30" height="30"/>
         <image name="like button filled" width="47" height="42"/>
+        <image name="like_icon" width="27" height="26"/>
         <image name="lock_icon" width="120" height="120"/>
         <image name="loginViewBackground" width="375" height="667"/>
         <image name="loginViewTitle" width="345" height="66"/>

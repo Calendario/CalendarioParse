@@ -8,7 +8,6 @@
 
 import UIKit
 import KILabel
-import DOFavoriteButton
 
 class NewsfeedTableViewCell: PFTableViewCell {
     
@@ -25,7 +24,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     @IBOutlet weak var likeslabel: UILabel!
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var privateView: UIView!
-    @IBOutlet weak var rsvpButton: DOFavoriteButton!
+    @IBOutlet weak var rsvpButton: UIButton!
     @IBOutlet weak var rsvpLabel: UILabel!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var likebutton: UIView!
@@ -69,14 +68,13 @@ class NewsfeedTableViewCell: PFTableViewCell {
         self.statusTextView.textColor = UIColor.darkGrayColor()
         
         // Setup the cell likes button.
-        likebutton.translatesAutoresizingMaskIntoConstraints = true
         likebutton.layer.cornerRadius = 2.0
-        likebutton.clipsToBounds = false
+        likebutton.clipsToBounds = true
         
         //setup the RSVP button
-        rsvpButton.layer.cornerRadius = 2.0
-        rsvpButton.layer.borderWidth = 2.0
-        rsvpButton.layer.borderColor = UIColor.darkGrayColor().CGColor
+        rsvpButton.layer.cornerRadius = 4.0
+        rsvpButton.layer.borderWidth = 1.0
+        rsvpButton.layer.borderColor = UIColor.lightGrayColor().CGColor
         rsvpButton.clipsToBounds = true
         rsvpButton.backgroundColor = UIColor.whiteColor()
         attendantContainerView.layer.cornerRadius = 2.0
@@ -87,15 +85,17 @@ class NewsfeedTableViewCell: PFTableViewCell {
         userPostedImage.clipsToBounds = true
         
         //setup the profile Image
-        profileimageview.layer.cornerRadius =  2.0
+        profileimageview.layer.cornerRadius = profileimageview.frame.height/2
+        profileimageview.layer.borderColor = UIColor.whiteColor().CGColor
+        profileimageview.layer.borderWidth = 2.0
         profileimageview.clipsToBounds = true
+        
         
         //setup the status labels.
         self.statusTextView.text = passedInObject["updatetext"] as? String
         self.uploaddatelabel.text = passedInObject["dateofevent"] as? String
         
         //setup the cell rsvp button
-        self.rsvpButton.translatesAutoresizingMaskIntoConstraints = true
         self.rsvpButton.addTarget(self, action: "rsvpClicked:", forControlEvents: .TouchUpInside)
     }
     
@@ -206,16 +206,11 @@ class NewsfeedTableViewCell: PFTableViewCell {
                 self.rsvpButton.enabled = false
                 self.attendantContainerView.removeGestureRecognizer(attendGestureRecognizer)
                 self.attendantContainerView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
-                
-                let rsvpPrivateImage: UIImage = UIImage(named: "rsvp_private_icon")!
-                self.rsvpButton.image = rsvpPrivateImage
+                self.rsvpButton.alpha = 0.6
             }
             else if rsvpPrivate == false {
                 self.rsvpButton.enabled = true
-                
-                let rsvpImage: UIImage = UIImage(named: "attend_icon")!
-                self.rsvpButton.image = rsvpImage
-            }
+                }
         }
     }
     
@@ -281,7 +276,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
             self.SavingNotifacations(likeString, objectID: objectId, notificationType:"like")
         }
         else {
-            self.likebutton.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
+            self.likebutton.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
         }
     }
     
@@ -305,14 +300,14 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     func updateRsvpButton(rsvpPost: Bool, objectId: String) {
         if (rsvpPost == true) {
-            self.rsvpButton.select()
+            self.rsvpButton.selected = true
             
             // Submit and save the rsvp notification.
             let rsvpString = "\(PFUser.currentUser()!.username!) is attending your event"
             self.SavingNotifacations(rsvpString, objectID: objectId, notificationType:"rsvp")
         }
         else {
-            self.rsvpButton.deselect()
+            self.rsvpButton.selected = false
         }
         
     }
@@ -346,7 +341,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
             self.likebutton.backgroundColor = UIColor.whiteColor()
         }
         else {
-            self.likebutton.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
+            self.likebutton.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
         }
     }
     
