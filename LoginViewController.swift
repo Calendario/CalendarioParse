@@ -6,18 +6,6 @@
 //  Copyright © 2015 Calendario. All rights reserved.
 //
 
-/* 
-
-IMPORTANT NOTE
-
-THIS CODE HAS NOT BEEN FINISHED YET. I AM WORKING
-TO GET IT FINISHED IN MULTIPLE COMMITS. PLEASE LEAVE
-IT ALONE UNLESS YOU ABSOLUTELY HAVE TO CHANGE SOMETHING.
-
-THANKS - DANIEL SADJADIAN 
-
-*/
-
 import UIKit
 import Parse
 
@@ -27,7 +15,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userField: UITextField!
     @IBOutlet weak var passField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
-    @IBOutlet weak var credentialsContainer: UIView!
     @IBOutlet weak var usernameView: UIView!
     @IBOutlet weak var passwordView: UIView!
     
@@ -134,15 +121,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private func setupUI() {
         signInButton.layer.cornerRadius = 6.0
         signInButton.clipsToBounds = true
-        //signInButton.layer.borderColor = UIColor.whiteColor().CGColor
-        signInButton.layer.borderColor = UIColor(red: 37/255.0, green: 151/255.0, blue: 85/255.0, alpha: 1.0).CGColor
+        signInButton.layer.borderColor = UIColor.whiteColor().CGColor
         signInButton.layer.borderWidth = 1.0
         
-        credentialsContainer.layer.cornerRadius = 6.0
-        credentialsContainer.clipsToBounds = true
         userField.clipsToBounds = true
         passField.clipsToBounds = true
+        usernameView.layer.borderWidth = 1.0
+        usernameView.layer.borderColor = UIColor.whiteColor().CGColor
+        usernameView.layer.cornerRadius = 6.0
         usernameView.clipsToBounds = true
+        passwordView.layer.borderWidth = 1.0
+        passwordView.layer.borderColor = UIColor.whiteColor().CGColor
+        passwordView.layer.cornerRadius = 6.0
         passwordView.clipsToBounds = true
     }
     

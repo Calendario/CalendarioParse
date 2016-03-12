@@ -36,12 +36,12 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     //MARK: LIFECYCLE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.automaticallyAdjustsScrollViewInsets = false;
+
         showRecommendedUsers(checkForNewUser())
         setActivityIndicatorForRefreshing()
         setHashtagDefaultKey()
         organizeNewsFeedData()
-        reloadNewsFeed()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -78,6 +78,8 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     
     func setTableViewProperties() {
         self.tableView.separatorInset = UIEdgeInsetsZero
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
     }
     
     func setHashtagDefaultKey() {
@@ -258,10 +260,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 511.0
-    }
-    
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.0
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
