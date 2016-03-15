@@ -31,8 +31,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var blockedViewDesc: UITextView!
     @IBOutlet weak var statusList: UITableView!
     @IBOutlet weak var profDesc: UILabel!
-    @IBOutlet weak var topBar: UINavigationBar!
-    @IBOutlet weak var topBackground: UIView!
+
     
     // Follow method property
     var FollowObject = FollowHelper()

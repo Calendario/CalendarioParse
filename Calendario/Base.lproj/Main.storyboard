@@ -14,6 +14,10 @@
             <string>SFUIDisplay-Light</string>
             <string>SFUIDisplay-Light</string>
             <string>SFUIDisplay-Light</string>
+            <string>SFUIDisplay-Light</string>
+            <string>SFUIDisplay-Light</string>
+            <string>SFUIDisplay-Light</string>
+            <string>SFUIDisplay-Light</string>
         </mutableArray>
         <mutableArray key="SF-UI-Display-Medium.otf">
             <string>SFUIDisplay-Medium</string>
@@ -63,15 +67,13 @@
             <string>SFUIDisplay-Regular</string>
             <string>SFUIDisplay-Regular</string>
             <string>SFUIDisplay-Regular</string>
-            <string>SFUIDisplay-Regular</string>
-            <string>SFUIDisplay-Regular</string>
-            <string>SFUIDisplay-Regular</string>
-            <string>SFUIDisplay-Regular</string>
-            <string>SFUIDisplay-Regular</string>
-            <string>SFUIDisplay-Regular</string>
-            <string>SFUIDisplay-Regular</string>
-            <string>SFUIDisplay-Regular</string>
-            <string>SFUIDisplay-Regular</string>
+        </mutableArray>
+        <mutableArray key="SF-UI-Display-Semibold.otf">
+            <string>SFUIDisplay-Semibold</string>
+            <string>SFUIDisplay-Semibold</string>
+            <string>SFUIDisplay-Semibold</string>
+            <string>SFUIDisplay-Semibold</string>
+            <string>SFUIDisplay-Semibold</string>
         </mutableArray>
         <mutableArray key="SF-UI-Display-Thin.otf">
             <string>SFUIDisplay-Thin</string>
@@ -4022,21 +4024,24 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="341"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <view opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yOi-6Z-a8D">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mcc-a3-a7I">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="341"/>
+                                        </imageView>
+                                        <view opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="yOi-6Z-a8D">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="341"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="itw-pb-aJn">
-                                                    <rect key="frame" x="167" y="211" width="40" height="20"/>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="itw-pb-aJn">
+                                                    <rect key="frame" x="134" y="214" width="107" height="17"/>
+                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="User Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8E-U3-rp0">
-                                                    <rect key="frame" x="134" y="8" width="130" height="23"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8E-U3-rp0">
+                                                    <rect key="frame" x="133" y="42" width="110" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="23" id="Ve5-v9-Fkx"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="19"/>
+                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -4045,12 +4050,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYp-Y4-W4r">
-                                                    <rect key="frame" x="161" y="35" width="71" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYp-Y4-W4r">
+                                                    <rect key="frame" x="157" y="60" width="62" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="uK3-6m-PLi"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -4059,12 +4064,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" image="default_profile_pic" translatesAutoresizingMaskIntoConstraints="NO" id="Pb0-fb-3L1">
-                                                    <rect key="frame" x="145" y="61" width="82" height="83"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="default_profile_pic" translatesAutoresizingMaskIntoConstraints="NO" id="Pb0-fb-3L1">
+                                                    <rect key="frame" x="150" y="102" width="75" height="75"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="81" id="8D3-Gi-QMC"/>
-                                                        <constraint firstAttribute="height" constant="82" id="oh8-8K-sys"/>
-                                                        <constraint firstAttribute="width" constant="82" id="uul-Gd-XkY"/>
+                                                        <constraint firstAttribute="height" constant="75" id="oh8-8K-sys"/>
+                                                        <constraint firstAttribute="width" constant="75" id="uul-Gd-XkY"/>
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -4072,16 +4077,16 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" image="bookmark_ribbon" translatesAutoresizingMaskIntoConstraints="NO" id="myB-BC-vtL">
-                                                    <rect key="frame" x="200" y="116" width="32" height="37"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="bookmark_ribbon" translatesAutoresizingMaskIntoConstraints="NO" id="myB-BC-vtL">
+                                                    <rect key="frame" x="193" y="100" width="25" height="25"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="32" id="2Bl-ig-8Zo"/>
-                                                        <constraint firstAttribute="height" constant="37" id="gIp-VL-mVm"/>
+                                                        <constraint firstAttribute="width" constant="25" id="2Bl-ig-8Zo"/>
+                                                        <constraint firstAttribute="height" constant="25" id="gIp-VL-mVm"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5b-rg-9ko">
-                                                    <rect key="frame" x="126" y="156" width="123" height="30"/>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="15"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5b-rg-9ko">
+                                                    <rect key="frame" x="133" y="185" width="110" height="29"/>
+                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="14"/>
                                                     <state key="normal" title="www.website.com">
                                                         <color key="titleColor" red="0.2156862745" green="0.60784313729999995" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
@@ -4089,75 +4094,165 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         <action selector="openUserWebsite:" destination="EL5-7o-osE" eventType="touchUpInside" id="EIj-97-gXj"/>
                                                     </connections>
                                                 </button>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="followers-icon" translatesAutoresizingMaskIntoConstraints="NO" id="y6I-kI-xnv">
-                                                    <rect key="frame" x="293" y="74" width="35" height="33"/>
-                                                </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAS-X9-rdH">
-                                                    <rect key="frame" x="272" y="115" width="76" height="35"/>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="15"/>
-                                                    <state key="normal" title="Followers">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="openFollowers:" destination="EL5-7o-osE" eventType="touchUpInside" id="kVe-TI-04g"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oid-Gm-D9p">
-                                                    <rect key="frame" x="23" y="115" width="76" height="35"/>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="15"/>
-                                                    <state key="normal" title="Following">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="openFollowing:" destination="EL5-7o-osE" eventType="touchUpInside" id="BUI-wD-er6"/>
-                                                    </connections>
-                                                </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kky-9R-Vgu">
-                                                    <rect key="frame" x="54" y="152" width="15" height="26"/>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q5S-Vv-53v">
-                                                    <rect key="frame" x="303" y="152" width="15" height="26"/>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVB-Xf-xKE">
-                                                    <rect key="frame" x="174" y="297" width="25" height="26"/>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="14"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="POSTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DS7-IM-sL7">
-                                                    <rect key="frame" x="207" y="297" width="50" height="26"/>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="14"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="post-icon" translatesAutoresizingMaskIntoConstraints="NO" id="BoC-nT-0El">
-                                                    <rect key="frame" x="134" y="297" width="32" height="26"/>
-                                                </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfT-fC-CxJ">
-                                                    <rect key="frame" x="44" y="74" width="35" height="33"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aax-VI-5pI">
+                                                    <rect key="frame" x="269" y="107" width="61" height="66"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAS-X9-rdH">
+                                                            <rect key="frame" x="0.0" y="25" width="61" height="29"/>
+                                                            <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="14"/>
+                                                            <state key="normal" title="Followers">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="openFollowers:" destination="EL5-7o-osE" eventType="touchUpInside" id="kVe-TI-04g"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 people" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q5S-Vv-53v">
+                                                            <rect key="frame" x="0.0" y="48" width="61" height="17"/>
+                                                            <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="14"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="followers-icon" translatesAutoresizingMaskIntoConstraints="NO" id="y6I-kI-xnv">
+                                                            <rect key="frame" x="18" y="0.0" width="25" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="25" id="AqE-f2-dHu"/>
+                                                                <constraint firstAttribute="height" constant="25" id="xmF-hU-TMm"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="289" id="vRq-hH-ED6"/>
+                                                        <constraint firstItem="JAS-X9-rdH" firstAttribute="leading" secondItem="Aax-VI-5pI" secondAttribute="leading" id="5RD-Jd-1hs"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Q5S-Vv-53v" secondAttribute="trailing" id="CQd-hQ-XQL"/>
+                                                        <constraint firstItem="y6I-kI-xnv" firstAttribute="centerX" secondItem="Aax-VI-5pI" secondAttribute="centerX" id="K9a-TT-e6M"/>
+                                                        <constraint firstItem="y6I-kI-xnv" firstAttribute="top" secondItem="Aax-VI-5pI" secondAttribute="top" id="MLc-id-O8a"/>
+                                                        <constraint firstItem="Q5S-Vv-53v" firstAttribute="leading" secondItem="Aax-VI-5pI" secondAttribute="leading" id="XwG-4G-QYJ"/>
+                                                        <constraint firstItem="JAS-X9-rdH" firstAttribute="centerX" secondItem="Aax-VI-5pI" secondAttribute="centerX" id="ad6-WB-iZs"/>
+                                                        <constraint firstItem="JAS-X9-rdH" firstAttribute="top" secondItem="y6I-kI-xnv" secondAttribute="bottom" id="duP-67-koe"/>
+                                                        <constraint firstAttribute="trailing" secondItem="JAS-X9-rdH" secondAttribute="trailing" id="pyQ-fe-NLO"/>
+                                                        <constraint firstItem="Q5S-Vv-53v" firstAttribute="top" secondItem="JAS-X9-rdH" secondAttribute="bottom" constant="-6" id="xqR-SU-8Wi"/>
+                                                        <constraint firstItem="Q5S-Vv-53v" firstAttribute="centerX" secondItem="Aax-VI-5pI" secondAttribute="centerX" id="yYH-cK-mlx"/>
                                                     </constraints>
-                                                    <state key="normal" image="follow-icon"/>
-                                                    <variation key="default">
-                                                        <mask key="constraints">
-                                                            <exclude reference="vRq-hH-ED6"/>
-                                                        </mask>
-                                                    </variation>
-                                                    <connections>
-                                                        <action selector="editProfile:" destination="EL5-7o-osE" eventType="touchUpInside" id="7vp-Ad-PNQ"/>
-                                                    </connections>
-                                                </button>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fbk-9X-y9d">
+                                                    <rect key="frame" x="48" y="107" width="61" height="66"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="followers-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Jz0-ht-Qnk" userLabel="following-icon">
+                                                            <rect key="frame" x="18" y="0.0" width="25" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="25" id="5K1-dM-Pju"/>
+                                                                <constraint firstAttribute="height" constant="25" id="lHe-7H-2Ip"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oid-Gm-D9p">
+                                                            <rect key="frame" x="0.0" y="25" width="61" height="29"/>
+                                                            <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="14"/>
+                                                            <state key="normal" title="Following">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="openFollowing:" destination="EL5-7o-osE" eventType="touchUpInside" id="BUI-wD-er6"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 people" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kky-9R-Vgu">
+                                                            <rect key="frame" x="4" y="48" width="53" height="17"/>
+                                                            <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="14"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="oid-Gm-D9p" firstAttribute="top" secondItem="Jz0-ht-Qnk" secondAttribute="bottom" id="4rD-JV-IQM"/>
+                                                        <constraint firstItem="Jz0-ht-Qnk" firstAttribute="top" secondItem="Fbk-9X-y9d" secondAttribute="top" id="7v4-P4-kvs"/>
+                                                        <constraint firstItem="kky-9R-Vgu" firstAttribute="centerX" secondItem="Fbk-9X-y9d" secondAttribute="centerX" id="8rT-ro-EEA"/>
+                                                        <constraint firstItem="oid-Gm-D9p" firstAttribute="leading" secondItem="Fbk-9X-y9d" secondAttribute="leading" id="El7-Gh-zst"/>
+                                                        <constraint firstItem="oid-Gm-D9p" firstAttribute="centerX" secondItem="Fbk-9X-y9d" secondAttribute="centerX" id="P6L-Jo-MOc"/>
+                                                        <constraint firstAttribute="trailing" secondItem="oid-Gm-D9p" secondAttribute="trailing" id="Xx7-X5-l8a"/>
+                                                        <constraint firstItem="kky-9R-Vgu" firstAttribute="top" secondItem="oid-Gm-D9p" secondAttribute="bottom" constant="-6" id="kFK-Kp-4UG"/>
+                                                        <constraint firstItem="Jz0-ht-Qnk" firstAttribute="centerX" secondItem="Fbk-9X-y9d" secondAttribute="centerX" id="pWe-wD-NAk"/>
+                                                    </constraints>
+                                                </view>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="eh1-Dh-tUG">
+                                                    <rect key="frame" x="142" y="270" width="91" height="25"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfT-fC-CxJ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="25" id="MOy-Hv-qs7"/>
+                                                                <constraint firstAttribute="height" constant="25" id="vN8-qe-8rU"/>
+                                                                <constraint firstAttribute="width" constant="289" id="vRq-hH-ED6"/>
+                                                            </constraints>
+                                                            <state key="normal" image="follow-icon"/>
+                                                            <variation key="default">
+                                                                <mask key="constraints">
+                                                                    <exclude reference="vRq-hH-ED6"/>
+                                                                </mask>
+                                                            </variation>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVB-Xf-xKE">
+                                                            <rect key="frame" x="31" y="4" width="9" height="17"/>
+                                                            <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="14"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POSTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DS7-IM-sL7">
+                                                            <rect key="frame" x="46" y="4" width="45" height="17"/>
+                                                            <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="14"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.25942817408376961" green="0.25942817408376961" blue="0.25942817408376961" alpha="0.80815048758865249" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="itw-pb-aJn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yOi-6Z-a8D" secondAttribute="leading" constant="12" id="2nA-DM-VYy"/>
+                                                <constraint firstItem="SYp-Y4-W4r" firstAttribute="centerX" secondItem="yOi-6Z-a8D" secondAttribute="centerX" id="3GD-Vy-uYY"/>
+                                                <constraint firstItem="itw-pb-aJn" firstAttribute="centerX" secondItem="yOi-6Z-a8D" secondAttribute="centerX" id="3P1-vA-X8V"/>
+                                                <constraint firstItem="itw-pb-aJn" firstAttribute="top" secondItem="T5b-rg-9ko" secondAttribute="bottom" id="9EQ-YN-Lih"/>
+                                                <constraint firstItem="myB-BC-vtL" firstAttribute="centerY" secondItem="Pb0-fb-3L1" secondAttribute="centerY" multiplier="0.81" id="AXZ-UV-NXG"/>
+                                                <constraint firstItem="T5b-rg-9ko" firstAttribute="top" secondItem="Pb0-fb-3L1" secondAttribute="bottom" constant="8" id="CBC-Lg-CNw"/>
+                                                <constraint firstItem="myB-BC-vtL" firstAttribute="leading" secondItem="Pb0-fb-3L1" secondAttribute="trailing" constant="-32" id="D5E-6c-enM"/>
+                                                <constraint firstItem="Aax-VI-5pI" firstAttribute="height" secondItem="Pb0-fb-3L1" secondAttribute="height" multiplier="0.75" id="Fae-2P-b55"/>
+                                                <constraint firstItem="eh1-Dh-tUG" firstAttribute="centerX" secondItem="yOi-6Z-a8D" secondAttribute="centerX" id="GHw-Zg-tsW"/>
+                                                <constraint firstItem="Fbk-9X-y9d" firstAttribute="height" secondItem="Aax-VI-5pI" secondAttribute="height" id="GSR-mj-eg8"/>
+                                                <constraint firstItem="Pb0-fb-3L1" firstAttribute="top" secondItem="SYp-Y4-W4r" secondAttribute="bottom" constant="25" id="KdD-Dp-Ieq"/>
+                                                <constraint firstItem="Pb0-fb-3L1" firstAttribute="leading" secondItem="Fbk-9X-y9d" secondAttribute="trailing" constant="41" id="Nfh-pT-w8Q"/>
+                                                <constraint firstItem="Aax-VI-5pI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Pb0-fb-3L1" secondAttribute="trailing" constant="12" id="O7V-Et-kUR"/>
+                                                <constraint firstItem="Pb0-fb-3L1" firstAttribute="centerX" secondItem="yOi-6Z-a8D" secondAttribute="centerX" id="O8k-vk-d2Y"/>
+                                                <constraint firstItem="SYp-Y4-W4r" firstAttribute="top" secondItem="p8E-U3-rp0" secondAttribute="bottom" constant="-2" id="Psd-Lg-ztX"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="itw-pb-aJn" secondAttribute="trailing" constant="12" id="R7C-oa-NTq"/>
+                                                <constraint firstItem="Aax-VI-5pI" firstAttribute="height" secondItem="Pb0-fb-3L1" secondAttribute="height" multiplier="0.88" id="SU6-aq-SVZ"/>
+                                                <constraint firstItem="p8E-U3-rp0" firstAttribute="top" secondItem="yOi-6Z-a8D" secondAttribute="top" constant="42" id="YBl-WP-iHs"/>
+                                                <constraint firstItem="Aax-VI-5pI" firstAttribute="centerY" secondItem="Pb0-fb-3L1" secondAttribute="centerY" id="Zcr-7W-KDs"/>
+                                                <constraint firstItem="T5b-rg-9ko" firstAttribute="centerX" secondItem="yOi-6Z-a8D" secondAttribute="centerX" id="ax2-1m-tPg"/>
+                                                <constraint firstItem="Aax-VI-5pI" firstAttribute="leading" secondItem="Pb0-fb-3L1" secondAttribute="trailing" priority="750" constant="44" id="e5i-Ff-9S3"/>
+                                                <constraint firstItem="p8E-U3-rp0" firstAttribute="centerX" secondItem="yOi-6Z-a8D" secondAttribute="centerX" id="gLw-tU-TIw"/>
+                                                <constraint firstItem="Fbk-9X-y9d" firstAttribute="centerY" secondItem="Pb0-fb-3L1" secondAttribute="centerY" id="kLX-yQ-oZv"/>
+                                                <constraint firstItem="eh1-Dh-tUG" firstAttribute="top" secondItem="itw-pb-aJn" secondAttribute="bottom" constant="39" id="ohu-df-lTK"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Aax-VI-5pI" secondAttribute="trailing" constant="12" id="tKq-dl-EqK"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="eh1-Dh-tUG" secondAttribute="bottom" constant="12" id="x6q-Wo-Ox1"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Fae-2P-b55"/>
+                                                </mask>
+                                            </variation>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Mcc-a3-a7I" secondAttribute="bottom" id="BuF-PP-YG4"/>
+                                        <constraint firstAttribute="trailing" secondItem="Mcc-a3-a7I" secondAttribute="trailing" id="KAm-NN-hdv"/>
+                                        <constraint firstAttribute="trailing" secondItem="yOi-6Z-a8D" secondAttribute="trailing" id="KEK-GZ-DEb"/>
+                                        <constraint firstItem="Mcc-a3-a7I" firstAttribute="top" secondItem="keW-E8-6mR" secondAttribute="top" id="Oxu-2u-xj7"/>
+                                        <constraint firstAttribute="bottom" secondItem="yOi-6Z-a8D" secondAttribute="bottom" id="VPY-Pw-jNc"/>
+                                        <constraint firstItem="yOi-6Z-a8D" firstAttribute="leading" secondItem="keW-E8-6mR" secondAttribute="leading" id="jvs-N3-RL9"/>
+                                        <constraint firstItem="yOi-6Z-a8D" firstAttribute="top" secondItem="keW-E8-6mR" secondAttribute="top" id="nqh-Ot-Sxs"/>
+                                        <constraint firstItem="Mcc-a3-a7I" firstAttribute="leading" secondItem="keW-E8-6mR" secondAttribute="leading" id="qKo-vW-K0Q"/>
+                                    </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="511" id="9e3-ND-WWW" customClass="NewsfeedTableViewCell" customModule="Calendario" customModuleProvider="target">
@@ -7100,7 +7195,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="like_icon" width="27" height="26"/>
         <image name="lock_icon" width="120" height="120"/>
         <image name="loginViewBackground" width="375" height="667"/>
-        <image name="post-icon" width="36" height="30"/>
         <image name="profile_grey" width="30" height="30"/>
         <image name="right_arrow" width="50" height="50"/>
         <image name="search_icon" width="15" height="15"/>
