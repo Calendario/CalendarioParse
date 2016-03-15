@@ -282,7 +282,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     func updateRsvpLabel(object: PFObject) {
         
-        // Get the post rsvp data.
+   /*     // Get the post rsvp data.
         let rsvpArray:[String] = object.objectForKey("rsvpArray") as! Array
         
         if (rsvpArray.count > 0) {
@@ -295,7 +295,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
         }
         else {
             self.rsvpLabel.text = "0"
-        }
+        } */
     }
     
     func updateRsvpButton(rsvpPost: Bool, objectId: String) {
