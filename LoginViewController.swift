@@ -18,8 +18,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameView: UIView!
     @IBOutlet weak var passwordView: UIView!
     @IBOutlet weak var backgroundImage: UIImageView!
-    
-    // Setup the on screen button actions.
+    @IBOutlet weak var containerConstraint: UIImageView!
     
     @IBAction func loginUser(sender: UIButton) {
         
@@ -52,8 +51,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let viewC = storyboard.instantiateViewControllerWithIdentifier("resetpassword") as! ResetPasswordViewController
         self.presentViewController(viewC, animated: true, completion: nil)
     }
-    
-    // View Did Load method.
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,8 +93,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         overlay.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.15)
         self.backgroundImage.addSubview(overlay)
     }
-    
-    // Login methods.
     
     func loginUser() {
         
@@ -160,8 +155,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    // News feed methods.
-    
     func GotoNewsfeed() {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -170,8 +163,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         appDelegate.window.makeKeyAndVisible()
         appDelegate.window.rootViewController = tabBarController
     }
-    
-    // Alert methods.
     
     func displayAlert(alertTitle: String, alertMessage: String) {
         
@@ -185,8 +176,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Present the alert on screen.
         presentViewController(alertController, animated: true, completion: nil)
     }
-    
-    // Other methods.
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
