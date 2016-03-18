@@ -17,12 +17,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var usernameView: UIView!
     @IBOutlet weak var passwordView: UIView!
-    
-    // Background animation image view.
     @IBOutlet weak var backgroundImage: UIImageView!
-    
-    // Backgrond photo names array.
-    var backgroundPhotos = Array<UIImage>()
     
     // Setup the on screen button actions.
     
@@ -62,60 +57,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-     /*   // Get the screen dimensions.
-        let height = UIScreen.mainScreen().bounds.size.height
-        
-        // Set the animation images depending on
-        // the height of the iOS device screen.
-        var imageName = "iphone4s"
-        
-        if (height == 480) {
-            // 3.5 inch display - iPhone 4S & below.
-            imageName = "iphone4s"
-        }
-        
-        else if (height == 568) {
-            // 4 inch display - iPhone 5/5s.
-            imageName = "iphone5&5s"
-        }
-        
-        else if (height == 667) {
-            // 4.7 inch display - iPhone 6/6s.
-            imageName = "iphone6"
-        }
-        
-        else if (height >= 736) {
-            // 5.5 inch display - iPhone 6/6s Plus.
-            imageName = "iphone6+"
-        }
-        
-        // Add the appropriate images to the photos array.
-        
-        for (var loop = 0; loop < 10; loop++) {
-            
-            if ((loop + 1) != 2) {
-                backgroundPhotos.append(UIImage(named: "\(imageName)\(loop + 1).png")!)
-            }
-        }*/
-        
-        // Automatically take the user to the
-        // news feed section if they are already
-        // logged in to the Calendario app.
-        var currentUser:PFUser!
-        currentUser = PFUser.currentUser()
-        
-        if (currentUser != nil) {
-            
-            // The user is already logged in.
-            self.GotoNewsfeed()
-        }
-        
-        // Run the animation.
-       // self.runBackgroundAnim(0)
         
         setupUI()
+        checkForExistingUser()
     }
     
     private func setupUI() {
@@ -134,37 +78,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         passwordView.layer.borderColor = UIColor.whiteColor().CGColor
         passwordView.layer.cornerRadius = 6.0
         passwordView.clipsToBounds = true
+        
+        createBackgroundOverlay()
     }
     
-    // Animation methods.
+    private func checkForExistingUser() {
+        var currentUser:PFUser!
+        currentUser = PFUser.currentUser()
+        
+        if (currentUser != nil) {
+            self.GotoNewsfeed()
+        }
+    }
     
-    func runBackgroundAnim(let num:Int) {
-        
-        // Set the array counter number.
-        var count = num
-        
-        if ((count + 1) == backgroundPhotos.count) {
-            count = 0
-        }
-        
-        else {
-            count = (count + 1)
-        }
-        
-        UIView.transitionWithView(self.backgroundImage, duration:3.0, options:UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-            
-            // Set the background photo
-            self.backgroundImage.image = self.backgroundPhotos[count]
-            }, completion: {(Bool) in
-                
-                // Move on to the next photo animation
-                // after a small transitional delay.
-                let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(2.0 * Double(NSEC_PER_SEC)))
-                
-                dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-                    self.runBackgroundAnim(count)
-                })
-        })
+    private func createBackgroundOverlay() {
+        let overlay: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.backgroundImage.frame.size.width, height: self.backgroundImage.frame.size.height))
+        overlay.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.15)
+        self.backgroundImage.addSubview(overlay)
     }
     
     // Login methods.
@@ -208,17 +138,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Get the entered username and password.
         let dataUser = self.userField.text
         let dataPass = self.passField.text
-    
+        
         if (dataUser == nil) {
             displayAlert("Errpr", alertMessage: "Please enter your username before logging in.")
         }
-        
+            
         else {
             
             if (dataPass == nil) {
                 displayAlert("Errpr", alertMessage: "Please enter your password before logging in.")
             }
-            
+                
             else {
                 
                 // Notify the user that the app is loading.
@@ -261,10 +191,5 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
