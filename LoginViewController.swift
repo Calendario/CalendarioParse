@@ -18,7 +18,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameView: UIView!
     @IBOutlet weak var passwordView: UIView!
     @IBOutlet weak var backgroundImage: UIImageView!
-    @IBOutlet weak var containerConstraint: UIImageView!
+    @IBOutlet weak var signInBottomButton: UIButton!
+    @IBOutlet weak var newUserBottomButton: UIButton!
+    @IBOutlet weak var containerConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stackViewConstraint: NSLayoutConstraint!
     
     @IBAction func loginUser(sender: UIButton) {
         
@@ -34,22 +37,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         // Dismiss the keyboard.
         self.view.resignFirstResponder()
-        
-        // Open the register view.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewC = storyboard.instantiateViewControllerWithIdentifier("registerview") as! RegisterViewController
-        self.presentViewController(viewC, animated: true, completion: nil)
+        goToSignUp()
     }
     
     @IBAction func resetPassword(sender: UIButton) {
         
         // Dismiss the keyboard.
         self.view.resignFirstResponder()
-        
-        // Open the reset password view.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewC = storyboard.instantiateViewControllerWithIdentifier("resetpassword") as! ResetPasswordViewController
-        self.presentViewController(viewC, animated: true, completion: nil)
+        goToResetPassword()
+    }
+    
+    @IBAction func originalSignInTapped(sender: AnyObject) {
+        animateTextFieldsContainer(true)
+    }
+    
+    @IBAction func newUserTapped(sender: AnyObject) {
+        goToSignUp()
     }
     
     override func viewDidLoad() {
@@ -59,18 +62,33 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         checkForExistingUser()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.containerConstraint.constant = self.backgroundImage.frame.size.height + 500
+    }
+    
     private func setupUI() {
-        signInButton.layer.cornerRadius = 6.0
+        signInButton.layer.cornerRadius = 4.0
         signInButton.clipsToBounds = true
         signInButton.layer.borderColor = UIColor.whiteColor().CGColor
         signInButton.layer.borderWidth = 1.0
         
         userField.clipsToBounds = true
         passField.clipsToBounds = true
+        
+        signInBottomButton.layer.borderColor = UIColor.whiteColor().CGColor
+        signInBottomButton.layer.borderWidth = 2.0
+        signInBottomButton.layer.cornerRadius = 4.0
+        signInBottomButton.clipsToBounds = true
+        
+        newUserBottomButton.layer.cornerRadius = 4.0
+        newUserBottomButton.clipsToBounds = true
+        
         usernameView.layer.borderWidth = 1.0
         usernameView.layer.borderColor = UIColor.whiteColor().CGColor
         usernameView.layer.cornerRadius = 6.0
         usernameView.clipsToBounds = true
+        
         passwordView.layer.borderWidth = 1.0
         passwordView.layer.borderColor = UIColor.whiteColor().CGColor
         passwordView.layer.cornerRadius = 6.0
@@ -90,8 +108,27 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private func createBackgroundOverlay() {
         let overlay: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.backgroundImage.frame.size.width, height: self.backgroundImage.frame.size.height))
-        overlay.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.15)
+        overlay.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
         self.backgroundImage.addSubview(overlay)
+    }
+    
+    private func animateTextFieldsContainer(show: Bool) {
+        if show == false {
+            self.containerConstraint.constant = self.backgroundImage.frame.size.height + 500
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.view.layoutIfNeeded()
+            })
+            self.signInBottomButton.hidden = false
+            self.newUserBottomButton.hidden = false
+        }
+        else if show == true {
+            self.containerConstraint.constant = 0
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.view.layoutIfNeeded()
+            })
+            self.signInBottomButton.hidden = true
+            self.newUserBottomButton.hidden = true
+        }
     }
     
     func loginUser() {
@@ -162,6 +199,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let tabBarController: UITabBarController = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! tabBarViewController
         appDelegate.window.makeKeyAndVisible()
         appDelegate.window.rootViewController = tabBarController
+    }
+    
+    func goToSignUp() {
+        // Open the register view.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewC = storyboard.instantiateViewControllerWithIdentifier("registerview") as! RegisterViewController
+        self.presentViewController(viewC, animated: true, completion: nil)
+        
+    }
+    
+    func goToResetPassword() {
+        // Open the reset password view.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewC = storyboard.instantiateViewControllerWithIdentifier("resetpassword") as! ResetPasswordViewController
+        self.presentViewController(viewC, animated: true, completion: nil)
     }
     
     func displayAlert(alertTitle: String, alertMessage: String) {
