@@ -64,7 +64,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        // Get the screen dimensions.
+     /*   // Get the screen dimensions.
         let height = UIScreen.mainScreen().bounds.size.height
         
         // Set the animation images depending on
@@ -98,7 +98,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             if ((loop + 1) != 2) {
                 backgroundPhotos.append(UIImage(named: "\(imageName)\(loop + 1).png")!)
             }
-        }
+        }*/
         
         // Automatically take the user to the
         // news feed section if they are already
@@ -113,7 +113,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         
         // Run the animation.
-        self.runBackgroundAnim(0)
+       // self.runBackgroundAnim(0)
         
         setupUI()
     }
