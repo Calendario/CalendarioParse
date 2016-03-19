@@ -252,18 +252,18 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
             })
         }
         
-        // Setup the see more button.
-        let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
-            
-            let defaults = NSUserDefaults.standardUserDefaults()
-            let updatetext = statusupdate.objectForKey("updatetext") as! String
-            let currentobjectID = statusupdate.objectId
-            
-            defaults.setObject(updatetext, forKey: "updatetext")
-            defaults.setObject(currentobjectID, forKey: "objectId")
-            
-            self.Seemore()
-        }
+//        // Setup the see more button.
+//        let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
+//            
+//            let defaults = NSUserDefaults.standardUserDefaults()
+//            let updatetext = statusupdate.objectForKey("updatetext") as! String
+//            let currentobjectID = statusupdate.objectId
+//            
+//            defaults.setObject(updatetext, forKey: "updatetext")
+//            defaults.setObject(currentobjectID, forKey: "objectId")
+//            
+//            self.Seemore()
+//        }
         
         // Setup the delete status button.
         let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in
@@ -310,7 +310,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         }
         
         // Set the button backgrond colours.
-        seemore.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+     //   seemore.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
 
         report.backgroundColor = UIColor(red: 236/255.0, green: 236/255.0, blue: 236/255.0, alpha: 1.0)
 
@@ -344,7 +344,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // Setup the table view custom cell.
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TimeLineTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
         cell.layoutMargins = UIEdgeInsetsZero
         
         // Get the specific status object for this cell.
@@ -407,7 +407,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         cell.commentsLabel.addGestureRecognizer(tapGestureCommentLabel)
         
         // Link the comment button to the comment method.
-        cell.commentButton.addTarget(self, action: "commentClicked:", forControlEvents: .TouchUpInside)
+      //  cell.commentButton.addTarget(self, action: "commentClicked:", forControlEvents: .TouchUpInside)
         
         // Set the status labels.
         cell.statusTextView.text = currentObject["updatetext"] as? String
@@ -501,13 +501,13 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                 cell.rsvpButton.enabled = false
                 
                 let rsvpPrivateImage: UIImage = UIImage(named: "rsvp_private_icon")!
-                cell.rsvpButton.image = rsvpPrivateImage
+                //cell.rsvpButton.image = rsvpPrivateImage
             }
             else if rsvpPrivate == false {
                 cell.rsvpButton.enabled = true
                 
                 let rsvpImage: UIImage = UIImage(named: "rsvpButtonFilled")!
-                cell.rsvpButton.image = rsvpImage
+              //  cell.rsvpButton.image = rsvpImage
             }
         }
 
@@ -556,7 +556,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         // Setup the cell likes button.
         cell.likebutton.translatesAutoresizingMaskIntoConstraints = true
         cell.likebutton.clipsToBounds = false
-        cell.likebutton.addTarget(self, action: "likeClicked:", forControlEvents: .TouchUpInside)
+     //   cell.likebutton.addTarget(self, action: "likeClicked:", forControlEvents: .TouchUpInside)
         
         //setup the cell rsvp button
         cell.rsvpButton.translatesAutoresizingMaskIntoConstraints = true
@@ -592,11 +592,11 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
             // Update the like button.
             
             if likesArray.contains(PFUser.currentUser()!.objectId!) {
-                cell.likebutton.select()
+        //        cell.likebutton.select()
             }
                 
             else {
-                cell.likebutton.deselect()
+       //         cell.likebutton.deselect()
             }
         }
             
@@ -620,11 +620,11 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
             // Update the like button.
             
             if rsvpArray.contains(PFUser.currentUser()!.objectId!) {
-                cell.rsvpButton.select()
+          //      cell.rsvpButton.select()
             }
                 
             else {
-                cell.rsvpButton.deselect()
+         //       cell.rsvpButton.deselect()
             }
         }
             
@@ -666,11 +666,11 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         // Set cell strip color.
         
         if indexPath.row % 2 == 0 {
-            cell.colorStrip.backgroundColor = UIColor(red: 30/255.0, green: 206/255.0, blue: 241/255.0, alpha: 1.0)
+     //       cell.colorStrip.backgroundColor = UIColor(red: 30/255.0, green: 206/255.0, blue: 241/255.0, alpha: 1.0)
         }
             
         else {
-            cell.colorStrip.backgroundColor = UIColor(red: 25/255.0, green: 181/255.0, blue: 215/255.0, alpha: 1.0)
+     //       cell.colorStrip.backgroundColor = UIColor(red: 25/255.0, green: 181/255.0, blue: 215/255.0, alpha: 1.0)
         }
         
         return cell
@@ -726,7 +726,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
         // Get the image from the custom cell.
         let indexPath = NSIndexPath(forRow: (sender.view?.tag)!, inSection: 0)
-        let cell = self.tableview.cellForRowAtIndexPath(indexPath) as! TimeLineTableViewCell
+        let cell = self.tableview.cellForRowAtIndexPath(indexPath) as! NewsfeedTableViewCell
         
         // Open the photo view controller.
         let sb = UIStoryboard(name: "Main", bundle: nil)
@@ -736,7 +736,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         self.presentViewController(NC, animated: true, completion: nil)
     }
     
-    func likeClicked(sender: DOFavoriteButton) {
+    func likeClicked(sender: AnyObject) {
         
         // Get the image from the custom cell.
         let indexPath = NSIndexPath(forRow: (sender.tag), inSection: 0)
@@ -776,7 +776,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         }
     }
     
-    func rsvpClicked(sender: DOFavoriteButton) {
+    func rsvpClicked(sender: AnyObject) {
         
         print("Clicked RSVP")
         // Get the image from the custom cell.
@@ -822,7 +822,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
 
     
-    func saveLikeForPost(statusObject: PFObject, likePost: Bool, likeButton: DOFavoriteButton) {
+    func saveLikeForPost(statusObject: PFObject, likePost: Bool, likeButton: AnyObject) {
         
         // Setup the likes query.
         var query:PFQuery!
@@ -862,7 +862,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                         
                         // Get access to the cell.
                         let indexPath = NSIndexPath(forRow: (likeButton.tag), inSection: 0)
-                        let cell = self.tableview.cellForRowAtIndexPath(indexPath) as! TimeLineTableViewCell
+                        let cell = self.tableview.cellForRowAtIndexPath(indexPath) as! NewsfeedTableViewCell
                         
                         // Get the post likes data.
                         let likesArray:[String] = object!.objectForKey("likesarray") as! Array
@@ -890,7 +890,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                         
                         if (likePost == true) {
                             
-                            likeButton.select()
+                            //likeButton.select()
                             
                             // Submit and save the like notification.
                             let likeString = "\(PFUser.currentUser()!.username!) has liked your post"
@@ -898,7 +898,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                         }
                             
                         else {
-                            likeButton.deselect()
+                           // likeButton.deselect()
                         }
                     }
                 })
@@ -906,7 +906,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         }
     }
     
-    func saveRsvpForPost(statusObject: PFObject, rsvpPost: Bool, rsvpButton: DOFavoriteButton) {
+    func saveRsvpForPost(statusObject: PFObject, rsvpPost: Bool, rsvpButton: AnyObject) {
         
         // Setup the likes query.
         var query:PFQuery!
@@ -974,7 +974,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                         
                         if (rsvpPost == true) {
                             
-                            rsvpButton.select()
+                           // rsvpButton.select()
                             
                             // Submit and save the rsvp notification.
                             let rsvpString = "\(PFUser.currentUser()!.username!) has RSVP'd to your post"
@@ -982,7 +982,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                         }
                             
                         else {
-                            rsvpButton.deselect()
+                           // rsvpButton.deselect()
                         }
                     }
                 })
@@ -1072,12 +1072,12 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         self.presentViewController(NC, animated: true, completion: nil)
     }
     
-    func Seemore() {
-        
-        // Open the see more view.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let SMVC = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
-        let NC = UINavigationController(rootViewController: SMVC)
-        self.presentViewController(NC, animated: true, completion: nil)
-    }
+//    func Seemore() {
+//        
+//        // Open the see more view.
+//        let sb = UIStoryboard(name: "Main", bundle: nil)
+//        let SMVC = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
+//        let NC = UINavigationController(rootViewController: SMVC)
+//        self.presentViewController(NC, animated: true, completion: nil)
+//    }
 }

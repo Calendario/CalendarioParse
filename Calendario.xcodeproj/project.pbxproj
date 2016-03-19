@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E3815A2F569919034060D65 /* Pods_Calendario.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6049A409A8BD5F08D9B8AD /* Pods_Calendario.framework */; };
 		78C1C01C1C006D9200ACDCEC /* reportBug.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C1C01B1C006D9200ACDCEC /* reportBug.m */; };
 		78CE15B21C95CDE800257C4B /* settings-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CE15B11C95CDE800257C4B /* settings-icon.png */; };
 		78CE15B71C95CE2F00257C4B /* follow-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CE15B31C95CE2F00257C4B /* follow-icon.png */; };
@@ -14,7 +15,6 @@
 		78CE15B91C95CE2F00257C4B /* following-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CE15B51C95CE2F00257C4B /* following-icon.png */; };
 		78CE15BA1C95CE2F00257C4B /* post-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CE15B61C95CE2F00257C4B /* post-icon.png */; };
 		78E4E0E51C86BE7800C37864 /* button-placeholder-primary.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E4E0E41C86BE7800C37864 /* button-placeholder-primary.png */; };
-		9CE5A692AEA13F553B89DF70 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3354E761A083188ECD02163D /* Pods.framework */; };
 		A22038021C5D332F000080AC /* RecommendedUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22038011C5D332F000080AC /* RecommendedUsersViewController.swift */; };
 		A22038041C5D35FF000080AC /* RecommendedUsersCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22038031C5D35FF000080AC /* RecommendedUsersCustomCell.swift */; };
 		A2267D171C4BD9C200180C6D /* FollowRequestsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2267D161C4BD9C200180C6D /* FollowRequestsTableViewController.swift */; };
@@ -60,7 +60,6 @@
 		D3DE979C1C80CC0400F4DE7B /* SF-UI-Text-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D3DE97871C80CC0400F4DE7B /* SF-UI-Text-RegularItalic.otf */; };
 		D3DE979D1C80CC0400F4DE7B /* SF-UI-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D3DE97881C80CC0400F4DE7B /* SF-UI-Text-Semibold.otf */; };
 		D3DE979E1C80CC0400F4DE7B /* SF-UI-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D3DE97891C80CC0400F4DE7B /* SF-UI-Text-SemiboldItalic.otf */; };
-		DF4456BE48282E22980A9FC7 /* Pods_Calendario.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07FB54643A3C7C4C36B98D84 /* Pods_Calendario.framework */; };
 		E151AF721BD72D6500811A31 /* tabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E151AF711BD72D6500811A31 /* tabBarViewController.m */; };
 		E17180521C21389600D591FA /* notificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17180511C21389600D591FA /* notificationsViewController.m */; };
 		E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E187B5F51BD3368400845C2F /* SearchViewController.m */; };
@@ -170,8 +169,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		07FB54643A3C7C4C36B98D84 /* Pods_Calendario.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Calendario.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3354E761A083188ECD02163D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6226D36FBFFA1852A9570CBB /* Pods-Calendario.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calendario.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Calendario/Pods-Calendario.debug.xcconfig"; sourceTree = "<group>"; };
 		78C1C01A1C006D9200ACDCEC /* reportBug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reportBug.h; sourceTree = "<group>"; };
 		78C1C01B1C006D9200ACDCEC /* reportBug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = reportBug.m; sourceTree = "<group>"; };
@@ -181,8 +178,7 @@
 		78CE15B51C95CE2F00257C4B /* following-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "following-icon.png"; sourceTree = "<group>"; };
 		78CE15B61C95CE2F00257C4B /* post-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "post-icon.png"; sourceTree = "<group>"; };
 		78E4E0E41C86BE7800C37864 /* button-placeholder-primary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-placeholder-primary.png"; sourceTree = "<group>"; };
-		9CFC86F79C40E6D71F993D2D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		A0A3EB60EF24220E0D3A8FD9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		8C6049A409A8BD5F08D9B8AD /* Pods_Calendario.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Calendario.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A22038011C5D332F000080AC /* RecommendedUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendedUsersViewController.swift; sourceTree = "<group>"; };
 		A22038031C5D35FF000080AC /* RecommendedUsersCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendedUsersCustomCell.swift; sourceTree = "<group>"; };
 		A2267D161C4BD9C200180C6D /* FollowRequestsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowRequestsTableViewController.swift; sourceTree = "<group>"; };
@@ -394,8 +390,7 @@
 				E2E0D73C1BC996C100662E70 /* Bolts.framework in Frameworks */,
 				E2E0D7411BC996C100662E70 /* ParseTwitterUtils.framework in Frameworks */,
 				E2E0D7401BC996C100662E70 /* ParseFacebookUtilsV4.framework in Frameworks */,
-				9CE5A692AEA13F553B89DF70 /* Pods.framework in Frameworks */,
-				DF4456BE48282E22980A9FC7 /* Pods_Calendario.framework in Frameworks */,
+				2E3815A2F569919034060D65 /* Pods_Calendario.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,8 +414,6 @@
 		729F0A65E9D4AC6F465236E8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9CFC86F79C40E6D71F993D2D /* Pods.debug.xcconfig */,
-				A0A3EB60EF24220E0D3A8FD9 /* Pods.release.xcconfig */,
 				6226D36FBFFA1852A9570CBB /* Pods-Calendario.debug.xcconfig */,
 				C36AC0B64436F7BA3A343F8E /* Pods-Calendario.release.xcconfig */,
 			);
@@ -784,8 +777,7 @@
 				E23083651C7426EB001C0142 /* UIView+FSExtension.h */,
 				E23083661C7426EB001C0142 /* UIView+FSExtension.m */,
 				E24DA5EA1C1156F900901DF0 /* Social.framework */,
-				3354E761A083188ECD02163D /* Pods.framework */,
-				07FB54643A3C7C4C36B98D84 /* Pods_Calendario.framework */,
+				8C6049A409A8BD5F08D9B8AD /* Pods_Calendario.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

@@ -131,13 +131,13 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         self.presentViewController(NC, animated: true, completion: nil)
     }
     
-    func Seemore() {
-        // Open the see more view.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let SMVC = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
-        let NC = UINavigationController(rootViewController: SMVC)
-        self.presentViewController(NC, animated: true, completion: nil)
-    }
+//    func Seemore() {
+//        // Open the see more view.
+//        let sb = UIStoryboard(name: "Main", bundle: nil)
+//        let SMVC = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
+//        let NC = UINavigationController(rootViewController: SMVC)
+//        self.presentViewController(NC, animated: true, completion: nil)
+//    }
     
     func displayAlert(alertTitle: String, alertMessage: String) {
         
@@ -318,18 +318,18 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
             })
         }
         
-        // Setup the see more button.
-        let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
-            
-            let defaults = NSUserDefaults.standardUserDefaults()
-            let updatetext = statusupdate.objectForKey("updatetext") as! String
-            let currentobjectID = statusupdate.objectId
-            
-            defaults.setObject(updatetext, forKey: "updatetext")
-            defaults.setObject(currentobjectID, forKey: "objectId")
-            
-            self.Seemore()
-        }
+//        // Setup the see more button.
+//        let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
+//            
+//            let defaults = NSUserDefaults.standardUserDefaults()
+//            let updatetext = statusupdate.objectForKey("updatetext") as! String
+//            let currentobjectID = statusupdate.objectId
+//            
+//            defaults.setObject(updatetext, forKey: "updatetext")
+//            defaults.setObject(currentobjectID, forKey: "objectId")
+//            
+//            self.Seemore()
+//        }
         
         // Setup the delete status button.
         let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in
@@ -375,7 +375,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         }
         
         // Set the button backgrond colours.
-        seemore.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+     //   seemore.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         report.backgroundColor = UIColor(red: 236/255.0, green: 236/255.0, blue: 236/255.0, alpha: 1.0)
         deletestatus.backgroundColor = UIColor(red: 255/255.0, green: 80/255.0, blue: 79/255.0, alpha: 1.0)
         
