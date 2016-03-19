@@ -38,6 +38,7 @@
 		A2E881261C6A96F2008DFFAC /* MIBadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E881251C6A96F2008DFFAC /* MIBadgeButton.swift */; };
 		A2FBF5C61C00BADA0051A553 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FBF5C51C00BADA0051A553 /* EditProfileViewController.swift */; };
 		A2FBF5CA1C010B360051A553 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FBF5C91C010B360051A553 /* SettingsViewController.swift */; };
+		D3D9D7D61C9E0B4B000A2528 /* ParseCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D9D7D51C9E0B4B000A2528 /* ParseCalls.swift */; };
 		D3DE97731C7FBA3300F4DE7B /* SignPainter-HouseScript.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3DE97721C7FBA3300F4DE7B /* SignPainter-HouseScript.ttf */; };
 		D3DE978A1C80CC0400F4DE7B /* SF-UI-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = D3DE97751C80CC0400F4DE7B /* SF-UI-Display-Black.otf */; };
 		D3DE978B1C80CC0400F4DE7B /* SF-UI-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D3DE97761C80CC0400F4DE7B /* SF-UI-Display-Bold.otf */; };
@@ -203,6 +204,7 @@
 		A2FBF5C51C00BADA0051A553 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		A2FBF5C91C010B360051A553 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C36AC0B64436F7BA3A343F8E /* Pods-Calendario.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calendario.release.xcconfig"; path = "Pods/Target Support Files/Pods-Calendario/Pods-Calendario.release.xcconfig"; sourceTree = "<group>"; };
+		D3D9D7D51C9E0B4B000A2528 /* ParseCalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseCalls.swift; sourceTree = "<group>"; };
 		D3DE97721C7FBA3300F4DE7B /* SignPainter-HouseScript.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SignPainter-HouseScript.ttf"; sourceTree = "<group>"; };
 		D3DE97751C80CC0400F4DE7B /* SF-UI-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Black.otf"; sourceTree = "<group>"; };
 		D3DE97761C80CC0400F4DE7B /* SF-UI-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Bold.otf"; sourceTree = "<group>"; };
@@ -668,6 +670,14 @@
 			name = "Settings view";
 			sourceTree = "<group>";
 		};
+		D3D9D7D41C9E0B40000A2528 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D3D9D7D51C9E0B4B000A2528 /* ParseCalls.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		D3DE97741C80CBEB00F4DE7B /* San Francisco Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -844,6 +854,7 @@
 		E2E0D7011BC9950800662E70 /* Calendario */ = {
 			isa = PBXGroup;
 			children = (
+				D3D9D7D41C9E0B40000A2528 /* Services */,
 				A24DB1161C8F703C002D4897 /* Event View Classes/Views */,
 				A23457AC1C7B4A7F00376F2F /* Hashtag View */,
 				A23457A31C79E60D00376F2F /* Likes List View */,
@@ -1220,6 +1231,7 @@
 				E2C2BC671C24731C00F810C9 /* TimeLineTableViewCell.swift in Sources */,
 				E2672D871C61C25B00555286 /* Newsfeed2TableViewController.swift in Sources */,
 				A23457AB1C79E6E500376F2F /* DateManager.swift in Sources */,
+				D3D9D7D61C9E0B4B000A2528 /* ParseCalls.swift in Sources */,
 				E2EE565D1BF199F70064BA1D /* NSArray+Chameleon.m in Sources */,
 				E24DA5EF1C13E3AC00901DF0 /* LocationSearchTableViewController.swift in Sources */,
 				E2EE56621BF199F70064BA1D /* UILabel+Chameleon.m in Sources */,

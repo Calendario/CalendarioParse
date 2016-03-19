@@ -36,11 +36,10 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     //MARK: LIFECYCLE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         showRecommendedUsers(checkForNewUser())
         setActivityIndicatorForRefreshing()
         setHashtagDefaultKey()
-        organizeNewsFeedData()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -50,16 +49,13 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     }
     
     func setupUI() {
-        createStatusBar()
+        setStatusBarProperties()
         setTableViewProperties()
         setNavigationBarProperties()
     }
     
-    func createStatusBar() {
-        UIApplication .sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        let statusBar: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 20))
-        statusBar.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-        self.view.addSubview(statusBar)
+    func setStatusBarProperties() {
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
     }
     
     func setNavigationBarProperties() {
@@ -69,10 +65,10 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         self.navigationController?.navigationBar.tintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         self.navigationController?.navigationBar.translucent = false
-
-        let image = UIImage()
-        self.navigationController?.navigationBar.shadowImage = image
-        self.navigationController?.navigationBar.setBackgroundImage(image, forBarMetrics: UIBarMetrics.Default)
+        
+        //let image = UIImage()
+        // self.navigationController?.navigationBar.shadowImage = image
+        //  self.navigationController?.navigationBar.setBackgroundImage(image, forBarMetrics: UIBarMetrics.Default)
     }
     
     func setTableViewProperties() {
@@ -131,13 +127,13 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         self.presentViewController(NC, animated: true, completion: nil)
     }
     
-//    func Seemore() {
-//        // Open the see more view.
-//        let sb = UIStoryboard(name: "Main", bundle: nil)
-//        let SMVC = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
-//        let NC = UINavigationController(rootViewController: SMVC)
-//        self.presentViewController(NC, animated: true, completion: nil)
-//    }
+    //    func Seemore() {
+    //        // Open the see more view.
+    //        let sb = UIStoryboard(name: "Main", bundle: nil)
+    //        let SMVC = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
+    //        let NC = UINavigationController(rootViewController: SMVC)
+    //        self.presentViewController(NC, animated: true, completion: nil)
+    //    }
     
     func displayAlert(alertTitle: String, alertMessage: String) {
         
@@ -257,6 +253,10 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         return self.sortedArray.count
     }
     
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
+    }
+    
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 511.0
     }
@@ -271,7 +271,14 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
         
         // Get the specific status object for this cell and call all needed methods.
-       cell.passedInObject = self.sortedArray[indexPath.row] as! PFObject
+        cell.passedInObject = self.sortedArray[indexPath.row] as! PFObject
+        
+        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[indexPath.row] as! PFObject, animatedConstraint: cell.imageViewHeightConstraint, cell: cell)
+        
+        ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.sortedArray[indexPath.row] as! PFObject)
+        
+        ParseCalls.findUserDetails(self.sortedArray[indexPath.row] as! PFObject
+            , usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
         
         return cell
     }
@@ -318,18 +325,18 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
             })
         }
         
-//        // Setup the see more button.
-//        let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
-//            
-//            let defaults = NSUserDefaults.standardUserDefaults()
-//            let updatetext = statusupdate.objectForKey("updatetext") as! String
-//            let currentobjectID = statusupdate.objectId
-//            
-//            defaults.setObject(updatetext, forKey: "updatetext")
-//            defaults.setObject(currentobjectID, forKey: "objectId")
-//            
-//            self.Seemore()
-//        }
+        //        // Setup the see more button.
+        //        let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
+        //
+        //            let defaults = NSUserDefaults.standardUserDefaults()
+        //            let updatetext = statusupdate.objectForKey("updatetext") as! String
+        //            let currentobjectID = statusupdate.objectId
+        //
+        //            defaults.setObject(updatetext, forKey: "updatetext")
+        //            defaults.setObject(currentobjectID, forKey: "objectId")
+        //
+        //            self.Seemore()
+        //        }
         
         // Setup the delete status button.
         let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in
@@ -375,7 +382,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         }
         
         // Set the button backgrond colours.
-     //   seemore.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        //   seemore.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         report.backgroundColor = UIColor(red: 236/255.0, green: 236/255.0, blue: 236/255.0, alpha: 1.0)
         deletestatus.backgroundColor = UIColor(red: 255/255.0, green: 80/255.0, blue: 79/255.0, alpha: 1.0)
         

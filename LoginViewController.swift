@@ -60,11 +60,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         setupUI()
         checkForExistingUser()
+        animateTextFieldsContainer(false)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.containerConstraint.constant = self.backgroundImage.frame.size.height + 500
     }
     
     private func setupUI() {
@@ -112,7 +112,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.backgroundImage.addSubview(overlay)
     }
     
-    private func animateTextFieldsContainer(show: Bool) {
+    func animateTextFieldsContainer(show: Bool) {
         if show == false {
             self.containerConstraint.constant = self.backgroundImage.frame.size.height + 500
             UIView.animateWithDuration(0.5, animations: { () -> Void in

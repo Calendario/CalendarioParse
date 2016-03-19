@@ -50,18 +50,14 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     override func layoutSubviews() {
         // Get the specific status object for this cell and call all needed methods.
-         setupUI()
-         assignGestureRecognizers()
-         createTenseAndDateLabel()
-         findUserDetails()
-         setLocationLabelAndCheckingContents()
-         checkForRsvpPrivacy()
-         checkForUserPostedImage()
-         getLikesData()
-         getRsvpData()
-         setCreatedAtLabel()
-         updateCommentsLabel()
-
+        setupUI()
+        assignGestureRecognizers()
+        createTenseAndDateLabel()
+        setLocationLabelAndCheckingContents()
+        checkForRsvpPrivacy()
+        getLikesData()
+        getRsvpData()
+        setCreatedAtLabel()
     }
     
     func setupUI () {
@@ -210,33 +206,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
             }
             else if rsvpPrivate == false {
                 self.rsvpButton.enabled = true
-                }
-        }
-    }
-    
-    func checkForUserPostedImage() {
-        if (passedInObject.objectForKey("image") == nil) {
-            self.userPostedImage.alpha = 0.0
-            self.imageViewHeightConstraint.constant = 1
-            self.updateConstraintsIfNeeded()
-        }
-        else {
-            // Show the Media image view.
-            self.userPostedImage.alpha = 1.0
-            self.imageViewHeightConstraint.constant = 127
-            self.updateConstraintsIfNeeded()
-            
-            // Setup the user profile image file.
-            let statusImage = passedInObject["image"] as! PFFile
-            
-            // Download the profile image.
-            statusImage.getDataInBackgroundWithBlock { (mediaData: NSData?, error: NSError?) -> Void in
-                if ((error == nil) && (mediaData != nil)) {
-                    self.userPostedImage.image = UIImage(data: mediaData!)
-                }
-                else {
-                    self.userPostedImage.image = UIImage(imageLiteral: "no-image-icon + Rectangle 4")
-                }
             }
         }
     }
@@ -282,19 +251,19 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     func updateRsvpLabel(object: PFObject) {
         
-   /*     // Get the post rsvp data.
+        /*     // Get the post rsvp data.
         let rsvpArray:[String] = object.objectForKey("rsvpArray") as! Array
         
         if (rsvpArray.count > 0) {
-            if (rsvpArray.count == 1) {
-                self.rsvpLabel.text = "1"
-            }
-            else {
-                self.rsvpLabel.text = "\(rsvpArray.count)"
-            }
+        if (rsvpArray.count == 1) {
+        self.rsvpLabel.text = "1"
         }
         else {
-            self.rsvpLabel.text = "0"
+        self.rsvpLabel.text = "\(rsvpArray.count)"
+        }
+        }
+        else {
+        self.rsvpLabel.text = "0"
         } */
     }
     
@@ -308,30 +277,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
         }
         else {
             self.rsvpButton.selected = false
-        }
-        
-    }
-    
-    func updateCommentsLabel() {
-        var commentsquery:PFQuery!
-        commentsquery = PFQuery(className: "comment")
-        commentsquery.orderByDescending("createdAt")
-        commentsquery.addDescendingOrder("updatedAt")
-        commentsquery.whereKey("statusOBJID", equalTo: passedInObject.objectId!)
-        commentsquery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            
-            if (error == nil) {
-                
-                if (objects!.count == 1) {
-                    self.commentsLabel.text = "1 comment"
-                }
-                else {
-                    self.commentsLabel.text = "\(String(objects!.count)) comments"
-                }
-            }
-            else {
-                self.commentsLabel.text = "0 comments"
-            }
         }
         
     }
@@ -415,7 +360,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
         
         self.showLikesView()
     }
-
+    
     func likeClicked() {
         
         // Get the specific status object for this  
@@ -630,42 +575,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
         }
     }
     
-    //MARK: LOAD DATA METHODS
-    func findUserDetails() {
-        // Setup the user details query.
-        var findUser:PFQuery!
-        findUser = PFUser.query()!
-        findUser.whereKey("objectId", equalTo: (passedInObject.objectForKey("user")?.objectId)!)
-        
-        // Download the user detials.
-        findUser.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
-            
-            if let aobject = objects {
-                
-                let userObject = (aobject as NSArray).lastObject as? PFUser
-                
-                // Set the user name label.
-                self.UserNameLabel.text = userObject?.username
-                
-                // Check the profile image data first.
-                var profileImage = UIImage(named: "default_profile_pic.png")
-                
-                // Setup the user profile image file.
-                let userImageFile = userObject!["profileImage"] as! PFFile
-                
-                // Download the profile image.
-                userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-                    
-                    if ((error == nil) && (imageData != nil)) {
-                        profileImage = UIImage(data: imageData!)
-                    }
-                    
-                    self.profileimageview.image = profileImage
-                }
-            }
-        }
-    }
-
     func getLikesData() {
         let likesData:[String] = passedInObject.objectForKey("likesarray") as! Array
         highlightLikedButton(likesData)
