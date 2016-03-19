@@ -98,12 +98,12 @@ public class DOFavoriteButton: UIButton {
     }
 
     public required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         createLayers(image: UIImage())
         addTargets()
     }
 
-    private func createLayers(#image: UIImage!) {
+    private func createLayers(image image: UIImage!) {
         self.layer.sublayers = nil
 
         let imageFrame = CGRectMake(frame.size.width / 2 - frame.size.width / 4, frame.size.height / 2 - frame.size.height / 4, frame.size.width / 2, frame.size.height / 2)

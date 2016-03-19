@@ -36,7 +36,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     //MARK: LIFECYCLE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.automaticallyAdjustsScrollViewInsets = false;
 
         showRecommendedUsers(checkForNewUser())
         setActivityIndicatorForRefreshing()

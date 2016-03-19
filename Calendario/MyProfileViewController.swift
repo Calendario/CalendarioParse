@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import Parse
 import QuartzCore
-import DOFavoriteButton
 
 class MyProfileViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
