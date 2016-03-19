@@ -66,15 +66,17 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         self.navigationController?.navigationBar.translucent = false
         
-        //let image = UIImage()
-        // self.navigationController?.navigationBar.shadowImage = image
-        //  self.navigationController?.navigationBar.setBackgroundImage(image, forBarMetrics: UIBarMetrics.Default)
+        let image = UIImage()
+        self.navigationController?.navigationBar.shadowImage = image
+        self.navigationController?.navigationBar.setBackgroundImage(image, forBarMetrics: UIBarMetrics.Default)
     }
     
     func setTableViewProperties() {
         self.tableView.separatorInset = UIEdgeInsetsZero
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.sectionHeaderHeight = 0
+        self.tableView.sectionFooterHeight = 0
     }
     
     func setHashtagDefaultKey() {
