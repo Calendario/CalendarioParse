@@ -62,7 +62,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     func setupUI () {
         self.statusTextView.textColor = UIColor.darkGrayColor()
-        
+                
         // Setup the cell likes button.
         likebutton.layer.cornerRadius = 2.0
         likebutton.clipsToBounds = true

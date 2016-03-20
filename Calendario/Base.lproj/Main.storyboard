@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LND-N1-zbS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LND-N1-zbS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -818,57 +818,6 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4G-Fy-1FJ">
-                                            <rect key="frame" x="255" y="235" width="112" height="34"/>
-                                            <color key="backgroundColor" red="0.95795157068062831" green="0.95795157068062831" blue="0.95795157068062831" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="42" id="5Pv-cW-xLP"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="AjM-qA-H6D"/>
-                                                <constraint firstAttribute="height" constant="25" id="EeU-0x-JtS"/>
-                                                <constraint firstAttribute="height" constant="34" id="J5F-va-wge"/>
-                                                <constraint firstAttribute="width" secondItem="l4G-Fy-1FJ" secondAttribute="height" multiplier="27:28" id="KQt-Ri-aC4"/>
-                                                <constraint firstAttribute="width" constant="27" id="LPL-jZ-JFH"/>
-                                                <constraint firstAttribute="width" constant="32" id="SCX-sx-tHh"/>
-                                                <constraint firstAttribute="height" constant="34" id="ZDJ-PI-YC0"/>
-                                                <constraint firstAttribute="width" constant="112" id="Zpo-Qj-u1Q"/>
-                                                <constraint firstAttribute="width" constant="25" id="gau-FA-DRP"/>
-                                                <constraint firstAttribute="width" constant="91" id="mvf-Gz-GhF"/>
-                                                <constraint firstAttribute="height" constant="43" id="p6B-cl-O47"/>
-                                                <constraint firstAttribute="height" constant="28" id="tIm-Th-zIT"/>
-                                                <constraint firstAttribute="height" constant="33" id="xrt-sB-gCx"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="15"/>
-                                            <state key="normal" title="Attend">
-                                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="imageColorOn">
-                                                    <color key="value" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="duration">
-                                                    <real key="value" value="3"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="imageColorOff">
-                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="5Pv-cW-xLP"/>
-                                                    <exclude reference="AjM-qA-H6D"/>
-                                                    <exclude reference="EeU-0x-JtS"/>
-                                                    <exclude reference="KQt-Ri-aC4"/>
-                                                    <exclude reference="LPL-jZ-JFH"/>
-                                                    <exclude reference="SCX-sx-tHh"/>
-                                                    <exclude reference="ZDJ-PI-YC0"/>
-                                                    <exclude reference="gau-FA-DRP"/>
-                                                    <exclude reference="mvf-Gz-GhF"/>
-                                                    <exclude reference="p6B-cl-O47"/>
-                                                    <exclude reference="tIm-Th-zIT"/>
-                                                    <exclude reference="xrt-sB-gCx"/>
-                                                </mask>
-                                            </variation>
-                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="6 hrs Ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="ScK-QL-CoL">
                                             <rect key="frame" x="315" y="103" width="52" height="15"/>
                                             <constraints>
@@ -1003,6 +952,46 @@
                                                 <constraint firstAttribute="width" constant="17" id="h7r-fE-kSS"/>
                                             </constraints>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4G-Fy-1FJ">
+                                            <rect key="frame" x="255" y="235" width="112" height="34"/>
+                                            <color key="backgroundColor" red="0.95795157068062831" green="0.95795157068062831" blue="0.95795157068062831" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="42" id="5Pv-cW-xLP"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="AjM-qA-H6D"/>
+                                                <constraint firstAttribute="height" constant="25" id="EeU-0x-JtS"/>
+                                                <constraint firstAttribute="height" constant="34" id="J5F-va-wge"/>
+                                                <constraint firstAttribute="width" secondItem="l4G-Fy-1FJ" secondAttribute="height" multiplier="27:28" id="KQt-Ri-aC4"/>
+                                                <constraint firstAttribute="width" constant="27" id="LPL-jZ-JFH"/>
+                                                <constraint firstAttribute="width" constant="32" id="SCX-sx-tHh"/>
+                                                <constraint firstAttribute="height" constant="34" id="ZDJ-PI-YC0"/>
+                                                <constraint firstAttribute="width" constant="112" id="Zpo-Qj-u1Q"/>
+                                                <constraint firstAttribute="width" constant="25" id="gau-FA-DRP"/>
+                                                <constraint firstAttribute="width" constant="91" id="mvf-Gz-GhF"/>
+                                                <constraint firstAttribute="height" constant="43" id="p6B-cl-O47"/>
+                                                <constraint firstAttribute="height" constant="28" id="tIm-Th-zIT"/>
+                                                <constraint firstAttribute="height" constant="33" id="xrt-sB-gCx"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="15"/>
+                                            <state key="normal" title="Attend">
+                                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="5Pv-cW-xLP"/>
+                                                    <exclude reference="AjM-qA-H6D"/>
+                                                    <exclude reference="EeU-0x-JtS"/>
+                                                    <exclude reference="KQt-Ri-aC4"/>
+                                                    <exclude reference="LPL-jZ-JFH"/>
+                                                    <exclude reference="SCX-sx-tHh"/>
+                                                    <exclude reference="ZDJ-PI-YC0"/>
+                                                    <exclude reference="gau-FA-DRP"/>
+                                                    <exclude reference="mvf-Gz-GhF"/>
+                                                    <exclude reference="p6B-cl-O47"/>
+                                                    <exclude reference="tIm-Th-zIT"/>
+                                                    <exclude reference="xrt-sB-gCx"/>
+                                                </mask>
+                                            </variation>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="MAk-zZ-i98" secondAttribute="bottom" id="00k-VF-CME"/>

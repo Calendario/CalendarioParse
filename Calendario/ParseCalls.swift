@@ -95,7 +95,5 @@ public class ParseCalls: NSObject {
                 commentsLabel.text = "0 comments"
             }
         }
-        
     }
-    
 }

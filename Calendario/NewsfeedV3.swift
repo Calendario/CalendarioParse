@@ -261,11 +261,10 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         cell.passedInObject = self.sortedArray[indexPath.row] as! PFObject
         
         ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[indexPath.row] as! PFObject, animatedConstraint: cell.imageViewHeightConstraint, cell: cell)
-        
+            
         ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.sortedArray[indexPath.row] as! PFObject)
-        
-        ParseCalls.findUserDetails(self.sortedArray[indexPath.row] as! PFObject
-            , usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
+            
+        ParseCalls.findUserDetails(self.sortedArray[indexPath.row] as! PFObject, usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
         
         return cell
     }
