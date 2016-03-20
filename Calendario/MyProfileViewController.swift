@@ -29,7 +29,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var profDesc: UILabel!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var backgroundImage: UIImageView!
-
+    
     
     // Follow method property
     var FollowObject = FollowHelper()
@@ -65,9 +65,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func editProfile(sender: UIButton) {
-        
-        // Restore the size of the edit button.
-        self.restoreEditSize()
         
         // Open the appropriate section depending
         // on whether a user object has been passed in.
@@ -292,35 +289,30 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-//        self.inboxButton.setImage(nil, forState: .Normal)
-//        self.inboxButton.alpha = 0.0
-        
+        setupUI()
+        addTapGestures()
+    }
+    
+    func setupUI() {
         // Get the screen dimensions.
         let width = UIScreen.mainScreen().bounds.size.width
         
-        // Add the blocked blur view to the view.
         blockedBlurView.frame = CGRectMake(0, 0, width, self.view.bounds.size.height)
         blockedBlurView.alpha = 0.0
         self.view.addSubview(blockedBlurView)
-               
-        // Add the blur to the blocked view.
+        
         var visualEffectView:UIVisualEffectView!
         visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
         visualEffectView.frame = self.blockedBlurView.bounds
-        blockedBlurView.insertSubview(visualEffectView, atIndex: 0)
-       
-        //MARK: EDIT BUTTON METHODS
-//        // Add the edit button animation methods.
-//        self.editButton.addTarget(self, action: "makeEditSmaller", forControlEvents: .TouchDown)
-//        self.editButton.addTarget(self, action: "restoreEditSize", forControlEvents: .TouchCancel)
-//        self.editButton.addTarget(self, action: "restoreEditSize", forControlEvents: .TouchDragExit)
         
-        // Turn the profile picture into a cirlce.
+        blockedBlurView.insertSubview(visualEffectView, atIndex: 0)
+        
         self.profPicture.layer.cornerRadius = (self.profPicture.frame.size.width / 2)
         self.profPicture.clipsToBounds = true
-        
+    }
+    
+    func addTapGestures() {
         // Adding tap gesture reconizers to the following and follower labels.
         let followgesturereconizer = UITapGestureRecognizer(target: self, action: "GotoFollowingView")
         self.profFollowing.userInteractionEnabled = true
@@ -329,6 +321,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         let followergesturereconizer = UITapGestureRecognizer(target: self, action: "GotoFollowerView")
         self.profFollowers.userInteractionEnabled = true
         self.profFollowers.addGestureRecognizer(followergesturereconizer)
+        
     }
     
     // Gesture methods.
@@ -363,13 +356,11 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         self.statusList.rowHeight = UITableViewAutomaticDimension;
         self.statusList.estimatedRowHeight = 292;
         self.statusList.separatorInset = UIEdgeInsetsZero
-
+        
         
         // By default the more button is diabled until
         // we have downloaded the appropriate user data.
         settingsButton.enabled = false
-//        inboxButton.enabled = false
-//        inboxButton.alpha = 0.0
         self.blockCheck = 0
         
         // Check to see if a user is being passed into the
@@ -379,32 +370,22 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             
             // Allow status updates to be fetched.
             self.statusLoadCheck = true
-
-            //MARK: EDIT BUTTON METHODS
-//            // Set the edit button text.
-//            self.editButton.setTitle("Edit Profile", forState: UIControlState.Normal)
-            
-
-//            // Show the inbox button.
-//            inboxButton.enabled = true
-//            inboxButton.setImage(UIImage(named: "inbox.png"), forState: .Normal)
-//            inboxButton.setTitle(nil, forState: .Normal)
             
             // Hide the back button if no
             // user has been passed in.
-
+            
             //MARK: BACKBUTTON METHOD
-//            if (passedUser == nil) {
-//                
-//                backButton.image = nil
-//                backButton.enabled = false
-//            }
-//                
-//            else {
-//                
-//                backButton.image = UIImage(named: "left_icon.png")
-//                backButton.enabled = true
-//            }
+            //            if (passedUser == nil) {
+            //
+            //                backButton.image = nil
+            //                backButton.enabled = false
+            //            }
+            //
+            //            else {
+            //
+            //                backButton.image = UIImage(named: "left_icon.png")
+            //                backButton.enabled = true
+            //            }
             
             // Update the follow requests badge.
             var followQuery:PFQuery!
@@ -416,19 +397,11 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                     
                     if (object!.count > 0) {
                         
-//                        // Set the inbox button badge properties.
-//                        self.inboxButton.badgeTextColor = UIColor.whiteColor()
-//                        self.inboxButton.badgeEdgeInsets = UIEdgeInsetsMake(13, 0, 0, 29)
-//                        self.inboxButton.badgeString = "\(object!.count)"
                     }
                         
                     else {
-//                        self.inboxButton.badgeString = nil
                     }
                     
-                    // Show the inbox button after the
-                    // properties have been set.
-//                    self.inboxButton.alpha = 1.0
                 })
             }
             
@@ -490,15 +463,10 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             
             
             //MARK: BACK BUTTON METHODS
-//            // Set the back button image and display it.
-//            backButton.image = UIImage(named: "left_icon.png")
-//            backButton.enabled = true
+            //            // Set the back button image and display it.
+            //            backButton.image = UIImage(named: "left_icon.png")
+            //            backButton.enabled = true
             
-            
-//            // Hide the inbox button.
-//            inboxButton.enabled = false
-//            inboxButton.setImage(nil, forState: .Normal)
-//            
             // Check if the user is a private account.
             privateCheck = passedUser?.objectForKey("privateProfile") as? Bool
             
@@ -510,16 +478,9 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                     
                     // Allow status updates to be fetched.
                     self.statusLoadCheck = true
-                  
-                    //MARK: EDIT BUTTON METHODS
-                    // Set the edit button text.
-//                    self.editButton.setTitle("Following \(self.passedUser.username!)", forState: UIControlState.Normal)
                 }
                     
                 else {
-                    
-                    // Set the edit button text.
-//                    self.editButton.setTitle("Follow \(self.passedUser.username!)", forState: UIControlState.Normal)
                     
                     // If the user is private then disallow
                     // the status updates to be fetched.
@@ -575,20 +536,20 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // Check if the user is verified.
         let verify = userData.objectForKey("verifiedUser")
         
-//        if (verify == nil) {
-////            self.profVerified.alpha = 0.0
-//        }
-//            
-//        else {
-//            
-//            if (verify as! Bool == true) {
-//                self.profVerified.alpha = 1.0
-//            }
-//                
-//            else {
-//                self.profVerified.alpha = 0.0
-//            }
-//        }
+        //        if (verify == nil) {
+        ////            self.profVerified.alpha = 0.0
+        //        }
+        //
+        //        else {
+        //
+        //            if (verify as! Bool == true) {
+        //                self.profVerified.alpha = 1.0
+        //            }
+        //
+        //            else {
+        //                self.profVerified.alpha = 0.0
+        //            }
+        //        }
         
         // Check if the user has a profile image.
         
@@ -730,32 +691,15 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // Setup the table view custom cell.
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
         
-        // Check if we can load the status updates.
+        // Get the specific status object for this cell and call all needed methods.
+        cell.passedInObject = self.statusObjects[indexPath.row] as! PFObject
         
-        if (self.statusLoadCheck == true) {
-            
-            // Set the specific status object for this cell.
-            cell.passedInObject = self.statusObjects.objectAtIndex(indexPath.row) as! PFObject
-        }
+        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.statusObjects[indexPath.row] as! PFObject, animatedConstraint: cell.imageViewHeightConstraint, cell: cell)
         
-        else {
-   
-            // Hide all cell views.
-            cell.UserNameLabel.alpha = 0.0
-            cell.commentsLabel.alpha = 0.0
-            cell.userPostedImage.alpha = 0.0
-            cell.createdAtLabel.alpha = 0.0
-            cell.statusTextView.alpha = 0.0
-            cell.likebutton.alpha = 0.0
-            cell.commentButton.alpha = 0.0
-            cell.profileimageview.alpha = 0.0
-            cell.uploaddatelabel.alpha = 0.0
-            cell.locationLabel.alpha = 0.0
-            cell.likeslabel.alpha = 0.0
-            
-            // Show the private view.
-            cell.privateView.alpha = 1.0
-        }
+        ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.statusObjects[indexPath.row] as! PFObject)
+        
+        ParseCalls.findUserDetails(self.statusObjects[indexPath.row] as! PFObject
+            , usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
         
         return cell
     }
@@ -796,7 +740,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setObject(statusupdate.objectId, forKey: "reported")
             
-            self.ReportView()
+            PresentingViews.ReportView(self)
             
             var reportquery:PFQuery!
             reportquery = PFQuery(className: "StatusUpdate")
@@ -827,19 +771,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 }
             })
         }
-        
-//        // Setup the see more button.
-//        let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
-//            
-//            let defaults = NSUserDefaults.standardUserDefaults()
-//            let updatetext = statusupdate.objectForKey("updatetext") as! String
-//            let currentobjectID = statusupdate.objectId
-//            
-//            defaults.setObject(updatetext, forKey: "updatetext")
-//            defaults.setObject(currentobjectID, forKey: "objectId")
-//            
-//            self.Seemore()
-//        }
         
         // Setup the delete status button.
         let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in
@@ -886,7 +817,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         }
         
         // Set the button backgrond colours.
-     //   seemore.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        //   seemore.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         report.backgroundColor = UIColor(red: 236/255.0, green: 236/255.0, blue: 236/255.0, alpha: 1.0)
         deletestatus.backgroundColor = UIColor(red: 255/255.0, green: 80/255.0, blue: 79/255.0, alpha: 1.0)
         
@@ -929,26 +860,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         presentViewController(alertController, animated: true, completion: nil)
     }
     
-    // Animation methods.
-    
-    func makeEditSmaller() {
-
-        //MARK: EDIT BUTTON METHODS
-//        // Run the 'small' animation.
-//        UIView.animateWithDuration(0.3 , animations: {
-//            self.editButton.transform = CGAffineTransformMakeScale(0.75, 0.75)
-//        }, completion: nil)
-    }
-    
-    func restoreEditSize() {
-
-        //MARK: EDIT BUTTON METHODS
-//        // Make the button bigger again.
-//        UIView.animateWithDuration(0.3) {
-//            self.editButton.transform = CGAffineTransformIdentity
-//        }
-    }
-    
     // Follow methods.
     
     func followOrUnfolowUser(userData: PFUser) {
@@ -966,10 +877,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 // operation succeded or failed.
                 
                 if (followUnfollowstatus == true) {
-
-                    //MARK: EDIT BUTTON METHODS
-//                    // Set the edit button text.
-//                    self.editButton.setTitle("\(buttonTitle) \(self.passedUser.username!)", forState: UIControlState.Normal)
                     
                     // Display the success alert.
                     self.displayAlert("Success", alertMessage: message)
@@ -993,38 +900,5 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             self.profFollowers.text = "\(countObject.valueForKey("userFollowers")!.count)"
             self.profFollowing.text = "\(countObject.valueForKey("userFollowing")!.count)"
         }
-    }
-    
-    // Other methods.
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "timelineComments" {
-            //let vc = segue.destinationViewController as! CommentsViewController
-            //vc.savedobjectID = currentObjectid
-        }
-    }
-    
-    func ReportView() {
-        
-        // Open the report view.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let reportVC = sb.instantiateViewControllerWithIdentifier("report") as! ReportTableViewController
-        let NC = UINavigationController(rootViewController: reportVC)
-        self.presentViewController(NC, animated: true, completion: nil)
-    }
-    
-//    func Seemore() {
-//        
-//        // Open the see more view.
-//        let sb = UIStoryboard(name: "Main", bundle: nil)
-//        let SMVC = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
-//        let NC = UINavigationController(rootViewController: SMVC)
-//        self.presentViewController(NC, animated: true, completion: nil)
-//    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

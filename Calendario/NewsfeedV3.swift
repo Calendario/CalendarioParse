@@ -122,21 +122,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    func ReportView() {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let reportVC = sb.instantiateViewControllerWithIdentifier("report") as! ReportTableViewController
-        let NC = UINavigationController(rootViewController: reportVC)
-        self.presentViewController(NC, animated: true, completion: nil)
-    }
-    
-    //    func Seemore() {
-    //        // Open the see more view.
-    //        let sb = UIStoryboard(name: "Main", bundle: nil)
-    //        let SMVC = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
-    //        let NC = UINavigationController(rootViewController: SMVC)
-    //        self.presentViewController(NC, animated: true, completion: nil)
-    //    }
-    
     func displayAlert(alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
@@ -296,7 +281,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
             
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setObject(statusupdate.objectId, forKey: "reported")
-            self.ReportView()
+            PresentingViews.ReportView(self)
             
             var reportquery:PFQuery!
             reportquery = PFQuery(className: "StatusUpdate")
@@ -403,3 +388,65 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         }
     }
 }
+
+
+
+//MARK: DEREKS TENSE SORTING METHOD
+//func isDatePassed(date1:NSDate, date2:NSDate, ParseID: String)
+//{
+//    print(date1)
+//    
+//    let dateformatter = NSDateFormatter()
+//    dateformatter.dateFormat = "M/d/yy"
+//    var newdate = dateformatter.stringFromDate(date2)
+//    
+//    
+//    
+//    if date1.timeIntervalSince1970 < date2.timeIntervalSince1970
+//    {
+//        print("Date2 has passed")
+//        
+//        var query = PFQuery(className: "StatusUpdate")
+//        query.orderByDescending("createdAt")
+//        query.addDescendingOrder("dateofevent")
+//        query.addDescendingOrder("updateddAt")
+//        query.getObjectInBackgroundWithId(ParseID, block: { (updates:PFObject?, error:NSError?) -> Void in
+//            if error == nil
+//            {
+//                var aobject:PFObject = updates!
+//                
+//                print(error)
+//                
+//                print(aobject.objectForKey("dateofevent") as! String)
+//                print(newdate)
+//                
+//                if aobject.objectForKey("dateofevent") as! String == newdate
+//                {
+//                    print("tense stays")
+//                    aobject["tense"] = "Currently"
+//                    aobject.saveInBackground()
+//                    
+//                    
+//                }
+//
+//                if  aobject.objectForKey("dateofevent") as! String > newdate
+//       
+//                    
+//                {
+//                    print("going tense")
+//                    aobject["tense"] = "Going"
+//                    aobject.saveInBackground()
+//                }
+//   
+//                else if newdate != aobject.objectForKey("dateofevent") as! String
+//                {
+//                    print("tense is going to change")
+//                    aobject["tense"] = "went"
+//                    aobject.saveInBackground()
+//                    
+//                }
+//            }
+//        })
+//    }
+//}
+

@@ -164,7 +164,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
                 defaults = NSUserDefaults.standardUserDefaults()
                 defaults.setObject(([1, hashtag]) as NSMutableArray, forKey: "HashtagData")
                 defaults.synchronize()
-                self.presentHashtagsView()
+                PresentingViews.presentHashtagsView(self)
             }
         }
     }
@@ -188,7 +188,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
                     
                     // Check for errors before passing
                     if ((error == nil) && (userObject != nil)) {
-                        self.showProfileView(userObject!)
+                        PresentingViews.showProfileView(userObject!, viewController: self)
                     }
                 })
             }
@@ -305,48 +305,11 @@ class NewsfeedTableViewCell: PFTableViewCell {
         }
     }
     
-    //MARK: SHOW VIEWS METHODS
-    func showProfileView(passedUserObject: PFObject) {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let reportVC = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
-        reportVC.passedUser = passedUserObject as! PFUser
-        self.parentViewController.presentViewController(reportVC, animated: true, completion: nil)
-    }
-    
-    func presentHashtagsView() {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let likesView = sb.instantiateViewControllerWithIdentifier("HashtagNav") as! UINavigationController
-        self.parentViewController.presentViewController(likesView, animated: true, completion: nil)
-    }
-    
-    func openComments(commentsID: String) {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let commentvc = sb.instantiateViewControllerWithIdentifier("comments") as! CommentsViewController
-        commentvc.savedobjectID = commentsID
-        let NC = UINavigationController(rootViewController: commentvc)
-        self.parentViewController.presentViewController(NC, animated: true, completion: nil)
-    }
-    
-    func showPhotoViewer() {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let PVC = sb.instantiateViewControllerWithIdentifier("PhotoV2") as! PhotoViewV2
-        PVC.passedImage = self.userPostedImage.image!
-        let NC = UINavigationController(rootViewController: PVC)
-        self.parentViewController.presentViewController(NC, animated: true, completion: nil)
-    }
-    
-    func showLikesView() {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let likesView = sb.instantiateViewControllerWithIdentifier("likesNav") as! UINavigationController
-        self.parentViewController.presentViewController(likesView, animated: true, completion: nil)
-    }
-    
-    
     //MARK: TAP GESTURE METHODS
     func commentsLabelClicked(sender: UITapGestureRecognizer) {
         let currentObject:PFObject = self.passedInObject
         // Open the comments view.
-        self.openComments(currentObject.objectId!)
+        PresentingViews.openComments(currentObject.objectId!, viewController: self)
     }
     
     func goToLikesList(sender: UITapGestureRecognizer) {
@@ -358,7 +321,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
         defaults.setObject(currentObject.objectId!, forKey: "likesListID")
         defaults.synchronize()
         
-        self.showLikesView()
+        PresentingViews.showLikesView(self)
     }
     
     func likeClicked() {
@@ -430,11 +393,11 @@ class NewsfeedTableViewCell: PFTableViewCell {
     }
     
     func commentClicked(sender: UIButton) {
-        self.openComments(self.passedInObject.objectId!)
+        PresentingViews.openComments(self.passedInObject.objectId!, viewController: self)
     }
     
     func imageTapped(sender: UITapGestureRecognizer) {
-        self.showPhotoViewer()
+        PresentingViews.showPhotoViewer(self, userPostedImage: self.userPostedImage)
     }
     
     func goToProfile(sender: UITapGestureRecognizer) {
@@ -450,8 +413,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
         userQuery.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
             
             if let aobject = objects {
-                self.showProfileView(((aobject as NSArray).lastObject as? PFUser)!
-                )
+                PresentingViews.showProfileView(((aobject as NSArray).lastObject as? PFUser)!, viewController: self)
             }
         }
     }

@@ -4,6 +4,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SignPainter-HouseScript.ttf">
+            <string>SignPainter-HouseScript</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -17,9 +22,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginViewTitle" translatesAutoresizingMaskIntoConstraints="NO" id="cla-hv-uM2">
-                                <rect key="frame" x="38" y="130" width="298" height="66"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YeM-oU-eMM">
                                 <rect key="frame" x="20" y="629" width="335" height="18"/>
                                 <string key="text">Copyright © 2016 Calendario. All rights reserved.
@@ -28,17 +30,22 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendario" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dp-sW-RY7">
+                                <rect key="frame" x="62.5" y="167" width="250.5" height="66.5"/>
+                                <fontDescription key="fontDescription" name="SignPainter-HouseScript" family="SignPainter" pointSize="72"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.1333333333" green="0.52941176469999995" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="cla-hv-uM2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6If-zD-ao9"/>
                             <constraint firstItem="YeM-oU-eMM" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="20" id="DBm-gg-fFp"/>
                             <constraint firstAttribute="trailing" secondItem="YeM-oU-eMM" secondAttribute="trailing" constant="20" id="DPT-2r-U7A"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="YeM-oU-eMM" secondAttribute="bottom" constant="20" id="F9A-vB-yVr"/>
+                            <constraint firstItem="6dp-sW-RY7" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="0.6" id="L80-4V-SJc"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="YeM-oU-eMM" secondAttribute="bottom" constant="20" id="Vlb-8d-1Qk"/>
-                            <constraint firstItem="cla-hv-uM2" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="110" id="WSO-ML-fID"/>
                             <constraint firstItem="YeM-oU-eMM" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bYz-es-GJP"/>
-                            <constraint firstItem="cla-hv-uM2" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.794" id="yqd-fd-ROg"/>
+                            <constraint firstItem="6dp-sW-RY7" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="sOe-cE-Shk"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -53,7 +60,4 @@
             <point key="canvasLocation" x="89.5" y="388.5"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="loginViewTitle" width="345" height="66"/>
-    </resources>
 </document>
