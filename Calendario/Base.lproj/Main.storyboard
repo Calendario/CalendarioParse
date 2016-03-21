@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LND-N1-zbS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LND-N1-zbS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -650,7 +650,7 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="KhO-HU-Fzo">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="KhO-HU-Fzo">
                                                     <rect key="frame" x="70" y="34" width="56" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="b4w-nE-rQj"/>
@@ -664,7 +664,7 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="cwP-EW-rcB">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="cwP-EW-rcB">
                                                     <rect key="frame" x="70" y="49" width="47" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="19" id="RxS-bw-WKY"/>
@@ -678,7 +678,7 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0y-Pa-UKA">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0y-Pa-UKA">
                                                     <rect key="frame" x="70" y="16" width="66" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="19" id="JQf-Ng-vci"/>
@@ -695,7 +695,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2bk-oR-I48" userLabel="Attendant Container">
                                                     <rect key="frame" x="318" y="16" width="49" height="49"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdg-qK-gUr">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdg-qK-gUr">
                                                             <rect key="frame" x="18" y="30" width="14" height="14"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="12"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -731,7 +731,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nKu-mN-9eq" userLabel="Like Container">
                                                     <rect key="frame" x="261" y="16" width="49" height="49"/>
                                                     <subviews>
-                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eOW-cl-tPW">
+                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eOW-cl-tPW">
                                                             <rect key="frame" x="18" y="30" width="14" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="DxH-Sv-3aF"/>
@@ -827,7 +827,7 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="GOING ON 2/25/16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5q3-2M-rR7">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOING ON 2/25/16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5q3-2M-rR7">
                                             <rect key="frame" x="31" y="98" width="123" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="17" id="etC-og-NdB"/>
@@ -836,7 +836,7 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QS9-mh-IYB" userLabel="Comment Container">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QS9-mh-IYB" userLabel="Comment Container">
                                             <rect key="frame" x="8" y="237" width="124" height="30"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHa-zv-rEg">
@@ -848,7 +848,7 @@
                                                     </constraints>
                                                     <state key="normal" image="comment"/>
                                                 </button>
-                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="20 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9o0-GD-rNj" userLabel="commentsLabel">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9o0-GD-rNj" userLabel="commentsLabel">
                                                     <rect key="frame" x="33" y="7" width="89" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="7hx-V6-bxO"/>
@@ -1114,7 +1114,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Calendario" id="FfO-cq-2WP">
-                        <barButtonItem key="leftBarButtonItem" image="add_icon" id="Her-MP-XjM">
+                        <barButtonItem key="leftBarButtonItem" image="upload_icon" id="Her-MP-XjM">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="createStatus:" destination="fk2-g8-CoW" id="Zba-fm-3h9"/>
@@ -1493,7 +1493,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Post" id="p7X-BI-Ce8">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="2jb-xx-NDH">
+                                        <barButtonItem key="leftBarButtonItem" image="back_button" id="2jb-xx-NDH">
                                             <inset key="imageInsets" minX="-2" minY="2" maxX="6" maxY="2"/>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
@@ -1708,7 +1708,7 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1M-Wa-Ujd">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1M-Wa-Ujd">
                                                     <rect key="frame" x="60" y="19" width="307" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="42" id="Kdg-ey-IIv"/>
@@ -1961,7 +1961,7 @@
                                                                 </mask>
                                                             </variation>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="m3y-y9-hpd">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="m3y-y9-hpd">
                                                             <rect key="frame" x="70" y="34" width="56" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="u0m-HF-5AV"/>
@@ -1975,7 +1975,7 @@
                                                                 </mask>
                                                             </variation>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="TMr-7T-xdX">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="TMr-7T-xdX">
                                                             <rect key="frame" x="70" y="49" width="47" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="19" id="bln-LA-ixG"/>
@@ -1989,7 +1989,7 @@
                                                                 </mask>
                                                             </variation>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbl-MH-6lG">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbl-MH-6lG">
                                                             <rect key="frame" x="70" y="16" width="66" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="19" id="Qj8-Cp-tDD"/>
@@ -2006,7 +2006,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hCO-aM-rzx" userLabel="Attendant Container">
                                                             <rect key="frame" x="318" y="16" width="49" height="49"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="616-Ru-Szw">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="616-Ru-Szw">
                                                                     <rect key="frame" x="18" y="30" width="14" height="14"/>
                                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="12"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -2042,7 +2042,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blw-6Z-7Lf" userLabel="Like Container">
                                                             <rect key="frame" x="261" y="16" width="49" height="49"/>
                                                             <subviews>
-                                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wDz-Hb-Kzp">
+                                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wDz-Hb-Kzp">
                                                                     <rect key="frame" x="18" y="30" width="14" height="14"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="XC3-3j-zsT"/>
@@ -2178,7 +2178,7 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="GOING ON 2/25/16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvp-zi-6H8">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOING ON 2/25/16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvp-zi-6H8">
                                                     <rect key="frame" x="31" y="98" width="123" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="17" id="FQf-Lc-1na"/>
@@ -2187,7 +2187,7 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BX3-Xa-zaZ" userLabel="Comment Container">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BX3-Xa-zaZ" userLabel="Comment Container">
                                                     <rect key="frame" x="8" y="237" width="124" height="30"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xU-Hm-sdn">
@@ -2199,7 +2199,7 @@
                                                             </constraints>
                                                             <state key="normal" image="comment"/>
                                                         </button>
-                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="20 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sf-Yd-lLj" userLabel="commentsLabel">
+                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sf-Yd-lLj" userLabel="commentsLabel">
                                                             <rect key="frame" x="33" y="7" width="89" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="7bd-AV-Itu"/>
@@ -2895,7 +2895,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Reset Password" id="lPy-kJ-PwT">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="c2G-0U-OQc">
+                                        <barButtonItem key="leftBarButtonItem" image="back_button" id="c2G-0U-OQc">
                                             <inset key="imageInsets" minX="-2" minY="2" maxX="6" maxY="2"/>
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
@@ -3399,7 +3399,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Sign Up" id="ZKc-5v-Xkl">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="Azl-tl-UDw">
+                                        <barButtonItem key="leftBarButtonItem" image="back_button" id="Azl-tl-UDw">
                                             <inset key="imageInsets" minX="-2" minY="2" maxX="6" maxY="2"/>
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
@@ -3654,7 +3654,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Settings" id="ppj-jy-ZIt">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="kJz-3p-cTD">
+                                        <barButtonItem key="leftBarButtonItem" image="back_button" id="kJz-3p-cTD">
                                             <inset key="imageInsets" minX="-2" minY="2" maxX="6" maxY="2"/>
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
@@ -3825,7 +3825,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Privacy Policy" id="EQ4-ce-091">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="9E5-UC-k6E">
+                                        <barButtonItem key="leftBarButtonItem" image="back_button" id="9E5-UC-k6E">
                                             <inset key="imageInsets" minX="-2" minY="2" maxX="6" maxY="2"/>
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
@@ -3960,7 +3960,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Terms of Service" id="tlS-IQ-aCg">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="t8o-Dk-7xu">
+                                        <barButtonItem key="leftBarButtonItem" image="back_button" id="t8o-Dk-7xu">
                                             <inset key="imageInsets" minX="-2" minY="2" maxX="6" maxY="2"/>
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
@@ -4502,13 +4502,13 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 </mask>
                                                             </variation>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVB-Xf-xKE">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVB-Xf-xKE">
                                                             <rect key="frame" x="31" y="4" width="9" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POSTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DS7-IM-sL7">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="POSTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DS7-IM-sL7">
                                                             <rect key="frame" x="46" y="4" width="45" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4598,7 +4598,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 </mask>
                                                             </variation>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="7uZ-De-7VV">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="7uZ-De-7VV">
                                                             <rect key="frame" x="70" y="34" width="56" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="NCl-QT-Tb5"/>
@@ -4612,7 +4612,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 </mask>
                                                             </variation>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="FKg-PK-Gke">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="FKg-PK-Gke">
                                                             <rect key="frame" x="70" y="49" width="47" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="19" id="VfH-AL-IKX"/>
@@ -4626,7 +4626,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 </mask>
                                                             </variation>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lid-BS-DZA">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lid-BS-DZA">
                                                             <rect key="frame" x="70" y="16" width="66" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="19" id="Z2f-8j-A1m"/>
@@ -4643,7 +4643,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PLZ-21-wTp" userLabel="Attendant Container">
                                                             <rect key="frame" x="318" y="16" width="49" height="49"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vta-Et-Lv9">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vta-Et-Lv9">
                                                                     <rect key="frame" x="18" y="30" width="14" height="14"/>
                                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="12"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -4679,7 +4679,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t73-XA-RbS" userLabel="Like Container">
                                                             <rect key="frame" x="261" y="16" width="49" height="49"/>
                                                             <subviews>
-                                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XNi-NW-fRT">
+                                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XNi-NW-fRT">
                                                                     <rect key="frame" x="18" y="30" width="14" height="14"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="GPB-ZE-kAN"/>
@@ -4815,7 +4815,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="GOING ON 2/25/16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9WD-7k-B3J">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOING ON 2/25/16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9WD-7k-B3J">
                                                     <rect key="frame" x="31" y="98" width="123" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="17" id="E15-fI-SIx"/>
@@ -4824,7 +4824,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7nw-ng-PTl" userLabel="Comment Container">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7nw-ng-PTl" userLabel="Comment Container">
                                                     <rect key="frame" x="8" y="237" width="124" height="30"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3nb-Jp-jcO">
@@ -4836,7 +4836,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             </constraints>
                                                             <state key="normal" image="comment"/>
                                                         </button>
-                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="20 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLA-nC-Ls3" userLabel="commentsLabel">
+                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLA-nC-Ls3" userLabel="commentsLabel">
                                                             <rect key="frame" x="33" y="7" width="89" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="ne5-aq-0y8"/>
@@ -5140,7 +5140,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 </textAttributes>
                                 <items>
                                     <navigationItem id="eMz-eP-fYr">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="fyg-pK-N1P">
+                                        <barButtonItem key="leftBarButtonItem" image="back_button" id="fyg-pK-N1P">
                                             <inset key="imageInsets" minX="-2" minY="2" maxX="6" maxY="2"/>
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
@@ -5489,7 +5489,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="KILabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Opn-vO-qEd" customClass="KILabel">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KILabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Opn-vO-qEd" customClass="KILabel">
                                                 <rect key="frame" x="127" y="89" width="45" height="18"/>
                                                 <color key="tintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="13"/>
@@ -6330,7 +6330,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Edit Profile" id="bOD-i5-VyN">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="UMf-Ps-Sll">
+                                        <barButtonItem key="leftBarButtonItem" image="back_button" id="UMf-Ps-Sll">
                                             <inset key="imageInsets" minX="-2" minY="2" maxX="6" maxY="2"/>
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
@@ -6476,7 +6476,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Cn5-pF-IYJ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Cn5-pF-IYJ">
                                                     <rect key="frame" x="70" y="34" width="56" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="ElG-S7-cp8"/>
@@ -6490,7 +6490,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vcn-ff-D9A">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vcn-ff-D9A">
                                                     <rect key="frame" x="70" y="49" width="47" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="19" id="RyM-np-cVM"/>
@@ -6504,7 +6504,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yL-Ug-5xw">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yL-Ug-5xw">
                                                     <rect key="frame" x="70" y="16" width="66" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="19" id="ywK-5n-hJf"/>
@@ -6521,7 +6521,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCq-ux-Oua" userLabel="Attendant Container">
                                                     <rect key="frame" x="318" y="16" width="49" height="49"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bkr-P9-INh">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bkr-P9-INh">
                                                             <rect key="frame" x="14" y="9" width="20" height="20"/>
                                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
@@ -6529,7 +6529,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 <constraint firstAttribute="height" constant="20" id="h5c-eF-cfD"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtH-88-Yo8">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtH-88-Yo8">
                                                             <rect key="frame" x="18" y="31" width="14" height="14"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="12"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -6557,7 +6557,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tjj-Dk-80E" userLabel="Like Container">
                                                     <rect key="frame" x="261" y="16" width="49" height="49"/>
                                                     <subviews>
-                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="A4q-R1-um0">
+                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="A4q-R1-um0">
                                                             <rect key="frame" x="18" y="31" width="14" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="PnT-rQ-PEf"/>
@@ -6573,7 +6573,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 </mask>
                                                             </variation>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cxY-rr-G60">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cxY-rr-G60">
                                                             <rect key="frame" x="14" y="9" width="20" height="20"/>
                                                         </imageView>
                                                     </subviews>
@@ -6701,19 +6701,19 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="6 hrs Ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="J1O-Mc-p4c">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6 hrs Ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="J1O-Mc-p4c">
                                             <rect key="frame" x="315" y="86" width="52" height="14"/>
                                             <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="GOING ON 2/25/16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRe-sN-UZH">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOING ON 2/25/16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRe-sN-UZH">
                                             <rect key="frame" x="8" y="94" width="123" height="17"/>
                                             <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KVh-eR-Sbd" userLabel="Comment Container">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KVh-eR-Sbd" userLabel="Comment Container">
                                             <rect key="frame" x="8" y="180" width="108" height="30"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kbw-xh-YUR">
@@ -6725,7 +6725,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     </constraints>
                                                     <state key="normal" image="comment"/>
                                                 </button>
-                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="20 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEV-xk-Kxt" userLabel="commentsLabel">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEV-xk-Kxt" userLabel="commentsLabel">
                                                     <rect key="frame" x="30" y="8" width="76" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="pBO-S3-Z6A"/>
@@ -6979,7 +6979,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Image" id="Wbp-ZY-tTN">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="27H-Lt-N7D">
+                                        <barButtonItem key="leftBarButtonItem" image="back_button" id="27H-Lt-N7D">
                                             <inset key="imageInsets" minX="-2" minY="2" maxX="6" maxY="2"/>
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
@@ -7189,7 +7189,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Follow Requests" id="ZO8-Zf-MEE">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="uck-u8-kai">
+                                        <barButtonItem key="leftBarButtonItem" image="back_button" id="uck-u8-kai">
                                             <inset key="imageInsets" minX="-2" minY="2" maxX="6" maxY="2"/>
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
@@ -7433,7 +7433,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Report User" id="LEl-dH-yyo">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="uyZ-pX-nTx">
+                                        <barButtonItem key="leftBarButtonItem" image="back_button" id="uyZ-pX-nTx">
                                             <inset key="imageInsets" minX="-2" minY="2" maxX="6" maxY="2"/>
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
@@ -7509,9 +7509,9 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="Followers_Icon" width="22" height="22"/>
         <image name="Video button" width="94" height="94"/>
         <image name="addUserV2" width="50" height="50"/>
-        <image name="add_icon" width="15" height="15"/>
         <image name="approve" width="50" height="50"/>
         <image name="attendants_icon" width="30" height="23"/>
+        <image name="back_button" width="22" height="22"/>
         <image name="block" width="60" height="60"/>
         <image name="bookmark_ribbon" width="120" height="120"/>
         <image name="camera_icon" width="94" height="94"/>
@@ -7531,6 +7531,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="right_arrow" width="50" height="50"/>
         <image name="search_icon" width="15" height="15"/>
         <image name="tense_icon" width="29" height="33"/>
+        <image name="upload_icon" width="15" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jbQ-WG-YYd"/>

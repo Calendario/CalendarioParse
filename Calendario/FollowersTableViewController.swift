@@ -32,7 +32,7 @@ class FollowersTableViewController: UITableViewController {
         self.navigationItem.title  = "Followers"
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.translucent = false
-        let font = UIFont(name: "Futura-Medium", size: 21)
+        let font = UIFont(name: "SFUIDisplay-Regular", size: 21)
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font!]
         self.navigationController!.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
         
