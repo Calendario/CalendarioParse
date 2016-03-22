@@ -26,7 +26,9 @@ class IntrochildViewController: UIViewController, UIPageViewControllerDataSource
             appVC.willMoveToParentViewController(self)
             addChildViewController(appVC)
             
-            transitionFromViewController(currentVC, toViewController: appVC, duration: 1.0, options: .TransitionCrossDissolve, animations: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>, completion: { (completed: Bool) -> Void in
+            transitionFromViewController(currentVC, toViewController: appVC, duration: 1.0, options: .TransitionCrossDissolve, animations: { () -> Void in
+                //
+                }, completion: { (completed: Bool) -> Void in
                 currentVC.removeFromParentViewController()
                 appVC.didMoveToParentViewController(self)
             })
