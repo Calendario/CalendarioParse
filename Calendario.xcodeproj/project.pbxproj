@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2E3815A2F569919034060D65 /* Pods_Calendario.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6049A409A8BD5F08D9B8AD /* Pods_Calendario.framework */; };
+		784E96191CA185CC00085057 /* IntrochildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E96181CA185CC00085057 /* IntrochildViewController.swift */; };
+		784E961B1CA1980D00085057 /* LastIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E961A1CA1980D00085057 /* LastIntroViewController.swift */; };
 		78C1C01C1C006D9200ACDCEC /* reportBug.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C1C01B1C006D9200ACDCEC /* reportBug.m */; };
 		78CE15B21C95CDE800257C4B /* settings-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CE15B11C95CDE800257C4B /* settings-icon.png */; };
 		78CE15B71C95CE2F00257C4B /* follow-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CE15B31C95CE2F00257C4B /* follow-icon.png */; };
@@ -167,6 +169,8 @@
 
 /* Begin PBXFileReference section */
 		6226D36FBFFA1852A9570CBB /* Pods-Calendario.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calendario.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Calendario/Pods-Calendario.debug.xcconfig"; sourceTree = "<group>"; };
+		784E96181CA185CC00085057 /* IntrochildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntrochildViewController.swift; sourceTree = "<group>"; };
+		784E961A1CA1980D00085057 /* LastIntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastIntroViewController.swift; sourceTree = "<group>"; };
 		78C1C01A1C006D9200ACDCEC /* reportBug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reportBug.h; sourceTree = "<group>"; };
 		78C1C01B1C006D9200ACDCEC /* reportBug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = reportBug.m; sourceTree = "<group>"; };
 		78CE15B11C95CDE800257C4B /* settings-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-icon.png"; sourceTree = "<group>"; };
@@ -414,6 +418,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		784E96151CA1857300085057 /* Intro Guide */ = {
+			isa = PBXGroup;
+			children = (
+				784E961A1CA1980D00085057 /* LastIntroViewController.swift */,
+				784E96181CA185CC00085057 /* IntrochildViewController.swift */,
+			);
+			name = "Intro Guide";
+			path = ..;
+			sourceTree = "<group>";
+		};
 		7864D1251C3AA7290009A89F /* Following/Followers List */ = {
 			isa = PBXGroup;
 			children = (
@@ -565,6 +579,7 @@
 		A2E12C811BCE6E27007D8587 /* Login/Register/Other pages */ = {
 			isa = PBXGroup;
 			children = (
+				784E96151CA1857300085057 /* Intro Guide */,
 				A22038011C5D332F000080AC /* RecommendedUsersViewController.swift */,
 				A22038031C5D35FF000080AC /* RecommendedUsersCustomCell.swift */,
 				A26359E31BDA8342003F8FEB /* ResetPasswordViewController.swift */,
@@ -1186,6 +1201,7 @@
 				E23083691C7426EB001C0142 /* FSCalendar+IBExtension.m in Sources */,
 				A2AE4A521BDCF82F008E84B9 /* PrivacyPolicyViewController.swift in Sources */,
 				A234579A1C768F5700376F2F /* LikesCustomCell.swift in Sources */,
+				784E961B1CA1980D00085057 /* LastIntroViewController.swift in Sources */,
 				E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */,
 				A2AE4A501BDCF7B8008E84B9 /* ToSViewController.swift in Sources */,
 				E2D09C9B1BCCC59A003F4651 /* NSDictionary+CL.m in Sources */,
@@ -1233,6 +1249,7 @@
 				A2E12C831BCE6E59007D8587 /* RegisterViewController.swift in Sources */,
 				E27ACC811BEDA64100503DD7 /* TimelineViewController.swift in Sources */,
 				E151AF721BD72D6500811A31 /* tabBarViewController.m in Sources */,
+				784E96191CA185CC00085057 /* IntrochildViewController.swift in Sources */,
 				E2D09C9D1BCCC59A003F4651 /* UIImage+CL.m in Sources */,
 				E25607AE1BCAF5EC0085B9B4 /* LoginViewController.swift in Sources */,
 				E23083751C7426EB001C0142 /* UIView+FSExtension.m in Sources */,
