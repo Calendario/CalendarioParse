@@ -11,7 +11,7 @@ import UIKit
 import Parse
 import QuartzCore
 
-class AttendantsListViewController: UITableViewController {
+public class AttendantsListViewController: UITableViewController {
     
     // Status likes data array.
     var userData:NSArray = []
@@ -25,7 +25,7 @@ class AttendantsListViewController: UITableViewController {
     
     // View Did Load method.
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -54,7 +54,7 @@ class AttendantsListViewController: UITableViewController {
     
     // View Did Appear method.
     
-    override func viewDidAppear(animated: Bool) {
+    override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         self.loadAttendantsForEvent()
@@ -95,19 +95,19 @@ class AttendantsListViewController: UITableViewController {
     
     // UITableView methods.
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.userData.count
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 52
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // Setup the table view custom cell.
         let cell = tableView.dequeueReusableCellWithIdentifier("likesCell", forIndexPath: indexPath) as! LikesCustomCell
@@ -158,7 +158,7 @@ class AttendantsListViewController: UITableViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
