@@ -51,6 +51,37 @@ public class PresentingViews: NSObject {
         let likesView = sb.instantiateViewControllerWithIdentifier("likesNav") as! UINavigationController
         viewController.parentViewController!!.presentViewController(likesView, animated: true, completion: nil)
     }
+    
+    class func viewRecommendations(viewController: AnyObject) {
+        // Open the user recommendations view.
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let postsview = sb.instantiateViewControllerWithIdentifier("recommend") as! RecommendedUsersViewController
+        viewController.presentViewController(postsview, animated: true, completion: nil)
+    }
+    
+    class func viewAcknowledgments(viewController: AnyObject) {
+        // Open the webpage view.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewC = storyboard.instantiateViewControllerWithIdentifier("WebPage") as! WebPageViewController
+        viewC.passedURL = "http://www.calendario.co.uk/acknowledgements.htm"
+        viewController.presentViewController(viewC, animated: true, completion: nil)
+    }
+    
+    class func ViewTermsOfService(viewController: AnyObject) {
+        
+        // Open the terms of service view.
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let termsofservice = sb.instantiateViewControllerWithIdentifier("tos") as! TosViewController
+        viewController.presentViewController(termsofservice, animated: true, completion: nil)
+    }
+    
+    class func ViewPrivacyPolicy(viewController: AnyObject) {
+        
+        // Open the privacy policy view.
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let privacypolicyVC = sb.instantiateViewControllerWithIdentifier("privacypolicy") as! PrivacyPolicyViewController
+        viewController.presentViewController(privacypolicyVC, animated: true, completion: nil)
+    }
 
     
     //    class func Seemore(viewController: AnyObject) {

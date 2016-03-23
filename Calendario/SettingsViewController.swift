@@ -12,7 +12,7 @@ import Parse
 
 class SettingsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let choicesarray = ["Report Bug", "Privacy Policy", "Terms of Service", "Acknowledgments", "Recommended Users"]
+    let choicesarray = ["Edit Profile", "Report Bug", "Privacy Policy", "Terms of Service", "Acknowledgments", "Recommended Users"]
     
     // Setup the various UI objects.
     @IBOutlet weak var tableview: UITableView!
@@ -28,7 +28,7 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
         // Log the user out of Calendario.
         PFUser.logOutInBackgroundWithBlock { (error) -> Void in
             
-            // Check if the log out has 
+            // Check if the log out has
             // been completed or not.
             
             if (error == nil) {
@@ -42,7 +42,7 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
                 let viewC = storyboard.instantiateViewControllerWithIdentifier("LoginPage") as! LoginViewController
                 self.presentViewController(viewC, animated: true, completion:nil)
             }
-            
+                
             else {
                 
                 // Display the error message.
@@ -80,7 +80,7 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-  
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return choicesarray.count
     }
@@ -106,60 +106,13 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
         
         switch indexPath.row {
             
-            case 0: GotoBugReport()
-            case 1: ViewPrivacyPolicy()
-            case 2: ViewTermsOfService()
-            case 3: viewAcknowledgments()
-            case 4: viewRecommendations()
-            default: break
+        case 0: PresentingViews.showProfileView(PFUser.currentUser()!, viewController: self)
+        case 1: PresentingViews.ReportView(self)
+        case 2: PresentingViews.ViewPrivacyPolicy(self)
+        case 3: PresentingViews.ViewTermsOfService(self)
+        case 4: PresentingViews.viewAcknowledgments(self)
+        case 5: PresentingViews.viewRecommendations(self)
+        default: break
         }
-    }
-    
-    func GotoBugReport() {
-        
-        // Open the report view.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let bugreportvc = sb.instantiateViewControllerWithIdentifier("bugreport") as! reportBug
-        self.presentViewController(bugreportvc, animated: true, completion: nil)
-    }
-    
-    func ViewPrivacyPolicy() {
-        
-        // Open the privacy policy view.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let privacypolicyVC = sb.instantiateViewControllerWithIdentifier("privacypolicy") as! PrivacyPolicyViewController
-        self.presentViewController(privacypolicyVC, animated: true, completion: nil)
-    }
-    
-    func ViewTermsOfService() {
-        
-        // Open the terms of service view.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let termsofservice = sb.instantiateViewControllerWithIdentifier("tos") as! TosViewController
-        self.presentViewController(termsofservice, animated: true, completion: nil)
-    }
-    
-    func viewAcknowledgments() {
-        
-        // Open the webpage view.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewC = storyboard.instantiateViewControllerWithIdentifier("WebPage") as! WebPageViewController
-        viewC.passedURL = "http://www.calendario.co.uk/acknowledgements.htm"
-        self.presentViewController(viewC, animated: true, completion: nil)
-    }
-    
-    func viewRecommendations() {
-        
-        // Open the user recommendations view.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let postsview = sb.instantiateViewControllerWithIdentifier("recommend") as! RecommendedUsersViewController
-        self.presentViewController(postsview, animated: true, completion: nil)
-    }
-    
-    // Other methods.
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
