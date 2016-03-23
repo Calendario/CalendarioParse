@@ -75,8 +75,7 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
         presentViewController(alertController, animated: true, completion: nil)
     }
     
-    // Tableview methods
-    
+    //MARK: TABLEVIEW METHODS
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }

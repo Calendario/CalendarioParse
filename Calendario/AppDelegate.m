@@ -27,11 +27,11 @@
     
     //set badge number back to 0 once user opens the app
     application.applicationIconBadgeNumber = 0;
-
+    
     
     //make status bar text white
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:NO];
-
+    
     
     // IMPORTANT: If this line does NOT execute, then the app will crash
     // when you try to interact with the Parse API - this line MUST be executed!
@@ -39,12 +39,12 @@
     
     //reference uiTabBar and set ui properties
     //reference the uitabBar
-    UITabBar *tabBar = [UITabBar appearance];
+    //    UITabBar *tabBar = [UITabBar appearance];
     
-    //uiTabBar appearance properties
-    tabBar.backgroundColor = [UIColor colorWithRed:33/255.0 green:135/255.0 blue:75/255.0 alpha:1.0];
-    tabBar.barTintColor = [UIColor colorWithRed:33/255.0 green:135/255.0 blue:75/255.0 alpha:1.0];
-    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+    //    //uiTabBar appearance properties
+    //    tabBar.backgroundColor = [UIColor colorWithRed:33/255.0 green:135/255.0 blue:75/255.0 alpha:1.0];
+    //    tabBar.barTintColor = [UIColor colorWithRed:33/255.0 green:135/255.0 blue:75/255.0 alpha:1.0];
+    //    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     [[UITabBar appearance] setShadowImage:nil];
     
     // Google Places API Set-up
@@ -96,7 +96,7 @@
     NSArray *items = @[item1,item2,item3];
     
     [UIApplication sharedApplication].shortcutItems = items;
-
+    
     
     
     
@@ -140,7 +140,6 @@
     SearchViewController *sv = [sb instantiateViewControllerWithIdentifier:@"search"];
     self.window.rootViewController = sv;
     [self.window makeKeyAndVisible];
-   
     
 }
 
