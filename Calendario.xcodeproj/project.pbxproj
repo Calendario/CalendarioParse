@@ -10,6 +10,7 @@
 		2E3815A2F569919034060D65 /* Pods_Calendario.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6049A409A8BD5F08D9B8AD /* Pods_Calendario.framework */; };
 		784E96191CA185CC00085057 /* IntrochildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E96181CA185CC00085057 /* IntrochildViewController.swift */; };
 		784E961B1CA1980D00085057 /* LastIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E961A1CA1980D00085057 /* LastIntroViewController.swift */; };
+		78971E791CA668730078CBDC /* FullimageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78971E781CA668730078CBDC /* FullimageViewController.swift */; };
 		78C1C01C1C006D9200ACDCEC /* reportBug.m in Sources */ = {isa = PBXBuildFile; fileRef = 78C1C01B1C006D9200ACDCEC /* reportBug.m */; };
 		78CE15B21C95CDE800257C4B /* settings-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CE15B11C95CDE800257C4B /* settings-icon.png */; };
 		78CE15B71C95CE2F00257C4B /* follow-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78CE15B31C95CE2F00257C4B /* follow-icon.png */; };
@@ -171,6 +172,7 @@
 		6226D36FBFFA1852A9570CBB /* Pods-Calendario.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calendario.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Calendario/Pods-Calendario.debug.xcconfig"; sourceTree = "<group>"; };
 		784E96181CA185CC00085057 /* IntrochildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntrochildViewController.swift; sourceTree = "<group>"; };
 		784E961A1CA1980D00085057 /* LastIntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastIntroViewController.swift; sourceTree = "<group>"; };
+		78971E781CA668730078CBDC /* FullimageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullimageViewController.swift; sourceTree = "<group>"; };
 		78C1C01A1C006D9200ACDCEC /* reportBug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reportBug.h; sourceTree = "<group>"; };
 		78C1C01B1C006D9200ACDCEC /* reportBug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = reportBug.m; sourceTree = "<group>"; };
 		78CE15B11C95CDE800257C4B /* settings-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-icon.png"; sourceTree = "<group>"; };
@@ -579,6 +581,7 @@
 		A2E12C811BCE6E27007D8587 /* Login/Register/Other pages */ = {
 			isa = PBXGroup;
 			children = (
+				78971E781CA668730078CBDC /* FullimageViewController.swift */,
 				784E96151CA1857300085057 /* Intro Guide */,
 				A22038011C5D332F000080AC /* RecommendedUsersViewController.swift */,
 				A22038031C5D35FF000080AC /* RecommendedUsersCustomCell.swift */,
@@ -1191,6 +1194,7 @@
 				E2D8D9FD1BCF51E800A40350 /* NewsfeedTableViewCell.swift in Sources */,
 				E24DA5F21C13EA7A00901DF0 /* LocatonViewController.swift in Sources */,
 				E23083701C7426EB001C0142 /* FSCalendarHeader.m in Sources */,
+				78971E791CA668730078CBDC /* FullimageViewController.swift in Sources */,
 				E2E0D7041BC9950800662E70 /* main.m in Sources */,
 				E25B09D61C4E0C0900529CCA /* LikeHelper.swift in Sources */,
 				A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */,
