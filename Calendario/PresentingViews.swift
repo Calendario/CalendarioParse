@@ -40,7 +40,7 @@ public class PresentingViews: NSObject {
     
     class func showPhotoViewer(viewController: AnyObject, userPostedImage: UIImageView) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let PVC = sb.instantiateViewControllerWithIdentifier("PhotoV2") as! PhotoViewV2
+        let PVC = sb.instantiateViewControllerWithIdentifier("photoViewer") as! FullimageViewController
         PVC.passedImage = userPostedImage.image!
         let NC = UINavigationController(rootViewController: PVC)
         viewController.parentViewController!!.presentViewController(NC, animated: true, completion: nil)

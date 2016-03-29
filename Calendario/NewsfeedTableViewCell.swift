@@ -45,13 +45,12 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        assignGestureRecognizers()
     }
     
     override func layoutSubviews() {
         // Get the specific status object for this cell and call all needed methods.
         setupUI()
-        assignGestureRecognizers()
         createTenseAndDateLabel()
         setLocationLabelAndCheckingContents()
         checkForRsvpPrivacy()
@@ -62,7 +61,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     func setupUI () {
         self.statusTextView.textColor = UIColor.darkGrayColor()
-                
+        
         // Setup the cell likes button.
         likebutton.layer.cornerRadius = 2.0
         likebutton.clipsToBounds = true
@@ -252,19 +251,19 @@ class NewsfeedTableViewCell: PFTableViewCell {
     func updateRsvpLabel(object: PFObject) {
         
         /*     // Get the post rsvp data.
-        let rsvpArray:[String] = object.objectForKey("rsvpArray") as! Array
-        
-        if (rsvpArray.count > 0) {
-        if (rsvpArray.count == 1) {
-        self.rsvpLabel.text = "1"
-        }
-        else {
-        self.rsvpLabel.text = "\(rsvpArray.count)"
-        }
-        }
-        else {
-        self.rsvpLabel.text = "0"
-        } */
+         let rsvpArray:[String] = object.objectForKey("rsvpArray") as! Array
+         
+         if (rsvpArray.count > 0) {
+         if (rsvpArray.count == 1) {
+         self.rsvpLabel.text = "1"
+         }
+         else {
+         self.rsvpLabel.text = "\(rsvpArray.count)"
+         }
+         }
+         else {
+         self.rsvpLabel.text = "0"
+         } */
     }
     
     func updateRsvpButton(rsvpPost: Bool, objectId: String) {
@@ -326,7 +325,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     func likeClicked() {
         
-        // Get the specific status object for this  
+        // Get the specific status object for this
         let currentObject:PFObject = passedInObject
         
         // Get the post likes data.

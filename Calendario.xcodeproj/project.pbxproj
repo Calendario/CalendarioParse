@@ -25,7 +25,6 @@
 		A23457961C765A9000376F2F /* NewsfeedV3.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457951C765A9000376F2F /* NewsfeedV3.swift */; };
 		A23457981C768A9B00376F2F /* LikesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457971C768A9B00376F2F /* LikesListViewController.swift */; };
 		A234579A1C768F5700376F2F /* LikesCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457991C768F5700376F2F /* LikesCustomCell.swift */; };
-		A23457A21C79D4EF00376F2F /* PhotoViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457A11C79D4EF00376F2F /* PhotoViewV2.swift */; };
 		A23457AB1C79E6E500376F2F /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457AA1C79E6E500376F2F /* DateManager.swift */; };
 		A23457AE1C7B4AA300376F2F /* HashtagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457AD1C7B4AA300376F2F /* HashtagViewController.swift */; };
 		A24DB1181C8F705E002D4897 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24DB1171C8F705E002D4897 /* EventManager.swift */; };
@@ -189,7 +188,6 @@
 		A23457951C765A9000376F2F /* NewsfeedV3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedV3.swift; sourceTree = "<group>"; };
 		A23457971C768A9B00376F2F /* LikesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesListViewController.swift; sourceTree = "<group>"; };
 		A23457991C768F5700376F2F /* LikesCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesCustomCell.swift; sourceTree = "<group>"; };
-		A23457A11C79D4EF00376F2F /* PhotoViewV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewV2.swift; sourceTree = "<group>"; };
 		A23457AA1C79E6E500376F2F /* DateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		A23457AD1C7B4AA300376F2F /* HashtagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagViewController.swift; sourceTree = "<group>"; };
 		A24DB1171C8F705E002D4897 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
@@ -458,14 +456,6 @@
 				A2267D181C4BE15700180C6D /* FollowRequestCustomCell.swift */,
 			);
 			name = "Follow Requests List";
-			sourceTree = "<group>";
-		};
-		A23457A01C79D4CE00376F2F /* Photo Viewer V2 */ = {
-			isa = PBXGroup;
-			children = (
-				A23457A11C79D4EF00376F2F /* PhotoViewV2.swift */,
-			);
-			name = "Photo Viewer V2";
 			sourceTree = "<group>";
 		};
 		A23457A31C79E60D00376F2F /* Likes List View */ = {
@@ -845,7 +835,6 @@
 				A24DB1161C8F703C002D4897 /* Event View Classes/Views */,
 				A23457AC1C7B4A7F00376F2F /* Hashtag View */,
 				A23457A31C79E60D00376F2F /* Likes List View */,
-				A23457A01C79D4CE00376F2F /* Photo Viewer V2 */,
 				E1804EDC1C1BD89D00A25C79 /* Notifications */,
 				E1D759A91C12430B0017B53F /* Location */,
 				78C1C01D1C006DBE00ACDCEC /* Settings */,
@@ -1199,7 +1188,6 @@
 				E25B09D61C4E0C0900529CCA /* LikeHelper.swift in Sources */,
 				A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */,
 				A23457981C768A9B00376F2F /* LikesListViewController.swift in Sources */,
-				A23457A21C79D4EF00376F2F /* PhotoViewV2.swift in Sources */,
 				E230836B1C7426EB001C0142 /* FSCalendarCell.m in Sources */,
 				E2AE81511BCAFAAD0047D1FA /* StatusUpdateViewController.swift in Sources */,
 				E23083691C7426EB001C0142 /* FSCalendar+IBExtension.m in Sources */,

@@ -931,31 +931,7 @@
                                                 <blurEffect style="light"/>
                                             </vibrancyEffect>
                                         </visualEffectView>
-                                        <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhotoPost" translatesAutoresizingMaskIntoConstraints="NO" id="MAk-zZ-i98" customClass="PFImageView">
-                                            <rect key="frame" x="8" y="289" width="359" height="205"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="127" id="0FQ-n2-BhR"/>
-                                                <constraint firstAttribute="height" constant="127" id="11h-oJ-nlI"/>
-                                                <constraint firstAttribute="width" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="299:127" id="1OG-e1-rG9"/>
-                                                <constraint firstAttribute="width" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="299:127" id="4LB-Su-8uo"/>
-                                                <constraint firstAttribute="height" constant="241" id="69P-Wa-CLn"/>
-                                                <constraint firstAttribute="height" constant="205" id="Bdw-J9-fjP"/>
-                                                <constraint firstAttribute="height" constant="127" id="XsB-l2-BxM"/>
-                                                <constraint firstAttribute="width" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="375:253" id="zLk-XA-TDm"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="0FQ-n2-BhR"/>
-                                                    <exclude reference="11h-oJ-nlI"/>
-                                                    <exclude reference="1OG-e1-rG9"/>
-                                                    <exclude reference="4LB-Su-8uo"/>
-                                                    <exclude reference="69P-Wa-CLn"/>
-                                                    <exclude reference="XsB-l2-BxM"/>
-                                                    <exclude reference="zLk-XA-TDm"/>
-                                                </mask>
-                                            </variation>
-                                        </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tense_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Qyq-BA-rDB">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qyq-BA-rDB">
                                             <rect key="frame" x="8" y="97" width="17" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="S8k-Wj-RCi"/>
@@ -1002,6 +978,30 @@
                                                 </mask>
                                             </variation>
                                         </button>
+                                        <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MAk-zZ-i98" customClass="PFImageView">
+                                            <rect key="frame" x="8" y="289" width="359" height="205"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="127" id="0FQ-n2-BhR"/>
+                                                <constraint firstAttribute="height" constant="127" id="11h-oJ-nlI"/>
+                                                <constraint firstAttribute="width" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="299:127" id="1OG-e1-rG9"/>
+                                                <constraint firstAttribute="width" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="299:127" id="4LB-Su-8uo"/>
+                                                <constraint firstAttribute="height" constant="241" id="69P-Wa-CLn"/>
+                                                <constraint firstAttribute="height" constant="205" id="Bdw-J9-fjP"/>
+                                                <constraint firstAttribute="height" constant="127" id="XsB-l2-BxM"/>
+                                                <constraint firstAttribute="width" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="375:253" id="zLk-XA-TDm"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="0FQ-n2-BhR"/>
+                                                    <exclude reference="11h-oJ-nlI"/>
+                                                    <exclude reference="1OG-e1-rG9"/>
+                                                    <exclude reference="4LB-Su-8uo"/>
+                                                    <exclude reference="69P-Wa-CLn"/>
+                                                    <exclude reference="XsB-l2-BxM"/>
+                                                    <exclude reference="zLk-XA-TDm"/>
+                                                </mask>
+                                            </variation>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="MAk-zZ-i98" secondAttribute="bottom" id="00k-VF-CME"/>
@@ -2572,7 +2572,7 @@
         <!--Fullimage View Controller-->
         <scene sceneID="pWo-as-DaT">
             <objects>
-                <viewController title="Fullimage View Controller" id="WxQ-hD-bGj" customClass="FullimageViewController" customModule="Calendario" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="photoViewer" title="Fullimage View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WxQ-hD-bGj" customClass="FullimageViewController" customModule="Calendario" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PEg-bm-XEd"/>
                         <viewControllerLayoutGuide type="bottom" id="W6D-Nh-boD"/>
