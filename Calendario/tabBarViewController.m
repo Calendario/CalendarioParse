@@ -61,14 +61,14 @@
   //  UITabBarItem *fifthTab = [self.tabBar.items objectAtIndex:4];
     firstTab.image = [[UIImage imageNamed:@"newsFeed_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     firstTab.selectedImage = [[UIImage imageNamed:@"newsFeed_icon.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    secondTab.image = [[UIImage imageNamed:@"timeline_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    secondTab.selectedImage = [[UIImage imageNamed:@"timeline_icon.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    fourthTab.image = [[UIImage imageNamed:@"Profile_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    fourthTab.selectedImage = [[UIImage imageNamed:@"Profile_icon.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    secondTab.image = [[UIImage imageNamed:@"calendar_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    secondTab.selectedImage = [[UIImage imageNamed:@"calendar_icon.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    fourthTab.image = [[UIImage imageNamed:@"default_profile_pic.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    fourthTab.selectedImage = [[UIImage imageNamed:@"default_profile_pic.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     //fifthTab.image = [[UIImage imageNamed:@"profile_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     //fifthTab.selectedImage = [[UIImage imageNamed:@"profile_icon.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    thirdTab.image = [[UIImage imageNamed:@"notifications2_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    thirdTab.selectedImage = [[UIImage imageNamed:@"notiications2_icon.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    thirdTab.image = [[UIImage imageNamed:@"notifications_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    thirdTab.selectedImage = [[UIImage imageNamed:@"notiications_icon.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     for(UITabBarItem * tabBarItem in self.tabBar.items){
         tabBarItem.title = @"";
