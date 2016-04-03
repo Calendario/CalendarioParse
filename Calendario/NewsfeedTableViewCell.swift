@@ -56,7 +56,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
         checkForRsvpPrivacy()
         getLikesData()
         getRsvpData()
-        setCreatedAtLabel()
     }
     
     func setupUI () {
@@ -92,12 +91,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
         
         //setup the cell rsvp button
         self.rsvpButton.addTarget(self, action: "rsvpClicked:", forControlEvents: .TouchUpInside)
-    }
-    
-    func setCreatedAtLabel() {
-        DateManager.createDateDifferenceString(passedInObject.createdAt!) { (difference) -> Void in
-            self.createdAtLabel.text = difference
-        }
     }
     
     func setPostedImage(image : UIImage) {

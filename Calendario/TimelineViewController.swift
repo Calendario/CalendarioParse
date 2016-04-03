@@ -356,6 +356,19 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         ParseCalls.findUserDetails(self.filteredData[indexPath.row] as! PFObject
             , usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
         
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {() -> Void in
+            
+            // Background Thread
+            DateManager.createDateDifferenceString((self.filteredData[indexPath.row] as! PFObject).createdAt!) { (difference) -> Void in
+                
+                dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                    
+                    // Run UI Updates
+                    cell.createdAtLabel.text = difference
+                })
+            }
+        })
+        
         return cell
     }
     
