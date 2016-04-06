@@ -82,6 +82,15 @@ public class PresentingViews: NSObject {
         let privacypolicyVC = sb.instantiateViewControllerWithIdentifier("privacypolicy") as! PrivacyPolicyViewController
         viewController.presentViewController(privacypolicyVC, animated: true, completion: nil)
     }
+    
+    class func presentNewsFeed(viewController: AnyObject) {
+        // Show the home view (news feed).
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let tabBarController: UITabBarController = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! tabBarViewController
+        appDelegate.window.makeKeyAndVisible()
+        appDelegate.window.rootViewController = tabBarController
+    }
 
     
     //    class func Seemore(viewController: AnyObject) {

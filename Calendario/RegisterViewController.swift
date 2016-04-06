@@ -446,7 +446,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
                                 self.loadingView.alpha = 0.0
                                 
                                 // Show the news feed.
-                                self.GotoNewsfeed()
+                                self.checkRecommendationsStatus()
+                                PresentingViews.presentNewsFeed(self)
                             }
                                 
                             else {
@@ -461,23 +462,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         }
     }
     
-    // News feed methods.
-    
-    func GotoNewsfeed() {
-        
+    private func checkRecommendationsStatus() {
         // Ensure that the recomendations view is shown.
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(true, forKey: "recoCheck")
         defaults.synchronize()
-        
-        // Show the home view (news feed).
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let tabBarController: UITabBarController = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! tabBarViewController
-        appDelegate.window.makeKeyAndVisible()
-        appDelegate.window.rootViewController = tabBarController
-        
-    
     }
     
     // Alert methods.
