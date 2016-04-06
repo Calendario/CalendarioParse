@@ -38,6 +38,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
     @IBOutlet weak var tosButton: UIButton!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var emailIconImageView: UIImageView!
+    @IBOutlet weak var usernameIconImageView: UIImageView!
+    @IBOutlet weak var passwordIconImageView: UIImageView!
+    @IBOutlet weak var reEnterPasswordIconImageView: UIImageView!
+    @IBOutlet weak var fullNameIconImageView: UIImageView!
     
     var usernameLowerCase: String = ""
     
@@ -204,25 +209,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        // Set the loading view background colour.
-        loadingView.backgroundColor = UIColor.clearColor()
-        
-        // Add a blur view to the loading view.
-        var visualEffectView:UIVisualEffectView!
-        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
-        visualEffectView.frame = loadingView.bounds
-        loadingView.insertSubview(visualEffectView, atIndex: 0)
-        
-        // Hide the loading view to beign with.
-        self.loadingView.alpha = 0.0
-        
-        // Turn the profile picture into a cirlce.
-        self.profilePicture.layer.cornerRadius = (self.profilePicture.frame.size.width / 2)
-        self.profilePicture.clipsToBounds = true
-        
-        // Curve the edges of the loading view.
-        self.loadingView.layer.cornerRadius = 12
-        self.loadingView.clipsToBounds = true
+        setupUI()
+        setIconRenderingModes()
+        setIconColors()
     }
     
     // View Did Layout Subviews method.
@@ -243,6 +232,46 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         // Setup the profile scroll view.
         self.profileScroll.scrollEnabled = true
         self.profileScroll.contentSize = CGSizeMake(self.view.bounds.width, scrollHeight)
+    }
+    
+    private func setupUI() {
+        // Set the loading view background colour.
+        loadingView.backgroundColor = UIColor.clearColor()
+        
+        // Add a blur view to the loading view.
+        var visualEffectView:UIVisualEffectView!
+        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
+        visualEffectView.frame = loadingView.bounds
+        loadingView.insertSubview(visualEffectView, atIndex: 0)
+ 
+        // Hide the loading view to beign with.
+        self.loadingView.alpha = 0.0
+        
+        // Turn the profile picture into a cirlce.
+        self.profilePicture.layer.cornerRadius = (self.profilePicture.frame.size.width / 2)
+        self.profilePicture.clipsToBounds = true
+
+        // Curve the edges of the loading view.
+        self.loadingView.layer.cornerRadius = 12
+        self.loadingView.clipsToBounds = true
+    }
+    
+    private func setIconRenderingModes() {
+        usernameIconImageView.image? = (usernameIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate))!
+        emailIconImageView.image? = (emailIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate))!
+        passwordIconImageView.image? = (passwordIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate))!
+        reEnterPasswordIconImageView.image? = (reEnterPasswordIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate))!
+        fullNameIconImageView.image? = (fullNameIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate))!
+        profilePicture.image? = (profilePicture.image?.imageWithRenderingMode(.AlwaysTemplate))!
+    }
+    
+    private func setIconColors() {
+        usernameIconImageView.tintColor = UIColor(red: 163/255.0, green: 163/255.0, blue: 163/255.0, alpha: 1.0)
+        emailIconImageView.tintColor = UIColor(red: 163/255.0, green: 163/255.0, blue: 163/255.0, alpha: 1.0)
+        passwordIconImageView.tintColor = UIColor(red: 163/255.0, green: 163/255.0, blue: 163/255.0, alpha: 1.0)
+        reEnterPasswordIconImageView.tintColor = UIColor(red: 163/255.0, green: 163/255.0, blue: 163/255.0, alpha: 1.0)
+        fullNameIconImageView.tintColor = UIColor(red: 163/255.0, green: 163/255.0, blue: 163/255.0, alpha: 1.0)
+        profilePicture.tintColor = UIColor(red: 163/255.0, green: 163/255.0, blue: 163/255.0, alpha: 1.0)
     }
     
     // Data check methods.
@@ -447,6 +476,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         let tabBarController: UITabBarController = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! tabBarViewController
         appDelegate.window.makeKeyAndVisible()
         appDelegate.window.rootViewController = tabBarController
+        
+    
     }
     
     // Alert methods.
