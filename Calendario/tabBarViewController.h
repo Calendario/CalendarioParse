@@ -10,7 +10,4 @@
 
 @interface tabBarViewController : UITabBarController
 
-- (IBAction)centerButtonClicked:(id)sender;
-
-
 @end
