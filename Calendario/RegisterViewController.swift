@@ -203,18 +203,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         self.presentViewController(imageAlert, animated: true, completion: nil)
     }
     
-    // View Did Load method.
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
         setupUI()
         setIconRenderingModes()
         setIconColors()
     }
-    
-    // View Did Layout Subviews method.
     
     override func viewDidLayoutSubviews() {
         

@@ -23,6 +23,7 @@ import Parse
 
 class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var emailIconImageView: UIImageView!
     // Setup the user email field.
     @IBOutlet weak var emailField: UITextField!
     
@@ -54,6 +55,14 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
         
         // Force open the keyboard.
         self.emailField.becomeFirstResponder()
+    }
+    
+    private func setRenderingModes() {
+        self.emailIconImageView.image = (emailIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate))!
+    }
+    
+    private func setIconColor() {
+        self.emailIconImageView.tintColor = UIColor(red: 163/255.0, green: 163/255.0, blue: 163/255.0, alpha: 1.0)
     }
     
     // Reset methods.
@@ -147,10 +156,5 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
         self.checkEmailAddress()
         
         return true
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
