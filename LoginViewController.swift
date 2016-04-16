@@ -206,7 +206,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewC = storyboard.instantiateViewControllerWithIdentifier("registerview") as! RegisterViewController
         self.presentViewController(viewC, animated: true, completion: nil)
-        
     }
     
     func goToResetPassword() {

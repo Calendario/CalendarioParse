@@ -19,23 +19,7 @@ class IntrochildViewController: UIViewController, UIPageViewControllerDataSource
     func lastPageDone() {
         print("View Controller says Last page done")
         
-        if let appVC = storyboard?.instantiateViewControllerWithIdentifier("LoginPage") {
-            let currentVC = pageViewController
-            
-            appVC.view.frame = currentVC.view.frame
-            appVC.willMoveToParentViewController(self)
-            addChildViewController(appVC)
-            
-            transitionFromViewController(currentVC, toViewController: appVC, duration: 1.0, options: .TransitionCrossDissolve, animations: { () -> Void in
-                //
-                }, completion: { (completed: Bool) -> Void in
-                currentVC.removeFromParentViewController()
-                appVC.didMoveToParentViewController(self)
-            })
-            
-            
-        }
-        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: Page View Controller Datasource
