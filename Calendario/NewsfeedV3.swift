@@ -40,6 +40,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         showRecommendedUsers(checkForNewUser())
         setActivityIndicatorForRefreshing()
         setHashtagDefaultKey()
+        self.view.translatesAutoresizingMaskIntoConstraints = false
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -479,4 +480,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
 //        })
 //    }
 //}
+
+
 

@@ -29,6 +29,12 @@ class NewsfeedTableViewCell: PFTableViewCell {
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var likebutton: UIView!
     
+    @IBOutlet weak var Likebuttoncontainerbutton: UIButton!
+    
+    
+    @IBOutlet weak var attendancecontainerbutton: UIButton!
+    
+    
     var attendGestureRecognizer: UITapGestureRecognizer!
     var passedInObject: PFObject!
     var parentViewController: AnyObject!
@@ -45,7 +51,8 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        assignGestureRecognizers()
+        
+        //assignGestureRecognizers()
     }
     
     override func layoutSubviews() {
@@ -59,6 +66,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     }
     
     func setupUI () {
+        //assignGestureRecognizers()
         self.statusTextView.textColor = UIColor.darkGrayColor()
         
         // Setup the cell likes button.
@@ -542,4 +550,19 @@ class NewsfeedTableViewCell: PFTableViewCell {
         self.updateRsvpLabel(passedInObject)
     }
     
-}
+    // like button container button action method 
+    
+    @IBAction func Likebuttoncontaineraction(sender: AnyObject) {
+        print("like button has been tapped")
+        likeClicked()
+    }
+    
+    @IBAction func RSVPbuttontapped(sender: AnyObject) {
+        print("RSVP tapped")
+    }
+    
+    
+        }
+    
+    
+

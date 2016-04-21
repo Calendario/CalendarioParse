@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="16Q-ZH-5Rb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="16Q-ZH-5Rb">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -145,7 +145,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Da4-WR-hCg" id="69G-w4-oPL">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_profile_pic" translatesAutoresizingMaskIntoConstraints="NO" id="j3k-ws-sU2" userLabel="User Profile Image">
@@ -224,7 +224,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2To-8o-TY8" id="S51-1d-psp">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_profile_pic" translatesAutoresizingMaskIntoConstraints="NO" id="e4K-gT-Fp1" userLabel="User Profile Image">
@@ -354,7 +354,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v4l-4r-4nc" id="1if-ng-4jI">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MeP-xu-Qpc" userLabel="User Profile Image">
@@ -634,7 +634,7 @@
                                 <rect key="frame" x="0.0" y="1" width="375" height="511"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vaR-8e-HVs" id="Niw-dS-Vbm">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="510.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPb-Is-p8R" userLabel="Green Container">
@@ -705,7 +705,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2bk-oR-I48" userLabel="Attendant Container">
                                                     <rect key="frame" x="318" y="16" width="49" height="49"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdg-qK-gUr">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdg-qK-gUr">
                                                             <rect key="frame" x="18" y="30" width="14" height="14"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="12"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -742,7 +742,7 @@
                                                     <rect key="frame" x="261" y="16" width="49" height="49"/>
                                                     <subviews>
                                                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eOW-cl-tPW">
-                                                            <rect key="frame" x="18" y="30" width="14" height="14"/>
+                                                            <rect key="frame" x="18" y="30" width="16" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="DxH-Sv-3aF"/>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="sBd-OS-PO7"/>
@@ -764,6 +764,12 @@
                                                                 <constraint firstAttribute="height" constant="20" id="bxH-Ng-ugt"/>
                                                             </constraints>
                                                         </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XyW-dT-dEW">
+                                                            <rect key="frame" x="0.0" y="3" width="49" height="46"/>
+                                                            <connections>
+                                                                <action selector="Likebuttoncontaineraction:" destination="vaR-8e-HVs" eventType="touchUpInside" id="P0E-xP-2F6"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -821,8 +827,8 @@
                                                 </mask>
                                             </variation>
                                         </view>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Status" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ro-Py-vgq" customClass="KILabel">
-                                            <rect key="frame" x="8" y="129" width="359" height="68"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="User Status" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ro-Py-vgq" customClass="KILabel">
+                                            <rect key="frame" x="8" y="126" width="359" height="68"/>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="12"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -938,6 +944,30 @@
                                                 <constraint firstAttribute="width" constant="17" id="h7r-fE-kSS"/>
                                             </constraints>
                                         </imageView>
+                                        <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MAk-zZ-i98" customClass="PFImageView">
+                                            <rect key="frame" x="8" y="289" width="359" height="205"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="127" id="0FQ-n2-BhR"/>
+                                                <constraint firstAttribute="height" constant="127" id="11h-oJ-nlI"/>
+                                                <constraint firstAttribute="width" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="299:127" id="1OG-e1-rG9"/>
+                                                <constraint firstAttribute="width" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="299:127" id="4LB-Su-8uo"/>
+                                                <constraint firstAttribute="height" constant="241" id="69P-Wa-CLn"/>
+                                                <constraint firstAttribute="height" constant="205" id="Bdw-J9-fjP"/>
+                                                <constraint firstAttribute="height" constant="127" id="XsB-l2-BxM"/>
+                                                <constraint firstAttribute="width" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="375:253" id="zLk-XA-TDm"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="0FQ-n2-BhR"/>
+                                                    <exclude reference="11h-oJ-nlI"/>
+                                                    <exclude reference="1OG-e1-rG9"/>
+                                                    <exclude reference="4LB-Su-8uo"/>
+                                                    <exclude reference="69P-Wa-CLn"/>
+                                                    <exclude reference="XsB-l2-BxM"/>
+                                                    <exclude reference="zLk-XA-TDm"/>
+                                                </mask>
+                                            </variation>
+                                        </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4G-Fy-1FJ">
                                             <rect key="frame" x="255" y="235" width="112" height="34"/>
                                             <color key="backgroundColor" red="0.95795157068062831" green="0.95795157068062831" blue="0.95795157068062831" alpha="1" colorSpace="calibratedRGB"/>
@@ -977,31 +1007,10 @@
                                                     <exclude reference="xrt-sB-gCx"/>
                                                 </mask>
                                             </variation>
+                                            <connections>
+                                                <action selector="RSVPbuttontapped:" destination="vaR-8e-HVs" eventType="touchUpInside" id="b50-RL-hHm"/>
+                                            </connections>
                                         </button>
-                                        <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MAk-zZ-i98" customClass="PFImageView">
-                                            <rect key="frame" x="8" y="289" width="359" height="205"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="127" id="0FQ-n2-BhR"/>
-                                                <constraint firstAttribute="height" constant="127" id="11h-oJ-nlI"/>
-                                                <constraint firstAttribute="width" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="299:127" id="1OG-e1-rG9"/>
-                                                <constraint firstAttribute="width" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="299:127" id="4LB-Su-8uo"/>
-                                                <constraint firstAttribute="height" constant="241" id="69P-Wa-CLn"/>
-                                                <constraint firstAttribute="height" constant="205" id="Bdw-J9-fjP"/>
-                                                <constraint firstAttribute="height" constant="127" id="XsB-l2-BxM"/>
-                                                <constraint firstAttribute="width" secondItem="MAk-zZ-i98" secondAttribute="height" multiplier="375:253" id="zLk-XA-TDm"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="0FQ-n2-BhR"/>
-                                                    <exclude reference="11h-oJ-nlI"/>
-                                                    <exclude reference="1OG-e1-rG9"/>
-                                                    <exclude reference="4LB-Su-8uo"/>
-                                                    <exclude reference="69P-Wa-CLn"/>
-                                                    <exclude reference="XsB-l2-BxM"/>
-                                                    <exclude reference="zLk-XA-TDm"/>
-                                                </mask>
-                                            </variation>
-                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="MAk-zZ-i98" secondAttribute="bottom" id="00k-VF-CME"/>
@@ -1099,6 +1108,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
+                                    <outlet property="Likebuttoncontainerbutton" destination="XyW-dT-dEW" id="9O1-8K-ZNa"/>
                                     <outlet property="UserNameLabel" destination="KhO-HU-Fzo" id="sYJ-cV-QoW"/>
                                     <outlet property="attendantContainerView" destination="2bk-oR-I48" id="Bgw-8i-3QU"/>
                                     <outlet property="bottomConstraint" destination="hTw-d4-0fL" id="yFh-Sf-GBF"/>
@@ -1700,7 +1710,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="105"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WYh-f2-f9g" id="idj-7P-aTH">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="104.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="meN-0W-CH9">
@@ -1945,7 +1955,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="511"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hoY-xk-8yZ" id="BAW-t3-qFL">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="510.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jib-3r-kjW" userLabel="Green Container">
@@ -2016,7 +2026,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hCO-aM-rzx" userLabel="Attendant Container">
                                                             <rect key="frame" x="318" y="16" width="49" height="49"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="616-Ru-Szw">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="616-Ru-Szw">
                                                                     <rect key="frame" x="18" y="30" width="14" height="14"/>
                                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="12"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -2553,7 +2563,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eLL-Yg-VtC" id="kpk-uB-DJm">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -2647,7 +2657,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Mh-yn-kDn">
-                                        <rect key="frame" x="185" y="0.0" width="166" height="50"/>
+                                        <rect key="frame" x="185" y="0.0" width="167" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="18"/>
                                         <state key="normal" title="SIGN IN">
@@ -3591,7 +3601,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Ju-AF-ADi" id="bSc-8H-yxl">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pdS-y4-KQA">
@@ -3751,11 +3761,11 @@
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="settingsCell" rowHeight="55" id="pLQ-Pz-6n9">
                                         <rect key="frame" x="0.0" y="22" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="pLQ-Pz-6n9" id="N6u-US-uAV">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pLQ-Pz-6n9" id="N6u-US-uAV">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="54.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zed-Ul-qvZ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zed-Ul-qvZ">
                                                     <rect key="frame" x="339" y="14" width="28" height="28"/>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -4443,7 +4453,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <rect key="frame" x="0.0" y="28" width="375" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xVQ-Pd-MJC" id="mgK-ZZ-S8V">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="57"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="57.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LHJ-6f-9gb">
@@ -4555,16 +4565,16 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wcF-Lg-mmq" id="cYt-mJ-hlS">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VVV-IP-6Wc">
+                                                <label opaque="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VVV-IP-6Wc">
                                                     <rect key="frame" x="65" y="23" width="83" height="20"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
                                                     <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VmK-Dk-lCf">
+                                                <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VmK-Dk-lCf">
                                                     <rect key="frame" x="8" y="8" width="49" height="49"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="VmK-Dk-lCf" secondAttribute="height" multiplier="1:1" id="Kjs-wB-YR7"/>
@@ -4923,7 +4933,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <rect key="frame" x="0.0" y="337" width="375" height="511"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9e3-ND-WWW" id="6at-9b-qjS">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="510.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z5l-mi-h2S" userLabel="Green Container">
@@ -4994,7 +5004,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PLZ-21-wTp" userLabel="Attendant Container">
                                                             <rect key="frame" x="318" y="16" width="49" height="49"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vta-Et-Lv9">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vta-Et-Lv9">
                                                                     <rect key="frame" x="18" y="30" width="14" height="14"/>
                                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="12"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -5571,7 +5581,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sez-zi-hV3" id="ZYX-Pm-TpJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -5612,7 +5622,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <rect key="frame" x="0.0" y="28" width="600" height="104"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jcS-8H-Ors" id="D8t-dW-2aa">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="103"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="103.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VAo-l4-Q5R">
@@ -5704,7 +5714,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <rect key="frame" x="0.0" y="28" width="600" height="89"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="88i-Oj-5BM" id="4Xt-Z7-jcJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="88.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iLG-Vb-bfT">
@@ -6216,7 +6226,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             <action selector="switchChangeState:" destination="DHB-c0-nrG" eventType="valueChanged" id="dhO-YV-L3m"/>
                                                         </connections>
                                                     </switch>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Private Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQm-WJ-rxc">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQm-WJ-rxc">
                                                         <rect key="frame" x="57" y="16" width="106" height="20"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -6487,7 +6497,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 <rect key="frame" x="0.0" y="92" width="375" height="468"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HwC-sX-VCM" id="GIC-9z-IyP">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="467"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="467.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gmv-mH-Mqh" userLabel="Green Container">
@@ -6559,14 +6569,14 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCq-ux-Oua" userLabel="Attendant Container">
                                                     <rect key="frame" x="318" y="16" width="49" height="49"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="atttendance_icon" translatesAutoresizingMaskIntoConstraints="NO" id="bkr-P9-INh">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="atttendance_icon" translatesAutoresizingMaskIntoConstraints="NO" id="bkr-P9-INh">
                                                             <rect key="frame" x="14" y="9" width="20" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="bkr-P9-INh" secondAttribute="height" multiplier="1:1" id="WsY-rf-SYD"/>
                                                                 <constraint firstAttribute="height" constant="20" id="h5c-eF-cfD"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtH-88-Yo8">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtH-88-Yo8">
                                                             <rect key="frame" x="18" y="31" width="14" height="14"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="12"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -6610,7 +6620,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 </mask>
                                                             </variation>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="like_icon" translatesAutoresizingMaskIntoConstraints="NO" id="cxY-rr-G60">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like_icon" translatesAutoresizingMaskIntoConstraints="NO" id="cxY-rr-G60">
                                                             <rect key="frame" x="14" y="9" width="20" height="20"/>
                                                         </imageView>
                                                     </subviews>
@@ -6798,7 +6808,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             <rect key="frame" x="0.0" y="0.0" width="359" height="55"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="I love this place!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4f-Vp-QSn">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I love this place!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4f-Vp-QSn">
                                                                     <rect key="frame" x="128" y="19" width="103" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="15"/>
                                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -7006,7 +7016,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <rect key="frame" x="0.0" y="28" width="375" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QDu-G9-lBy" id="AaH-Xd-a14">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="73.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pnq-DP-Q1o">
