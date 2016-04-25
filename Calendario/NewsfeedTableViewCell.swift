@@ -31,6 +31,8 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     @IBOutlet weak var Likebuttoncontainerbutton: UIButton!
     
+    //constraint to animate if imageview is nil
+    @IBOutlet weak var bottomImageViewConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var attendancecontainerbutton: UIButton!
     
@@ -99,6 +101,28 @@ class NewsfeedTableViewCell: PFTableViewCell {
         
         //setup the cell rsvp button
         self.rsvpButton.addTarget(self, action: "rsvpClicked:", forControlEvents: .TouchUpInside)
+        
+        //animate cell height if image is not there
+        animateBottomConstraintForCell(checkForImage())
+    }
+    
+    func checkForImage() -> Bool {
+        if self.userPostedImage.image == nil {
+            return true
+        }
+        return false
+    }
+    
+    func animateBottomConstraintForCell(shouldAnimate: Bool) {
+        if shouldAnimate == true {
+            
+            print("IMAGE IS NIL")
+            self.imageViewHeightConstraint.constant = 0
+            self.bottomImageViewConstraint.constant = -self.userPostedImage.frame.size.height - 5
+            UIView.animateWithDuration(0.5) {
+                self.contentView.layoutIfNeeded()
+            }
+        }
     }
     
     func setPostedImage(image : UIImage) {
@@ -550,7 +574,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
         self.updateRsvpLabel(passedInObject)
     }
     
-    // like button container button action method 
+    // like button container button action method
     
     @IBAction func Likebuttoncontaineraction(sender: AnyObject) {
         print("like button has been tapped")
@@ -562,7 +586,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     }
     
     
-        }
-    
-    
+}
+
+
 
