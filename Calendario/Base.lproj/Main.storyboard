@@ -212,13 +212,13 @@
         <!--Attendants-->
         <scene sceneID="7SM-A4-wk3">
             <objects>
-                <tableViewController id="Dze-52-gEU" customClass="AttendantsListViewController" customModule="Calendario" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="UserAttendantsList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Dze-52-gEU" customClass="AttendantsListViewController" customModule="Calendario" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="42E-IF-yrW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="likesCell" rowHeight="52" id="2To-8o-TY8" customClass="LikesCustomCell" customModule="Calendario" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="likesCell" rowHeight="52" id="2To-8o-TY8" customClass="LikesCustomCell" customModule="Calendario" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="375" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2To-8o-TY8" id="S51-1d-psp">
@@ -726,6 +726,12 @@
                                                                 <constraint firstAttribute="height" constant="20" id="rcp-KP-UO8"/>
                                                             </constraints>
                                                         </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3NH-dj-d1g">
+                                                            <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
+                                                            <connections>
+                                                                <action selector="AttendantsListContainerInteraction:" destination="vaR-8e-HVs" eventType="touchUpInside" id="mKc-a1-QIG"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -2002,6 +2008,12 @@
                                                                         <constraint firstAttribute="height" constant="20" id="iuh-Bf-e3M"/>
                                                                     </constraints>
                                                                 </imageView>
+                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZL0-c0-25C">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
+                                                                    <connections>
+                                                                        <action selector="AttendantsListContainerInteraction:" destination="hoY-xk-8yZ" eventType="touchUpInside" id="cwX-SM-uIh"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
@@ -2047,6 +2059,12 @@
                                                                         <constraint firstAttribute="width" constant="20" id="m0h-yT-fSa"/>
                                                                     </constraints>
                                                                 </imageView>
+                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8xm-v1-2rP">
+                                                                    <rect key="frame" x="1" y="0.0" width="49" height="49"/>
+                                                                    <connections>
+                                                                        <action selector="Likebuttoncontaineraction:" destination="hoY-xk-8yZ" eventType="touchUpInside" id="48p-VY-sA2"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
@@ -4781,6 +4799,9 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rbs-6t-oCm">
                                                     <rect key="frame" x="20" y="41" width="22" height="22"/>
                                                     <state key="normal" image="back_button"/>
+                                                    <connections>
+                                                        <action selector="dismissProfile:" destination="EL5-7o-osE" eventType="touchUpInside" id="PES-JF-DtR"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.19036321989528793" green="0.19036321989528793" blue="0.19036321989528793" alpha="0.80815048758865249" colorSpace="calibratedRGB"/>
@@ -4923,6 +4944,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                         <constraint firstAttribute="height" constant="20" id="hrQ-ow-MxR"/>
                                                                     </constraints>
                                                                 </imageView>
+                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvX-Ax-mIW">
+                                                                    <rect key="frame" x="1" y="0.0" width="49" height="49"/>
+                                                                    <connections>
+                                                                        <action selector="AttendantsListContainerInteraction:" destination="9e3-ND-WWW" eventType="touchUpInside" id="tQv-jY-NEj"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
@@ -4968,6 +4995,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                         <constraint firstAttribute="height" constant="20" id="Z6e-QV-65W"/>
                                                                     </constraints>
                                                                 </imageView>
+                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1De-k6-OYz">
+                                                                    <rect key="frame" x="1" y="0.0" width="49" height="49"/>
+                                                                    <connections>
+                                                                        <action selector="Likebuttoncontaineraction:" destination="9e3-ND-WWW" eventType="touchUpInside" id="BwF-BN-Mic"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>

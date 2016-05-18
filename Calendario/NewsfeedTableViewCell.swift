@@ -275,20 +275,20 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     func updateRsvpLabel(object: PFObject) {
         
-        /*     // Get the post rsvp data.
-         let rsvpArray:[String] = object.objectForKey("rsvpArray") as! Array
-         
-         if (rsvpArray.count > 0) {
-         if (rsvpArray.count == 1) {
-         self.rsvpLabel.text = "1"
-         }
-         else {
-         self.rsvpLabel.text = "\(rsvpArray.count)"
-         }
-         }
-         else {
-         self.rsvpLabel.text = "0"
-         } */
+        // Get the post rsvp (attendants) data.
+        let rsvpArray:[String] = object.objectForKey("rsvpArray") as! Array
+        
+        if (rsvpArray.count > 0) {
+            if (rsvpArray.count == 1) {
+                self.rsvpLabel.text = "1"
+            }
+            else {
+                self.rsvpLabel.text = "\(rsvpArray.count)"
+            }
+        }
+        else {
+            self.rsvpLabel.text = "0"
+        }
     }
     
     func updateRsvpButton(rsvpPost: Bool, objectId: String) {
@@ -581,12 +581,15 @@ class NewsfeedTableViewCell: PFTableViewCell {
         likeClicked()
     }
     
+    // Attendants button container: button action method
+    
+    @IBAction func AttendantsListContainerInteraction(sender: AnyObject) {
+        PresentingViews.ViewAttendantsListView(parentViewController, eventID: passedInObject.objectId!)
+    }
+    
+    // RSVP button container: button action method
+    
     @IBAction func RSVPbuttontapped(sender: AnyObject) {
         print("RSVP tapped")
     }
-    
-    
 }
-
-
-

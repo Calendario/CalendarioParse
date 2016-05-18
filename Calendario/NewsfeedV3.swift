@@ -276,6 +276,9 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         // Setup the table view custom cell.
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
         
+        // Pass in the parent view controller.
+        cell.parentViewController = self
+        
         // Get the specific status object for this cell and call all needed methods.
         cell.passedInObject = self.sortedArray[indexPath.row] as! PFObject
         

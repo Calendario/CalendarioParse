@@ -34,13 +34,13 @@ public class AttendantsListViewController: UITableViewController {
         self.navigationItem.title = "Attendants"
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.translucent = false
-        let font = UIFont(name: "Futura-Medium", size: 21)
+        let font = UIFont(name: "SFUIDisplay-Regular", size: 18)
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font!]
         self.navigationController!.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
         
         // Set the back button.
         let button: UIButton = UIButton(type: UIButtonType.Custom)
-        button.setImage(UIImage(named: "left_icon.png"), forState: UIControlState.Normal)
+        button.setImage(UIImage(named: "back_button.png"), forState: UIControlState.Normal)
         button.tintColor = UIColor.whiteColor()
         button.addTarget(self, action: "closeView", forControlEvents: UIControlEvents.TouchUpInside)
         button.frame = CGRectMake(0, 0, 30, 30)
@@ -65,7 +65,7 @@ public class AttendantsListViewController: UITableViewController {
     func loadAttendantsForEvent() {
         
         self.menuIndicator.beginRefreshing()
-        
+                
         EventManager.getEventAttendants(passedInEventID) { (attendants) -> Void in
             
             self.menuIndicator.endRefreshing()
@@ -80,7 +80,7 @@ public class AttendantsListViewController: UITableViewController {
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     // Setup the alert controller.
-                    let alertController = UIAlertController(title: "No Likes", message: "This event does not have any attendants.", preferredStyle: .Alert)
+                    let alertController = UIAlertController(title: "No attendants", message: "This event does not have any attendants.", preferredStyle: .Alert)
                     
                     // Setup the alert actions.
                     let cancel = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
@@ -89,6 +89,30 @@ public class AttendantsListViewController: UITableViewController {
                     // Present the alert on screen.
                     self.presentViewController(alertController, animated: true, completion: nil)
                 })
+            }
+        }
+    }
+    
+    func getUserObject(userID: String , completion: (userDataObject: PFObject) -> Void) {
+        
+        // Setup the user details query.
+        var findUser:PFQuery!
+        findUser = PFUser.query()!
+        findUser.whereKey("objectId", equalTo: userID)
+        
+        // Download the user detials.
+        findUser.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
+            
+            if (error == nil) {
+                
+                if let aobject = objects {
+                    
+                    let userObject = (aobject as NSArray).lastObject
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        completion(userDataObject: userObject! as! PFObject)
+                    })
+                }
             }
         }
     }
@@ -105,6 +129,13 @@ public class AttendantsListViewController: UITableViewController {
     
     override public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 52
+    }
+    
+    override public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        self.getUserObject(self.userData[indexPath.row] as! String) { (userDataObject) in
+            PresentingViews.showProfileView(userDataObject, viewController: self)
+        }
     }
     
     override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

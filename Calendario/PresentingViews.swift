@@ -10,6 +10,14 @@ import UIKit
 
 public class PresentingViews: NSObject {
     
+    class func ViewAttendantsListView(viewController: AnyObject, eventID: String) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let attendantListView = sb.instantiateViewControllerWithIdentifier("UserAttendantsList") as! AttendantsListViewController
+        attendantListView.passedInEventID = eventID
+        let NC = UINavigationController(rootViewController: attendantListView)
+        viewController.presentViewController(NC, animated: true, completion: nil)
+    }
+    
     class func ReportView(viewController: AnyObject) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let reportVC = sb.instantiateViewControllerWithIdentifier("report") as! ReportTableViewController

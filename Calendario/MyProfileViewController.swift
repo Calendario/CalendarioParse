@@ -30,7 +30,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var backgroundImage: UIImageView!
     
-    
     // Follow method property
     var FollowObject = FollowHelper()
     
@@ -690,6 +689,9 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         
         // Setup the table view custom cell.
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
+        
+        // Pass in the parent view controller.
+        cell.parentViewController = self
         
         // Get the specific status object for this cell and call all needed methods.
         cell.passedInObject = self.statusObjects[indexPath.row] as! PFObject
