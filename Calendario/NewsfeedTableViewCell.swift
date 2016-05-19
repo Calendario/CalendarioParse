@@ -28,6 +28,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     @IBOutlet weak var rsvpLabel: UILabel!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var likebutton: UIView!
+    @IBOutlet weak var eventTitle: UILabel!
     
     @IBOutlet weak var Likebuttoncontainerbutton: UIButton!
     
@@ -98,6 +99,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
         //setup the status labels.
         self.statusTextView.text = passedInObject["updatetext"] as? String
         self.uploaddatelabel.text = passedInObject["dateofevent"] as? String
+        self.eventTitle.text = passedInObject["eventTitle"] as? String
         
         //setup the cell rsvp button
         self.rsvpButton.addTarget(self, action: "rsvpClicked:", forControlEvents: .TouchUpInside)
