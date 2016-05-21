@@ -30,6 +30,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var moreButton: UIButton!
+    @IBOutlet weak var followButton: UIButton!
     
     // Follow method property
     var FollowObject = FollowHelper()
@@ -64,20 +65,12 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         self.GotoFollowingView()
     }
     
-    @IBAction func editProfile(sender: UIButton) {
+    @IBAction func followUserTapped(sender: UIButton) {
         
-        // Open the appropriate section depending
-        // on whether a user object has been passed in.
+        // Only follow the user if the user
+        // is not viewing their own profile.
         
-        if ((passedUser == nil) || ((passedUser != nil) && (passedUser.username! == "\(PFUser.currentUser()!.username!)"))) {
-            
-            // No user passed in - edit current user button.
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewC = storyboard.instantiateViewControllerWithIdentifier("EditView") as! EditProfileViewController
-            self.presentViewController(viewC, animated: true, completion: nil)
-        }
-            
-        else {
+        if ((passedUser != nil) && (passedUser.username! != "\(PFUser.currentUser()!.username!)")) {
             
             // Follow/unfollow the passed in user.
             self.followOrUnfolowUser(passedUser)
@@ -380,7 +373,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         self.statusList.estimatedRowHeight = 292;
         self.statusList.separatorInset = UIEdgeInsetsZero
         
-        
         // By default the more button is diabled until
         // we have downloaded the appropriate user data.
         self.blockCheck = 0
@@ -426,11 +418,19 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 })
             }
             
+            // Disable the follow user button.
+            self.followButton.userInteractionEnabled = false
+            self.followButton.enabled = false
+            
             // Update the rest of the profile view.
             self.updateProfileView(PFUser.currentUser()!)
         }
             
         else {
+            
+            // Enable the follow user button.
+            self.followButton.userInteractionEnabled = true
+            self.followButton.enabled = true
             
             // Check if the user has already been blocked
             // or if the user has blocked you and take the
@@ -489,9 +489,15 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                     
                     // Allow status updates to be fetched.
                     self.statusLoadCheck = true
+                    
+                    // Set the follow user button image - following.
+                    self.followButton.setImage(UIImage(named: "Following_icon.png"), forState: .Normal)
                 }
                     
                 else {
+                    
+                    // Set the follow user button image - not following.
+                    self.followButton.setImage(UIImage(named: "Follow_icon.png"), forState: .Normal)
                     
                     // If the user is private then disallow
                     // the status updates to be fetched.
@@ -547,20 +553,20 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // Check if the user is verified.
         let verify = userData.objectForKey("verifiedUser")
         
-        //        if (verify == nil) {
-        ////            self.profVerified.alpha = 0.0
-        //        }
-        //
-        //        else {
-        //
-        //            if (verify as! Bool == true) {
-        //                self.profVerified.alpha = 1.0
-        //            }
-        //
-        //            else {
-        //                self.profVerified.alpha = 0.0
-        //            }
-        //        }
+        if (verify == nil) {
+            self.profVerified.alpha = 0.0
+        }
+            
+        else {
+            
+            if (verify as! Bool == true) {
+                self.profVerified.alpha = 1.0
+            }
+                
+            else {
+                self.profVerified.alpha = 0.0
+            }
+        }
         
         // Check if the user has a profile image.
         
@@ -899,6 +905,20 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             self.setFollowDataCount(userData)
             
             dispatch_async(dispatch_get_main_queue(), {
+                
+                // Update the follow button image.
+                
+                if (buttonTitle == "Follow") {
+                    
+                    // Set the follow user button image - not following.
+                    self.followButton.setImage(UIImage(named: "Follow_icon.png"), forState: .Normal)
+                }
+                
+                else {
+                    
+                    // Set the follow user button image - following.
+                    self.followButton.setImage(UIImage(named: "Following_icon.png"), forState: .Normal)
+                }
                 
                 // Check to see if the follow/unfollow
                 // operation succeded or failed.

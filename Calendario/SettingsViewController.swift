@@ -105,13 +105,13 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
         
         switch indexPath.row {
             
-        case 0: PresentingViews.showProfileView(PFUser.currentUser()!, viewController: self)
-        case 1: PresentingViews.ReportView(self)
-        case 2: PresentingViews.ViewPrivacyPolicy(self)
-        case 3: PresentingViews.ViewTermsOfService(self)
-        case 4: PresentingViews.viewAcknowledgments(self)
-        case 5: PresentingViews.viewRecommendations(self)
-        default: break
+            case 0: PresentingViews.ShowUserEditController(self); break;
+            case 1: PresentingViews.ReportView(self); break;
+            case 2: PresentingViews.ViewPrivacyPolicy(self); break;
+            case 3: PresentingViews.ViewTermsOfService(self); break;
+            case 4: PresentingViews.viewAcknowledgments(self); break;
+            case 5: PresentingViews.viewRecommendations(self); break;
+            default: break;
         }
     }
 }

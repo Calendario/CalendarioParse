@@ -4709,13 +4709,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fbk-9X-y9d">
                                                     <rect key="frame" x="48" y="106" width="61" height="66"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Follow_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Jz0-ht-Qnk" userLabel="following-icon">
-                                                            <rect key="frame" x="18" y="0.0" width="25" height="25"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="25" id="5K1-dM-Pju"/>
-                                                                <constraint firstAttribute="height" constant="25" id="lHe-7H-2Ip"/>
-                                                            </constraints>
-                                                        </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oid-Gm-D9p">
                                                             <rect key="frame" x="0.0" y="25" width="61" height="29"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="14"/>
@@ -4732,17 +4725,29 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dRr-uY-Ebg">
+                                                            <rect key="frame" x="12" y="0.0" width="38" height="29"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="29" id="0ta-3M-o9B"/>
+                                                                <constraint firstAttribute="width" constant="38" id="t4v-Mk-RBX"/>
+                                                            </constraints>
+                                                            <state key="normal" image="Follow_icon"/>
+                                                            <connections>
+                                                                <action selector="followUserTapped:" destination="EL5-7o-osE" eventType="touchUpInside" id="h6A-IT-u1K"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="oid-Gm-D9p" firstAttribute="top" secondItem="Jz0-ht-Qnk" secondAttribute="bottom" id="4rD-JV-IQM"/>
-                                                        <constraint firstItem="Jz0-ht-Qnk" firstAttribute="top" secondItem="Fbk-9X-y9d" secondAttribute="top" id="7v4-P4-kvs"/>
+                                                        <constraint firstAttribute="trailing" secondItem="dRr-uY-Ebg" secondAttribute="trailing" constant="11" id="3WD-t0-rmF"/>
                                                         <constraint firstItem="kky-9R-Vgu" firstAttribute="centerX" secondItem="Fbk-9X-y9d" secondAttribute="centerX" id="8rT-ro-EEA"/>
                                                         <constraint firstItem="oid-Gm-D9p" firstAttribute="leading" secondItem="Fbk-9X-y9d" secondAttribute="leading" id="El7-Gh-zst"/>
+                                                        <constraint firstItem="dRr-uY-Ebg" firstAttribute="leading" secondItem="Fbk-9X-y9d" secondAttribute="leading" constant="12" id="FGZ-59-Zyv"/>
                                                         <constraint firstItem="oid-Gm-D9p" firstAttribute="centerX" secondItem="Fbk-9X-y9d" secondAttribute="centerX" id="P6L-Jo-MOc"/>
                                                         <constraint firstAttribute="trailing" secondItem="oid-Gm-D9p" secondAttribute="trailing" id="Xx7-X5-l8a"/>
+                                                        <constraint firstItem="kky-9R-Vgu" firstAttribute="top" secondItem="dRr-uY-Ebg" secondAttribute="bottom" constant="19" id="gGA-uS-sIN"/>
                                                         <constraint firstItem="kky-9R-Vgu" firstAttribute="top" secondItem="oid-Gm-D9p" secondAttribute="bottom" constant="-6" id="kFK-Kp-4UG"/>
-                                                        <constraint firstItem="Jz0-ht-Qnk" firstAttribute="centerX" secondItem="Fbk-9X-y9d" secondAttribute="centerX" id="pWe-wD-NAk"/>
+                                                        <constraint firstItem="dRr-uY-Ebg" firstAttribute="top" secondItem="Fbk-9X-y9d" secondAttribute="top" id="n0H-JJ-lSf"/>
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LaI-WP-jGz">
@@ -4806,7 +4811,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Followers_icon" translatesAutoresizingMaskIntoConstraints="NO" id="y6I-kI-xnv">
+                                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Followers_icon" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y6I-kI-xnv">
                                                             <rect key="frame" x="18" y="0.0" width="25" height="25"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
@@ -5439,6 +5444,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         <outlet property="backgroundImage" destination="Mcc-a3-a7I" id="rTv-pv-dyJ"/>
                         <outlet property="blockedBlurView" destination="36U-kS-yTL" id="WUT-Pz-Zzg"/>
                         <outlet property="blockedViewDesc" destination="mVO-HP-zm7" id="rc2-t8-X7h"/>
+                        <outlet property="followButton" destination="dRr-uY-Ebg" id="YVs-An-HTA"/>
                         <outlet property="moreButton" destination="LaI-WP-jGz" id="8Sq-Is-sbQ"/>
                         <outlet property="profDesc" destination="itw-pb-aJn" id="7It-ag-FJb"/>
                         <outlet property="profFollowers" destination="Q5S-Vv-53v" id="Ega-Mn-Eok"/>

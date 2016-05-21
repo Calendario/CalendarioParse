@@ -10,6 +10,12 @@ import UIKit
 
 public class PresentingViews: NSObject {
     
+    class func ShowUserEditController(viewController: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewC = storyboard.instantiateViewControllerWithIdentifier("EditView") as! EditProfileViewController
+        viewController.presentViewController(viewC, animated: true, completion: nil)
+    }
+    
     class func ViewSearchController(viewController: AnyObject) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let searchView = sb.instantiateViewControllerWithIdentifier("search") as! SearchViewController
