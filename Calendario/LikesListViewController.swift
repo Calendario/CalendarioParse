@@ -30,13 +30,13 @@ class LikesListViewController: UITableViewController {
         self.navigationItem.title = "Likes"
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.translucent = false
-        let font = UIFont(name: "Futura-Medium", size: 21)
+        let font = UIFont(name: "SFUIDisplay-Regular", size: 18)
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font!]
         self.navigationController!.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
 
         // Set the back button.
         let button: UIButton = UIButton(type: UIButtonType.Custom)
-        button.setImage(UIImage(named: "left_icon.png"), forState: UIControlState.Normal)
+        button.setImage(UIImage(named: "back_button.png"), forState: UIControlState.Normal)
         button.tintColor = UIColor.whiteColor()
         button.addTarget(self, action: "closeView", forControlEvents: UIControlEvents.TouchUpInside)
         button.frame = CGRectMake(0, 0, 30, 30)

@@ -667,6 +667,12 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9g-j6-yLU">
+                                                    <rect key="frame" x="8" y="14" width="54" height="54"/>
+                                                    <connections>
+                                                        <action selector="openProfileTapped:" destination="vaR-8e-HVs" eventType="touchUpInside" id="lYU-hb-c9e"/>
+                                                    </connections>
+                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="KhO-HU-Fzo">
                                                     <rect key="frame" x="70" y="34" width="56" height="14"/>
                                                     <constraints>
@@ -891,6 +897,12 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9vn-ae-PVA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="122" height="30"/>
+                                                    <connections>
+                                                        <action selector="CommentButtonTapped:" destination="vaR-8e-HVs" eventType="touchUpInside" id="ywX-nc-eJg"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -982,6 +994,12 @@
                                             </variation>
                                             <connections>
                                                 <action selector="RSVPbuttontapped:" destination="vaR-8e-HVs" eventType="touchUpInside" id="b50-RL-hHm"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQo-0D-UKO">
+                                            <rect key="frame" x="8" y="289" width="359" height="205"/>
+                                            <connections>
+                                                <action selector="feedImageTapped:" destination="vaR-8e-HVs" eventType="touchUpInside" id="q18-5V-jDG"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -1586,7 +1604,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="jGc-dL-Dib"/>
-                        <barButtonItem image="left_icon" id="lNJ-Zv-djk">
+                        <barButtonItem image="back_button" id="lNJ-Zv-djk">
                             <connections>
                                 <action selector="backbuttonTapped:" destination="9Rc-cM-4J1" id="dSW-2s-Q5f"/>
                             </connections>
@@ -1789,7 +1807,7 @@
                     </view>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Kl2-IQ-cfd"/>
-                        <barButtonItem image="left_icon" id="ttY-Qb-aem">
+                        <barButtonItem image="back_button" id="ttY-Qb-aem">
                             <connections>
                                 <action selector="bacbuttontapped:" destination="F2z-l2-38J" id="4NH-ig-wuY"/>
                             </connections>
@@ -1951,6 +1969,12 @@
                                                                 </mask>
                                                             </variation>
                                                         </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCp-Fh-EhT">
+                                                            <rect key="frame" x="8" y="14" width="54" height="54"/>
+                                                            <connections>
+                                                                <action selector="openProfileTapped:" destination="hoY-xk-8yZ" eventType="touchUpInside" id="HGu-zs-Uwx"/>
+                                                            </connections>
+                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="m3y-y9-hpd">
                                                             <rect key="frame" x="70" y="34" width="56" height="14"/>
                                                             <constraints>
@@ -2170,6 +2194,9 @@
                                                             <exclude reference="ow7-6B-WG3"/>
                                                         </mask>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="RSVPbuttontapped:" destination="hoY-xk-8yZ" eventType="touchUpInside" id="mQh-CD-i5R"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="6 hrs Ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="AWF-tm-2Jm">
                                                     <rect key="frame" x="315" y="103" width="52" height="15"/>
@@ -4331,7 +4358,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Location" id="jXg-o7-zc3">
-                                        <barButtonItem key="leftBarButtonItem" image="left_icon" id="DNU-kB-afD">
+                                        <barButtonItem key="leftBarButtonItem" image="back_button" id="DNU-kB-afD">
                                             <inset key="imageInsets" minX="-2" minY="2" maxX="6" maxY="2"/>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
@@ -5028,6 +5055,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 </mask>
                                                             </variation>
                                                         </view>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="scW-lU-QyD">
+                                                            <rect key="frame" x="8" y="14" width="54" height="54"/>
+                                                            <connections>
+                                                                <action selector="openProfileTapped:" destination="9e3-ND-WWW" eventType="touchUpInside" id="vfi-79-Xv1"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.19963944459999999" green="0.59966291000000005" blue="0.34588249119999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -5115,6 +5148,9 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             <exclude reference="xma-f7-fCS"/>
                                                         </mask>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="RSVPbuttontapped:" destination="9e3-ND-WWW" eventType="touchUpInside" id="727-lQ-vw2"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="6 hrs Ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Tny-3W-Dlc">
                                                     <rect key="frame" x="315" y="103" width="52" height="15"/>
@@ -5160,6 +5196,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 </mask>
                                                             </variation>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rw5-Wa-gUp">
+                                                            <rect key="frame" x="1" y="1" width="122" height="30"/>
+                                                            <connections>
+                                                                <action selector="CommentButtonTapped:" destination="9e3-ND-WWW" eventType="touchUpInside" id="z36-yl-jsF"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -5539,7 +5581,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem image="left_icon" id="w93-kp-yY6">
+                        <barButtonItem image="back_button" id="w93-kp-yY6">
                             <connections>
                                 <action selector="leftButtonTapped:" destination="0Fn-H2-WqX" id="5bO-ss-PTH"/>
                             </connections>
@@ -7394,7 +7436,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="default_profile_pic" width="27" height="27"/>
         <image name="email_icon" width="25" height="18"/>
         <image name="iphone6+1" width="1242" height="2208"/>
-        <image name="left_icon" width="30" height="30"/>
         <image name="like_icon" width="25" height="24"/>
         <image name="lock_icon" width="25" height="33"/>
         <image name="more_button" width="20" height="20"/>
@@ -7406,6 +7447,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Q92-9R-gKB"/>
-        <segue reference="jbQ-WG-YYd"/>
+        <segue reference="Urg-qd-jmS"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -54,8 +54,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        //assignGestureRecognizers()
     }
     
     override func layoutSubviews() {
@@ -69,7 +67,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
     }
     
     func setupUI () {
-        //assignGestureRecognizers()
         self.statusTextView.textColor = UIColor.darkGrayColor()
         
         // Setup the cell likes button.
@@ -101,9 +98,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
         self.uploaddatelabel.text = passedInObject["dateofevent"] as? String
         self.eventTitle.text = passedInObject["eventTitle"] as? String
         
-        //setup the cell rsvp button
-        self.rsvpButton.addTarget(self, action: "rsvpClicked:", forControlEvents: .TouchUpInside)
-        
         //animate cell height if image is not there
         animateBottomConstraintForCell(checkForImage())
     }
@@ -129,23 +123,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     func setPostedImage(image : UIImage) {
         userPostedImage.image = image
-    }
-    
-    func assignGestureRecognizers() {
-        let commentGestureRecognizer = UITapGestureRecognizer(target: self, action: "commentClicked")
-        commentButton.addGestureRecognizer(commentGestureRecognizer)
-        
-        let likeGestureRecognizer = UITapGestureRecognizer(target: self, action: "likeClicked:")
-        likebutton.addGestureRecognizer(likeGestureRecognizer)
-        
-        self.attendGestureRecognizer = UITapGestureRecognizer(target: self, action: "rsvpClicked:")
-        attendantContainerView.addGestureRecognizer(attendGestureRecognizer)
-        
-        let tapGesturePostImage = UITapGestureRecognizer(target: self, action: "imageTapped:")
-        self.userPostedImage.addGestureRecognizer(tapGesturePostImage)
-        
-        let tapGestureProfileImage = UITapGestureRecognizer(target: self, action: "goToProfile:")
-        self.profileimageview.addGestureRecognizer(tapGestureProfileImage)
     }
     
     func createTenseAndDateLabel() {
@@ -422,11 +399,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
         PresentingViews.openComments(self.passedInObject.objectId!, viewController: self)
     }
     
-    func imageTapped(sender: UITapGestureRecognizer) {
-        PresentingViews.showPhotoViewer(self, userPostedImage: self.userPostedImage)
-    }
-    
-    func goToProfile(sender: UITapGestureRecognizer) {
+    func goToProfile() {
         
         let currentObject:PFObject = self.passedInObject
         
@@ -576,10 +549,21 @@ class NewsfeedTableViewCell: PFTableViewCell {
         self.updateRsvpLabel(passedInObject)
     }
     
+    // Profile view image button
+    
+    @IBAction func openProfileTapped(sender: AnyObject) {
+        self.goToProfile()
+    }
+    
+    // Main news item image method
+    
+    @IBAction func feedImageTapped(sender: AnyObject) {
+        PresentingViews.showPhotoViewer(self, userPostedImage: self.userPostedImage)
+    }
+    
     // like button container button action method
     
     @IBAction func Likebuttoncontaineraction(sender: AnyObject) {
-        print("like button has been tapped")
         likeClicked()
     }
     
@@ -592,6 +576,12 @@ class NewsfeedTableViewCell: PFTableViewCell {
     // RSVP button container: button action method
     
     @IBAction func RSVPbuttontapped(sender: AnyObject) {
-        print("RSVP tapped")
+        self.rsvpClicked()
+    }
+    
+    // Comment button container: button action method
+    
+    @IBAction func CommentButtonTapped(sender: AnyObject) {
+        self.commentClicked(sender as! UIButton)
     }
 }
