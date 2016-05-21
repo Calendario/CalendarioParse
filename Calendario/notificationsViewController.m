@@ -35,7 +35,9 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    
+    // Hide the notifications tab bar label as
+    // the user has now seen their notifications.
+    [[self navigationController] tabBarItem].badgeValue = nil;
 }
 
 - (void) getNotifications {
