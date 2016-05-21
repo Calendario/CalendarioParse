@@ -4743,13 +4743,13 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 </mask>
                                                             </variation>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVB-Xf-xKE">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVB-Xf-xKE">
                                                             <rect key="frame" x="31" y="4" width="9" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="POSTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DS7-IM-sL7">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POSTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DS7-IM-sL7">
                                                             <rect key="frame" x="46" y="4" width="45" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -5390,6 +5390,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="backButton" destination="Rbs-6t-oCm" id="aYP-i8-86R"/>
                         <outlet property="backgroundImage" destination="Mcc-a3-a7I" id="rTv-pv-dyJ"/>
                         <outlet property="blockedBlurView" destination="36U-kS-yTL" id="WUT-Pz-Zzg"/>
                         <outlet property="blockedViewDesc" destination="mVO-HP-zm7" id="rc2-t8-X7h"/>
@@ -5400,6 +5401,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         <outlet property="profPicture" destination="Pb0-fb-3L1" id="rzB-pB-rO3"/>
                         <outlet property="profPosts" destination="mVB-Xf-xKE" id="UKT-gt-mIV"/>
                         <outlet property="profUserName" destination="SYp-Y4-W4r" id="DDI-zw-G4l"/>
+                        <outlet property="profVerified" destination="myB-BC-vtL" id="zK0-BN-DAL"/>
                         <outlet property="profWeb" destination="T5b-rg-9ko" id="qZB-kf-q5V"/>
                         <outlet property="settingsButton" destination="LaI-WP-jGz" id="fdp-Z1-jjU"/>
                         <outlet property="statusList" destination="oFf-Iw-JVv" id="VwN-lV-wau"/>

@@ -29,6 +29,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var profDesc: UILabel!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var backgroundImage: UIImageView!
+    @IBOutlet weak var backButton: UIButton!
     
     // Follow method property
     var FollowObject = FollowHelper()
@@ -373,18 +374,17 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             // Hide the back button if no
             // user has been passed in.
             
-            //MARK: BACKBUTTON METHOD
-            //            if (passedUser == nil) {
-            //
-            //                backButton.image = nil
-            //                backButton.enabled = false
-            //            }
-            //
-            //            else {
-            //
-            //                backButton.image = UIImage(named: "left_icon.png")
-            //                backButton.enabled = true
-            //            }
+            if (passedUser == nil) {
+                backButton.enabled = false
+                backButton.userInteractionEnabled = false
+                backButton.alpha = 0.0
+            }
+                
+            else {
+                backButton.enabled = true
+                backButton.userInteractionEnabled = true
+                backButton.alpha = 1.0
+            }
             
             // Update the follow requests badge.
             var followQuery:PFQuery!
