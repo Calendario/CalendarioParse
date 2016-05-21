@@ -27,9 +27,9 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var blockedViewDesc: UITextView!
     @IBOutlet weak var statusList: UITableView!
     @IBOutlet weak var profDesc: UILabel!
-    @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var moreButton: UIButton!
     
     // Follow method property
     var FollowObject = FollowHelper()
@@ -104,7 +104,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func dismissProfile(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.closeProfileView()
     }
     
     @IBAction func openFollowRequestsSection(sender: UIButton) {
@@ -122,6 +122,68 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func openSettingsOrMoreSection(sender: UIButton) {
+        self.viewMoreAlert()
+    }
+    
+    // View Did Load method.
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupUI()
+        addTapGestures()
+    }
+    
+    func setupUI() {
+        // Get the screen dimensions.
+        let width = UIScreen.mainScreen().bounds.size.width
+        
+        blockedBlurView.frame = CGRectMake(0, 0, width, self.view.bounds.size.height)
+        blockedBlurView.alpha = 0.0
+        self.view.addSubview(blockedBlurView)
+        
+        var visualEffectView:UIVisualEffectView!
+        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
+        visualEffectView.frame = self.blockedBlurView.bounds
+        
+        blockedBlurView.insertSubview(visualEffectView, atIndex: 0)
+        
+        let blockButtonLeft = UIButton()
+        let blockButtonRight = UIButton()
+        blockButtonLeft.setImage(UIImage(named: "back_button.png"), forState: .Normal)
+        blockButtonLeft.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        blockButtonLeft.frame = CGRectMake(15, 44, 22, 22)
+        blockButtonRight.setImage(UIImage(named: "more_button.png"), forState: .Normal)
+        blockButtonRight.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        blockButtonRight.frame = CGRectMake(self.view.bounds.size.width - 62, 44, 62, 22)
+        blockButtonLeft.addTarget(self, action: #selector(MyProfileViewController.closeProfileView), forControlEvents: .TouchUpInside)
+        blockButtonRight.addTarget(self, action: #selector(MyProfileViewController.viewMoreAlert), forControlEvents: .TouchUpInside)
+
+        self.blockedBlurView.addSubview(blockButtonLeft)
+        self.blockedBlurView.addSubview(blockButtonRight)
+
+        self.profPicture.layer.cornerRadius = (self.profPicture.frame.size.width / 2)
+        self.profPicture.clipsToBounds = true
+    }
+    
+    func addTapGestures() {
+        // Adding tap gesture reconizers to the following and follower labels.
+        let followgesturereconizer = UITapGestureRecognizer(target: self, action: "GotoFollowingView")
+        self.profFollowing.userInteractionEnabled = true
+        self.profFollowing.addGestureRecognizer(followgesturereconizer)
+        
+        let followergesturereconizer = UITapGestureRecognizer(target: self, action: "GotoFollowerView")
+        self.profFollowers.userInteractionEnabled = true
+        self.profFollowers.addGestureRecognizer(followergesturereconizer)
+    }
+    
+    // Back/More section alert methods.
+    
+    func closeProfileView() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func viewMoreAlert() {
         
         // If the current user is being displayed then show the user
         // settings menu otherwise display the more action sheet.
@@ -285,45 +347,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    // View Did Load method.
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupUI()
-        addTapGestures()
-    }
-    
-    func setupUI() {
-        // Get the screen dimensions.
-        let width = UIScreen.mainScreen().bounds.size.width
-        
-        blockedBlurView.frame = CGRectMake(0, 0, width, self.view.bounds.size.height)
-        blockedBlurView.alpha = 0.0
-        self.view.addSubview(blockedBlurView)
-        
-        var visualEffectView:UIVisualEffectView!
-        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
-        visualEffectView.frame = self.blockedBlurView.bounds
-        
-        blockedBlurView.insertSubview(visualEffectView, atIndex: 0)
-        
-        self.profPicture.layer.cornerRadius = (self.profPicture.frame.size.width / 2)
-        self.profPicture.clipsToBounds = true
-    }
-    
-    func addTapGestures() {
-        // Adding tap gesture reconizers to the following and follower labels.
-        let followgesturereconizer = UITapGestureRecognizer(target: self, action: "GotoFollowingView")
-        self.profFollowing.userInteractionEnabled = true
-        self.profFollowing.addGestureRecognizer(followgesturereconizer)
-        
-        let followergesturereconizer = UITapGestureRecognizer(target: self, action: "GotoFollowerView")
-        self.profFollowers.userInteractionEnabled = true
-        self.profFollowers.addGestureRecognizer(followergesturereconizer)
-        
-    }
-    
     // Gesture methods.
     
     func GotoFollowingView() {
@@ -360,7 +383,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         
         // By default the more button is diabled until
         // we have downloaded the appropriate user data.
-        settingsButton.enabled = false
         self.blockCheck = 0
         
         // Check to see if a user is being passed into the
@@ -427,7 +449,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                         // display blocked blur view.
                         self.blockedBlurView.alpha = 1.0;
                         self.blockedViewDesc.text = "You have blocked this user. Tap the button in the top right hand corner to unblock."
-                        self.settingsButton.enabled = true
                         self.blockCheck = 1
                     }
                         
@@ -450,21 +471,12 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                                 }
                                     
                                 else {
-                                    
-                                    // Allow access to the more button.
-                                    self.settingsButton.enabled = true
                                 }
                             }
                         }
                     }
                 }
             }
-            
-            
-            //MARK: BACK BUTTON METHODS
-            //            // Set the back button image and display it.
-            //            backButton.image = UIImage(named: "left_icon.png")
-            //            backButton.enabled = true
             
             // Check if the user is a private account.
             privateCheck = passedUser?.objectForKey("privateProfile") as? Bool

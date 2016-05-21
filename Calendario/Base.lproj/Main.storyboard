@@ -4725,6 +4725,9 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         <constraint firstAttribute="width" constant="62" id="su3-Ov-hzl"/>
                                                     </constraints>
                                                     <state key="normal" image="more_button"/>
+                                                    <connections>
+                                                        <action selector="openSettingsOrMoreSection:" destination="EL5-7o-osE" eventType="touchUpInside" id="rIr-BQ-Noe"/>
+                                                    </connections>
                                                 </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="eh1-Dh-tUG">
                                                     <rect key="frame" x="142" y="269" width="91" height="25"/>
@@ -5394,6 +5397,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         <outlet property="backgroundImage" destination="Mcc-a3-a7I" id="rTv-pv-dyJ"/>
                         <outlet property="blockedBlurView" destination="36U-kS-yTL" id="WUT-Pz-Zzg"/>
                         <outlet property="blockedViewDesc" destination="mVO-HP-zm7" id="rc2-t8-X7h"/>
+                        <outlet property="moreButton" destination="LaI-WP-jGz" id="8Sq-Is-sbQ"/>
                         <outlet property="profDesc" destination="itw-pb-aJn" id="7It-ag-FJb"/>
                         <outlet property="profFollowers" destination="Q5S-Vv-53v" id="Ega-Mn-Eok"/>
                         <outlet property="profFollowing" destination="kky-9R-Vgu" id="BrF-MP-0mN"/>
@@ -5403,7 +5407,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                         <outlet property="profUserName" destination="SYp-Y4-W4r" id="DDI-zw-G4l"/>
                         <outlet property="profVerified" destination="myB-BC-vtL" id="zK0-BN-DAL"/>
                         <outlet property="profWeb" destination="T5b-rg-9ko" id="qZB-kf-q5V"/>
-                        <outlet property="settingsButton" destination="LaI-WP-jGz" id="fdp-Z1-jjU"/>
                         <outlet property="statusList" destination="oFf-Iw-JVv" id="VwN-lV-wau"/>
                     </connections>
                 </viewController>
