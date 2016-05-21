@@ -28,9 +28,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         showStatusPostView()
     }
     @IBAction func presentSearchController(sender: UIBarButtonItem) {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let searchView = sb.instantiateViewControllerWithIdentifier("search") as! SearchViewController
-        self.presentViewController(searchView, animated: true, completion: nil)
+        PresentingViews.ViewSearchController(self)
     }
     
     //MARK: LIFECYCLE METHODS

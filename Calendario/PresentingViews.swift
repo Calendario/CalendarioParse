@@ -10,6 +10,13 @@ import UIKit
 
 public class PresentingViews: NSObject {
     
+    class func ViewSearchController(viewController: AnyObject) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let searchView = sb.instantiateViewControllerWithIdentifier("search") as! SearchViewController
+        let NC = UINavigationController(rootViewController: searchView)
+        viewController.presentViewController(NC, animated: true, completion: nil)
+    }
+    
     class func ViewAttendantsListView(viewController: AnyObject, eventID: String) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let attendantListView = sb.instantiateViewControllerWithIdentifier("UserAttendantsList") as! AttendantsListViewController

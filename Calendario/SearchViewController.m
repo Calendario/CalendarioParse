@@ -69,9 +69,32 @@
 }
 
 - (void) setupUI {
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:(35/255.0) green:(135/255.0) blue:(75/255.0) alpha:1.0]];
+    [self.navigationItem setTitle:@"Search"];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setTranslucent:NO];
+    
+    NSDictionary *titleDict = @{NSForegroundColorAttributeName: [UIColor whiteColor],
+                                NSFontAttributeName: [UIFont fontWithName:@"SFUIDisplay-Regular" size:18]};
+    [self.navigationController.navigationBar setTitleTextAttributes:titleDict];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(closeView) forControlEvents:UIControlEventTouchUpInside];
+    [button setImage:[UIImage imageNamed:@"back_button.png"] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor whiteColor]];
+    button.frame = CGRectMake(0, 0, 30, 30);
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [self.navigationItem setLeftBarButtonItem:backButton];
+    
     [self setSearchControllerProperties];
     self.definesPresentationContext = YES;
+}
+
+-(void)closeView {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) setSearchControllerProperties {
@@ -137,8 +160,9 @@
     
     filteredArray = [[self.allUsers filteredArrayUsingPredicate:searchPredicate] mutableCopy];
     
-    [self.searchTableView reloadData];
-    
+    if ([filteredArray count] > 0) {
+        [self.searchTableView reloadData];
+    }
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
