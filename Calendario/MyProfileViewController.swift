@@ -924,8 +924,8 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         ManageUser.getFollowDataCount(userData) { (countObject) -> Void in
             
             // Set the followers and following labels.
-//            self.profFollowers.text = "\(countObject.valueForKey("userFollowers")!.count)"
-//            self.profFollowing.text = "\(countObject.valueForKey("userFollowing")!.count)"
+            self.profFollowers.text = "\((countObject.valueForKey("userFollowers") as! NSArray).count) people"
+            self.profFollowing.text = "\((countObject.valueForKey("userFollowing") as! NSArray).count) people"
         }
     }
 }
