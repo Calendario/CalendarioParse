@@ -145,7 +145,7 @@
     actionButton.layer.cornerRadius = 2.0;
     
     //check for action type
-    NSString *type = notificationsExtLinks[indexPath.row];
+    NSString *type = [notificationsExtLinks[indexPath.row] objectAtIndex:0];
     [actionButton setImage:[self checkActionType:type] forState:UIControlStateNormal];
     
     // Set the notification label.
