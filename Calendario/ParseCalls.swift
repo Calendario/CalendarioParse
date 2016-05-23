@@ -77,8 +77,8 @@ public class ParseCalls: NSObject {
     class func updateCommentsLabel(commentsLabel: UILabel, passedObject: PFObject) {
         var commentsquery:PFQuery!
         commentsquery = PFQuery(className: "comment")
-        commentsquery.orderByDescending("createdAt")
-        commentsquery.addDescendingOrder("updatedAt")
+        commentsquery.orderByAscending("createdAt")
+        commentsquery.addAscendingOrder("updatedAt")
         commentsquery.whereKey("statusOBJID", equalTo: passedObject.objectId!)
         commentsquery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             

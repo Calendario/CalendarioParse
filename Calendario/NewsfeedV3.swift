@@ -303,7 +303,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        
+
         // Get the current status update.
         let statusupdate:PFObject = self.sortedArray.objectAtIndex(indexPath.row) as! PFObject
         
@@ -343,7 +343,60 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                 }
             })
         }
+        // If the status contains hashtags then highlight them.
         
+      //  if ((cell.statusTextView.text?.hasPrefix("#")) != nil) {
+            
+            // Highlight the status hashtags.
+        //    cell.statusTextView.hashtagLinkTapHandler = {label, hashtag, range in
+                
+                // Save the hashtag string.
+          //      var defaults:NSUserDefaults!
+            //    defaults = NSUserDefaults.standardUserDefaults()
+              //  defaults.setObject(([1, hashtag]) as NSMutableArray, forKey: "HashtagData")
+              //  defaults.synchronize()
+                
+                // Open the hashtag view with status
+                // posts containing the selected #hashtag.
+              //  let sb = UIStoryboard(name: "Main", bundle: nil)
+               // let likesView = sb.instantiateViewControllerWithIdentifier("HashtagNav") as! UINavigationController
+                // self.presentViewController(likesView, animated: true, completion: nil)
+       //    }
+      //  }
+        // If the status contains @mentions then highligh
+        // and link them to the open profile view action.
+        
+      //  if ((cell.statusTextView.text?.hasPrefix("@")) != nil) {
+            
+            // Highlight the @username label.
+        //    cell.statusTextView.userHandleLinkTapHandler = {label2, mention, range in
+                
+                // Remove the '@' symbol from the username
+          //      let userMention = mention.stringByReplacingOccurrencesOfString("@", withString: "")
+                
+                // Setup the user query.
+            //    var query:PFQuery!
+             //   query = PFUser.query()
+             //   query.whereKey("username", equalTo: userMention)
+                
+                // Get the user data object.
+             //   query.getFirstObjectInBackgroundWithBlock({ (userObject, error) -> Void in
+                    
+                    // Check for errors before passing
+                    // the user object to the profile view.
+                    
+               //     if ((error == nil) && (userObject != nil)) {
+                        
+                        // Open the selected users profile.
+                 //       let sb = UIStoryboard(name: "Main", bundle: nil)
+                   //     let reportVC = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
+                     //   reportVC.passedUser = userObject as? PFUser
+                     //   self.presentViewController(reportVC, animated: true, completion: nil)
+                   // }
+               // })
+           // }
+       // }
+    
         //        // Setup the see more button.
         //        let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
         //

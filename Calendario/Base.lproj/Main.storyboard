@@ -445,7 +445,7 @@
         <!--Report Bug-->
         <scene sceneID="4Fn-09-kJ4">
             <objects>
-                <viewController storyboardIdentifier="bugreport" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4Iv-vW-lfV" customClass="reportBug" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="reportbug" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4Iv-vW-lfV" customClass="reportBug" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ByJ-55-1qt"/>
                         <viewControllerLayoutGuide type="bottom" id="2uT-Hb-v5C"/>
@@ -5628,7 +5628,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             </constraints>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qd4-6x-aNx">
-                                            <rect key="frame" x="81" y="31" width="511" height="41"/>
+                                            <rect key="frame" x="81" y="19" width="511" height="41"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Real Name " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1L1-Uh-sff">
                                                     <rect key="frame" x="0.0" y="22" width="76" height="19"/>
@@ -5661,7 +5661,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     <constraints>
                                         <constraint firstItem="VAo-l4-Q5R" firstAttribute="leading" secondItem="D8t-dW-2aa" secondAttribute="leading" constant="8" id="1Op-Qw-rzG"/>
                                         <constraint firstAttribute="trailing" secondItem="Qd4-6x-aNx" secondAttribute="trailing" constant="8" id="Cm1-KT-WJg"/>
-                                        <constraint firstItem="Qd4-6x-aNx" firstAttribute="centerY" secondItem="VAo-l4-Q5R" secondAttribute="centerY" id="DKJ-hC-wIw"/>
+                                        <constraint firstItem="Qd4-6x-aNx" firstAttribute="centerY" secondItem="VAo-l4-Q5R" secondAttribute="centerY" constant="-12" id="DKJ-hC-wIw"/>
                                         <constraint firstItem="Qd4-6x-aNx" firstAttribute="leading" secondItem="VAo-l4-Q5R" secondAttribute="trailing" constant="8" id="XX5-LA-RUo"/>
                                         <constraint firstItem="rzq-v7-kVp" firstAttribute="leading" secondItem="VAo-l4-Q5R" secondAttribute="trailing" constant="8" id="xBc-Ro-0eo"/>
                                         <constraint firstItem="VAo-l4-Q5R" firstAttribute="centerY" secondItem="D8t-dW-2aa" secondAttribute="centerY" id="xek-ht-0vA"/>
@@ -5720,7 +5720,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             </constraints>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aMf-Hv-pbZ">
-                                            <rect key="frame" x="81" y="24" width="511" height="41"/>
+                                            <rect key="frame" x="81" y="12" width="511" height="41"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Real Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7E6-Xq-Qyn">
                                                     <rect key="frame" x="0.0" y="22" width="72" height="19"/>
@@ -5748,7 +5748,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <constraint firstAttribute="trailing" secondItem="aMf-Hv-pbZ" secondAttribute="trailing" constant="8" id="8UQ-6V-cuD"/>
                                         <constraint firstItem="iLG-Vb-bfT" firstAttribute="leading" secondItem="4Xt-Z7-jcJ" secondAttribute="leading" constant="8" id="Aqd-hU-rXi"/>
                                         <constraint firstItem="iLG-Vb-bfT" firstAttribute="centerY" secondItem="4Xt-Z7-jcJ" secondAttribute="centerY" id="Knc-uj-VBf"/>
-                                        <constraint firstItem="aMf-Hv-pbZ" firstAttribute="centerY" secondItem="iLG-Vb-bfT" secondAttribute="centerY" id="Upo-9q-2Xo"/>
+                                        <constraint firstItem="aMf-Hv-pbZ" firstAttribute="centerY" secondItem="iLG-Vb-bfT" secondAttribute="centerY" constant="-12" id="Upo-9q-2Xo"/>
                                         <constraint firstItem="aMf-Hv-pbZ" firstAttribute="leading" secondItem="iLG-Vb-bfT" secondAttribute="trailing" constant="8" id="Yyn-fr-fAb"/>
                                         <constraint firstItem="PiH-5p-fOX" firstAttribute="leading" secondItem="iLG-Vb-bfT" secondAttribute="trailing" constant="8" id="kD9-jd-oKI"/>
                                     </constraints>

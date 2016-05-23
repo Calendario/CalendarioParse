@@ -106,7 +106,7 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
         switch indexPath.row {
             
             case 0: PresentingViews.ShowUserEditController(self); break;
-            case 1: PresentingViews.ReportView(self); break;
+            case 1: PresentingViews.ViewReportBug(self); break;
             case 2: PresentingViews.ViewPrivacyPolicy(self); break;
             case 3: PresentingViews.ViewTermsOfService(self); break;
             case 4: PresentingViews.viewAcknowledgments(self); break;

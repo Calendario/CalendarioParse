@@ -112,7 +112,14 @@ public class PresentingViews: NSObject {
         appDelegate.window.makeKeyAndVisible()
         appDelegate.window.rootViewController = tabBarController
     }
-
+    
+    class func ViewReportBug(viewController: AnyObject) {
+        
+        // Open the terms of service view.
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let reportbug = sb.instantiateViewControllerWithIdentifier("reportbug") as! reportBug
+        viewController.presentViewController(reportbug, animated: true, completion: nil)
+    }
     
     //    class func Seemore(viewController: AnyObject) {
     //        // Open the see more view.

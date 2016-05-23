@@ -447,7 +447,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         }
             
         else {
-            return [mentioncomment]
+            return [mentioncomment ]
         }
     }
     
