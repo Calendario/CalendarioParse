@@ -26,7 +26,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     
-    @IBOutlet weak var eventTitleField: UITextField!
+    @IBOutlet weak var eventTitle: UITextField!
+    
     
     @IBOutlet weak var charlabel: UILabel!
     
@@ -172,7 +173,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     func textViewDismissKeyboard() {
         self.statusUpdateTextField.resignFirstResponder()
-        self.eventTitleField.resignFirstResponder()
+        self.eventTitle.resignFirstResponder()
     }
 
     func setDate()
@@ -376,13 +377,13 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         let objects = try! events.findObjects()
         for i in objects {
             let cUN = i.objectForKey("eventTitle")! as! String
-            if cUN == eventTitleField.text! {
+            if cUN == eventTitle.text! {
                 return
             }
         }
         
         let query = PFObject(className: "StatusUpdate")
-        query.setValue(eventTitleField.text!, forKey: "eventTitle")
+        query.setValue(eventTitle.text!, forKey: "eventTitle")
         try! query.save()
         
 
