@@ -26,6 +26,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     
+    @IBOutlet weak var eventTitleField: UITextField!
     
     @IBOutlet weak var charlabel: UILabel!
     
@@ -171,6 +172,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     func textViewDismissKeyboard() {
         self.statusUpdateTextField.resignFirstResponder()
+        self.eventTitleField.resignFirstResponder()
     }
 
     func setDate()
@@ -369,6 +371,21 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     // posts update
     
     @IBAction func PostTapped(sender: AnyObject) {
+        
+        let events = PFQuery(className: "StuatusUpdate")
+        let objects = try! events.findObjects()
+        for i in objects {
+            let cUN = i.objectForKey("eventTitle")! as! String
+            if cUN == eventTitleField.text! {
+                return
+            }
+        }
+        
+        let query = PFObject(className: "StatusUpdate")
+        query.setValue(eventTitleField.text!, forKey: "eventTitle")
+        try! query.save()
+        
+
         if statusUpdateTextField.text.isEmpty
         {
             let reportalert = UIAlertController(title: "Error", message: "You must enter a status update and/or a valid date ", preferredStyle: .Alert)
@@ -388,6 +405,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             deafaults.removeObjectForKey("location")
             deafaults.synchronize()
         }
+        
       
     }
     
