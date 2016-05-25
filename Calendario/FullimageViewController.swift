@@ -8,12 +8,13 @@
 
 import UIKit
 
-class FullimageViewController: UIViewController {
+class FullimageViewController: UIViewController, UIScrollViewDelegate {
     
     
     
     @IBOutlet weak var Image: UIImageView!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBAction func back(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -30,6 +31,10 @@ class FullimageViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        self.scrollView.minimumZoomScale = 1.0
+        
+        self.scrollView.maximumZoomScale = 6.0
        
         self.Image.image = passedImage
         
@@ -38,7 +43,7 @@ class FullimageViewController: UIViewController {
         
         zoomImageView.frame = CGRectMake(0, 0, 200, 100)
         zoomImageView.backgroundColor = UIColor.redColor()
-        //zoomImageView.image = UIImage(data: passedImage)
+       // zoomImageView.image = UIImage(data: passedImage)
         zoomImageView.contentMode = .ScaleAspectFill
         zoomImageView.clipsToBounds = true
         
@@ -68,5 +73,9 @@ class FullimageViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resource that can be recreated.
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return self.Image
     }
 }
