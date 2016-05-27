@@ -268,7 +268,7 @@
     userImage.hidden = YES;
     nameLabel.hidden = YES;
     
-    if ([self.searchController isActive])
+    if (([self.searchController isActive]) && ([filteredArray count] > 0))
     {
         PFUser *user = [filteredArray objectAtIndex:indexPath.row];
         userLabel.hidden = NO;
