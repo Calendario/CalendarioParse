@@ -13,13 +13,11 @@
 #import "Calendario-Swift.h"
 #import "SearchViewController.h"
 
-
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -27,7 +25,6 @@
     
     //set badge number back to 0 once user opens the app
     application.applicationIconBadgeNumber = 0;
-    
     
     //make status bar text white
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:NO];
@@ -86,9 +83,7 @@
 }
 
 - (void) createshortcuts
-
 {
-    
     UIMutableApplicationShortcutItem *item1 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"co.uk.calendario.CalendarioApp.newsfeed" localizedTitle:@"Newsfeed" localizedSubtitle:@"View your newsfeed" icon:nil userInfo:nil];
     UIMutableApplicationShortcutItem *item2 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"co.uk.calendario.CalendarioApp.profile" localizedTitle:@"Profile" localizedSubtitle:@"View your profile" icon:nil userInfo:nil];
     UIMutableApplicationShortcutItem *item3 = [[UIMutableApplicationShortcutItem alloc]initWithType:@"co.uk.calendario.CalendarioApp.search" localizedTitle:@"Search" localizedSubtitle:@"Search" icon:nil userInfo:nil];
@@ -96,10 +91,6 @@
     NSArray *items = @[item1,item2,item3];
     
     [UIApplication sharedApplication].shortcutItems = items;
-    
-    
-    
-    
 }
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler
@@ -120,8 +111,6 @@
     {
         [self lanunchProfile];
     }
-    
-    
 }
 
 - (void) launchNewsfeed
@@ -149,8 +138,6 @@
     MyProfileViewController *profile = [sb instantiateViewControllerWithIdentifier:@"My Profile"];
     self.window.rootViewController = profile;
     [self.window makeKeyAndVisible];
-    
-    
 }
 
 

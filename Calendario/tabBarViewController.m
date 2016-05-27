@@ -33,7 +33,8 @@
 }
 
 - (void) setTabBarIconTitles {
-    for(UITabBarItem * tabBarItem in self.tabBar.items){
+    
+    for (UITabBarItem * tabBarItem in self.tabBar.items) {
         tabBarItem.title = @"";
         tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     }
@@ -66,8 +67,31 @@
             
             if ([userData count] > 0) {
                 
-                // One or more notification(s) - show badge number.
-                [thirdTab setBadgeValue:[NSString stringWithFormat:@"%lu", (unsigned long)[userData count]]];
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                NSInteger badgeNum = [defaults integerForKey:@"NOTIFICATION_BADGE_NUM"];
+                
+                if ([defaults valueForKey:@"NOTIFICATION_BADGE_NUM"] == nil) {
+                    
+                    // One or more notification(s) - show badge number.
+                    [thirdTab setBadgeValue:[NSString stringWithFormat:@"%lu", (unsigned long)[userData count]]];
+                }
+                
+                else if ([userData count] > badgeNum) {
+                    
+                    // Figure out the number of NEW notifications.
+                    NSInteger newNotifications = ([userData count] - badgeNum);
+                    
+                    // One or more notification(s) - show badge number.
+                    [thirdTab setBadgeValue:[NSString stringWithFormat:@"%lu", newNotifications]];
+                }
+                
+                else {
+                    [thirdTab setBadgeValue:nil];
+                }
+                
+                // Save the new total notification count.
+                [defaults setInteger:[userData count] forKey:@"NOTIFICATION_BADGE_NUM"];
+                [defaults synchronize];
             }
             
             else {
@@ -78,6 +102,5 @@
         }];
     }];
 }
-
 
 @end
