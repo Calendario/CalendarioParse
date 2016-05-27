@@ -135,7 +135,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                     
                     for comment in comments!
                     {
-                        let comments:PFObject = comment as! PFObject
                         self.commentdata.addObject(comment)
                     }
                     

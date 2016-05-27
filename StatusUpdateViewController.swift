@@ -95,6 +95,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         editToolbar.sizeToFit()
         self.statusUpdateTextField.inputAccessoryView = editToolbar
+        self.eventTitle.inputAccessoryView = editToolbar
         
         statusUpdateTextField.layer.borderColor = UIColor.blackColor().CGColor
         TenseControl.selectedSegmentIndex = 2
@@ -146,7 +147,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         view.addGestureRecognizer(tap)
     }
     
-    
     override func viewDidAppear(animated: Bool) {
         
         deafaults.synchronize()
@@ -166,9 +166,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             //LocationLabel.text = location as! String
             //LocationLabel.textColor = UIColor.darkGrayColor()
         }
-        
-        
-        
     }
     
     func textViewDismissKeyboard() {
@@ -280,6 +277,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 statusupdatewithimage["location"] = self.LocationLabel.text
                 statusupdatewithimage["likesarray"] = []
                 statusupdatewithimage["rsvpArray"] = []
+                statusupdatewithimage["eventTitle"] = self.eventTitle.text!
                 
                 if (self.rsvpSwitch.on == true) {
                     statusupdatewithimage["privateRsvp"] = true
@@ -320,6 +318,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 statusupdate["location"] = self.LocationLabel.text
                 statusupdate["likesarray"] = []
                 statusupdate["rsvpArray"] = []
+                statusupdate["eventTitle"] = self.eventTitle.text!
                 
                 if (self.rsvpSwitch.on == true) {
                     statusupdate["privateRsvp"] = true
@@ -373,20 +372,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     @IBAction func PostTapped(sender: AnyObject) {
         
-        let events = PFQuery(className: "StuatusUpdate")
-        let objects = try! events.findObjects()
-        for i in objects {
-            let cUN = i.objectForKey("eventTitle")! as! String
-            if cUN == eventTitle.text! {
-                return
-            }
-        }
-        
-        let query = PFObject(className: "StatusUpdate")
-        query.setValue(eventTitle.text!, forKey: "eventTitle")
-        try! query.save()
-        
-
         if statusUpdateTextField.text.isEmpty
         {
             let reportalert = UIAlertController(title: "Error", message: "You must enter a status update and/or a valid date ", preferredStyle: .Alert)
@@ -406,8 +391,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             deafaults.removeObjectForKey("location")
             deafaults.synchronize()
         }
-        
-      
     }
     
     @IBAction func backbuttonTapped(sender: AnyObject) {
