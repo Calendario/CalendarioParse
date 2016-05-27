@@ -220,33 +220,42 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     if (section == 0) {
-    return 3;
+        return 3;
     }
+    
     else {
-    if ([self.searchController isActive])
-    {
-        return filteredArray.count;
-    }
-    return 0;
+    
+        if ([self.searchController isActive]) {
+            return filteredArray.count;
+        }
+        
+        return 0;
     }
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30)];
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(31, view.frame.size.height/2, tableView.frame.size.width, 18)];
     [title setFont:[UIFont fontWithName:@"SF-UI-Display-Medium" size:16.0]];
-    title.textColor = [UIColor darkGrayColor];
-    UIImageView *headerIcon = [[UIImageView alloc] init];
+    title.textColor = [UIColor blackColor];
+    UIImageView *headerIcon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 15, 15, 18)];
     view.backgroundColor = [UIColor whiteColor];
+    [view addSubview:title];
+    [view addSubview:headerIcon];
+    
     if (section == 0) {
         title.text = @"SUGGESTED USERS";
         headerIcon.image = [UIImage imageNamed: @"star-icon.png"];
     }
+    
     else {
         title.text = @"SEARCH RESULTS";
         headerIcon.image = [UIImage imageNamed: @"clock-icon.png"];
     }
+    
     return view;
 }
 
@@ -268,7 +277,7 @@
     userImage.hidden = YES;
     nameLabel.hidden = YES;
     
-    if (([self.searchController isActive]) && ([filteredArray count] > 0))
+    if (([self.searchController isActive]) && ([filteredArray count] > 0) && (indexPath.row < [filteredArray count]))
     {
         PFUser *user = [filteredArray objectAtIndex:indexPath.row];
         userLabel.hidden = NO;
