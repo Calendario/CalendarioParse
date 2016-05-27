@@ -22,7 +22,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var profPosts: UILabel!
     @IBOutlet weak var profFollowers: UILabel!
     @IBOutlet weak var profFollowing: UILabel!
-    @IBOutlet weak var inboxButton: MIBadgeButton!
     @IBOutlet weak var blockedBlurView: UIView!
     @IBOutlet weak var blockedViewDesc: UITextView!
     @IBOutlet weak var statusList: UITableView!
@@ -98,20 +97,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     
     @IBAction func dismissProfile(sender: UIButton) {
         self.closeProfileView()
-    }
-    
-    @IBAction func openFollowRequestsSection(sender: UIButton) {
-        
-        // Only open the follow requests view
-        // if the current user profile is being viewed.
-        
-        if ((passedUser == nil) || ((passedUser != nil) && (passedUser.username! == "\(PFUser.currentUser()!.username!)"))) {
-            
-            // Open the users follow requests.
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewC = storyboard.instantiateViewControllerWithIdentifier("RequestsView") as! FollowRequestsTableViewController
-            self.presentViewController(viewC, animated: true, completion: nil)
-        }
     }
     
     @IBAction func openSettingsOrMoreSection(sender: UIButton) {
@@ -400,24 +385,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 backButton.alpha = 1.0
             }
             
-            // Update the follow requests badge.
-            var followQuery:PFQuery!
-            followQuery = PFQuery(className: "FollowRequest")
-            followQuery.whereKey("desiredfollower", equalTo: PFUser.currentUser()!)
-            followQuery.findObjectsInBackgroundWithBlock { (object, error) -> Void in
-                
-                dispatch_async(dispatch_get_main_queue(), {
-                    
-                    if (object!.count > 0) {
-                        
-                    }
-                        
-                    else {
-                    }
-                    
-                })
-            }
-            
             // Disable the follow user button.
             self.followButton.userInteractionEnabled = false
             self.followButton.enabled = false
@@ -638,6 +605,10 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     
     func loadUserStatusUpdate(userData: PFUser) {
         
+        // Only enable scrolling if we are
+        // going to load the users posts.
+        self.statusList.scrollEnabled = self.statusLoadCheck
+        
         // Only show the status updates if the check has passed
         // otherwise show the private user table view cell only.
         
@@ -711,28 +682,34 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // Pass in the parent view controller.
         cell.parentViewController = self
         
-        // Get the specific status object for this cell and call all needed methods.
-        cell.passedInObject = self.statusObjects[indexPath.row] as! PFObject
+        // Check to see if we should show the users posts
+        // or show one cell saying the user is private.
         
-        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.statusObjects[indexPath.row] as! PFObject, animatedConstraint: cell.imageViewHeightConstraint, cell: cell)
-        
-        ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.statusObjects[indexPath.row] as! PFObject)
-        
-        ParseCalls.findUserDetails(self.statusObjects[indexPath.row] as! PFObject
-            , usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {() -> Void in
+        if (self.statusLoadCheck == true) {
             
-            // Background Thread
-            DateManager.createDateDifferenceString((self.statusObjects[indexPath.row] as! PFObject).createdAt!) { (difference) -> Void in
+            // Get the specific status object for this cell and call all needed methods.
+            cell.passedInObject = self.statusObjects[indexPath.row] as! PFObject
+            
+            ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.statusObjects[indexPath.row] as! PFObject, animatedConstraint: cell.imageViewHeightConstraint, cell: cell)
+            
+            ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.statusObjects[indexPath.row] as! PFObject)
+            
+            ParseCalls.findUserDetails(self.statusObjects[indexPath.row] as! PFObject
+                , usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {() -> Void in
                 
-                dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                // Background Thread
+                DateManager.createDateDifferenceString((self.statusObjects[indexPath.row] as! PFObject).createdAt!) { (difference) -> Void in
                     
-                    // Run UI Updates
-                    cell.createdAtLabel.text = difference
-                })
-            }
-        })
+                    dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                        
+                        // Run UI Updates
+                        cell.createdAtLabel.text = difference
+                    })
+                }
+            })
+        }
         
         return cell
     }

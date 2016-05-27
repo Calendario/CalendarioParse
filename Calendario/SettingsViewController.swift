@@ -12,7 +12,7 @@ import Parse
 
 class SettingsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let choicesarray = ["Edit Profile", "Report Bug", "Privacy Policy", "Terms of Service", "Acknowledgments", "Recommended Users"]
+    let choicesarray = ["Edit Profile", "View Follow Requests", "Report Bug", "Privacy Policy", "Terms of Service", "Acknowledgments", "Recommended Users"]
     
     // Setup the various UI objects.
     @IBOutlet weak var tableview: UITableView!
@@ -92,6 +92,49 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
         // Set the setting name.
         cell.textLabel?.text = choicesarray[indexPath.row]
         
+        if (indexPath.row == 1) {
+            
+            // Update the follow requests badge.
+            var followQuery:PFQuery!
+            followQuery = PFQuery(className: "FollowRequest")
+            followQuery.whereKey("desiredfollower", equalTo: PFUser.currentUser()!)
+            followQuery.findObjectsInBackgroundWithBlock { (object, error) -> Void in
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    let label = UILabel(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
+                    label.textColor = UIColor.blackColor()
+                    label.textAlignment = .Center
+                    label.textColor = UIColor.whiteColor()
+                    label.backgroundColor = UIColor.redColor()
+                    label.layer.cornerRadius = label.frame.size.height / 2.0
+                    label.clipsToBounds = true
+                    cell.accessoryView = label
+                    
+                    if (error == nil) {
+                        
+                        if (object!.count > 0) {
+                            label.text = "\(object!.count)"
+                        }
+                            
+                        else {
+                            label.text = "0"
+                        }
+                    }
+                    
+                    else {
+                        label.text = "0"
+                    }
+                })
+            }
+        }
+        
+        else {
+            
+            cell.accessoryView = nil
+            cell.accessoryType = .None
+        }
+        
         return cell
     }
     
@@ -106,11 +149,12 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
         switch indexPath.row {
             
             case 0: PresentingViews.ShowUserEditController(self); break;
-            case 1: PresentingViews.ViewReportBug(self); break;
-            case 2: PresentingViews.ViewPrivacyPolicy(self); break;
-            case 3: PresentingViews.ViewTermsOfService(self); break;
-            case 4: PresentingViews.viewAcknowledgments(self); break;
-            case 5: PresentingViews.viewRecommendations(self); break;
+            case 1: PresentingViews.ShowFollowRequestsView(self); break;
+            case 2: PresentingViews.ViewReportBug(self); break;
+            case 3: PresentingViews.ViewPrivacyPolicy(self); break;
+            case 4: PresentingViews.ViewTermsOfService(self); break;
+            case 5: PresentingViews.viewAcknowledgments(self); break;
+            case 6: PresentingViews.viewRecommendations(self); break;
             default: break;
         }
     }

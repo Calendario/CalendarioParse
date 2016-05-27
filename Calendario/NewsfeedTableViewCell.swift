@@ -24,19 +24,17 @@ class NewsfeedTableViewCell: PFTableViewCell {
     @IBOutlet weak var likeslabel: UILabel!
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var privateView: UIView!
+    @IBOutlet weak var privateViewText: UITextView!
     @IBOutlet weak var rsvpButton: UIButton!
     @IBOutlet weak var rsvpLabel: UILabel!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var likebutton: UIView!
     @IBOutlet weak var eventTitle: UILabel!
-    
     @IBOutlet weak var Likebuttoncontainerbutton: UIButton!
     
     //constraint to animate if imageview is nil
     @IBOutlet weak var bottomImageViewConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var attendancecontainerbutton: UIButton!
-    
     
     var attendGestureRecognizer: UITapGestureRecognizer!
     var passedInObject: PFObject!
@@ -73,7 +71,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
         likebutton.layer.cornerRadius = 2.0
         likebutton.clipsToBounds = true
         
-        //setup the RSVP button
+        // Setup the RSVP button
         rsvpButton.layer.cornerRadius = 4.0
         rsvpButton.layer.borderWidth = 1.0
         rsvpButton.layer.borderColor = UIColor.lightGrayColor().CGColor
@@ -82,23 +80,36 @@ class NewsfeedTableViewCell: PFTableViewCell {
         attendantContainerView.layer.cornerRadius = 2.0
         attendantContainerView.clipsToBounds = true
         
-        //setup User Posted Image
+        // Setup User Posted Image
         userPostedImage.layer.cornerRadius = 2.0
         userPostedImage.clipsToBounds = true
         
-        //setup the profile Image
-        profileimageview.layer.cornerRadius = profileimageview.frame.height/2
+        // Setup the profile Image
+        profileimageview.layer.cornerRadius = profileimageview.frame.height / 2
         profileimageview.layer.borderColor = UIColor.whiteColor().CGColor
         profileimageview.layer.borderWidth = 2.0
         profileimageview.clipsToBounds = true
         
+        // Setup the status labels.
         
-        //setup the status labels.
-        self.statusTextView.text = passedInObject["updatetext"] as? String
-        self.uploaddatelabel.text = passedInObject["dateofevent"] as? String
-        self.eventTitle.text = passedInObject["eventTitle"] as? String
+        if (passedInObject != nil) {
+            self.statusTextView.text = passedInObject["updatetext"] as? String
+            self.uploaddatelabel.text = passedInObject["dateofevent"] as? String
+            self.eventTitle.text = passedInObject["eventTitle"] as? String
+        }
         
-        //animate cell height if image is not there
+        else {
+            
+            // Only show the private view as we are
+            // looking at a profile which is private.
+            self.privateView.alpha = 1.0
+            
+            // Set the private view lavel font.
+            let font = UIFont(name: "SFUIDisplay-Regular", size: 18)
+            self.privateViewText.font = font
+        }
+        
+        // Animate cell height if image is not there
         animateBottomConstraintForCell(checkForImage())
     }
     
@@ -126,32 +137,40 @@ class NewsfeedTableViewCell: PFTableViewCell {
     }
     
     func createTenseAndDateLabel() {
-        // Create the tense/date all in one attributed string.
-        let attrs2 = [NSForegroundColorAttributeName:UIColor.lightGrayColor(), NSFontAttributeName : UIFont.systemFontOfSize(14)]
-        let tensestring2 = NSMutableAttributedString(string: passedInObject.objectForKey("tense") as! String, attributes: attrs2)
-        let spacestring2 = NSMutableAttributedString(string: " ")
-        let onstring = NSAttributedString(string: "on")
-        let spacestr3 = NSAttributedString(string: " ")
-        tensestring2.appendAttributedString(spacestring2)
-        tensestring2.appendAttributedString(onstring)
-        tensestring2.appendAttributedString(spacestr3)
-        let dateattrstring = NSAttributedString(string: passedInObject.objectForKey("dateofevent") as! String, attributes: attrs2)
-        tensestring2.appendAttributedString(dateattrstring)
         
-        // Set the date/tense all in one label.
-        self.uploaddatelabel.attributedText = tensestring2
-        checkForHashtagsAndHighlight()
+        if (passedInObject != nil) {
+            
+            // Create the tense/date all in one attributed string.
+            let attrs2 = [NSForegroundColorAttributeName:UIColor.lightGrayColor(), NSFontAttributeName : UIFont.systemFontOfSize(14)]
+            let tensestring2 = NSMutableAttributedString(string: passedInObject.objectForKey("tense") as! String, attributes: attrs2)
+            let spacestring2 = NSMutableAttributedString(string: " ")
+            let onstring = NSAttributedString(string: "on")
+            let spacestr3 = NSAttributedString(string: " ")
+            tensestring2.appendAttributedString(spacestring2)
+            tensestring2.appendAttributedString(onstring)
+            tensestring2.appendAttributedString(spacestr3)
+            let dateattrstring = NSAttributedString(string: passedInObject.objectForKey("dateofevent") as! String, attributes: attrs2)
+            tensestring2.appendAttributedString(dateattrstring)
+            
+            // Set the date/tense all in one label.
+            self.uploaddatelabel.attributedText = tensestring2
+            checkForHashtagsAndHighlight()
+        }
     }
     
     func setLocationLabelAndCheckingContents() {
-        let locationValue: String = passedInObject.objectForKey("location") as! String
         
-        if locationValue == "tap to select location..." {
-            self.locationLabel.text = ""
-        }
+        if (passedInObject != nil) {
             
-        else {
-            self.locationLabel.text = locationValue
+            let locationValue: String = passedInObject.objectForKey("location") as! String
+            
+            if locationValue == "tap to select location..." {
+                self.locationLabel.text = ""
+            }
+                
+            else {
+                self.locationLabel.text = locationValue
+            }
         }
     }
     
@@ -199,16 +218,20 @@ class NewsfeedTableViewCell: PFTableViewCell {
     }
     
     func checkForRsvpPrivacy() {
-        if passedInObject.valueForKey("privateRsvp") != nil {
-            let rsvpPrivate: Bool = passedInObject.valueForKey("privateRsvp") as! Bool
-            if rsvpPrivate == true {
-                self.rsvpButton.enabled = false
-                self.attendantContainerView.removeGestureRecognizer(attendGestureRecognizer)
-                self.attendantContainerView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
-                self.rsvpButton.alpha = 0.6
-            }
-            else if rsvpPrivate == false {
-                self.rsvpButton.enabled = true
+        
+        if (passedInObject != nil) {
+            
+            if passedInObject.valueForKey("privateRsvp") != nil {
+                let rsvpPrivate: Bool = passedInObject.valueForKey("privateRsvp") as! Bool
+                if rsvpPrivate == true {
+                    self.rsvpButton.enabled = false
+                    self.attendantContainerView.removeGestureRecognizer(attendGestureRecognizer)
+                    self.attendantContainerView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
+                    self.rsvpButton.alpha = 0.6
+                }
+                else if rsvpPrivate == false {
+                    self.rsvpButton.enabled = true
+                }
             }
         }
     }
@@ -234,7 +257,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
         else {
             self.likeslabel.text = "0"
         }
-        
     }
     
     func updateLikesButton(likePost: Bool, objectId: String) {
@@ -537,16 +559,24 @@ class NewsfeedTableViewCell: PFTableViewCell {
     }
     
     func getLikesData() {
-        let likesData:[String] = passedInObject.objectForKey("likesarray") as! Array
-        highlightLikedButton(likesData)
-        updateLikeCount(likesData)
+        
+        if (passedInObject != nil) {
+            
+            let likesData:[String] = passedInObject.objectForKey("likesarray") as! Array
+            highlightLikedButton(likesData)
+            updateLikeCount(likesData)
+        }
     }
     
     func getRsvpData() {
-        if passedInObject.objectForKey("rsvpArray") != nil {
-            rsvpArray = passedInObject.objectForKey("rsvpArray") as! Array
+        
+        if (passedInObject != nil) {
+            
+            if passedInObject.objectForKey("rsvpArray") != nil {
+                rsvpArray = passedInObject.objectForKey("rsvpArray") as! Array
+            }
+            self.updateRsvpLabel(passedInObject)
         }
-        self.updateRsvpLabel(passedInObject)
     }
     
     // Profile view image button
