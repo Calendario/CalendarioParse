@@ -25,6 +25,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:nil];
     
     [self getNotifications];
 }
@@ -34,10 +35,8 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
-    // Hide the notifications tab bar label as
-    // the user has now seen their notifications.
-    [[self navigationController] tabBarItem].badgeValue = nil;
+        
+    [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:nil];
 }
 
 - (void) getNotifications {
