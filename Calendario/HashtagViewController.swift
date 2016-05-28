@@ -246,7 +246,7 @@ class HashtagViewController: UITableViewController {
         // Get the specific status object for this cell and call all needed methods.
         cell.passedInObject = self.sortedArray[indexPath.row] as! PFObject
         
-        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[indexPath.row] as! PFObject, animatedConstraint: cell.imageViewHeightConstraint, cell: cell)
+        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[indexPath.row] as! PFObject, cell: cell)
         
         ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.sortedArray[indexPath.row] as! PFObject)
         

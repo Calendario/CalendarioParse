@@ -12,7 +12,7 @@ import Parse
 public class ParseCalls: NSObject {
     
     class func findUserDetails(passedObject: PFObject, usernameLabel: UILabel, profileImageView: UIImageView) {
-      
+        
         // Setup the user details query.
         var findUser:PFQuery!
         findUser = PFUser.query()!
@@ -44,19 +44,19 @@ public class ParseCalls: NSObject {
                 }
             }
         }
-
+        
     }
     
-    class func checkForUserPostedImage(imageView: UIImageView, passedObject: PFObject, animatedConstraint: NSLayoutConstraint, cell: UITableViewCell) {
+    class func checkForUserPostedImage(imageView: UIImageView, passedObject: PFObject, cell: NewsfeedTableViewCell) {
+        let initialHeightConstraint = cell.userImageViewContainerHeightContstraint.constant
+        
         if (passedObject.objectForKey("image") == nil) {
-            imageView.alpha = 0.0
-            animatedConstraint.constant = 1
+            cell.userImageViewContainerHeightContstraint.constant = 0
             cell.updateConstraintsIfNeeded()
         }
         else {
             // Show the Media image view.
-            imageView.alpha = 1.0
-            animatedConstraint.constant = 127
+            cell.userImageViewContainerHeightContstraint.constant = initialHeightConstraint
             cell.updateConstraintsIfNeeded()
             
             // Setup the user profile image file.

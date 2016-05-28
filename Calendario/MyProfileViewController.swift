@@ -136,10 +136,10 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         blockButtonRight.frame = CGRectMake(self.view.bounds.size.width - 62, 44, 62, 22)
         blockButtonLeft.addTarget(self, action: #selector(MyProfileViewController.closeProfileView), forControlEvents: .TouchUpInside)
         blockButtonRight.addTarget(self, action: #selector(MyProfileViewController.viewMoreAlert), forControlEvents: .TouchUpInside)
-
+        
         self.blockedBlurView.addSubview(blockButtonLeft)
         self.blockedBlurView.addSubview(blockButtonRight)
-
+        
         self.profPicture.layer.cornerRadius = (self.profPicture.frame.size.width / 2)
         self.profPicture.clipsToBounds = true
     }
@@ -336,7 +336,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         if (passedUser == nil) {
             followingview.passedInUser = PFUser.currentUser()
         }
-        
+            
         else {
             followingview.passedInUser = passedUser
         }
@@ -708,7 +708,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             // Get the specific status object for this cell and call all needed methods.
             cell.passedInObject = self.statusObjects[indexPath.row] as! PFObject
             
-            ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.statusObjects[indexPath.row] as! PFObject, animatedConstraint: cell.imageViewHeightConstraint, cell: cell)
+            ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.statusObjects[indexPath.row] as! PFObject, cell: cell)
             
             ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.statusObjects[indexPath.row] as! PFObject)
             
@@ -908,7 +908,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                     // Set the follow user button image - not following.
                     self.followButton.setImage(UIImage(named: "Follow_icon.png"), forState: .Normal)
                 }
-                
+                    
                 else {
                     
                     // Set the follow user button image - following.

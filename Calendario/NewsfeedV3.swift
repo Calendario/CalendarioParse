@@ -39,6 +39,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         setActivityIndicatorForRefreshing()
         setHashtagDefaultKey()
         self.view.translatesAutoresizingMaskIntoConstraints = false
+        self.tableView.contentInset = UIEdgeInsetsMake(((self.navigationController?.navigationBar.frame.height)! + 15), 0, 44, 0)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -280,11 +281,11 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         // Get the specific status object for this cell and call all needed methods.
         cell.passedInObject = self.sortedArray[indexPath.row] as! PFObject
         
-        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[indexPath.row] as! PFObject, animatedConstraint: cell.imageViewHeightConstraint, cell: cell)
-            
-        ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.sortedArray[indexPath.row] as! PFObject)
-            
         ParseCalls.findUserDetails(self.sortedArray[indexPath.row] as! PFObject, usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
+        
+        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[indexPath.row] as! PFObject, cell: cell)
+        
+        ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.sortedArray[indexPath.row] as! PFObject)
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {() -> Void in
             
@@ -299,11 +300,17 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
             }
         })
         
+        var doesHaveImage: Bool = false
+        if cell.userPostedImage.image != nil {
+            doesHaveImage = true
+        }
+        
+        print("cell: \(indexPath.row) has image: \(doesHaveImage)")
         return cell
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-
+        
         // Get the current status update.
         let statusupdate:PFObject = self.sortedArray.objectAtIndex(indexPath.row) as! PFObject
         
@@ -343,7 +350,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                 }
             })
         }
-    
+        
         //        // Setup the see more button.
         //        let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
         //

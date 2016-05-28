@@ -31,10 +31,8 @@ class NewsfeedTableViewCell: PFTableViewCell {
     @IBOutlet weak var likebutton: UIView!
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var Likebuttoncontainerbutton: UIButton!
-    
-    //constraint to animate if imageview is nil
-    @IBOutlet weak var bottomImageViewConstraint: NSLayoutConstraint!
-    @IBOutlet weak var attendancecontainerbutton: UIButton!
+    @IBOutlet weak var userImageViewContainerHeightContstraint: NSLayoutConstraint!
+    @IBOutlet weak var userImageContainer: UIView!
     
     var attendGestureRecognizer: UITapGestureRecognizer!
     var passedInObject: PFObject!
@@ -97,7 +95,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
             self.uploaddatelabel.text = passedInObject["dateofevent"] as? String
             self.eventTitle.text = passedInObject["eventTitle"] as? String
         }
-        
+            
         else {
             
             // Only show the private view as we are
@@ -109,31 +107,11 @@ class NewsfeedTableViewCell: PFTableViewCell {
             self.privateViewText.font = font
         }
         
-        // Animate cell height if image is not there
-        animateBottomConstraintForCell(checkForImage())
-    }
-    
-    func checkForImage() -> Bool {
-        if self.userPostedImage.image == nil {
-            return true
-        }
-        return false
-    }
-    
-    func animateBottomConstraintForCell(shouldAnimate: Bool) {
-        if shouldAnimate == true {
-            
-            print("IMAGE IS NIL")
-            self.imageViewHeightConstraint.constant = 0
-            self.bottomImageViewConstraint.constant = -self.userPostedImage.frame.size.height - 5
-            UIView.animateWithDuration(0.5) {
-                self.contentView.layoutIfNeeded()
-            }
-        }
     }
     
     func setPostedImage(image : UIImage) {
         userPostedImage.image = image
+        
     }
     
     func createTenseAndDateLabel() {
