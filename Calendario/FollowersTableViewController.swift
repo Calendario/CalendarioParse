@@ -14,6 +14,10 @@ class FollowersTableViewController: UITableViewController {
 
     @IBOutlet weak var backButton: UIBarButtonItem!
     
+    // This variable MUST remain as PUBLIC because it
+    // is used to get the list for the appropriate user.
+    public var passedInUser:PFUser!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
      
@@ -36,7 +40,7 @@ class FollowersTableViewController: UITableViewController {
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font!]
         self.navigationController!.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
         
-
+        // Load in the user follower list.
         LoadData()
     }
     
@@ -45,18 +49,14 @@ class FollowersTableViewController: UITableViewController {
     
     func LoadData()
     {
-        
         // Disallow table view access until
         // the data has been fully loaded.
         self.tableView.userInteractionEnabled = false
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        var userdata = defaults.objectForKey("userdata")
-        
+                
         followersdata.removeAllObjects()
         
         var query = PFUser.query()
-        query?.whereKey("username", equalTo: userdata!)
+        query?.whereKey("objectId", equalTo: passedInUser.objectId!)
         query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if error == nil
             {
@@ -80,18 +80,12 @@ class FollowersTableViewController: UITableViewController {
                                 self.tableView.reloadData()
                                 
                             }
-                            
-                            
                         })
                     }
                 }
             }
         })
-        
-
     }
-    
-    
     
     @IBAction func backButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)

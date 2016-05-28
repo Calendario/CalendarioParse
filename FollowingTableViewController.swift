@@ -14,9 +14,10 @@ class FollowingTableViewController: UITableViewController {
     
     @IBOutlet weak var backButton: UIBarButtonItem!
     
+    // This variable MUST remain as PUBLIC because it
+    // is used to get the list for the appropriate user.
+    public var passedInUser:PFUser!
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
       
@@ -35,32 +36,24 @@ class FollowingTableViewController: UITableViewController {
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font!]
         self.navigationController!.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
         
-
-        
-        // get user data from nsuserdefaults 
+        // Load in the user following list.
         LoadData()
-       
     }
     
     
     // load data from Parse backend
     
     func LoadData()
-    
     {
-        
         // Disallow table view access until 
         // the data has been fully loaded.
         self.tableView.userInteractionEnabled = false
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        var userdata = defaults.objectForKey("userdata")
         
         followingdata.removeAllObjects()
         
         var query:PFQuery!
         query = PFUser.query()
-        query?.whereKey("username", equalTo: userdata!)
+        query?.whereKey("objectId", equalTo: passedInUser.objectId!)
         query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if error == nil
             {

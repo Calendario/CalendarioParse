@@ -332,6 +332,15 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // Open the following view.
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let followingview = sb.instantiateViewControllerWithIdentifier("following") as! FollowingTableViewController
+        
+        if (passedUser == nil) {
+            followingview.passedInUser = PFUser.currentUser()
+        }
+        
+        else {
+            followingview.passedInUser = passedUser
+        }
+        
         let NC = UINavigationController(rootViewController: followingview)
         self.presentViewController(NC, animated: true, completion: nil)
     }
@@ -340,8 +349,17 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         
         // Open the followers view.
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let followingview = sb.instantiateViewControllerWithIdentifier("followers") as! FollowersTableViewController
-        let NC = UINavigationController(rootViewController: followingview)
+        let followerview = sb.instantiateViewControllerWithIdentifier("followers") as! FollowersTableViewController
+        
+        if (passedUser == nil) {
+            followerview.passedInUser = PFUser.currentUser()
+        }
+            
+        else {
+            followerview.passedInUser = passedUser
+        }
+        
+        let NC = UINavigationController(rootViewController: followerview)
         self.presentViewController(NC, animated: true, completion: nil)
     }
     
