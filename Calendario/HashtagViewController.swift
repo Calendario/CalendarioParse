@@ -120,19 +120,22 @@ class HashtagViewController: UITableViewController {
         var hashtagData: NSMutableArray = []
         hashtagData = ((defaults.objectForKey("HashtagData"))?.mutableCopy())! as! NSMutableArray
         
-        // Set the correct inex number.
-        var hashtagIndex = hashtagData[0] as! Int
-        hashtagIndex = hashtagIndex - 1
-        
-        // Remove the last hashtag string and
-        // update the hashtag array index number.
-        hashtagData.replaceObjectAtIndex(0, withObject: hashtagIndex)
-        hashtagData.removeLastObject()
-        
-        // Save the hashtag data.
-        defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(hashtagData, forKey: "HashtagData")
-        defaults.synchronize()
+        if (hashtagData.count > 0) {
+            
+            // Set the correct inex number.
+            var hashtagIndex = hashtagData[0] as! Int
+            hashtagIndex = hashtagIndex - 1
+            
+            // Remove the last hashtag string and
+            // update the hashtag array index number.
+            hashtagData.replaceObjectAtIndex(0, withObject: hashtagIndex)
+            hashtagData.removeLastObject()
+            
+            // Save the hashtag data.
+            defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setObject(hashtagData, forKey: "HashtagData")
+            defaults.synchronize()
+        }
         
         // Close the hashtag view.
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -146,6 +149,7 @@ class HashtagViewController: UITableViewController {
         
         // Set the hashtag string.
         hashtagString = hashtagData![hashtagData![0] as! Int] as! String
+        self.navigationItem.title = hashtagString
     }
     
     func reloadHashtagFeed() {
@@ -233,9 +237,34 @@ class HashtagViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        // Setup the table view custom cell.
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
+        
+        // Pass in the parent view controller.
+        cell.parentViewController = self
+        
         // Get the specific status object for this cell and call all needed methods.
         cell.passedInObject = self.sortedArray[indexPath.row] as! PFObject
+        
+        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[indexPath.row] as! PFObject, animatedConstraint: cell.imageViewHeightConstraint, cell: cell)
+        
+        ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.sortedArray[indexPath.row] as! PFObject)
+        
+        ParseCalls.findUserDetails(self.sortedArray[indexPath.row] as! PFObject, usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {() -> Void in
+            
+            // Background Thread
+            DateManager.createDateDifferenceString((self.sortedArray[indexPath.row] as! PFObject).createdAt!) { (difference) -> Void in
+                
+                dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                    
+                    // Run UI Updates
+                    cell.createdAtLabel.text = difference
+                })
+            }
+        })
+        
         return cell
     }
     

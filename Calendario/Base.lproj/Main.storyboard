@@ -4803,13 +4803,13 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 </mask>
                                                             </variation>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVB-Xf-xKE">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVB-Xf-xKE">
                                                             <rect key="frame" x="31" y="4" width="9" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POSTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DS7-IM-sL7">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="POSTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DS7-IM-sL7">
                                                             <rect key="frame" x="46" y="4" width="45" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -6684,6 +6684,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="like_icon" translatesAutoresizingMaskIntoConstraints="NO" id="cxY-rr-G60">
                                                             <rect key="frame" x="14" y="9" width="20" height="20"/>
                                                         </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Wp-Yv-oTz">
+                                                            <rect key="frame" x="0.0" y="-1" width="49" height="50"/>
+                                                            <connections>
+                                                                <action selector="Likebuttoncontaineraction:" destination="HwC-sX-VCM" eventType="touchUpInside" id="Pc7-0s-3IC"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -6703,6 +6709,18 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         </mask>
                                                     </variation>
                                                 </view>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9v-AX-TMc">
+                                                    <rect key="frame" x="8" y="14" width="54" height="52"/>
+                                                    <connections>
+                                                        <action selector="openProfileTapped:" destination="HwC-sX-VCM" eventType="touchUpInside" id="Qqx-E7-KUh"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lgs-LJ-D6I">
+                                                    <rect key="frame" x="318" y="16" width="49" height="50"/>
+                                                    <connections>
+                                                        <action selector="RSVPbuttontapped:" destination="HwC-sX-VCM" eventType="touchUpInside" id="FGC-wz-1im"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.19963944459999999" green="0.59966291000000005" blue="0.34588249119999998" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
@@ -6792,6 +6810,9 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     <exclude reference="zwC-42-TdO"/>
                                                 </mask>
                                             </variation>
+                                            <connections>
+                                                <action selector="AttendantsListContainerInteraction:" destination="HwC-sX-VCM" eventType="touchUpInside" id="JzM-Yu-f3E"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="5 people are attending this event" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="52Z-7R-7Ro">
                                             <rect key="frame" x="107" y="147" width="260" height="17"/>
@@ -6846,6 +6867,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         </mask>
                                                     </variation>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbG-wU-l1N">
+                                                    <rect key="frame" x="-5" y="-4" width="113" height="37"/>
+                                                    <connections>
+                                                        <action selector="CommentButtonTapped:" destination="HwC-sX-VCM" eventType="touchUpInside" id="DI0-3q-bDN"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OEV-xk-Kxt" secondAttribute="trailing" constant="2" id="1NZ-aA-LYt"/>
@@ -6919,6 +6946,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 </mask>
                                             </variation>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEz-0z-gWr">
+                                            <rect key="frame" x="8" y="230" width="359" height="205"/>
+                                            <connections>
+                                                <action selector="feedImageTapped:" destination="HwC-sX-VCM" eventType="touchUpInside" id="aLh-rz-ytF"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="4wh-BQ-nM7" secondAttribute="trailing" constant="8" id="0tL-NW-i5o"/>
@@ -7002,12 +7035,14 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
+                                    <outlet property="Likebuttoncontainerbutton" destination="7Wp-Yv-oTz" id="3M8-sS-VkZ"/>
                                     <outlet property="UserNameLabel" destination="Cn5-pF-IYJ" id="uP5-OV-oyj"/>
                                     <outlet property="attendantContainerView" destination="OCq-ux-Oua" id="66t-T4-8d9"/>
                                     <outlet property="bottomConstraint" destination="aa9-Wf-hEE" id="qjC-xs-RfK"/>
                                     <outlet property="commentButton" destination="KVh-eR-Sbd" id="JpG-ZI-za0"/>
                                     <outlet property="commentsLabel" destination="OEV-xk-Kxt" id="51C-VN-Aua"/>
                                     <outlet property="createdAtLabel" destination="J1O-Mc-p4c" id="rhf-tT-iVB"/>
+                                    <outlet property="eventTitle" destination="1yL-Ug-5xw" id="mhA-sl-6ah"/>
                                     <outlet property="imageViewHeightConstraint" destination="gpF-6d-9Tm" id="qqc-6D-hPX"/>
                                     <outlet property="likebutton" destination="tjj-Dk-80E" id="4Hw-EI-uer"/>
                                     <outlet property="likeslabel" destination="A4q-R1-um0" id="G1p-Ze-qOM"/>

@@ -155,6 +155,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
             // Set the date/tense all in one label.
             self.uploaddatelabel.attributedText = tensestring2
             checkForHashtagsAndHighlight()
+            checkForMentionsAndHighlight()
         }
     }
     
@@ -176,7 +177,11 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     //MARK: STATUS CHECK METHODS
     func checkForHashtagsAndHighlight() {
+        
         if ((self.statusTextView.text?.hasPrefix("#")) != nil) {
+            
+            // Set the #hashtag green colour.
+            self.statusTextView.tintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
             
             // Highlight the status hashtags.
             self.statusTextView.hashtagLinkTapHandler = {label, hashtag, range in
@@ -192,7 +197,11 @@ class NewsfeedTableViewCell: PFTableViewCell {
     }
     
     func checkForMentionsAndHighlight() {
+        
         if ((self.statusTextView.text?.hasPrefix("@")) != nil) {
+            
+            // Set the @mention green colour.
+            self.statusTextView.tintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
             
             // Highlight the @username label.
             self.statusTextView.userHandleLinkTapHandler = {label2, mention, range in

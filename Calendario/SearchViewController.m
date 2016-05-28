@@ -238,9 +238,9 @@
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30)];
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(31, view.frame.size.height/2, tableView.frame.size.width, 18)];
-    [title setFont:[UIFont fontWithName:@"SF-UI-Display-Medium" size:16.0]];
-    title.textColor = [UIColor blackColor];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(31, view.frame.size.height/4, tableView.frame.size.width, 18)];
+    [title setFont:[UIFont fontWithName:@"SF-UI-Display-Medium" size:12.0]];
+    title.textColor = [UIColor lightGrayColor];
     UIImageView *headerIcon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 15, 15, 18)];
     view.backgroundColor = [UIColor whiteColor];
     [view addSubview:title];
