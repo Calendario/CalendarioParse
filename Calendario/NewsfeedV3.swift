@@ -305,7 +305,8 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
             doesHaveImage = true
         }
         
-        print("cell: \(indexPath.row) has image: \(doesHaveImage)")
+        print("cell: \(indexPath.row) user: \(cell.UserNameLabel.text) date: \(cell.createdAtLabel.text) has image: \(doesHaveImage)")
+        
         return cell
     }
     

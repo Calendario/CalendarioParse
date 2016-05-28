@@ -48,15 +48,12 @@ public class ParseCalls: NSObject {
     }
     
     class func checkForUserPostedImage(imageView: UIImageView, passedObject: PFObject, cell: NewsfeedTableViewCell) {
-        let initialHeightConstraint = cell.userImageViewContainerHeightContstraint.constant
         
         if (passedObject.objectForKey("image") == nil) {
             cell.userImageViewContainerHeightContstraint.constant = 0
             cell.updateConstraintsIfNeeded()
         }
         else {
-            // Show the Media image view.
-            cell.userImageViewContainerHeightContstraint.constant = initialHeightConstraint
             cell.updateConstraintsIfNeeded()
             
             // Setup the user profile image file.
