@@ -296,6 +296,14 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                     
                     // Run UI Updates
                     cell.createdAtLabel.text = difference
+                    
+                    var currentobjects = self.sortedArray[indexPath.row] as! PFObject
+                    var dateofevent = currentobjects.objectForKey("dateofevent") as! String
+                    var currentid = currentobjects.objectId!
+                    tenseChanged(NSDate(), StatusObjectID: currentid, StatusDateofevent: dateofevent)
+                    
+                    
+                   
                 })
             }
         })
@@ -428,6 +436,33 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
             return [report]
         }
     }
+}
+
+func tenseChanged(currentDate:NSDate, StatusObjectID:String, StatusDateofevent:String)
+{
+    // create a date formatter to turn the date into a readable string
+    let dateformatter = NSDateFormatter()
+    dateformatter.dateFormat = "M/d/yy"
+    // the current date is passed in the date formatter method
+    var compareabledate = dateformatter.stringFromDate(currentDate)
+    var datefromstring = dateformatter.dateFromString(StatusDateofevent)
+    
+    if currentDate.timeIntervalSince1970 < datefromstring?.timeIntervalSince1970
+    {
+        print("tense change has started")
+        var tensequery = PFQuery(className: "StatusUpdate")
+        tensequery.orderByAscending("createdAt")
+        tensequery.getObjectInBackgroundWithId(StatusObjectID, block: { (tenseupdate:PFObject?, error:NSError?) in
+            if error == nil
+            {
+                var returnedobject:PFObject = tenseupdate!
+              var retunreddateofevent = returnedobject.objectForKey("dateofevent") as! String
+                print(retunreddateofevent)
+                
+            }
+        })
+    }
+    
 }
 
 
