@@ -50,7 +50,7 @@ public class ParseCalls: NSObject {
     class func checkForUserPostedImage(imageView: UIImageView, passedObject: PFObject, cell: NewsfeedTableViewCell) {
         
         if (passedObject.objectForKey("image") == nil) {
-            cell.userImageViewContainerHeightContstraint.constant = 0
+            //cell.userImageViewContainerHeightContstraint.constant = 0
             cell.updateConstraintsIfNeeded()
         }
         else {
