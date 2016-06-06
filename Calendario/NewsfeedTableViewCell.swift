@@ -212,7 +212,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
                 let rsvpPrivate: Bool = passedInObject.valueForKey("privateRsvp") as! Bool
                 if rsvpPrivate == true {
                     self.rsvpButton.enabled = false
-                    self.attendantContainerView.removeGestureRecognizer(attendGestureRecognizer)
+                    //self.attendantContainerView.removeGestureRecognizer(attendGestureRecognizer)
                     self.attendantContainerView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
                     self.rsvpButton.alpha = 0.6
                 }
