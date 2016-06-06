@@ -10,22 +10,16 @@ import UIKit
 
 class FullimageViewController: UIViewController, UIScrollViewDelegate {
     
-    
-    
     @IBOutlet weak var Image: UIImageView!
     @IBOutlet weak var imageViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBAction func BackButtontapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    
- //   let zoomImageView = UIImageView()
- //   let startingFrame = CGRectMake(0, 0, 200, 100)
-    
     
     public var passedImage:UIImage!
     
@@ -33,12 +27,32 @@ class FullimageViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         
         self.scrollView.minimumZoomScale = 1.0
-        
         self.scrollView.maximumZoomScale = 6.0
-       
         self.Image.image = passedImage
         
+        // Set the navigation bar properties.
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
+        self.navigationItem.title = ""
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.translucent = false
+        let font = UIFont(name: "SFUIDisplay-Regular", size: 18)
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font!]
+        self.navigationController!.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
+        
+        // Set the back button.
+        let button: UIButton = UIButton(type: UIButtonType.Custom)
+        button.setImage(UIImage(named: "back_button.png"), forState: UIControlState.Normal)
+        button.tintColor = UIColor.whiteColor()
+        button.addTarget(self, action: #selector(FullimageViewController.closeView), forControlEvents: UIControlEvents.TouchUpInside)
+        button.frame = CGRectMake(0, 0, 30, 30)
+        let barButton = UIBarButtonItem(customView: button)
+        self.navigationItem.leftBarButtonItem = barButton
     }
+    
+    func closeView() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resource that can be recreated.
@@ -55,9 +69,9 @@ class FullimageViewController: UIViewController, UIScrollViewDelegate {
         let minScale = min(widthScale, heightScale)
         
         scrollView.minimumZoomScale = minScale
-        
         scrollView.zoomScale = minScale
     }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -75,11 +89,9 @@ class FullimageViewController: UIViewController, UIScrollViewDelegate {
         imageViewTrailingConstraint.constant = xOffset
         
         view.layoutIfNeeded()
-        
     }
     
     func scrollViewDidZoom(scrollView: UIScrollView) {
         updateViewConstraints()
-        
     }
 }
