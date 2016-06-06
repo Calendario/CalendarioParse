@@ -100,7 +100,6 @@
             <string>SFUIDisplay-Regular</string>
             <string>SFUIDisplay-Regular</string>
             <string>SFUIDisplay-Regular</string>
-            <string>SFUIDisplay-Regular</string>
         </mutableArray>
         <mutableArray key="SF-UI-Display-Semibold.otf">
             <string>SFUIDisplay-Semibold</string>
@@ -4773,13 +4772,13 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 </mask>
                                                             </variation>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVB-Xf-xKE">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVB-Xf-xKE">
                                                             <rect key="frame" x="31" y="4" width="9" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="POSTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DS7-IM-sL7">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POSTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DS7-IM-sL7">
                                                             <rect key="frame" x="46" y="4" width="45" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -6688,7 +6687,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lgs-LJ-D6I">
                                                     <rect key="frame" x="318" y="16" width="49" height="50"/>
                                                     <connections>
-                                                        <action selector="RSVPbuttontapped:" destination="HwC-sX-VCM" eventType="touchUpInside" id="FGC-wz-1im"/>
+                                                        <action selector="AttendantsListContainerInteraction:" destination="HwC-sX-VCM" eventType="touchUpInside" id="TSj-ez-6cr"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -6781,25 +6780,9 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 </mask>
                                             </variation>
                                             <connections>
-                                                <action selector="AttendantsListContainerInteraction:" destination="HwC-sX-VCM" eventType="touchUpInside" id="JzM-Yu-f3E"/>
+                                                <action selector="RSVPbuttontapped:" destination="HwC-sX-VCM" eventType="touchUpInside" id="mQg-s3-b7R"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="5 people are attending this event" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="52Z-7R-7Ro">
-                                            <rect key="frame" x="107" y="147" width="260" height="17"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="3tq-ed-pOm"/>
-                                                <constraint firstAttribute="height" constant="15" id="5PM-Fw-rHu"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="14"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="3tq-ed-pOm"/>
-                                                    <exclude reference="5PM-Fw-rHu"/>
-                                                </mask>
-                                            </variation>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="6 hrs Ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="J1O-Mc-p4c">
                                             <rect key="frame" x="315" y="86" width="52" height="14"/>
                                             <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="12"/>
@@ -6930,14 +6913,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <constraint firstAttribute="trailing" secondItem="Smi-Wt-E7X" secondAttribute="trailing" constant="8" id="1xw-ae-pPg"/>
                                         <constraint firstItem="Smi-Wt-E7X" firstAttribute="leading" secondItem="GIC-9z-IyP" secondAttribute="leading" id="2Mm-PQ-okA"/>
                                         <constraint firstItem="tNR-9w-EU3" firstAttribute="leading" secondItem="GIC-9z-IyP" secondAttribute="leading" constant="8" id="2bN-ba-i9D"/>
-                                        <constraint firstItem="KVh-eR-Sbd" firstAttribute="top" secondItem="52Z-7R-7Ro" secondAttribute="bottom" constant="16" id="3T2-Ic-wWw"/>
                                         <constraint firstItem="4wh-BQ-nM7" firstAttribute="leading" secondItem="tNR-9w-EU3" secondAttribute="leading" id="6ZL-pS-HLq"/>
                                         <constraint firstItem="Smi-Wt-E7X" firstAttribute="top" secondItem="4wh-BQ-nM7" secondAttribute="bottom" constant="12" id="6ZR-FK-KAz"/>
                                         <constraint firstItem="4wh-BQ-nM7" firstAttribute="top" secondItem="tNR-9w-EU3" secondAttribute="bottom" constant="24" id="8P3-Vh-g6N"/>
                                         <constraint firstItem="lRe-sN-UZH" firstAttribute="leading" secondItem="GIC-9z-IyP" secondAttribute="leading" constant="8" id="DtH-1s-qxh"/>
-                                        <constraint firstAttribute="trailing" secondItem="52Z-7R-7Ro" secondAttribute="trailing" constant="8" id="GDP-vR-WVC"/>
                                         <constraint firstAttribute="trailing" secondItem="tNR-9w-EU3" secondAttribute="trailing" constant="8" id="I5b-q3-OSf"/>
-                                        <constraint firstItem="52Z-7R-7Ro" firstAttribute="leading" secondItem="4wh-BQ-nM7" secondAttribute="trailing" constant="8" id="KAR-st-NyE"/>
                                         <constraint firstItem="tNR-9w-EU3" firstAttribute="leading" secondItem="GIC-9z-IyP" secondAttribute="leading" constant="8" id="KwI-nJ-sFz"/>
                                         <constraint firstItem="gmv-mH-Mqh" firstAttribute="leading" secondItem="GIC-9z-IyP" secondAttribute="leading" id="LeY-e1-smd"/>
                                         <constraint firstAttribute="bottom" secondItem="Smi-Wt-E7X" secondAttribute="bottom" constant="32.5" id="RYK-mN-vaN"/>
@@ -6970,7 +6950,6 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                         <constraint firstItem="KVh-eR-Sbd" firstAttribute="top" secondItem="tNR-9w-EU3" secondAttribute="bottom" constant="40" id="wSN-58-mHd"/>
                                         <constraint firstItem="Smi-Wt-E7X" firstAttribute="top" secondItem="4wh-BQ-nM7" secondAttribute="bottom" constant="16" id="wxZ-wx-Ppi"/>
                                         <constraint firstItem="4wh-BQ-nM7" firstAttribute="centerY" secondItem="OEV-xk-Kxt" secondAttribute="centerY" id="yPW-YY-7n2"/>
-                                        <constraint firstItem="52Z-7R-7Ro" firstAttribute="centerY" secondItem="4wh-BQ-nM7" secondAttribute="centerY" id="yyi-AY-0yt"/>
                                         <constraint firstItem="KVh-eR-Sbd" firstAttribute="leading" secondItem="GIC-9z-IyP" secondAttribute="leading" constant="8" id="zFX-cJ-avf"/>
                                         <constraint firstItem="J1O-Mc-p4c" firstAttribute="top" secondItem="gmv-mH-Mqh" secondAttribute="bottom" constant="4" id="zKJ-JF-upb"/>
                                     </constraints>
@@ -6981,10 +6960,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             <exclude reference="2bN-ba-i9D"/>
                                             <exclude reference="UEg-me-YfQ"/>
                                             <exclude reference="fPb-lq-Rqk"/>
-                                            <exclude reference="3T2-Ic-wWw"/>
                                             <exclude reference="wSN-58-mHd"/>
-                                            <exclude reference="KAR-st-NyE"/>
-                                            <exclude reference="yyi-AY-0yt"/>
                                             <exclude reference="1xb-xh-deA"/>
                                             <exclude reference="2Mm-PQ-okA"/>
                                             <exclude reference="6ZR-FK-KAz"/>
@@ -7019,7 +6995,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     <outlet property="locationLabel" destination="Vcn-ff-D9A" id="xVk-4Y-6YC"/>
                                     <outlet property="profileimageview" destination="ssr-nJ-EvE" id="qal-aX-J8a"/>
                                     <outlet property="rsvpButton" destination="4wh-BQ-nM7" id="Fez-nh-aN9"/>
-                                    <outlet property="rsvpLabel" destination="52Z-7R-7Ro" id="NPw-VA-NVP"/>
+                                    <outlet property="rsvpLabel" destination="KtH-88-Yo8" id="xL7-m3-dTW"/>
                                     <outlet property="statusTextView" destination="tNR-9w-EU3" id="KVE-uj-f3u"/>
                                     <outlet property="uploaddatelabel" destination="lRe-sN-UZH" id="Fz4-PK-61Y"/>
                                     <outlet property="userPostedImage" destination="Smi-Wt-E7X" id="LNf-HW-xGs"/>
