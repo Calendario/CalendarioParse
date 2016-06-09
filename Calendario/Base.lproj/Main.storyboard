@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="16Q-ZH-5Rb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="16Q-ZH-5Rb">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -2617,13 +2617,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zrL-Wd-MZt">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zrL-Wd-MZt">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fv3-IZ-QjL">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fv3-IZ-QjL">
+                                        <rect key="frame" x="0.0" y="83" width="375" height="490"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="375" id="udm-az-TvN"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="fv3-IZ-QjL" secondAttribute="bottom" constant="50" id="6tg-XT-Hwv"/>
+                                    <constraint firstItem="fv3-IZ-QjL" firstAttribute="top" secondItem="zrL-Wd-MZt" secondAttribute="top" constant="83" id="BWS-wj-FUW"/>
+                                    <constraint firstAttribute="trailing" secondItem="fv3-IZ-QjL" secondAttribute="trailing" id="CRQ-uh-trq"/>
+                                    <constraint firstItem="fv3-IZ-QjL" firstAttribute="centerY" secondItem="zrL-Wd-MZt" secondAttribute="centerY" constant="16.5" id="L9t-PU-O9f"/>
+                                    <constraint firstItem="fv3-IZ-QjL" firstAttribute="width" secondItem="zrL-Wd-MZt" secondAttribute="height" multiplier="100:100" id="Vxz-J7-u4s"/>
+                                    <constraint firstItem="fv3-IZ-QjL" firstAttribute="leading" secondItem="zrL-Wd-MZt" secondAttribute="leading" id="ZEN-Y9-hXN"/>
+                                    <constraint firstItem="fv3-IZ-QjL" firstAttribute="centerX" secondItem="zrL-Wd-MZt" secondAttribute="centerX" id="jKm-ON-57Y"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="WxQ-hD-bGj" id="Ag9-Yx-1jN"/>
                                 </connections>
@@ -2631,9 +2643,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="zrL-Wd-MZt" secondAttribute="trailing" id="0a5-Ma-3fp"/>
-                            <constraint firstAttribute="bottom" secondItem="zrL-Wd-MZt" secondAttribute="bottom" id="5x2-SI-gz6"/>
-                            <constraint firstItem="zrL-Wd-MZt" firstAttribute="leading" secondItem="DDm-Ms-AsX" secondAttribute="leading" id="ROG-fM-Y6L"/>
+                            <constraint firstItem="W6D-Nh-boD" firstAttribute="top" secondItem="zrL-Wd-MZt" secondAttribute="bottom" id="9zE-E0-TID"/>
+                            <constraint firstItem="zrL-Wd-MZt" firstAttribute="leading" secondItem="DDm-Ms-AsX" secondAttribute="leading" id="GDQ-rx-dy3"/>
+                            <constraint firstItem="zrL-Wd-MZt" firstAttribute="top" secondItem="PEg-bm-XEd" secondAttribute="bottom" constant="-20" id="sdE-Lv-9fp"/>
+                            <constraint firstAttribute="trailing" secondItem="zrL-Wd-MZt" secondAttribute="trailing" id="yaX-I0-ggN"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -2641,9 +2654,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="Image" destination="fv3-IZ-QjL" id="auy-Yp-5bF"/>
-                        <outlet property="imageViewBottomConstraint" destination="5x2-SI-gz6" id="xqM-7z-hU4"/>
-                        <outlet property="imageViewLeadingConstraint" destination="ROG-fM-Y6L" id="QUh-OB-DOs"/>
-                        <outlet property="imageViewTrailingConstraint" destination="0a5-Ma-3fp" id="eHu-LL-7aE"/>
                         <outlet property="scrollView" destination="zrL-Wd-MZt" id="tUs-Xb-n6r"/>
                     </connections>
                 </viewController>
@@ -7499,7 +7509,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <image name="username_icon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Q92-9R-gKB"/>
         <segue reference="Urg-qd-jmS"/>
+        <segue reference="Q92-9R-gKB"/>
     </inferredMetricsTieBreakers>
 </document>
