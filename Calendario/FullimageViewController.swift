@@ -94,4 +94,35 @@ class FullimageViewController: UIViewController, UIScrollViewDelegate {
     func scrollViewDidZoom(scrollView: UIScrollView) {
         updateViewConstraints()
     }
+    
+    
+    func resizeImage(Image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = Image.size
+        
+        let widthRatio = targetSize.width / Image.size.width
+        let heightRatio = targetSize.height / Image.size.height
+        
+        self.resizeImage(passedImage, targetSize: CGSizeMake(200.0, 200.0))
+        
+        // Figure the orientation
+        
+        var newSize: CGSize
+        if (widthRatio > heightRatio) {
+            newSize = CGSizeMake(size.width * heightRatio , size.height * heightRatio)
+            
+        }
+        else {
+            newSize = CGSizeMake(size.width * widthRatio, size.height * widthRatio)
+        }
+        
+        let rect = CGRectMake(0, 0, newSize.width, newSize.height)
+        
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        Image.drawInRect(rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsGetImageFromCurrentImageContext()
+        
+        return newImage
+      }
+
 }
