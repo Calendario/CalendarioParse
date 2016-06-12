@@ -301,19 +301,9 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                     var dateofevent = currentobjects.objectForKey("dateofevent") as! String
                     var currentid = currentobjects.objectId!
                     tenseChanged(NSDate(), StatusObjectID: currentid, StatusDateofevent: dateofevent)
-                    
-                    
-                   
                 })
             }
         })
-        
-        var doesHaveImage: Bool = false
-        if cell.userPostedImage.image != nil {
-            doesHaveImage = true
-        }
-        
-        print("cell: \(indexPath.row) user: \(cell.UserNameLabel.text) date: \(cell.createdAtLabel.text) has image: \(doesHaveImage)")
         
         return cell
     }

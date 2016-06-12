@@ -50,23 +50,24 @@ public class ParseCalls: NSObject {
     class func checkForUserPostedImage(imageView: UIImageView, passedObject: PFObject, cell: NewsfeedTableViewCell) {
         
         if (passedObject.objectForKey("image") == nil) {
-            //cell.userImageViewContainerHeightContstraint.constant = 0
+            imageView.image = nil
+            cell.userImageViewContainerHeightContstraint.constant = 0
             cell.updateConstraintsIfNeeded()
-        }
-        else {
-            cell.updateConstraintsIfNeeded()
+        } else {
             
             // Setup the user profile image file.
             let statusImage = passedObject["image"] as! PFFile
             
             // Download the profile image.
             statusImage.getDataInBackgroundWithBlock { (mediaData: NSData?, error: NSError?) -> Void in
+                
                 if ((error == nil) && (mediaData != nil)) {
                     imageView.image = UIImage(data: mediaData!)
                 }
-                else {
-                    imageView.image = UIImage(imageLiteral: "no-image-icon + Rectangle 4")
-                }
+                
+                cell.userImageViewContainerHeightContstraint.constant = 205
+                cell.layoutIfNeeded()
+                cell.updateConstraintsIfNeeded()
             }
         }
     }

@@ -13,7 +13,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     @IBOutlet weak var UserNameLabel: UILabel!
     @IBOutlet weak var commentsLabel: UILabel!
-    @IBOutlet weak var userPostedImage: PFImageView!
+    @IBOutlet weak var userPostedImage: UIImageView!
     @IBOutlet weak var createdAtLabel: UILabel!
     @IBOutlet weak var statusTextView: KILabel!
     @IBOutlet weak var attendantContainerView: UIView!
@@ -94,6 +94,16 @@ class NewsfeedTableViewCell: PFTableViewCell {
             self.statusTextView.text = passedInObject["updatetext"] as? String
             self.uploaddatelabel.text = passedInObject["dateofevent"] as? String
             self.eventTitle.text = passedInObject["eventTitle"] as? String
+            
+            if (passedInObject.objectForKey("image") == nil) {
+                self.userPostedImage.image = nil
+                self.userImageViewContainerHeightContstraint.constant = 0
+                self.updateConstraintsIfNeeded()
+            } else {
+                self.userImageViewContainerHeightContstraint.constant = 205
+                self.layoutIfNeeded()
+                self.updateConstraintsIfNeeded()
+            }
         }
             
         else {
