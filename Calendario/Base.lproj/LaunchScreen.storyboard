@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="SignPainter-HouseScript.ttf">
-            <string>SignPainter-HouseScript</string>
-        </mutableArray>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -30,22 +24,19 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Calendario" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dp-sW-RY7">
-                                <rect key="frame" x="63" y="167" width="250" height="67"/>
-                                <fontDescription key="fontDescription" name="SignPainter-HouseScript" family="SignPainter" pointSize="72"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="calsplashlogo" translatesAutoresizingMaskIntoConstraints="NO" id="5oG-SU-jmc">
+                                <rect key="frame" x="27" y="110" width="320" height="200"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.1333333333" green="0.52941176469999995" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="5oG-SU-jmc" firstAttribute="centerX" secondItem="YeM-oU-eMM" secondAttribute="centerX" id="0fs-mZ-6G3"/>
                             <constraint firstItem="YeM-oU-eMM" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="20" id="DBm-gg-fFp"/>
                             <constraint firstAttribute="trailing" secondItem="YeM-oU-eMM" secondAttribute="trailing" constant="20" id="DPT-2r-U7A"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="YeM-oU-eMM" secondAttribute="bottom" constant="20" id="F9A-vB-yVr"/>
-                            <constraint firstItem="6dp-sW-RY7" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="0.6" id="L80-4V-SJc"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="YeM-oU-eMM" secondAttribute="bottom" constant="20" id="Vlb-8d-1Qk"/>
                             <constraint firstItem="YeM-oU-eMM" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bYz-es-GJP"/>
-                            <constraint firstItem="6dp-sW-RY7" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="sOe-cE-Shk"/>
+                            <constraint firstItem="5oG-SU-jmc" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="110" id="gHd-9b-218"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -53,6 +44,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -60,4 +52,7 @@
             <point key="canvasLocation" x="89.5" y="388.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="calsplashlogo" width="320" height="200"/>
+    </resources>
 </document>

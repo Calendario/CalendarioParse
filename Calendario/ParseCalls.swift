@@ -52,6 +52,7 @@ public class ParseCalls: NSObject {
         if (passedObject.objectForKey("image") == nil) {
             imageView.image = nil
             cell.userImageViewContainerHeightContstraint.constant = 0
+            cell.layoutIfNeeded()
             cell.updateConstraintsIfNeeded()
         } else {
             
@@ -63,9 +64,14 @@ public class ParseCalls: NSObject {
                 
                 if ((error == nil) && (mediaData != nil)) {
                     imageView.image = UIImage(data: mediaData!)
+                    cell.userImageViewContainerHeightContstraint.constant = 205
                 }
                 
-                cell.userImageViewContainerHeightContstraint.constant = 205
+                else {
+                    imageView.image = nil
+                    cell.userImageViewContainerHeightContstraint.constant = 0
+                }
+                
                 cell.layoutIfNeeded()
                 cell.updateConstraintsIfNeeded()
             }

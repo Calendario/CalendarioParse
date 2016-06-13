@@ -98,12 +98,12 @@ class NewsfeedTableViewCell: PFTableViewCell {
             if (passedInObject.objectForKey("image") == nil) {
                 self.userPostedImage.image = nil
                 self.userImageViewContainerHeightContstraint.constant = 0
-                self.updateConstraintsIfNeeded()
             } else {
                 self.userImageViewContainerHeightContstraint.constant = 205
-                self.layoutIfNeeded()
-                self.updateConstraintsIfNeeded()
             }
+            
+            self.layoutIfNeeded()
+            self.updateConstraintsIfNeeded()
         }
             
         else {
