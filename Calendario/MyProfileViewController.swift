@@ -142,6 +142,8 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         
         self.profPicture.layer.cornerRadius = (self.profPicture.frame.size.width / 2)
         self.profPicture.clipsToBounds = true
+        
+        self.statusList.separatorColor = UIColor.clearColor()
     }
     
     func addTapGestures() {

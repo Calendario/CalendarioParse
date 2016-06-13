@@ -95,6 +95,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         self.tableView.dataSource = self
         self.tableView.sectionHeaderHeight = 0
         self.tableView.sectionFooterHeight = 0
+        self.tableView.separatorColor = UIColor.clearColor()
     }
     
     func setHashtagDefaultKey() {

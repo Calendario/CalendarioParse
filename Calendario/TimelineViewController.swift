@@ -50,6 +50,8 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         self.tableview.separatorInset = UIEdgeInsetsZero
         self.tableview.sectionHeaderHeight = 0
         self.tableview.sectionFooterHeight = 0
+        self.tableview.separatorColor = UIColor.clearColor()
+
     }
     
     func setNavBarProperties() {
