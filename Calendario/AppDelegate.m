@@ -29,10 +29,13 @@
     //make status bar text white
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:NO];
     
-    
     // IMPORTANT: If this line does NOT execute, then the app will crash
     // when you try to interact with the Parse API - this line MUST be executed!
-    [Parse setApplicationId:@"p8YhMVSoCmZvl5tBbpvdk2CK3BYmqwC3p9VS4kPI" clientKey:@"fyHr9RFkqoeefvQxX92J1RBAKnm1s4aqDLRDhAgr"];
+    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+        configuration.applicationId = @"p8YhMVSoCmZvl5tBbpvdk2CK3BYmqwC3p9VS4kPI";
+        configuration.clientKey = @"fyHr9RFkqoeefvQxX92J1RBAKnm1s4aqDLRDhAgr";
+        configuration.server = @"https://parseapi.back4app.com";
+    }]];
     
     //reference uiTabBar and set ui properties
     //reference the uitabBar
@@ -46,7 +49,7 @@
     
     // Google Places API Set-up
     [GMSServices provideAPIKey:@"AIzaSyARYlkKdCJJ_NyvzroSOJauGj5CR450fT0"];
-    
+
     // Creating Installation with User
     
     // NOTE: The below line of code will crash if no
