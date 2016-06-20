@@ -463,6 +463,9 @@ var finalData:NSMutableArray = []
                     followData = objects!.valueForKey("userFollowing") as! Array<String>!
                 }
                 
+                // User data download loop count.
+                var downloadCount = 0;
+                
                 // Loop through the Object IDs and
                 // convert them to PFUser objects.
                 
@@ -471,7 +474,7 @@ var finalData:NSMutableArray = []
                     // Convert the object IDs to PFUser objects.
                     var queryUser:PFQuery!
                     queryUser = PFUser.query()
-                    queryUser.whereKey("objectId", equalTo: followData[loop])
+                    queryUser.whereKey("objectId", equalTo: followData[loop] as String)
                     
                     // Perform the object ID request.
                     queryUser.getFirstObjectInBackgroundWithBlock({ (userObject, error) -> Void in
@@ -479,25 +482,31 @@ var finalData:NSMutableArray = []
                         // Pass the data back if correctly loaded.
                         dispatch_async(dispatch_get_main_queue(), {
                             
+                            // Increment the download user count.
+                            downloadCount = downloadCount + 1
+                            
+                            // Add the correct data in.
+                            
                             if ((error == nil) && (userObject != nil)) {
-                                
-                                // Add the correct data in.
                                 finalData.addObject(userObject as! PFUser)
+                            }
+                            
+                            // If the download count matches the user array count
+                            // then we have downloaded the user data objects.
+                            
+                            if (downloadCount == followData.count) {
                                 
-                                if (finalData.count == followData.count) {
+                                // Add other data if we are retreving
+                                // following data instead of followers.
+                                
+                                if (includeCurrentUser == true) {
                                     
-                                    // Add other data if we are retreving
-                                    // following data instead of followers.
-                                    
-                                    if (includeCurrentUser == true) {
-                                        
-                                        // Add in the logged in user (for the newsfeed).
-                                        finalData.addObject(PFUser.currentUser()!)
-                                    }
-                                    
-                                    // Send back the follow data array.
-                                    completion(userFollowData: finalData)
+                                    // Add in the logged in user (for the newsfeed).
+                                    finalData.addObject(PFUser.currentUser()!)
                                 }
+                                
+                                // Send back the follow data array.
+                                completion(userFollowData: finalData)
                             }
                         })
                     })
