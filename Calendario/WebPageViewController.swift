@@ -14,9 +14,8 @@ class WebPageViewController : UIViewController, UIWebViewDelegate {
     @IBOutlet weak var webPage: UIWebView!
     @IBOutlet weak var titleLabel: UILabel!
     
-    // Do NOT change the following line of
-    // code as it MUST be set to PUBLIC.
-    public var passedURL:String!
+    // Passed in website URL string.
+    internal var passedURL:String!
     
     // Setup the on screen button actions.
     

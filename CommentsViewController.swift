@@ -33,7 +33,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         // Get the keyboard height when the comment text field is pressed - needed
         // in order to move the comment container view to the correct postion.
      
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CommentsViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -330,11 +330,14 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
         
-        var usernamequery = PFUser.query()
+        var usernamequery:PFQuery!
+        usernamequery = PFUser.query()
         usernamequery?.getObjectInBackgroundWithId((comment.valueForKey("postedby")?.objectId!)!, block: { (object, error) -> Void in
             if error == nil
             {
-                cell.UserLabel.text = object?.valueForKey("username") as! String
+                
+                let nameString = object?.valueForKey("username") as! String
+                cell.UserLabel.text = nameString
                 
                 if let image = object!["profileImage"] as! PFFile? {
                     
@@ -357,7 +360,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         })
         
-        cell.commentTextView.text = comment.objectForKey("commenttext") as! String
+        let commentString = comment.objectForKey("commenttext") as! String
+        cell.commentTextView.text = commentString
    
         return cell
     }
@@ -427,7 +431,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                 }
                 
                 // Hide the swipe from right cell animation.
-                self.performSelector("hideCellButton:", withObject: nil, afterDelay: 0.1)
+                self.performSelector(#selector(CommentsViewController.hideCellButton(_:)), withObject: nil, afterDelay: 0.1)
             })
         }
         

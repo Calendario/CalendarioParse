@@ -37,14 +37,13 @@
         configuration.server = @"https://parseapi.back4app.com";
     }]];
     
-    //reference uiTabBar and set ui properties
-    //reference the uitabBar
-        UITabBar *tabBar = [UITabBar appearance];
-    
-    //    //uiTabBar appearance properties
-    //    tabBar.backgroundColor = [UIColor colorWithRed:33/255.0 green:135/255.0 blue:75/255.0 alpha:1.0];
-       // tabBar.barTintColor = [UIColor colorWithRed:33/255.0 green:135/255.0 blue:75/255.0 alpha:1.0];
-        //[[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+    // reference uiTabBar and set ui properties
+    // reference the uitabBar
+    // UITabBar *tabBar = [UITabBar appearance];
+    // uiTabBar appearance properties
+    // tabBar.backgroundColor = [UIColor colorWithRed:33/255.0 green:135/255.0 blue:75/255.0 alpha:1.0];
+    // tabBar.barTintColor = [UIColor colorWithRed:33/255.0 green:135/255.0 blue:75/255.0 alpha:1.0];
+    // [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     [[UITabBar appearance] setShadowImage:nil];
     
     // Google Places API Set-up

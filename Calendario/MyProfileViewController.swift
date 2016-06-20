@@ -34,9 +34,8 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     // Follow method property
     var FollowObject = FollowHelper()
     
-    // Do NOT change the following line of
-    // code as it MUST be set to PUBLIC.
-    public var passedUser:PFUser!
+    // Passed in user object.
+    internal var passedUser:PFUser!
     
     // User block check.
     // 1 = You blocked the user.
@@ -148,11 +147,11 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     
     func addTapGestures() {
         // Adding tap gesture reconizers to the following and follower labels.
-        let followgesturereconizer = UITapGestureRecognizer(target: self, action: "GotoFollowingView")
+        let followgesturereconizer = UITapGestureRecognizer(target: self, action: #selector(MyProfileViewController.GotoFollowingView))
         self.profFollowing.userInteractionEnabled = true
         self.profFollowing.addGestureRecognizer(followgesturereconizer)
         
-        let followergesturereconizer = UITapGestureRecognizer(target: self, action: "GotoFollowerView")
+        let followergesturereconizer = UITapGestureRecognizer(target: self, action: #selector(MyProfileViewController.GotoFollowerView))
         self.profFollowers.userInteractionEnabled = true
         self.profFollowers.addGestureRecognizer(followergesturereconizer)
     }
@@ -658,10 +657,10 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                             
                             // Save the status update data.
                             
-                            for (var loop = 0; loop < objects!.count; loop++) {
+                            for loop in 0..<objects!.count {
                                 self.statusObjects.addObject(objects![loop])
                             }
-                            
+            
                             // Reload the table view.
                             self.statusList.reloadData()
                         }

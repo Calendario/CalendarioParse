@@ -41,7 +41,7 @@ var finalData:NSMutableArray = []
             
             if (commentSegments.count > 0) {
                 
-                for (var loop = 0; loop < commentSegments.count; loop++) {
+                for loop in 0..<commentSegments.count {
                     
                     // Check the username to ensure that there
                     // are no capital letters in the string.
@@ -410,7 +410,7 @@ var finalData:NSMutableArray = []
     @objc class func getUserFollowersList(userData:PFUser , completion: (userFollowers: NSMutableArray) -> Void) {
         
         // Get the user followers data.
-        self.downloadFFClassData(userData, type: 1) { (userFollowData) -> Void in
+        self.downloadFFClassData(userData, includeCurrentUser: false, type: 1) { (userFollowData) -> Void in
             
             dispatch_async(dispatch_get_main_queue(), {
                 completion(userFollowers: userFollowData)
@@ -418,10 +418,10 @@ var finalData:NSMutableArray = []
         }
     }
     
-    class func getUserFollowingList(userData:PFUser , completion: (userFollowing: NSMutableArray) -> Void) {
+    class func getUserFollowingList(userData:PFUser, withCurrentUser:Bool , completion: (userFollowing: NSMutableArray) -> Void) {
         
         // Get the user following data.
-        self.downloadFFClassData(userData, type: 2) { (userFollowData) -> Void in
+        self.downloadFFClassData(userData, includeCurrentUser: withCurrentUser, type: 2) { (userFollowData) -> Void in
             
             dispatch_async(dispatch_get_main_queue(), {
                 completion(userFollowing: userFollowData)
@@ -429,20 +429,21 @@ var finalData:NSMutableArray = []
         }
     }
     
-    class func downloadFFClassData(userData:PFUser, type:Int, completion: (userFollowData: NSMutableArray) -> Void) {
+    class func downloadFFClassData(userData:PFUser, includeCurrentUser:Bool, type:Int, completion: (userFollowData: NSMutableArray) -> Void) {
         
-        // Get the Object ID for passed in user and then use that
-        // to get the user's followers or following data array.
-        self.getObjectIDForFFClass(userData) { (idNumber) -> Void in
+        // Setup following query.
+        var queryFollowData:PFQuery!
+        queryFollowData = PFQuery(className: "FollowersAndFollowing")
+        queryFollowData.orderByDescending("createdAt")
+        queryFollowData.addDescendingOrder("updatedAt")
+        queryFollowData.whereKey("userLink", equalTo: userData)
+        
+        queryFollowData.getFirstObjectInBackgroundWithBlock { (objects, error) in
             
-            // Setup following query.
-            var queryFollowData:PFQuery!
-            queryFollowData = PFQuery(className: "FollowersAndFollowing")
-            queryFollowData.orderByDescending("createdAt")
-            queryFollowData.addDescendingOrder("updatedAt")
+            // Clear the user data array.
+            finalData = NSMutableArray()
             
-            // Get the follow list.
-            queryFollowData.getObjectInBackgroundWithId(idNumber, block: { (objects, error) -> Void in
+            if (error == nil) {
                 
                 // Create the following list.
                 var followData:Array<String>!
@@ -455,20 +456,17 @@ var finalData:NSMutableArray = []
                     // Get the followers information.
                     followData = objects!.valueForKey("userFollowers") as! Array<String>!
                 }
-                
+                    
                 else if (type == 2) {
                     
                     // Get the following information.
                     followData = objects!.valueForKey("userFollowing") as! Array<String>!
                 }
                 
-                // Clear the user data array.
-                finalData = NSMutableArray()
-                
                 // Loop through the Object IDs and
                 // convert them to PFUser objects.
                 
-                for (var loop = 0; loop < followData.count; loop++) {
+                for loop in 0..<followData.count {
                     
                     // Convert the object IDs to PFUser objects.
                     var queryUser:PFQuery!
@@ -481,28 +479,34 @@ var finalData:NSMutableArray = []
                         // Pass the data back if correctly loaded.
                         dispatch_async(dispatch_get_main_queue(), {
                             
-                            // Add the correct data in.
-                            finalData.addObject(userObject as! PFUser)
-                            
-                            if (finalData.count == followData.count) {
+                            if ((error == nil) && (userObject != nil)) {
                                 
-                                // Add other data if we are retreving
-                                // following data instead of followers.
+                                // Add the correct data in.
+                                finalData.addObject(userObject as! PFUser)
                                 
-                                if (type == 2) {
+                                if (finalData.count == followData.count) {
                                     
-                                    // As per Derek's request add the logged
-                                    // in user to the following data array.
-                                    finalData.addObject(PFUser.currentUser()!)
+                                    // Add other data if we are retreving
+                                    // following data instead of followers.
+                                    
+                                    if (includeCurrentUser == true) {
+                                        
+                                        // Add in the logged in user (for the newsfeed).
+                                        finalData.addObject(PFUser.currentUser()!)
+                                    }
+                                    
+                                    // Send back the follow data array.
+                                    completion(userFollowData: finalData)
                                 }
-                                
-                                // Send back the follow data array.
-                                completion(userFollowData: finalData) // bug occured here during pull to refresh
                             }
                         })
                     })
                 }
-            })
+            } else {
+                
+                // Send back the follow data array.
+                completion(userFollowData: finalData)
+            }
         }
     }
     
@@ -510,7 +514,7 @@ var finalData:NSMutableArray = []
     
     class func getObjectIDForFFClass(userData:PFUser, completion: (idNumber: String) -> Void) {
         
-        // Get the ObjectID for one of the 
+        // Get the ObjectID for one of the
         // following/followers rows.
         var queryID:PFQuery!
         queryID = PFQuery(className: "FollowersAndFollowing")
@@ -520,7 +524,7 @@ var finalData:NSMutableArray = []
         queryID.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             
             dispatch_async(dispatch_get_main_queue(), {
-                completion(idNumber: (objects?[0].objectId)!) // bug here
+                completion(idNumber: (objects?[0].objectId)!)
             })
         }
     }

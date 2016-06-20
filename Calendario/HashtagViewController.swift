@@ -62,7 +62,7 @@ class HashtagViewController: UITableViewController {
         let button: UIButton = UIButton(type: UIButtonType.Custom)
         button.setImage(UIImage(named: "back_button.png"), forState: UIControlState.Normal)
         button.tintColor = UIColor.whiteColor()
-        button.addTarget(self, action: "closeView", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(HashtagViewController.closeView), forControlEvents: UIControlEvents.TouchUpInside)
         button.frame = CGRectMake(0, 0, 30, 30)
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.leftBarButtonItem = barButton
@@ -82,7 +82,7 @@ class HashtagViewController: UITableViewController {
     }
     
     func setActivityIndicatorForRefreshing() {
-        menuIndicator.addTarget(self, action: "reloadNewsFeed", forControlEvents: .ValueChanged)
+        menuIndicator.addTarget(self, action: #selector(HashtagViewController.reloadHashtagFeed), forControlEvents: .ValueChanged)
         menuIndicatorActivity(true)
     }
     
@@ -179,7 +179,7 @@ class HashtagViewController: UITableViewController {
             
             if ((error == nil) && (statusUpdates?.count > 0)) {
                 
-                for (var loop = 0; loop < statusUpdates!.count; loop++) {
+                for loop in 0..<statusUpdates!.count {
                     self.statusData.addObject(statusUpdates![loop])
                 }
             }

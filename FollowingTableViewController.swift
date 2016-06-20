@@ -10,24 +10,23 @@ import UIKit
 
 class FollowingTableViewController: UITableViewController {
     
+    // Following user data array.
     var followingdata:NSMutableArray = NSMutableArray()
     
+    // Cancel/back button.
     @IBOutlet weak var backButton: UIBarButtonItem!
     
-    // This variable MUST remain as PUBLIC because it
-    // is used to get the list for the appropriate user.
-    public var passedInUser:PFUser!
+    // Passed in user object.
+    internal var passedInUser:PFUser!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-          }
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationItem.setLeftBarButtonItem(backButton, animated: true)
-        
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         self.navigationItem.title  = "Following"
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
@@ -39,7 +38,6 @@ class FollowingTableViewController: UITableViewController {
         // Load in the user following list.
         LoadData()
     }
-    
     
     // load data from Parse backend
     
@@ -61,14 +59,12 @@ class FollowingTableViewController: UITableViewController {
                 {
                     for object in objects
                     {
-                        var user:PFUser = object as! PFUser
+                        let user:PFUser = object as! PFUser
                         
-                        ManageUser.getUserFollowingList(user, completion: { (userFollowers) -> Void in
+                        ManageUser.getUserFollowingList(user, withCurrentUser: false, completion: { (userFollowers) -> Void in
                                                         
                             for followers in userFollowers
                             {
-                               let user = followers.username!
-
                                 self.followingdata.addObject(followers as! PFObject)
                                 
                                 let array:NSArray = self.followingdata.reverseObjectEnumerator().allObjects
@@ -76,24 +72,18 @@ class FollowingTableViewController: UITableViewController {
                                 self.tableView.userInteractionEnabled = true
                                 self.tableView.reloadData()
                             }
-                            
-                            
-                    })
+                        })
                     }
                 }
             }
         })
- 
-       
     }
-    
-    
+
     // when the backbutton is tapped
     
     @IBAction func BackButtontapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -111,54 +101,46 @@ class FollowingTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return followingdata.count
     }
-
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FollowingCell", forIndexPath: indexPath) as! FollowingTableViewCell
         
-        
         let followData:PFObject = self.followingdata.objectAtIndex(indexPath.row) as! PFObject
+        let nameString = followData.objectForKey("username") as! String
+        let fullNameString = followData.objectForKey("fullName") as! String
+
         // setting the labels
-        cell.UserNameLabel.text = followData.objectForKey("username") as! String
-        cell.RealNameLabel.text = followData.objectForKey("fullName") as! String
+        cell.UserNameLabel.text = nameString
+        cell.RealNameLabel.text = fullNameString
         
-        
-        // make the imageview into a circle 
-        
+        // make the imageview into a circle
         cell.imageview.layer.cornerRadius = (cell.imageview.frame.size.width / 2)
         cell.imageview.clipsToBounds = true
         
-        
-        
         // query to get images
         
-        var getImages:PFQuery = PFUser.query()!
+        var getImages:PFQuery!
+        getImages = PFUser.query()!
         getImages.whereKey("objectId", equalTo: followData.valueForKey("objectId")!)
         getImages.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if error == nil
-            {
+            
+            if error == nil {
                 self.getImageData(objects!, imageview: cell.imageview)
-            }
-            else
-            {
+            } else {
                 print("error")
             }
         }
         
-        
-        
-
-        // Configure the cell...
-
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let followData:PFObject = self.followingdata.objectAtIndex(indexPath.row) as! PFObject
         
-        var username = followData.objectForKey("username") as! String
+        let username = followData.objectForKey("username") as! String
         
-        var query = PFUser.query()
+        var query:PFQuery!
+        query = PFUser.query()
         query?.includeKey("user")
         query?.whereKey("username", equalTo: username)
         query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
@@ -168,7 +150,7 @@ class FollowingTableViewController: UITableViewController {
                 {
                     for object in objects
                     {
-                        var user:PFUser = object as! PFUser
+                        let user:PFUser = object as! PFUser
                         self.GotoProfile(user)
                     }
                 }
@@ -180,15 +162,13 @@ class FollowingTableViewController: UITableViewController {
     func GotoProfile(user:PFUser)
     {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        var profile = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
+        var profile:MyProfileViewController!
+        profile = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
         profile.passedUser = user
         self.presentViewController(profile, animated: true, completion: nil)
     }
     
-    
-    
     // get images
-    
     
     func getImageData(objects:[PFObject], imageview:UIImageView)
     {
@@ -201,9 +181,7 @@ class FollowingTableViewController: UITableViewController {
                     {
                         let image = UIImage(data: ImageData!)
                         imageview.image = image
-                    }
-                    else
-                    {
+                    } else {
                         imageview.image = UIImage(named: "profile_icon")
                     }
                 })
@@ -211,53 +189,4 @@ class FollowingTableViewController: UITableViewController {
             
         }
     }
-    
-
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

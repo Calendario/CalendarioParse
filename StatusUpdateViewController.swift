@@ -13,37 +13,21 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     @IBOutlet weak var PostButton: UIBarButtonItem!
     @IBOutlet var dateTapRecognizer: UITapGestureRecognizer!
-    
     @IBOutlet weak var dateContainer: UIView!
-    
     @IBOutlet weak var containerView: UIView!
-  //  @IBOutlet weak var checkinbutton: UIButton!
-    
+    //@IBOutlet weak var checkinbutton: UIButton!
     @IBOutlet weak var datepicker: UIDatePicker!
     @IBOutlet weak var datePickerContainer: UIView!
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     @IBOutlet weak var placeholderLabel: UILabel!
-    
     @IBOutlet weak var navigationBar: UINavigationBar!
-    
     @IBOutlet weak var eventTitle: UITextField!
-    
-    
     @IBOutlet weak var charlabel: UILabel!
-    
-    
     @IBOutlet weak var TenseControl: UISegmentedControl!
-    
     @IBOutlet weak var statusUpdateTextField: UITextView!
-    
-    
     @IBOutlet weak var dateLabel: UILabel!
-    
-    
     @IBOutlet weak var LocationLabel: UILabel!
-    
     @IBOutlet weak var backbutton: UIBarButtonItem!
-    
     @IBOutlet weak var statusImageview: UIImageView?
     @IBOutlet weak var rsvpSwitch: UISwitch!
     
@@ -59,7 +43,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         case going = "Going"
         case went = "Went"
         case currently = "Currently"
-        
     }
     
     var currenttense: String! = "Currently"
@@ -90,7 +73,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         editToolbar.items = [
             UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "textViewDismissKeyboard")
+            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(StatusUpdateViewController.textViewDismissKeyboard))
         ]
         
         editToolbar.sizeToFit()
@@ -124,18 +107,18 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         // gesture reconizer for date picker
         
-        let tapgesture = UITapGestureRecognizer(target: self, action: "DatePickerAppear")
+        let tapgesture = UITapGestureRecognizer(target: self, action: #selector(StatusUpdateViewController.DatePickerAppear))
         
         dateLabel.userInteractionEnabled = true
         
         dateLabel.addGestureRecognizer(tapgesture)
         
-        viewGestureRecognizer = UITapGestureRecognizer(target: self, action: "setDate")
+        viewGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(StatusUpdateViewController.setDate))
         containerView.addGestureRecognizer(viewGestureRecognizer)
         viewGestureRecognizer.enabled = false
         
         
-        locationtapReconizer = UITapGestureRecognizer(target: self, action: "LocationlabelTapped")
+        locationtapReconizer = UITapGestureRecognizer(target: self, action: #selector(StatusUpdateViewController.LocationlabelTapped))
         
         LocationLabel.userInteractionEnabled = true
         
@@ -143,7 +126,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         
         // dismisses keyboard when background is tapped
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(StatusUpdateViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     
@@ -151,16 +134,13 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         deafaults.synchronize()
         
-        var location = deafaults.valueForKey("location") as? String
-        print(location)
+        let location = deafaults.valueForKey("location") as? String
         
         if location == nil
         {
             //LocationLabel.text = "No Location"
             //LocationLabel.textColor = UIColor.lightGrayColor()
-        }
-        else
-        {
+        } else {
             LocationLabel.text = location
             //checkinbutton.hidden = true
             //LocationLabel.text = location as! String
@@ -256,8 +236,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     }
     
     func PostStatusUpdate() {
-        
-        var dateformatter = NSDateFormatter()
         
         // Make sure the updatetext contains all
         // the @user mentions in lowercase.
@@ -372,17 +350,13 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     @IBAction func PostTapped(sender: AnyObject) {
         
-        if statusUpdateTextField.text.isEmpty
-        {
+        if statusUpdateTextField.text.isEmpty {
             let reportalert = UIAlertController(title: "Error", message: "You must enter a status update and/or a valid date ", preferredStyle: .Alert)
             let next = UIAlertAction(title: "OK", style: .Default, handler: nil)
             reportalert.addAction(next)
             
             self.presentViewController(reportalert, animated: true, completion: nil)
-        }
-
-        else
-        {
+        } else {
             self.textViewDismissKeyboard()
             PostStatusUpdate()
             GotoNewsfeed()
@@ -401,7 +375,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
 
     // camera controls
     
-    
     @IBAction func CameraTapped(sender: AnyObject) {
         let camera = UIImagePickerController()
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
@@ -412,10 +385,9 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         }
     }
     
-    
-    
     @IBAction func VideoTapped(sender: AnyObject) {
-        var photo = UIImagePickerController()
+        var photo:UIImagePickerController!
+        photo = UIImagePickerController()
         dispatch_async(dispatch_get_main_queue()) {
             photo.delegate = self
             photo.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
@@ -423,22 +395,18 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             self.presentViewController(photo, animated: true, completion: nil)
         }
     }
-    
 
     // UITextfield delegate methods
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        var newLength:Int = (statusUpdateTextField.text as NSString).length + (text as NSString).length - range.length
-        var remainingchars:Int = 400 - newLength
+        let newLength:Int = (statusUpdateTextField.text as NSString).length + (text as NSString).length - range.length
+        let remainingchars:Int = 400 - newLength
         charlabel.text = "\(remainingchars)"
         return (newLength > 400) ? false:true
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
         self.placeholderLabel.hidden = true
-        
-        
-        
     }
     
     func GotoNewsfeed() {
@@ -449,7 +417,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         appDelegate.window.makeKeyAndVisible()
         appDelegate.window.rootViewController = tabBarController
     }
-    
     
     // image picker delegate methods
     

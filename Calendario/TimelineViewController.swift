@@ -131,18 +131,16 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                 let array:NSArray = postsdata.reverseObjectEnumerator().allObjects
                 postsdata = NSMutableArray(array: array)
                 
-                print(postsdata)
-                
                 // Reset the filtered data array.
                 self.filteredData.removeAllObjects()
                 
                 // Get the list of accounts the user is following.
-                ManageUser.getUserFollowingList(PFUser.currentUser()!, completion: { (userFollowing) -> Void in
+                ManageUser.getUserFollowingList(PFUser.currentUser()!, withCurrentUser: true, completion: { (userFollowing) -> Void in
                     
                     // We need to filter the post data so that we only
                     // see the status updates of people we are folowing.
                     
-                    for (var loop = 0; loop < postsdata.count; loop++) {
+                    for loop in 0..<postsdata.count {
                         
                         // Get the current user from the
                         // downloaded status update data.
@@ -151,7 +149,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                         // Loop through the following array and check if the user
                         // from the postsdata array is being followed or not.
                         
-                        for (var loopTwo = 0; loopTwo < userFollowing.count; loopTwo++) {
+                        for loopTwo in 0..<userFollowing.count {
                             
                             // Get the current user from the following array.
                             let followingUser:PFUser = userFollowing[loopTwo] as! PFUser
@@ -164,8 +162,6 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                             }
                         }
                     }
-                    print("success finding objects")
-                    print(self.filteredData)
                     
                     dispatch_async(dispatch_get_main_queue(), {
                         

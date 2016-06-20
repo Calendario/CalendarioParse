@@ -21,7 +21,7 @@ class FullimageViewController: UIViewController, UIScrollViewDelegate {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    public var passedImage:UIImage!
+    internal var passedImage:UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()

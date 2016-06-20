@@ -282,7 +282,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
         // Setup the errors array.
         let errorStrings: [String] = ["email", "username", "password", "re-enter password", "full name"]
         
-        for (var loop = 0; loop < userData.count; loop++) {
+        for loop in 0..<userData.count {
             
             // Get the current string.
             let data = userData[loop]

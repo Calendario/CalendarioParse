@@ -91,26 +91,16 @@ class LocationSearchTableViewController: UITableViewController {
         // 5
         task.resume()
         
-       
-        
-        var location = self.SearchResults[indexPath.row] as String
-        print(location)
+        let location = self.SearchResults[indexPath.row] as String
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(location, forKey: "location")
         defaults.synchronize()
-        
-        
     }
-    
     
     func reloadDataWithArray(array:[String]){
         self.SearchResults = array
         self.tableView.reloadData()
     }
-
-
-    
-
 
     /*
     // Override to support conditional editing of the table view.
@@ -156,5 +146,4 @@ class LocationSearchTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

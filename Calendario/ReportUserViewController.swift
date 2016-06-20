@@ -21,9 +21,8 @@ class ReportUserViewController : UIViewController, UITextViewDelegate {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var categoryButton: UIButton!
     
-    // Do NOT change the following line of
-    // code as it MUST be set to PUBLIC.
-    public var passedUser:PFUser!
+    // Passed in user object.
+    internal var passedUser:PFUser!
     var userString:String!
     
     // Report category data.
@@ -104,7 +103,7 @@ class ReportUserViewController : UIViewController, UITextViewDelegate {
         
         editToolbar.items = [
             UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "textViewDismissKeyboard")
+            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ReportUserViewController.textViewDismissKeyboard))
         ]
         
         editToolbar.sizeToFit()

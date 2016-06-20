@@ -111,7 +111,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     
     func setActivityIndicatorForRefreshing() {
         // Link the pull to refresh to the refresh method.
-        menuIndicator.addTarget(self, action: "reloadNewsFeed", forControlEvents: .ValueChanged)
+        menuIndicator.addTarget(self, action: #selector(NewsfeedV3.reloadNewsFeed), forControlEvents: .ValueChanged)
         menuIndicatorActivity(true)
     }
     
@@ -202,7 +202,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         }
         
         // Download the user following data.
-        ManageUser.getUserFollowingList(PFUser.currentUser()!) { (userFollowing) -> Void in
+        ManageUser.getUserFollowingList(PFUser.currentUser()!, withCurrentUser: true) { (userFollowing) -> Void in
             
             dispatch_async(dispatch_get_main_queue(),{
                 
@@ -235,7 +235,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
             
             if ((error == nil) && (statusUpdates?.count > 0)) {
                 
-                for (var loop = 0; loop < statusUpdates!.count; loop++) {
+                for loop in 0..<statusUpdates!.count {
                     self.statusData.addObject(statusUpdates![loop])
                 }
             }
@@ -298,9 +298,9 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                     // Run UI Updates
                     cell.createdAtLabel.text = difference
                     
-                    var currentobjects = self.sortedArray[indexPath.row] as! PFObject
-                    var dateofevent = currentobjects.objectForKey("dateofevent") as! String
-                    var currentid = currentobjects.objectId!
+                    let currentobjects = self.sortedArray[indexPath.row] as! PFObject
+                    let dateofevent = currentobjects.objectForKey("dateofevent") as! String
+                    let currentid = currentobjects.objectId!
                     tenseChanged(NSDate(), StatusObjectID: currentid, StatusDateofevent: dateofevent)
                 })
             }
@@ -435,25 +435,25 @@ func tenseChanged(currentDate:NSDate, StatusObjectID:String, StatusDateofevent:S
     let dateformatter = NSDateFormatter()
     dateformatter.dateFormat = "M/d/yy"
     // the current date is passed in the date formatter method
-    var compareabledate = dateformatter.stringFromDate(currentDate)
-    var datefromstring = dateformatter.dateFromString(StatusDateofevent)
+    let datefromstring = dateformatter.dateFromString(StatusDateofevent)
     
     if currentDate.timeIntervalSince1970 < datefromstring?.timeIntervalSince1970
     {
         print("tense change has started")
-        var tensequery = PFQuery(className: "StatusUpdate")
+        var tensequery:PFQuery!
+        tensequery = PFQuery(className: "StatusUpdate")
         tensequery.orderByAscending("createdAt")
         tensequery.getObjectInBackgroundWithId(StatusObjectID, block: { (tenseupdate:PFObject?, error:NSError?) in
             if error == nil
             {
-                var returnedobject:PFObject = tenseupdate!
-              var retunreddateofevent = returnedobject.objectForKey("dateofevent") as! String
+                
+                let returnedobject:PFObject = tenseupdate!
+                let retunreddateofevent = returnedobject.objectForKey("dateofevent") as! String
                 print(retunreddateofevent)
                 
             }
         })
     }
-    
 }
 
 

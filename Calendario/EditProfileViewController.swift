@@ -239,7 +239,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         
         editToolbar.items = [
             UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "textViewDismissKeyboard")
+            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EditProfileViewController.textViewDismissKeyboard))
         ]
         
         editToolbar.sizeToFit()
@@ -376,7 +376,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
             
             // Loop through the data and make sure it is valid.
             
-            for (var loop = 0; loop < 5; loop++) {
+            for loop in 0..<5 {
                 
                 // Get the current string.
                 let data = userData[loop]

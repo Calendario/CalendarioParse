@@ -38,13 +38,13 @@ class LikesListViewController: UITableViewController {
         let button: UIButton = UIButton(type: UIButtonType.Custom)
         button.setImage(UIImage(named: "back_button.png"), forState: UIControlState.Normal)
         button.tintColor = UIColor.whiteColor()
-        button.addTarget(self, action: "closeView", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(LikesListViewController.closeView), forControlEvents: UIControlEvents.TouchUpInside)
         button.frame = CGRectMake(0, 0, 30, 30)
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.leftBarButtonItem = barButton
         
         // Link the pull to refresh to the refresh method.
-        menuIndicator.addTarget(self, action: "loadLikesData", forControlEvents: .ValueChanged)
+        menuIndicator.addTarget(self, action: #selector(LikesListViewController.loadLikesData), forControlEvents: .ValueChanged)
         self.menuIndicator.beginRefreshing()
     }
     

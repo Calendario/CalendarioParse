@@ -16,8 +16,7 @@ public class AttendantsListViewController: UITableViewController {
     // Status likes data array.
     var userData:NSArray = []
     
-    // Do NOT change the following line of
-    // code as it MUST be set to PUBLIC.
+    // Passed in event ID string.
     public var passedInEventID:String!
     
     // Setup the on screen UI objects.
@@ -42,13 +41,13 @@ public class AttendantsListViewController: UITableViewController {
         let button: UIButton = UIButton(type: UIButtonType.Custom)
         button.setImage(UIImage(named: "back_button.png"), forState: UIControlState.Normal)
         button.tintColor = UIColor.whiteColor()
-        button.addTarget(self, action: "closeView", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(AttendantsListViewController.closeView), forControlEvents: UIControlEvents.TouchUpInside)
         button.frame = CGRectMake(0, 0, 30, 30)
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.leftBarButtonItem = barButton
         
         // Link the pull to refresh to the refresh method.
-        menuIndicator.addTarget(self, action: "loadLikesData", forControlEvents: .ValueChanged)
+        menuIndicator.addTarget(self, action: #selector(AttendantsListViewController.loadAttendantsForEvent), forControlEvents: .ValueChanged)
         self.menuIndicator.beginRefreshing()
     }
     

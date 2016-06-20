@@ -53,8 +53,6 @@ class LocatonViewController: UIViewController, UINavigationBarDelegate, LocateOn
         searchResultsController.delegate = self
     }
     
-    
-    
     func locateWithLongitude(lon: Double, andLatitude lat: Double, andTitle title: String) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             let position = CLLocationCoordinate2DMake(lat, lon)
@@ -81,8 +79,9 @@ class LocatonViewController: UIViewController, UINavigationBarDelegate, LocateOn
             if results == nil {
                 return
             }
-            for result in results!{
-                if let result = result as? GMSAutocompletePrediction{
+            for result in results! {
+                
+                if let result = result as? GMSAutocompletePrediction {
                     self.resultsArray.append(result.attributedFullText.string)
                 }
             }

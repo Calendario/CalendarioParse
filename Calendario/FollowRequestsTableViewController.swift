@@ -61,7 +61,7 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
                 
                 // Save the user request data.
                 
-                for (var loop = 0; loop < object!.count; loop++) {
+                for loop in 0..<object!.count {
                     self.requestObjects.addObject(object![loop])
                 }
                 
@@ -194,8 +194,8 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
             
             // Connect the accept and decline buttons
             // to the appropriate user request method.
-            cell.acceptButton.addTarget(self, action: "acceptRequest:", forControlEvents: UIControlEvents.TouchUpInside)
-            cell.declineButton.addTarget(self, action: "declineRequest:", forControlEvents: UIControlEvents.TouchUpInside)
+            cell.acceptButton.addTarget(self, action: #selector(FollowRequestsTableViewController.acceptRequest(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            cell.declineButton.addTarget(self, action: #selector(FollowRequestsTableViewController.declineRequest(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             
             // Get the specific status object for this cell.
             let currentObject:PFObject = requestObjects.objectAtIndex(indexPath.row) as! PFObject

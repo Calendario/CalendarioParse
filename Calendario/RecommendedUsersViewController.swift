@@ -81,7 +81,7 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
                     
                     // Add some random users to the random data array.
                     
-                    for (var loop = 0; loop < 100; loop++) {
+                    for _ in 0..<100 {
                         
                         // Select a random user object.
                         let number = arc4random_uniform(UInt32(self.userData.count))
@@ -91,7 +91,7 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
                             // Add random data check.
                             var dataCheck = true
                             
-                            for (var loopTwo = 0; loopTwo < self.randomData.count; loopTwo++) {
+                            for loopTwo in 0..<self.randomData.count {
                                 
                                 // If the user is the logged in user or has already
                                 // been added then do NOT allow it to be added.
@@ -108,7 +108,7 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
                                 self.randomData.addObject(self.userData[Int(number)])
                             }
                         }
-                        
+                            
                         else {
                             self.randomData.addObject(self.userData[Int(number)])
                         }
