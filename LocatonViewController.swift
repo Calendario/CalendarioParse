@@ -76,15 +76,22 @@ class LocatonViewController: UIViewController, UINavigationBarDelegate, LocateOn
         let placesClient = GMSPlacesClient()
         placesClient.autocompleteQuery(searchText, bounds: nil, filter: nil) { (results, error:NSError?) -> Void in
             self.resultsArray.removeAll()
-            if results == nil {
-                return
-            }
-            for result in results! {
+            
+            if (error == nil) {
                 
-                if let result = result as? GMSAutocompletePrediction {
-                    self.resultsArray.append(result.attributedFullText.string)
+                if results == nil {
+                    return
+                } else {
+                    
+                    for result in results! {
+                        
+                        var data: GMSAutocompletePrediction!
+                        data = result
+                        self.resultsArray.append(data.attributedFullText.string)
+                    }
                 }
             }
+            
             self.searchResultsController.reloadDataWithArray(self.resultsArray)
         }
     }
@@ -92,23 +99,9 @@ class LocatonViewController: UIViewController, UINavigationBarDelegate, LocateOn
     @IBAction func Backtapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -27,7 +27,7 @@
     application.applicationIconBadgeNumber = 0;
     
     //make status bar text white
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:NO];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     // IMPORTANT: If this line does NOT execute, then the app will crash
     // when you try to interact with the Parse API - this line MUST be executed!
