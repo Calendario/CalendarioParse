@@ -116,12 +116,10 @@ class NewsfeedTableViewCell: PFTableViewCell {
             let font = UIFont(name: "SFUIDisplay-Regular", size: 18)
             self.privateViewText.font = font
         }
-        
     }
     
     func setPostedImage(image : UIImage) {
         userPostedImage.image = image
-        
     }
     
     func createTenseAndDateLabel() {

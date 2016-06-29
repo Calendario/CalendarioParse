@@ -67,8 +67,6 @@ class LocationSearchTableViewController: UITableViewController {
       let correctedAddress:String! = self.SearchResults[indexPath.row].stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.symbolCharacterSet())
         let url = NSURL(string:  "https://maps.googleapis.com/maps/api/geocode/json?address=\(correctedAddress)&sensor=false")
         
-       
-        
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) -> Void in
             // 3
             do {
@@ -77,12 +75,17 @@ class LocationSearchTableViewController: UITableViewController {
                     
                     let lat = dic["results"]?.valueForKey("geometry")?.valueForKey("location")?.valueForKey("lat")?.objectAtIndex(0) as! Double
                     let lon = dic["results"]?.valueForKey("geometry")?.valueForKey("location")?.valueForKey("lng")?.objectAtIndex(0) as! Double
+                    
+                    // Save the selected location name/lat/long (for later usage).
+                    let location = self.SearchResults[indexPath.row] as String
+                    let defaults = NSUserDefaults.standardUserDefaults()
+                    defaults.setObject(location, forKey: "location")
+                    defaults.setObject(lat, forKey: "locationLat")
+                    defaults.setObject(lon, forKey: "locationLon")
+                    defaults.synchronize()
+                    
                     // 4
                     self.delegate.locateWithLongitude(lon, andLatitude: lat, andTitle: self.SearchResults[indexPath.row] )
-                    
-                    
-                    
-                    
                 }
             }catch {
                 print("Error")
@@ -90,11 +93,6 @@ class LocationSearchTableViewController: UITableViewController {
         }
         // 5
         task.resume()
-        
-        let location = self.SearchResults[indexPath.row] as String
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(location, forKey: "location")
-        defaults.synchronize()
     }
     
     func reloadDataWithArray(array:[String]){

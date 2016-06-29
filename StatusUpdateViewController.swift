@@ -56,16 +56,13 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     //creates a id number for each status update
     var statusID = arc4random()
     
-    
     // location
     let locationManager = CLLocationManager()
     var imagedata:NSData?
     var postingImage = false
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // Allow the user to dismiss the keyboard with a toolabr.
         let editToolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.frame.size.width, 50))
@@ -204,9 +201,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         }
         
         tenseControlchanged()
-
     }
-    
     
     @IBAction func datePickerChanged(sender: AnyObject) {
         changeSegmentControl(datepicker.date)
@@ -237,6 +232,11 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     func PostStatusUpdate() {
         
+        // Get the latitude/longitude of the location
+        // if one has been selected by the user.
+        let locationLatitude = deafaults.valueForKey("locationLat") as? Double
+        let locationLongitude = deafaults.valueForKey("locationLon") as? Double
+        
         // Make sure the updatetext contains all
         // the @user mentions in lowercase.
         ManageUser.correctStringWithUsernames(self.statusUpdateTextField.text!, completion: { (correctString) -> Void in
@@ -265,6 +265,10 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                     statusupdatewithimage["privateRsvp"] = false
                 }
 
+                if ((self.LocationLabel.text?.containsString("tap to select location")) == false) {
+                    let point = PFGeoPoint(latitude:locationLatitude!, longitude:locationLongitude!)
+                    statusupdatewithimage["placeGeoPoint"] = point
+                }
                 
                 // image posting
                 self.imagedata = UIImageJPEGRepresentation(((self.statusImageview?.image))!, 0.5)
@@ -304,6 +308,11 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                     
                 else if (self.rsvpSwitch.on == false){
                     statusupdate["privateRsvp"] = false
+                }
+                
+                if ((self.LocationLabel.text?.containsString("tap to select location")) == false) {
+                    let point = PFGeoPoint(latitude:locationLatitude!, longitude:locationLongitude!)
+                    statusupdate["placeGeoPoint"] = point
                 }
                                 
                 statusupdate.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in

@@ -22,6 +22,16 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // Override point for customization after application launch.
+    NSString *freshInstallCheck = [[NSUserDefaults standardUserDefaults] stringForKey:@"FRESH_CHECK_SETTINGS"];
+    
+    if ((freshInstallCheck == nil) || ([freshInstallCheck isEqualToString:@"YES"])) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"FRESH_CHECK_SETTINGS"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"tap to select location..." forKey:@"location"];
+        [[NSUserDefaults standardUserDefaults] setObject:@NO forKey:@"filterDateCheck"];
+        [[NSUserDefaults standardUserDefaults] setObject:@NO forKey:@"filterLocationCheck"];
+        [[NSUserDefaults standardUserDefaults] setObject:@NO forKey:@"filterUserCheck"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     
     //set badge number back to 0 once user opens the app
     application.applicationIconBadgeNumber = 0;
@@ -32,6 +42,7 @@
     // IMPORTANT: If this line does NOT execute, then the app will crash
     // when you try to interact with the Parse API - this line MUST be executed!
     [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+        configuration.localDatastoreEnabled = YES;
         configuration.applicationId = @"p8YhMVSoCmZvl5tBbpvdk2CK3BYmqwC3p9VS4kPI";
         configuration.clientKey = @"fyHr9RFkqoeefvQxX92J1RBAKnm1s4aqDLRDhAgr";
         configuration.server = @"https://parseapi.back4app.com";
@@ -64,8 +75,9 @@
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
                                                     UIUserNotificationTypeBadge |
                                                     UIUserNotificationTypeSound);
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
-                                                                             categories:nil];
+    
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
+    
     [application registerUserNotificationSettings:settings];
     [application registerForRemoteNotifications];
     
@@ -121,7 +133,6 @@
     tabBarViewController *tab = [storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
     [self.window makeKeyAndVisible];
     self.window.rootViewController = tab;
-    
 }
 
 -(void) launchSearch
@@ -131,7 +142,6 @@
     SearchViewController *sv = [sb instantiateViewControllerWithIdentifier:@"search"];
     self.window.rootViewController = sv;
     [self.window makeKeyAndVisible];
-    
 }
 
 -(void) lanunchProfile
@@ -142,12 +152,10 @@
     [self.window makeKeyAndVisible];
 }
 
-
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
-
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.

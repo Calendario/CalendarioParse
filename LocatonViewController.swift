@@ -14,20 +14,16 @@ class LocatonViewController: UIViewController, UINavigationBarDelegate, LocateOn
     var searchResultsController:LocationSearchTableViewController!
     var resultsArray = [String]()
     var googleMapsView:GMSMapView!
-
+    
     @IBOutlet weak var searchButton: UIBarButtonItem!
     @IBOutlet weak var mapViewContainer: UIView!
-    
     @IBOutlet weak var backButton: UIBarButtonItem!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-       
         // Do any additional setup after loading the view.
     }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -41,6 +37,8 @@ class LocatonViewController: UIViewController, UINavigationBarDelegate, LocateOn
         navitems.titleView?.contentMode = UIViewContentMode.Center
         navitems.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
         
+        backButton.title = nil
+        backButton.image = UIImage(named: "back_button.png")
         
         navitems.setRightBarButtonItem(searchButton, animated: true)
         navitems.setLeftBarButtonItem(backButton, animated: true)
@@ -63,6 +61,15 @@ class LocatonViewController: UIViewController, UINavigationBarDelegate, LocateOn
             
             marker.title = title
             marker.map = self.googleMapsView
+            
+            // Save the location name/coordinates (for the search
+            // filter view controller's location settings).
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setObject(title, forKey: "filterLocationName")
+            defaults.setObject(lat, forKey: "filterLocationLat")
+            defaults.setObject(lon, forKey: "filterLocationLon")
+            defaults.synchronize()
+            // Please do NOT delete the above code - Dan.
         }
     }
     

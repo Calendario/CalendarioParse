@@ -152,7 +152,6 @@
     
     //check for action type and set correct icon
 
-    
     // Download the user data.
     PFQuery *imageQuery = [PFUser query];
     [imageQuery whereKey:@"objectId" equalTo:((PFUser *)notificationUsers[indexPath.row]).objectId];

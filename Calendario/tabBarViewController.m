@@ -47,7 +47,7 @@
     UITabBarItem *fourthTab = [self.tabBar.items objectAtIndex:3];
     
     firstTab.image = [[UIImage imageNamed:@"newsFeed_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    secondTab.image = [[UIImage imageNamed:@"calendar_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    secondTab.image = [[UIImage imageNamed:@"searchTabLogo.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     thirdTab.image = [[UIImage imageNamed:@"notifications_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     fourthTab.image = [[UIImage imageNamed:@"default_profile_pic.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 }
