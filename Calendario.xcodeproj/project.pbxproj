@@ -35,6 +35,7 @@
 		A234579A1C768F5700376F2F /* LikesCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457991C768F5700376F2F /* LikesCustomCell.swift */; };
 		A23457AB1C79E6E500376F2F /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457AA1C79E6E500376F2F /* DateManager.swift */; };
 		A23457AE1C7B4AA300376F2F /* HashtagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457AD1C7B4AA300376F2F /* HashtagViewController.swift */; };
+		A238736C1D25B6F200C785EF /* SearchFilterUI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A238736B1D25B6F200C785EF /* SearchFilterUI.storyboard */; };
 		A24DB1181C8F705E002D4897 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24DB1171C8F705E002D4897 /* EventManager.swift */; };
 		A24DB11A1C8F7EB1002D4897 /* AttendantsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24DB1191C8F7EB1002D4897 /* AttendantsListViewController.swift */; };
 		A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25179511C201B0300EA0A5E /* ReportUserViewController.swift */; };
@@ -200,6 +201,7 @@
 		A23457991C768F5700376F2F /* LikesCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesCustomCell.swift; sourceTree = "<group>"; };
 		A23457AA1C79E6E500376F2F /* DateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		A23457AD1C7B4AA300376F2F /* HashtagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagViewController.swift; sourceTree = "<group>"; };
+		A238736B1D25B6F200C785EF /* SearchFilterUI.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchFilterUI.storyboard; sourceTree = "<group>"; };
 		A24DB1171C8F705E002D4897 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		A24DB1191C8F7EB1002D4897 /* AttendantsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendantsListViewController.swift; sourceTree = "<group>"; };
 		A25179511C201B0300EA0A5E /* ReportUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportUserViewController.swift; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 			children = (
 				A23456C91D22B7F600C4A769 /* SearchFilterView.swift */,
 				A23456CC1D23FDEE00C4A769 /* SearchFilterUserSelector.swift */,
+				A238736B1D25B6F200C785EF /* SearchFilterUI.storyboard */,
 			);
 			name = "Search Filter view";
 			sourceTree = "<group>";
@@ -1099,6 +1102,7 @@
 				D3DE97991C80CC0400F4DE7B /* SF-UI-Text-Medium.otf in Resources */,
 				78E4E0E51C86BE7800C37864 /* button-placeholder-primary.png in Resources */,
 				E24DA5E91C1154BE00901DF0 /* Podfile in Resources */,
+				A238736C1D25B6F200C785EF /* SearchFilterUI.storyboard in Resources */,
 				D3DE979A1C80CC0400F4DE7B /* SF-UI-Text-MediumItalic.otf in Resources */,
 				D3DE978C1C80CC0400F4DE7B /* SF-UI-Display-Heavy.otf in Resources */,
 				D3DE979D1C80CC0400F4DE7B /* SF-UI-Text-Semibold.otf in Resources */,

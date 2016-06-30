@@ -30,7 +30,7 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
     //MARK: BUTTONS.
     
     @IBAction func openFilterSettings(sender: UIButton) {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let sb = UIStoryboard(name: "SearchFilterUI", bundle: nil)
         let filterVC = sb.instantiateViewControllerWithIdentifier("FilterView") as! SearchFilterView
         self.presentViewController(filterVC, animated: true, completion: nil)
     }

@@ -477,13 +477,13 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                     self.statusLoadCheck = true
                     
                     // Set the follow user button image - following.
-                    self.followButton.setImage(UIImage(named: "Following_icon.png"), forState: .Normal)
+                    self.followButton.setImage(UIImage(named: "Following.png"), forState: .Normal)
                 }
                     
                 else {
                     
                     // Set the follow user button image - not following.
-                    self.followButton.setImage(UIImage(named: "Follow_icon.png"), forState: .Normal)
+                    self.followButton.setImage(UIImage(named: "FollowButton.png"), forState: .Normal)
                     
                     // If the user is private then disallow
                     // the status updates to be fetched.
@@ -898,13 +898,13 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 if (buttonTitle == "Follow") {
                     
                     // Set the follow user button image - not following.
-                    self.followButton.setImage(UIImage(named: "Follow_icon.png"), forState: .Normal)
+                    self.followButton.setImage(UIImage(named: "FollowButton.png"), forState: .Normal)
                 }
                     
                 else {
                     
                     // Set the follow user button image - following.
-                    self.followButton.setImage(UIImage(named: "Following_icon.png"), forState: .Normal)
+                    self.followButton.setImage(UIImage(named: "Following.png"), forState: .Normal)
                 }
                 
                 // Check to see if the follow/unfollow

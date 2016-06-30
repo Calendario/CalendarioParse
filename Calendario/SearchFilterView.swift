@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Parse
 
-class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIScrollViewDelegate {
     
     // Setup the various UI objects.
     @IBOutlet weak var dateOneLabel: UILabel!
@@ -30,6 +30,7 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
     @IBOutlet weak var blockViewFive: UIView!
     @IBOutlet weak var radiusPicker: UIPickerView!
     @IBOutlet weak var radiusView: UIView!
+    @IBOutlet weak var scroll: UIScrollView!
     
     // Filter settings data.
     var dateOne:NSDate!
@@ -71,6 +72,10 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
         self.blockViewTwo.hidden = sender.on
         self.dateOneLabel.userInteractionEnabled = sender.on
         self.dateTwoLabel.userInteractionEnabled = sender.on
+        
+        if (sender.on == false) {
+            self.dateView.hidden = true
+        }
     }
     
     @IBAction func changeLocationSwitch(sender: UISwitch) {
@@ -78,6 +83,10 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
         self.blockViewFour.hidden = sender.on
         self.locationOneLabel.userInteractionEnabled = sender.on
         self.locationTwoLabel.userInteractionEnabled = sender.on
+        
+        if (sender.on == false) {
+            self.radiusView.hidden = true
+        }
     }
     
     @IBAction func changeUserSwitch(sender: UISwitch) {
@@ -105,6 +114,16 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
         
         // Setup the user pass back notification.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SearchFilterView.updateUser(_:)), name: "userSelected", object: nil)
+        
+        // Setup the scroll view.
+        self.scroll.scrollEnabled = true
+        let result: CGSize = UIScreen.mainScreen().bounds.size
+        
+        if result.height == 480 {
+            scroll.contentSize = CGSizeMake(result.width, 520)
+        } else {
+            scroll.contentSize = CGSizeMake(result.width, 520)
+        }
         
         // Set the label tap recognizers.
         let tapgestureDate = UITapGestureRecognizer(target: self, action: #selector(SearchFilterView.setDateSelection(_:)))
@@ -185,8 +204,9 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
     }
     
     func setLocationSelection() {
-        let locView = self.storyboard!.instantiateViewControllerWithIdentifier("LocationVC") as UIViewController!
-        self.presentViewController(locView, animated: true, completion: nil)
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let filterVC = sb.instantiateViewControllerWithIdentifier("LocationVC") as UIViewController!
+        self.presentViewController(filterVC, animated: true, completion: nil)
     }
     
     func setLocationRadiusSelection() {
@@ -194,8 +214,9 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
     }
     
     func setUserSelection() {
-        let userView = self.storyboard!.instantiateViewControllerWithIdentifier("UserSearch") as UIViewController!
-        self.presentViewController(userView, animated: true, completion: nil)
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let filterVC = sb.instantiateViewControllerWithIdentifier("UserSearch") as UIViewController!
+        self.presentViewController(filterVC, animated: true, completion: nil)
     }
     
     func updateUser(object: NSNotification) {
@@ -365,6 +386,13 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
         
         // Present the alert on screen.
         presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    //MARK: UISCROLLVIEW METHODS.
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        self.dateView.hidden = true
+        self.radiusView.hidden = true
     }
     
     //MARK: UIPICKER METHODS.
