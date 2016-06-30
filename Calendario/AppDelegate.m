@@ -42,7 +42,6 @@
     // IMPORTANT: If this line does NOT execute, then the app will crash
     // when you try to interact with the Parse API - this line MUST be executed!
     [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-        configuration.localDatastoreEnabled = YES;
         configuration.applicationId = @"p8YhMVSoCmZvl5tBbpvdk2CK3BYmqwC3p9VS4kPI";
         configuration.clientKey = @"fyHr9RFkqoeefvQxX92J1RBAKnm1s4aqDLRDhAgr";
         configuration.server = @"https://parseapi.back4app.com";

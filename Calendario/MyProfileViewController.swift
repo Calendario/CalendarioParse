@@ -572,21 +572,12 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                     let profileImage = UIImage(data:imageData!)
                     
                     if ((imageData != nil) && (profileImage != nil)) {
-                        
-                        // Set the downloaded profile image.
                         self.profPicture.image = profileImage
-                    }
-                        
-                    else {
-                        
-                        // No profile picture set the standard image.
+                    } else {
                         self.profPicture.image = UIImage(named: "default_profile_pic.png")
                     }
-                }
                     
-                else {
-                    
-                    // No profile picture set the standard image.
+                } else {
                     self.profPicture.image = UIImage(named: "default_profile_pic.png")
                 }
                 

@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import Parse
-import Bolts
 
 class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -168,19 +167,13 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
         
         if (userState == true) {
             
-            var localUserQuery:PFQuery!
-            localUserQuery = PFQuery()
-            localUserQuery.fromLocalDatastore()
-            localUserQuery.whereKeyExists("filterUserObject")
-            localUserQuery.findObjectsInBackgroundWithBlock({ (object, error) in
-                
-                print("\(object)")
+            var findUser:PFQuery!
+            findUser = PFUser.query()!
+            findUser.getObjectInBackgroundWithId((defaults.objectForKey("filterUserObject") as? String)!, block: { (userAccount, error) in
                 
                 if (error == nil) {
-                    self.userObject = (object![0] as! PFUser)
+                    self.userObject = (userAccount as! PFUser)
                     self.userLabel.text = self.userObject.username!
-                } else {
-                    print("\(error?.localizedDescription)")
                 }
             })
         }
@@ -347,19 +340,9 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
         // Set the 'by user' username filter setting.
         
         if (self.userSwitch.on == true) {
-            self.userObject.pinInBackgroundWithName("filterUserObject") { (success, error) in }
+            defaults.setObject(self.userObject.objectId!, forKey: "filterUserObject")
         } else {
-            
-            var localUserQuery:PFQuery!
-            localUserQuery = PFQuery()
-            localUserQuery.fromLocalDatastore()
-            localUserQuery.whereKeyExists("filterUserObject")
-            localUserQuery.findObjectsInBackgroundWithBlock({ (object, error) in
-                
-                if (error == nil) {
-                    (object![0] as! PFUser).unpinInBackgroundWithName("filterUserObject")
-                }
-            })
+            defaults.removeObjectForKey("filterUserObject")
         }
         
         // Save the new filter settings.

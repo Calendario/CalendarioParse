@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import Parse
-import Bolts
 
 class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -19,10 +18,12 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var titleLabelOne: UILabel!
     @IBOutlet weak var titleLabelTwo: UILabel!
+    @IBOutlet weak var noUsersLabel: UILabel!
+    @IBOutlet weak var noEventsLabel: UILabel!
+    @IBOutlet weak var introSearchView: UIView!
     
     // Status update data array.
     var statusData:NSMutableArray = []
-    var followingData:NSMutableArray = []
     var sortedArray:NSMutableArray = []
     var userData:NSMutableArray = []
     
@@ -53,9 +54,12 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         
         self.userList.keyboardDismissMode = UIScrollViewKeyboardDismissMode.OnDrag
         self.eventList.keyboardDismissMode = UIScrollViewKeyboardDismissMode.OnDrag
-        
         self.userList.backgroundColor = UIColor(red: 223.0/255, green: 223.0/255, blue: 223.0/255, alpha: 1.0)
         self.searchBar.tintColor = UIColor.whiteColor()
+        self.noUsersLabel.hidden = true
+        self.noEventsLabel.hidden = true
+        self.introSearchView.hidden = false
+        self.eventList.hidden = true
         
         for subView in self.searchBar.subviews {
             
@@ -79,14 +83,14 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         
         findUsers.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
             
+            self.userData.removeAllObjects()
+            
             if ((error == nil) && (objects != nil)) {
-                
                 self.userData = NSMutableArray(array: (objects! as NSArray))
-                self.userList.reloadData()
-                
-            } else {
-                print("No user data found")
             }
+            
+            self.noUsersLabel.hidden = (self.userData.count > 0)
+            self.userList.reloadData()
         }
         
         self.reloadNewsFeed(inputString)
@@ -94,84 +98,55 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
     
     func reloadNewsFeed(inputString: String) {
         
-        // Clear the status data array.
-        if (self.statusData.count > 0) {
-            self.statusData.removeAllObjects()
+        // Get the search filter settings.
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let locationState = defaults.objectForKey("filterLocationCheck") as? Bool
+        let userState = defaults.objectForKey("filterUserCheck") as? Bool
+        var locationMode:Int = 2
+        var point:PFGeoPoint = PFGeoPoint(latitude: 0, longitude: 0)
+        var locatonRadius:Double = 0
+        
+        if (locationState == true) {
+            
+            let locationLat = defaults.objectForKey("filterLocationLat") as? Double
+            let locationLon = defaults.objectForKey("filterLocationLon") as? Double
+            locatonRadius = (defaults.objectForKey("filterLocationRadius") as? Double)!
+            let locatonRadiusType = defaults.objectForKey("filterLocationRadiusType") as? String
+            point = PFGeoPoint(latitude:locationLat!, longitude:locationLon!)
+            
+            if (locatonRadiusType == "mi") {
+                locationMode = 1
+            } else {
+                locationMode = 2
+            }
         }
         
-        // Download the user following data.
-        ManageUser.getUserFollowingList(PFUser.currentUser()!, withCurrentUser: true) { (userFollowing) -> Void in
+        if (userState == true) {
             
-            dispatch_async(dispatch_get_main_queue(),{
+            var findUser:PFQuery!
+            findUser = PFUser.query()!
+            findUser.getObjectInBackgroundWithId((defaults.objectForKey("filterUserObject") as? String)!, block: { (userAccount, error) in
                 
-                if (userFollowing.count > 0) {
+                if (error == nil) {
+                    self.loadNewsFeedData(inputString, locationMode: locationMode, locationPoint: point, radius: locatonRadius, userMode: true, inputUser: (userAccount as! PFUser))
                     
-                    self.followingData = userFollowing
-                    
-                    // Get the search filter settings.
-                    let defaults = NSUserDefaults.standardUserDefaults()
-                    let locationState = defaults.objectForKey("filterLocationCheck") as? Bool
-                    let userState = defaults.objectForKey("filterUserCheck") as? Bool
-                    var locationMode:Int = 2
-                    var point:PFGeoPoint = PFGeoPoint(latitude: 0, longitude: 0)
-                    var locatonRadius:Double = 0
-                    
-                    if (locationState == true) {
-                        
-                        let locationLat = defaults.objectForKey("filterLocationLat") as? Double
-                        let locationLon = defaults.objectForKey("filterLocationLon") as? Double
-                        locatonRadius = (defaults.objectForKey("filterLocationRadius") as? Double)!
-                        let locatonRadiusType = defaults.objectForKey("filterLocationRadiusType") as? String
-                        point = PFGeoPoint(latitude:locationLat!, longitude:locationLon!)
-                        
-                        if (locatonRadiusType == "mi") {
-                            locationMode = 1
-                        } else {
-                            locationMode = 2
-                        }
-                    }
-                    
-                    if (userState == true) {
-                        
-                        var localUserQuery:PFQuery!
-                        localUserQuery = PFQuery()
-                        localUserQuery.fromLocalDatastore()
-                        localUserQuery.whereKeyExists("filterUserObject")
-                        localUserQuery.findObjectsInBackgroundWithBlock({ (object, error) in
-                            
-                            if (error == nil) {
-                                self.loadNewsFeedData(0, inputString: inputString, locationMode: locationMode, locationPoint: point, radius: locatonRadius, userMode: true, inputUser: (object![0] as! PFUser))
-                                
-                            } else {
-                                self.loadNewsFeedData(0, inputString: inputString, locationMode: locationMode, locationPoint: point, radius: locatonRadius, userMode: false, inputUser: PFUser.currentUser()!)
-                            }
-                        })
-                    } else {
-                        self.loadNewsFeedData(0, inputString: inputString, locationMode: locationMode, locationPoint: point, radius: locatonRadius, userMode: false, inputUser: PFUser.currentUser()!)
-                    }
-                }
-                    
-                else {
-                    
-                    // Show the no posts error message.
-                    self.displayAlert("No posts", alertMessage: "You are not folowing anyone.")
+                } else {
+                    self.loadNewsFeedData(inputString, locationMode: locationMode, locationPoint: point, radius: locatonRadius, userMode: false, inputUser: PFUser.currentUser()!)
                 }
             })
+        } else {
+            self.loadNewsFeedData(inputString, locationMode: locationMode, locationPoint: point, radius: locatonRadius, userMode: false, inputUser: PFUser.currentUser()!)
         }
     }
     
-    func loadNewsFeedData(currentPos: Int, inputString: String, locationMode: Int, locationPoint: PFGeoPoint, radius: Double, userMode: Bool, inputUser: PFUser) {
+    func loadNewsFeedData(inputString: String, locationMode: Int, locationPoint: PFGeoPoint, radius: Double, userMode: Bool, inputUser: PFUser) {
         
         // Setup the status update query.
         var query:PFQuery!
         query = PFQuery(className:"StatusUpdate")
         query.limit = 100
-        query.whereKey("user", equalTo: self.followingData[currentPos] as! PFUser)
-        query.whereKey("eventTitle", containsString: inputString)
-        query.whereKey("updatetext", containsString: inputString)
-        query.whereKey("eventTitle", containsString: inputString.lowercaseString)
-        query.whereKey("updatetext", containsString: inputString.lowercaseString)
-        
+        query.whereKey("eventTitle", matchesRegex: inputString, modifiers: "i")
+
         if (locationMode == 0) {
             query.whereKey("placeGeoPoint", nearGeoPoint: locationPoint, withinMiles: radius)
         } else if (locationMode == 1) {
@@ -185,20 +160,68 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         // Get the status update(s).
         query.findObjectsInBackgroundWithBlock({ (statusUpdates, error) -> Void in
             
+            self.statusData.removeAllObjects()
+            
             if ((error == nil) && (statusUpdates?.count > 0)) {
+                self.statusData =  NSMutableArray(array: statusUpdates!)
+            }
+            
+            self.runSecondFeedQuery(inputString, locationMode: locationMode, locationPoint: locationPoint, radius: radius, userMode: userMode, inputUser: inputUser)
+        })
+    }
+    
+    func runSecondFeedQuery(inputString: String, locationMode: Int, locationPoint: PFGeoPoint, radius: Double, userMode: Bool, inputUser: PFUser) {
+
+        var queryTwo:PFQuery!
+        queryTwo = PFQuery(className:"StatusUpdate")
+        queryTwo.limit = 100
+        queryTwo.whereKey("updatetext", matchesRegex: inputString, modifiers: "i")
+        
+        if (locationMode == 0) {
+            queryTwo.whereKey("placeGeoPoint", nearGeoPoint: locationPoint, withinMiles: radius)
+        } else if (locationMode == 1) {
+            queryTwo.whereKey("placeGeoPoint", nearGeoPoint: locationPoint, withinKilometers: radius)
+        }
+        
+        if (userMode == true) {
+            queryTwo.whereKey("user", equalTo: inputUser)
+        }
+        
+        queryTwo.findObjectsInBackgroundWithBlock({ (statusUpdatesTwo, errorTwo) -> Void in
+            
+            if ((errorTwo == nil) && (statusUpdatesTwo!.count > 0)) {
                 
-                for loop in 0..<statusUpdates!.count {
-                    self.statusData.addObject(statusUpdates![loop])
+                if (self.statusData.count > 0) {
+                    
+                    for loop in 0..<statusUpdatesTwo!.count {
+                        
+                        let statusTwo:PFObject = statusUpdatesTwo![loop]
+                        var matchCheck:Bool = false
+                        
+                        for innerLoop in 0..<self.statusData.count {
+                            
+                            let status:PFObject = self.statusData[innerLoop] as! PFObject
+                            
+                            if (status.objectId! == statusTwo.objectId!) {
+                                matchCheck = true
+                                break
+                            }
+                        }
+                        
+                        if (matchCheck == false) {
+                            self.statusData.addObject(statusTwo)
+                        }
+                    }
+                    
+                } else {
+                    
+                    if (statusUpdatesTwo!.count > 0) {
+                        self.statusData =  NSMutableArray(array: statusUpdatesTwo!)
+                    }
                 }
             }
             
-            if ((currentPos + 1) < self.followingData.count) {
-                self.loadNewsFeedData(currentPos + 1, inputString: inputString, locationMode: locationMode, locationPoint: locationPoint, radius: radius, userMode: userMode, inputUser: inputUser)
-            }
-                
-            else {
-                self.organizeNewsFeedData()
-            }
+            self.organizeNewsFeedData()
         })
     }
     
@@ -233,10 +256,17 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
                 for loop in 0..<tempData.count {
                     
                     let currentObject:PFObject = tempData[loop] as! PFObject
-                    let date:NSDate = self.convertStringToDate(currentObject.valueForKey("dateofevent") as! String)
                     
-                    if (self.isBetweenDates(dateStart!, endDate: dateEnd!, dateToCheck: date) == true) {
-                        self.sortedArray.addObject(tempData[loop])
+                    if let dateString = currentObject["dateofevent"] {
+                        
+                        if ((dateString as! String).characters.count > 1) {
+                            
+                            let date:NSDate = self.convertStringToDate(dateString as! String)
+                            
+                            if (self.isBetweenDates(dateStart!, endDate: dateEnd!, dateToCheck: date) == true) {
+                                self.sortedArray.addObject(tempData[loop])
+                            }
+                        }
                     }
                 }
             } else {
@@ -247,10 +277,12 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         else {
             
             // Show the no posts error message.
-            print("No posts found matching the search term")
+            self.sortedArray.removeAllObjects()
         }
         
         // Reload the table view.
+        self.eventList.scrollEnabled = (self.sortedArray.count > 0)
+        self.noEventsLabel.hidden = (self.sortedArray.count > 0)
         self.eventList.reloadData()
     }
     
@@ -270,9 +302,10 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
     func convertStringToDate(inputText: String) -> NSDate {
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        dateFormatter.dateFormat = "M/d/yy"
         dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")
-        
+
         return dateFormatter.dateFromString(inputText)!
     }
     
@@ -286,7 +319,12 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         if (searchCheck.characters.count > 0) {
             self.titleLabelOne.text = "Users matching \"\(searchText)\""
             self.titleLabelTwo.text = "Events with \"\(searchText)\""
+            self.introSearchView.hidden = true
+            self.eventList.hidden = false
             self.loadUserData(searchText)
+        } else {
+            self.introSearchView.hidden = false
+            self.eventList.hidden = true
         }
     }
     
@@ -444,20 +482,6 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
                 }
             })
         }
-        
-        //        // Setup the see more button.
-        //        let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
-        //
-        //            let defaults = NSUserDefaults.standardUserDefaults()
-        //            let updatetext = statusupdate.objectForKey("updatetext") as! String
-        //            let currentobjectID = statusupdate.objectId
-        //
-        //            defaults.setObject(updatetext, forKey: "updatetext")
-        //            defaults.setObject(currentobjectID, forKey: "objectId")
-        //
-        //            self.Seemore()
-        //        }
-        // WILL BE ADDED IN FUTURE APP UPDATES //
         
         // Setup the delete status button.
         let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in

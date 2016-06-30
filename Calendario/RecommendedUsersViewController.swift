@@ -200,34 +200,28 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
         }
         
         // Setup the user profile image file.
-        let userImageFile = currentObject["profileImage"] as! PFFile
-        
-        // Download the profile image.
-        userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+        if let userImageFile = currentObject["profileImage"] {
             
-            if (error == nil) {
+            // Download the profile image.
+            userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                 
-                // Check the profile image data first.
-                let profileImage = UIImage(data:imageData!)
-                
-                if ((imageData != nil) && (profileImage != nil)) {
+                if (error == nil) {
                     
-                    // Set the user profile picture.
-                    cell.profileImageView.image = profileImage
-                }
+                    // Check the profile image data first.
+                    let profileImage = UIImage(data:imageData!)
                     
-                else {
+                    if ((imageData != nil) && (profileImage != nil)) {
+                        cell.profileImageView.image = profileImage
+                    } else {
+                        cell.profileImageView.image = UIImage(named: "default_profile_pic.png")
+                    }
                     
-                    // No profile picture set the standard image.
+                } else {
                     cell.profileImageView.image = UIImage(named: "default_profile_pic.png")
                 }
             }
-                
-            else {
-                
-                // No profile picture set the standard image.
-                cell.profileImageView.image = UIImage(named: "default_profile_pic.png")
-            }
+        } else {
+            cell.profileImageView.image = UIImage(named: "default_profile_pic.png")
         }
         
         return cell

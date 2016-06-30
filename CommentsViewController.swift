@@ -352,6 +352,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                             cell.userProfileImage.image = UIImage(named: "default_profile_pic.png")
                         }
                     })
+                } else {
+                    cell.userProfileImage.image = UIImage(named: "default_profile_pic.png")
                 }
             }
             

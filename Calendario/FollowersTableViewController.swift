@@ -184,11 +184,12 @@ class FollowersTableViewController: UITableViewController {
                     }
                     else
                     {
-                        imageview.image = UIImage(named: "profile_icon")
+                        imageview.image = UIImage(named: "default_profile_pic.png")
                     }
                 })
+            } else {
+                imageview.image = UIImage(named: "default_profile_pic.png")
             }
-            
         }
     }
 }

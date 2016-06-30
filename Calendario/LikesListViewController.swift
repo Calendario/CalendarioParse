@@ -154,15 +154,18 @@ class LikesListViewController: UITableViewController {
                 var profileImage = UIImage(named: "default_profile_pic.png")
                 
                 // Setup the user profile image file.
-                let userImageFile = userObject!["profileImage"] as! PFFile
-                
-                // Download the profile image.
-                userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                if let userImageFile = userObject!["profileImage"] {
                     
-                    if ((error == nil) && (imageData != nil)) {
-                        profileImage = UIImage(data: imageData!)
+                    // Download the profile image.
+                    userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                        
+                        if ((error == nil) && (imageData != nil)) {
+                            profileImage = UIImage(data: imageData!)
+                        }
+                        
+                        cell.profileImageView.image = profileImage
                     }
-                    
+                } else {
                     cell.profileImageView.image = profileImage
                 }
             }

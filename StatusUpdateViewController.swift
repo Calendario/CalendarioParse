@@ -52,6 +52,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     var locationtapReconizer:UITapGestureRecognizer!
     
     var shortStyleDateToBeSaved: String = ""
+    var dateSetCheck:Bool = false
     
     //creates a id number for each status update
     var statusID = arc4random()
@@ -162,6 +163,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         dateformatter2.timeZone = NSTimeZone(abbreviation: "UTC")
         
         shortStyleDateToBeSaved = dateformatter.stringFromDate(datepicker.date)
+        self.dateSetCheck = true
         dateLabel.hidden = false
         dateLabel.text = dateformatter2.stringFromDate(datepicker.date)
         print(dateLabel)
@@ -359,8 +361,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     @IBAction func PostTapped(sender: AnyObject) {
         
-        if statusUpdateTextField.text.isEmpty {
-            let reportalert = UIAlertController(title: "Error", message: "You must enter a status update and/or a valid date ", preferredStyle: .Alert)
+        if ((statusUpdateTextField.text.isEmpty) || (self.dateSetCheck == false)) {
+            let reportalert = UIAlertController(title: "Error", message: "You must enter a status update and valid event date.", preferredStyle: .Alert)
             let next = UIAlertAction(title: "OK", style: .Default, handler: nil)
             reportalert.addAction(next)
             

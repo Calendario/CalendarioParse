@@ -190,9 +190,11 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                     }
                     else
                     {
-                        imageView.image = UIImage(named: "profile_icon")
+                        imageView.image = UIImage(named: "default_profile_pic.png")
                     }
                 })
+            } else {
+                imageView.image = UIImage(named: "default_profile_pic.png")
             }
         }
     }

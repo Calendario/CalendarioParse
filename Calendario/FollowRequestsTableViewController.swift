@@ -220,20 +220,27 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
                     cell.userFullNameLabel.text = userObject!["fullName"] as? String
                     
                     // Setup the user profile image file.
-                    let userImageFile = userObject!["profileImage"] as! PFFile
-                    
-                    // Download the profile image.
-                    userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                    if let userImageFile = userObject!["profileImage"] {
                         
-                        if (error == nil) {
+                        // Download the profile image.
+                        userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                             
-                            // Check the profile image data first.
-                            let profileImage = UIImage(data:imageData!)
-                            
-                            if ((imageData != nil) && (profileImage != nil)) {
+                            if (error == nil) {
                                 
-                                // Set the user profile picture.
-                                cell.userProfilePicture.image = profileImage
+                                // Check the profile image data first.
+                                let profileImage = UIImage(data:imageData!)
+                                
+                                if ((imageData != nil) && (profileImage != nil)) {
+                                    
+                                    // Set the user profile picture.
+                                    cell.userProfilePicture.image = profileImage
+                                }
+                                    
+                                else {
+                                    
+                                    // No profile picture set the standard image.
+                                    cell.userProfilePicture.image = UIImage(named: "default_profile_pic.png")
+                                }
                             }
                                 
                             else {
@@ -242,12 +249,8 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
                                 cell.userProfilePicture.image = UIImage(named: "default_profile_pic.png")
                             }
                         }
-                            
-                        else {
-                            
-                            // No profile picture set the standard image.
-                            cell.userProfilePicture.image = UIImage(named: "default_profile_pic.png")
-                        }
+                    } else {
+                        cell.userProfilePicture.image = UIImage(named: "default_profile_pic.png")
                     }
                 }
             }

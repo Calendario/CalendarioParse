@@ -182,11 +182,12 @@ class FollowingTableViewController: UITableViewController {
                         let image = UIImage(data: ImageData!)
                         imageview.image = image
                     } else {
-                        imageview.image = UIImage(named: "profile_icon")
+                        imageview.image = UIImage(named: "default_profile_pic.png")
                     }
                 })
+            } else {
+                imageview.image = UIImage(named: "default_profile_pic.png")
             }
-            
         }
     }
 }
