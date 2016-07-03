@@ -237,6 +237,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                 
                 for loop in 0..<statusUpdates!.count {
                     self.statusData.addObject(statusUpdates![loop])
+                    tenseChanged(NSDate(), StatusObjectID: statusUpdates![loop].objectId!, StatusDateofevent: statusUpdates![loop].objectForKey("dateofevent") as! String)
                 }
             }
             
@@ -301,8 +302,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                     let currentobjects = self.sortedArray[indexPath.row] as! PFObject
                     let dateofevent = currentobjects.objectForKey("dateofevent") as! String
                     let currentid = currentobjects.objectId!
-                    tenseChanged(NSDate(), StatusObjectID: currentid, StatusDateofevent: dateofevent)
-                })
+            })
             }
         })
         
