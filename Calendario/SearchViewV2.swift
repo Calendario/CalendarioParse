@@ -61,6 +61,18 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         self.introSearchView.hidden = false
         self.eventList.hidden = true
         
+        // Allow the user to dismiss the keyboard with a toolabr.
+        let editToolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.frame.size.width, 50))
+        editToolbar.barStyle = UIBarStyle.Default
+        
+        editToolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SearchViewV2.hideKeyboard))
+        ]
+        
+        editToolbar.sizeToFit()
+        self.searchBar.inputAccessoryView = editToolbar
+        
         for subView in self.searchBar.subviews {
             
             for subsubView in subView.subviews {
@@ -329,7 +341,7 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        self.searchBar.resignFirstResponder()
+        self.hideKeyboard()
     }
     
     func displayAlert(alertTitle: String, alertMessage: String) {
@@ -343,6 +355,10 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         
         // Present the alert on screen.
         presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func hideKeyboard() {
+        self.searchBar.resignFirstResponder()
     }
     
     //MARK: COLLECTIONVIEW METHODS.
