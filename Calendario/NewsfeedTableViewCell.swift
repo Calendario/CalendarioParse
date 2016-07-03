@@ -78,6 +78,10 @@ class NewsfeedTableViewCell: PFTableViewCell {
         attendantContainerView.layer.cornerRadius = 2.0
         attendantContainerView.clipsToBounds = true
         
+        // Set the date label text font.
+        self.uploaddatelabel.font = UIFont.systemFontOfSize(14)
+        self.uploaddatelabel.textColor = UIColor.lightGrayColor()
+        
         // Setup User Posted Image
         userPostedImage.layer.cornerRadius = 2.0
         userPostedImage.clipsToBounds = true
@@ -126,22 +130,50 @@ class NewsfeedTableViewCell: PFTableViewCell {
         
         if (passedInObject != nil) {
             
-            // Create the tense/date all in one attributed string.
-            let attrs2 = [NSForegroundColorAttributeName:UIColor.lightGrayColor(), NSFontAttributeName : UIFont.systemFontOfSize(14)]
-            let tensestring2 = NSMutableAttributedString(string: passedInObject.objectForKey("tense") as! String, attributes: attrs2)
-            let spacestring2 = NSMutableAttributedString(string: " ")
-            let onstring = NSAttributedString(string: "on")
-            let spacestr3 = NSAttributedString(string: " ")
-            tensestring2.appendAttributedString(spacestring2)
-            tensestring2.appendAttributedString(onstring)
-            tensestring2.appendAttributedString(spacestr3)
-            let dateattrstring = NSAttributedString(string: passedInObject.objectForKey("dateofevent") as! String, attributes: attrs2)
-            tensestring2.appendAttributedString(dateattrstring)
+            // Create the tense/date all in one string.
+            let dateOfPassedInEvent = self.passedInObject.objectForKey("dateofevent") as! String
+            let fullDateTitle = "\(self.tenseChanged(dateOfPassedInEvent)) on \(dateOfPassedInEvent)"
             
             // Set the date/tense all in one label.
-            self.uploaddatelabel.attributedText = tensestring2
+            self.uploaddatelabel.text = fullDateTitle
+            
+            // Highlight the hashtags and @mentions.
             checkForHashtagsAndHighlight()
             checkForMentionsAndHighlight()
+        }
+    }
+    
+    func tenseChanged(passedInEventDate: String) -> String {
+        
+        // Get the cureent date.
+        let currentDate:NSDate = NSDate()
+        
+        // Create a date formatter to turn the date into a readable string.
+        let dateformatter = NSDateFormatter()
+        dateformatter.dateFormat = "M/d/yy"
+        
+        // The current date is passed in the date formatter method.
+        let datefromstring = dateformatter.dateFromString(passedInEventDate)
+        
+        // Set the tense label depending on the comparison result.
+        
+        if currentDate.compare(datefromstring!) == NSComparisonResult.OrderedAscending {
+            
+            // Current date is earlier than date of event.
+            return "Going"
+            
+        } else if currentDate.compare(datefromstring!) == NSComparisonResult.OrderedDescending {
+            
+            // Current date is later than date of event.
+            return "Went"
+            
+        } else if currentDate.compare(datefromstring!) == NSComparisonResult.OrderedSame {
+            
+            // Current date is same than date of event.
+            return "Currently"
+            
+        } else {
+            return "Currently"
         }
     }
     

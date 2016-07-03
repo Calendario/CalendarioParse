@@ -237,7 +237,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                 
                 for loop in 0..<statusUpdates!.count {
                     self.statusData.addObject(statusUpdates![loop])
-                    tenseChanged(NSDate(), StatusObjectID: statusUpdates![loop].objectId!, StatusDateofevent: statusUpdates![loop].objectForKey("dateofevent") as! String)
                 }
             }
             
@@ -299,9 +298,9 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                     // Run UI Updates
                     cell.createdAtLabel.text = difference
                     
-                    let currentobjects = self.sortedArray[indexPath.row] as! PFObject
-                    let dateofevent = currentobjects.objectForKey("dateofevent") as! String
-                    let currentid = currentobjects.objectId!
+                    //let currentobjects = self.sortedArray[indexPath.row] as! PFObject
+                    //let dateofevent = currentobjects.objectForKey("dateofevent") as! String
+                    //let currentid = currentobjects.objectId!
             })
             }
         })
@@ -429,32 +428,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     }
 }
 
-func tenseChanged(currentDate:NSDate, StatusObjectID:String, StatusDateofevent:String)
-{
-    // create a date formatter to turn the date into a readable string
-    let dateformatter = NSDateFormatter()
-    dateformatter.dateFormat = "M/d/yy"
-    // the current date is passed in the date formatter method
-    let datefromstring = dateformatter.dateFromString(StatusDateofevent)
-    
-    if currentDate.timeIntervalSince1970 < datefromstring?.timeIntervalSince1970
-    {
-        print("tense change has started")
-        var tensequery:PFQuery!
-        tensequery = PFQuery(className: "StatusUpdate")
-        tensequery.orderByAscending("createdAt")
-        tensequery.getObjectInBackgroundWithId(StatusObjectID, block: { (tenseupdate:PFObject?, error:NSError?) in
-            if error == nil
-            {
-                
-                let returnedobject:PFObject = tenseupdate!
-                let retunreddateofevent = returnedobject.objectForKey("dateofevent") as! String
-                print(retunreddateofevent)
-                
-            }
-        })
-    }
-}
 
 
 
