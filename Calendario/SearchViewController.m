@@ -292,7 +292,7 @@
         }
         
         //check if user is verified and display ribbon
-        BOOL verified = [user valueForKey:@"verifiedUser"];
+        BOOL verified = (BOOL)[user valueForKey:@"verifiedUser"];
         if (verified == true) {
             ribbonImage.hidden = NO;
         }

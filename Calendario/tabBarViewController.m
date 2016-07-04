@@ -82,7 +82,7 @@
                     NSInteger newNotifications = ([userData count] - badgeNum);
                     
                     // One or more notification(s) - show badge number.
-                    [thirdTab setBadgeValue:[NSString stringWithFormat:@"%lu", newNotifications]];
+                    [thirdTab setBadgeValue:[NSString stringWithFormat:@"%lu", (long)newNotifications]];
                 }
                 
                 else {

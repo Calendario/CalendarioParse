@@ -61,19 +61,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
     }
     
     @IBAction func openTos(sender: UIButton) {
-        
-        // Open the register view.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewC = storyboard.instantiateViewControllerWithIdentifier("tos") as! TosViewController
-        self.presentViewController(viewC, animated: true, completion: nil)
+        PresentingViews.ViewTermsOfService(self)
     }
     
     @IBAction func openPrivacyPolicy(sender: UIButton) {
-        
-        // Open the register view.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewC = storyboard.instantiateViewControllerWithIdentifier("privacypolicy") as! PrivacyPolicyViewController
-        self.presentViewController(viewC, animated: true, completion: nil)
+        PresentingViews.ViewPrivacyPolicy(self)
     }
     
     @IBAction func cancel(sender: UIButton) {

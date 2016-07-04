@@ -97,17 +97,19 @@ public class PresentingViews: NSObject {
     class func ViewTermsOfService(viewController: AnyObject) {
         
         // Open the terms of service view.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let termsofservice = sb.instantiateViewControllerWithIdentifier("tos") as! TosViewController
-        viewController.presentViewController(termsofservice, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewC = storyboard.instantiateViewControllerWithIdentifier("WebPage") as! WebPageViewController
+        viewC.passedURL = "http://calendario.co.uk/termsofuse.html"
+        viewController.presentViewController(viewC, animated: true, completion: nil)
     }
     
     class func ViewPrivacyPolicy(viewController: AnyObject) {
         
         // Open the privacy policy view.
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let privacypolicyVC = sb.instantiateViewControllerWithIdentifier("privacypolicy") as! PrivacyPolicyViewController
-        viewController.presentViewController(privacypolicyVC, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewC = storyboard.instantiateViewControllerWithIdentifier("WebPage") as! WebPageViewController
+        viewC.passedURL = "http://www.calendario.co.uk/privacypolicy.html"
+        viewController.presentViewController(viewC, animated: true, completion: nil)
     }
     
     class func presentNewsFeed(viewController: AnyObject) {

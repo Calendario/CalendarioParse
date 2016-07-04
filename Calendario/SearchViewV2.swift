@@ -20,7 +20,9 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
     @IBOutlet weak var titleLabelTwo: UILabel!
     @IBOutlet weak var noUsersLabel: UILabel!
     @IBOutlet weak var noEventsLabel: UILabel!
-    @IBOutlet weak var introSearchView: UIView!
+    var introSearchView: UIView!
+    var introSearchImage: UIImageView!
+    var introSearchLabel: UITextView!
     
     // Status update data array.
     var statusData:NSMutableArray = []
@@ -52,6 +54,28 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
     
     func setupUI() {
         
+        // Create and add the intro view to the search view.
+        self.introSearchView = UIView(frame: CGRectMake(0, (self.view.frame.size.height / 2), self.view.frame.size.width, 200))
+        self.view.addSubview(self.introSearchView)
+        self.introSearchLabel = UITextView(frame: CGRectMake((self.introSearchView.frame.origin.x / 2), 0, (self.introSearchView.frame.size.width - 14), 100))
+        self.introSearchView.addSubview(self.introSearchLabel)
+        self.introSearchLabel.text = "Search for users and events. Tap the filter button to set event filters."
+        self.introSearchLabel.textAlignment = NSTextAlignment.Center
+        self.introSearchLabel.editable = false
+        self.introSearchLabel.userInteractionEnabled = false
+        self.introSearchImage = UIImageView(frame:CGRectMake((self.introSearchView.bounds.width / 2) - 10, -50, 40, 40));
+        self.introSearchImage.image = UIImage(named: "searchTabLogo.png")
+        self.introSearchImage.contentMode = .ScaleAspectFit
+        self.introSearchView.addSubview(self.introSearchImage)
+        
+        // Set the various label fonts.
+        self.introSearchLabel.font = UIFont(name: "SFUIDisplay-Regular", size: 17)
+        self.titleLabelOne.font = UIFont(name: "SFUIDisplay-Regular", size: 17)
+        self.titleLabelTwo.font = UIFont(name: "SFUIDisplay-Regular", size: 17)
+        self.noUsersLabel.font = UIFont(name: "SFUIDisplay-Regular", size: 17)
+        self.noEventsLabel.font = UIFont(name: "SFUIDisplay-Regular", size: 17)
+        
+        // Set the various UI properties.
         self.userList.keyboardDismissMode = UIScrollViewKeyboardDismissMode.OnDrag
         self.eventList.keyboardDismissMode = UIScrollViewKeyboardDismissMode.OnDrag
         self.userList.backgroundColor = UIColor(red: 223.0/255, green: 223.0/255, blue: 223.0/255, alpha: 1.0)
@@ -337,6 +361,7 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         } else {
             self.introSearchView.hidden = false
             self.eventList.hidden = true
+            self.noEventsLabel.hidden = true
         }
     }
     
@@ -445,11 +470,6 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
                     
                     // Run UI Updates
                     cell.createdAtLabel.text = difference
-                    
-                    //let currentobjects = self.sortedArray[indexPath.row] as! PFObject
-                    //let dateofevent = currentobjects.objectForKey("dateofevent") as! String
-                    //let currentid = currentobjects.objectId!
-                    //tenseChanged(NSDate(), StatusObjectID: currentid, StatusDateofevent: dateofevent)
                 })
             }
         })
