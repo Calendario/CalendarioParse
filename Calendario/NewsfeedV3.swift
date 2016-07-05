@@ -45,25 +45,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         setupUI()
-        runIntroViewIfAppropriate()
         self.reloadNewsFeed()
-    }
-    
-    func runIntroViewIfAppropriate() {
-        
-        self.defaults = NSUserDefaults.standardUserDefaults()
-        let checkFreshInstall = defaults.objectForKey("freshCheck") as? Bool
-        
-        if ((checkFreshInstall == nil) || (checkFreshInstall == false)) {
-            
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let introView = sb.instantiateViewControllerWithIdentifier("IntroViewChild") as! IntrochildViewController
-            self.presentViewController(introView, animated: true, completion: {
-                
-                self.defaults.setObject(true, forKey: "freshCheck")
-                self.defaults.synchronize()
-            })
-        }
     }
     
     func setupUI() {
