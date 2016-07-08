@@ -278,8 +278,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
             
             // Get the current string.
             let data = userData[loop]
+
+            // Setup the data string check.
+            let dataCheck: String = data!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             
-            if (data == nil) {
+            // Ensure the string is not nill and
+            // actually contains multiple characters.
+            
+            if ((data == nil) || (dataCheck.characters.count <= 0)) {
                 
                 // Enable access to the UI and
                 // hide the loading indicator view.
@@ -338,9 +344,43 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UITextViewD
             
             else {
                 
-                // The data meets all the requirements
-                // go on to the actual registration.
-                registerUser()
+                // Setup the terms and conditions reminder alert.
+                let alertController = UIAlertController(title: "Terms of Service", message: "In order to use this service, you must first accept the Terms of Service.", preferredStyle: .ActionSheet)
+                
+                // Setup the alert actions.
+                let termsHandler = { (action:UIAlertAction!) -> Void in
+                    
+                    // Enable access to the UI and
+                    // hide the loading indicator view.
+                    self.changeUIAccess(true)
+                    
+                    // Show the Terms and Conditions view.
+                    PresentingViews.ViewTermsOfService(self)
+                }
+                let viewTandCs = UIAlertAction(title: "View Terms of Service", style: .Default, handler: termsHandler)
+                
+                let continueHandler = { (action:UIAlertAction!) -> Void in
+                    
+                    // The data meets all the requirements
+                    // go on to the actual registration.
+                    self.registerUser()
+                }
+                let accept = UIAlertAction(title: "Accept and Continue", style: .Default, handler: continueHandler)
+                
+                let cancelHandler = { (action:UIAlertAction!) -> Void in
+                    
+                    // Enable access to the UI and
+                    // hide the loading indicator view.
+                    self.changeUIAccess(true)
+                }
+                let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelHandler)
+                
+                alertController.addAction(viewTandCs)
+                alertController.addAction(accept)
+                alertController.addAction(cancel)
+                
+                // Present the alert on screen.
+                presentViewController(alertController, animated: true, completion: nil)
             }
         }
     }
