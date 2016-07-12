@@ -206,7 +206,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                                     let message = "\(PFUser.currentUser()!.username!) has commented on your post"
                                     
                                     // Send the notification.
-                                    PFCloud.callFunctionInBackground("comment", withParameters: ["message" : message, "user" : "\((object!.valueForKey("user") as! PFUser).username!)"])
+                                    PFCloud.callFunctionInBackground("comment", withParameters: ["message" : message, "user" : "\((object!.valueForKey("user") as! PFUser).objectId!)"])
 
                                     // Save the user notification.
                                     ManageUser.saveUserNotification(message, fromUser: PFUser.currentUser()!, toUser: object!.valueForKey("user") as! PFUser, extType: "comment", extObjectID: String(self.savedobjectID))

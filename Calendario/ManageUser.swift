@@ -211,7 +211,7 @@ var finalData:NSMutableArray = []
                                     let pushMessage = "\(PFUser.currentUser()!.username!) has followed you."
                                     
                                     // Submit the push notification.
-                                    PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage, "user" : "\(userData.username!)"])
+                                    PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage, "user" : "\(userData.objectId!)"])
                                     
                                     // Save the push notification string on the notification class.
                                     self.saveUserNotification(pushMessage, fromUser: PFUser.currentUser()!, toUser: userData, extType: "user", extObjectID: "n/a")
@@ -714,7 +714,7 @@ func FollowRequest(userData:PFUser, completion:(requestStatus: Bool) -> Void) {
                 let pushMessage = "\(PFUser.currentUser()!.username!) would like to follow you."
                 
                 // Submit the push notification.
-                PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage, "user" : "\(userData.username!)"])
+                PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage, "user" : "\(userData.objectId!)"])
                 
                 // Save the push notification string on the notification class.
                 ManageUser.saveUserNotification(pushMessage, fromUser: PFUser.currentUser()!, toUser: userData, extType: "user", extObjectID: "user")
