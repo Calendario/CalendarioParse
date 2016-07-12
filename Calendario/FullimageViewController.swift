@@ -29,6 +29,7 @@ class FullimageViewController: UIViewController, UIScrollViewDelegate {
         self.scrollView.minimumZoomScale = 1.0
         self.scrollView.maximumZoomScale = 6.0
         self.Image.image = passedImage
+        self.Image.contentMode = .ScaleAspectFit
         
         // Set the navigation bar properties.
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
