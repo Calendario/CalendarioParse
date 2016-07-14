@@ -66,11 +66,10 @@ public class PresentingViews: NSObject {
     }
     
     class func showPhotoViewer(viewController: AnyObject, userPostedImage: UIImageView) {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let PVC = sb.instantiateViewControllerWithIdentifier("photoViewer") as! FullimageViewController
-        PVC.passedImage = userPostedImage.image!
-        let NC = UINavigationController(rootViewController: PVC)
-        viewController.parentViewController!!.presentViewController(NC, animated: true, completion: nil)
+        let sb = UIStoryboard(name: "FullimageViewController", bundle: nil)
+        let photoView = sb.instantiateViewControllerWithIdentifier("photoViewer") as! FullimageViewController
+        photoView.passedImage = userPostedImage.image!
+        viewController.parentViewController!!.presentViewController(photoView, animated: true, completion: nil)
     }
     
     class func showLikesView(viewController: AnyObject) {

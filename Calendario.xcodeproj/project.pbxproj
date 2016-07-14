@@ -43,6 +43,7 @@
 		A26701F21C369D5B0041E1D1 /* ManageUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26701F11C369D5B0041E1D1 /* ManageUser.swift */; };
 		A28825F61BE3960500564EBF /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28825F51BE3960500564EBF /* MyProfileViewController.swift */; };
 		A29C2C051D21CC7E00C201FD /* SearchViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29C2C041D21CC7E00C201FD /* SearchViewV2.swift */; };
+		A2A7D75B1D37DC0E003BE0AF /* FullimageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2A7D75A1D37DC0E003BE0AF /* FullimageViewController.storyboard */; };
 		A2AE4A501BDCF7B8008E84B9 /* ToSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AE4A4F1BDCF7B8008E84B9 /* ToSViewController.swift */; };
 		A2AE4A521BDCF82F008E84B9 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AE4A511BDCF82F008E84B9 /* PrivacyPolicyViewController.swift */; };
 		A2C55BAC1BE7B77B00431EA0 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C55BAB1BE7B77B00431EA0 /* WebPageViewController.swift */; };
@@ -209,6 +210,7 @@
 		A26701F11C369D5B0041E1D1 /* ManageUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageUser.swift; sourceTree = "<group>"; };
 		A28825F51BE3960500564EBF /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		A29C2C041D21CC7E00C201FD /* SearchViewV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewV2.swift; sourceTree = "<group>"; };
+		A2A7D75A1D37DC0E003BE0AF /* FullimageViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FullimageViewController.storyboard; sourceTree = "<group>"; };
 		A2AE4A4F1BDCF7B8008E84B9 /* ToSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToSViewController.swift; sourceTree = "<group>"; };
 		A2AE4A511BDCF82F008E84B9 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		A2C55BAB1BE7B77B00431EA0 /* WebPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
@@ -602,6 +604,23 @@
 			name = "New search view";
 			sourceTree = "<group>";
 		};
+		A2A7D7591D37DBDB003BE0AF /* Full image viewer */ = {
+			isa = PBXGroup;
+			children = (
+				78971E781CA668730078CBDC /* FullimageViewController.swift */,
+				A2A7D75A1D37DC0E003BE0AF /* FullimageViewController.storyboard */,
+			);
+			name = "Full image viewer";
+			sourceTree = "<group>";
+		};
+		A2A7D75C1D37DD05003BE0AF /* Present View Class */ = {
+			isa = PBXGroup;
+			children = (
+				D3D9D7D71C9E2580000A2528 /* PresentingViews.swift */,
+			);
+			name = "Present View Class";
+			sourceTree = "<group>";
+		};
 		A2C55BAA1BE7B75000431EA0 /* Web Page Viewer */ = {
 			isa = PBXGroup;
 			children = (
@@ -613,7 +632,6 @@
 		A2E12C811BCE6E27007D8587 /* Login/Register/Other pages */ = {
 			isa = PBXGroup;
 			children = (
-				78971E781CA668730078CBDC /* FullimageViewController.swift */,
 				784E96151CA1857300085057 /* Intro Guide */,
 				A22038011C5D332F000080AC /* RecommendedUsersViewController.swift */,
 				A22038031C5D35FF000080AC /* RecommendedUsersCustomCell.swift */,
@@ -873,6 +891,8 @@
 		E2E0D7011BC9950800662E70 /* Calendario */ = {
 			isa = PBXGroup;
 			children = (
+				A2A7D75C1D37DD05003BE0AF /* Present View Class */,
+				A2A7D7591D37DBDB003BE0AF /* Full image viewer */,
 				D3D9D7D41C9E0B40000A2528 /* Services */,
 				A24DB1161C8F703C002D4897 /* Event View Classes/Views */,
 				A23457AC1C7B4A7F00376F2F /* Hashtag View */,
@@ -909,7 +929,6 @@
 				D3DE97741C80CBEB00F4DE7B /* San Francisco Fonts */,
 				D3DE97721C7FBA3300F4DE7B /* SignPainter-HouseScript.ttf */,
 				E2E0D7031BC9950800662E70 /* main.m */,
-				D3D9D7D71C9E2580000A2528 /* PresentingViews.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1121,6 +1140,7 @@
 				D3DE978F1C80CC0400F4DE7B /* SF-UI-Display-Regular.otf in Resources */,
 				E2E0D7121BC9950800662E70 /* LaunchScreen.storyboard in Resources */,
 				78CE15B81C95CE2F00257C4B /* followers-icon.png in Resources */,
+				A2A7D75B1D37DC0E003BE0AF /* FullimageViewController.storyboard in Resources */,
 				D3DE97981C80CC0400F4DE7B /* SF-UI-Text-LightItalic.otf in Resources */,
 				E2E0D70F1BC9950800662E70 /* Assets.xcassets in Resources */,
 				E2E0D70D1BC9950800662E70 /* Main.storyboard in Resources */,

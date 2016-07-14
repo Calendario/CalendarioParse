@@ -3449,62 +3449,6 @@
             </objects>
             <point key="canvasLocation" x="-134.5" y="3544.5"/>
         </scene>
-        <!--Fullimage View Controller-->
-        <scene sceneID="pWo-as-DaT">
-            <objects>
-                <viewController storyboardIdentifier="photoViewer" title="Fullimage View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WxQ-hD-bGj" customClass="FullimageViewController" customModule="Calendario" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="PEg-bm-XEd"/>
-                        <viewControllerLayoutGuide type="bottom" id="W6D-Nh-boD"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="DDm-Ms-AsX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zrL-Wd-MZt">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fv3-IZ-QjL">
-                                        <rect key="frame" x="0.0" y="83" width="375" height="490"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="375" id="udm-az-TvN"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="fv3-IZ-QjL" secondAttribute="bottom" constant="50" id="6tg-XT-Hwv"/>
-                                    <constraint firstItem="fv3-IZ-QjL" firstAttribute="top" secondItem="zrL-Wd-MZt" secondAttribute="top" constant="83" id="BWS-wj-FUW"/>
-                                    <constraint firstAttribute="trailing" secondItem="fv3-IZ-QjL" secondAttribute="trailing" id="CRQ-uh-trq"/>
-                                    <constraint firstItem="fv3-IZ-QjL" firstAttribute="centerY" secondItem="zrL-Wd-MZt" secondAttribute="centerY" constant="16.5" id="L9t-PU-O9f"/>
-                                    <constraint firstItem="fv3-IZ-QjL" firstAttribute="width" secondItem="zrL-Wd-MZt" secondAttribute="height" multiplier="100:100" id="Vxz-J7-u4s"/>
-                                    <constraint firstItem="fv3-IZ-QjL" firstAttribute="leading" secondItem="zrL-Wd-MZt" secondAttribute="leading" id="ZEN-Y9-hXN"/>
-                                    <constraint firstItem="fv3-IZ-QjL" firstAttribute="centerX" secondItem="zrL-Wd-MZt" secondAttribute="centerX" id="jKm-ON-57Y"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="delegate" destination="WxQ-hD-bGj" id="Ag9-Yx-1jN"/>
-                                </connections>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="W6D-Nh-boD" firstAttribute="top" secondItem="zrL-Wd-MZt" secondAttribute="bottom" id="9zE-E0-TID"/>
-                            <constraint firstItem="zrL-Wd-MZt" firstAttribute="leading" secondItem="DDm-Ms-AsX" secondAttribute="leading" id="GDQ-rx-dy3"/>
-                            <constraint firstItem="zrL-Wd-MZt" firstAttribute="top" secondItem="PEg-bm-XEd" secondAttribute="bottom" constant="-20" id="sdE-Lv-9fp"/>
-                            <constraint firstAttribute="trailing" secondItem="zrL-Wd-MZt" secondAttribute="trailing" id="yaX-I0-ggN"/>
-                        </constraints>
-                    </view>
-                    <toolbarItems/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <outlet property="Image" destination="fv3-IZ-QjL" id="auy-Yp-5bF"/>
-                        <outlet property="scrollView" destination="zrL-Wd-MZt" id="tUs-Xb-n6r"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="o9R-xi-bPj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-532.5" y="4267.5"/>
-        </scene>
         <!--Login View Controller-->
         <scene sceneID="vZk-wx-8V6">
             <objects>
@@ -5628,13 +5572,13 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                 </mask>
                                                             </variation>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVB-Xf-xKE">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVB-Xf-xKE">
                                                             <rect key="frame" x="31" y="4" width="9" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POSTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DS7-IM-sL7">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="POSTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DS7-IM-sL7">
                                                             <rect key="frame" x="46" y="4" width="45" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
