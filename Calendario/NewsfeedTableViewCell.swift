@@ -42,6 +42,10 @@ class NewsfeedTableViewCell: PFTableViewCell {
     //MARK: LIFECYCLE METHODS
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        // Hide the previous cell image.
+        self.profileimageview.image = nil
+        self.userPostedImage.image = nil
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -54,50 +58,50 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     override func layoutSubviews() {
         // Get the specific status object for this cell and call all needed methods.
-        setupUI()
-        createTenseAndDateLabel()
-        setLocationLabelAndCheckingContents()
-        checkForRsvpPrivacy()
-        getLikesData()
-        getRsvpData()
+        self.setupUI()
+        self.createTenseAndDateLabel()
+        self.setLocationLabelAndCheckingContents()
+        self.checkForRsvpPrivacy()
+        self.getLikesData()
+        self.getRsvpData()
     }
     
     func setupUI () {
         self.statusTextView.textColor = UIColor.darkGrayColor()
         
         // Setup the cell likes button.
-        likebutton.layer.cornerRadius = 2.0
-        likebutton.clipsToBounds = true
+        self.likebutton.layer.cornerRadius = 2.0
+        self.likebutton.clipsToBounds = true
         
         // Setup the RSVP button
-        rsvpButton.layer.cornerRadius = 4.0
-        rsvpButton.layer.borderWidth = 1.0
-        rsvpButton.layer.borderColor = UIColor.lightGrayColor().CGColor
-        rsvpButton.clipsToBounds = true
-        rsvpButton.backgroundColor = UIColor.whiteColor()
-        attendantContainerView.layer.cornerRadius = 2.0
-        attendantContainerView.clipsToBounds = true
+        self.rsvpButton.layer.cornerRadius = 4.0
+        self.rsvpButton.layer.borderWidth = 1.0
+        self.rsvpButton.layer.borderColor = UIColor.lightGrayColor().CGColor
+        self.rsvpButton.clipsToBounds = true
+        self.rsvpButton.backgroundColor = UIColor.whiteColor()
+        self.attendantContainerView.layer.cornerRadius = 2.0
+        self.attendantContainerView.clipsToBounds = true
         
         // Set the date label text font.
         self.uploaddatelabel.font = UIFont.systemFontOfSize(14)
         self.uploaddatelabel.textColor = UIColor.lightGrayColor()
         
         // Setup User Posted Image
-        userPostedImage.layer.cornerRadius = 2.0
-        userPostedImage.clipsToBounds = true
+        self.userPostedImage.layer.cornerRadius = 2.0
+        self.userPostedImage.clipsToBounds = true
         
         // Setup the profile Image
-        profileimageview.layer.cornerRadius = profileimageview.frame.height / 2
-        profileimageview.layer.borderColor = UIColor.whiteColor().CGColor
-        profileimageview.layer.borderWidth = 2.0
-        profileimageview.clipsToBounds = true
+        self.profileimageview.layer.cornerRadius = self.profileimageview.frame.height / 2
+        self.profileimageview.layer.borderColor = UIColor.whiteColor().CGColor
+        self.profileimageview.layer.borderWidth = 2.0
+        self.profileimageview.clipsToBounds = true
         
         // Setup the status labels.
         
-        if (passedInObject != nil) {
-            self.statusTextView.text = passedInObject["updatetext"] as? String
-            self.uploaddatelabel.text = passedInObject["dateofevent"] as? String
-            self.eventTitle.text = passedInObject["eventTitle"] as? String
+        if (self.passedInObject != nil) {
+            self.statusTextView.text = self.passedInObject["updatetext"] as? String
+            self.uploaddatelabel.text = self.passedInObject["dateofevent"] as? String
+            self.eventTitle.text = self.passedInObject["eventTitle"] as? String
             
             if (passedInObject.objectForKey("image") == nil) {
                 self.userPostedImage.image = nil
@@ -123,12 +127,12 @@ class NewsfeedTableViewCell: PFTableViewCell {
     }
     
     func setPostedImage(image : UIImage) {
-        userPostedImage.image = image
+        self.userPostedImage.image = image
     }
     
     func createTenseAndDateLabel() {
         
-        if (passedInObject != nil) {
+        if (self.passedInObject != nil) {
             
             // Create the tense/date all in one string.
             let dateOfPassedInEvent = self.passedInObject.objectForKey("dateofevent") as! String
@@ -138,8 +142,8 @@ class NewsfeedTableViewCell: PFTableViewCell {
             self.uploaddatelabel.text = fullDateTitle
             
             // Highlight the hashtags and @mentions.
-            checkForHashtagsAndHighlight()
-            checkForMentionsAndHighlight()
+            self.checkForHashtagsAndHighlight()
+            self.checkForMentionsAndHighlight()
         }
     }
     
@@ -179,15 +183,13 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     func setLocationLabelAndCheckingContents() {
         
-        if (passedInObject != nil) {
+        if (self.passedInObject != nil) {
             
-            let locationValue: String = passedInObject.objectForKey("location") as! String
+            let locationValue: String = self.passedInObject.objectForKey("location") as! String
             
             if locationValue == "tap to select location..." {
                 self.locationLabel.text = ""
-            }
-                
-            else {
+            } else {
                 self.locationLabel.text = locationValue
             }
         }
@@ -246,7 +248,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     func checkForRsvpPrivacy() {
         
-        if (passedInObject != nil) {
+        if (self.passedInObject != nil) {
             
             if passedInObject.valueForKey("privateRsvp") != nil {
                 let rsvpPrivate: Bool = passedInObject.valueForKey("privateRsvp") as! Bool
@@ -276,12 +278,10 @@ class NewsfeedTableViewCell: PFTableViewCell {
             
             if (likesArray.count == 1) {
                 self.likeslabel.text = "1"
-            }
-            else {
+            } else {
                 self.likeslabel.text = "\(likesArray.count)"
             }
-        }
-        else {
+        } else {
             self.likeslabel.text = "0"
         }
     }
@@ -309,8 +309,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
         if (rsvpArray.count > 0) {
             if (rsvpArray.count == 1) {
                 self.rsvpLabel.text = "1"
-            }
-            else {
+            } else {
                 self.rsvpLabel.text = "\(rsvpArray.count)"
             }
         }
@@ -326,8 +325,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
             // Submit and save the rsvp notification.
             let rsvpString = "\(PFUser.currentUser()!.username!) is attending your event"
             self.SavingNotifacations(rsvpString, objectID: objectId, notificationType:"rsvp")
-        }
-        else {
+        } else {
             self.rsvpButton.selected = false
         }
         
@@ -336,8 +334,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     func highlightLikedButton(likesArray: [String]) {
         if likesArray.contains(PFUser.currentUser()!.objectId!) {
             self.likebutton.backgroundColor = UIColor.whiteColor()
-        }
-        else {
+        } else {
             self.likebutton.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
         }
     }
@@ -346,13 +343,10 @@ class NewsfeedTableViewCell: PFTableViewCell {
         if (likesArray.count > 0) {
             if (likesArray.count == 1) {
                 self.likeslabel.text = "1"
-            }
-            else
-            {
+            } else {
                 self.likeslabel.text = "\(likesArray.count)"
             }
-        }
-        else {
+        } else {
             self.likeslabel.text = "0"
         }
     }
@@ -393,14 +387,12 @@ class NewsfeedTableViewCell: PFTableViewCell {
                 // The user has already liked the status
                 // so lets dislike the status update.
                 self.saveLikeForPost(currentObject, likePost: false)
-            }
-            else {
+            } else {
                 // The user has not liked the status
                 // so lets go ahead and like it.
                 self.saveLikeForPost(currentObject, likePost: true)
             }
-        }
-        else {
+        } else {
             // This status has zero likes so the logged
             // in user hasn't liked the post either so we
             // can go ahead and save the like for the user.
@@ -427,15 +419,13 @@ class NewsfeedTableViewCell: PFTableViewCell {
                 // The user has already liked the status
                 // so lets dislike the status update.
                 self.saveRsvpForPost(currentObject, rsvpPost: false)
-            }
-            else {
+            } else {
                 
                 // The user has not liked the status
                 // so lets go ahead and like it.
                 self.saveRsvpForPost(currentObject, rsvpPost: true)
             }
-        }
-        else {
+        } else {
             
             // This status has zero likes so the logged
             // in user hasn't liked the post either so we
@@ -466,7 +456,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
         }
     }
     
-    
     //MARK: SAVE DATA METHODS
     
     func saveLikeForPost(statusObject: PFObject, likePost: Bool) {
@@ -485,8 +474,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
                     
                     // Add the user to the post likes array.
                     object?.addUniqueObject(PFUser.currentUser()!.objectId!, forKey: "likesarray")
-                }
-                else {
+                } else {
                     
                     // Remove the user from the post likes array.
                     object?.removeObject(PFUser.currentUser()!.objectId!, forKey: "likesarray")
@@ -559,8 +547,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
                     
                     // Add the user to the post rsvp array.
                     object?.addUniqueObject(PFUser.currentUser()!.objectId!, forKey: "rsvpArray")
-                }
-                else {
+                } else {
                     // Remove the user from the post likes array.
                     object?.removeObject(PFUser.currentUser()!.objectId!, forKey: "rsvpArray")
                 }
@@ -587,22 +574,22 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     func getLikesData() {
         
-        if (passedInObject != nil) {
+        if (self.passedInObject != nil) {
             
-            let likesData:[String] = passedInObject.objectForKey("likesarray") as! Array
-            highlightLikedButton(likesData)
-            updateLikeCount(likesData)
+            let likesData:[String] = self.passedInObject.objectForKey("likesarray") as! Array
+            self.highlightLikedButton(likesData)
+            self.updateLikeCount(likesData)
         }
     }
     
     func getRsvpData() {
         
-        if (passedInObject != nil) {
+        if (self.passedInObject != nil) {
             
-            if passedInObject.objectForKey("rsvpArray") != nil {
-                rsvpArray = passedInObject.objectForKey("rsvpArray") as! Array
+            if self.passedInObject.objectForKey("rsvpArray") != nil {
+                self.rsvpArray = self.passedInObject.objectForKey("rsvpArray") as! Array
             }
-            self.updateRsvpLabel(passedInObject)
+            self.updateRsvpLabel(self.passedInObject)
         }
     }
     
@@ -621,13 +608,13 @@ class NewsfeedTableViewCell: PFTableViewCell {
     // like button container button action method
     
     @IBAction func Likebuttoncontaineraction(sender: AnyObject) {
-        likeClicked()
+        self.likeClicked()
     }
     
     // Attendants button container: button action method
     
     @IBAction func AttendantsListContainerInteraction(sender: AnyObject) {
-        PresentingViews.ViewAttendantsListView(parentViewController, eventID: passedInObject.objectId!)
+        PresentingViews.ViewAttendantsListView(parentViewController, eventID: self.passedInObject.objectId!)
     }
     
     // RSVP button container: button action method

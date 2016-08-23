@@ -59,7 +59,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     }
     
     func setNavigationBarProperties() {
-        let font = UIFont(name: "SignPainter-HouseScript", size: 30.0)
+        let font = UIFont.init(name: "SignPainter-HouseScript", size: 30.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName : font!, NSForegroundColorAttributeName : UIColor.whiteColor()]
         self.navigationController?.navigationBar.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         self.navigationController?.navigationBar.tintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
@@ -144,92 +144,33 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    func organizeNewsFeedData() {
-        
-        // Only sort the data if there are
-        // any status updates for the user.
-        
-        if (self.statusData.count > 0) {
-            
-            // Sort the status updates by the 'createdAt' date.
-            let newData:NSArray = (self.statusData.copy() as! NSArray).sortedArrayUsingComparator { (obj1, obj2) -> NSComparisonResult in
-                return ((obj2 as! PFObject).createdAt?.compare((obj1 as! PFObject).createdAt!))!
-            }
-            
-            // Save the sorted data to the mutable array.
-            sortedArray = NSMutableArray(array: newData)
-            
-            menuIndicatorActivity(false)
-            
-            // Reload the table view.
-            self.tableView.reloadData()
-        }
-            
-        else {
-            
-            menuIndicatorActivity(false)
-            // Show the no posts error message.
-            self.displayAlert("No posts", alertMessage: "An error has occurred, the newsfeed posts have not been loaded. Make sure you are following at least one person to view posts on the news feed.")
-        }
-    }
-    
-    
     //MARK: LOAD DATA METHODS
     func reloadNewsFeed() {
-        menuIndicatorActivity(true)
         
-        // Clear the status data array.
-        if (self.statusData.count > 0) {
-            self.statusData.removeAllObjects()
+        // Start the loading indicators.
+        self.menuIndicatorActivity(true)
+        
+        // Call the newsfeed cloud code method.
+        PFCloud.callFunctionInBackground("getUserNewsFeed", withParameters: ["user" : "\(PFUser.currentUser()!.objectId!)"]) {
+            (response: AnyObject?, error: NSError?) -> Void in
+            
+            // Stop the loading indicators.
+            self.menuIndicatorActivity(false)
+            
+            // Check for request errors first.
+            
+            if (error == nil) {
+                
+                // Save the sorted data to the mutable array.
+                self.sortedArray = NSMutableArray(array: (response as! NSArray))
+                
+                // Reload the table view.
+                self.tableView.reloadData()
+                
+            } else {
+                self.displayAlert("Error", alertMessage: (error?.localizedDescription)!)
+            }
         }
-        
-        // Download the user following data.
-        ManageUser.getUserFollowingList(PFUser.currentUser()!, withCurrentUser: true) { (userFollowing) -> Void in
-            
-            dispatch_async(dispatch_get_main_queue(),{
-                
-                if (userFollowing.count > 0) {
-                    
-                    self.followingData = userFollowing
-                    self.loadNewsFeedData(0)
-                }
-                    
-                else {
-                    self.menuIndicatorActivity(false)
-                    
-                    // Show the no posts error message.
-                    self.displayAlert("No posts", alertMessage: "You are not folowing anyone.")
-                }
-            })
-        }
-    }
-    
-    func loadNewsFeedData(currentPos: Int) {
-        
-        // Setup the status update query.
-        var query:PFQuery!
-        query = PFQuery(className:"StatusUpdate")
-        query.limit = 100
-        query.whereKey("user", equalTo: self.followingData[currentPos] as! PFUser)
-        
-        // Get the status update(s).
-        query.findObjectsInBackgroundWithBlock({ (statusUpdates, error) -> Void in
-            
-            if ((error == nil) && (statusUpdates?.count > 0)) {
-                
-                for loop in 0..<statusUpdates!.count {
-                    self.statusData.addObject(statusUpdates![loop])
-                }
-            }
-            
-            if ((currentPos + 1) < self.followingData.count) {
-                self.loadNewsFeedData(currentPos + 1)
-            }
-                
-            else {
-                self.organizeNewsFeedData()
-            }
-        })
     }
     
     //MARK: TABLEVIEW METHODS
@@ -257,7 +198,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         
         // Setup the table view custom cell.
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
-        
+                
         // Pass in the parent view controller.
         cell.parentViewController = self
         
