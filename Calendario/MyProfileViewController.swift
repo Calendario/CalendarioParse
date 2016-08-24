@@ -490,9 +490,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                     
                     if (self.privateCheck == true) {
                         self.statusLoadCheck = false
-                    }
-                        
-                    else {
+                    } else {
                         self.statusLoadCheck = true
                     }
                 }
@@ -529,9 +527,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         
         if (userWebsiteLink != nil) {
             self.profWeb.setTitle(userWebsiteLink, forState: UIControlState.Normal)
-        }
-            
-        else {
+        } else {
             self.profWeb.setTitle("No website set.", forState: UIControlState.Normal)
             self.profWeb.userInteractionEnabled = false
         }
@@ -547,9 +543,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             
             if (verify as! Bool == true) {
                 self.profVerified.alpha = 1.0
-            }
-                
-            else {
+            } else {
                 self.profVerified.alpha = 0.0
             }
         }
@@ -586,29 +580,8 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             }
         }
         
-        // Set the posts count label.
-        ManageUser.getUserPostCount(userData) { (result) -> Void in
-            
-            // Set the posts counter label.
-            self.profPosts.text = "\(result)"
-            
-            // Initialise the data array.
-            self.statusObjects = NSMutableArray()
-            
-            // Set the status check.
-            
-            if (result > 0) {
-                
-                // Load in the user status updates data.
-                self.loadUserStatusUpdate(userData)
-            }
-                
-            else {
-                
-                // Ensure the table view remains clear.
-                self.statusList.reloadData()
-            }
-        }
+        // Load in the user status updates data.
+        self.loadUserStatusUpdate(userData)
     }
     
     // Status updates data methods.
@@ -624,43 +597,28 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         
         if (self.statusLoadCheck == true) {
             
-            // Setup the user status update query.
-            var queryStatusUpdate:PFQuery!
-            queryStatusUpdate = PFQuery(className: "StatusUpdate")
-            queryStatusUpdate.orderByDescending("createdAt")
-            queryStatusUpdate.whereKey("user", equalTo: userData)
-            queryStatusUpdate.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            // Call the profile feed cloud code method.
+            PFCloud.callFunctionInBackground("getUserProfileFeed", withParameters: ["user" : "\(PFUser.currentUser()!.objectId!)"]) {
+                (response: AnyObject?, error: NSError?) -> Void in
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                // Check for request errors first.
+                
+                if (error == nil) {
                     
-                    if (error == nil) {
-                        
-                        // Set the posts counter label.
-                        self.profPosts.text = "\(objects!.count)"
-                        
-                        // Check if any objects matching
-                        // the passed in user are present.
-                        
-                        if (objects!.count > 0) {
-                            
-                            // Initialise the data array.
-                            self.statusObjects = NSMutableArray()
-                            
-                            // Save the status update data.
-                            
-                            for loop in 0..<objects!.count {
-                                self.statusObjects.addObject(objects![loop])
-                            }
-            
-                            // Reload the table view.
-                            self.statusList.reloadData()
-                        }
-                    }
-                })
+                    // Save the sorted data to the mutable array.
+                    self.statusObjects = NSMutableArray(array: (response as! NSArray))
+                    
+                    // Set the posts counter label.
+                    self.profPosts.text = "\(self.statusObjects.count)"
+                    
+                    // Reload the table view.
+                    self.statusList.reloadData()
+                    
+                } else {
+                    self.displayAlert("Error", alertMessage: (error?.localizedDescription)!)
+                }
             }
-        }
-            
-        else {
+        } else {
             
             // Reload the table view.
             self.statusList.reloadData()
@@ -677,9 +635,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         
         if (self.statusLoadCheck == true) {
             return statusObjects.count
-        }
-            
-        else {
+        } else {
             return 1
         }
     }
@@ -732,9 +688,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         
         if (self.statusLoadCheck == true) {
             return true
-        }
-            
-        else {
+        } else {
             return false
         }
     }

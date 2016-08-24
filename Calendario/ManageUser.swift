@@ -596,46 +596,6 @@ var finalData:NSMutableArray = []
     
     // User data count methods.
     
-    class func getUserPostCount(userData:PFUser, completion: (result: Int) -> Void) {
-        
-        // Get the user posts number count.
-        var queryPosts:PFQuery!
-        queryPosts = PFQuery(className: "StatusUpdate")
-        queryPosts.whereKey("user", equalTo: userData)
-        queryPosts.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            
-            // If an error has occured we will return 0 posts however 
-            // if no error is returned we will return the post count.
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                
-                if (error == nil) {
-                    
-                    // Check if any objects matching
-                    // the passed in user are present.
-                    
-                    if let objects = objects as [PFObject]! {
-                        
-                        // Get the posts count information.
-                        completion(result: objects.count)
-                    }
-                        
-                    else {
-                        
-                        // No posts have been found.
-                        completion(result: 0)
-                    }
-                }
-                    
-                else {
-                    
-                    // An error has occured return 0.
-                    completion(result: 0)
-                }
-            })
-        }
-    }
-    
     class func getFollowDataCount(userData: PFUser, completion:(countObject: PFObject) -> Void) {
         
         // Get the follower/following count for the user.
