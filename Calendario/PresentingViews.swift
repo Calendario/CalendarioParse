@@ -111,13 +111,15 @@ public class PresentingViews: NSObject {
         viewController.presentViewController(viewC, animated: true, completion: nil)
     }
     
-    class func presentNewsFeed(viewController: AnyObject) {
+    class func presentNewsFeed(viewController: AnyObject, completion:() -> Void) {
+        
         // Show the home view (news feed).
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let tabBarController: UITabBarController = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! tabBarViewController
         appDelegate.window.makeKeyAndVisible()
         appDelegate.window.rootViewController = tabBarController
+        completion()
     }
     
     class func ViewReportBug(viewController: AnyObject) {
@@ -135,6 +137,4 @@ public class PresentingViews: NSObject {
     //        let NC = UINavigationController(rootViewController: SMVC)
     //        viewController.presentViewController(NC, animated: true, completion: nil)
     //    }
-    
-    
 }

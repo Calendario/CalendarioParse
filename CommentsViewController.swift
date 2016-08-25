@@ -93,7 +93,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         let keyboardHeight = keyboardRectangle.height
         
         // Raise the comments container view.
-        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.2, delay: 0.0, options: [.CurveEaseOut, .AllowUserInteraction], animations: {
             self.commentsContainerView.transform = CGAffineTransformMakeTranslation(0.0, -keyboardHeight)
         }, completion:nil)
     }
@@ -104,7 +104,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         self.commentTextView.resignFirstResponder()
         
         // Lower the comments container view.
-        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.2, delay: 0.0, options: [.CurveEaseOut, .AllowUserInteraction], animations: {
             self.commentsContainerView.transform = CGAffineTransformMakeTranslation(0.0, 0.0)
         }, completion:nil)
     }

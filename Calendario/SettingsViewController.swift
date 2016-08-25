@@ -38,9 +38,10 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
                 PFInstallation.currentInstallation().saveInBackground()
                 
                 // Go back to the login view controller.
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let viewC = storyboard.instantiateViewControllerWithIdentifier("LoginPage") as! LoginViewController
-                self.presentViewController(viewC, animated: true, completion:nil)
+                let storyboard = UIStoryboard(name: "LoginSignUpUI", bundle: nil)
+                let loginView = storyboard.instantiateViewControllerWithIdentifier("SignUpLoginUI") as! AllInOneSignUpAndLoginViewController
+                loginView.transitionType = true
+                self.presentViewController(loginView, animated: true, completion:nil)
             }
                 
             else {

@@ -598,7 +598,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         if (self.statusLoadCheck == true) {
             
             // Call the profile feed cloud code method.
-            PFCloud.callFunctionInBackground("getUserProfileFeed", withParameters: ["user" : "\(PFUser.currentUser()!.objectId!)"]) {
+            PFCloud.callFunctionInBackground("getUserProfileFeed", withParameters: ["user" : "\(userData.objectId!)"]) {
                 (response: AnyObject?, error: NSError?) -> Void in
                 
                 // Check for request errors first.

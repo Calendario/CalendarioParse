@@ -6,26 +6,16 @@
 //  Copyright © 2015 Calendario. All rights reserved.
 //
 
-/*
-
-IMPORTANT NOTE
-
-THIS CODE HAS NOT BEEN FINISHED YET. I AM WORKING
-TO GET IT FINISHED IN MULTIPLE COMMITS. PLEASE LEAVE
-IT ALONE UNLESS YOU ABSOLUTELY HAVE TO CHANGE SOMETHING.
-
-THANKS - DANIEL SADJADIAN
-
-*/
-
 import UIKit
 import Parse
+import QuartzCore
 
 class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var emailIconImageView: UIImageView!
-    // Setup the user email field.
+    //MARK: UI OBJECTS.
     @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var emailBlockView: UIView!
+    @IBOutlet weak var resetButton: UIView!
     
     // Setup the alert bool check.
     var checkAlertAction = false
@@ -53,16 +43,14 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        // Curve the edges of the block views.
+        emailBlockView.layer.cornerRadius = 4
+        emailBlockView.clipsToBounds = true
+        resetButton.layer.cornerRadius = 4
+        resetButton.clipsToBounds = true
+        
         // Force open the keyboard.
         self.emailField.becomeFirstResponder()
-    }
-    
-    private func setRenderingModes() {
-        self.emailIconImageView.image = (emailIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate))!
-    }
-    
-    private func setIconColor() {
-        self.emailIconImageView.tintColor = UIColor(red: 163/255.0, green: 163/255.0, blue: 163/255.0, alpha: 1.0)
     }
     
     // Reset methods.
@@ -84,14 +72,14 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
                 if (success && (error == nil)) {
                     
                     self.checkAlertAction = true
-                    self.displayAlert("Success", alertMessage: "A password reset email has been sent to \(dataEmail)")
+                    self.displayAlert("Success", alertMessage: "A password reset email has been sent to \(dataEmail!)")
                 }
                     
                 else {
                     
                     self.emailField.becomeFirstResponder()
                     self.checkAlertAction = false
-                    self.displayAlert("Error", alertMessage: error!.userInfo["error"] as! String)
+                    self.displayAlert("Error", alertMessage: (error?.localizedDescription)!)
                 }
             })
         }
