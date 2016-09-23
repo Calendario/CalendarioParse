@@ -28,29 +28,29 @@ class LikesListViewController: UITableViewController {
         // Set the navigation bar properties.
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 35/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         self.navigationItem.title = "Likes"
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.isTranslucent = false
         let font = UIFont(name: "SFUIDisplay-Regular", size: 18)
-        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font!]
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: font!]
         self.navigationController!.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
 
         // Set the back button.
-        let button: UIButton = UIButton(type: UIButtonType.Custom)
-        button.setImage(UIImage(named: "back_button.png"), forState: UIControlState.Normal)
-        button.tintColor = UIColor.whiteColor()
-        button.addTarget(self, action: #selector(LikesListViewController.closeView), forControlEvents: UIControlEvents.TouchUpInside)
-        button.frame = CGRectMake(0, 0, 30, 30)
+        let button: UIButton = UIButton(type: UIButtonType.custom)
+        button.setImage(UIImage(named: "back_button.png"), for: UIControlState())
+        button.tintColor = UIColor.white
+        button.addTarget(self, action: #selector(LikesListViewController.closeView), for: UIControlEvents.touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.leftBarButtonItem = barButton
         
         // Link the pull to refresh to the refresh method.
-        menuIndicator.addTarget(self, action: #selector(LikesListViewController.loadLikesData), forControlEvents: .ValueChanged)
+        menuIndicator.addTarget(self, action: #selector(LikesListViewController.loadLikesData), for: .valueChanged)
         self.menuIndicator.beginRefreshing()
     }
     
     // View Did Appear method.
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         // Load in the user likes data.
@@ -64,15 +64,15 @@ class LikesListViewController: UITableViewController {
         self.menuIndicator.beginRefreshing()
         
         // Load in the recommended view controller state.
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let statusID = defaults.objectForKey("likesListID") as? String
+        let defaults = UserDefaults.standard
+        let statusID = defaults.object(forKey: "likesListID") as? String
         
         // Setup the likes query.
-        var queryLikes:PFQuery!
+        var queryLikes:PFQuery<PFObject>!
         queryLikes = PFQuery(className:"StatusUpdate")
         
         // Get the status likes array.
-        queryLikes.getObjectInBackgroundWithId(statusID!) { (object, error) -> Void in
+        queryLikes.getObjectInBackground(withId: statusID!) { (object, error) -> Void in
             
             self.menuIndicator.endRefreshing()
             
@@ -82,7 +82,7 @@ class LikesListViewController: UITableViewController {
             if ((error == nil) && (object != nil)) {
                 
                 // Save the status likes data.
-                self.likesData = object?.valueForKey("likesarray") as! NSArray
+                self.likesData = object?.value(forKey: "likesarray") as! NSArray
                 
                 // Update the table view.
                 self.tableView.reloadData()
@@ -90,7 +90,7 @@ class LikesListViewController: UITableViewController {
                 
             else {
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     var alertString = "The selected status update has not received any likes."
                     
@@ -99,14 +99,14 @@ class LikesListViewController: UITableViewController {
                     }
                     
                     // Setup the alert controller.
-                    let alertController = UIAlertController(title: "No Likes", message: alertString, preferredStyle: .Alert)
+                    let alertController = UIAlertController(title: "No Likes", message: alertString, preferredStyle: .alert)
                     
                     // Setup the alert actions.
-                    let cancel = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+                    let cancel = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
                     alertController.addAction(cancel)
                     
                     // Present the alert on screen.
-                    self.presentViewController(alertController, animated: true, completion: nil)
+                    self.present(alertController, animated: true, completion: nil)
                 })
             }
         }
@@ -114,34 +114,34 @@ class LikesListViewController: UITableViewController {
     
     // UITableView methods.
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.likesData.count
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 52
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // Setup the table view custom cell.
-        let cell = tableView.dequeueReusableCellWithIdentifier("likesCell", forIndexPath: indexPath) as! LikesCustomCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "likesCell", for: indexPath) as! LikesCustomCell
         
         // Turn the profile picture into a circle.
         cell.profileImageView.layer.cornerRadius = (cell.profileImageView.frame.size.width / 2)
         cell.profileImageView.clipsToBounds = true
         
         // Setup the user details query.
-        var findUser:PFQuery!
+        var findUser:PFQuery<PFObject>!
         findUser = PFUser.query()!
-        findUser.whereKey("objectId", equalTo: self.likesData.objectAtIndex(indexPath.row))
+        findUser.whereKey("objectId", equalTo: self.likesData.object(at: (indexPath as NSIndexPath).row))
         
         // Download the user detials.
-        findUser.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
+        findUser.findObjectsInBackground { (objects:[PFObject]?, error: Error?) in
             
             if let aobject = objects {
                 
@@ -157,14 +157,14 @@ class LikesListViewController: UITableViewController {
                 if let userImageFile = userObject!["profileImage"] {
                     
                     // Download the profile image.
-                    userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                    (userImageFile as AnyObject).getDataInBackground(block: { (imageData: Data?, error: Error?) in
                         
                         if ((error == nil) && (imageData != nil)) {
                             profileImage = UIImage(data: imageData!)
                         }
                         
                         cell.profileImageView.image = profileImage
-                    }
+                    })
                 } else {
                     cell.profileImageView.image = profileImage
                 }
@@ -177,7 +177,7 @@ class LikesListViewController: UITableViewController {
     // Other methods.
     
     func closeView() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

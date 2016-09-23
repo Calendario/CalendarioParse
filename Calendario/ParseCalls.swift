@@ -9,17 +9,17 @@
 import UIKit
 import Parse
 
-public class ParseCalls: NSObject {
+open class ParseCalls: NSObject {
     
-    class func findUserDetails(passedObject: PFObject, usernameLabel: UILabel, profileImageView: UIImageView) {
+    class func findUserDetails(_ passedObject: PFObject, usernameLabel: UILabel, profileImageView: UIImageView) {
         
         // Setup the user details query.
-        var findUser:PFQuery!
+        var findUser:PFQuery<PFObject>!
         findUser = PFUser.query()!
-        findUser.whereKey("objectId", equalTo: (passedObject.objectForKey("user")?.objectId)!)
+        findUser.whereKey("objectId", equalTo: ((passedObject.object(forKey: "user") as! PFObject).objectId)!)
         
-        // Download the user detials.
-        findUser.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
+        // Download the user details.
+        findUser.findObjectsInBackground { (objects:[PFObject]?, error: Error?) in
             
             if let aobject = objects {
                 
@@ -35,13 +35,13 @@ public class ParseCalls: NSObject {
                 if let userImageFile = userObject!["profileImage"] {
                     
                     // Download the profile image.
-                    userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                    (userImageFile as AnyObject).getDataInBackground(block: { (imageData: Data?, error: Error?) in
                         
                         if ((error == nil) && (imageData != nil)) {
                             profileImage = UIImage(data: imageData!)
                         }
                         profileImageView.image = profileImage
-                    }
+                    })
                 } else {
                     profileImageView.image = profileImage
                 }
@@ -49,9 +49,9 @@ public class ParseCalls: NSObject {
         }
     }
     
-    class func checkForUserPostedImage(imageView: UIImageView, passedObject: PFObject, cell: NewsfeedTableViewCell) {
+    class func checkForUserPostedImage(_ imageView: UIImageView, passedObject: PFObject, cell: NewsfeedTableViewCell) {
         
-        if (passedObject.objectForKey("image") == nil) {
+        if (passedObject.object(forKey: "image") == nil) {
             imageView.image = nil
             cell.userImageViewContainerHeightContstraint.constant = 0
             cell.layoutIfNeeded()
@@ -62,13 +62,13 @@ public class ParseCalls: NSObject {
             let statusImage = passedObject["image"] as! PFFile
             
             // Download the profile image.
-            statusImage.getDataInBackgroundWithBlock { (mediaData: NSData?, error: NSError?) -> Void in
+            statusImage.getDataInBackground(block: { (mediaData: Data?, error: Error?) in
                 
                 if ((error == nil) && (mediaData != nil)) {
                     imageView.image = UIImage(data: mediaData!)
                     cell.userImageViewContainerHeightContstraint.constant = 205
                 }
-                
+                    
                 else {
                     imageView.image = nil
                     cell.userImageViewContainerHeightContstraint.constant = 0
@@ -76,17 +76,17 @@ public class ParseCalls: NSObject {
                 
                 cell.layoutIfNeeded()
                 cell.updateConstraintsIfNeeded()
-            }
+            })
         }
     }
     
-    class func updateCommentsLabel(commentsLabel: UILabel, passedObject: PFObject) {
-        var commentsquery:PFQuery!
+    class func updateCommentsLabel(_ commentsLabel: UILabel, passedObject: PFObject) {
+        var commentsquery:PFQuery<PFObject>!
         commentsquery = PFQuery(className: "comment")
-        commentsquery.orderByAscending("createdAt")
+        commentsquery.order(byAscending: "createdAt")
         commentsquery.addAscendingOrder("updatedAt")
         commentsquery.whereKey("statusOBJID", equalTo: passedObject.objectId!)
-        commentsquery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+        commentsquery.findObjectsInBackground { (objects, error) -> Void in
             
             if (error == nil) {
                 

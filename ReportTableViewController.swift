@@ -33,15 +33,15 @@ class ReportTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.black
+        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha: 1)
         
         self.navigationItem.title = "Report Status"
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "SFUIDisplay-Regular", size: 18)!]
         
-        self.navigationItem.setLeftBarButtonItem(leftbutton, animated: true)
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationItem.setLeftBarButton(leftbutton, animated: true)
+        self.navigationController?.navigationBar.tintColor = UIColor.white
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,36 +51,36 @@ class ReportTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return reasonsarray.count
     }
 
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("DataCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DataCell", for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = reasonsarray[indexPath.row]
+        cell.textLabel?.text = reasonsarray[(indexPath as NSIndexPath).row]
 
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // get object id
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let repotedID =  defaults.objectForKey("reported")
+        let defaults = UserDefaults.standard
+        let repotedID =  defaults.object(forKey: "reported")
         
         
-        switch indexPath.row {
+        switch (indexPath as NSIndexPath).row {
             
             case 0: selectedreason = Reasons.Porn.rawValue
             
@@ -95,43 +95,44 @@ class ReportTableViewController: UITableViewController {
         }
         
         
-        var query:PFQuery!
+        var query:PFQuery<PFObject>!
         query = PFQuery(className: "StatusUpdate")
-        query.getObjectInBackgroundWithId(repotedID! as! String) { (statusupdate:PFObject?, error:NSError?) -> Void in
+        
+        query.getObjectInBackground(withId: repotedID! as! String) { (statusupdate: PFObject?, error: Error?) in
             
             if error == nil {
                 
                 statusupdate!["reported"] = true
-                statusupdate!["reportedby"] = PFUser.currentUser()
+                statusupdate!["reportedby"] = PFUser.current()
                 statusupdate!["reason"] = self.selectedreason
                 statusupdate?.saveInBackground()
                 
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             }
-            
+                
             else {
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     // Setup the alert controller.
-                    let alertController = UIAlertController(title: "Report Unsuccessful", message: "The status update has not been reported (\(error!.localizedDescription))", preferredStyle: .Alert)
+                    let alertController = UIAlertController(title: "Report Unsuccessful", message: "The status update has not been reported (\(error!.localizedDescription))", preferredStyle: .alert)
                     
                     // Setup the alert actions.
-                    let cancel = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+                    let cancel = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
                     alertController.addAction(cancel)
                     
                     // Present the alert on screen.
-                    self.presentViewController(alertController, animated: true, completion: nil)
+                    self.present(alertController, animated: true, completion: nil)
                 })
             }
         }
     }
     
-    @IBAction func leftButtonTapped(sender: AnyObject) {
+    @IBAction func leftButtonTapped(_ sender: AnyObject) {
         
         // Dismiss the view instead of going back to the news feed;
         // SeeMore/Report views are called by other controllers too.
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     /*

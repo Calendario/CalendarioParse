@@ -34,7 +34,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     // Image upload check.
     var imageCheck = false
     
-    let deafaults = NSUserDefaults()
+    let deafaults = UserDefaults()
     // tense
     var tensenum:Int!
     
@@ -59,33 +59,33 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     // location
     let locationManager = CLLocationManager()
-    var imagedata:NSData?
+    var imagedata:Data?
     var postingImage = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Allow the user to dismiss the keyboard with a toolabr.
-        let editToolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.frame.size.width, 50))
-        editToolbar.barStyle = UIBarStyle.Default
+        let editToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50))
+        editToolbar.barStyle = UIBarStyle.default
         
         editToolbar.items = [
-            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(StatusUpdateViewController.textViewDismissKeyboard))
+            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(StatusUpdateViewController.textViewDismissKeyboard))
         ]
         
         editToolbar.sizeToFit()
         self.statusUpdateTextField.inputAccessoryView = editToolbar
         self.eventTitle.inputAccessoryView = editToolbar
         
-        statusUpdateTextField.layer.borderColor = UIColor.blackColor().CGColor
+        statusUpdateTextField.layer.borderColor = UIColor.black.cgColor
         TenseControl.selectedSegmentIndex = 2
         
         // Do any additional setup after loading the view.
         statusUpdateTextField.delegate = self
-        dateLabel.hidden = false
-        datepicker.hidden = true
-        datePickerContainer.hidden = true
+        dateLabel.isHidden = false
+        datepicker.isHidden = true
+        datePickerContainer.isHidden = true
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
@@ -94,7 +94,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         self.datePickerContainer.layer.cornerRadius = 10.0
         self.datepicker.layer.cornerRadius = 10.0
         self.visualEffectView.layer.cornerRadius = 10.0
-        self.datePickerContainer.layer.borderColor = UIColor.lightGrayColor().CGColor
+        self.datePickerContainer.layer.borderColor = UIColor.lightGray.cgColor
         self.datePickerContainer.layer.borderWidth = 1.0
         self.datePickerContainer.layoutIfNeeded()
         
@@ -107,18 +107,18 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         let tapgesture = UITapGestureRecognizer(target: self, action: #selector(StatusUpdateViewController.DatePickerAppear))
         
-        dateLabel.userInteractionEnabled = true
+        dateLabel.isUserInteractionEnabled = true
         
         dateLabel.addGestureRecognizer(tapgesture)
         
         viewGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(StatusUpdateViewController.setDate))
         containerView.addGestureRecognizer(viewGestureRecognizer)
-        viewGestureRecognizer.enabled = false
+        viewGestureRecognizer.isEnabled = false
         
         
         locationtapReconizer = UITapGestureRecognizer(target: self, action: #selector(StatusUpdateViewController.LocationlabelTapped))
         
-        LocationLabel.userInteractionEnabled = true
+        LocationLabel.isUserInteractionEnabled = true
         
         LocationLabel.addGestureRecognizer(locationtapReconizer)
         
@@ -128,11 +128,11 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         view.addGestureRecognizer(tap)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
         deafaults.synchronize()
         
-        let location = deafaults.valueForKey("location") as? String
+        let location = deafaults.value(forKey: "location") as? String
         
         if location == nil
         {
@@ -153,78 +153,78 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
 
     func setDate()
     {
-        let dateformatter = NSDateFormatter()
-        dateformatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        let dateformatter = DateFormatter()
+        dateformatter.dateStyle = DateFormatter.Style.short
         dateformatter.dateFormat = "M/d/yy"
-        dateformatter.timeZone = NSTimeZone(abbreviation: "UTC")
+        dateformatter.timeZone = TimeZone(abbreviation: "UTC")
         
-        let dateformatter2 = NSDateFormatter()
-        dateformatter2.dateStyle = NSDateFormatterStyle.MediumStyle
-        dateformatter2.timeZone = NSTimeZone(abbreviation: "UTC")
+        let dateformatter2 = DateFormatter()
+        dateformatter2.dateStyle = DateFormatter.Style.medium
+        dateformatter2.timeZone = TimeZone(abbreviation: "UTC")
         
-        shortStyleDateToBeSaved = dateformatter.stringFromDate(datepicker.date)
+        shortStyleDateToBeSaved = dateformatter.string(from: datepicker.date)
         self.dateSetCheck = true
-        dateLabel.hidden = false
-        dateLabel.text = dateformatter2.stringFromDate(datepicker.date)
+        dateLabel.isHidden = false
+        dateLabel.text = dateformatter2.string(from: datepicker.date)
         print(dateLabel)
-        datepicker.hidden = true
-        datePickerContainer.hidden = true
-        dateLabel.textColor = UIColor.darkGrayColor()
+        datepicker.isHidden = true
+        datePickerContainer.isHidden = true
+        dateLabel.textColor = UIColor.darkGray
         
         changeSegmentControl(datepicker.date)
         
-        viewGestureRecognizer.enabled = false
+        viewGestureRecognizer.isEnabled = false
     }
     
-    func changeSegmentControl (dateSelected: NSDate) {
+    func changeSegmentControl (_ dateSelected: Date) {
         
-        let dateformatter = NSDateFormatter()
-        dateformatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        let dateformatter = DateFormatter()
+        dateformatter.dateStyle = DateFormatter.Style.medium
         dateformatter.dateFormat = "M/d/yy"
         
-        let timeFormatter = NSDateFormatter()
-        timeFormatter.dateStyle = NSDateFormatterStyle.LongStyle
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateStyle = DateFormatter.Style.long
         timeFormatter.dateFormat = "HH"
         
-        let currentDate = NSDate()
-        let currentDateString = dateformatter.stringFromDate(currentDate)
-        let currentTimeString = timeFormatter.stringFromDate(currentDate)
-        let dateSelectedString = dateformatter.stringFromDate(dateSelected)
-        let selectedTimeString = timeFormatter.stringFromDate(dateSelected)
+        let currentDate = Date()
+        let currentDateString = dateformatter.string(from: currentDate)
+        let currentTimeString = timeFormatter.string(from: currentDate)
+        let dateSelectedString = dateformatter.string(from: dateSelected)
+        let selectedTimeString = timeFormatter.string(from: dateSelected)
         
         if (currentDateString == dateSelectedString) && (currentTimeString == selectedTimeString) {
             TenseControl.selectedSegmentIndex = 2
         }
-        else if currentDate.compare(dateSelected) == NSComparisonResult.OrderedDescending {
+        else if currentDate.compare(dateSelected) == ComparisonResult.orderedDescending {
             TenseControl.selectedSegmentIndex = 1
         }
-        else if currentDate.compare(dateSelected) == NSComparisonResult.OrderedAscending{
+        else if currentDate.compare(dateSelected) == ComparisonResult.orderedAscending{
             TenseControl.selectedSegmentIndex = 0
         }
         
         tenseControlchanged()
     }
     
-    @IBAction func datePickerChanged(sender: AnyObject) {
+    @IBAction func datePickerChanged(_ sender: AnyObject) {
         changeSegmentControl(datepicker.date)
     }
     
     func DatePickerAppear()
     {
         // gesture reconizer for date picker
-        viewGestureRecognizer.enabled = true
+        viewGestureRecognizer.isEnabled = true
 
-        datepicker.hidden = false
-        dateLabel.hidden = true
-        datePickerContainer.hidden = false
+        datepicker.isHidden = false
+        dateLabel.isHidden = true
+        datePickerContainer.isHidden = false
     }
     
     func LocationlabelTapped()
     {
         //checkinbutton.hidden = false
         
-        let locationReference =  self.storyboard!.instantiateViewControllerWithIdentifier("LocationVC") as UIViewController!
-        self.presentViewController(locationReference, animated: true, completion: nil)
+        let locationReference =  self.storyboard!.instantiateViewController(withIdentifier: "LocationVC") as UIViewController!
+        self.present(locationReference!, animated: true, completion: nil)
     }
     
     func dismissKeyboard()
@@ -236,8 +236,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         // Get the latitude/longitude of the location
         // if one has been selected by the user.
-        let locationLatitude = deafaults.valueForKey("locationLat") as? Double
-        let locationLongitude = deafaults.valueForKey("locationLon") as? Double
+        let locationLatitude = deafaults.value(forKey: "locationLat") as? Double
+        let locationLongitude = deafaults.value(forKey: "locationLon") as? Double
         
         // Make sure the updatetext contains all
         // the @user mentions in lowercase.
@@ -250,7 +250,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 var statusupdatewithimage: PFObject!
                 statusupdatewithimage = PFObject(className: "StatusUpdate")
                 statusupdatewithimage["updatetext"] = correctString
-                statusupdatewithimage["user"] = PFUser.currentUser()
+                statusupdatewithimage["user"] = PFUser.current()
                 statusupdatewithimage["dateofevent"] = self.shortStyleDateToBeSaved
                 statusupdatewithimage["ID"] = Int(self.statusID)
                 statusupdatewithimage["tense"] = self.currenttense
@@ -259,15 +259,15 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 statusupdatewithimage["rsvpArray"] = []
                 statusupdatewithimage["eventTitle"] = self.eventTitle.text!
                 
-                if (self.rsvpSwitch.on == true) {
+                if (self.rsvpSwitch.isOn == true) {
                     statusupdatewithimage["privateRsvp"] = true
                 }
                     
-                else if (self.rsvpSwitch.on == false){
+                else if (self.rsvpSwitch.isOn == false){
                     statusupdatewithimage["privateRsvp"] = false
                 }
 
-                if ((self.LocationLabel.text?.containsString("tap to select location")) == false) {
+                if ((self.LocationLabel.text?.contains("tap to select location")) == false) {
                     let point = PFGeoPoint(latitude:locationLatitude!, longitude:locationLongitude!)
                     statusupdatewithimage["placeGeoPoint"] = point
                 }
@@ -277,7 +277,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 let imagefile = PFFile(name: "image.jpg", data: self.imagedata!)
                 statusupdatewithimage["image"] = imagefile!
                 // saves object in background
-                statusupdatewithimage.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+                
+                statusupdatewithimage.saveInBackground(block: { (success: Bool, error: Error?) in
                     
                     if success {
                         print("Update saved")
@@ -287,7 +288,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                         // prints error
                         print(error?.localizedDescription)
                     }
-                }
+                })
             }
                 
             else {
@@ -295,7 +296,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 var statusupdate: PFObject!
                 statusupdate = PFObject(className: "StatusUpdate")
                 statusupdate["updatetext"] = correctString
-                statusupdate["user"] = PFUser.currentUser()
+                statusupdate["user"] = PFUser.current()
                 statusupdate["dateofevent"] = self.shortStyleDateToBeSaved
                 statusupdate["ID"] = Int(self.statusID)
                 statusupdate["tense"] = self.currenttense
@@ -304,30 +305,31 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 statusupdate["rsvpArray"] = []
                 statusupdate["eventTitle"] = self.eventTitle.text!
                 
-                if (self.rsvpSwitch.on == true) {
+                if (self.rsvpSwitch.isOn == true) {
                     statusupdate["privateRsvp"] = true
                 }
                     
-                else if (self.rsvpSwitch.on == false){
+                else if (self.rsvpSwitch.isOn == false){
                     statusupdate["privateRsvp"] = false
                 }
                 
-                if ((self.LocationLabel.text?.containsString("tap to select location")) == false) {
+                if ((self.LocationLabel.text?.contains("tap to select location")) == false) {
                     let point = PFGeoPoint(latitude:locationLatitude!, longitude:locationLongitude!)
                     statusupdate["placeGeoPoint"] = point
                 }
-                                
-                statusupdate.saveInBackgroundWithBlock { (success:Bool, error:NSError?) -> Void in
+                
+                
+                statusupdate.saveInBackground(block: { (success: Bool, error: Error?) in
                     
                     if success {
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        self.dismiss(animated: true, completion: nil)
                     }
                         
                     else {
                         // prints error
                         print(error?.localizedDescription)
                     }
-                }
+                })
             }
         })
     }
@@ -359,80 +361,80 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     // posts update
     
-    @IBAction func PostTapped(sender: AnyObject) {
+    @IBAction func PostTapped(_ sender: AnyObject) {
         
         if ((statusUpdateTextField.text.isEmpty) || (self.dateSetCheck == false)) {
-            let reportalert = UIAlertController(title: "Error", message: "You must enter a status update and valid event date.", preferredStyle: .Alert)
-            let next = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            let reportalert = UIAlertController(title: "Error", message: "You must enter a status update and valid event date.", preferredStyle: .alert)
+            let next = UIAlertAction(title: "OK", style: .default, handler: nil)
             reportalert.addAction(next)
             
-            self.presentViewController(reportalert, animated: true, completion: nil)
+            self.present(reportalert, animated: true, completion: nil)
         } else {
             self.textViewDismissKeyboard()
             PostStatusUpdate()
             GotoNewsfeed()
             
             //reset userDefaults
-            deafaults.removeObjectForKey("location")
+            deafaults.removeObject(forKey: "location")
             deafaults.synchronize()
         }
     }
     
-    @IBAction func backbuttonTapped(sender: AnyObject) {
+    @IBAction func backbuttonTapped(_ sender: AnyObject) {
         self.textViewDismissKeyboard()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         self.view.endEditing(true)
     }
 
     // camera controls
     
-    @IBAction func CameraTapped(sender: AnyObject) {
+    @IBAction func CameraTapped(_ sender: AnyObject) {
         let camera = UIImagePickerController()
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        DispatchQueue.main.async { () -> Void in
             camera.delegate = self
-            camera.sourceType = UIImagePickerControllerSourceType.Camera
+            camera.sourceType = UIImagePickerControllerSourceType.camera
             camera.allowsEditing = false
-            self.presentViewController(camera, animated: true, completion: nil)
+            self.present(camera, animated: true, completion: nil)
         }
     }
     
-    @IBAction func VideoTapped(sender: AnyObject) {
+    @IBAction func VideoTapped(_ sender: AnyObject) {
         var photo:UIImagePickerController!
         photo = UIImagePickerController()
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             photo.delegate = self
-            photo.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            photo.sourceType = UIImagePickerControllerSourceType.photoLibrary
             photo.allowsEditing = false
-            self.presentViewController(photo, animated: true, completion: nil)
+            self.present(photo, animated: true, completion: nil)
         }
     }
 
     // UITextfield delegate methods
     
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newLength:Int = (statusUpdateTextField.text as NSString).length + (text as NSString).length - range.length
         let remainingchars:Int = 400 - newLength
         charlabel.text = "\(remainingchars)"
         return (newLength > 400) ? false:true
     }
     
-    func textViewDidBeginEditing(textView: UITextView) {
-        self.placeholderLabel.hidden = true
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.placeholderLabel.isHidden = true
     }
     
     func GotoNewsfeed() {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let tabBarController: UITabBarController = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! tabBarViewController
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let tabBarController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "tabBar") as! tabBarViewController
         appDelegate.window.makeKeyAndVisible()
         appDelegate.window.rootViewController = tabBarController
     }
     
     // image picker delegate methods
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        self.dismiss(animated: true, completion: nil)
         statusImageview?.image = image
         statusImageview!.layer.cornerRadius = 4.0
         statusImageview!.clipsToBounds = true

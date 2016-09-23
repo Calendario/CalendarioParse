@@ -46,11 +46,11 @@ class SearchUserCell: UICollectionViewCell {
         self.userProfilePicture.layer.cornerRadius = (self.userProfilePicture.frame.size.width / 2)
         self.userProfilePicture.clipsToBounds = true
         self.userProfilePicture.layer.borderWidth = 1.0
-        self.userProfilePicture.layer.borderColor = UIColor.clearColor().CGColor
+        self.userProfilePicture.layer.borderColor = UIColor.clear.cgColor
         
         // Set the name label font.
         self.nameLabel.font = UIFont(name: "SFUIDisplay-Regular", size: 18)
-        self.nameLabel.textColor = UIColor.blackColor()
+        self.nameLabel.textColor = UIColor.black
     }
     
     func setUserDetails() {
@@ -67,13 +67,13 @@ class SearchUserCell: UICollectionViewCell {
             if let userImageFile = self.passedInUser!["profileImage"] {
                 
                 // Download the profile image.
-                userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                (userImageFile as AnyObject).getDataInBackground(block: { (imageData: Data?, error: Error?) in
                     
                     if ((error == nil) && (imageData != nil)) {
                         profileImage = UIImage(data: imageData!)
                     }
                     self.userProfilePicture.image = profileImage
-                }
+                })
             } else {
                 self.userProfilePicture.image = profileImage
             }

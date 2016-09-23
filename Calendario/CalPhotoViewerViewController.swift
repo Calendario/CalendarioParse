@@ -17,15 +17,15 @@ class CalPhotoViewerViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.setLeftBarButtonItem(closeButton, animated: true)
+        self.navigationItem.setLeftBarButton(closeButton, animated: true)
         self.navigationController?.hidesBarsOnTap = true
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.17, green: 0.58, blue: 0.38, alpha: 1.0)
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.white
       
         // Do any additional setup after loading the view.
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let imagedata:NSData = defaults.objectForKey("image") as! NSData
+        let defaults = UserDefaults.standard
+        let imagedata:Data = defaults.object(forKey: "image") as! Data
         let image = UIImage(data: imagedata)
         var finalimage = UIImage()
         
@@ -37,12 +37,12 @@ class CalPhotoViewerViewController: UIViewController, UIScrollViewDelegate {
         
         //Imageview.image = image
         
-        Imageview.contentMode = .ScaleAspectFit
-        Imageview.transform = CGAffineTransformMakeScale(1.0, -1.0)
+        Imageview.contentMode = .scaleAspectFit
+        Imageview.transform = CGAffineTransform(scaleX: 1.0, y: -1.0)
         
         //roatateImage(image!)
         
-        let flipped = UIImage(CGImage: image!.CGImage!, scale: image!.scale, orientation: UIImageOrientation.DownMirrored)
+        let flipped = UIImage(cgImage: image!.cgImage!, scale: image!.scale, orientation: UIImageOrientation.downMirrored)
         finalimage = flipped
         
         Imageview.image = finalimage
@@ -55,22 +55,22 @@ class CalPhotoViewerViewController: UIViewController, UIScrollViewDelegate {
     
     func addBlur()
     {
-        let blureffect = UIBlurEffect(style: .Light)
+        let blureffect = UIBlurEffect(style: .light)
         var blureffectview:UIVisualEffectView!
         blureffectview = UIVisualEffectView(effect: blureffect)
         blureffectview.frame = view.bounds
-        blureffectview.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        blureffectview.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blureffectview)
         blureffectview.addSubview(scrollview)
     }
     
-    func roatateImage(image:UIImage) -> UIImage {
+    func roatateImage(_ image:UIImage) -> UIImage {
         
         var finalimage = UIImage()
         
         if image.imageOrientation.hashValue == 0 {
             
-            let flipped = UIImage(CGImage: image.CGImage!, scale: image.scale, orientation: UIImageOrientation.DownMirrored)
+            let flipped = UIImage(cgImage: image.cgImage!, scale: image.scale, orientation: UIImageOrientation.downMirrored)
             finalimage = flipped
         } else {
             print(image.imageOrientation.hashValue)
@@ -79,36 +79,36 @@ class CalPhotoViewerViewController: UIViewController, UIScrollViewDelegate {
         return finalimage
     }
     
-    @IBAction func CloseButton(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func CloseButton(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         
         var image:UIImageView!
         image = self.Imageview
         
-        image.transform = CGAffineTransformMakeScale(1.0, -1.0)
+        image.transform = CGAffineTransform(scaleX: 1.0, y: -1.0)
         
-        let flipped = UIImage(CGImage: image.image!.CGImage!, scale: image.image!.scale, orientation: UIImageOrientation.DownMirrored)
+        let flipped = UIImage(cgImage: image.image!.cgImage!, scale: image.image!.scale, orientation: UIImageOrientation.downMirrored)
         image.image = flipped
         
         return image
     }
     
-    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        self.scrollview.scrollEnabled = false
+    override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+        self.scrollview.isScrollEnabled = false
     }
     
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        self.scrollview.scrollEnabled = false
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        self.scrollview.isScrollEnabled = false
     }
  
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.All
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.all
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollView.zoomScale = 1
     }
 }

@@ -19,15 +19,15 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     var sortedArray:NSMutableArray = []
     
     //Create Defaults
-    var defaults: NSUserDefaults!
+    var defaults: UserDefaults!
     
     // Setup the on screen UI objects.
     @IBOutlet weak var menuIndicator: UIRefreshControl!
     
-    @IBAction func createStatus(sender: UIBarButtonItem) {
+    @IBAction func createStatus(_ sender: UIBarButtonItem) {
         showStatusPostView()
     }
-    @IBAction func presentSearchController(sender: UIBarButtonItem) {
+    @IBAction func presentSearchController(_ sender: UIBarButtonItem) {
         PresentingViews.ViewSearchController(self)
     }
     
@@ -42,7 +42,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         self.tableView.contentInset = UIEdgeInsetsMake(((self.navigationController?.navigationBar.frame.height)! + 15), 0, 44, 0)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupUI()
         self.reloadNewsFeed()
@@ -55,51 +55,51 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     }
     
     func setStatusBarProperties() {
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
     }
     
     func setNavigationBarProperties() {
         let font = UIFont.init(name: "SignPainter-HouseScript", size: 30.0)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName : font!, NSForegroundColorAttributeName : UIColor.whiteColor()]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName : font!, NSForegroundColorAttributeName : UIColor.white]
         self.navigationController?.navigationBar.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         self.navigationController?.navigationBar.tintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.isTranslucent = false
         
         let image = UIImage()
         self.navigationController?.navigationBar.shadowImage = image
-        self.navigationController?.navigationBar.setBackgroundImage(image, forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
     }
     
     func setTableViewProperties() {
-        self.tableView.separatorInset = UIEdgeInsetsZero
+        self.tableView.separatorInset = UIEdgeInsets.zero
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.sectionHeaderHeight = 0
         self.tableView.sectionFooterHeight = 0
-        self.tableView.separatorColor = UIColor.clearColor()
+        self.tableView.separatorColor = UIColor.clear
     }
     
     func setHashtagDefaultKey() {
-        defaults.setObject(([1, "#test"]) as NSMutableArray, forKey: "HashtagData")
+        defaults.set(([1, "#test"]) as NSMutableArray, forKey: "HashtagData")
         defaults.synchronize()
     }
     
     func showStatusPostView() {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let postsview = sb.instantiateViewControllerWithIdentifier("PostView") as! StatusUpdateViewController
-        self.presentViewController(postsview, animated: true, completion: nil)
+        let postsview = sb.instantiateViewController(withIdentifier: "PostView") as! StatusUpdateViewController
+        self.present(postsview, animated: true, completion: nil)
     }
     
     func setActivityIndicatorForRefreshing() {
         // Link the pull to refresh to the refresh method.
-        menuIndicator.addTarget(self, action: #selector(NewsfeedV3.reloadNewsFeed), forControlEvents: .ValueChanged)
+        menuIndicator.addTarget(self, action: #selector(NewsfeedV3.reloadNewsFeed), for: .valueChanged)
         menuIndicatorActivity(true)
     }
     
     func checkForNewUser() -> Bool {
-        self.defaults = NSUserDefaults.standardUserDefaults()
-        let showRecommendations = defaults.objectForKey("recoCheck") as? Bool
+        self.defaults = UserDefaults.standard
+        let showRecommendations = defaults.object(forKey: "recoCheck") as? Bool
         
         if (showRecommendations == true) {
             return true
@@ -109,34 +109,34 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    func showRecommendedUsers(show: Bool) {
+    func showRecommendedUsers(_ show: Bool) {
         if show {
             // Open the user recommendations view.
             let sb = UIStoryboard(name: "Main", bundle: nil)
-            let postsview = sb.instantiateViewControllerWithIdentifier("recommend") as! RecommendedUsersViewController
-            self.presentViewController(postsview, animated: true, completion:{
+            let postsview = sb.instantiateViewController(withIdentifier: "recommend") as! RecommendedUsersViewController
+            self.present(postsview, animated: true, completion:{
                 
                 // Make sure the view does not appear every time.
-                self.defaults.setObject(false, forKey: "recoCheck")
+                self.defaults.set(false, forKey: "recoCheck")
                 self.defaults.synchronize()
             })
         }
     }
     
-    func displayAlert(alertTitle: String, alertMessage: String) {
+    func displayAlert(_ alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
-        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         // Setup the alert actions.
-        let cancel = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+        let cancel = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
         alertController.addAction(cancel)
         
         // Present the alert on screen.
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
-    func menuIndicatorActivity(start: Bool) {
+    func menuIndicatorActivity(_ start: Bool) {
         if start == true {
             self.menuIndicator.beginRefreshing()
         } else {
@@ -151,8 +151,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         self.menuIndicatorActivity(true)
         
         // Call the newsfeed cloud code method.
-        PFCloud.callFunctionInBackground("getUserNewsFeed", withParameters: ["user" : "\(PFUser.currentUser()!.objectId!)"]) {
-            (response: AnyObject?, error: NSError?) -> Void in
+        PFCloud.callFunction(inBackground: "getUserNewsFeed", withParameters: ["user" : "\(PFUser.current()!.objectId!)"]) { (response: Any?, error: Error?) in
             
             // Stop the loading indicators.
             self.menuIndicatorActivity(false)
@@ -174,49 +173,49 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     }
     
     //MARK: TABLEVIEW METHODS
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.sortedArray.count
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return nil
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 511.0
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // Setup the table view custom cell.
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NewsfeedTableViewCell
                 
         // Pass in the parent view controller.
         cell.parentViewController = self
         
         // Get the specific status object for this cell and call all needed methods.
-        cell.passedInObject = self.sortedArray[indexPath.row] as! PFObject
+        cell.passedInObject = self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject
         
-        ParseCalls.findUserDetails(self.sortedArray[indexPath.row] as! PFObject, usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
+        ParseCalls.findUserDetails(self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
         
-        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[indexPath.row] as! PFObject, cell: cell)
+        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, cell: cell)
         
-        ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.sortedArray[indexPath.row] as! PFObject)
+        ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject)
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {() -> Void in
+        DispatchQueue.global(qos: .background).async {
             
             // Background Thread
-            DateManager.createDateDifferenceString((self.sortedArray[indexPath.row] as! PFObject).createdAt!) { (difference) -> Void in
+            DateManager.createDateDifferenceString((self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject).createdAt!) { (difference) -> Void in
                 
-                dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                DispatchQueue.main.async(execute: {() -> Void in
                     
                     // Run UI Updates
                     cell.createdAtLabel.text = difference
@@ -226,28 +225,29 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                     //let currentid = currentobjects.objectId!
                 })
             }
-        })
+        }
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         // Get the current status update.
-        let statusupdate:PFObject = self.sortedArray.objectAtIndex(indexPath.row) as! PFObject
+        let statusupdate:PFObject = self.sortedArray.object(at: (indexPath as NSIndexPath).row) as! PFObject
         
         // Setup the report status button.
         var report:UITableViewRowAction!
-        report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
+        report = UITableViewRowAction(style: .normal, title: "Report") { (action, index) -> Void in
             
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setObject(statusupdate.objectId, forKey: "reported")
+            let defaults = UserDefaults.standard
+            defaults.set(statusupdate.objectId, forKey: "reported")
             PresentingViews.ReportView(self)
             
-            var reportquery:PFQuery!
+            var reportquery:PFQuery<PFObject>!
             reportquery = PFQuery(className: "StatusUpdate")
-            reportquery.whereKey("updatetext", equalTo: statusupdate.objectForKey("updatetext")!)
-            reportquery.findObjectsInBackgroundWithBlock({ (objects:[PFObject]?, error:NSError?) -> Void in
+            reportquery.whereKey("updatetext", equalTo: statusupdate.object(forKey: "updatetext")!)
+            
+            reportquery.findObjectsInBackground(block: { (objects:[PFObject]?, error: Error?) in
                 
                 if error == nil {
                     
@@ -258,9 +258,10 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                             reportedID = object.objectId
                         }
                         
-                        var reportstatus:PFQuery!
+                        var reportstatus:PFQuery<PFObject>!
                         reportstatus = PFQuery(className: "StatusUpdate")
-                        reportstatus.getObjectInBackgroundWithId(reportedID, block: { (status:PFObject?, error:NSError?) -> Void in
+                        
+                        reportstatus.getObjectInBackground(withId: reportedID, block: { (status: PFObject?, error: Error?) in
                             
                             if (error == nil) {
                                 
@@ -288,42 +289,42 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         // WILL BE ADDED IN FUTURE APP UPDATES //
         
         // Setup the delete status button.
-        let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in
+        let deletestatus = UITableViewRowAction(style: .normal, title: "Delete") { (actiom, indexPath) -> Void in
             
-            var query:PFQuery!
+            var query:PFQuery<PFObject>!
             query = PFQuery(className: "StatusUpdate")
             query.includeKey("user")
             query.whereKey("objectId", equalTo: statusupdate.objectId!)
-            query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+            query.findObjectsInBackground(block: { (objects, error) -> Void in
                 
                 if (error == nil) {
                     
                     for object in objects! {
                         
-                        let userstr = object["user"]?.username!
+                        let userstr = (object["user"] as AnyObject).username!
                         
-                        if (userstr == PFUser.currentUser()?.username) {
+                        if (userstr == PFUser.current()?.username) {
                             
-                            statusupdate.deleteInBackgroundWithBlock({ (success, error) -> Void in
+                            statusupdate.deleteInBackground(block: { (success, error) -> Void in
                                 
                                 if (success) {
                                     
                                     // Remove the status update from the array.
-                                    self.sortedArray.removeObjectAtIndex(indexPath.row)
+                                    self.sortedArray.removeObject(at: (indexPath as NSIndexPath).row)
                                     
                                     // Remove the cell from the table view.
-                                    self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                                    self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
                                 }
                             })
                         }
                             
                         else {
-                            let alert = UIAlertController(title: "Error", message: "You can only delete your own posts.", preferredStyle: .Alert)
-                            alert.view.tintColor = UIColor.flatGreenColor()
-                            let next = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+                            let alert = UIAlertController(title: "Error", message: "You can only delete your own posts.", preferredStyle: .alert)
+                            alert.view.tintColor = UIColor.flatGreen()
+                            let next = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
                             alert.addAction(next)
                             
-                            self.presentViewController(alert, animated: true, completion: nil)
+                            self.present(alert, animated: true, completion: nil)
                         }
                     }
                 }
@@ -338,7 +339,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         // Only show the delete button if the status
         // belongs to the currently logged in user.
         
-        if ((statusupdate.objectForKey("user") as! PFUser!).objectId! == PFUser.currentUser()?.objectId!) {
+        if ((statusupdate.object(forKey: "user") as! PFUser!).objectId! == PFUser.current()?.objectId!) {
             
             // For V1.0 we will not be adding access to
             // the "See More" section as it is not needed.

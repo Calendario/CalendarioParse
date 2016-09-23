@@ -19,8 +19,8 @@ class FullimageViewController: UIViewController, UIScrollViewDelegate {
     
     //MARK: BUTTONS.
     
-    @IBAction func BackButtontapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func BackButtontapped(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     //MARK: VIEW DID LOAD.
@@ -40,7 +40,7 @@ class FullimageViewController: UIViewController, UIScrollViewDelegate {
         
         // Setup the image view.
         self.Image.image = passedImage
-        self.Image.contentMode = .ScaleAspectFit
+        self.Image.contentMode = .scaleAspectFit
     }
     
     //MARK: OTHER METHODS.
@@ -52,7 +52,7 @@ class FullimageViewController: UIViewController, UIScrollViewDelegate {
     
     //MARK: SCROLLVIEW DELEGATE METHODS.
     
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.Image
     }
 }

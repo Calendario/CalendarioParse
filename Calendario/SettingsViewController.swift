@@ -19,14 +19,14 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
     
     // Setup the on screen button actions.
     
-    @IBAction func goBack(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func goBack(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func signOutUser(sender: UIButton) {
+    @IBAction func signOutUser(_ sender: UIButton) {
         
         // Log the user out of Calendario.
-        PFUser.logOutInBackgroundWithBlock { (error) -> Void in
+        PFUser.logOutInBackground { (error) -> Void in
             
             // Check if the log out has
             // been completed or not.
@@ -34,20 +34,20 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
             if (error == nil) {
                 
                 // Remove the push notifications channel.
-                PFInstallation.currentInstallation().removeObjectForKey("user")
-                PFInstallation.currentInstallation().saveInBackground()
+                PFInstallation.current().remove(forKey: "user")
+                PFInstallation.current().saveInBackground()
                 
                 // Go back to the login view controller.
                 let storyboard = UIStoryboard(name: "LoginSignUpUI", bundle: nil)
-                let loginView = storyboard.instantiateViewControllerWithIdentifier("SignUpLoginUI") as! AllInOneSignUpAndLoginViewController
+                let loginView = storyboard.instantiateViewController(withIdentifier: "SignUpLoginUI") as! AllInOneSignUpAndLoginViewController
                 loginView.transitionType = true
-                self.presentViewController(loginView, animated: true, completion:nil)
+                self.present(loginView, animated: true, completion:nil)
             }
                 
             else {
                 
                 // Display the error message.
-                self.displayAlert("Error", alertMessage: "\(error!.description)")
+                self.displayAlert("Error", alertMessage: "\(error?.localizedDescription)")
             }
         }
     }
@@ -63,51 +63,51 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
     
     // Alert methods.
     
-    func displayAlert(alertTitle: String, alertMessage: String) {
+    func displayAlert(_ alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
-        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         // Setup the alert actions.
-        let cancel = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+        let cancel = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
         alertController.addAction(cancel)
         
         // Present the alert on screen.
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     //MARK: TABLEVIEW METHODS
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return choicesarray.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // Setup the settings cell.
-        let cell = tableview.dequeueReusableCellWithIdentifier("settingsCell", forIndexPath: indexPath)
+        let cell = tableview.dequeueReusableCell(withIdentifier: "settingsCell", for: indexPath)
         
         // Set the setting name.
-        cell.textLabel?.text = choicesarray[indexPath.row]
+        cell.textLabel?.text = choicesarray[(indexPath as NSIndexPath).row]
         
-        if (indexPath.row == 1) {
+        if ((indexPath as NSIndexPath).row == 1) {
             
             // Update the follow requests badge.
-            var followQuery:PFQuery!
+            var followQuery:PFQuery<PFObject>!
             followQuery = PFQuery(className: "FollowRequest")
-            followQuery.whereKey("desiredfollower", equalTo: PFUser.currentUser()!)
-            followQuery.findObjectsInBackgroundWithBlock { (object, error) -> Void in
+            followQuery.whereKey("desiredfollower", equalTo: PFUser.current()!)
+            followQuery.findObjectsInBackground { (object, error) -> Void in
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     let label = UILabel(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
-                    label.textColor = UIColor.blackColor()
-                    label.textAlignment = .Center
-                    label.textColor = UIColor.whiteColor()
-                    label.backgroundColor = UIColor.redColor()
+                    label.textColor = UIColor.black
+                    label.textAlignment = .center
+                    label.textColor = UIColor.white
+                    label.backgroundColor = UIColor.red
                     label.layer.cornerRadius = label.frame.size.height / 2.0
                     label.clipsToBounds = true
                     cell.accessoryView = label
@@ -133,21 +133,21 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
         else {
             
             cell.accessoryView = nil
-            cell.accessoryType = .None
+            cell.accessoryType = .none
         }
         
         return cell
     }
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.tableview.deselectRowAtIndexPath(indexPath, animated: true)
+        self.tableview.deselectRow(at: indexPath, animated: true)
         
-        switch indexPath.row {
+        switch (indexPath as NSIndexPath).row {
             
             case 0: PresentingViews.ShowUserEditController(self); break;
             case 1: PresentingViews.ShowFollowRequestsView(self); break;

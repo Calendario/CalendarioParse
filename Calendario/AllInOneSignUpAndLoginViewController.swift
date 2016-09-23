@@ -37,8 +37,8 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
     
     //MARK: DATA OBJECTS.
     var displayState:Bool = false
-    var blockViews = []
-    var imageData : NSData!
+    var blockViews = [] as NSArray
+    var imageData : Data!
     var userSetImage = false
     var scrollHeightIncrease:Array <CGFloat> = []
     var bigScreenCheck:Bool = false
@@ -47,7 +47,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
     
     //MARK: BUTTONS.
     
-    @IBAction func setProfilePicture(sender: UIButton) {
+    @IBAction func setProfilePicture(_ sender: UIButton) {
         
         // Dismiss the keyboard.
         self.view.resignFirstResponder()
@@ -59,36 +59,36 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         imagePicker.allowsEditing = true
         
         // Setup the alert controller.
-        let imageAlert = UIAlertController(title: "Profile Picture", message: "Add a photo from your library or take a picture with the camera.", preferredStyle: .ActionSheet)
+        let imageAlert = UIAlertController(title: "Profile Picture", message: "Add a photo from your library or take a picture with the camera.", preferredStyle: .actionSheet)
         
         // Photo library action button.
         let libraryPicture = { (action:UIAlertAction!) -> Void in
             
             // Check if the device has a photo library.
             
-            if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)) {
+            if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary)) {
                 
                 // Access the photo library (not the camera).
-                imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+                imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
                 
                 // Request photo library authorisation.
                 let check = PHPhotoLibrary.authorizationStatus()
                 
                 // Check to see what the users response if.
                 
-                if (check == PHAuthorizationStatus.Authorized) {
-                    self.presentViewController(imagePicker, animated: true, completion: nil)
+                if (check == PHAuthorizationStatus.authorized) {
+                    self.present(imagePicker, animated: true, completion: nil)
                 }
                     
-                else if ((check == PHAuthorizationStatus.NotDetermined) || (check == PHAuthorizationStatus.Denied)) {
+                else if ((check == PHAuthorizationStatus.notDetermined) || (check == PHAuthorizationStatus.denied)) {
                     
                     // Request library authorisation.
                     PHPhotoLibrary.requestAuthorization({ (status) -> Void in
                         
                         // Check to see if access has been granted.
                         
-                        if (status == PHAuthorizationStatus.Authorized) {
-                            self.presentViewController(imagePicker, animated: true, completion: nil)
+                        if (status == PHAuthorizationStatus.authorized) {
+                            self.present(imagePicker, animated: true, completion: nil)
                         }
                             
                         else {
@@ -97,7 +97,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                     })
                 }
                     
-                else if (check == PHAuthorizationStatus.Restricted) {
+                else if (check == PHAuthorizationStatus.restricted) {
                     self.displayAlert("Error", alertMessage: "You have not granted access to your photo library.")
                 }
             }
@@ -106,23 +106,23 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                 self.displayAlert("Error", alertMessage: "Your device does not have a photo library")
             }
         }
-        let buttonOne = UIAlertAction(title: "Library", style: .Default, handler: libraryPicture)
+        let buttonOne = UIAlertAction(title: "Library", style: .default, handler: libraryPicture)
         
         // Take a picture button.
         let cameraPicture = { (action:UIAlertAction!) -> Void in
             
             // Check if the device has a camera.
             
-            if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
+            if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
                 
                 // Access the camera (not the photo library).
-                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+                imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
                 
                 // Request access to the camera.
-                AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: { (success) -> Void in
+                AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (success) -> Void in
                     
                     if (success) {
-                        self.presentViewController(imagePicker, animated: true, completion: nil)
+                        self.present(imagePicker, animated: true, completion: nil)
                     }
                         
                     else {
@@ -135,7 +135,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                 self.displayAlert("Error", alertMessage: "Your device does not have a camera.")
             }
         }
-        let buttonTwo = UIAlertAction(title: "Camera", style: .Default, handler: cameraPicture)
+        let buttonTwo = UIAlertAction(title: "Camera", style: .default, handler: cameraPicture)
         
         // Set to default picture button.
         let defaultPicture = { (action:UIAlertAction!) -> Void in
@@ -147,12 +147,12 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
             self.imageData = UIImageJPEGRepresentation(UIImage(named: "default_profile_pic.png")!, 1.0)
             
             // Set the profile picture to the default image.
-            self.profilePictureButton.setImage(UIImage(named: "camera_icon.png"), forState: .Normal)
+            self.profilePictureButton.setImage(UIImage(named: "camera_icon.png"), for: UIControlState())
         }
-        let buttonThree = UIAlertAction(title: "Remove picture", style: .Destructive, handler: defaultPicture)
+        let buttonThree = UIAlertAction(title: "Remove picture", style: .destructive, handler: defaultPicture)
         
         // Cancel button.
-        let buttonFour = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let buttonFour = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         // Add the actions to the alert.
         imageAlert.addAction(buttonOne)
@@ -165,10 +165,10 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         imageAlert.addAction(buttonFour)
         
         // Present the alert on screen.
-        self.presentViewController(imageAlert, animated: true, completion: nil)
+        self.present(imageAlert, animated: true, completion: nil)
     }
     
-    @IBAction func registerUserDetails(sender: UIButton) {
+    @IBAction func registerUserDetails(_ sender: UIButton) {
         
         // Dismiss the keyboard.
         self.view.resignFirstResponder()
@@ -177,7 +177,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         self.checkUserData()
     }
     
-    @IBAction func viewPrivacyPolicy(sender: UIButton) {
+    @IBAction func viewPrivacyPolicy(_ sender: UIButton) {
         
         // Dismiss the keyboard.
         self.view.resignFirstResponder()
@@ -186,7 +186,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         PresentingViews.ViewPrivacyPolicy(self)
     }
     
-    @IBAction func viewToS(sender: UIButton) {
+    @IBAction func viewToS(_ sender: UIButton) {
         
         // Dismiss the keyboard.
         self.view.resignFirstResponder()
@@ -195,13 +195,13 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         PresentingViews.ViewTermsOfService(self)
     }
     
-    @IBAction func loginWithExistingAccount(sender: UIButton) {
+    @IBAction func loginWithExistingAccount(_ sender: UIButton) {
         
         // Dismiss the keyboard.
         self.view.resignFirstResponder()
         
         // Update the UI appropriately.
-        UIView.animateWithDuration(0.2, delay: 0.0, options: [.CurveEaseOut, .AllowUserInteraction], animations: {
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseOut, .allowUserInteraction], animations: {
         
             // Clear the text fields.
             self.userFullNameField.text = nil
@@ -210,7 +210,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
             self.emailField.text = nil
             
             // Reset the profile image button.
-            self.profilePictureButton.setImage(UIImage(named: "camera_icon.png"), forState: .Normal)
+            self.profilePictureButton.setImage(UIImage(named: "camera_icon.png"), for: UIControlState())
             
             // Perform the correct UI animations
             // depending on the current display state.
@@ -224,19 +224,19 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                 self.topLabel.text = "SIGN UP"
                 
                 // Set the sign up button text.
-                self.signUpUserButton.setTitle("Sign up", forState: .Normal)
+                self.signUpUserButton.setTitle("Sign up", for: UIControlState())
                 
                 // Set the existing button text.
-                self.alreadyAccountButton.setTitle("Already got an account? Login.", forState: .Normal)
+                self.alreadyAccountButton.setTitle("Already got an account? Login.", for: UIControlState())
                 
                 // Move the appropriate block views down.
-                (self.blockViews[1] as! UIView).frame = CGRectOffset((self.blockViews[1] as! UIView).frame, 0, 62.0)
-                (self.blockViews[2] as! UIView).frame = CGRectOffset((self.blockViews[2] as! UIView).frame, 0, 62.0)
-                (self.blockViews[4] as! UIView).frame = CGRectOffset((self.blockViews[4] as! UIView).frame, 0, 62.0)
-                (self.blockViews[5] as! UIView).frame = CGRectOffset((self.blockViews[5] as! UIView).frame, 0, 62.0)
+                (self.blockViews[1] as! UIView).frame = (self.blockViews[1] as! UIView).frame.offsetBy(dx: 0, dy: 62.0)
+                (self.blockViews[2] as! UIView).frame = (self.blockViews[2] as! UIView).frame.offsetBy(dx: 0, dy: 62.0)
+                (self.blockViews[4] as! UIView).frame = (self.blockViews[4] as! UIView).frame.offsetBy(dx: 0, dy: 62.0)
+                (self.blockViews[5] as! UIView).frame = (self.blockViews[5] as! UIView).frame.offsetBy(dx: 0, dy: 62.0)
                 
                 // Move the top section block up.
-                (self.blockViews[7] as! UIView).frame = CGRectOffset((self.blockViews[7] as! UIView).frame, 0, -11.0)
+                (self.blockViews[7] as! UIView).frame = (self.blockViews[7] as! UIView).frame.offsetBy(dx: 0, dy: -11.0)
                 
                 // Show the appropriate block views.
                 (self.blockViews[0] as! UIView).alpha = 1.0
@@ -249,7 +249,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                 (self.blockViews[6] as! UIView).alpha = 0.0
                 
                 // Set the keyboard return button to 'Next'.
-                self.passwordField.returnKeyType = .Next
+                self.passwordField.returnKeyType = .next
                 
             } else {
                 
@@ -260,19 +260,19 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                 self.topLabel.text = "SIGN IN"
                 
                 // Set the sign up button text.
-                self.signUpUserButton.setTitle("Sign in", forState: .Normal)
+                self.signUpUserButton.setTitle("Sign in", for: UIControlState())
                 
                 // Set the existing button text.
-                self.alreadyAccountButton.setTitle("Create a new account.", forState: .Normal)
+                self.alreadyAccountButton.setTitle("Create a new account.", for: UIControlState())
                 
                 // Move the appropriate block views up.
-                (self.blockViews[1] as! UIView).frame = CGRectOffset((self.blockViews[1] as! UIView).frame, 0, -62.0)
-                (self.blockViews[2] as! UIView).frame = CGRectOffset((self.blockViews[2] as! UIView).frame, 0, -62.0)
-                (self.blockViews[4] as! UIView).frame = CGRectOffset((self.blockViews[4] as! UIView).frame, 0, -62.0)
-                (self.blockViews[5] as! UIView).frame = CGRectOffset((self.blockViews[5] as! UIView).frame, 0, -62.0)
+                (self.blockViews[1] as! UIView).frame = (self.blockViews[1] as! UIView).frame.offsetBy(dx: 0, dy: -62.0)
+                (self.blockViews[2] as! UIView).frame = (self.blockViews[2] as! UIView).frame.offsetBy(dx: 0, dy: -62.0)
+                (self.blockViews[4] as! UIView).frame = (self.blockViews[4] as! UIView).frame.offsetBy(dx: 0, dy: -62.0)
+                (self.blockViews[5] as! UIView).frame = (self.blockViews[5] as! UIView).frame.offsetBy(dx: 0, dy: -62.0)
                 
                 // Move the top section block down.
-                (self.blockViews[7] as! UIView).frame = CGRectOffset((self.blockViews[7] as! UIView).frame, 0, 11.0)
+                (self.blockViews[7] as! UIView).frame = (self.blockViews[7] as! UIView).frame.offsetBy(dx: 0, dy: 11.0)
                 
                 // Hide the appropriate block views.
                 (self.blockViews[0] as! UIView).alpha = 0.0
@@ -285,24 +285,24 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                 (self.blockViews[6] as! UIView).alpha = 1.0
                 
                 // Set the keyboard return button to 'Done'.
-                self.passwordField.returnKeyType = .Done
+                self.passwordField.returnKeyType = .done
             }
             
         }, completion:nil)
         
         // Inverse the display state value.
-        self.displayState = !self.displayState.boolValue
+        self.displayState = !self.displayState
     }
     
-    @IBAction func resetUserPassword(sender: AnyObject) {
+    @IBAction func resetUserPassword(_ sender: AnyObject) {
         
         // Dismiss the keyboard.
         self.view.resignFirstResponder()
         
         // Open the reset password view.
         let storyboard = UIStoryboard(name: "ResetPassUI", bundle: nil)
-        let viewC = storyboard.instantiateViewControllerWithIdentifier("resetpassword") as! ResetPasswordViewController
-        self.presentViewController(viewC, animated: true, completion: nil)
+        let viewC = storyboard.instantiateViewController(withIdentifier: "resetpassword") as! ResetPasswordViewController
+        self.present(viewC, animated: true, completion: nil)
     }
     
     //MARK: VIEW DID LOAD METHOD.
@@ -315,7 +315,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         // if the user is already logged in.
         self.view.alpha = 0.0
         
-        if (PFUser.currentUser() != nil) {
+        if (PFUser.current() != nil) {
             
             // Show the news feed.
             self.transitionToNewsFeed()
@@ -344,23 +344,23 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         }
         
         // Add the blur view to the loading view.
-        let blurEffect = UIBlurEffect(style: .Dark)
+        let blurEffect = UIBlurEffect(style: .dark)
         let effectView = UIVisualEffectView(effect: blurEffect)
         effectView.frame = self.loadingView.bounds
-        self.loadingView!.insertSubview(effectView, atIndex: 0)
+        self.loadingView!.insertSubview(effectView, at: 0)
         
         // Hide the loading view.
         self.loadingView.alpha = 0.0
         
         // Set the already registered button border.
-        self.alreadyAccountButton.layer.borderColor = UIColor.init(colorLiteralRed: (230.0/255), green: (230.0/255), blue: (230.0/255), alpha: 1.0).CGColor
+        self.alreadyAccountButton.layer.borderColor = UIColor.init(colorLiteralRed: (230.0/255), green: (230.0/255), blue: (230.0/255), alpha: 1.0).cgColor
         self.alreadyAccountButton.layer.borderWidth = 1.0
         
         // Setup the detail scroll view.
-        self.detailScrollView.scrollEnabled = true
+        self.detailScrollView.isScrollEnabled = true
         
         // Get the screen size values.
-        let result = UIScreen.mainScreen().bounds.size
+        let result = UIScreen.main.bounds.size
         
         // Set the scroll view content size
         // depending on the device screen size.
@@ -368,7 +368,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         if (result.height == 480) {
             
             // 3.5 inch display - iPhone 4S & below.
-            self.detailScrollView.contentSize = CGSizeMake(result.width, 700)
+            self.detailScrollView.contentSize = CGSize(width: result.width, height: 700)
             self.scrollHeightIncrease = [2, 3, 4, 5]
             self.bigScreenCheck = false
         }
@@ -376,7 +376,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         else if (result.height == 568) {
             
             // 4 inch display - iPhone 5/5s.
-            self.detailScrollView.contentSize = CGSizeMake(result.width, 650)
+            self.detailScrollView.contentSize = CGSize(width: result.width, height: 650)
             self.scrollHeightIncrease = [2, 3, 4, 5]
             self.bigScreenCheck = false
         }
@@ -384,7 +384,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         else if (result.height == 667) {
             
             // 4.7 inch display - iPhone 6.
-            self.detailScrollView.contentSize = CGSizeMake(result.width, 300)
+            self.detailScrollView.contentSize = CGSize(width: result.width, height: 300)
             self.scrollHeightIncrease = [1, 2, 3]
             self.bigScreenCheck = true
         }
@@ -392,7 +392,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         else if (result.height >= 736) {
             
             // 5.5 inch display - iPhone 6 Plus.
-            self.detailScrollView.contentSize = CGSizeMake(result.width, 300)
+            self.detailScrollView.contentSize = CGSize(width: result.width, height: 300)
             self.scrollHeightIncrease = [1, 2, 3]
             self.bigScreenCheck = true
         }
@@ -419,23 +419,23 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         
         else {
             
-            self.dismissViewControllerAnimated(true, completion: {
+            self.dismiss(animated: true, completion: {
                 self.clearUpUI()
             })
         }
     }
     
-    func displayAlert(alertTitle: String, alertMessage: String) {
+    func displayAlert(_ alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
-        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         // Setup the alert actions.
-        let cancel = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+        let cancel = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
         alertController.addAction(cancel)
         
         // Present the alert on screen.
-        presentViewController(alertController, animated: true, completion: {
+        present(alertController, animated: true, completion: {
             
             // Enable access to the UI and
             // hide the loading indicator view.
@@ -443,21 +443,21 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         })
     }
     
-    func changeUIAccess(mode : Bool) {
+    func changeUIAccess(_ mode : Bool) {
         
         // True means we should enable access to the UI
         // objects and false means we should disable access.
-        self.userFullNameField.userInteractionEnabled = mode
-        self.userNameField.userInteractionEnabled = mode
-        self.passwordField.userInteractionEnabled = mode
-        self.emailField.userInteractionEnabled = mode
-        self.detailScrollView.userInteractionEnabled = mode
-        self.resetPassButton.enabled = mode
-        self.signUpUserButton.userInteractionEnabled = mode
-        self.ppButton.userInteractionEnabled = mode
-        self.tosButton.userInteractionEnabled = mode
-        self.alreadyAccountButton.userInteractionEnabled = mode
-        self.profilePictureButton.userInteractionEnabled = mode
+        self.userFullNameField.isUserInteractionEnabled = mode
+        self.userNameField.isUserInteractionEnabled = mode
+        self.passwordField.isUserInteractionEnabled = mode
+        self.emailField.isUserInteractionEnabled = mode
+        self.detailScrollView.isUserInteractionEnabled = mode
+        self.resetPassButton.isEnabled = mode
+        self.signUpUserButton.isUserInteractionEnabled = mode
+        self.ppButton.isUserInteractionEnabled = mode
+        self.tosButton.isUserInteractionEnabled = mode
+        self.alreadyAccountButton.isUserInteractionEnabled = mode
+        self.profilePictureButton.isUserInteractionEnabled = mode
         
         // Show or hide the loading indicator view.
         
@@ -484,7 +484,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         self.emailField.text = nil
         
         // Reset the profile image button.
-        self.profilePictureButton.setImage(UIImage(named: "camera_icon.png"), forState: .Normal)
+        self.profilePictureButton.setImage(UIImage(named: "camera_icon.png"), for: UIControlState())
     }
     
     //MARK: DATA METHODS.
@@ -499,13 +499,13 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
             
             // Get the entered username and password.
             
-            if (!self.userNameField.hasText()) {
+            if (!self.userNameField.hasText) {
                 self.displayAlert("Error", alertMessage: "Please enter your username before logging in.")
             }
                 
             else {
                 
-                if (!self.passwordField.hasText()) {
+                if (!self.passwordField.hasText) {
                     self.displayAlert("Error", alertMessage: "Please enter your password before logging in.")
                 }
                     
@@ -520,7 +520,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         else {
             
             // Get the relevant user data.
-            let userData = [self.userFullNameField.text, self.userNameField.text?.lowercaseString, self.passwordField.text, self.emailField.text]
+            let userData = [self.userFullNameField.text, self.userNameField.text?.lowercased(), self.passwordField.text, self.emailField.text]
             
             // Setup the errors array.
             let errorStrings: [String] = ["full name", "username", "password", "email"]
@@ -531,7 +531,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                 let data = userData[loop]
                 
                 // Setup the data string check.
-                let dataCheck: String = data!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                let dataCheck: String = data!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
                 
                 // Ensure the string is not nill and
                 // actually contains multiple characters.
@@ -553,7 +553,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
             // are no capital letters in the string.
             let capitalLetterRegEx  = ".*[A-Z]+.*"
             let textData = NSPredicate(format:"SELF MATCHES %@", capitalLetterRegEx)
-            let capitalresult = textData.evaluateWithObject(self.userNameField.text)
+            let capitalresult = textData.evaluate(with: self.userNameField.text)
             
             if (capitalresult == true) {
                 
@@ -567,10 +567,10 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                 // Check the username to make sure it only
                 // contains dots, underscores, letters and numbers.
                 var allowedSet: NSMutableCharacterSet!
-                allowedSet = NSMutableCharacterSet(charactersInString: "._")
-                allowedSet.formUnionWithCharacterSet(NSCharacterSet.alphanumericCharacterSet())
-                let forbiddenSet: NSCharacterSet = allowedSet.invertedSet
-                let r: NSRange = (self.userNameField.text! as NSString).rangeOfCharacterFromSet(forbiddenSet)
+                allowedSet = NSMutableCharacterSet(charactersIn: "._")
+                allowedSet.formUnion(with: CharacterSet.alphanumerics)
+                let forbiddenSet: CharacterSet = allowedSet.inverted
+                let r: NSRange = (self.userNameField.text! as NSString).rangeOfCharacter(from: forbiddenSet)
                 
                 // Check the username against the character set.
                 
@@ -584,7 +584,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                 else {
                     
                     // Setup the terms and conditions reminder alert.
-                    let alertController = UIAlertController(title: "Terms of Service", message: "In order to use this service, you must first accept the Terms of Service.", preferredStyle: .ActionSheet)
+                    let alertController = UIAlertController(title: "Terms of Service", message: "In order to use this service, you must first accept the Terms of Service.", preferredStyle: .actionSheet)
                     
                     // Setup the alert actions.
                     let termsHandler = { (action:UIAlertAction!) -> Void in
@@ -596,7 +596,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                         // Show the Terms and Conditions view.
                         PresentingViews.ViewTermsOfService(self)
                     }
-                    let viewTandCs = UIAlertAction(title: "View Terms of Service", style: .Default, handler: termsHandler)
+                    let viewTandCs = UIAlertAction(title: "View Terms of Service", style: .default, handler: termsHandler)
                     
                     let continueHandler = { (action:UIAlertAction!) -> Void in
                         
@@ -604,7 +604,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                         // go on to the actual registration.
                         self.registerUser()
                     }
-                    let accept = UIAlertAction(title: "Accept and Continue", style: .Default, handler: continueHandler)
+                    let accept = UIAlertAction(title: "Accept and Continue", style: .default, handler: continueHandler)
                     
                     let cancelHandler = { (action:UIAlertAction!) -> Void in
                         
@@ -612,14 +612,14 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                         // hide the loading indicator view.
                         self.changeUIAccess(true)
                     }
-                    let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelHandler)
+                    let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelHandler)
                     
                     alertController.addAction(viewTandCs)
                     alertController.addAction(accept)
                     alertController.addAction(cancel)
                     
                     // Present the alert on screen.
-                    presentViewController(alertController, animated: true, completion: nil)
+                    present(alertController, animated: true, completion: nil)
                 }
             }
         }
@@ -632,17 +632,17 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         let dataPass = self.passwordField.text
         
         // Login the user via the Parse API.
-        PFUser.logInWithUsernameInBackground(dataUser!, password: dataPass!) { (user, error) -> Void in
+        PFUser.logInWithUsername(inBackground: dataUser!, password: dataPass!) { (user, error) -> Void in
             
             // Run the alert code on the main thread.
-            dispatch_async(dispatch_get_main_queue(),{
+            DispatchQueue.main.async(execute: {
                                 
                 if (user != nil) {
                     
                     // Ensure that the recomendations view is not shown
                     // as the user has already seen the view before.
-                    let defaults = NSUserDefaults.standardUserDefaults()
-                    defaults.setObject(false, forKey: "recoCheck")
+                    let defaults = UserDefaults.standard
+                    defaults.set(false, forKey: "recoCheck")
                     defaults.synchronize()
                     
                     // Enable access to the UI and
@@ -664,7 +664,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         
         // Get the relevat data.
         let email = self.emailField.text
-        let username = self.userNameField.text?.lowercaseString
+        let username = self.userNameField.text?.lowercased()
         let password = self.passwordField.text
         
         // Setup the new user details.
@@ -696,10 +696,10 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         newUser["profileImage"] = imageFile
         
         // Pass the details to the Parse API.
-        newUser.signUpInBackgroundWithBlock { (succed, error) -> Void in
+        newUser.signUpInBackground { (succed, error) -> Void in
             
             // Run the alert code on the main thread.
-            dispatch_async(dispatch_get_main_queue(),{
+            DispatchQueue.main.async(execute: {
                 
                 if (error != nil) {
                     
@@ -715,10 +715,10 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                     userFollowData = PFObject(className:"FollowersAndFollowing")
                     userFollowData["userFollowing"] = []
                     userFollowData["userFollowers"] = []
-                    userFollowData["userLink"] = PFUser.currentUser()
+                    userFollowData["userLink"] = PFUser.current()
                     
                     // Save the follow data on Parse.
-                    userFollowData.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                    userFollowData.saveInBackground(block: { (success: Bool, error: Error?) in
                         
                         // Create the user entry in the
                         // userNotifications Parse class.
@@ -727,16 +727,16 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                         userNotificationData["fromUser"] = []
                         userNotificationData["notificationStrings"] = []
                         userNotificationData["extLink"] = []
-                        userNotificationData["userLink"] = PFUser.currentUser()
+                        userNotificationData["userLink"] = PFUser.current()
                         
                         // Save the notification data on Parse.
-                        userNotificationData.saveInBackgroundWithBlock({ (notificationSuccess, notificationError) -> Void in
+                        userNotificationData.saveInBackground(block: { (notificationSuccess, notificationError) -> Void in
                             
                             if (notificationSuccess) {
                                 
                                 // Ensure that the recomendations view is shown.
-                                let defaults = NSUserDefaults.standardUserDefaults()
-                                defaults.setObject(true, forKey: "recoCheck")
+                                let defaults = UserDefaults.standard
+                                defaults.set(true, forKey: "recoCheck")
                                 defaults.synchronize()
                                 
                                 // Enable access to the UI and
@@ -753,7 +753,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                                 self.displayAlert("Error", alertMessage: "\((notificationError?.localizedDescription)!)")
                             }
                         })
-                    }
+                    })
                 }
             })
         }
@@ -761,7 +761,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
     
     //MARK: TEXT FIELD DELEGATE METHODS.
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         
         // Set the current edit state.
         self.currentlyEditing = true
@@ -769,37 +769,37 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         // Scroll to the text field so that it is
         // not hidden by the keyboard during editing.
         
-        if (self.userFullNameField.isFirstResponder()) {
-            self.detailScrollView.setContentOffset(CGPointMake(0, (textField.bounds.size.height * self.scrollHeightIncrease[0])), animated: true)
+        if (self.userFullNameField.isFirstResponder) {
+            self.detailScrollView.setContentOffset(CGPoint(x: 0, y: (textField.bounds.size.height * self.scrollHeightIncrease[0])), animated: true)
         }
         
-        else if (self.userNameField.isFirstResponder()) {
-            self.detailScrollView.setContentOffset(CGPointMake(0, (textField.bounds.size.height * self.scrollHeightIncrease[1])), animated: true)
+        else if (self.userNameField.isFirstResponder) {
+            self.detailScrollView.setContentOffset(CGPoint(x: 0, y: (textField.bounds.size.height * self.scrollHeightIncrease[1])), animated: true)
         }
             
         else if (self.bigScreenCheck == false) {
             
-            if (self.passwordField.isFirstResponder()) {
-                self.detailScrollView.setContentOffset(CGPointMake(0, (textField.bounds.size.height * self.scrollHeightIncrease[2])), animated: true)
+            if (self.passwordField.isFirstResponder) {
+                self.detailScrollView.setContentOffset(CGPoint(x: 0, y: (textField.bounds.size.height * self.scrollHeightIncrease[2])), animated: true)
             }
                 
-            else if (self.emailField.isFirstResponder()) {
-                self.detailScrollView.setContentOffset(CGPointMake(0, (textField.bounds.size.height * self.scrollHeightIncrease[3])), animated: true)
+            else if (self.emailField.isFirstResponder) {
+                self.detailScrollView.setContentOffset(CGPoint(x: 0, y: (textField.bounds.size.height * self.scrollHeightIncrease[3])), animated: true)
             }
         }
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
         // Remove any content offset from the scroll
         // view otherwise the scroll view will look odd.
         
         if (self.currentlyEditing == false) {
-            self.detailScrollView.setContentOffset(CGPointMake(0, 0), animated: true)
+            self.detailScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
         }
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         // Set the current edit state.
         self.currentlyEditing = true
@@ -810,12 +810,12 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         
         if (self.displayState == true) {
             
-            if (self.userNameField.isFirstResponder()) {
-                self.userNameField.text = self.userNameField.text?.lowercaseString
+            if (self.userNameField.isFirstResponder) {
+                self.userNameField.text = self.userNameField.text?.lowercased()
                 self.passwordField.becomeFirstResponder()
             }
                 
-            else if (self.passwordField.isFirstResponder()) {
+            else if (self.passwordField.isFirstResponder) {
                 self.currentlyEditing = false
                 textField.resignFirstResponder()
             }
@@ -823,16 +823,16 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         
         else {
             
-            if (self.userFullNameField.isFirstResponder()) {
+            if (self.userFullNameField.isFirstResponder) {
                 self.userNameField.becomeFirstResponder()
             }
                 
-            else if (self.userNameField.isFirstResponder()) {
-                self.userNameField.text = self.userNameField.text?.lowercaseString
+            else if (self.userNameField.isFirstResponder) {
+                self.userNameField.text = self.userNameField.text?.lowercased()
                 self.passwordField.becomeFirstResponder()
             }
                 
-            else if (self.passwordField.isFirstResponder()) {
+            else if (self.passwordField.isFirstResponder) {
                 self.emailField.becomeFirstResponder()
             }
                 
@@ -847,7 +847,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
     
     //MARK: SCROLL VIEW DELEGATE METHODS.
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         // Dismiss the keyboard.
         self.currentlyEditing = false
@@ -856,10 +856,10 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
     
     //MARK: IMAGE PICKER DELEGATE METHODS.
     
-    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!){
+    func imagePickerController(_ picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!){
         
         // Dismiss the image picker view controller.
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+        self.dismiss(animated: true, completion: { () -> Void in
             
             // The user has set an image.
             self.userSetImage = true
@@ -868,7 +868,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
             self.imageData = UIImageJPEGRepresentation(image, 1.0)
             
             // Set the profile picture view.
-            self.profilePictureButton.setImage(image, forState: .Normal)
+            self.profilePictureButton.setImage(image, for: UIControlState())
         })
     }
     

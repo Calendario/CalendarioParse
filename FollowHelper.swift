@@ -18,7 +18,7 @@ class FollowHelper: NSObject {
         
     }
     
-    func addFollowingRelationshipFromUser(user:String, toUser:String )
+    func addFollowingRelationshipFromUser(_ user:String, toUser:String )
     {
         let followObject = PFObject(className: "Followers")
         followObject.setObject(user, forKey: ParseFollowFromUser)
@@ -28,20 +28,20 @@ class FollowHelper: NSObject {
     
     // unfollow method
     
-    func RemoveFollowingRelationshipFromUser(user:String, toUser:String)
+    func RemoveFollowingRelationshipFromUser(_ user:String, toUser:String)
     {
         let query = PFQuery(className: "Followers")
         query.whereKey(ParseFollowFromUser, equalTo: user)
         query.whereKey(ParseFollowToUser, equalTo: toUser)
         
-        query.findObjectsInBackgroundWithBlock { (results, error) -> Void in
+        query.findObjectsInBackground { (results, error) -> Void in
             if error == nil
             {
-                let results = results! as [PFObject] ?? []
+                let results = results! as [PFObject] 
                 
                 for relationship in results
                 {
-                    relationship.deleteInBackgroundWithBlock({ (sucess, error) -> Void in
+                    relationship.deleteInBackground(block: { (sucess, error) -> Void in
                         if  sucess
                         {
                             print("Unfollowed")

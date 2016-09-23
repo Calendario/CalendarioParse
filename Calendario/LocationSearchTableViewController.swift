@@ -10,7 +10,7 @@ import UIKit
 
 protocol LocateOnTheMap
 {
-    func locateWithLongitude(lon:Double, andLatitude lat:Double, andTitle title: String)
+    func locateWithLongitude(_ lon:Double, andLatitude lat:Double, andTitle title: String)
 }
 
 class LocationSearchTableViewController: UITableViewController {
@@ -23,7 +23,7 @@ class LocationSearchTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.SearchResults = Array()
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -39,63 +39,63 @@ class LocationSearchTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return self.SearchResults.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         // Configure the cell...
         
-        cell.textLabel?.text = self.SearchResults[indexPath.row]
+        cell.textLabel?.text = self.SearchResults[(indexPath as NSIndexPath).row]
         
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.dismiss(animated: true, completion: nil)
         
-      let correctedAddress:String! = self.SearchResults[indexPath.row].stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.symbolCharacterSet())
-        let url = NSURL(string:  "https://maps.googleapis.com/maps/api/geocode/json?address=\(correctedAddress)&sensor=false")
+      let correctedAddress:String! = self.SearchResults[(indexPath as NSIndexPath).row].addingPercentEncoding(withAllowedCharacters: CharacterSet.symbols)
+        let url = URL(string:  "https://maps.googleapis.com/maps/api/geocode/json?address=\(correctedAddress)&sensor=false")
         
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) -> Void in
+        let task = URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) -> Void in
             // 3
             do {
                 if data != nil{
-                    let dic = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableLeaves) as!  NSDictionary
+                    let dic = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableLeaves) as!  NSDictionary
                     
-                    let lat = dic["results"]?.valueForKey("geometry")?.valueForKey("location")?.valueForKey("lat")?.objectAtIndex(0) as! Double
-                    let lon = dic["results"]?.valueForKey("geometry")?.valueForKey("location")?.valueForKey("lng")?.objectAtIndex(0) as! Double
+                    let lat = ((((dic["results"] as AnyObject).value(forKey: "geometry") as AnyObject).value(forKey: "location") as AnyObject).value(forKey: "lat") as AnyObject).object(at: 0) as! Double
+                    let lon = ((((dic["results"] as AnyObject).value(forKey: "geometry") as AnyObject).value(forKey: "location") as AnyObject).value(forKey: "lng") as AnyObject).object(at: 0) as! Double
                     
                     // Save the selected location name/lat/long (for later usage).
-                    let location = self.SearchResults[indexPath.row] as String
-                    let defaults = NSUserDefaults.standardUserDefaults()
-                    defaults.setObject(location, forKey: "location")
-                    defaults.setObject(lat, forKey: "locationLat")
-                    defaults.setObject(lon, forKey: "locationLon")
+                    let location = self.SearchResults[(indexPath as NSIndexPath).row] as String
+                    let defaults = UserDefaults.standard
+                    defaults.set(location, forKey: "location")
+                    defaults.set(lat, forKey: "locationLat")
+                    defaults.set(lon, forKey: "locationLon")
                     defaults.synchronize()
                     
                     // 4
-                    self.delegate.locateWithLongitude(lon, andLatitude: lat, andTitle: self.SearchResults[indexPath.row] )
+                    self.delegate.locateWithLongitude(lon, andLatitude: lat, andTitle: self.SearchResults[(indexPath as NSIndexPath).row] )
                 }
             }catch {
                 print("Error")
             }
-        }
+        }) 
         // 5
         task.resume()
     }
     
-    func reloadDataWithArray(array:[String]){
+    func reloadDataWithArray(_ array:[String]){
         self.SearchResults = array
         self.tableView.reloadData()
     }

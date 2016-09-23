@@ -24,24 +24,24 @@ class LocatonViewController: UIViewController, UINavigationBarDelegate, LocateOn
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 64))
-        navigationbar.backgroundColor = UIColor.whiteColor()
+        let navigationbar = UINavigationBar(frame:  CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 64))
+        navigationbar.backgroundColor = UIColor.white
         navigationbar.delegate = self
         navigationbar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-        navigationbar.translucent = false
-        navigationbar.tintColor = UIColor.whiteColor()
+        navigationbar.isTranslucent = false
+        navigationbar.tintColor = UIColor.white
         let navitems = UINavigationItem()
-        navitems.titleView?.contentMode = UIViewContentMode.Center
-        navitems.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
+        navitems.titleView?.contentMode = UIViewContentMode.center
+        navitems.titleView?.contentMode = UIViewContentMode.scaleAspectFit
         
         backButton.title = nil
         backButton.image = UIImage(named: "back_button.png")
         
-        navitems.setRightBarButtonItem(searchButton, animated: true)
-        navitems.setLeftBarButtonItem(backButton, animated: true)
+        navitems.setRightBarButton(searchButton, animated: true)
+        navitems.setLeftBarButton(backButton, animated: true)
          navigationbar.items = [navitems]
         self.view.addSubview(navigationbar)
         
@@ -51,12 +51,12 @@ class LocatonViewController: UIViewController, UINavigationBarDelegate, LocateOn
         searchResultsController.delegate = self
     }
     
-    func locateWithLongitude(lon: Double, andLatitude lat: Double, andTitle title: String) {
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+    func locateWithLongitude(_ lon: Double, andLatitude lat: Double, andTitle title: String) {
+        DispatchQueue.main.async { () -> Void in
             let position = CLLocationCoordinate2DMake(lat, lon)
             let marker = GMSMarker(position: position)
             
-            let camera  = GMSCameraPosition.cameraWithLatitude(lat, longitude: lon, zoom: 10)
+            let camera  = GMSCameraPosition.camera(withLatitude: lat, longitude: lon, zoom: 10)
             self.googleMapsView.camera = camera
             
             marker.title = title
@@ -64,24 +64,26 @@ class LocatonViewController: UIViewController, UINavigationBarDelegate, LocateOn
             
             // Save the location name/coordinates (for the search
             // filter view controller's location settings).
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setObject(title, forKey: "filterLocationName")
-            defaults.setObject(lat, forKey: "filterLocationLat")
-            defaults.setObject(lon, forKey: "filterLocationLon")
+            let defaults = UserDefaults.standard
+            defaults.set(title, forKey: "filterLocationName")
+            defaults.set(lat, forKey: "filterLocationLat")
+            defaults.set(lon, forKey: "filterLocationLon")
             defaults.synchronize()
             // Please do NOT delete the above code - Dan.
         }
     }
     
-    @IBAction func ShowSearchBarController(sender: AnyObject) {
+    @IBAction func ShowSearchBarController(_ sender: AnyObject) {
         let searchController = UISearchController(searchResultsController: searchResultsController)
         searchController.searchBar.delegate = self
-        self.presentViewController(searchController, animated: true, completion: nil)
+        self.present(searchController, animated: true, completion: nil)
     }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let placesClient = GMSPlacesClient()
-        placesClient.autocompleteQuery(searchText, bounds: nil, filter: nil) { (results, error:NSError?) -> Void in
+        
+        placesClient.autocompleteQuery(searchText, bounds: nil, filter: nil) { (results: [GMSAutocompletePrediction]?, error:Error?) in
+            
             self.resultsArray.removeAll()
             
             if (error == nil) {
@@ -103,8 +105,8 @@ class LocatonViewController: UIViewController, UINavigationBarDelegate, LocateOn
         }
     }
     
-    @IBAction func Backtapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func Backtapped(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

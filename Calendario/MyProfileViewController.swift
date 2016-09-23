@@ -10,6 +10,26 @@ import Foundation
 import UIKit
 import Parse
 import QuartzCore
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class MyProfileViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -55,27 +75,27 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     
     // Setup the on screen button actions.
     
-    @IBAction func openFollowers(sender: UIButton) {
+    @IBAction func openFollowers(_ sender: UIButton) {
         self.GotoFollowerView()
     }
     
-    @IBAction func openFollowing(sender: UIButton) {
+    @IBAction func openFollowing(_ sender: UIButton) {
         self.GotoFollowingView()
     }
     
-    @IBAction func followUserTapped(sender: UIButton) {
+    @IBAction func followUserTapped(_ sender: UIButton) {
         
         // Only follow the user if the user
         // is not viewing their own profile.
         
-        if ((passedUser != nil) && (passedUser.username! != "\(PFUser.currentUser()!.username!)")) {
+        if ((passedUser != nil) && (passedUser.username! != "\(PFUser.current()!.username!)")) {
             
             // Follow/unfollow the passed in user.
             self.followOrUnfolowUser(passedUser)
         }
     }
     
-    @IBAction func openUserWebsite(sender: UIButton) {
+    @IBAction func openUserWebsite(_ sender: UIButton) {
         
         // Check the website URL before
         // opening the web page view.
@@ -84,9 +104,9 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             
             // Open the webpage view.
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewC = storyboard.instantiateViewControllerWithIdentifier("WebPage") as! WebPageViewController
+            let viewC = storyboard.instantiateViewController(withIdentifier: "WebPage") as! WebPageViewController
             viewC.passedURL = userWebsiteLink
-            self.presentViewController(viewC, animated: true, completion: nil)
+            self.present(viewC, animated: true, completion: nil)
         }
             
         else {
@@ -94,11 +114,11 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    @IBAction func dismissProfile(sender: UIButton) {
+    @IBAction func dismissProfile(_ sender: UIButton) {
         self.closeProfileView()
     }
     
-    @IBAction func openSettingsOrMoreSection(sender: UIButton) {
+    @IBAction func openSettingsOrMoreSection(_ sender: UIButton) {
         self.viewMoreAlert()
     }
     
@@ -113,28 +133,28 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     
     func setupUI() {
         // Get the screen dimensions.
-        let width = UIScreen.mainScreen().bounds.size.width
+        let width = UIScreen.main.bounds.size.width
         
-        blockedBlurView.frame = CGRectMake(0, 0, width, self.view.bounds.size.height)
+        blockedBlurView.frame = CGRect(x: 0, y: 0, width: width, height: self.view.bounds.size.height)
         blockedBlurView.alpha = 0.0
         self.view.addSubview(blockedBlurView)
         
         var visualEffectView:UIVisualEffectView!
-        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
+        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark)) as UIVisualEffectView
         visualEffectView.frame = self.blockedBlurView.bounds
         
-        blockedBlurView.insertSubview(visualEffectView, atIndex: 0)
+        blockedBlurView.insertSubview(visualEffectView, at: 0)
         
         let blockButtonLeft = UIButton()
         let blockButtonRight = UIButton()
-        blockButtonLeft.setImage(UIImage(named: "back_button.png"), forState: .Normal)
-        blockButtonLeft.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        blockButtonLeft.frame = CGRectMake(15, 44, 22, 22)
-        blockButtonRight.setImage(UIImage(named: "more_button.png"), forState: .Normal)
-        blockButtonRight.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        blockButtonRight.frame = CGRectMake(self.view.bounds.size.width - 62, 44, 62, 22)
-        blockButtonLeft.addTarget(self, action: #selector(MyProfileViewController.closeProfileView), forControlEvents: .TouchUpInside)
-        blockButtonRight.addTarget(self, action: #selector(MyProfileViewController.viewMoreAlert), forControlEvents: .TouchUpInside)
+        blockButtonLeft.setImage(UIImage(named: "back_button.png"), for: UIControlState())
+        blockButtonLeft.setTitleColor(UIColor.blue, for: UIControlState())
+        blockButtonLeft.frame = CGRect(x: 15, y: 44, width: 22, height: 22)
+        blockButtonRight.setImage(UIImage(named: "more_button.png"), for: UIControlState())
+        blockButtonRight.setTitleColor(UIColor.blue, for: UIControlState())
+        blockButtonRight.frame = CGRect(x: self.view.bounds.size.width - 62, y: 44, width: 62, height: 22)
+        blockButtonLeft.addTarget(self, action: #selector(MyProfileViewController.closeProfileView), for: .touchUpInside)
+        blockButtonRight.addTarget(self, action: #selector(MyProfileViewController.viewMoreAlert), for: .touchUpInside)
         
         self.blockedBlurView.addSubview(blockButtonLeft)
         self.blockedBlurView.addSubview(blockButtonRight)
@@ -142,24 +162,24 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         self.profPicture.layer.cornerRadius = (self.profPicture.frame.size.width / 2)
         self.profPicture.clipsToBounds = true
         
-        self.statusList.separatorColor = UIColor.clearColor()
+        self.statusList.separatorColor = UIColor.clear
     }
     
     func addTapGestures() {
         // Adding tap gesture reconizers to the following and follower labels.
         let followgesturereconizer = UITapGestureRecognizer(target: self, action: #selector(MyProfileViewController.GotoFollowingView))
-        self.profFollowing.userInteractionEnabled = true
+        self.profFollowing.isUserInteractionEnabled = true
         self.profFollowing.addGestureRecognizer(followgesturereconizer)
         
         let followergesturereconizer = UITapGestureRecognizer(target: self, action: #selector(MyProfileViewController.GotoFollowerView))
-        self.profFollowers.userInteractionEnabled = true
+        self.profFollowers.isUserInteractionEnabled = true
         self.profFollowers.addGestureRecognizer(followergesturereconizer)
     }
     
     // Back/More section alert methods.
     
     func closeProfileView() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func viewMoreAlert() {
@@ -167,12 +187,12 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // If the current user is being displayed then show the user
         // settings menu otherwise display the more action sheet.
         
-        if ((passedUser == nil) || ((passedUser != nil) && (passedUser.username! == "\(PFUser.currentUser()!.username!)"))) {
+        if ((passedUser == nil) || ((passedUser != nil) && (passedUser.username! == "\(PFUser.current()!.username!)"))) {
             
             // No user passed in - show the settings menu.
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewC = storyboard.instantiateViewControllerWithIdentifier("SettingsView") as! SettingsViewController
-            self.presentViewController(viewC, animated: true, completion: nil)
+            let viewC = storyboard.instantiateViewController(withIdentifier: "SettingsView") as! SettingsViewController
+            self.present(viewC, animated: true, completion: nil)
         }
             
         else {
@@ -193,25 +213,25 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             }
             
             // User passed in - show the more menu.
-            let moreMenu = UIAlertController(title: "Options", message: alertDesc, preferredStyle: .ActionSheet)
+            let moreMenu = UIAlertController(title: "Options", message: alertDesc, preferredStyle: .actionSheet)
             
             // Setup the alert actions.
             let blockUser = { (action:UIAlertAction!) -> Void in
                 
                 // Check if the user has already been blocked
                 // and then show the appropriate actions.
-                var query:PFQuery!
+                var query:PFQuery<PFObject>!
                 query = PFQuery(className: "blockUser")
                 query.whereKey("userBlock", equalTo: self.passedUser)
-                query.whereKey("userBlocking", equalTo: PFUser.currentUser()!)
-                query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+                query.whereKey("userBlocking", equalTo: PFUser.current()!)
+                query.findObjectsInBackground { (objects, error) -> Void in
                     
                     if (error == nil) {
                         
                         if (objects?.count > 0) {
                             
                             // The user has already been blocked.
-                            let unblockAlert = UIAlertController(title: "Unblock user?", message: "You have previously blocked this user. Would you like to unblock this user?", preferredStyle: .Alert)
+                            let unblockAlert = UIAlertController(title: "Unblock user?", message: "You have previously blocked this user. Would you like to unblock this user?", preferredStyle: .alert)
                             
                             // Setup the alert actions.
                             let unblockUser = { (action:UIAlertAction!) -> Void in
@@ -222,7 +242,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                                 let objects = objects as [PFObject]!
                                 
                                 // Submit the unblock request.
-                                objects[0].deleteInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
+                                objects?[0].deleteInBackground(block: { (success: Bool, error: Error?) in
                                     
                                     if (success) {
                                         
@@ -236,21 +256,21 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                                     else {
                                         
                                         // An error has occured.
-                                        self.displayAlert("Error", alertMessage: "\(error?.description)")
+                                        self.displayAlert("Error", alertMessage: "\(error?.localizedDescription)")
                                     }
                                 })
                             }
                             
                             // Setup the alert buttons.
-                            let yes = UIAlertAction(title: "Yes", style: .Default, handler: unblockUser)
-                            let cancel = UIAlertAction(title: "No", style: .Default, handler: nil)
+                            let yes = UIAlertAction(title: "Yes", style: .default, handler: unblockUser)
+                            let cancel = UIAlertAction(title: "No", style: .default, handler: nil)
                             
                             // Add the actions to the alert.
                             unblockAlert.addAction(yes)
                             unblockAlert.addAction(cancel)
                             
                             // Present the alert on screen.
-                            self.presentViewController(unblockAlert, animated: true, completion: nil)
+                            self.present(unblockAlert, animated: true, completion: nil)
                         }
                             
                         else {
@@ -263,10 +283,10 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                             var blockUserData:PFObject!
                             blockUserData = PFObject(className:"blockUser")
                             blockUserData["userBlock"] = self.passedUser
-                            blockUserData["userBlocking"] = PFUser.currentUser()
+                            blockUserData["userBlocking"] = PFUser.current()
                             
                             // Submit the block request.
-                            blockUserData.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                            blockUserData.saveInBackground(block: { (success: Bool, error: Error?) in
                                 
                                 // Check if the user block data
                                 // request was succesful or not.
@@ -274,29 +294,29 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                                 if (success) {
                                     
                                     // The user has been blocked.
-                                    let blockUpdate = UIAlertController(title: "Success", message: "The user has been blocked.", preferredStyle: .Alert)
+                                    let blockUpdate = UIAlertController(title: "Success", message: "The user has been blocked.", preferredStyle: .alert)
                                     
                                     // Setup the alert actions.
                                     let close = { (action:UIAlertAction!) -> Void in
-                                        self.dismissViewControllerAnimated(true, completion: nil)
+                                        self.dismiss(animated: true, completion: nil)
                                     }
                                     
                                     // Setup the alert buttons.
-                                    let dismiss = UIAlertAction(title: "Dismiss", style: .Default, handler: close)
+                                    let dismiss = UIAlertAction(title: "Dismiss", style: .default, handler: close)
                                     
                                     // Add the actions to the alert.
                                     blockUpdate.addAction(dismiss)
                                     
                                     // Present the alert on screen.
-                                    self.presentViewController(blockUpdate, animated: true, completion: nil)
+                                    self.present(blockUpdate, animated: true, completion: nil)
                                 }
                                     
                                 else {
                                     
                                     // There was a problem, check error.description.
-                                    self.displayAlert("Error", alertMessage: "\(error?.description)")
+                                    self.displayAlert("Error", alertMessage: "\(error?.localizedDescription)")
                                 }
-                            }
+                            })
                         }
                     }
                 }
@@ -306,15 +326,15 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 
                 // Open the report user view controller.
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let viewC = storyboard.instantiateViewControllerWithIdentifier("reportUser") as! ReportUserViewController
+                let viewC = storyboard.instantiateViewController(withIdentifier: "reportUser") as! ReportUserViewController
                 viewC.passedUser = self.passedUser
-                self.presentViewController(viewC, animated: true, completion: nil)
+                self.present(viewC, animated: true, completion: nil)
             }
             
             // Setuo the alert buttons.
-            let buttonOne = UIAlertAction(title: buttonOneTitle, style: .Default, handler: blockUser)
-            let buttonTwo = UIAlertAction(title: "Report User", style: .Default, handler: reportUser)
-            let cancel = UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil)
+            let buttonOne = UIAlertAction(title: buttonOneTitle, style: .default, handler: blockUser)
+            let buttonTwo = UIAlertAction(title: "Report User", style: .default, handler: reportUser)
+            let cancel = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
             
             // Add the actions to the alert.
             moreMenu.addAction(buttonOne)
@@ -322,7 +342,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             moreMenu.addAction(cancel)
             
             // Present the alert on screen.
-            presentViewController(moreMenu, animated: true, completion: nil)
+            present(moreMenu, animated: true, completion: nil)
         }
     }
     
@@ -332,10 +352,10 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         
         // Open the following view.
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let followingview = sb.instantiateViewControllerWithIdentifier("following") as! FollowingTableViewController
+        let followingview = sb.instantiateViewController(withIdentifier: "following") as! FollowingTableViewController
         
         if (passedUser == nil) {
-            followingview.passedInUser = PFUser.currentUser()
+            followingview.passedInUser = PFUser.current()
         }
             
         else {
@@ -343,17 +363,17 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         }
         
         let NC = UINavigationController(rootViewController: followingview)
-        self.presentViewController(NC, animated: true, completion: nil)
+        self.present(NC, animated: true, completion: nil)
     }
     
     func GotoFollowerView() {
         
         // Open the followers view.
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let followerview = sb.instantiateViewControllerWithIdentifier("followers") as! FollowersTableViewController
+        let followerview = sb.instantiateViewController(withIdentifier: "followers") as! FollowersTableViewController
         
         if (passedUser == nil) {
-            followerview.passedInUser = PFUser.currentUser()
+            followerview.passedInUser = PFUser.current()
         }
             
         else {
@@ -361,21 +381,21 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         }
         
         let NC = UINavigationController(rootViewController: followerview)
-        self.presentViewController(NC, animated: true, completion: nil)
+        self.present(NC, animated: true, completion: nil)
     }
     
     // View Did Appear method.
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         // Notify the user that the app is loading.
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         // Allow tableview cell resizing based on content.
         self.statusList.rowHeight = UITableViewAutomaticDimension;
         self.statusList.estimatedRowHeight = 292;
-        self.statusList.separatorInset = UIEdgeInsetsZero
+        self.statusList.separatorInset = UIEdgeInsets.zero
         
         // By default the more button is diabled until
         // we have downloaded the appropriate user data.
@@ -384,7 +404,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // Check to see if a user is being passed into the
         // view controller and run the appropriate actions.
         
-        if ((passedUser == nil) || ((passedUser != nil) && (passedUser.username! == "\(PFUser.currentUser()!.username!)"))) {
+        if ((passedUser == nil) || ((passedUser != nil) && (passedUser.username! == "\(PFUser.current()!.username!)"))) {
             
             // Allow status updates to be fetched.
             self.statusLoadCheck = true
@@ -393,39 +413,39 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             // user has been passed in.
             
             if (passedUser == nil) {
-                backButton.enabled = false
-                backButton.userInteractionEnabled = false
+                backButton.isEnabled = false
+                backButton.isUserInteractionEnabled = false
                 backButton.alpha = 0.0
             }
                 
             else {
-                backButton.enabled = true
-                backButton.userInteractionEnabled = true
+                backButton.isEnabled = true
+                backButton.isUserInteractionEnabled = true
                 backButton.alpha = 1.0
             }
             
             // Disable the follow user button.
-            self.followButton.userInteractionEnabled = false
-            self.followButton.enabled = false
+            self.followButton.isUserInteractionEnabled = false
+            self.followButton.isEnabled = false
             
             // Update the rest of the profile view.
-            self.updateProfileView(PFUser.currentUser()!)
+            self.updateProfileView(PFUser.current()!)
         }
             
         else {
             
             // Enable the follow user button.
-            self.followButton.userInteractionEnabled = true
-            self.followButton.enabled = true
+            self.followButton.isUserInteractionEnabled = true
+            self.followButton.isEnabled = true
             
             // Check if the user has already been blocked
             // or if the user has blocked you and take the
             // appropriate actions.
-            var query:PFQuery!
+            var query:PFQuery<PFObject>!
             query = PFQuery(className: "blockUser")
             query.whereKey("userBlock", equalTo: self.passedUser)
-            query.whereKey("userBlocking", equalTo: PFUser.currentUser()!)
-            query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            query.whereKey("userBlocking", equalTo: PFUser.current()!)
+            query.findObjectsInBackground { (objects, error) -> Void in
                 
                 if (error == nil) {
                     
@@ -440,11 +460,11 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                         
                     else {
                         
-                        var queryTwo:PFQuery!
+                        var queryTwo:PFQuery<PFObject>!
                         queryTwo = PFQuery(className: "blockUser")
-                        queryTwo.whereKey("userBlock", equalTo: PFUser.currentUser()!)
+                        queryTwo.whereKey("userBlock", equalTo: PFUser.current()!)
                         queryTwo.whereKey("userBlocking", equalTo: self.passedUser)
-                        queryTwo.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+                        queryTwo.findObjectsInBackground { (objects, error) -> Void in
                             
                             if (error == nil) {
                                 
@@ -465,7 +485,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             }
             
             // Check if the user is a private account.
-            privateCheck = passedUser?.objectForKey("privateProfile") as? Bool
+            privateCheck = passedUser?.object(forKey: "privateProfile") as? Bool
             
             // Check if the logged in user is following
             // the passed in user object or not.
@@ -477,13 +497,13 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                     self.statusLoadCheck = true
                     
                     // Set the follow user button image - following.
-                    self.followButton.setImage(UIImage(named: "Following.png"), forState: .Normal)
+                    self.followButton.setImage(UIImage(named: "Following.png"), for: UIControlState())
                 }
                     
                 else {
                     
                     // Set the follow user button image - not following.
-                    self.followButton.setImage(UIImage(named: "FollowButton.png"), forState: .Normal)
+                    self.followButton.setImage(UIImage(named: "FollowButton.png"), for: UIControlState())
                     
                     // If the user is private then disallow
                     // the status updates to be fetched.
@@ -503,11 +523,11 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     
     // Profile data load method.
     
-    func updateProfileView(userData: PFUser) {
+    func updateProfileView(_ userData: PFUser) {
         
         // User is logged in - get thier details and populate the UI.
-        self.profName.text = userData.objectForKey("fullName") as? String
-        self.profDesc.text = userData.objectForKey("userBio") as? String
+        self.profName.text = userData.object(forKey: "fullName") as? String
+        self.profDesc.text = userData.object(forKey: "userBio") as? String
         
         // Get and set the followers/following label.
         self.setFollowDataCount(userData)
@@ -519,21 +539,21 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         self.profUserName.text = "@\(userData.username!)"
         
         // Store PFUser Data in NSUserDefaults.
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(userData.username, forKey: "userdata")
+        let defaults = UserDefaults.standard
+        defaults.set(userData.username, forKey: "userdata")
         
         // Check the website URL link.
-        userWebsiteLink = userData.objectForKey("website") as? String
+        userWebsiteLink = userData.object(forKey: "website") as? String
         
         if (userWebsiteLink != nil) {
-            self.profWeb.setTitle(userWebsiteLink, forState: UIControlState.Normal)
+            self.profWeb.setTitle(userWebsiteLink, for: UIControlState())
         } else {
-            self.profWeb.setTitle("No website set.", forState: UIControlState.Normal)
-            self.profWeb.userInteractionEnabled = false
+            self.profWeb.setTitle("No website set.", for: UIControlState())
+            self.profWeb.isUserInteractionEnabled = false
         }
         
         // Check if the user is verified.
-        let verify = userData.objectForKey("verifiedUser")
+        let verify = userData.object(forKey: "verifiedUser")
         
         if (verify == nil) {
             self.profVerified.alpha = 0.0
@@ -550,15 +570,14 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         
         // Check if the user has a profile image.
         
-        if (userData.objectForKey("profileImage") == nil) {
+        if (userData.object(forKey: "profileImage") == nil) {
             self.profPicture.image = UIImage(named: "default_profile_pic.png")
         }
             
         else {
             
             let userImageFile = userData["profileImage"] as! PFFile
-            
-            userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+            userImageFile.getDataInBackground(block: { (imageData: Data?, error: Error?) in
                 
                 if (error == nil) {
                     
@@ -576,8 +595,8 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 }
                 
                 // Notify the user that the app has stopped loading.
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            }
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            })
         }
         
         // Load in the user status updates data.
@@ -586,11 +605,11 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     
     // Status updates data methods.
     
-    func loadUserStatusUpdate(userData: PFUser) {
+    func loadUserStatusUpdate(_ userData: PFUser) {
         
         // Only enable scrolling if we are
         // going to load the users posts.
-        self.statusList.scrollEnabled = self.statusLoadCheck
+        self.statusList.isScrollEnabled = self.statusLoadCheck
         
         // Only show the status updates if the check has passed
         // otherwise show the private user table view cell only.
@@ -598,8 +617,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         if (self.statusLoadCheck == true) {
             
             // Call the profile feed cloud code method.
-            PFCloud.callFunctionInBackground("getUserProfileFeed", withParameters: ["user" : "\(userData.objectId!)"]) {
-                (response: AnyObject?, error: NSError?) -> Void in
+            PFCloud.callFunction(inBackground: "getUserProfileFeed", withParameters: ["user" : "\(userData.objectId!)"], block: { (response: Any?, error: Error?) in
                 
                 // Check for request errors first.
                 
@@ -617,7 +635,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 } else {
                     self.displayAlert("Error", alertMessage: (error?.localizedDescription)!)
                 }
-            }
+            })
         } else {
             
             // Reload the table view.
@@ -627,11 +645,11 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     
     // UITableView methods.
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if (self.statusLoadCheck == true) {
             return statusObjects.count
@@ -640,10 +658,10 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // Setup the table view custom cell.
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NewsfeedTableViewCell
         
         // Pass in the parent view controller.
         cell.parentViewController = self
@@ -654,37 +672,37 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         if (self.statusLoadCheck == true) {
             
             // Get the specific status object for this cell and call all needed methods.
-            cell.passedInObject = self.statusObjects[indexPath.row] as! PFObject
+            cell.passedInObject = self.statusObjects[(indexPath as NSIndexPath).row] as! PFObject
             
-            ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.statusObjects[indexPath.row] as! PFObject, cell: cell)
+            ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.statusObjects[(indexPath as NSIndexPath).row] as! PFObject, cell: cell)
             
-            ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.statusObjects[indexPath.row] as! PFObject)
+            ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.statusObjects[(indexPath as NSIndexPath).row] as! PFObject)
             
-            ParseCalls.findUserDetails(self.statusObjects[indexPath.row] as! PFObject
+            ParseCalls.findUserDetails(self.statusObjects[(indexPath as NSIndexPath).row] as! PFObject
                 , usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {() -> Void in
+            DispatchQueue.global(qos: .background).async {
                 
                 // Background Thread
-                DateManager.createDateDifferenceString((self.statusObjects[indexPath.row] as! PFObject).createdAt!) { (difference) -> Void in
+                DateManager.createDateDifferenceString((self.statusObjects[(indexPath as NSIndexPath).row] as! PFObject).createdAt!) { (difference) -> Void in
                     
-                    dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                    DispatchQueue.main.async(execute: {() -> Void in
                         
                         // Run UI Updates
                         cell.createdAtLabel.text = difference
                     })
                 }
-            })
+            }
         }
         
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
         if (self.statusLoadCheck == true) {
             return true
@@ -693,33 +711,34 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     }
     
     // Dynamic cell height.
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 292.0
     }
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         // Get the current status update.
-        let statusupdate:PFObject = self.statusObjects.objectAtIndex(indexPath.row) as! PFObject
+        let statusupdate:PFObject = self.statusObjects.object(at: (indexPath as NSIndexPath).row) as! PFObject
         
         // Setup the report status button.
         var report:UITableViewRowAction!
-        report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
+        report = UITableViewRowAction(style: .normal, title: "Report") { (action, index) -> Void in
             
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setObject(statusupdate.objectId, forKey: "reported")
+            let defaults = UserDefaults.standard
+            defaults.set(statusupdate.objectId, forKey: "reported")
             
             PresentingViews.ReportView(self)
             
-            var reportquery:PFQuery!
+            var reportquery:PFQuery<PFObject>!
             reportquery = PFQuery(className: "StatusUpdate")
-            reportquery.whereKey("updatetext", equalTo: statusupdate.objectForKey("updatetext")!)
-            reportquery.findObjectsInBackgroundWithBlock({ (objects:[PFObject]?, error:NSError?) -> Void in
+            reportquery.whereKey("updatetext", equalTo: statusupdate.object(forKey: "updatetext")!)
+            
+            reportquery.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
                 
                 if error == nil {
                     
@@ -731,9 +750,9 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                             reportedID = object.objectId
                         }
                         
-                        var reportstatus:PFQuery!
+                        var reportstatus:PFQuery<PFObject>!
                         reportstatus = PFQuery(className: "StatusUpdate")
-                        reportstatus.getObjectInBackgroundWithId(reportedID, block: { (status:PFObject?, error:NSError?) -> Void in
+                        reportstatus.getObjectInBackground(withId: reportedID, block: { (status: PFObject?, error: Error?) in
                             
                             if (error == nil) {
                                 
@@ -747,43 +766,43 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         }
         
         // Setup the delete status button.
-        let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in
+        let deletestatus = UITableViewRowAction(style: .normal, title: "Delete") { (actiom, indexPath) -> Void in
             
-            var query:PFQuery!
+            var query:PFQuery<PFObject>!
             query = PFQuery(className: "StatusUpdate")
             query.includeKey("user")
             query.whereKey("objectId", equalTo: statusupdate.objectId!)
-            query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+            query.findObjectsInBackground(block: { (objects, error) -> Void in
                 
                 if (error == nil) {
                     
                     for object in objects! {
                         
-                        let userstr = object["user"]?.username!
+                        let userstr = (object["user"] as AnyObject).username!
                         
-                        if (userstr == PFUser.currentUser()?.username) {
+                        if (userstr == PFUser.current()?.username) {
                             
-                            statusupdate.deleteInBackgroundWithBlock({ (success, error) -> Void in
+                            statusupdate.deleteInBackground(block: { (success, error) -> Void in
                                 
                                 if (success) {
                                     
                                     // Remove the status update from the array.
-                                    self.statusObjects.removeObjectAtIndex(indexPath.row)
+                                    self.statusObjects.removeObject(at: (indexPath as NSIndexPath).row)
                                     
                                     // Remove the cell from the table view.
-                                    self.statusList.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                                    self.statusList.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
                                 }
                             })
                         }
                             
                         else {
                             
-                            let alert = UIAlertController(title: "Error", message: "You can only delete your own posts.", preferredStyle: .Alert)
-                            alert.view.tintColor = UIColor.flatGreenColor()
-                            let next = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+                            let alert = UIAlertController(title: "Error", message: "You can only delete your own posts.", preferredStyle: .alert)
+                            alert.view.tintColor = UIColor.flatGreen()
+                            let next = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
                             alert.addAction(next)
                             
-                            self.presentViewController(alert, animated: true, completion: nil)
+                            self.present(alert, animated: true, completion: nil)
                         }
                     }
                 }
@@ -799,7 +818,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // logged in user's profile is being shown as we don't
         // want other users to be able to delete your posts.
         
-        if ((self.passedUser == nil) || ((self.passedUser != nil) && (self.passedUser.username! == "\(PFUser.currentUser()!.username!)"))) {
+        if ((self.passedUser == nil) || ((self.passedUser != nil) && (self.passedUser.username! == "\(PFUser.current()!.username!)"))) {
             
             // For V1.0 we will not be adding access to
             // the "See More" section as it is not needed.
@@ -821,22 +840,22 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     
     // Alert methods.
     
-    func displayAlert(alertTitle: String, alertMessage: String) {
+    func displayAlert(_ alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
-        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         // Setup the alert actions.
-        let cancel = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+        let cancel = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
         alertController.addAction(cancel)
         
         // Present the alert on screen.
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     // Follow methods.
     
-    func followOrUnfolowUser(userData: PFUser) {
+    func followOrUnfolowUser(_ userData: PFUser) {
         
         // Send the user object to the ManageUser
         // class to follor ow unfollow the user.
@@ -845,20 +864,20 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             // Update the followers labels.
             self.setFollowDataCount(userData)
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 
                 // Update the follow button image.
                 
                 if (buttonTitle == "Follow") {
                     
                     // Set the follow user button image - not following.
-                    self.followButton.setImage(UIImage(named: "FollowButton.png"), forState: .Normal)
+                    self.followButton.setImage(UIImage(named: "FollowButton.png"), for: UIControlState())
                 }
                     
                 else {
                     
                     // Set the follow user button image - following.
-                    self.followButton.setImage(UIImage(named: "Following.png"), forState: .Normal)
+                    self.followButton.setImage(UIImage(named: "Following.png"), for: UIControlState())
                 }
                 
                 // Check to see if the follow/unfollow
@@ -879,14 +898,14 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    func setFollowDataCount(userData: PFUser) {
+    func setFollowDataCount(_ userData: PFUser) {
         
         // Get the user follow data.
         ManageUser.getFollowDataCount(userData) { (countObject) -> Void in
             
             // Set the followers and following labels.
-            self.profFollowers.text = "\((countObject.valueForKey("userFollowers") as! NSArray).count) people"
-            self.profFollowing.text = "\((countObject.valueForKey("userFollowing") as! NSArray).count) people"
+            self.profFollowers.text = "\((countObject.value(forKey: "userFollowers") as! NSArray).count) people"
+            self.profFollowing.text = "\((countObject.value(forKey: "userFollowing") as! NSArray).count) people"
         }
     }
 }

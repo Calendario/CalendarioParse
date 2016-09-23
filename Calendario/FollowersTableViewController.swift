@@ -29,16 +29,16 @@ class FollowersTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.setLeftBarButtonItem(backButton, animated: true)
+        self.navigationItem.setLeftBarButton(backButton, animated: true)
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         self.navigationItem.title  = "Followers"
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.isTranslucent = false
         let font = UIFont(name: "SFUIDisplay-Regular", size: 21)
-        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font!]
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: font!]
         self.navigationController!.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
         
         // Load in the user follower list.
@@ -51,14 +51,14 @@ class FollowersTableViewController: UITableViewController {
     {
         // Disallow table view access until
         // the data has been fully loaded.
-        self.tableView.userInteractionEnabled = false
+        self.tableView.isUserInteractionEnabled = false
                 
         followersdata.removeAllObjects()
         
-        var query:PFQuery!
+        var query:PFQuery<PFObject>!
         query = PFUser.query()
         query.whereKey("objectId", equalTo: passedInUser.objectId!)
-        query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+        query.findObjectsInBackground(block: { (objects, error) -> Void in
             if error == nil
             {
                 if let objects = objects
@@ -71,11 +71,11 @@ class FollowersTableViewController: UITableViewController {
                             
                             for followers in userFollowers
                             {                                
-                                self.followersdata.addObject(followers as! PFObject)
+                                self.followersdata.add(followers as! PFObject)
                                 
-                                let array:NSArray = self.followersdata.reverseObjectEnumerator().allObjects
+                                let array:NSArray = self.followersdata.reverseObjectEnumerator().allObjects as NSArray
                                 self.followersdata = NSMutableArray(array: array)
-                                self.tableView.userInteractionEnabled = true
+                                self.tableView.isUserInteractionEnabled = true
                                 self.tableView.reloadData()
                             }
                         })
@@ -85,8 +85,8 @@ class FollowersTableViewController: UITableViewController {
         })
     }
     
-    @IBAction func backButtonTapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func backButtonTapped(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -96,22 +96,22 @@ class FollowersTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return followersdata.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FollowersCell", forIndexPath: indexPath) as! FollowersTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FollowersCell", for: indexPath) as! FollowersTableViewCell
         
-        let followdata:PFObject = self.followersdata.objectAtIndex(indexPath.row) as! PFObject
-        let nameString = followdata.objectForKey("username") as! String
-        let fullNameString = followdata.objectForKey("fullName") as! String
+        let followdata:PFObject = self.followersdata.object(at: (indexPath as NSIndexPath).row) as! PFObject
+        let nameString = followdata.object(forKey: "username") as! String
+        let fullNameString = followdata.object(forKey: "fullName") as! String
         
         cell.usernameLabel.text = nameString
         cell.realNameLabel.text = fullNameString
@@ -120,10 +120,10 @@ class FollowersTableViewController: UITableViewController {
         cell.imageview.layer.cornerRadius = (cell.imageview.frame.size.width / 2)
         cell.imageview.clipsToBounds = true
         
-        var getImages:PFQuery!
+        var getImages:PFQuery<PFObject>!
         getImages = PFUser.query()!
-        getImages.whereKey("objectId", equalTo: followdata.valueForKey("objectId")!)
-        getImages.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+        getImages.whereKey("objectId", equalTo: followdata.value(forKey: "objectId")!)
+        getImages.findObjectsInBackground { (objects, error) -> Void in
             
             if error == nil {
                 self.getImageData(objects!, imageview: cell.imageview)
@@ -135,16 +135,16 @@ class FollowersTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let followData:PFObject = self.followersdata.objectAtIndex(indexPath.row) as! PFObject
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let followData:PFObject = self.followersdata.object(at: (indexPath as NSIndexPath).row) as! PFObject
         
-        let username = followData.objectForKey("username") as! String
+        let username = followData.object(forKey: "username") as! String
         
-        var query:PFQuery!
+        var query:PFQuery<PFObject>!
         query = PFUser.query()
         query?.includeKey("user")
         query?.whereKey("username", equalTo: username)
-        query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+        query?.findObjectsInBackground(block: { (objects, error) -> Void in
             if error == nil
             {
                 if let objects = objects
@@ -159,24 +159,24 @@ class FollowersTableViewController: UITableViewController {
         })
     }
 
-    func GotoProfile(user:PFUser)
+    func GotoProfile(_ user:PFUser)
     {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         var profile:MyProfileViewController!
-        profile = sb.instantiateViewControllerWithIdentifier("My Profile") as! MyProfileViewController
+        profile = sb.instantiateViewController(withIdentifier: "My Profile") as! MyProfileViewController
         profile.passedUser = user
-        self.presentViewController(profile, animated: true, completion: nil)
+        self.present(profile, animated: true, completion: nil)
     }
     
     // get images
     
-    func getImageData(objects:[PFObject], imageview:UIImageView)
+    func getImageData(_ objects:[PFObject], imageview:UIImageView)
     {
         for object in objects
         {
             if let image = object["profileImage"] as! PFFile?
             {
-                image.getDataInBackgroundWithBlock({ (ImageData, error) -> Void in
+                image.getDataInBackground(block: { (ImageData, error) -> Void in
                     if error == nil
                     {
                         let image = UIImage(data: ImageData!)

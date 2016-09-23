@@ -25,7 +25,7 @@ extern NSString *const CLCalendarBackgroundImageColor;      //BackgroundImage co
 @end
 
 
-@interface CLWeeklyCalendarView : UIView
+@interface CLWeeklyCalendarView : UIView <CAAnimationDelegate>
 
 @property (nonatomic, weak) id<CLWeeklyCalendarViewDelegate> delegate;
 @property (nonatomic, strong) NSDate *selectedDate;

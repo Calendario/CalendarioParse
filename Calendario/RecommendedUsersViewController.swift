@@ -20,21 +20,21 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
     
     // Setup the on screen button actions.
     
-    @IBAction func done(sender: UIBarButtonItem) {
+    @IBAction func done(_ sender: UIBarButtonItem) {
         // Go back to the login page.
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func followUser(sender: UIButton) {
+    @IBAction func followUser(_ sender: UIButton) {
         
         // Follow or unfollow the user account.
-        ManageUser.followOrUnfolowUser((randomData.objectAtIndex(sender.tag) as! PFUser)) { (followUnfollowstatus, test, hello) -> Void in
+        ManageUser.followOrUnfolowUser((randomData.object(at: sender.tag) as! PFUser)) { (followUnfollowstatus, test, hello) -> Void in
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 
                 // Update the cell follow button.
                 self.userTableView.beginUpdates()
-                self.userTableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: sender.tag, inSection: 0)], withRowAnimation: .None)
+                self.userTableView.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .none)
                 self.userTableView.endUpdates()
             })
         }
@@ -52,7 +52,7 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
     
     // View Did Appear method.
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         // Load the user data.
@@ -64,11 +64,11 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
     func loadRandomUsers() {
         
         // Setup the user query.
-        var findUser:PFQuery!
+        var findUser:PFQuery<PFObject>!
         findUser = PFUser.query()!
         
         // Get the user objects from Parse.
-        findUser.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+        findUser.findObjectsInBackground { (objects, error) -> Void in
             
             if (error == nil) {
                 
@@ -96,7 +96,7 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
                                 // If the user is the logged in user or has already
                                 // been added then do NOT allow it to be added.
                                 
-                                if (((self.randomData[loopTwo] as! PFUser).objectId! == (self.userData[Int(number)] as! PFUser).objectId!) || ((self.userData[Int(number)] as! PFUser).objectId! == PFUser.currentUser()!.objectId!)) {
+                                if (((self.randomData[loopTwo] as! PFUser).objectId! == (self.userData[Int(number)] as! PFUser).objectId!) || ((self.userData[Int(number)] as! PFUser).objectId! == PFUser.current()!.objectId!)) {
                                     
                                     // Set the data check to 'already added'.
                                     dataCheck = false
@@ -105,12 +105,12 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
                             }
                             
                             if (dataCheck == true) {
-                                self.randomData.addObject(self.userData[Int(number)])
+                                self.randomData.add(self.userData[Int(number)])
                             }
                         }
                             
                         else {
-                            self.randomData.addObject(self.userData[Int(number)])
+                            self.randomData.add(self.userData[Int(number)])
                         }
                     }
                     
@@ -123,25 +123,25 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
     
     // UITableView methods.
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.randomData.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // Setup the table view cell.
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! RecommendedUsersCustomCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! RecommendedUsersCustomCell
         
         // Turn the profile picture into a cirlce.
         cell.profileImageView.layer.cornerRadius = (cell.profileImageView.frame.size.width / 2)
         cell.profileImageView.clipsToBounds = true
         
         // Get the specific user object for this cell.
-        let currentObject:PFUser = randomData.objectAtIndex(indexPath.row) as! PFUser
+        let currentObject:PFUser = randomData.object(at: (indexPath as NSIndexPath).row) as! PFUser
         
         // Set the cell labels.
         cell.usernameLabel.text = currentObject.username
@@ -149,7 +149,7 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
         
         // Set the follow button tag needed
         // for the follow function method call.
-        cell.followButton.tag = indexPath.row
+        cell.followButton.tag = (indexPath as NSIndexPath).row
         
         // Set the follow user button state.
         ManageUser.alreadyFollowingUser(currentObject, currentUserCheckMode: true) { (followCheck, info) -> Void in
@@ -157,10 +157,11 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
             // Set the alpha and interaction proerties to the
             // default (ma change depending on other states).
             cell.followButton.alpha = 1.0
-            cell.followButton.userInteractionEnabled = true
+            cell.followButton.isUserInteractionEnabled = true
             
             if (followCheck == true) {
-                cell.followButton.setImage(UIImage(imageLiteral: "checkedUserV2"), forState: UIControlState.Normal)
+                cell.followButton.setImage(UIImage(imageLiteralResourceName: "checkedUserV2"), for: UIControlState())
+                
             }
             
             else {
@@ -169,7 +170,7 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
                 // a follow request has been made otherwise
                 // show the 'addUser' follow button image.
                 
-                if ((currentObject.objectForKey("privateProfile") as? Bool) == true) {
+                if ((currentObject.object(forKey: "privateProfile") as? Bool) == true) {
                     
                     ManageUser.checkFollowRequest(currentObject, completion: { (requestCheck) -> Void in
                         
@@ -179,14 +180,14 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
                             // the button alpha and do not allow the user
                             // to select the follow button for that user.
                             cell.followButton.alpha = 0.6
-                            cell.followButton.userInteractionEnabled = false
-                            cell.followButton.setImage(UIImage(imageLiteral: "waitingApproval"), forState: UIControlState.Normal)
+                            cell.followButton.isUserInteractionEnabled = false
+                            cell.followButton.setImage(UIImage(imageLiteralResourceName: "waitingApproval"), for: UIControlState())
                         }
                         
                         else {
                             
                             // No follow request has been made.
-                            cell.followButton.setImage(UIImage(imageLiteral: "addUserV2"), forState: UIControlState.Normal)
+                            cell.followButton.setImage(UIImage(imageLiteralResourceName: "addUserV2"), for: UIControlState())
                         }
                     })
                 }
@@ -194,7 +195,7 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
                 else {
                     
                     // The logged in user is not follow the cell user.
-                    cell.followButton.setImage(UIImage(imageLiteral: "addUserV2"), forState: UIControlState.Normal)
+                    cell.followButton.setImage(UIImage(imageLiteralResourceName: "addUserV2"), for: UIControlState())
                 }
             }
         }
@@ -203,7 +204,7 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
         if let userImageFile = currentObject["profileImage"] {
             
             // Download the profile image.
-            userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+            (userImageFile as AnyObject).getDataInBackground(block: { (imageData: Data?, error: Error?) in
                 
                 if (error == nil) {
                     
@@ -219,7 +220,7 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
                 } else {
                     cell.profileImageView.image = UIImage(named: "default_profile_pic.png")
                 }
-            }
+            })
         } else {
             cell.profileImageView.image = UIImage(named: "default_profile_pic.png")
         }
@@ -227,7 +228,7 @@ class RecommendedUsersViewController : UIViewController, UITableViewDelegate, UI
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 74
     }
     

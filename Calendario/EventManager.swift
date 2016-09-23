@@ -13,41 +13,41 @@ import Parse
 // events such as: find all the attendants of an event.
 @objc class EventManager : NSObject {
     
-    @objc class func getEventAttendants(eventID: String, completion: (attendants: Array<AnyObject>) -> Void) {
+    @objc class func getEventAttendants(_ eventID: String, completion: @escaping (_ attendants: Array<AnyObject>) -> Void) {
         
-        var attendantQuery: PFQuery!
+        var attendantQuery: PFQuery<PFObject>!
         attendantQuery = PFQuery(className: "StatusUpdate")
         attendantQuery.whereKey("objectId", equalTo: eventID)
-        attendantQuery.getFirstObjectInBackgroundWithBlock { (eventObject, error) -> Void in
+        attendantQuery.getFirstObjectInBackground { (eventObject, error) -> Void in
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 if ((error == nil) && (eventObject != nil))
                 {
-                    completion(attendants: eventObject!["rsvpArray"] as! Array<AnyObject>)
+                    completion(eventObject!["rsvpArray"] as! Array<AnyObject>)
                 }
                 else
                 {
-                    completion(attendants: [])
+                    completion([])
                 }
             })
         }
     }
     
-    @objc class func getUserAttendingEvents(eventID: String, forUser: PFUser, completion: (attendingEvents: Array<AnyObject>) -> Void) {
+    @objc class func getUserAttendingEvents(_ eventID: String, forUser: PFUser, completion: @escaping (_ attendingEvents: Array<AnyObject>) -> Void) {
         
-        var userAttendingEventsQuery: PFQuery!
+        var userAttendingEventsQuery: PFQuery<PFObject>!
         userAttendingEventsQuery = PFQuery(className: "StatusUpdate")
-        userAttendingEventsQuery.whereKey("rsvpArray", containsString: forUser.objectId!)
-        userAttendingEventsQuery.findObjectsInBackgroundWithBlock { (eventObjects, error) -> Void in
+        userAttendingEventsQuery.whereKey("rsvpArray", contains: forUser.objectId!)
+        userAttendingEventsQuery.findObjectsInBackground { (eventObjects, error) -> Void in
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 if ((error == nil) && (eventObjects != nil))
                 {
-                    completion(attendingEvents: eventObjects!)
+                    completion(eventObjects!)
                 }
                 else
                 {
-                    completion(attendingEvents: [])
+                    completion([])
                 }
             })
         }

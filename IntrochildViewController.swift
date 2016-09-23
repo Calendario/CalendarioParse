@@ -19,14 +19,14 @@ class IntrochildViewController: UIViewController, UIPageViewControllerDataSource
     func lastPageDone() {
         print("View Controller says Last page done")
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: Page View Controller Datasource
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        if let index = pages.indexOf(viewController.restorationIdentifier!) {
+        if let index = pages.index(of: viewController.restorationIdentifier!) {
             
             if index > 0 {
                 return viewControllerAtIndex(index - 1)
@@ -37,9 +37,9 @@ class IntrochildViewController: UIViewController, UIPageViewControllerDataSource
     }
     
 
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        if let index = pages.indexOf(viewController.restorationIdentifier!) {
+        if let index = pages.index(of: viewController.restorationIdentifier!) {
             
             if index < pages.count - 1 {
                 return viewControllerAtIndex(index + 1)
@@ -50,8 +50,8 @@ class IntrochildViewController: UIViewController, UIPageViewControllerDataSource
         return nil
     }
     
-    func viewControllerAtIndex(index: Int) -> UIViewController? {
-        let vc = storyboard?.instantiateViewControllerWithIdentifier(pages[index])
+    func viewControllerAtIndex(_ index: Int) -> UIViewController? {
+        let vc = storyboard?.instantiateViewController(withIdentifier: pages[index])
         
         if pages[index] == "Pagethree" {
             
@@ -68,7 +68,7 @@ class IntrochildViewController: UIViewController, UIPageViewControllerDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let vc = storyboard?.instantiateViewControllerWithIdentifier("IntroPageViewController") {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "IntroPageViewController") {
             self.addChildViewController(vc)
             self.view.addSubview(vc.view)
             
@@ -76,8 +76,8 @@ class IntrochildViewController: UIViewController, UIPageViewControllerDataSource
             pageViewController.dataSource = self
             pageViewController.delegate = self
             
-            pageViewController.setViewControllers([viewControllerAtIndex(0)!], direction: .Forward, animated: true, completion: nil)
-            pageViewController.didMoveToParentViewController(self)
+            pageViewController.setViewControllers([viewControllerAtIndex(0)!], direction: .forward, animated: true, completion: nil)
+            pageViewController.didMove(toParentViewController: self)
             
         }
        

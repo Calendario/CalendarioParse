@@ -8,6 +8,26 @@
 
 import Foundation
 import Parse
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 /***************************************************
 
@@ -29,15 +49,15 @@ var finalData:NSMutableArray = []
     
     // Check username string methods.
     
-    class func correctStringWithUsernames(inputString: String, completion: (correctString: String) -> Void) {
+    class func correctStringWithUsernames(_ inputString: String, completion: @escaping (_ correctString: String) -> Void) {
 
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             
             // Create the final string and get all
             // the seperate strings from the data.
             var finalString: String!
             var commentSegments: NSArray!
-            commentSegments = inputString.componentsSeparatedByString(" ")
+            commentSegments = inputString.components(separatedBy: " ") as NSArray
             
             if (commentSegments.count > 0) {
                 
@@ -48,12 +68,12 @@ var finalData:NSMutableArray = []
                     let currentString = commentSegments[loop] as! String
                     let capitalLetterRegEx  = ".*[A-Z]+.*"
                     let textData = NSPredicate(format:"SELF MATCHES %@", capitalLetterRegEx)
-                    let capitalResult = textData.evaluateWithObject(currentString)
+                    let capitalResult = textData.evaluate(with: currentString)
                     
                     // Check if the current loop string
                     // is a @user mention string or not.
                     
-                    if (currentString.containsString("@")) {
+                    if (currentString.contains("@")) {
                         
                         // If we are in the first loop then set the
                         // string otherwise concatenate the string.
@@ -64,7 +84,7 @@ var finalData:NSMutableArray = []
                                 
                                 // The username contains capital letters
                                 // so change it to a lower case version.
-                                finalString = currentString.lowercaseString
+                                finalString = currentString.lowercased()
                             }
                                 
                             else {
@@ -80,7 +100,7 @@ var finalData:NSMutableArray = []
                                 
                                 // The username contains capital letters
                                 // so change it to a lower case version.
-                                finalString = "\(finalString) \(currentString.lowercaseString)"
+                                finalString = "\(finalString) \(currentString.lowercased())"
                             }
                                 
                             else {
@@ -114,13 +134,13 @@ var finalData:NSMutableArray = []
             }
             
             // Pass back the correct username string.
-            completion(correctString: finalString)
+            completion(finalString)
         })
     }
     
     // Follow/Unfollow user methods.
     
-    class func followOrUnfolowUser(userData:PFUser, completion: (followUnfollowstatus: Bool, String, String) -> Void) {
+    class func followOrUnfolowUser(_ userData:PFUser, completion: @escaping (_ followUnfollowstatus: Bool, String, String) -> Void) {
         
         // Check if the logged in user is
         // already following the passed in user.
@@ -137,7 +157,7 @@ var finalData:NSMutableArray = []
                 // Submit the follow request.
                 FollowRequest(userData, completion: { (requestStatus) -> Void in
                     
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         
                         var messageAlert:String!
                         
@@ -150,7 +170,7 @@ var finalData:NSMutableArray = []
                         }
                         
                         // Set the follow request completion.
-                        completion(followUnfollowstatus: requestStatus, messageAlert, "Follow")
+                        completion(requestStatus, messageAlert, "Follow")
                     })
                 })
             }
@@ -158,9 +178,9 @@ var finalData:NSMutableArray = []
             else {
                 
                 // Setup the follow/unfollow.
-                var dataQuery:PFQuery!
+                var dataQuery:PFQuery<PFObject>!
                 dataQuery = PFQuery(className: "FollowersAndFollowing")
-                dataQuery.getObjectInBackgroundWithId(objectID, block: { (returnObject, error) -> Void in
+                dataQuery.getObjectInBackground(withId: objectID, block: { (returnObject, error) -> Void in
                     
                     // Follow/unfollow alert/button string.
                     var messageAlert:String!
@@ -178,7 +198,7 @@ var finalData:NSMutableArray = []
                         buttonTitle = "Follow"
                         
                         // Unfollow the user account.
-                        returnObject!.removeObject(userData.objectId!, forKey: "userFollowing")
+                        returnObject!.remove(userData.objectId!, forKey: "userFollowing")
                     }
                         
                     else {
@@ -195,7 +215,7 @@ var finalData:NSMutableArray = []
                     
                     // Save the data for the logged in user
                     // and the other (un)followed user.
-                    returnObject!.saveInBackgroundWithBlock({ (success, error) -> Void in
+                    returnObject!.saveInBackground(block: { (success, error) -> Void in
                         
                         if (success) {
                             
@@ -208,29 +228,29 @@ var finalData:NSMutableArray = []
                                 if (followStatus == false) {
                                     
                                     // Create the push notification message.
-                                    let pushMessage = "\(PFUser.currentUser()!.username!) has followed you."
+                                    let pushMessage = "\(PFUser.current()!.username!) has followed you."
                                     
                                     // Submit the push notification.
-                                    PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage, "user" : "\(userData.objectId!)"])
+                                    PFCloud.callFunction(inBackground: "FollowersAndFollowing", withParameters: ["message" : pushMessage, "user" : "\(userData.objectId!)"])
                                     
                                     // Save the push notification string on the notification class.
-                                    self.saveUserNotification(pushMessage, fromUser: PFUser.currentUser()!, toUser: userData, extType: "user", extObjectID: "n/a")
+                                    self.saveUserNotification(pushMessage, fromUser: PFUser.current()!, toUser: userData, extType: "user", extObjectID: "n/a")
                                 }
                                 
-                                dispatch_async(dispatch_get_main_queue(), {
+                                DispatchQueue.main.async(execute: {
                                     
                                     // The follow/unfollow operation has succeded.
-                                    completion(followUnfollowstatus: updateUserStatus, messageAlert, buttonTitle)
+                                    completion(updateUserStatus, messageAlert, buttonTitle)
                                 })
                             })
                         }
                             
                         else {
                             
-                            dispatch_async(dispatch_get_main_queue(), {
+                            DispatchQueue.main.async(execute: {
                                 
                                 // The follow/unfollow operation has failed.
-                                completion(followUnfollowstatus: false, (error?.localizedDescription)!, buttonTitle)
+                                completion(false, (error?.localizedDescription)!, buttonTitle)
                             })
                         }
                     })
@@ -239,16 +259,16 @@ var finalData:NSMutableArray = []
         }
     }
     
-    class func updateOtherUserData(userData:PFUser, followType:Bool, completion: (updateUserStatus: Bool) -> Void) {
+    class func updateOtherUserData(_ userData:PFUser, followType:Bool, completion: @escaping (_ updateUserStatus: Bool) -> Void) {
         
         // Get the passed in users following/followers
         // row objectID and add the new 'followers' data.
         self.alreadyFollowingUser(userData, currentUserCheckMode: false) { (status, objectID) -> Void in
             
             // Setup the follow/unfollow request.
-            var dataQuery:PFQuery!
+            var dataQuery:PFQuery<PFObject>!
             dataQuery = PFQuery(className: "FollowersAndFollowing")
-            dataQuery.getObjectInBackgroundWithId(objectID, block: { (returnObject, error) -> Void in
+            dataQuery.getObjectInBackground(withId: objectID, block: { (returnObject, error) -> Void in
                 
                 // Add or remove the new follower depending on
                 // the current status of the 'followers' array.
@@ -256,61 +276,61 @@ var finalData:NSMutableArray = []
                 if (followType == true) {
                     
                     // Remove the follower.
-                    returnObject!.removeObject(PFUser.currentUser()!.objectId!, forKey: "userFollowers")
+                    returnObject!.remove(PFUser.current()!.objectId!, forKey: "userFollowers")
                 }
                     
                 else {
                     
                     // Add the user as a new follower.
-                    returnObject!.addUniqueObject(PFUser.currentUser()!.objectId!, forKey: "userFollowers")
+                    returnObject!.addUniqueObject(PFUser.current()!.objectId!, forKey: "userFollowers")
                 }
                 
                 // Save the data for the passed in user.
-                returnObject!.saveInBackgroundWithBlock({ (success, error) -> Void in
+                returnObject!.saveInBackground(block: { (success, error) -> Void in
                     
-                    dispatch_async(dispatch_get_main_queue(), {
-                        completion(updateUserStatus: success)
+                    DispatchQueue.main.async(execute: {
+                        completion(success)
                     })
                 })
             })
         }
     }
     
-    class func acceptFollowRequest(requester:PFUser, completion: (followSuccess: Bool, error: String) -> Void) {
+    class func acceptFollowRequest(_ requester:PFUser, completion: @escaping (_ followSuccess: Bool, _ error: String) -> Void) {
         
         // Get the logged in users follower array data.
-        var currentUserQuery:PFQuery!
+        var currentUserQuery:PFQuery<PFObject>!
         currentUserQuery = PFQuery(className: "FollowersAndFollowing")
-        currentUserQuery.whereKey("userLink", equalTo: PFUser.currentUser()!)
-        currentUserQuery.getFirstObjectInBackgroundWithBlock { (currentUserObject, error) -> Void in
+        currentUserQuery.whereKey("userLink", equalTo: PFUser.current()!)
+        currentUserQuery.getFirstObjectInBackground { (currentUserObject, error) -> Void in
             
             // Add the requester to the logged in user's followers array.
             currentUserObject!.addUniqueObject(requester.objectId!, forKey: "userFollowers")
             
             // Save the new follower to the data array.
-            currentUserObject!.saveInBackgroundWithBlock({ (success, error) -> Void in
+            currentUserObject!.saveInBackground(block: { (success, error) -> Void in
                 
                 // Get the requesters following array data.
-                var requesterQuery:PFQuery!
+                var requesterQuery:PFQuery<PFObject>!
                 requesterQuery = PFQuery(className: "FollowersAndFollowing")
                 requesterQuery.whereKey("userLink", equalTo: requester)
-                requesterQuery.getFirstObjectInBackgroundWithBlock({ (requesterObject, requesrtError) -> Void in
+                requesterQuery.getFirstObjectInBackground(block: { (requesterObject, requesrtError) -> Void in
                     
                     // Add the logged in user as a user
                     // that the requester is now following.
-                    requesterObject!.addUniqueObject(PFUser.currentUser()!.objectId!, forKey: "userFollowing")
+                    requesterObject!.addUniqueObject(PFUser.current()!.objectId!, forKey: "userFollowing")
                     
                     // Save the new following to the requesters data array.
-                    requesterObject!.saveInBackgroundWithBlock({ (success, error) -> Void in
+                    requesterObject!.saveInBackground(block: { (success, error) -> Void in
                         
-                        dispatch_async(dispatch_get_main_queue(), {
+                        DispatchQueue.main.async(execute: {
                             
                             if (error == nil) {
-                                completion(followSuccess: success, error: "n/a")
+                                completion(success, "n/a")
                             }
                             
                             else {
-                                completion(followSuccess: success, error: (requesrtError?.localizedDescription)!)
+                                completion(success, (requesrtError?.localizedDescription)!)
                             }
                         })
                     })
@@ -322,7 +342,7 @@ var finalData:NSMutableArray = []
     
     // User notification save method.
     
-    class func saveUserNotification(notifcation:String, fromUser:PFUser, toUser:PFUser, extType:String, extObjectID:String) {
+    class func saveUserNotification(_ notifcation:String, fromUser:PFUser, toUser:PFUser, extType:String, extObjectID:String) {
         
         // Only save the notification if the user recieving
         // the notification is NOT the same as the logged in user.
@@ -331,25 +351,25 @@ var finalData:NSMutableArray = []
             
             // Get the notifications object for the
             // currently logged in user account.
-            var notificationQuery:PFQuery!
+            var notificationQuery:PFQuery<PFObject>!
             notificationQuery = PFQuery(className: "userNotifications")
             notificationQuery.whereKey("userLink", equalTo: toUser)
-            notificationQuery.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+            notificationQuery.getFirstObjectInBackground { (object, error) -> Void in
                 
                 // Check for errors before continuing.
                 
                 if (error == nil) {
                     
                     // Add the from user object.
-                    object?.addObject(fromUser, forKey: "fromUser")
+                    object?.add(fromUser, forKey: "fromUser")
                     
                     // Add the new notification.
-                    object?.addObject(notifcation, forKey: "notificationStrings")
+                    object?.add(notifcation, forKey: "notificationStrings")
                     
                     // Add the external object ID - if the
                     // ID is set to "n/a" - it wont be used by
                     // the notifications view conroller.
-                    object?.addObject([extType, extObjectID], forKey: "extLink")
+                    object?.add([extType, extObjectID], forKey: "extLink")
                     
                     // Save the notification data.
                     object?.saveInBackground()
@@ -358,22 +378,22 @@ var finalData:NSMutableArray = []
         }
     }
     
-    class func getUserNotifications(userData:PFUser, completion: (notificationFromUser: NSArray, notificationStrings: NSArray, extLinks: NSArray) -> Void) {
+    class func getUserNotifications(_ userData:PFUser, completion: @escaping (_ notificationFromUser: NSArray, _ notificationStrings: NSArray, _ extLinks: NSArray) -> Void) {
         
         // Get the notifications for a particular user.
-        var notificationQuery:PFQuery!
+        var notificationQuery:PFQuery<PFObject>!
         notificationQuery = PFQuery(className: "userNotifications")
         notificationQuery.whereKey("userLink", equalTo: userData)
         notificationQuery.limit = 30
-        notificationQuery.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+        notificationQuery.getFirstObjectInBackground { (object, error) -> Void in
             
             // Check for errors before continuing.
             
             if (error == nil) {
                 
                 // Pass the data back if correctly loaded.
-                dispatch_async(dispatch_get_main_queue(), {
-                    completion(notificationFromUser: (object?.valueForKey("fromUser"))! as! NSArray, notificationStrings: (object?.valueForKey("notificationStrings"))! as! NSArray, extLinks: (object?.valueForKey("extLink"))! as! NSArray)
+                DispatchQueue.main.async(execute: {
+                    completion((object?.value(forKey: "fromUser"))! as! NSArray, (object?.value(forKey: "notificationStrings"))! as! NSArray, (object?.value(forKey: "extLink"))! as! NSArray)
                 })
             }
         }
@@ -381,64 +401,64 @@ var finalData:NSMutableArray = []
     
     // User follower/following data.
     
-    class func checkFollowRequest(toUser:PFUser , completion: (requestCheck: Bool) -> Void) {
+    class func checkFollowRequest(_ toUser:PFUser , completion: @escaping (_ requestCheck: Bool) -> Void) {
         
         // Check if the "toUser" has a follow
         // request from the logged in user.
-        var requestCheck:PFQuery!
+        var requestCheck:PFQuery<PFObject>!
         requestCheck = PFQuery(className: "FollowRequest")
-        requestCheck.whereKey("Requester", equalTo: PFUser.currentUser()!)
+        requestCheck.whereKey("Requester", equalTo: PFUser.current()!)
         requestCheck.whereKey("desiredfollower", equalTo: toUser)
-        requestCheck.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+        requestCheck.getFirstObjectInBackground { (object, error) -> Void in
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 
                 // If the follow request has been made
                 // return true otherwise return false.
                 
                 if (object == nil) {
-                    completion(requestCheck: false)
+                    completion(false)
                 }
                 
                 else {
-                    completion(requestCheck: true)
+                    completion(true)
                 }
             })
         }
     }
     
-    @objc class func getUserFollowersList(userData:PFUser , completion: (userFollowers: NSMutableArray) -> Void) {
+    @objc class func getUserFollowersList(_ userData:PFUser , completion: @escaping (_ userFollowers: NSMutableArray) -> Void) {
         
         // Get the user followers data.
         self.downloadFFClassData(userData, includeCurrentUser: false, type: 1) { (userFollowData) -> Void in
             
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(userFollowers: userFollowData)
+            DispatchQueue.main.async(execute: {
+                completion(userFollowData)
             })
         }
     }
     
-    class func getUserFollowingList(userData:PFUser, withCurrentUser:Bool , completion: (userFollowing: NSMutableArray) -> Void) {
+    class func getUserFollowingList(_ userData:PFUser, withCurrentUser:Bool , completion: @escaping (_ userFollowing: NSMutableArray) -> Void) {
         
         // Get the user following data.
         self.downloadFFClassData(userData, includeCurrentUser: withCurrentUser, type: 2) { (userFollowData) -> Void in
             
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(userFollowing: userFollowData)
+            DispatchQueue.main.async(execute: {
+                completion(userFollowData)
             }) 
         }
     }
     
-    class func downloadFFClassData(userData:PFUser, includeCurrentUser:Bool, type:Int, completion: (userFollowData: NSMutableArray) -> Void) {
+    class func downloadFFClassData(_ userData:PFUser, includeCurrentUser:Bool, type:Int, completion: @escaping (_ userFollowData: NSMutableArray) -> Void) {
         
         // Setup following query.
-        var queryFollowData:PFQuery!
+        var queryFollowData:PFQuery<PFObject>!
         queryFollowData = PFQuery(className: "FollowersAndFollowing")
-        queryFollowData.orderByDescending("createdAt")
+        queryFollowData.order(byDescending: "createdAt")
         queryFollowData.addDescendingOrder("updatedAt")
         queryFollowData.whereKey("userLink", equalTo: userData)
         
-        queryFollowData.getFirstObjectInBackgroundWithBlock { (objects, error) in
+        queryFollowData.getFirstObjectInBackground { (objects, error) in
             
             // Clear the user data array.
             finalData = NSMutableArray()
@@ -454,13 +474,13 @@ var finalData:NSMutableArray = []
                 if (type == 1) {
                     
                     // Get the followers information.
-                    followData = objects!.valueForKey("userFollowers") as! Array<String>!
+                    followData = objects!.value(forKey: "userFollowers") as! Array<String>!
                 }
                     
                 else if (type == 2) {
                     
                     // Get the following information.
-                    followData = objects!.valueForKey("userFollowing") as! Array<String>!
+                    followData = objects!.value(forKey: "userFollowing") as! Array<String>!
                 }
                 
                 // User data download loop count.
@@ -472,15 +492,15 @@ var finalData:NSMutableArray = []
                 for loop in 0..<followData.count {
                     
                     // Convert the object IDs to PFUser objects.
-                    var queryUser:PFQuery!
+                    var queryUser:PFQuery<PFObject>!
                     queryUser = PFUser.query()
                     queryUser.whereKey("objectId", equalTo: followData[loop] as String)
                     
                     // Perform the object ID request.
-                    queryUser.getFirstObjectInBackgroundWithBlock({ (userObject, error) -> Void in
+                    queryUser.getFirstObjectInBackground(block: { (userObject, error) -> Void in
                         
                         // Pass the data back if correctly loaded.
-                        dispatch_async(dispatch_get_main_queue(), {
+                        DispatchQueue.main.async(execute: {
                             
                             // Increment the download user count.
                             downloadCount = downloadCount + 1
@@ -488,7 +508,7 @@ var finalData:NSMutableArray = []
                             // Add the correct data in.
                             
                             if ((error == nil) && (userObject != nil)) {
-                                finalData.addObject(userObject as! PFUser)
+                                finalData.add(userObject as! PFUser)
                             }
                             
                             // If the download count matches the user array count
@@ -502,11 +522,11 @@ var finalData:NSMutableArray = []
                                 if (includeCurrentUser == true) {
                                     
                                     // Add in the logged in user (for the newsfeed).
-                                    finalData.addObject(PFUser.currentUser()!)
+                                    finalData.add(PFUser.current()!)
                                 }
                                 
                                 // Send back the follow data array.
-                                completion(userFollowData: finalData)
+                                completion(finalData)
                             }
                         })
                     })
@@ -514,37 +534,37 @@ var finalData:NSMutableArray = []
             } else {
                 
                 // Send back the follow data array.
-                completion(userFollowData: finalData)
+                completion(finalData)
             }
         }
     }
     
     // User object ID methods.
     
-    class func getObjectIDForFFClass(userData:PFUser, completion: (idNumber: String) -> Void) {
+    class func getObjectIDForFFClass(_ userData:PFUser, completion: @escaping (_ idNumber: String) -> Void) {
         
         // Get the ObjectID for one of the
         // following/followers rows.
-        var queryID:PFQuery!
+        var queryID:PFQuery<PFObject>!
         queryID = PFQuery(className: "FollowersAndFollowing")
         queryID.whereKey("userLink", equalTo: userData)
         
         // Perform the object ID request.
-        queryID.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+        queryID.findObjectsInBackground { (objects, error) -> Void in
             
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(idNumber: (objects?[0].objectId)!)
+            DispatchQueue.main.async(execute: {
+                completion((objects?[0].objectId)!)
             })
         }
     }
     
     // Already following user check method.
     
-    class func alreadyFollowingUser(userData:PFUser, currentUserCheckMode:Bool, completion: (status: Bool, String) -> Void) {
+    class func alreadyFollowingUser(_ userData:PFUser, currentUserCheckMode:Bool, completion: @escaping (_ status: Bool, String) -> Void) {
         
         // Check if the logged in user is already
         // following the passed in user object.
-        var queryFollowing:PFQuery!
+        var queryFollowing:PFQuery<PFObject>!
         queryFollowing = PFQuery(className: "FollowersAndFollowing")
         
         // Set the query keys depending on whether
@@ -554,17 +574,17 @@ var finalData:NSMutableArray = []
         
         if (currentUserCheckMode == true) {
             
-            queryFollowing.whereKey("userFollowing", containsAllObjectsInArray: [userData.objectId!])
-            queryFollowing.whereKey("userLink", equalTo: PFUser.currentUser()!)
+            queryFollowing.whereKey("userFollowing", containsAllObjectsIn: [userData.objectId!])
+            queryFollowing.whereKey("userLink", equalTo: PFUser.current()!)
         }
         
         else {
             
-            queryFollowing.whereKey("userFollowing", containsAllObjectsInArray: [(PFUser.currentUser()?.objectId)!])
+            queryFollowing.whereKey("userFollowing", containsAllObjectsIn: [(PFUser.current()?.objectId)!])
             queryFollowing.whereKey("userLink", equalTo: userData)
         }
     
-        queryFollowing.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+        queryFollowing.findObjectsInBackground { (objects, error) -> Void in
             
             // Check if an error has occurred.
             
@@ -576,17 +596,17 @@ var finalData:NSMutableArray = []
                 
                 if (objects?.count > 0) {
                     
-                    dispatch_async(dispatch_get_main_queue(), {
-                        completion(status: true, (objects?[0].objectId)!)
+                    DispatchQueue.main.async(execute: {
+                        completion(true, (objects?[0].objectId)!)
                     })
                 }
                     
                 else {
                     
-                    self.getObjectIDForFFClass((currentUserCheckMode ? PFUser.currentUser()! : userData), completion: { (idNumber) -> Void in
+                    self.getObjectIDForFFClass((currentUserCheckMode ? PFUser.current()! : userData), completion: { (idNumber) -> Void in
                         
-                        dispatch_async(dispatch_get_main_queue(), {
-                            completion(status: false, idNumber)
+                        DispatchQueue.main.async(execute: {
+                            completion(false, idNumber)
                         })
                     })
                 }
@@ -596,13 +616,13 @@ var finalData:NSMutableArray = []
     
     // User data count methods.
     
-    class func getFollowDataCount(userData: PFUser, completion:(countObject: PFObject) -> Void) {
+    class func getFollowDataCount(_ userData: PFUser, completion:@escaping (_ countObject: PFObject) -> Void) {
         
         // Get the follower/following count for the user.
-        var queryObjectID:PFQuery!
+        var queryObjectID:PFQuery<PFObject>!
         queryObjectID = PFQuery(className: "FollowersAndFollowing")
         queryObjectID.whereKey("userLink", equalTo: userData)
-        queryObjectID.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+        queryObjectID.findObjectsInBackground { (objects, error) -> Void in
             
             // Check if an error has occured.
             
@@ -610,12 +630,12 @@ var finalData:NSMutableArray = []
                 
                 // Get the data object which relates to the 
                 // correct user in the FollowersAndFollowing class.
-                var dataQuery:PFQuery!
+                var dataQuery:PFQuery<PFObject>!
                 dataQuery = PFQuery(className: "FollowersAndFollowing")
-                dataQuery.getObjectInBackgroundWithId((objects?[0].objectId)!, block: { (returnObject, error) -> Void in
+                dataQuery.getObjectInBackground(withId: (objects?[0].objectId)!, block: { (returnObject, error) -> Void in
                     
-                    dispatch_async(dispatch_get_main_queue(), {
-                        completion(countObject: returnObject!)
+                    DispatchQueue.main.async(execute: {
+                        completion(returnObject!)
                     })
                 })
             }
@@ -626,61 +646,61 @@ var finalData:NSMutableArray = []
 
 // Follow request function.
 
-func FollowRequest(userData:PFUser, completion:(requestStatus: Bool) -> Void) {
+func FollowRequest(_ userData:PFUser, completion:@escaping (_ requestStatus: Bool) -> Void) {
     
     // Check if the request has already been made.
-    var followQuery:PFQuery!
+    var followQuery:PFQuery<PFObject>!
     followQuery = PFQuery(className: "FollowRequest")
-    followQuery.whereKey("Requester", equalTo: PFUser.currentUser()!)
+    followQuery.whereKey("Requester", equalTo: PFUser.current()!)
     followQuery.whereKey("desiredfollower", equalTo: userData)
-    followQuery.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+    followQuery.getFirstObjectInBackground { (object, error) -> Void in
         
         // Check if the request already exists.
         
         if (object == nil) {
             
             // Setup the expiry date limit (+1 month).
-            var dateCommpoents:NSDateComponents!
-            dateCommpoents = NSDateComponents()
+            var dateCommpoents:DateComponents!
+            dateCommpoents = DateComponents()
             dateCommpoents.month = 1
             
             // Get the current calendar data.
-            var calendar: NSCalendar!
-            calendar = NSCalendar.currentCalendar()
+            var calendar: Calendar!
+            calendar = Calendar.current
             
             // Set the expiry date to 30 days from the current date.
-            var expireDate:NSDate!
-            expireDate = calendar.dateByAddingComponents(dateCommpoents, toDate: NSDate(), options: NSCalendarOptions())!
+            var expireDate:Date!
+            expireDate = calendar.date(byAdding: dateCommpoents, to: Date())
             
             // Convert the date into a more reaable form
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = DateFormatter.Style.short
             dateFormatter.dateFormat = "M/d/yy"
             
             // Create the human readable date string.
-            let readableDate = dateFormatter.stringFromDate(expireDate)
+            let readableDate = dateFormatter.string(from: expireDate)
             
             // Create user follow request object.
             var followRequest:PFObject!
             followRequest = PFObject(className: "FollowRequest")
-            followRequest["Requester"] = PFUser.currentUser()
+            followRequest["Requester"] = PFUser.current()
             followRequest["desiredfollower"] = userData
             followRequest["expiredate"] = readableDate
             
             // Save the follow request on Parse.
-            followRequest.saveInBackgroundWithBlock({ (success, error) -> Void in
+            followRequest.saveInBackground(block: { (success, error) -> Void in
                 
                 // Create the push notification message.
-                let pushMessage = "\(PFUser.currentUser()!.username!) would like to follow you."
+                let pushMessage = "\(PFUser.current()!.username!) would like to follow you."
                 
                 // Submit the push notification.
-                PFCloud.callFunctionInBackground("FollowersAndFollowing", withParameters: ["message" : pushMessage, "user" : "\(userData.objectId!)"])
+                PFCloud.callFunction(inBackground: "FollowersAndFollowing", withParameters: ["message" : pushMessage, "user" : "\(userData.objectId!)"])
                 
                 // Save the push notification string on the notification class.
-                ManageUser.saveUserNotification(pushMessage, fromUser: PFUser.currentUser()!, toUser: userData, extType: "user", extObjectID: "user")
+                ManageUser.saveUserNotification(pushMessage, fromUser: PFUser.current()!, toUser: userData, extType: "user", extObjectID: "user")
                 
-                dispatch_async(dispatch_get_main_queue(), {
-                    completion(requestStatus: success)
+                DispatchQueue.main.async(execute: {
+                    completion(success)
                 })
             })
         }
@@ -689,8 +709,8 @@ func FollowRequest(userData:PFUser, completion:(requestStatus: Bool) -> Void) {
             
             // The request already exists so lets pass back true
             // so that the user knows their request has been made.
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(requestStatus: true)
+            DispatchQueue.main.async(execute: {
+                completion(true)
             })
         }
     }

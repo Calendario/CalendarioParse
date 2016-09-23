@@ -22,19 +22,19 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
     
     // Setup the on screen button actions.
     
-    @IBAction func resetPassword(sender: UIButton) {
+    @IBAction func resetPassword(_ sender: UIButton) {
     
         // Check the entered email address.
         self.checkEmailAddress()
     }
     
-    @IBAction func cancel(sender: UIButton) {
+    @IBAction func cancel(_ sender: UIButton) {
         
         // Dismiss the keyboard.
         self.emailField.resignFirstResponder()
         
         // Go back to the login page.
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     // View Did Load method.
@@ -61,13 +61,13 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
         let dataEmail = self.emailField.text
         
         // Submit the password reset request.
-        PFUser.requestPasswordResetForEmailInBackground(dataEmail!) { (success, error) -> Void in
+        PFUser.requestPasswordResetForEmail(inBackground: dataEmail!) { (success, error) -> Void in
             
             // Run the alert code on the main thread.
-            dispatch_async(dispatch_get_main_queue(),{
+            DispatchQueue.main.async(execute: {
                 
                 // Notify the user that the app has stopped loading.
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 
                 if (success && (error == nil)) {
                     
@@ -89,10 +89,10 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
         
         // Check the entered email address.
         
-        if (self.emailField.hasText()) {
+        if (self.emailField.hasText) {
             
             // Notify the user that the app is loading.
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             
             // Reset the user password.
             self.resetPassword()
@@ -105,10 +105,10 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
     
     // Alert methods.
     
-    func displayAlert(alertTitle: String, alertMessage: String) {
+    func displayAlert(_ alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
-        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         // Setup the alert actions.
         
@@ -120,25 +120,25 @@ class ResetPasswordViewController : UIViewController, UITextFieldDelegate {
                 self.emailField.resignFirstResponder()
                 
                 // Go back to the login page.
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             }
-            let next = UIAlertAction(title: "Continue", style: .Default, handler: nextHandler)
+            let next = UIAlertAction(title: "Continue", style: .default, handler: nextHandler)
             alertController.addAction(next)
         }
         
         else {
             
-            let cancel = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+            let cancel = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
             alertController.addAction(cancel)
         }
         
         // Present the alert on screen.
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     // Other methods.
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         // Check the entered email address.
         self.checkEmailAddress()

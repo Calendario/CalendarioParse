@@ -31,7 +31,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
     @IBOutlet weak var privateSwitch: UISwitch!
     
     // Store the selected profile image data.
-    var imageData : NSData!
+    var imageData : Data!
     
     // Profile image set by user check.
     var userSetImage = false
@@ -41,13 +41,13 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
     
     // Setup the on screen button actions.
     
-    @IBAction func saveEdit(sender: UIButton) {
+    @IBAction func saveEdit(_ sender: UIButton) {
         
         // Check the data before saving it.
         checkData()
     }
     
-    @IBAction func editPicture(sender: UIButton) {
+    @IBAction func editPicture(_ sender: UIButton) {
         
         // Setup the image picker view controller.
         var imagePicker:UIImagePickerController!
@@ -56,36 +56,36 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         imagePicker.allowsEditing = true
         
         // Setup the alert controller.
-        let imageAlert = UIAlertController(title: "Profile Picture", message: "Add a photo from your library or take a picture with the camera.", preferredStyle: .Alert)
+        let imageAlert = UIAlertController(title: "Profile Picture", message: "Add a photo from your library or take a picture with the camera.", preferredStyle: .alert)
         
         // Photo library action button.
         let libraryPicture = { (action:UIAlertAction!) -> Void in
             
             // Check if the device has a photo library.
             
-            if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)) {
+            if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary)) {
                 
                 // Access the photo library (not the camera).
-                imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+                imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
                 
                 // Request photo library authorisation.
                 let check = PHPhotoLibrary.authorizationStatus()
                 
                 // Check to see what the users response if.
                 
-                if (check == PHAuthorizationStatus.Authorized) {
-                    self.presentViewController(imagePicker, animated: true, completion: nil)
+                if (check == PHAuthorizationStatus.authorized) {
+                    self.present(imagePicker, animated: true, completion: nil)
                 }
                     
-                else if ((check == PHAuthorizationStatus.NotDetermined) || (check == PHAuthorizationStatus.Denied)) {
+                else if ((check == PHAuthorizationStatus.notDetermined) || (check == PHAuthorizationStatus.denied)) {
                     
                     // Request library authorisation.
                     PHPhotoLibrary.requestAuthorization({ (status) -> Void in
                         
                         // Check to see if access has been granted.
                         
-                        if (status == PHAuthorizationStatus.Authorized) {
-                            self.presentViewController(imagePicker, animated: true, completion: nil)
+                        if (status == PHAuthorizationStatus.authorized) {
+                            self.present(imagePicker, animated: true, completion: nil)
                         }
                             
                         else {
@@ -94,7 +94,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
                     })
                 }
                     
-                else if (check == PHAuthorizationStatus.Restricted) {
+                else if (check == PHAuthorizationStatus.restricted) {
                     self.displayAlert("Error", alertMessage: "You have not granted access to your photo library.")
                 }
             }
@@ -103,23 +103,23 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
                 self.displayAlert("Error", alertMessage: "Your device does not have a photo library")
             }
         }
-        let buttonOne = UIAlertAction(title: "Library", style: .Default, handler: libraryPicture)
+        let buttonOne = UIAlertAction(title: "Library", style: .default, handler: libraryPicture)
         
         // Take a picture button.
         let cameraPicture = { (action:UIAlertAction!) -> Void in
             
             // Check if the device has a camera.
             
-            if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
+            if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
                 
                 // Access the camera (not the photo library).
-                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+                imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
                 
                 // Request access to the camera.
-                AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: { (success) -> Void in
+                AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (success) -> Void in
                     
                     if (success) {
-                        self.presentViewController(imagePicker, animated: true, completion: nil)
+                        self.present(imagePicker, animated: true, completion: nil)
                     }
                         
                     else {
@@ -132,7 +132,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
                 self.displayAlert("Error", alertMessage: "Your device does not have a camera.")
             }
         }
-        let buttonTwo = UIAlertAction(title: "Camera", style: .Default, handler: cameraPicture)
+        let buttonTwo = UIAlertAction(title: "Camera", style: .default, handler: cameraPicture)
         
         // Set to default picture button.
         let defaultPicture = { (action:UIAlertAction!) -> Void in
@@ -146,10 +146,10 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
             // Set the profile picture to the default image.
             self.userPicture.image = UIImage(named: "default_profile_pic.png")
         }
-        let buttonThree = UIAlertAction(title: "Default picture", style: .Default, handler: defaultPicture)
+        let buttonThree = UIAlertAction(title: "Default picture", style: .default, handler: defaultPicture)
         
         // Cancel button.
-        let buttonFour = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        let buttonFour = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         
         // Add the actions to the alert.
         imageAlert.addAction(buttonOne)
@@ -162,10 +162,10 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         imageAlert.addAction(buttonFour)
         
         // Present the alert on screen.
-        self.presentViewController(imageAlert, animated: true, completion: nil)
+        self.present(imageAlert, animated: true, completion: nil)
     }
     
-    @IBAction func goBack(sender: UIButton) {
+    @IBAction func goBack(_ sender: UIButton) {
         
         // Dismiss the keyboard.
         self.view.resignFirstResponder()
@@ -177,34 +177,34 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         // Check if the user has saved their edits.
         
         if (editSavedCheck == true) {
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
         
         else if (editSavedCheck == false) {
             
             // Setup the alert controller.
-            let exitAlert = UIAlertController(title: "Unsaved changes", message: "Are you sure you want to go back? Your new changes have not been saved.", preferredStyle: .Alert)
+            let exitAlert = UIAlertController(title: "Unsaved changes", message: "Are you sure you want to go back? Your new changes have not been saved.", preferredStyle: .alert)
             
             // Exit alert action buttons.
             let ok = { (action:UIAlertAction!) -> Void in
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             }
-            let buttonOne = UIAlertAction(title: "Exit without saving changes", style: .Destructive, handler: ok)
+            let buttonOne = UIAlertAction(title: "Exit without saving changes", style: .destructive, handler: ok)
             
             let cancel = { (action:UIAlertAction!) -> Void in
             }
-            let buttonTwo = UIAlertAction(title: "Cancel", style: .Default, handler: cancel)
+            let buttonTwo = UIAlertAction(title: "Cancel", style: .default, handler: cancel)
             
             // Add the actions to the alert.
             exitAlert.addAction(buttonOne)
             exitAlert.addAction(buttonTwo)
             
             // Present the alert on screen.
-            self.presentViewController(exitAlert, animated: true, completion: nil)
+            self.present(exitAlert, animated: true, completion: nil)
         }
     }
     
-    @IBAction func switchChangeState(sender: UISwitch) {
+    @IBAction func switchChangeState(_ sender: UISwitch) {
         editSavedCheck = false
     }
     
@@ -214,13 +214,13 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         super.viewDidLoad()
         
         // Set the loading view background colour.
-        loadingView.backgroundColor = UIColor.clearColor()
+        loadingView.backgroundColor = UIColor.clear
         
         // Add a blur view to the loading view.
         var visualEffectView:UIVisualEffectView!
-        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark)) as UIVisualEffectView
+        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark)) as UIVisualEffectView
         visualEffectView.frame = loadingView.bounds
-        loadingView.insertSubview(visualEffectView, atIndex: 0)
+        loadingView.insertSubview(visualEffectView, at: 0)
         
         // Turn the profile picture into a cirlce.
         self.userPicture.layer.cornerRadius = (self.userPicture.frame.size.width / 2)
@@ -234,12 +234,12 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         editSavedCheck = true
         
         // Allow the user to dismiss the keyboard with a toolabr.
-        let editToolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.frame.size.width, 50))
-        editToolbar.barStyle = UIBarStyle.Default
+        let editToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50))
+        editToolbar.barStyle = UIBarStyle.default
         
         editToolbar.items = [
-            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EditProfileViewController.textViewDismissKeyboard))
+            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(EditProfileViewController.textViewDismissKeyboard))
         ]
         
         editToolbar.sizeToFit()
@@ -265,8 +265,8 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         }
         
         // Setup the profile scroll view.
-        self.editScroll.scrollEnabled = true
-        self.editScroll.contentSize = CGSizeMake(self.view.bounds.width, scrollHeight)
+        self.editScroll.isScrollEnabled = true
+        self.editScroll.contentSize = CGSize(width: self.view.bounds.width, height: scrollHeight)
     }
     
     // Data methods.
@@ -281,13 +281,13 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         var currentUser:PFUser!
         
         // Show the currently logged in user.
-        currentUser = PFUser.currentUser()
+        currentUser = PFUser.current()
         
         // Get the current user details.
-        self.userFullName.text = currentUser?.objectForKey("fullName") as? String
-        self.userDescription.text = currentUser?.objectForKey("userBio") as? String
-        self.userEmail.text = currentUser?.objectForKey("email") as? String
-        let lockCheck = currentUser?.objectForKey("privateProfile") as? Bool
+        self.userFullName.text = currentUser?.object(forKey: "fullName") as? String
+        self.userDescription.text = currentUser?.object(forKey: "userBio") as? String
+        self.userEmail.text = currentUser?.object(forKey: "email") as? String
+        let lockCheck = currentUser?.object(forKey: "privateProfile") as? Bool
         
         // Update the private profile switch.
         privateSwitch.setOn(lockCheck!, animated: true)
@@ -300,11 +300,11 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         self.userName.text = userString as String
         
         // Check the website URL link.
-        userWebsite.text = currentUser?.objectForKey("website") as? String
+        userWebsite.text = currentUser?.object(forKey: "website") as? String
         
         // Check if the user has a profile image.
         
-        if (currentUser.objectForKey("profileImage") == nil) {
+        if (currentUser.object(forKey: "profileImage") == nil) {
             self.userPicture.image = UIImage(named: "default_profile_pic.png")
         }
             
@@ -314,7 +314,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
             let userImageFile = currentUser!["profileImage"] as! PFFile
             
             // Download the user image.
-            userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+            userImageFile.getDataInBackground(block: { (imageData: Data?, error: Error?) in
                 
                 if (error == nil) {
                     
@@ -329,7 +329,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
                 } else {
                     self.userPicture.image = UIImage(named: "default_profile_pic.png")
                 }
-            }
+            })
         }
         
         // Enable access to the UI and
@@ -392,7 +392,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
             // are no capital letters in the string.
             let capitalLetterRegEx  = ".*[A-Z]+.*"
             let textData = NSPredicate(format:"SELF MATCHES %@", capitalLetterRegEx)
-            let capitalresult = textData.evaluateWithObject(self.userName.text)
+            let capitalresult = textData.evaluate(with: self.userName.text)
             
             if (capitalresult == true) {
                 
@@ -457,7 +457,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         
         // Setup the Parse user object.
         var currentUser:PFUser!
-        currentUser = PFUser.currentUser()
+        currentUser = PFUser.current()
         
         // Set the user data in the Parse object.
         currentUser["fullName"] = self.userFullName.text
@@ -468,7 +468,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         
         // Set the private profile property.
         
-        if (privateSwitch.on == true) {
+        if (privateSwitch.isOn == true) {
             currentUser["privateProfile"] = true
         }
         
@@ -477,15 +477,15 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         }
         
         // Store current username is NSUserDefults so it can be used later to follow a user.
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(self.userName.text, forKey: "username")
+        let defaults = UserDefaults.standard
+        defaults.set(self.userName.text, forKey: "username")
         defaults.synchronize()
         
         // Set the user password if a new 
         // one has been created by the user.
-        let passCheck = (userPassword.text)!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        let passCheck = (userPassword.text)!.trimmingCharacters(in: CharacterSet.whitespaces)
         
-        if ((userPassword.hasText() == true) && (passCheck.characters.count > 0)) {
+        if ((userPassword.hasText == true) && (passCheck.characters.count > 0)) {
             currentUser.password = self.userPassword.text
         }
         
@@ -501,7 +501,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         }
         
         // Upload the changes to the Parse servers.
-        currentUser.saveInBackgroundWithBlock { (success, error) -> Void in
+        currentUser.saveInBackground { (success, error) -> Void in
             
             // Enable access to the UI and
             // hide the loading indicator view.
@@ -510,70 +510,70 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
             // Check if the data has been saved.
             
             if (success) {
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             }
                 
             else {
                 
                 // Display the error alert.
-                self.displayAlert("Error", alertMessage: "\(error?.description)")
+                self.displayAlert("Error", alertMessage: "\(error?.localizedDescription)")
             }
         }
     }
     
     // UI access methods.
     
-    func changeUIAccess(mode : Bool) {
+    func changeUIAccess(_ mode : Bool) {
         
         // True means we should enable access to the UI
         // objects and false means we should disable access.
-        userEmail.userInteractionEnabled = mode
-        userName.userInteractionEnabled = mode
-        userPassword.userInteractionEnabled = mode
-        userReEnterPassword.userInteractionEnabled = mode
-        userDescription.userInteractionEnabled = mode
-        userFullName.userInteractionEnabled = mode
-        userWebsite.userInteractionEnabled = mode
-        editScroll.userInteractionEnabled = mode
-        saveButton.enabled = mode
-        backButton.enabled = mode
+        userEmail.isUserInteractionEnabled = mode
+        userName.isUserInteractionEnabled = mode
+        userPassword.isUserInteractionEnabled = mode
+        userReEnterPassword.isUserInteractionEnabled = mode
+        userDescription.isUserInteractionEnabled = mode
+        userFullName.isUserInteractionEnabled = mode
+        userWebsite.isUserInteractionEnabled = mode
+        editScroll.isUserInteractionEnabled = mode
+        saveButton.isEnabled = mode
+        backButton.isEnabled = mode
         
         // Show or hide the loading indicator views.
         
         if (mode == true) {
             
             loadingView.alpha = 0.0
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
             
         else if (mode == false) {
             
             loadingView.alpha = 1.0
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
         }
     }
     
     // Alert methods.
     
-    func displayAlert(alertTitle: String, alertMessage: String) {
+    func displayAlert(_ alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
-        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         // Setup the alert actions.
-        let cancel = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+        let cancel = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
         alertController.addAction(cancel)
         
         // Present the alert on screen.
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     // Other methods.
     
-    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!){
+    func imagePickerController(_ picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!){
         
         // Dismiss the image picker view controller.
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+        self.dismiss(animated: true, completion: { () -> Void in
             
             // New edits have been made.
             self.editSavedCheck = false
@@ -591,7 +591,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
     
     func setPlaceholderAlpha() {
         
-        if (self.userDescription.hasText()) {
+        if (self.userDescription.hasText) {
             self.userDescriptionPlaceholder.alpha = 0.0
         }
             
@@ -600,13 +600,13 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         }
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         
         editSavedCheck = false
         self.setPlaceholderAlpha()
     }
     
-    func textViewDidChange(textView: UITextView) {
+    func textViewDidChange(_ textView: UITextView) {
         
         editSavedCheck = false
         self.setPlaceholderAlpha()
@@ -618,7 +618,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         userDescription.resignFirstResponder()
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         editSavedCheck = false
         textField.resignFirstResponder()

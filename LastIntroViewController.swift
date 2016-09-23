@@ -18,7 +18,7 @@ class LastIntroViewController: UIViewController {
 
     
     // MARK: IBActions
-    @IBAction func doneButtonTapped(sender: UIButton) {
+    @IBAction func doneButtonTapped(_ sender: UIButton) {
         
         if delegate != nil {
             delegate?.lastPageDone()

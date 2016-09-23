@@ -19,8 +19,8 @@ class WebPageViewController : UIViewController, UIWebViewDelegate {
     
     // Setup the on screen button actions.
     
-    @IBAction func goBack(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func goBack(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     // View Did Load method.
@@ -37,8 +37,8 @@ class WebPageViewController : UIViewController, UIWebViewDelegate {
             titleLabel.text = passedURL
             
             // Setup the URL scheme check.
-            var urlComp: NSURLComponents!
-            urlComp = NSURLComponents(string: passedURL)!
+            var urlComp: URLComponents!
+            urlComp = URLComponents(string: passedURL)!
             
             // If the URL does not have a scheme then
             // add the standard 'http' URL scheme in.
@@ -53,8 +53,8 @@ class WebPageViewController : UIViewController, UIWebViewDelegate {
             }
 
             // Load the website in the web view.
-            let url = NSURL(string: passedURL)
-            let requestObj = NSURLRequest(URL: url!)
+            let url = URL(string: passedURL)
+            let requestObj = URLRequest(url: url!)
             webPage.loadRequest(requestObj)
         }
         
@@ -65,17 +65,17 @@ class WebPageViewController : UIViewController, UIWebViewDelegate {
     
     /// Web View methods.
     
-    func webViewDidStartLoad(webView: UIWebView) {
+    func webViewDidStartLoad(_ webView: UIWebView) {
         
         // Notify the user that the app is loading.
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         
         // Get the website title/URL.
-        let webTitle = webPage.stringByEvaluatingJavaScriptFromString("document.title")
-        let webURL = webPage.request!.URL!.absoluteString
+        let webTitle = webPage.stringByEvaluatingJavaScript(from: "document.title")
+        let webURL = webPage.request!.url!.absoluteString
         
         // Set the website title.
         
@@ -95,41 +95,41 @@ class WebPageViewController : UIViewController, UIWebViewDelegate {
         }
         
         // Notify the user that the app has stopped loading.
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         
         // Display the error message to the user.
-        self.displayAlert("Error", alertMessage: "An error has occured: \(error!.localizedDescription)")
+        self.displayAlert("Error", alertMessage: "An error has occured: \(error.localizedDescription)")
     }
     
     // Alert methods.
     
-    func displayAlert(alertTitle: String, alertMessage: String) {
+    func displayAlert(_ alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
-        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         // Setup the alert actions.
-        let cancel = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+        let cancel = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
         alertController.addAction(cancel)
         
         // Present the alert on screen.
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     
-    @IBAction func ActionPressed(sender: AnyObject) {
-        OpeninSafari(NSURL(string: "http://\(passedURL)")!)
+    @IBAction func ActionPressed(_ sender: AnyObject) {
+        OpeninSafari(URL(string: "http://\(passedURL)")!)
     }
     
     
     // Other methods.
     
-    func OpeninSafari(url:NSURL)
+    func OpeninSafari(_ url:URL)
     {
-        UIApplication.sharedApplication().openURL(url)
+        UIApplication.shared.openURL(url)
     }
     
     override func didReceiveMemoryWarning() {

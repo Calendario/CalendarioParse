@@ -9,6 +9,26 @@
 import Foundation
 import UIKit
 import Parse
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -31,10 +51,10 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
     
     //MARK: BUTTONS.
     
-    @IBAction func openFilterSettings(sender: UIButton) {
+    @IBAction func openFilterSettings(_ sender: UIButton) {
         let sb = UIStoryboard(name: "SearchFilterUI", bundle: nil)
-        let filterVC = sb.instantiateViewControllerWithIdentifier("FilterView") as! SearchFilterView
-        self.presentViewController(filterVC, animated: true, completion: nil)
+        let filterVC = sb.instantiateViewController(withIdentifier: "FilterView") as! SearchFilterView
+        self.present(filterVC, animated: true, completion: nil)
     }
     
     //MARK: VIWW DID LOAD METHOD.
@@ -46,7 +66,7 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
     
     //MARK: VIEW DID APPEAR METHOD.
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
@@ -55,17 +75,17 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
     func setupUI() {
         
         // Create and add the intro view to the search view.
-        self.introSearchView = UIView(frame: CGRectMake(0, (self.view.frame.size.height / 2), self.view.frame.size.width, 200))
+        self.introSearchView = UIView(frame: CGRect(x: 0, y: (self.view.frame.size.height / 2), width: self.view.frame.size.width, height: 200))
         self.view.addSubview(self.introSearchView)
-        self.introSearchLabel = UITextView(frame: CGRectMake((self.introSearchView.frame.origin.x / 2), 0, (self.introSearchView.frame.size.width - 14), 100))
+        self.introSearchLabel = UITextView(frame: CGRect(x: (self.introSearchView.frame.origin.x / 2), y: 0, width: (self.introSearchView.frame.size.width - 14), height: 100))
         self.introSearchView.addSubview(self.introSearchLabel)
         self.introSearchLabel.text = "Search for users and events. Tap the filter button to set event filters."
-        self.introSearchLabel.textAlignment = NSTextAlignment.Center
-        self.introSearchLabel.editable = false
-        self.introSearchLabel.userInteractionEnabled = false
-        self.introSearchImage = UIImageView(frame:CGRectMake((self.introSearchView.bounds.width / 2) - 10, -50, 40, 40));
+        self.introSearchLabel.textAlignment = NSTextAlignment.center
+        self.introSearchLabel.isEditable = false
+        self.introSearchLabel.isUserInteractionEnabled = false
+        self.introSearchImage = UIImageView(frame:CGRect(x: (self.introSearchView.bounds.width / 2) - 10, y: -50, width: 40, height: 40));
         self.introSearchImage.image = UIImage(named: "searchTabLogo.png")
-        self.introSearchImage.contentMode = .ScaleAspectFit
+        self.introSearchImage.contentMode = .scaleAspectFit
         self.introSearchView.addSubview(self.introSearchImage)
         
         // Set the various label fonts.
@@ -76,22 +96,22 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         self.noEventsLabel.font = UIFont(name: "SFUIDisplay-Regular", size: 17)
         
         // Set the various UI properties.
-        self.userList.keyboardDismissMode = UIScrollViewKeyboardDismissMode.OnDrag
-        self.eventList.keyboardDismissMode = UIScrollViewKeyboardDismissMode.OnDrag
+        self.userList.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
+        self.eventList.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
         self.userList.backgroundColor = UIColor(red: 223.0/255, green: 223.0/255, blue: 223.0/255, alpha: 1.0)
-        self.searchBar.tintColor = UIColor.whiteColor()
-        self.noUsersLabel.hidden = true
-        self.noEventsLabel.hidden = true
-        self.introSearchView.hidden = false
-        self.eventList.hidden = true
+        self.searchBar.tintColor = UIColor.white
+        self.noUsersLabel.isHidden = true
+        self.noEventsLabel.isHidden = true
+        self.introSearchView.isHidden = false
+        self.eventList.isHidden = true
         
         // Allow the user to dismiss the keyboard with a toolabr.
-        let editToolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.frame.size.width, 50))
-        editToolbar.barStyle = UIBarStyle.Default
+        let editToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50))
+        editToolbar.barStyle = UIBarStyle.default
         
         editToolbar.items = [
-            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SearchViewV2.hideKeyboard))
+            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(SearchViewV2.hideKeyboard))
         ]
         
         editToolbar.sizeToFit()
@@ -102,8 +122,8 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
             for subsubView in subView.subviews {
                 
                 if let textField = subsubView as? UITextField {
-                    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Search", comment: ""), attributes: [NSForegroundColorAttributeName: UIColor.lightGrayColor()])
-                    textField.textColor = UIColor.whiteColor()
+                    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Search", comment: ""), attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
+                    textField.textColor = UIColor.white
                 }
             }
         }
@@ -111,13 +131,13 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
     
     //MARK: DATA LOADING METHODS.
     
-    func loadUserData(inputString: String) {
+    func loadUserData(_ inputString: String) {
         
-        var findUsers:PFQuery!
+        var findUsers:PFQuery<PFObject>!
         findUsers = PFUser.query()!
-        findUsers.whereKey("username", containsString: inputString.lowercaseString)
+        findUsers.whereKey("username", contains: inputString.lowercased())
         
-        findUsers.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
+        findUsers.findObjectsInBackground { (objects:[PFObject]?, error: Error?) in
             
             self.userData.removeAllObjects()
             
@@ -125,29 +145,29 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
                 self.userData = NSMutableArray(array: (objects! as NSArray))
             }
             
-            self.noUsersLabel.hidden = (self.userData.count > 0)
+            self.noUsersLabel.isHidden = (self.userData.count > 0)
             self.userList.reloadData()
         }
         
         self.reloadNewsFeed(inputString)
     }
     
-    func reloadNewsFeed(inputString: String) {
+    func reloadNewsFeed(_ inputString: String) {
         
         // Get the search filter settings.
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let locationState = defaults.objectForKey("filterLocationCheck") as? Bool
-        let userState = defaults.objectForKey("filterUserCheck") as? Bool
+        let defaults = UserDefaults.standard
+        let locationState = defaults.object(forKey: "filterLocationCheck") as? Bool
+        let userState = defaults.object(forKey: "filterUserCheck") as? Bool
         var locationMode:Int = 2
         var point:PFGeoPoint = PFGeoPoint(latitude: 0, longitude: 0)
         var locatonRadius:Double = 0
         
         if (locationState == true) {
             
-            let locationLat = defaults.objectForKey("filterLocationLat") as? Double
-            let locationLon = defaults.objectForKey("filterLocationLon") as? Double
-            locatonRadius = (defaults.objectForKey("filterLocationRadius") as? Double)!
-            let locatonRadiusType = defaults.objectForKey("filterLocationRadiusType") as? String
+            let locationLat = defaults.object(forKey: "filterLocationLat") as? Double
+            let locationLon = defaults.object(forKey: "filterLocationLon") as? Double
+            locatonRadius = (defaults.object(forKey: "filterLocationRadius") as? Double)!
+            let locatonRadiusType = defaults.object(forKey: "filterLocationRadiusType") as? String
             point = PFGeoPoint(latitude:locationLat!, longitude:locationLon!)
             
             if (locatonRadiusType == "mi") {
@@ -159,26 +179,26 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         
         if (userState == true) {
             
-            var findUser:PFQuery!
+            var findUser:PFQuery<PFObject>!
             findUser = PFUser.query()!
-            findUser.getObjectInBackgroundWithId((defaults.objectForKey("filterUserObject") as? String)!, block: { (userAccount, error) in
+            findUser.getObjectInBackground(withId: (defaults.object(forKey: "filterUserObject") as? String)!, block: { (userAccount, error) in
                 
                 if (error == nil) {
                     self.loadNewsFeedData(inputString, locationMode: locationMode, locationPoint: point, radius: locatonRadius, userMode: true, inputUser: (userAccount as! PFUser))
                     
                 } else {
-                    self.loadNewsFeedData(inputString, locationMode: locationMode, locationPoint: point, radius: locatonRadius, userMode: false, inputUser: PFUser.currentUser()!)
+                    self.loadNewsFeedData(inputString, locationMode: locationMode, locationPoint: point, radius: locatonRadius, userMode: false, inputUser: PFUser.current()!)
                 }
             })
         } else {
-            self.loadNewsFeedData(inputString, locationMode: locationMode, locationPoint: point, radius: locatonRadius, userMode: false, inputUser: PFUser.currentUser()!)
+            self.loadNewsFeedData(inputString, locationMode: locationMode, locationPoint: point, radius: locatonRadius, userMode: false, inputUser: PFUser.current()!)
         }
     }
     
-    func loadNewsFeedData(inputString: String, locationMode: Int, locationPoint: PFGeoPoint, radius: Double, userMode: Bool, inputUser: PFUser) {
+    func loadNewsFeedData(_ inputString: String, locationMode: Int, locationPoint: PFGeoPoint, radius: Double, userMode: Bool, inputUser: PFUser) {
         
         // Setup the status update query.
-        var query:PFQuery!
+        var query:PFQuery<PFObject>!
         query = PFQuery(className:"StatusUpdate")
         query.limit = 100
         query.whereKey("eventTitle", matchesRegex: inputString, modifiers: "i")
@@ -194,7 +214,7 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         }
         
         // Get the status update(s).
-        query.findObjectsInBackgroundWithBlock({ (statusUpdates, error) -> Void in
+        query.findObjectsInBackground(block: { (statusUpdates, error) -> Void in
             
             self.statusData.removeAllObjects()
             
@@ -206,9 +226,9 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         })
     }
     
-    func runSecondFeedQuery(inputString: String, locationMode: Int, locationPoint: PFGeoPoint, radius: Double, userMode: Bool, inputUser: PFUser) {
+    func runSecondFeedQuery(_ inputString: String, locationMode: Int, locationPoint: PFGeoPoint, radius: Double, userMode: Bool, inputUser: PFUser) {
 
-        var queryTwo:PFQuery!
+        var queryTwo:PFQuery<PFObject>!
         queryTwo = PFQuery(className:"StatusUpdate")
         queryTwo.limit = 100
         queryTwo.whereKey("updatetext", matchesRegex: inputString, modifiers: "i")
@@ -223,7 +243,7 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
             queryTwo.whereKey("user", equalTo: inputUser)
         }
         
-        queryTwo.findObjectsInBackgroundWithBlock({ (statusUpdatesTwo, errorTwo) -> Void in
+        queryTwo.findObjectsInBackground(block: { (statusUpdatesTwo, errorTwo) -> Void in
             
             if ((errorTwo == nil) && (statusUpdatesTwo!.count > 0)) {
                 
@@ -245,7 +265,7 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
                         }
                         
                         if (matchCheck == false) {
-                            self.statusData.addObject(statusTwo)
+                            self.statusData.add(statusTwo)
                         }
                     }
                     
@@ -264,7 +284,7 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
     func organizeNewsFeedData() {
         
         // Get the feed filter settings.
-        let filterSettings = NSUserDefaults.standardUserDefaults()
+        let filterSettings = UserDefaults.standard
         
         // Only sort the data if there are
         // any status updates for the user.
@@ -272,20 +292,20 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         if (self.statusData.count > 0) {
             
             // Sort the status updates by the 'createdAt' date.
-            let newData:NSArray = (self.statusData.copy() as! NSArray).sortedArrayUsingComparator { (obj1, obj2) -> NSComparisonResult in
+            let newData:NSArray = (self.statusData.copy() as! NSArray).sortedArray (comparator: { (obj1, obj2) -> ComparisonResult in
                 return ((obj2 as! PFObject).createdAt?.compare((obj1 as! PFObject).createdAt!))!
-            }
+            }) as NSArray
             
             // Save the sorted data to the mutable array.
             let tempData = NSMutableArray(array: newData)
             
             // Get the data/user filter settings.
-            let dateState = filterSettings.objectForKey("filterDateCheck") as? Bool
+            let dateState = filterSettings.object(forKey: "filterDateCheck") as? Bool
             
             if (dateState == true) {
                 
-                let dateStart = filterSettings.objectForKey("filterDateStart") as? NSDate
-                let dateEnd = filterSettings.objectForKey("filterDateEnd") as? NSDate
+                let dateStart = filterSettings.object(forKey: "filterDateStart") as? Date
+                let dateEnd = filterSettings.object(forKey: "filterDateEnd") as? Date
                 
                 self.sortedArray.removeAllObjects()
                 
@@ -297,10 +317,10 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
                         
                         if ((dateString as! String).characters.count > 1) {
                             
-                            let date:NSDate = self.convertStringToDate(dateString as! String)
+                            let date:Date = self.convertStringToDate(dateString as! String)
                             
                             if (self.isBetweenDates(dateStart!, endDate: dateEnd!, dateToCheck: date) == true) {
-                                self.sortedArray.addObject(tempData[loop])
+                                self.sortedArray.add(tempData[loop])
                             }
                         }
                     }
@@ -317,69 +337,69 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         }
         
         // Reload the table view.
-        self.eventList.scrollEnabled = (self.sortedArray.count > 0)
-        self.noEventsLabel.hidden = (self.sortedArray.count > 0)
+        self.eventList.isScrollEnabled = (self.sortedArray.count > 0)
+        self.noEventsLabel.isHidden = (self.sortedArray.count > 0)
         self.eventList.reloadData()
     }
     
-    func isBetweenDates(beginDate: NSDate, endDate: NSDate, dateToCheck: NSDate) -> Bool {
+    func isBetweenDates(_ beginDate: Date, endDate: Date, dateToCheck: Date) -> Bool {
         
-        if dateToCheck.compare(beginDate) == .OrderedAscending {
+        if dateToCheck.compare(beginDate) == .orderedAscending {
             return false
         }
         
-        if dateToCheck.compare(endDate) == .OrderedDescending {
+        if dateToCheck.compare(endDate) == .orderedDescending {
             return false
         }
         
         return true
     }
     
-    func convertStringToDate(inputText: String) -> NSDate {
+    func convertStringToDate(_ inputText: String) -> Date {
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.short
         dateFormatter.dateFormat = "M/d/yy"
-        dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
 
-        return dateFormatter.dateFromString(inputText)!
+        return dateFormatter.date(from: inputText)!
     }
     
     //MARK: OTHER METHODS.
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         // Check the search text.
-        let searchCheck = searchText.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let searchCheck = searchText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         if (searchCheck.characters.count > 0) {
             self.titleLabelOne.text = "Users matching \"\(searchText)\""
             self.titleLabelTwo.text = "Events with \"\(searchText)\""
-            self.introSearchView.hidden = true
-            self.eventList.hidden = false
+            self.introSearchView.isHidden = true
+            self.eventList.isHidden = false
             self.loadUserData(searchText)
         } else {
-            self.introSearchView.hidden = false
-            self.eventList.hidden = true
-            self.noEventsLabel.hidden = true
+            self.introSearchView.isHidden = false
+            self.eventList.isHidden = true
+            self.noEventsLabel.isHidden = true
         }
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.hideKeyboard()
     }
     
-    func displayAlert(alertTitle: String, alertMessage: String) {
+    func displayAlert(_ alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
-        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         // Setup the alert actions.
-        let cancel = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+        let cancel = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
         alertController.addAction(cancel)
         
         // Present the alert on screen.
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     func hideKeyboard() {
@@ -388,112 +408,113 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
     
     //MARK: COLLECTIONVIEW METHODS.
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.userData.count
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("UserCell", forIndexPath: indexPath) as! SearchUserCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserCell", for: indexPath) as! SearchUserCell
         
-        if (indexPath.row < self.userData.count) {
-            cell.passedInUser = self.userData[indexPath.row] as! PFUser
+        if ((indexPath as NSIndexPath).row < self.userData.count) {
+            cell.passedInUser = self.userData[(indexPath as NSIndexPath).row] as! PFUser
         }
         
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if (indexPath.row < self.userData.count) {
-            PresentingViews.showProfileView(self.userData[indexPath.row] as! PFUser, viewController: self)
+        if ((indexPath as NSIndexPath).row < self.userData.count) {
+            PresentingViews.showProfileView(self.userData[(indexPath as NSIndexPath).row] as! PFUser, viewController: self)
         }
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 100)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(0, 0, 0, 0)
     }
     
     //MARK: TABLEVIEW METHODS.
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.sortedArray.count
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return nil
     }
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 511.0
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // Setup the table view custom cell.
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NewsfeedTableViewCell
         
         // Pass in the parent view controller.
         cell.parentViewController = self
         
         // Get the specific status object for this cell and call all needed methods.
-        cell.passedInObject = self.sortedArray[indexPath.row] as! PFObject
+        cell.passedInObject = self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject
         
-        ParseCalls.findUserDetails(self.sortedArray[indexPath.row] as! PFObject, usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
+        ParseCalls.findUserDetails(self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
         
-        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[indexPath.row] as! PFObject, cell: cell)
+        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, cell: cell)
         
-        ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.sortedArray[indexPath.row] as! PFObject)
+        ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject)
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {() -> Void in
+        DispatchQueue.global(qos: .background).async {
             
             // Background Thread
-            DateManager.createDateDifferenceString((self.sortedArray[indexPath.row] as! PFObject).createdAt!) { (difference) -> Void in
+            DateManager.createDateDifferenceString((self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject).createdAt!) { (difference) -> Void in
                 
-                dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                DispatchQueue.main.async(execute: {() -> Void in
                     
                     // Run UI Updates
                     cell.createdAtLabel.text = difference
                 })
             }
-        })
+        }
         
         return cell
     }
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         // Get the current status update.
-        let statusupdate:PFObject = self.sortedArray.objectAtIndex(indexPath.row) as! PFObject
+        let statusupdate:PFObject = self.sortedArray.object(at: (indexPath as NSIndexPath).row) as! PFObject
         
         // Setup the report status button.
         var report:UITableViewRowAction!
-        report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
+        report = UITableViewRowAction(style: .normal, title: "Report") { (action, index) -> Void in
             
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setObject(statusupdate.objectId, forKey: "reported")
+            let defaults = UserDefaults.standard
+            defaults.set(statusupdate.objectId, forKey: "reported")
             PresentingViews.ReportView(self)
             
-            var reportquery:PFQuery!
+            var reportquery:PFQuery<PFObject>!
             reportquery = PFQuery(className: "StatusUpdate")
-            reportquery.whereKey("updatetext", equalTo: statusupdate.objectForKey("updatetext")!)
-            reportquery.findObjectsInBackgroundWithBlock({ (objects:[PFObject]?, error:NSError?) -> Void in
+            reportquery.whereKey("updatetext", equalTo: statusupdate.object(forKey: "updatetext")!)
+            
+            reportquery.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
                 
                 if error == nil {
                     
@@ -504,9 +525,10 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
                             reportedID = object.objectId
                         }
                         
-                        var reportstatus:PFQuery!
+                        var reportstatus:PFQuery<PFObject>!
                         reportstatus = PFQuery(className: "StatusUpdate")
-                        reportstatus.getObjectInBackgroundWithId(reportedID, block: { (status:PFObject?, error:NSError?) -> Void in
+                        
+                        reportstatus.getObjectInBackground(withId: reportedID, block: { (status:PFObject?, error: Error?) in
                             
                             if (error == nil) {
                                 
@@ -520,42 +542,42 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         }
         
         // Setup the delete status button.
-        let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in
+        let deletestatus = UITableViewRowAction(style: .normal, title: "Delete") { (actiom, indexPath) -> Void in
             
-            var query:PFQuery!
+            var query:PFQuery<PFObject>!
             query = PFQuery(className: "StatusUpdate")
             query.includeKey("user")
             query.whereKey("objectId", equalTo: statusupdate.objectId!)
-            query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+            query.findObjectsInBackground(block: { (objects, error) -> Void in
                 
                 if (error == nil) {
                     
                     for object in objects! {
                         
-                        let userstr = object["user"]?.username!
+                        let userstr = (object["user"] as AnyObject).username!
                         
-                        if (userstr == PFUser.currentUser()?.username) {
+                        if (userstr == PFUser.current()?.username) {
                             
-                            statusupdate.deleteInBackgroundWithBlock({ (success, error) -> Void in
+                            statusupdate.deleteInBackground(block: { (success, error) -> Void in
                                 
                                 if (success) {
                                     
                                     // Remove the status update from the array.
-                                    self.sortedArray.removeObjectAtIndex(indexPath.row)
+                                    self.sortedArray.removeObject(at: (indexPath as NSIndexPath).row)
                                     
                                     // Remove the cell from the table view.
-                                    self.eventList.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                                    self.eventList.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
                                 }
                             })
                         }
                             
                         else {
-                            let alert = UIAlertController(title: "Error", message: "You can only delete your own posts.", preferredStyle: .Alert)
-                            alert.view.tintColor = UIColor.flatGreenColor()
-                            let next = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+                            let alert = UIAlertController(title: "Error", message: "You can only delete your own posts.", preferredStyle: .alert)
+                            alert.view.tintColor = UIColor.flatGreen()
+                            let next = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
                             alert.addAction(next)
                             
-                            self.presentViewController(alert, animated: true, completion: nil)
+                            self.present(alert, animated: true, completion: nil)
                         }
                     }
                 }
@@ -570,7 +592,7 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         // Only show the delete button if the status
         // belongs to the currently logged in user.
         
-        if ((statusupdate.objectForKey("user") as! PFUser!).objectId! == PFUser.currentUser()?.objectId!) {
+        if ((statusupdate.object(forKey: "user") as! PFUser!).objectId! == PFUser.current()?.objectId!) {
             
             // For V1.0 we will not be adding access to
             // the "See More" section as it is not needed.

@@ -33,8 +33,8 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
     @IBOutlet weak var scroll: UIScrollView!
     
     // Filter settings data.
-    var dateOne:NSDate!
-    var dateTwo:NSDate!
+    var dateOne:Date!
+    var dateTwo:Date!
     var locationName:String!
     var locationLat:Double!
     var locationLon:Double!
@@ -47,11 +47,11 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
     
     //MARK: BUTTONS.
     
-    @IBAction func goBack(sender: UIButton) {
+    @IBAction func goBack(_ sender: UIButton) {
         self.checkSettings()
     }
     
-    @IBAction func changeDate(sender: UIDatePicker) {
+    @IBAction func changeDate(_ sender: UIDatePicker) {
         
         // Create a readable date string.
         let dateString = self.convertDateToString(sender.date)
@@ -67,31 +67,31 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
         }
     }
     
-    @IBAction func changeDateSwitch(sender: UISwitch) {
-        self.blockViewOne.hidden = sender.on
-        self.blockViewTwo.hidden = sender.on
-        self.dateOneLabel.userInteractionEnabled = sender.on
-        self.dateTwoLabel.userInteractionEnabled = sender.on
+    @IBAction func changeDateSwitch(_ sender: UISwitch) {
+        self.blockViewOne.isHidden = sender.isOn
+        self.blockViewTwo.isHidden = sender.isOn
+        self.dateOneLabel.isUserInteractionEnabled = sender.isOn
+        self.dateTwoLabel.isUserInteractionEnabled = sender.isOn
         
-        if (sender.on == false) {
-            self.dateView.hidden = true
+        if (sender.isOn == false) {
+            self.dateView.isHidden = true
         }
     }
     
-    @IBAction func changeLocationSwitch(sender: UISwitch) {
-        self.blockViewThree.hidden = sender.on
-        self.blockViewFour.hidden = sender.on
-        self.locationOneLabel.userInteractionEnabled = sender.on
-        self.locationTwoLabel.userInteractionEnabled = sender.on
+    @IBAction func changeLocationSwitch(_ sender: UISwitch) {
+        self.blockViewThree.isHidden = sender.isOn
+        self.blockViewFour.isHidden = sender.isOn
+        self.locationOneLabel.isUserInteractionEnabled = sender.isOn
+        self.locationTwoLabel.isUserInteractionEnabled = sender.isOn
         
-        if (sender.on == false) {
-            self.radiusView.hidden = true
+        if (sender.isOn == false) {
+            self.radiusView.isHidden = true
         }
     }
     
-    @IBAction func changeUserSwitch(sender: UISwitch) {
-        self.blockViewFive.hidden = sender.on
-        self.userLabel.userInteractionEnabled = sender.on
+    @IBAction func changeUserSwitch(_ sender: UISwitch) {
+        self.blockViewFive.isHidden = sender.isOn
+        self.userLabel.isUserInteractionEnabled = sender.isOn
     }
     
     //MARK: VIWW DID LOAD METHOD.
@@ -103,7 +103,7 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
     
     //MARK: VIEW DID APPEAR METHOD.
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.checkForSetLocation()
     }
@@ -113,16 +113,16 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
     func setupUI() {
         
         // Setup the user pass back notification.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SearchFilterView.updateUser(_:)), name: "userSelected", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SearchFilterView.updateUser(_:)), name: NSNotification.Name(rawValue: "userSelected"), object: nil)
         
         // Setup the scroll view.
-        self.scroll.scrollEnabled = true
-        let result: CGSize = UIScreen.mainScreen().bounds.size
+        self.scroll.isScrollEnabled = true
+        let result: CGSize = UIScreen.main.bounds.size
         
         if result.height == 480 {
-            scroll.contentSize = CGSizeMake(result.width, 520)
+            scroll.contentSize = CGSize(width: result.width, height: 520)
         } else {
-            scroll.contentSize = CGSizeMake(result.width, 520)
+            scroll.contentSize = CGSize(width: result.width, height: 520)
         }
         
         // Set the label tap recognizers.
@@ -141,14 +141,14 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
         self.userLabel.addGestureRecognizer(tapgestureUser)
         
         // Hide the date picker views by default.
-        self.dateView.hidden = true
-        self.radiusView.hidden = true
+        self.dateView.isHidden = true
+        self.radiusView.isHidden = true
         
         // Get the current filter settings.
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let dateState = defaults.objectForKey("filterDateCheck") as? Bool
-        let locationState = defaults.objectForKey("filterLocationCheck") as? Bool
-        let userState = defaults.objectForKey("filterUserCheck") as? Bool
+        let defaults = UserDefaults.standard
+        let dateState = defaults.object(forKey: "filterDateCheck") as? Bool
+        let locationState = defaults.object(forKey: "filterLocationCheck") as? Bool
+        let userState = defaults.object(forKey: "filterUserCheck") as? Bool
         
         // Set the switches.
         self.dateSwitch.setOn(dateState!, animated: true)
@@ -156,39 +156,39 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
         self.userSwitch.setOn(userState!, animated: true)
         
         // Set the block hidden and label interaction states.
-        self.blockViewOne.hidden = dateState!
-        self.blockViewTwo.hidden = dateState!
-        self.blockViewThree.hidden = locationState!
-        self.blockViewFour.hidden = locationState!
-        self.blockViewFive.hidden = userState!
-        self.dateOneLabel.userInteractionEnabled = dateState!
-        self.dateTwoLabel.userInteractionEnabled = dateState!
-        self.locationOneLabel.userInteractionEnabled = locationState!
-        self.locationTwoLabel.userInteractionEnabled = locationState!
-        self.userLabel.userInteractionEnabled = userState!
+        self.blockViewOne.isHidden = dateState!
+        self.blockViewTwo.isHidden = dateState!
+        self.blockViewThree.isHidden = locationState!
+        self.blockViewFour.isHidden = locationState!
+        self.blockViewFive.isHidden = userState!
+        self.dateOneLabel.isUserInteractionEnabled = dateState!
+        self.dateTwoLabel.isUserInteractionEnabled = dateState!
+        self.locationOneLabel.isUserInteractionEnabled = locationState!
+        self.locationTwoLabel.isUserInteractionEnabled = locationState!
+        self.userLabel.isUserInteractionEnabled = userState!
         
         // Set the other labels depending on
         // the current filter settings.
         
         if (dateState == true) {
-            self.dateOne = defaults.objectForKey("filterDateStart") as? NSDate
-            self.dateTwo = defaults.objectForKey("filterDateEnd") as? NSDate
+            self.dateOne = defaults.object(forKey: "filterDateStart") as? Date
+            self.dateTwo = defaults.object(forKey: "filterDateEnd") as? Date
             self.dateOneLabel.text = self.convertDateToString(self.dateOne!)
             self.dateTwoLabel.text = self.convertDateToString(self.dateTwo!)
         }
         
         if (locationState == true) {
             self.checkForSetLocation()
-            self.locatonRadius = defaults.objectForKey("filterLocationRadius") as? Double
-            self.locatonRadiusType = defaults.objectForKey("filterLocationRadiusType") as? String
+            self.locatonRadius = defaults.object(forKey: "filterLocationRadius") as? Double
+            self.locatonRadiusType = defaults.object(forKey: "filterLocationRadiusType") as? String
             self.locationTwoLabel.text = "\(self.locatonRadius!) \(self.locatonRadiusType!)"
         }
         
         if (userState == true) {
             
-            var findUser:PFQuery!
+            var findUser:PFQuery<PFObject>!
             findUser = PFUser.query()!
-            findUser.getObjectInBackgroundWithId((defaults.objectForKey("filterUserObject") as? String)!, block: { (userAccount, error) in
+            findUser.getObjectInBackground(withId: (defaults.object(forKey: "filterUserObject") as? String)!, block: { (userAccount, error) in
                 
                 if (error == nil) {
                     self.userObject = (userAccount as! PFUser)
@@ -198,28 +198,28 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
         }
     }
     
-    func setDateSelection(sender: UITapGestureRecognizer) {
+    func setDateSelection(_ sender: UITapGestureRecognizer) {
         self.currentDateSelection = ((sender.view?.tag)! - 1)
-        self.dateView.hidden = !self.dateView.hidden
+        self.dateView.isHidden = !self.dateView.isHidden
     }
     
     func setLocationSelection() {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let filterVC = sb.instantiateViewControllerWithIdentifier("LocationVC") as UIViewController!
-        self.presentViewController(filterVC, animated: true, completion: nil)
+        let filterVC = sb.instantiateViewController(withIdentifier: "LocationVC") as UIViewController!
+        self.present(filterVC!, animated: true, completion: nil)
     }
     
     func setLocationRadiusSelection() {
-        self.radiusView.hidden = !self.radiusView.hidden
+        self.radiusView.isHidden = !self.radiusView.isHidden
     }
     
     func setUserSelection() {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let filterVC = sb.instantiateViewControllerWithIdentifier("UserSearch") as UIViewController!
-        self.presentViewController(filterVC, animated: true, completion: nil)
+        let filterVC = sb.instantiateViewController(withIdentifier: "UserSearch") as UIViewController!
+        self.present(filterVC!, animated: true, completion: nil)
     }
     
-    func updateUser(object: NSNotification) {
+    func updateUser(_ object: Notification) {
         self.userObject = (object.object as! PFUser)
         self.userLabel.text = self.userObject.username!
     }
@@ -227,27 +227,27 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
     func checkForSetLocation() {
 
         // Get the current filter settings.
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
 
         // Set the location data/labels.
         
-        if ((self.locationSwitch.on == true) && (defaults.objectForKey("filterLocationLat") != nil)) {
-            self.locationName = defaults.objectForKey("filterLocationName") as? String
-            self.locationLat = defaults.objectForKey("filterLocationLat") as? Double
-            self.locationLon = defaults.objectForKey("filterLocationLon") as? Double
+        if ((self.locationSwitch.isOn == true) && (defaults.object(forKey: "filterLocationLat") != nil)) {
+            self.locationName = defaults.object(forKey: "filterLocationName") as? String
+            self.locationLat = defaults.object(forKey: "filterLocationLat") as? Double
+            self.locationLon = defaults.object(forKey: "filterLocationLon") as? Double
             self.locationOneLabel.text = self.locationName!
         }
     }
     
     //MARK: DATA METHODS.
     
-    func convertDateToString(date: NSDate) -> String {
+    func convertDateToString(_ date: Date) -> String {
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         
-        return dateFormatter.stringFromDate(date)
+        return dateFormatter.string(from: date)
     }
     
     func checkSettings() {
@@ -273,11 +273,11 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
     
     func checkTheDate() -> Bool {
         
-        if (self.dateSwitch.on == true) {
+        if (self.dateSwitch.isOn == true) {
             
             if ((self.dateOne != nil) && (self.dateTwo != nil)) {
                 
-                if self.dateOne.earlierDate(self.dateTwo) == self.dateOne {
+                if self.dateOne.isLessThanDate(self.dateTwo) {
                     return true
                 } else {
                     return false
@@ -294,7 +294,7 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
     
     func checkTheLocation() -> Bool {
         
-        if (self.locationSwitch.on == true) {
+        if (self.locationSwitch.isOn == true) {
             
             if ((self.locationName != nil) && (self.locationLat != nil) && (self.locationLon != nil) && (self.locatonRadius != nil) && (self.locatonRadiusType != nil)) {
                 return true
@@ -309,7 +309,7 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
     
     func checkTheUser() -> Bool {
         
-        if (self.userSwitch.on == true) {
+        if (self.userSwitch.isOn == true) {
             
             if (self.userObject != nil) {
                 return true
@@ -325,83 +325,83 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
     func saveSettings() {
         
         // Get the settings defaults object.
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         
         // Set the filters to on/off depending on the switch.
-        defaults.setObject(self.dateSwitch.on, forKey: "filterDateCheck")
-        defaults.setObject(self.locationSwitch.on, forKey: "filterLocationCheck")
-        defaults.setObject(self.userSwitch.on, forKey: "filterUserCheck")
+        defaults.set(self.dateSwitch.isOn, forKey: "filterDateCheck")
+        defaults.set(self.locationSwitch.isOn, forKey: "filterLocationCheck")
+        defaults.set(self.userSwitch.isOn, forKey: "filterUserCheck")
         
         // Set the date filter settings.
         
-        if (self.dateSwitch.on == true) {
-            defaults.setObject(self.dateOne, forKey: "filterDateStart")
-            defaults.setObject(self.dateTwo, forKey: "filterDateEnd")
+        if (self.dateSwitch.isOn == true) {
+            defaults.set(self.dateOne, forKey: "filterDateStart")
+            defaults.set(self.dateTwo, forKey: "filterDateEnd")
         } else {
-            defaults.removeObjectForKey("filterDateStart")
-            defaults.removeObjectForKey("filterDateEnd")
+            defaults.removeObject(forKey: "filterDateStart")
+            defaults.removeObject(forKey: "filterDateEnd")
         }
         
         // Set the location filter settings.
         
-        if (self.locationSwitch.on == true) {
-            defaults.setObject(self.locationName, forKey: "filterLocationName")
-            defaults.setObject(self.locationLat, forKey: "filterLocationLat")
-            defaults.setObject(self.locationLon, forKey: "filterLocationLon")
-            defaults.setObject(self.locatonRadius, forKey: "filterLocationRadius")
-            defaults.setObject(self.locatonRadiusType, forKey: "filterLocationRadiusType")
+        if (self.locationSwitch.isOn == true) {
+            defaults.set(self.locationName, forKey: "filterLocationName")
+            defaults.set(self.locationLat, forKey: "filterLocationLat")
+            defaults.set(self.locationLon, forKey: "filterLocationLon")
+            defaults.set(self.locatonRadius, forKey: "filterLocationRadius")
+            defaults.set(self.locatonRadiusType, forKey: "filterLocationRadiusType")
         } else {
-            defaults.removeObjectForKey("filterLocationName")
-            defaults.removeObjectForKey("filterLocationLat")
-            defaults.removeObjectForKey("filterLocationLon")
-            defaults.removeObjectForKey("filterLocationRadius")
-            defaults.removeObjectForKey("filterLocationRadiusType")
+            defaults.removeObject(forKey: "filterLocationName")
+            defaults.removeObject(forKey: "filterLocationLat")
+            defaults.removeObject(forKey: "filterLocationLon")
+            defaults.removeObject(forKey: "filterLocationRadius")
+            defaults.removeObject(forKey: "filterLocationRadiusType")
         }
         
         // Set the 'by user' username filter setting.
         
-        if (self.userSwitch.on == true) {
-            defaults.setObject(self.userObject.objectId!, forKey: "filterUserObject")
+        if (self.userSwitch.isOn == true) {
+            defaults.set(self.userObject.objectId!, forKey: "filterUserObject")
         } else {
-            defaults.removeObjectForKey("filterUserObject")
+            defaults.removeObject(forKey: "filterUserObject")
         }
         
         // Save the new filter settings.
         defaults.synchronize()
 
         // Close the filter view.
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     //MARK: OTHER METHODS.
     
-    func displayAlert(alertTitle: String, alertMessage: String) {
+    func displayAlert(_ alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
-        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         // Setup the alert actions.
-        let cancel = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+        let cancel = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
         alertController.addAction(cancel)
         
         // Present the alert on screen.
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     //MARK: UISCROLLVIEW METHODS.
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        self.dateView.hidden = true
-        self.radiusView.hidden = true
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.dateView.isHidden = true
+        self.radiusView.isHidden = true
     }
     
     //MARK: UIPICKER METHODS.
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
         if (component == 0) {
             return self.pickerDataSetOne.count
@@ -410,7 +410,7 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
         }
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         if (component == 0) {
             return "\(self.pickerDataSetOne[row])"
@@ -419,7 +419,7 @@ class SearchFilterView : UIViewController, UIPickerViewDataSource, UIPickerViewD
         }
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         if (component == 0) {
             self.locatonRadius = self.pickerDataSetOne[row]

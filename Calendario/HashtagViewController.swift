@@ -11,6 +11,26 @@ import UIKit
 import Parse
 import QuartzCore
 
+/*fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}*/
+
 class HashtagViewController: UITableViewController {
     
     // Status update data array.
@@ -30,7 +50,7 @@ class HashtagViewController: UITableViewController {
         setActivityIndicatorForRefreshing()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
       
         // Load in the hashtag feed data.
@@ -40,7 +60,7 @@ class HashtagViewController: UITableViewController {
     func setupUI() {
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 254.0;
-        self.tableView.separatorInset = UIEdgeInsetsZero
+        self.tableView.separatorInset = UIEdgeInsets.zero
 
         setNavigationBarProperties()
         setBackButtonProperties()
@@ -50,43 +70,43 @@ class HashtagViewController: UITableViewController {
         // Set the navigation bar properties.
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         self.navigationItem.title = hashtagString
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.isTranslucent = false
         let font = UIFont(name: "SFUIDisplay-Regular", size: 18)
-        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: font!]
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: font!]
         self.navigationController!.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
     }
     
     func setBackButtonProperties() {
         // Set the back button.
-        let button: UIButton = UIButton(type: UIButtonType.Custom)
-        button.setImage(UIImage(named: "back_button.png"), forState: UIControlState.Normal)
-        button.tintColor = UIColor.whiteColor()
-        button.addTarget(self, action: #selector(HashtagViewController.closeView), forControlEvents: UIControlEvents.TouchUpInside)
-        button.frame = CGRectMake(0, 0, 30, 30)
+        let button: UIButton = UIButton(type: UIButtonType.custom)
+        button.setImage(UIImage(named: "back_button.png"), for: UIControlState())
+        button.tintColor = UIColor.white
+        button.addTarget(self, action: #selector(HashtagViewController.closeView), for: UIControlEvents.touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.leftBarButtonItem = barButton
     }
     
-    func displayAlert(alertTitle: String, alertMessage: String) {
+    func displayAlert(_ alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
-        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         // Setup the alert actions.
-        let cancel = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+        let cancel = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
         alertController.addAction(cancel)
         
         // Present the alert on screen.
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     func setActivityIndicatorForRefreshing() {
-        menuIndicator.addTarget(self, action: #selector(HashtagViewController.reloadHashtagFeed), forControlEvents: .ValueChanged)
+        menuIndicator.addTarget(self, action: #selector(HashtagViewController.reloadHashtagFeed), for: .valueChanged)
         menuIndicatorActivity(true)
     }
     
-    func menuIndicatorActivity(start: Bool) {
+    func menuIndicatorActivity(_ start: Bool) {
         if start == true {
             self.menuIndicator.beginRefreshing()
         } else {
@@ -99,9 +119,9 @@ class HashtagViewController: UITableViewController {
         
         // Open the report view.
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let reportVC = sb.instantiateViewControllerWithIdentifier("report") as! ReportTableViewController
+        let reportVC = sb.instantiateViewController(withIdentifier: "report") as! ReportTableViewController
         let NC = UINavigationController(rootViewController: reportVC)
-        self.presentViewController(NC, animated: true, completion: nil)
+        self.present(NC, animated: true, completion: nil)
     }
     
 //    func Seemore() {
@@ -116,9 +136,10 @@ class HashtagViewController: UITableViewController {
     func closeView() {
         
         // Load in the hashtag data.
-        var defaults = NSUserDefaults.standardUserDefaults()
+        var defaults = UserDefaults.standard
         var hashtagData: NSMutableArray = []
-        hashtagData = ((defaults.objectForKey("HashtagData"))?.mutableCopy())! as! NSMutableArray
+        //hashtagData = (((defaults.object(forKey: "HashtagData")) as AnyObject).mutableCopy())! as! NSMutableArray
+        hashtagData = (((defaults.object(forKey: "HashtagData")) as! NSArray).mutableCopy()) as! NSMutableArray
         
         if (hashtagData.count > 0) {
             
@@ -128,27 +149,27 @@ class HashtagViewController: UITableViewController {
             
             // Remove the last hashtag string and
             // update the hashtag array index number.
-            hashtagData.replaceObjectAtIndex(0, withObject: hashtagIndex)
+            hashtagData.replaceObject(at: 0, with: hashtagIndex)
             hashtagData.removeLastObject()
             
             // Save the hashtag data.
-            defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setObject(hashtagData, forKey: "HashtagData")
+            defaults = UserDefaults.standard
+            defaults.set(hashtagData, forKey: "HashtagData")
             defaults.synchronize()
         }
         
         // Close the hashtag view.
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
     //MARK: LOAD DATA METHODS
     
     func loadInitialHashtagData() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let hashtagData = defaults.objectForKey("HashtagData") as? NSMutableArray
+        let defaults = UserDefaults.standard
+        let hashtagData = defaults.object(forKey: "HashtagData") as? NSMutableArray
         
         // Set the hashtag string.
-        hashtagString = hashtagData![hashtagData![0] as! Int] as! String
+        hashtagString = hashtagData![0] as! String
         self.navigationItem.title = hashtagString
     }
     
@@ -169,18 +190,18 @@ class HashtagViewController: UITableViewController {
     func loadHashtagData() {
         
         // Setup the status update query.
-        var query:PFQuery!
+        var query:PFQuery<PFObject>!
         query = PFQuery(className:"StatusUpdate")
         query.limit = 300
-        query.whereKey("updatetext", containsString: hashtagString)
+        query.whereKey("updatetext", contains: hashtagString)
         
         // Get the hashtag status update(s).
-        query.findObjectsInBackgroundWithBlock({ (statusUpdates, error) -> Void in
+        query.findObjectsInBackground(block: { (statusUpdates, error) -> Void in
             
-            if ((error == nil) && (statusUpdates?.count > 0)) {
+            if ((error == nil) && ((statusUpdates?.count)! > 0)) {
                 
                 for loop in 0..<statusUpdates!.count {
-                    self.statusData.addObject(statusUpdates![loop])
+                    self.statusData.add(statusUpdates![loop])
                 }
             }
                 
@@ -203,9 +224,9 @@ class HashtagViewController: UITableViewController {
         if (self.statusData.count > 0) {
             
             // Sort the status updates by the 'createdAt' date.
-            let newData:NSArray = (self.statusData.copy() as! NSArray).sortedArrayUsingComparator { (obj1, obj2) -> NSComparisonResult in
+            let newData:NSArray = (self.statusData.copy() as! NSArray).sortedArray (comparator: { (obj1, obj2) -> ComparisonResult in
                 return ((obj2 as! PFObject).createdAt?.compare((obj1 as! PFObject).createdAt!))!
-            }
+            }) as NSArray
             
             // Save the sorted data to the mutable array.
             sortedArray = NSMutableArray(array: newData)
@@ -227,65 +248,66 @@ class HashtagViewController: UITableViewController {
     
     //MARK: TABLEVIEW METHODS
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.sortedArray.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // Setup the table view custom cell.
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsfeedTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NewsfeedTableViewCell
         
         // Pass in the parent view controller.
         cell.parentViewController = self
         
         // Get the specific status object for this cell and call all needed methods.
-        cell.passedInObject = self.sortedArray[indexPath.row] as! PFObject
+        cell.passedInObject = self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject
         
-        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[indexPath.row] as! PFObject, cell: cell)
+        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, cell: cell)
         
-        ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.sortedArray[indexPath.row] as! PFObject)
+        ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject)
         
-        ParseCalls.findUserDetails(self.sortedArray[indexPath.row] as! PFObject, usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
+        ParseCalls.findUserDetails(self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {() -> Void in
+        DispatchQueue.global(qos: .background).async {
             
             // Background Thread
-            DateManager.createDateDifferenceString((self.sortedArray[indexPath.row] as! PFObject).createdAt!) { (difference) -> Void in
+            DateManager.createDateDifferenceString((self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject).createdAt!) { (difference) -> Void in
                 
-                dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                DispatchQueue.main.async(execute: {() -> Void in
                     
                     // Run UI Updates
                     cell.createdAtLabel.text = difference
                 })
             }
-        })
+        }
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         // Get the current status update.
-        let statusupdate:PFObject = self.sortedArray.objectAtIndex(indexPath.row) as! PFObject
+        let statusupdate:PFObject = self.sortedArray.object(at: (indexPath as NSIndexPath).row) as! PFObject
         
         // Setup the report status button.
         var report:UITableViewRowAction!
-        report = UITableViewRowAction(style: .Normal, title: "Report") { (action, index) -> Void in
+        report = UITableViewRowAction(style: .normal, title: "Report") { (action, index) -> Void in
             
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setObject(statusupdate.objectId, forKey: "reported")
+            let defaults = UserDefaults.standard
+            defaults.set(statusupdate.objectId, forKey: "reported")
             
             self.ReportView()
             
-            var reportquery:PFQuery!
+            var reportquery:PFQuery<PFObject>!
             reportquery = PFQuery(className: "StatusUpdate")
-            reportquery.whereKey("updatetext", equalTo: statusupdate.objectForKey("updatetext")!)
-            reportquery.findObjectsInBackgroundWithBlock({ (objects:[PFObject]?, error:NSError?) -> Void in
+            reportquery.whereKey("updatetext", equalTo: statusupdate.object(forKey: "updatetext")!)
+            
+            reportquery.findObjectsInBackground(block: { (objects:[PFObject]?, error: Error?) in
                 
                 if error == nil {
                     
@@ -297,9 +319,10 @@ class HashtagViewController: UITableViewController {
                             reportedID = object.objectId
                         }
                         
-                        var reportstatus:PFQuery!
+                        var reportstatus:PFQuery<PFObject>!
                         reportstatus = PFQuery(className: "StatusUpdate")
-                        reportstatus.getObjectInBackgroundWithId(reportedID, block: { (status:PFObject?, error:NSError?) -> Void in
+                        
+                        reportstatus.getObjectInBackground(withId: reportedID, block: { (status: PFObject?, error: Error?) in
                             
                             if (error == nil) {
                                 
@@ -326,43 +349,43 @@ class HashtagViewController: UITableViewController {
 //        }
         
         // Setup the delete status button.
-        let deletestatus = UITableViewRowAction(style: .Normal, title: "Delete") { (actiom, indexPath) -> Void in
+        let deletestatus = UITableViewRowAction(style: .normal, title: "Delete") { (actiom, indexPath) -> Void in
             
-            var query:PFQuery!
+            var query:PFQuery<PFObject>!
             query = PFQuery(className: "StatusUpdate")
             query.includeKey("user")
             query.whereKey("objectId", equalTo: statusupdate.objectId!)
-            query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+            query.findObjectsInBackground(block: { (objects, error) -> Void in
                 
                 if (error == nil) {
                     
                     for object in objects! {
                         
-                        let userstr = object["user"]?.username!
+                        let userstr = (object["user"] as AnyObject).username!
                         
-                        if (userstr == PFUser.currentUser()?.username) {
+                        if (userstr == PFUser.current()?.username) {
                             
-                            statusupdate.deleteInBackgroundWithBlock({ (success, error) -> Void in
+                            statusupdate.deleteInBackground(block: { (success, error) -> Void in
                                 
                                 if (success) {
                                     
                                     // Remove the status update from the array.
-                                    self.sortedArray.removeObjectAtIndex(indexPath.row)
+                                    self.sortedArray.removeObject(at: (indexPath as NSIndexPath).row)
                                     
                                     // Remove the cell from the table view.
-                                    self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                                    self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
                                 }
                             })
                         }
                             
                         else {
                             
-                            let alert = UIAlertController(title: "Error", message: "You can only delete your own posts.", preferredStyle: .Alert)
-                            alert.view.tintColor = UIColor.flatGreenColor()
-                            let next = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+                            let alert = UIAlertController(title: "Error", message: "You can only delete your own posts.", preferredStyle: .alert)
+                            alert.view.tintColor = UIColor.flatGreen()
+                            let next = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
                             alert.addAction(next)
                             
-                            self.presentViewController(alert, animated: true, completion: nil)
+                            self.present(alert, animated: true, completion: nil)
                         }
                     }
                 }
@@ -378,7 +401,7 @@ class HashtagViewController: UITableViewController {
         // Only show the delete button if the status
         // belongs to the currently logged in user.
         
-        if ((statusupdate.objectForKey("user") as! PFUser!).objectId! == PFUser.currentUser()?.objectId!) {
+        if ((statusupdate.object(forKey: "user") as! PFUser!).objectId! == PFUser.current()?.objectId!) {
             
             // For V1.0 we will not be adding access to
             // the "See More" section as it is not needed.

@@ -22,8 +22,8 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
     
     // Setup the button methods.
     
-    @IBAction func close(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func close(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     // View Did Load method.
@@ -35,7 +35,7 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
     
     // View Did Appear method.
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         // Load the data requests.
@@ -47,10 +47,10 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
     func getUserRequests() {
         
         // Get the various follow requests for the user.
-        var followQuery:PFQuery!
+        var followQuery:PFQuery<PFObject>!
         followQuery = PFQuery(className: "FollowRequest")
-        followQuery.whereKey("desiredfollower", equalTo: PFUser.currentUser()!)
-        followQuery.findObjectsInBackgroundWithBlock { (object, error) -> Void in
+        followQuery.whereKey("desiredfollower", equalTo: PFUser.current()!)
+        followQuery.findObjectsInBackground { (object, error) -> Void in
             
             // Check if the user has any requests.
             
@@ -62,7 +62,7 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
                 // Save the user request data.
                 
                 for loop in 0..<object!.count {
-                    self.requestObjects.addObject(object![loop])
+                    self.requestObjects.add(object![loop])
                 }
                 
                 // Set the requests check.
@@ -74,7 +74,7 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
             }
             
             // Enable table view access.
-            self.requestList.userInteractionEnabled = true
+            self.requestList.isUserInteractionEnabled = true
             
             // Update the table view.
             self.requestList.reloadData()
@@ -83,28 +83,28 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
     
     // Accept/decline request methods.
     
-    func acceptRequest(sender:UIButton) {
+    func acceptRequest(_ sender:UIButton) {
         
         // Disable access to the table view
         // while the request data is processed.
-        self.requestList.userInteractionEnabled = false
+        self.requestList.isUserInteractionEnabled = false
         
         // Get the specific status object for this cell.
-        let currentObject:PFObject = requestObjects.objectAtIndex(sender.tag) as! PFObject
+        let currentObject:PFObject = requestObjects.object(at: sender.tag) as! PFObject
         
         // Accept the follow request.
-        ManageUser.acceptFollowRequest((currentObject.valueForKey("Requester") as? PFUser!)!) { (followSuccess, error) -> Void in
+        ManageUser.acceptFollowRequest((currentObject.value(forKey: "Requester") as? PFUser!)!) { (followSuccess, error) -> Void in
             
             if (followSuccess == true) {
                 
                 // Delete the follow request as it
                 // has now been accepted by the user.
-                currentObject.deleteInBackgroundWithBlock({ (success, deleteError) -> Void in
+                currentObject.deleteInBackground(block: { (success, deleteError) -> Void in
                     
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         
                         // Delete the data from the data array.
-                        self.requestObjects.removeObjectAtIndex(sender.tag)
+                        self.requestObjects.removeObject(at: sender.tag)
                         
                         // Reload the table view.
                         self.getUserRequests()
@@ -114,10 +114,10 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
             
             else {
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     // Enable table view access.
-                    self.requestList.userInteractionEnabled = true
+                    self.requestList.isUserInteractionEnabled = true
                     
                     // Display the delete error alert.
                     self.displayAlert("Error", alertMessage: "The follow request has not been accepted (Error: \(error)).")
@@ -126,24 +126,24 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
         }
     }
     
-    func declineRequest(sender:UIButton) {
+    func declineRequest(_ sender:UIButton) {
         
         // Disable access to the table view
         // while the request data is processed.
-        self.requestList.userInteractionEnabled = false
+        self.requestList.isUserInteractionEnabled = false
         
         // Get the specific status object for this cell.
-        let currentObject:PFObject = requestObjects.objectAtIndex(sender.tag) as! PFObject
+        let currentObject:PFObject = requestObjects.object(at: sender.tag) as! PFObject
         
         // Delete the follow request.
-        currentObject.deleteInBackgroundWithBlock({ (success, error) -> Void in
+        currentObject.deleteInBackground(block: { (success, error) -> Void in
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 
                 if (error == nil) {
                     
                     // Delete the data from the data array.
-                    self.requestObjects.removeObjectAtIndex(sender.tag)
+                    self.requestObjects.removeObject(at: sender.tag)
                     
                     // Reload the table view.
                     self.getUserRequests()
@@ -152,7 +152,7 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
                 else {
                     
                     // Enable table view access.
-                    self.requestList.userInteractionEnabled = true
+                    self.requestList.isUserInteractionEnabled = true
                     
                     // Display the delete error alert.
                     self.displayAlert("Error", alertMessage: "The follow request has not been deleted (Error: \(error?.localizedDescription)).")
@@ -163,11 +163,11 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
     
     // UITableView methods.
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if (self.requestsCheck == true) {
             return requestObjects.count
@@ -178,10 +178,10 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // Setup the table view cell.
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! FollowRequestCustomCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FollowRequestCustomCell
         
         if (self.requestsCheck == true) {
             
@@ -189,26 +189,27 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
             cell.noDataLabel.alpha = 0.0
             
             // Enable access to the accept/decline buttons.
-            cell.acceptButton.enabled = true
-            cell.declineButton.enabled = true
+            cell.acceptButton.isEnabled = true
+            cell.declineButton.isEnabled = true
             
             // Connect the accept and decline buttons
             // to the appropriate user request method.
-            cell.acceptButton.addTarget(self, action: #selector(FollowRequestsTableViewController.acceptRequest(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-            cell.declineButton.addTarget(self, action: #selector(FollowRequestsTableViewController.declineRequest(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            cell.acceptButton.addTarget(self, action: #selector(FollowRequestsTableViewController.acceptRequest(_:)), for: UIControlEvents.touchUpInside)
+            cell.declineButton.addTarget(self, action: #selector(FollowRequestsTableViewController.declineRequest(_:)), for: UIControlEvents.touchUpInside)
             
             // Get the specific status object for this cell.
-            let currentObject:PFObject = requestObjects.objectAtIndex(indexPath.row) as! PFObject
+            let currentObject:PFObject = requestObjects.object(at: (indexPath as NSIndexPath).row) as! PFObject
     
             // Turn the profile picture into a circle.
             cell.userProfilePicture.layer.cornerRadius = (cell.userProfilePicture.frame.size.width / 2)
             cell.userProfilePicture.clipsToBounds = true
             
             // Get the user object data.
-            var findUser:PFQuery!
+            var findUser:PFQuery<PFObject>!
             findUser = PFUser.query()!
-            findUser.whereKey("objectId", equalTo: (currentObject.objectForKey("Requester")?.objectId)!)
-            findUser.findObjectsInBackgroundWithBlock { (objects:[PFObject]?, error:NSError?) -> Void in
+            findUser.whereKey("objectId", equalTo: ((currentObject.object(forKey: "Requester") as AnyObject).objectId)!)
+            
+            findUser.findObjectsInBackground(block: { (objects:[PFObject]?, error: Error?) in
                 
                 if let aobject = objects {
                     
@@ -223,7 +224,7 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
                     if let userImageFile = userObject!["profileImage"] {
                         
                         // Download the profile image.
-                        userImageFile.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                        (userImageFile as AnyObject).getDataInBackground(block: { (imageData: Data?, error: Error?) in
                             
                             if (error == nil) {
                                 
@@ -248,19 +249,19 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
                                 // No profile picture set the standard image.
                                 cell.userProfilePicture.image = UIImage(named: "default_profile_pic.png")
                             }
-                        }
+                        })
                     } else {
                         cell.userProfilePicture.image = UIImage(named: "default_profile_pic.png")
                     }
                 }
-            }
+            })
         }
             
         else {
             
             // Disable access to the accept/decline buttons.
-            cell.acceptButton.enabled = false
-            cell.declineButton.enabled = false
+            cell.acceptButton.isEnabled = false
+            cell.declineButton.isEnabled = false
             
             // Hide the main cell views.
             cell.usernameLabel.alpha = 0.0
@@ -276,7 +277,7 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if (self.requestsCheck == true) {
             return 74
@@ -289,17 +290,17 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
     
     // Alert methods.
     
-    func displayAlert(alertTitle: String, alertMessage: String) {
+    func displayAlert(_ alertTitle: String, alertMessage: String) {
         
         // Setup the alert controller.
-        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         // Setup the alert actions.
-        let cancel = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+        let cancel = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
         alertController.addAction(cancel)
         
         // Present the alert on screen.
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
    
     // Other methods.

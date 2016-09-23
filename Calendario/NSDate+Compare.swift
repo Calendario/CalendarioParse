@@ -8,14 +8,14 @@
 
 import UIKit
 
-extension NSDate
+extension Date
 {
     // this function compares a date to see if its greater than the passed date
-    func isGreaterThanDate(datetoCompare:NSDate) -> Bool
+    func isGreaterThanDate(_ datetoCompare:Date) -> Bool
     {
         var isGreater = false
         
-        if self.compare(datetoCompare) == NSComparisonResult.OrderedDescending
+        if self.compare(datetoCompare) == ComparisonResult.orderedDescending
         {
             isGreater = true
         }
@@ -23,12 +23,12 @@ extension NSDate
         return isGreater
     }
     
-    // this function compares a date to see if its less tah the passed date 
-    func isLessThanDate(dateToCompare:NSDate) -> Bool
+    // this function compares a date to see if its less than the passed date
+    func isLessThanDate(_ dateToCompare:Date) -> Bool
     {
         var isLess = false
         
-        if self.compare(dateToCompare) == NSComparisonResult.OrderedAscending
+        if self.compare(dateToCompare) == ComparisonResult.orderedAscending
         {
             isLess = true
         }
@@ -37,11 +37,11 @@ extension NSDate
     }
     
     // checks to see if the dates are equal
-    func EqualtoDate(dateToCompare:NSDate) -> Bool
+    func EqualtoDate(_ dateToCompare:Date) -> Bool
     {
         var isEqual = false
         
-        if self.compare(dateToCompare) == NSComparisonResult.OrderedSame
+        if self.compare(dateToCompare) == ComparisonResult.orderedSame
         {
             isEqual = true
         }
@@ -49,16 +49,15 @@ extension NSDate
         return isEqual
     }
     
-    func DateisNotEqual(dateToCompare:NSDate) -> Bool
+    func DateisNotEqual(_ dateToCompare:Date) -> Bool
     {
         var notEqual = false
         
-        if self.compare(dateToCompare) != NSComparisonResult.OrderedSame
+        if self.compare(dateToCompare) != ComparisonResult.orderedSame
         {
             notEqual = true
             
         }
         return notEqual
     }
-    
 }

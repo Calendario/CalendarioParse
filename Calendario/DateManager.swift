@@ -23,17 +23,17 @@ and returning the appropriate difference string.
 // in relations to the status update dates.
 @objc class DateManager : NSObject {
     
-    @objc class func createDateDifferenceString(inputDate: NSDate, completion: (difference: String) -> Void) {
+    @objc class func createDateDifferenceString(_ inputDate: Date, completion: @escaping (_ difference: String) -> Void) {
         
         // Get the current date.
-        let currentDate: NSDate = NSDate()
+        let currentDate: Date = Date()
         
         // Get the standard Gregorian calendar.s
-        let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let calendar: Calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         
         // Calculate the different between the
         // current date and the input date.
-        let components: NSDateComponents = calendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute , NSCalendarUnit.Second], fromDate: inputDate, toDate: currentDate, options: [])
+        let components: DateComponents = (calendar as NSCalendar).components([NSCalendar.Unit.year, NSCalendar.Unit.month, NSCalendar.Unit.day, NSCalendar.Unit.hour, NSCalendar.Unit.minute , NSCalendar.Unit.second], from: inputDate, to: currentDate, options: [])
         
         // Create the difference string.
         var result: String!
@@ -41,7 +41,7 @@ and returning the appropriate difference string.
         // Set the difference string depending on the
         // year, month, day and seconds calculated.
         
-        if (components.year > 1) {
+        if (components.year! > 1) {
             result = "\(components.year) years ago"
         }
             
@@ -51,7 +51,7 @@ and returning the appropriate difference string.
         
         else {
             
-            if (components.month > 1) {
+            if (components.month! > 1) {
                 result = "\(components.month) months ago"
             }
                 
@@ -61,7 +61,7 @@ and returning the appropriate difference string.
             
             else {
                 
-                if (components.day > 1) {
+                if (components.day! > 1) {
                     result = "\(components.day) days ago"
                 }
                     
@@ -71,7 +71,7 @@ and returning the appropriate difference string.
                 
                 else {
                     
-                    if (components.hour > 1) {
+                    if (components.hour! > 1) {
                         result = "\(components.hour) hours ago"
                     }
                         
@@ -81,7 +81,7 @@ and returning the appropriate difference string.
                     
                     else {
                         
-                        if (components.minute > 1) {
+                        if (components.minute! > 1) {
                             result = "\(components.minute) minutes ago"
                         }
                             
@@ -91,7 +91,7 @@ and returning the appropriate difference string.
                         
                         else {
                             
-                            if (components.second > 1) {
+                            if (components.second! > 1) {
                                 result = "\(components.second) seconds ago"
                             }
                                 
@@ -105,8 +105,8 @@ and returning the appropriate difference string.
         }
         
         // Return the difference string.
-        dispatch_async(dispatch_get_main_queue(), {
-            completion(difference: result)
+        DispatchQueue.main.async(execute: {
+            completion(result)
         })
     }
 }
