@@ -16,6 +16,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
     
     // Setup the edit form UI objects.
     @IBOutlet weak var userPicture: UIImageView!
+    @IBOutlet weak var userBackgroundPicture: UIImageView!
     @IBOutlet weak var userFullName: UITextField!
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var userEmail: UITextField!
@@ -24,7 +25,8 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
     @IBOutlet weak var userWebsite: UITextField!
     @IBOutlet weak var userPassword: UITextField!
     @IBOutlet weak var userReEnterPassword: UITextField!
-    @IBOutlet weak var editScroll: UIScrollView!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var containerTable: UITableView!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var backButton: UIBarButtonItem!
@@ -33,11 +35,23 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
     // Store the selected profile image data.
     var imageData : Data!
     
+    // Store the selected profile background data.
+    var imageBackgroundData : Data!
+    
     // Profile image set by user check.
     var userSetImage = false
     
+    // Profile background image set by user check.
+    var userBackgroundSetImage = false
+    
+    // Current image mode check.
+    var currentImageMode = true
+    
     // Unsaved changes check.
     var editSavedCheck : Bool!
+    
+    // Scroll movement data.
+    var currentlyEditing:Bool = false
     
     // Setup the on screen button actions.
     
@@ -49,6 +63,131 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
     
     @IBAction func editPicture(_ sender: UIButton) {
         
+        // Setup the alert controller.
+        let choiceAlert = UIAlertController(title: "Edit Profile", message: "Would you like to edit your profile picture or background picture?", preferredStyle: .actionSheet)
+        
+        // Setup the alert actions.
+        let editProfilePicture = { (action:UIAlertAction!) -> Void in
+            self.setUserPicture(mode: true, inputTitle: "Profile Picture")
+        }
+        let selectProfile = UIAlertAction(title: "Profile Picture", style: .default, handler: editProfilePicture)
+        
+        let editBackgroundPicture = { (action:UIAlertAction!) -> Void in
+            self.setUserPicture(mode: false, inputTitle: "Background Picture")
+        }
+        let selectBackground = UIAlertAction(title: "Background Picture", style: .default, handler: editBackgroundPicture)
+        
+        let cancel = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+        choiceAlert.addAction(selectBackground)
+        choiceAlert.addAction(selectProfile)
+        choiceAlert.addAction(cancel)
+        
+        // Present the alert on screen.
+        present(choiceAlert, animated: true, completion: nil)
+    }
+    
+    @IBAction func goBack(_ sender: UIButton) {
+        
+        // Dismiss the keyboard.
+        self.view.resignFirstResponder()
+        
+        // Enable access to the UI and
+        // hide the loading indicator view.
+        self.changeUIAccess(true)
+        
+        // Check if the user has saved their edits.
+        
+        if (editSavedCheck == true) {
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        else if (editSavedCheck == false) {
+            
+            // Setup the alert controller.
+            let exitAlert = UIAlertController(title: "Unsaved changes", message: "Are you sure you want to go back? Your new changes have not been saved.", preferredStyle: .alert)
+            
+            // Exit alert action buttons.
+            let ok = { (action:UIAlertAction!) -> Void in
+                self.dismiss(animated: true, completion: nil)
+            }
+            let buttonOne = UIAlertAction(title: "Exit without saving changes", style: .destructive, handler: ok)
+            
+            let cancel = { (action:UIAlertAction!) -> Void in
+            }
+            let buttonTwo = UIAlertAction(title: "Cancel", style: .default, handler: cancel)
+            
+            // Add the actions to the alert.
+            exitAlert.addAction(buttonOne)
+            exitAlert.addAction(buttonTwo)
+            
+            // Present the alert on screen.
+            self.present(exitAlert, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func switchChangeState(_ sender: UISwitch) {
+        editSavedCheck = false
+    }
+    
+    // View Did Load method.
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Set the loading view background colour.
+        loadingView.backgroundColor = UIColor.clear
+        
+        // Add a blur view to the loading view.
+        var visualEffectView:UIVisualEffectView!
+        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark)) as UIVisualEffectView
+        visualEffectView.frame = loadingView.bounds
+        loadingView.insertSubview(visualEffectView, at: 0)
+        
+        // Turn the profile picture into a cirlce.
+        self.userPicture.layer.cornerRadius = (self.userPicture.frame.size.width / 2)
+        self.userPicture.clipsToBounds = true
+        
+        // Curve the edges of the loading view.
+        self.loadingView.layer.cornerRadius = 12
+        self.loadingView.clipsToBounds = true
+        
+        // Esnure the background picture crops.
+        self.userBackgroundPicture.clipsToBounds = true
+        
+        // Set tha table view header view.
+        self.containerTable.tableHeaderView = self.containerView
+        
+        // By default the user hasn't made any edits.
+        editSavedCheck = true
+        
+        // Allow the user to dismiss the keyboard with a toolabr.
+        let editToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50))
+        editToolbar.barStyle = UIBarStyle.default
+        
+        editToolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(EditProfileViewController.textViewDismissKeyboard))
+        ]
+        
+        editToolbar.sizeToFit()
+        userDescription.inputAccessoryView = editToolbar
+        
+        // Load in the current user data.
+        loadCurrentData()
+    }
+    
+    // View Did Layout Subviews method.
+    
+    override func viewDidLayoutSubviews() {
+    }
+    
+    // Data methods.
+    
+    func setUserPicture(mode: Bool, inputTitle: String) {
+        
+        // Set the current image mode.
+        self.currentImageMode = mode
+        
         // Setup the image picker view controller.
         var imagePicker:UIImagePickerController!
         imagePicker = UIImagePickerController()
@@ -56,7 +195,7 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         imagePicker.allowsEditing = true
         
         // Setup the alert controller.
-        let imageAlert = UIAlertController(title: "Profile Picture", message: "Add a photo from your library or take a picture with the camera.", preferredStyle: .alert)
+        let imageAlert = UIAlertController(title: inputTitle, message: "Add a photo from your library or take a picture with the camera.", preferredStyle: .actionSheet)
         
         // Photo library action button.
         let libraryPicture = { (action:UIAlertAction!) -> Void in
@@ -137,26 +276,53 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         // Set to default picture button.
         let defaultPicture = { (action:UIAlertAction!) -> Void in
             
-            // The user has not set an image.
-            self.userSetImage = false
+            // Check if we are editing the profile
+            // picture or the background picture.
             
-            // Set the image data to the default image.
-            self.imageData = UIImageJPEGRepresentation(UIImage(named: "default_profile_pic.png")!, 1.0)
+            if (mode == true) {
+                
+                // The user has not set an image.
+                self.userSetImage = false
+                
+                // Set the image data to the default image.
+                self.imageData = UIImageJPEGRepresentation(UIImage(named: "default_profile_pic.png")!, 1.0)
+                
+                // Set the profile picture to the default image.
+                self.userPicture.image = UIImage(named: "default_profile_pic.png")
+            }
             
-            // Set the profile picture to the default image.
-            self.userPicture.image = UIImage(named: "default_profile_pic.png")
+            else {
+                
+                // The user has not set a background image.
+                self.userBackgroundSetImage = false
+                
+                // Set the image data to clear.
+                self.imageBackgroundData = nil
+                
+                // Set the background picture to clear.
+                self.userBackgroundPicture.image = nil
+            }
         }
-        let buttonThree = UIAlertAction(title: "Default picture", style: .default, handler: defaultPicture)
+        let buttonThree = UIAlertAction(title: "Reset picture", style: .default, handler: defaultPicture)
         
         // Cancel button.
-        let buttonFour = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let buttonFour = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         // Add the actions to the alert.
         imageAlert.addAction(buttonOne)
         imageAlert.addAction(buttonTwo)
         
-        if (userSetImage == true) {
-            imageAlert.addAction(buttonThree)
+        if (mode == true) {
+            
+            if (self.userSetImage == true) {
+                imageAlert.addAction(buttonThree)
+            }
+            
+        } else {
+            
+            if (self.userBackgroundSetImage == true) {
+                imageAlert.addAction(buttonThree)
+            }
         }
         
         imageAlert.addAction(buttonFour)
@@ -164,112 +330,6 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         // Present the alert on screen.
         self.present(imageAlert, animated: true, completion: nil)
     }
-    
-    @IBAction func goBack(_ sender: UIButton) {
-        
-        // Dismiss the keyboard.
-        self.view.resignFirstResponder()
-        
-        // Enable access to the UI and
-        // hide the loading indicator view.
-        self.changeUIAccess(true)
-        
-        // Check if the user has saved their edits.
-        
-        if (editSavedCheck == true) {
-            self.dismiss(animated: true, completion: nil)
-        }
-        
-        else if (editSavedCheck == false) {
-            
-            // Setup the alert controller.
-            let exitAlert = UIAlertController(title: "Unsaved changes", message: "Are you sure you want to go back? Your new changes have not been saved.", preferredStyle: .alert)
-            
-            // Exit alert action buttons.
-            let ok = { (action:UIAlertAction!) -> Void in
-                self.dismiss(animated: true, completion: nil)
-            }
-            let buttonOne = UIAlertAction(title: "Exit without saving changes", style: .destructive, handler: ok)
-            
-            let cancel = { (action:UIAlertAction!) -> Void in
-            }
-            let buttonTwo = UIAlertAction(title: "Cancel", style: .default, handler: cancel)
-            
-            // Add the actions to the alert.
-            exitAlert.addAction(buttonOne)
-            exitAlert.addAction(buttonTwo)
-            
-            // Present the alert on screen.
-            self.present(exitAlert, animated: true, completion: nil)
-        }
-    }
-    
-    @IBAction func switchChangeState(_ sender: UISwitch) {
-        editSavedCheck = false
-    }
-    
-    // View Did Load method.
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Set the loading view background colour.
-        loadingView.backgroundColor = UIColor.clear
-        
-        // Add a blur view to the loading view.
-        var visualEffectView:UIVisualEffectView!
-        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark)) as UIVisualEffectView
-        visualEffectView.frame = loadingView.bounds
-        loadingView.insertSubview(visualEffectView, at: 0)
-        
-        // Turn the profile picture into a cirlce.
-        self.userPicture.layer.cornerRadius = (self.userPicture.frame.size.width / 2)
-        self.userPicture.clipsToBounds = true
-        
-        // Curve the edges of the loading view.
-        self.loadingView.layer.cornerRadius = 12
-        self.loadingView.clipsToBounds = true
-        
-        // By default the user hasn't made any edits.
-        editSavedCheck = true
-        
-        // Allow the user to dismiss the keyboard with a toolabr.
-        let editToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50))
-        editToolbar.barStyle = UIBarStyle.default
-        
-        editToolbar.items = [
-            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(EditProfileViewController.textViewDismissKeyboard))
-        ]
-        
-        editToolbar.sizeToFit()
-        userDescription.inputAccessoryView = editToolbar
-        
-        // Load in the current user data.
-        loadCurrentData()
-    }
-    
-    // View Did Layout Subviews method.
-    
-    override func viewDidLayoutSubviews() {
-        
-        // Calculate the appropriate scroll height.
-        var scrollHeight: CGFloat = 0.0
-        
-        if (self.editScroll.bounds.height > 780) {
-            scrollHeight = self.editScroll.bounds.height
-        }
-            
-        else {
-            scrollHeight = 780
-        }
-        
-        // Setup the profile scroll view.
-        self.editScroll.isScrollEnabled = true
-        self.editScroll.contentSize = CGSize(width: self.view.bounds.width, height: scrollHeight)
-    }
-    
-    // Data methods.
     
     func loadCurrentData() {
         
@@ -301,6 +361,29 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         
         // Check the website URL link.
         userWebsite.text = currentUser?.object(forKey: "website") as? String
+        
+        // Check if the user has a background picture.
+        
+        if (currentUser.object(forKey: "backgroundImage") != nil) {
+            
+            let userImageFile = currentUser["backgroundImage"] as! PFFile
+            userImageFile.getDataInBackground(block: { (imageData: Data?, error: Error?) in
+                
+                if (error == nil) {
+                    
+                    // Check the profile image data first.
+                    let profileBackgroundImage = UIImage(data:imageData!)
+                    
+                    if ((imageData != nil) && (profileBackgroundImage != nil)) {
+                        self.userBackgroundPicture.image = profileBackgroundImage
+                    }
+                }
+            })
+        }
+            
+        else {
+            self.userBackgroundPicture.image = nil
+        }
         
         // Check if the user has a profile image.
         
@@ -492,12 +575,23 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         // Only upload a profile picture if a
         // new picture has been set by the user.
         
-        if (userSetImage == true) {
+        if (self.userSetImage == true) {
             
             // Add the profile image in the form of a
             // PFFile object to the update profile api request.
             let imageFile = PFFile(name: "prof.jpg", data: imageData!)
             currentUser["profileImage"] = imageFile
+        }
+        
+        // Only upload a profile background picture
+        // if a new picture has been set by the user.
+        
+        if (self.userBackgroundSetImage == true) {
+            
+            // Add the profile image in the form of a
+            // PFFile object to the update profile api request.
+            let imageFile = PFFile(name: "profBackground.jpg", data: imageBackgroundData!)
+            currentUser["backgroundImage"] = imageFile
         }
         
         // Upload the changes to the Parse servers.
@@ -527,16 +621,16 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
         
         // True means we should enable access to the UI
         // objects and false means we should disable access.
-        userEmail.isUserInteractionEnabled = mode
-        userName.isUserInteractionEnabled = mode
-        userPassword.isUserInteractionEnabled = mode
-        userReEnterPassword.isUserInteractionEnabled = mode
-        userDescription.isUserInteractionEnabled = mode
-        userFullName.isUserInteractionEnabled = mode
-        userWebsite.isUserInteractionEnabled = mode
-        editScroll.isUserInteractionEnabled = mode
-        saveButton.isEnabled = mode
-        backButton.isEnabled = mode
+        self.userEmail.isUserInteractionEnabled = mode
+        self.userName.isUserInteractionEnabled = mode
+        self.userPassword.isUserInteractionEnabled = mode
+        self.userReEnterPassword.isUserInteractionEnabled = mode
+        self.userDescription.isUserInteractionEnabled = mode
+        self.userFullName.isUserInteractionEnabled = mode
+        self.userWebsite.isUserInteractionEnabled = mode
+        self.containerView.isUserInteractionEnabled = mode
+        self.saveButton.isEnabled = mode
+        self.backButton.isEnabled = mode
         
         // Show or hide the loading indicator views.
         
@@ -570,6 +664,13 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
     
     // Other methods.
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        // Dismiss the keyboard.
+        self.currentlyEditing = false
+        self.view.resignFirstResponder()
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!){
         
         // Dismiss the image picker view controller.
@@ -578,14 +679,32 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
             // New edits have been made.
             self.editSavedCheck = false
             
-            // The user has set an image.
-            self.userSetImage = true
+            // Set the user profile or background
+            // picture depending on the current mode.
             
-            // Store the image for use in the registration.
-            self.imageData = UIImageJPEGRepresentation(image, 1.0)
+            if (self.currentImageMode == true) {
+                
+                // The user has set an image.
+                self.userSetImage = true
+                
+                // Store the image for use in the registration.
+                self.imageData = UIImageJPEGRepresentation(image, 1.0)
+                
+                // Set the profile picture view.
+                self.userPicture.image = image
+            }
             
-            // Set the profile picture view.
-            self.userPicture.image = image
+            else {
+                
+                // The user has set an image.
+                self.userBackgroundSetImage = true
+                
+                // Store the image for use in the registration.
+                self.imageBackgroundData = UIImageJPEGRepresentation(image, 1.0)
+                
+                // Set the profile background picture view.
+                self.userBackgroundPicture.image = image
+            }
         })
     }
     
@@ -602,25 +721,35 @@ class EditProfileViewController : UIViewController, UITextFieldDelegate, UITextV
     
     func textViewDidEndEditing(_ textView: UITextView) {
         
-        editSavedCheck = false
+        self.editSavedCheck = false
+        self.currentlyEditing = false
         self.setPlaceholderAlpha()
     }
     
     func textViewDidChange(_ textView: UITextView) {
         
-        editSavedCheck = false
+        self.editSavedCheck = false
+        self.currentlyEditing = false
         self.setPlaceholderAlpha()
     }
     
     func textViewDismissKeyboard() {
         
-        editSavedCheck = false
-        userDescription.resignFirstResponder()
+        self.editSavedCheck = false
+        self.currentlyEditing = false
+        self.userDescription.resignFirstResponder()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        // Set the current edit state.
+        self.currentlyEditing = true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        editSavedCheck = false
+        self.editSavedCheck = false
+        self.currentlyEditing = false
         textField.resignFirstResponder()
         
         return true

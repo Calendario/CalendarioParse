@@ -11,7 +11,7 @@ import UIKit
 open class PresentingViews: NSObject {
     
     class func ShowUserEditController(_ viewController: AnyObject) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "EditProfileUI", bundle: nil)
         let viewC = storyboard.instantiateViewController(withIdentifier: "EditView") as! EditProfileViewController
         viewController.present(viewC, animated: true, completion: nil)
     }

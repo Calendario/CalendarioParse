@@ -552,6 +552,31 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             self.profWeb.isUserInteractionEnabled = false
         }
         
+        // Check if the user has a background picture.
+        
+        if (userData.object(forKey: "backgroundImage") != nil) {
+            
+            let userImageFile = userData["backgroundImage"] as! PFFile
+            userImageFile.getDataInBackground(block: { (imageData: Data?, error: Error?) in
+                
+                if (error == nil) {
+                    
+                    // Check the profile image data first.
+                    let profileBackgroundImage = UIImage(data:imageData!)
+                    
+                    if ((imageData != nil) && (profileBackgroundImage != nil)) {
+                        self.backgroundImage.image = profileBackgroundImage
+                    }
+                } else {
+                    self.backgroundImage.image = nil
+                }
+            })
+        }
+        
+        else {
+            self.backgroundImage.image = nil
+        }
+        
         // Check if the user is verified.
         let verify = userData.object(forKey: "verifiedUser")
         
@@ -571,6 +596,8 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // Check if the user has a profile image.
         
         if (userData.object(forKey: "profileImage") == nil) {
+            
+            print("Hello");
             self.profPicture.image = UIImage(named: "default_profile_pic.png")
         }
             
@@ -581,18 +608,28 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 
                 if (error == nil) {
                     
+                    print("Hello 2");
+                    
                     // Check the profile image data first.
                     let profileImage = UIImage(data:imageData!)
                     
                     if ((imageData != nil) && (profileImage != nil)) {
+                        
+                        print("Hello 3");
                         self.profPicture.image = profileImage
                     } else {
+                        
+                        print("Hello 4");
                         self.profPicture.image = UIImage(named: "default_profile_pic.png")
                     }
                     
                 } else {
+                    
+                    print("Hello 5");
                     self.profPicture.image = UIImage(named: "default_profile_pic.png")
                 }
+                
+                print("Hello 6");
                 
                 // Notify the user that the app has stopped loading.
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
