@@ -49,6 +49,35 @@ open class ParseCalls: NSObject {
         }
     }
     
+    class func checkForUserPostedMedia(imageView: UIImageView, passedObject: PFObject, cell: NewsfeedTableViewCell, completion: @escaping (_ mediaDetected: Bool) -> Void) {
+        
+        // Setup the media details query.
+        var findMedia:PFQuery<PFObject>!
+        findMedia = PFUser.query()!
+        findMedia.whereKey("statusUpdateID", equalTo: passedObject.objectId!)
+        
+        // Download the media data.
+        findMedia.getFirstObjectInBackground { (object:PFObject?, error: Error?) in
+            
+            if (error == nil) {
+                
+                var mediaData = [Any]()
+                
+                if object?.value(forKey: "videoData") != nil {
+                    mediaData.append(object?.value(forKey: "videoData") != nil)
+                }
+            }
+                
+            else {
+                
+                // Return the whether or not media was detected.
+                DispatchQueue.main.async(execute: {
+                    completion(false)
+                })
+            }
+        }
+    }
+    
     class func checkForUserPostedImage(_ imageView: UIImageView, passedObject: PFObject, cell: NewsfeedTableViewCell) {
         
         if (passedObject.object(forKey: "image") == nil) {

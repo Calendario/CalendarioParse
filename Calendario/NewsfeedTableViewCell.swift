@@ -33,6 +33,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     @IBOutlet weak var Likebuttoncontainerbutton: UIButton!
     @IBOutlet weak var userImageViewContainerHeightContstraint: NSLayoutConstraint!
     @IBOutlet weak var userImageContainer: UIView!
+    @IBOutlet weak var likeButtonImage: UIImageView!
     
     var attendGestureRecognizer: UITapGestureRecognizer!
     var passedInObject: PFObject!
@@ -334,8 +335,10 @@ class NewsfeedTableViewCell: PFTableViewCell {
     func highlightLikedButton(_ likesArray: [String]) {
         if likesArray.contains(PFUser.current()!.objectId!) {
             self.likebutton.backgroundColor = UIColor.white
+            self.likeButtonImage.image = UIImage(named: "Like Icon.png")
         } else {
             self.likebutton.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+            self.likeButtonImage.image = UIImage(named: "Like Icon.png")
         }
     }
     
@@ -445,7 +448,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
         // Setup the user query.
         var userQuery:PFQuery<PFObject>!
         userQuery = PFUser.query()!
-        userQuery.whereKey("objectId", equalTo: ((currentObject.object(forKey: "user") as AnyObject).objectId)!)
+        userQuery.whereKey("objectId", equalTo: (currentObject.object(forKey: "user") as! PFUser).objectId!)
         
         // Download the user object.
         userQuery.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in

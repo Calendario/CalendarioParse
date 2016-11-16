@@ -169,7 +169,7 @@ class HashtagViewController: UITableViewController {
         let hashtagData = defaults.object(forKey: "HashtagData") as? NSMutableArray
         
         // Set the hashtag string.
-        hashtagString = hashtagData![0] as! String
+        hashtagString = hashtagData![1] as! String
         self.navigationItem.title = hashtagString
     }
     

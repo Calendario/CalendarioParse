@@ -39,6 +39,8 @@
 		A23457AB1C79E6E500376F2F /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457AA1C79E6E500376F2F /* DateManager.swift */; };
 		A23457AE1C7B4AA300376F2F /* HashtagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457AD1C7B4AA300376F2F /* HashtagViewController.swift */; };
 		A238736C1D25B6F200C785EF /* SearchFilterUI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A238736B1D25B6F200C785EF /* SearchFilterUI.storyboard */; };
+		A23D83D21DDB23600013C233 /* ProfileSubController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23D83D11DDB23600013C233 /* ProfileSubController.swift */; };
+		A23D83D41DDB236D0013C233 /* ProfileUI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A23D83D31DDB236D0013C233 /* ProfileUI.storyboard */; };
 		A24DB1181C8F705E002D4897 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24DB1171C8F705E002D4897 /* EventManager.swift */; };
 		A24DB11A1C8F7EB1002D4897 /* AttendantsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24DB1191C8F7EB1002D4897 /* AttendantsListViewController.swift */; };
 		A25179521C201B0300EA0A5E /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25179511C201B0300EA0A5E /* ReportUserViewController.swift */; };
@@ -208,6 +210,8 @@
 		A23457AA1C79E6E500376F2F /* DateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		A23457AD1C7B4AA300376F2F /* HashtagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagViewController.swift; sourceTree = "<group>"; };
 		A238736B1D25B6F200C785EF /* SearchFilterUI.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchFilterUI.storyboard; sourceTree = "<group>"; };
+		A23D83D11DDB23600013C233 /* ProfileSubController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSubController.swift; sourceTree = "<group>"; };
+		A23D83D31DDB236D0013C233 /* ProfileUI.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProfileUI.storyboard; sourceTree = "<group>"; };
 		A24DB1171C8F705E002D4897 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		A24DB1191C8F7EB1002D4897 /* AttendantsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendantsListViewController.swift; sourceTree = "<group>"; };
 		A25179511C201B0300EA0A5E /* ReportUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportUserViewController.swift; sourceTree = "<group>"; };
@@ -701,6 +705,8 @@
 			children = (
 				A2E881251C6A96F2008DFFAC /* MIBadgeButton.swift */,
 				A28825F51BE3960500564EBF /* MyProfileViewController.swift */,
+				A23D83D11DDB23600013C233 /* ProfileSubController.swift */,
+				A23D83D31DDB236D0013C233 /* ProfileUI.storyboard */,
 			);
 			name = "Profile view";
 			sourceTree = "<group>";
@@ -1165,6 +1171,7 @@
 				A259E8911DD9C22300963F0C /* EditProfileUI.storyboard in Resources */,
 				E2E0D7121BC9950800662E70 /* LaunchScreen.storyboard in Resources */,
 				78CE15B81C95CE2F00257C4B /* followers-icon.png in Resources */,
+				A23D83D41DDB236D0013C233 /* ProfileUI.storyboard in Resources */,
 				A2A7D75B1D37DC0E003BE0AF /* FullimageViewController.storyboard in Resources */,
 				D3DE97981C80CC0400F4DE7B /* SF-UI-Text-LightItalic.otf in Resources */,
 				E2E0D70F1BC9950800662E70 /* Assets.xcassets in Resources */,
@@ -1298,6 +1305,7 @@
 				D3D9D7D61C9E0B4B000A2528 /* ParseCalls.swift in Sources */,
 				E2EE565D1BF199F70064BA1D /* NSArray+Chameleon.m in Sources */,
 				E24DA5EF1C13E3AC00901DF0 /* LocationSearchTableViewController.swift in Sources */,
+				A23D83D21DDB23600013C233 /* ProfileSubController.swift in Sources */,
 				E2EE56621BF199F70064BA1D /* UILabel+Chameleon.m in Sources */,
 				E2CAAA3B1C69A2AB001C9E06 /* NSDate+Compare.swift in Sources */,
 				E23083671C7426EB001C0142 /* CALayer+FSExtension.m in Sources */,

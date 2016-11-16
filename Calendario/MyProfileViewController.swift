@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Parse
 import QuartzCore
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -30,32 +31,21 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
 class MyProfileViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // Setup the various user labels/etc.
-    @IBOutlet weak var profPicture: UIImageView!
-    @IBOutlet weak var profVerified: UIImageView!
-    @IBOutlet weak var profName: UILabel!
-    @IBOutlet weak var profUserName: UILabel!
-    @IBOutlet weak var profWeb: UIButton!
-    @IBOutlet weak var profPosts: UILabel!
-    @IBOutlet weak var profFollowers: UILabel!
-    @IBOutlet weak var profFollowing: UILabel!
     @IBOutlet weak var blockedBlurView: UIView!
     @IBOutlet weak var blockedViewDesc: UITextView!
     @IBOutlet weak var statusList: UITableView!
-    @IBOutlet weak var profDesc: UILabel!
-    @IBOutlet weak var backgroundImage: UIImageView!
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var moreButton: UIButton!
-    @IBOutlet weak var followButton: UIButton!
     
     // Follow method property
     var FollowObject = FollowHelper()
     
     // Passed in user object.
     internal var passedUser:PFUser!
+    
+    // Profile subview controller.
+    var profileSubview:ProfileSubController!
     
     // User block check.
     // 1 = You blocked the user.
@@ -68,6 +58,9 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     // Private profile check.
     var privateCheck:Bool!
     var statusLoadCheck:Bool = true
+    
+    // Header view set check.
+    var headerSetCheck = false
     
     // User status update data.
     // (For the statusList table view).
@@ -127,8 +120,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupUI()
-        addTapGestures()
+        self.setupUI()
     }
     
     func setupUI() {
@@ -159,21 +151,18 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         self.blockedBlurView.addSubview(blockButtonLeft)
         self.blockedBlurView.addSubview(blockButtonRight)
         
-        self.profPicture.layer.cornerRadius = (self.profPicture.frame.size.width / 2)
-        self.profPicture.clipsToBounds = true
-        
         self.statusList.separatorColor = UIColor.clear
     }
     
     func addTapGestures() {
         // Adding tap gesture reconizers to the following and follower labels.
         let followgesturereconizer = UITapGestureRecognizer(target: self, action: #selector(MyProfileViewController.GotoFollowingView))
-        self.profFollowing.isUserInteractionEnabled = true
-        self.profFollowing.addGestureRecognizer(followgesturereconizer)
+        self.profileSubview.profFollowing.isUserInteractionEnabled = true
+        self.profileSubview.profFollowing.addGestureRecognizer(followgesturereconizer)
         
         let followergesturereconizer = UITapGestureRecognizer(target: self, action: #selector(MyProfileViewController.GotoFollowerView))
-        self.profFollowers.isUserInteractionEnabled = true
-        self.profFollowers.addGestureRecognizer(followergesturereconizer)
+        self.profileSubview.profFollowers.isUserInteractionEnabled = true
+        self.profileSubview.profFollowers.addGestureRecognizer(followergesturereconizer)
     }
     
     // Back/More section alert methods.
@@ -397,6 +386,28 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         self.statusList.estimatedRowHeight = 292;
         self.statusList.separatorInset = UIEdgeInsets.zero
         
+        // Check if the header view has been set.
+        
+        if (self.headerSetCheck == false) {
+            
+            // Insert the user profile subview as the table header view.
+            let story_file = UIStoryboard(name: "ProfileUI", bundle: nil)
+            self.profileSubview = story_file.instantiateViewController(withIdentifier: "ProfileUI") as! ProfileSubController
+            self.addChildViewController(self.profileSubview)
+            self.profileSubview.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 341)
+            self.statusList.tableHeaderView = self.profileSubview.view
+            self.addTapGestures()
+            
+            // Connect the profile subview buttons to actions.
+            self.profileSubview.profWeb.addTarget(self, action: #selector(MyProfileViewController.openUserWebsite(_:)), for: .touchUpInside)
+            self.profileSubview.moreButton.addTarget(self, action: #selector(MyProfileViewController.openSettingsOrMoreSection(_:)), for: .touchUpInside)
+            self.profileSubview.backButton.addTarget(self, action: #selector(MyProfileViewController.dismissProfile(_:)), for: .touchUpInside)
+            self.profileSubview.followButton.addTarget(self, action: #selector(MyProfileViewController.followUserTapped(_:)), for: .touchUpInside)
+            
+            // The header view has been set.
+            self.headerSetCheck = true
+        }
+        
         // By default the more button is diabled until
         // we have downloaded the appropriate user data.
         self.blockCheck = 0
@@ -413,20 +424,20 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             // user has been passed in.
             
             if (passedUser == nil) {
-                backButton.isEnabled = false
-                backButton.isUserInteractionEnabled = false
-                backButton.alpha = 0.0
+                self.profileSubview.backButton.isEnabled = false
+                self.profileSubview.backButton.isUserInteractionEnabled = false
+                self.profileSubview.backButton.alpha = 0.0
             }
                 
             else {
-                backButton.isEnabled = true
-                backButton.isUserInteractionEnabled = true
-                backButton.alpha = 1.0
+                self.profileSubview.backButton.isEnabled = true
+                self.profileSubview.backButton.isUserInteractionEnabled = true
+                self.profileSubview.backButton.alpha = 1.0
             }
             
             // Disable the follow user button.
-            self.followButton.isUserInteractionEnabled = false
-            self.followButton.isEnabled = false
+            self.profileSubview.followButton.isUserInteractionEnabled = false
+            self.profileSubview.followButton.isEnabled = false
             
             // Update the rest of the profile view.
             self.updateProfileView(PFUser.current()!)
@@ -435,8 +446,8 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         else {
             
             // Enable the follow user button.
-            self.followButton.isUserInteractionEnabled = true
-            self.followButton.isEnabled = true
+            self.profileSubview.followButton.isUserInteractionEnabled = true
+            self.profileSubview.followButton.isEnabled = true
             
             // Check if the user has already been blocked
             // or if the user has blocked you and take the
@@ -497,13 +508,13 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                     self.statusLoadCheck = true
                     
                     // Set the follow user button image - following.
-                    self.followButton.setImage(UIImage(named: "Following.png"), for: UIControlState())
+                    self.profileSubview.followButton.setImage(UIImage(named: "FollowingIcon.png"), for: UIControlState())
                 }
                     
                 else {
                     
                     // Set the follow user button image - not following.
-                    self.followButton.setImage(UIImage(named: "FollowButton.png"), for: UIControlState())
+                    self.profileSubview.followButton.setImage(UIImage(named: "FollowIcon.png"), for: UIControlState())
                     
                     // If the user is private then disallow
                     // the status updates to be fetched.
@@ -526,17 +537,17 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     func updateProfileView(_ userData: PFUser) {
         
         // User is logged in - get thier details and populate the UI.
-        self.profName.text = userData.object(forKey: "fullName") as? String
-        self.profDesc.text = userData.object(forKey: "userBio") as? String
+        self.profileSubview.profName.text = userData.object(forKey: "fullName") as? String
+        self.profileSubview.profDesc.text = userData.object(forKey: "userBio") as? String
         
         // Get and set the followers/following label.
         self.setFollowDataCount(userData)
         
         // Set the post count label default.
-        self.profPosts.text = "0"
+        self.profileSubview.setPostsLabel(number: "0 POSTS")
         
         // Set the username label text.
-        self.profUserName.text = "@\(userData.username!)"
+        self.profileSubview.profUserName.text = "@\(userData.username!)"
         
         // Store PFUser Data in NSUserDefaults.
         let defaults = UserDefaults.standard
@@ -546,10 +557,10 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         userWebsiteLink = userData.object(forKey: "website") as? String
         
         if (userWebsiteLink != nil) {
-            self.profWeb.setTitle(userWebsiteLink, for: UIControlState())
+            self.profileSubview.profWeb.setTitle(userWebsiteLink, for: UIControlState())
         } else {
-            self.profWeb.setTitle("No website set.", for: UIControlState())
-            self.profWeb.isUserInteractionEnabled = false
+            self.profileSubview.profWeb.setTitle("No website set.", for: UIControlState())
+            self.profileSubview.profWeb.isUserInteractionEnabled = false
         }
         
         // Check if the user has a background picture.
@@ -565,40 +576,38 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                     let profileBackgroundImage = UIImage(data:imageData!)
                     
                     if ((imageData != nil) && (profileBackgroundImage != nil)) {
-                        self.backgroundImage.image = profileBackgroundImage
+                        self.profileSubview.backgroundImage.image = profileBackgroundImage
                     }
                 } else {
-                    self.backgroundImage.image = nil
+                    self.profileSubview.backgroundImage.image = nil
                 }
             })
         }
         
         else {
-            self.backgroundImage.image = nil
+            self.profileSubview.backgroundImage.image = nil
         }
         
         // Check if the user is verified.
         let verify = userData.object(forKey: "verifiedUser")
         
         if (verify == nil) {
-            self.profVerified.alpha = 0.0
+            self.profileSubview.profVerified.alpha = 0.0
         }
             
         else {
             
             if (verify as! Bool == true) {
-                self.profVerified.alpha = 1.0
+                self.profileSubview.profVerified.alpha = 1.0
             } else {
-                self.profVerified.alpha = 0.0
+                self.profileSubview.profVerified.alpha = 0.0
             }
         }
         
         // Check if the user has a profile image.
         
         if (userData.object(forKey: "profileImage") == nil) {
-            
-            print("Hello");
-            self.profPicture.image = UIImage(named: "default_profile_pic.png")
+            self.profileSubview.profPicture.image = UIImage(named: "default_profile_pic.png")
         }
             
         else {
@@ -608,28 +617,18 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 
                 if (error == nil) {
                     
-                    print("Hello 2");
-                    
                     // Check the profile image data first.
                     let profileImage = UIImage(data:imageData!)
                     
                     if ((imageData != nil) && (profileImage != nil)) {
-                        
-                        print("Hello 3");
-                        self.profPicture.image = profileImage
+                        self.profileSubview.profPicture.image = profileImage
                     } else {
-                        
-                        print("Hello 4");
-                        self.profPicture.image = UIImage(named: "default_profile_pic.png")
+                        self.profileSubview.profPicture.image = UIImage(named: "default_profile_pic.png")
                     }
                     
                 } else {
-                    
-                    print("Hello 5");
-                    self.profPicture.image = UIImage(named: "default_profile_pic.png")
+                    self.profileSubview.profPicture.image = UIImage(named: "default_profile_pic.png")
                 }
-                
-                print("Hello 6");
                 
                 // Notify the user that the app has stopped loading.
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
@@ -664,7 +663,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                     self.statusObjects = NSMutableArray(array: (response as! NSArray))
                     
                     // Set the posts counter label.
-                    self.profPosts.text = "\(self.statusObjects.count)"
+                    self.profileSubview.setPostsLabel(number: "\(self.statusObjects.count) POSTS")
                     
                     // Reload the table view.
                     self.statusList.reloadData()
@@ -908,13 +907,13 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 if (buttonTitle == "Follow") {
                     
                     // Set the follow user button image - not following.
-                    self.followButton.setImage(UIImage(named: "FollowButton.png"), for: UIControlState())
+                    self.profileSubview.followButton.setImage(UIImage(named: "FollowIcon.png"), for: UIControlState())
                 }
                     
                 else {
                     
                     // Set the follow user button image - following.
-                    self.followButton.setImage(UIImage(named: "Following.png"), for: UIControlState())
+                    self.profileSubview.followButton.setImage(UIImage(named: "FollowingIcon.png"), for: UIControlState())
                 }
                 
                 // Check to see if the follow/unfollow
@@ -941,8 +940,8 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         ManageUser.getFollowDataCount(userData) { (countObject) -> Void in
             
             // Set the followers and following labels.
-            self.profFollowers.text = "\((countObject.value(forKey: "userFollowers") as! NSArray).count) people"
-            self.profFollowing.text = "\((countObject.value(forKey: "userFollowing") as! NSArray).count) people"
+            self.profileSubview.profFollowers.text = "\((countObject.value(forKey: "userFollowers") as! NSArray).count) people"
+            self.profileSubview.profFollowing.text = "\((countObject.value(forKey: "userFollowing") as! NSArray).count) people"
         }
     }
 }

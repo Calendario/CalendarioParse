@@ -42,57 +42,57 @@ and returning the appropriate difference string.
         // year, month, day and seconds calculated.
         
         if (components.year! > 1) {
-            result = "\(components.year) years ago"
+            result = "\(components.year!) years ago"
         }
             
-        else if (components.year == 1) {
+        else if (components.year! == 1) {
             result = "1 year ago"
         }
         
         else {
             
             if (components.month! > 1) {
-                result = "\(components.month) months ago"
+                result = "\(components.month!) months ago"
             }
                 
-            else if (components.month == 1) {
+            else if (components.month! == 1) {
                 result = "1 month ago"
             }
             
             else {
                 
                 if (components.day! > 1) {
-                    result = "\(components.day) days ago"
+                    result = "\(components.day!) days ago"
                 }
                     
-                else if (components.day == 1) {
+                else if (components.day! == 1) {
                     result = "1 day ago"
                 }
                 
                 else {
                     
                     if (components.hour! > 1) {
-                        result = "\(components.hour) hours ago"
+                        result = "\(components.hour!) hours ago"
                     }
                         
-                    else if (components.hour == 1) {
+                    else if (components.hour! == 1) {
                         result = "1 hour ago"
                     }
                     
                     else {
                         
                         if (components.minute! > 1) {
-                            result = "\(components.minute) minutes ago"
+                            result = "\(components.minute!) minutes ago"
                         }
                             
-                        else if (components.minute == 1) {
+                        else if (components.minute! == 1) {
                             result = "1 minute ago"
                         }
                         
                         else {
                             
                             if (components.second! > 1) {
-                                result = "\(components.second) seconds ago"
+                                result = "\(components.second!) seconds ago"
                             }
                                 
                             else {
