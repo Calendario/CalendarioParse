@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import QuartzCore
 
 class FullimageViewController: UIViewController, UIScrollViewDelegate {
     
@@ -70,29 +71,26 @@ class FullimageViewController: UIViewController, UIScrollViewDelegate {
             self.dotView.numberOfPages = (numberOfPictures + 1)
             
             if (numberOfPictures == 1) {
-                self.dotView.alpha = 1.0
                 self.containerScrollView.contentSize = CGSize(width: (UIScreen.main.bounds.size.width * 2), height: UIScreen.main.bounds.size.height)
-                self.containerScrollView.isScrollEnabled = true
             }
             
             else if (numberOfPictures == 2) {
-                self.dotView.alpha = 1.0
                 self.containerScrollView.contentSize = CGSize(width: (UIScreen.main.bounds.size.width * 3), height: UIScreen.main.bounds.size.height)
-                self.containerScrollView.isScrollEnabled = true
-            }
-            
-            else {
-                self.dotView.alpha = 0.0
             }
             
             // Stop the loading indicator.
             self.dotLoadingView.stopAnimating()
+            self.dotView.alpha = 1.0
         }
     }
     
     //MARK: UI METHODS.
     
     func setupUI() {
+        
+        // Turn the profile picture into a circle.
+        self.userProfilePicture.layer.cornerRadius = (self.userProfilePicture.frame.size.width / 2)
+        self.userProfilePicture.clipsToBounds = true
         
         // Start the loading indicator.
         self.dotLoadingView.startAnimating()
