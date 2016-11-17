@@ -605,7 +605,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     // Main news item image method
     
     @IBAction func feedImageTapped(_ sender: AnyObject) {
-        PresentingViews.showPhotoViewer(self, userPostedImage: self.userPostedImage)
+        PresentingViews.showPhotoViewer(self, userPostedImage: userPostedImage, userProfilePic: self.profileimageview.image!, userName: self.UserNameLabel.text!, statusObject: self.passedInObject)
     }
     
     // like button container button action method

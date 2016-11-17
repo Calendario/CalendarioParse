@@ -49,11 +49,11 @@ open class ParseCalls: NSObject {
         }
     }
     
-    class func checkForUserPostedMedia(imageView: UIImageView, passedObject: PFObject, cell: NewsfeedTableViewCell, completion: @escaping (_ mediaDetected: Bool) -> Void) {
+    class func checkForUserPostedMedia(passedObject: PFObject, imageViewTwo: UIImageView, imageViewThree: UIImageView, completion: @escaping (_ extraImageNum: Int) -> Void) {
         
         // Setup the media details query.
         var findMedia:PFQuery<PFObject>!
-        findMedia = PFUser.query()!
+        findMedia = PFQuery(className: "statusMedia")
         findMedia.whereKey("statusUpdateID", equalTo: passedObject.objectId!)
         
         // Download the media data.
@@ -61,18 +61,88 @@ open class ParseCalls: NSObject {
             
             if (error == nil) {
                 
-                var mediaData = [Any]()
-                
-                if object?.value(forKey: "videoData") != nil {
-                    mediaData.append(object?.value(forKey: "videoData") != nil)
+                if object?.value(forKey: "imageDataTwo") != nil {
+                    
+                    // Setup the user profile image file.
+                    let statusImageTwo = object?["imageDataTwo"] as! PFFile
+                    
+                    // Download the profile image.
+                    statusImageTwo.getDataInBackground(block: { (mediaDataTwo: Data?, errorTwo: Error?) in
+                        
+                        if ((errorTwo == nil) && (mediaDataTwo != nil)) {
+                            
+                            imageViewTwo.image = UIImage(data: mediaDataTwo!)
+                            
+                            if object?.value(forKey: "imageDataThree") != nil {
+                                
+                                // Setup the user profile image file.
+                                let statusImageThree = object?["imageDataThree"] as! PFFile
+                                
+                                // Download the profile image.
+                                statusImageThree.getDataInBackground(block: { (mediaDataThree: Data?, errorThree: Error?) in
+                                    
+                                    if ((errorThree == nil) && (mediaDataThree != nil)) {
+                                        
+                                        imageViewThree.image = UIImage(data: mediaDataThree!)
+                                        
+                                        // Return the number of set images.
+                                        DispatchQueue.main.async(execute: {
+                                            completion(2)
+                                        })
+                                    }
+                                        
+                                    else {
+                                        
+                                        imageViewThree.image = nil
+                                        
+                                        // Return the number of set images.
+                                        DispatchQueue.main.async(execute: {
+                                            completion(1)
+                                        })
+                                    }
+                                })
+                            } else {
+                                
+                                imageViewThree.image = nil
+                                
+                                // Return the number of set images.
+                                DispatchQueue.main.async(execute: {
+                                    completion(1)
+                                })
+                            }
+                        }
+                            
+                        else {
+                            
+                            imageViewTwo.image = nil
+                            imageViewThree.image = nil
+                            
+                            // Return the number of set images.
+                            DispatchQueue.main.async(execute: {
+                                completion(0)
+                            })
+                        }
+                    })
+                } else {
+                    
+                    imageViewTwo.image = nil
+                    imageViewThree.image = nil
+                    
+                    // Return the number of set images.
+                    DispatchQueue.main.async(execute: {
+                        completion(0)
+                    })
                 }
             }
                 
             else {
                 
-                // Return the whether or not media was detected.
+                imageViewTwo.image = nil
+                imageViewThree.image = nil
+                
+                // Return the number of set images.
                 DispatchQueue.main.async(execute: {
-                    completion(false)
+                    completion(0)
                 })
             }
         }

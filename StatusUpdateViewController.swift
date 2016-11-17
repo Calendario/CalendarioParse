@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UINavigationBarDelegate, UIGestureRecognizerDelegate {
+class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UINavigationBarDelegate, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var PostButton: UIBarButtonItem!
     @IBOutlet var dateTapRecognizer: UITapGestureRecognizer!
@@ -28,9 +28,12 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var LocationLabel: UILabel!
     @IBOutlet weak var backbutton: UIBarButtonItem!
-    @IBOutlet weak var statusImageview: UIImageView?
     @IBOutlet weak var rsvpSwitch: UISwitch!
+    @IBOutlet weak var imageList: UICollectionView!
     
+    // Media data array.
+    var mediaDataArray: Array<UIImage> = []
+
     // Image upload check.
     var imageCheck = false
     
@@ -97,9 +100,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         self.datePickerContainer.layer.borderColor = UIColor.lightGray.cgColor
         self.datePickerContainer.layer.borderWidth = 1.0
         self.datePickerContainer.layoutIfNeeded()
-        
-        statusImageview!.layer.cornerRadius = 4.0
-        statusImageview!.clipsToBounds = true
         
         // save current status id in NSUserDefaults incase its going to be used for a comment
         
@@ -243,7 +243,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         // the @user mentions in lowercase.
         ManageUser.correctStringWithUsernames(self.statusUpdateTextField.text!, completion: { (correctString) -> Void in
             
-            if ((self.statusImageview?.image != nil) && (self.imageCheck == true)) {
+            if ((self.mediaDataArray.count > 0) && (self.imageCheck == true)) {
                 
                 self.postingImage = true
                 
@@ -254,7 +254,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 statusupdatewithimage["dateofevent"] = self.shortStyleDateToBeSaved
                 statusupdatewithimage["ID"] = Int(self.statusID)
                 statusupdatewithimage["tense"] = self.currenttense
-                statusupdatewithimage["location"] = self.LocationLabel.text
+                statusupdatewithimage["location"] = self.LocationLabel.text!
                 statusupdatewithimage["likesarray"] = []
                 statusupdatewithimage["rsvpArray"] = []
                 statusupdatewithimage["eventTitle"] = self.eventTitle.text!
@@ -263,7 +263,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                     statusupdatewithimage["privateRsvp"] = true
                 }
                     
-                else if (self.rsvpSwitch.isOn == false){
+                else if (self.rsvpSwitch.isOn == false) {
                     statusupdatewithimage["privateRsvp"] = false
                 }
 
@@ -272,19 +272,41 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                     statusupdatewithimage["placeGeoPoint"] = point
                 }
                 
-                // image posting
-                self.imagedata = UIImageJPEGRepresentation(((self.statusImageview?.image))!, 0.5)
+                // image 1 posting
+                self.imagedata = UIImageJPEGRepresentation(self.mediaDataArray[0], 0.5)
                 let imagefile = PFFile(name: "image.jpg", data: self.imagedata!)
                 statusupdatewithimage["image"] = imagefile!
+                
                 // saves object in background
                 
                 statusupdatewithimage.saveInBackground(block: { (success: Bool, error: Error?) in
                     
                     if success {
-                        print("Update saved")
+                        
+                        // Setup the extra image query.
+                        var extraMediaImage: PFObject!
+                        extraMediaImage = PFObject(className: "statusMedia")
+                        let imagedataTwo:Data = UIImageJPEGRepresentation(self.mediaDataArray[1], 0.5)!
+                        let imagefileTwo = PFFile(name: "image2.jpg", data: imagedataTwo)
+                        extraMediaImage["imageDataTwo"] = imagefileTwo!
+                        
+                        if (self.mediaDataArray.count > 2) {
+                            
+                            let imagedataThree:Data = UIImageJPEGRepresentation(self.mediaDataArray[2], 0.5)!
+                            let imagefileThree = PFFile(name: "image3.jpg", data: imagedataThree)
+                            extraMediaImage["imageDataThree"] = imagefileThree!
+                        }
+                        
+                        extraMediaImage["statusUpdateID"] = statusupdatewithimage.objectId!
+                        
+                        // Save the extra images with status ID.
+                        extraMediaImage.saveInBackground(block: { (success: Bool, errorExtra: Error?) in
+                            self.dismiss(animated: true, completion: nil)
+                        })
                     }
                         
                     else {
+                        
                         // prints error
                         print(error?.localizedDescription)
                     }
@@ -300,7 +322,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 statusupdate["dateofevent"] = self.shortStyleDateToBeSaved
                 statusupdate["ID"] = Int(self.statusID)
                 statusupdate["tense"] = self.currenttense
-                statusupdate["location"] = self.LocationLabel.text
+                statusupdate["location"] = self.LocationLabel.text!
                 statusupdate["likesarray"] = []
                 statusupdate["rsvpArray"] = []
                 statusupdate["eventTitle"] = self.eventTitle.text!
@@ -317,7 +339,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                     let point = PFGeoPoint(latitude:locationLatitude!, longitude:locationLongitude!)
                     statusupdate["placeGeoPoint"] = point
                 }
-                
                 
                 statusupdate.saveInBackground(block: { (success: Bool, error: Error?) in
                     
@@ -389,23 +410,39 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     // camera controls
     
     @IBAction func CameraTapped(_ sender: AnyObject) {
-        let camera = UIImagePickerController()
-        DispatchQueue.main.async { () -> Void in
-            camera.delegate = self
-            camera.sourceType = UIImagePickerControllerSourceType.camera
-            camera.allowsEditing = false
-            self.present(camera, animated: true, completion: nil)
+        
+        if (self.mediaDataArray.count < 3) {
+            
+            let camera = UIImagePickerController()
+            DispatchQueue.main.async { () -> Void in
+                camera.delegate = self
+                camera.sourceType = UIImagePickerControllerSourceType.camera
+                camera.allowsEditing = false
+                self.present(camera, animated: true, completion: nil)
+            }
+        }
+        
+        else {
+            self.displayAlert("Error", alertMessage: "You can add a maximum of 3 photos to each status update.")
         }
     }
     
     @IBAction func VideoTapped(_ sender: AnyObject) {
-        var photo:UIImagePickerController!
-        photo = UIImagePickerController()
-        DispatchQueue.main.async {
-            photo.delegate = self
-            photo.sourceType = UIImagePickerControllerSourceType.photoLibrary
-            photo.allowsEditing = false
-            self.present(photo, animated: true, completion: nil)
+        
+        if (self.mediaDataArray.count < 3) {
+            
+            var photo:UIImagePickerController!
+            photo = UIImagePickerController()
+            DispatchQueue.main.async {
+                photo.delegate = self
+                photo.sourceType = UIImagePickerControllerSourceType.photoLibrary
+                photo.allowsEditing = false
+                self.present(photo, animated: true, completion: nil)
+            }
+        }
+            
+        else {
+            self.displayAlert("Error", alertMessage: "You can add a maximum of 3 photos to each status update.")
         }
     }
 
@@ -435,9 +472,86 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         self.dismiss(animated: true, completion: nil)
-        statusImageview?.image = image
-        statusImageview!.layer.cornerRadius = 4.0
-        statusImageview!.clipsToBounds = true
+        self.mediaDataArray.insert(image, at:0)
         self.imageCheck = true
+        self.imageList.reloadData()
+    }
+    
+    // Collection view delegate methods.
+    
+    func deleteImageAtIndex(object: AnyObject) {
+        
+        // Setup the alert controller.
+        let choiceAlert = UIAlertController(title: "Delete phpto", message: "Would you like to remove the selected photo from the status update.", preferredStyle: .actionSheet)
+        
+        // Setup the alert actions.
+        let deletePhotoAction = { (action:UIAlertAction!) -> Void in
+            
+            self.mediaDataArray.remove(at: object.tag)
+            self.imageList.reloadData()
+        }
+        let deleteButton = UIAlertAction(title: "Delete", style: .destructive, handler: deletePhotoAction)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        choiceAlert.addAction(deleteButton)
+        choiceAlert.addAction(cancel)
+        
+        // Present the alert on screen.
+        present(choiceAlert, animated: true, completion: nil)
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    //func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    //    self.deleteImageAtIndex(selectedPath: indexPath)
+    //}
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return mediaDataArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(0, 0, 0, 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 136, height: 136)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        // Get a reference to our storyboard cell.
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StatusCell", for: indexPath as IndexPath) as! StatusUpdateCollectionCell
+        
+        // Set the preview image view.
+        cell.previewImage.setImage(mediaDataArray[indexPath.row], for: .normal)
+        
+        // Set the buttont tag number.
+        cell.previewImage.tag = indexPath.row
+        
+        // Connect the button image to the alert method.
+        cell.previewImage.addTarget(self, action: #selector(self.deleteImageAtIndex(object:)), for: .touchUpInside)
+        
+        // Ensure the image sticks to the size of the button.
+        cell.previewImage.clipsToBounds = true
+        
+        return cell
+    }
+    
+    // Alert methods.
+    
+    func displayAlert(_ alertTitle: String, alertMessage: String) {
+        
+        // Setup the alert controller.
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        // Setup the alert actions.
+        let cancel = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+        alertController.addAction(cancel)
+        
+        // Present the alert on screen.
+        present(alertController, animated: true, completion: nil)
     }
 }

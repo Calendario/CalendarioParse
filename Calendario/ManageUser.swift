@@ -8,6 +8,7 @@
 
 import Foundation
 import Parse
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -28,7 +29,6 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
 /***************************************************
 
  IMPORTANT PLEASE READ:
@@ -46,6 +46,108 @@ var finalData:NSMutableArray = []
 // ManageUser class contains all the methods
 // in relations to the user account (ie: follow).
 @objc class ManageUser : NSObject {
+    
+    // Status media data methods.
+    
+    class func deleteStatusUpdate(_ statusupdate: PFObject, _ viewController: AnyObject, completion: @escaping (_ deletionSuccess: Bool) -> Void ) {
+        
+        // Setup the status post deletion query.
+        var query:PFQuery<PFObject>!
+        query = PFQuery(className: "StatusUpdate")
+        query.includeKey("user")
+        query.whereKey("objectId", equalTo: statusupdate.objectId!)
+        
+        // Search for any matching status updates.
+        query.findObjectsInBackground(block: { (objects, error) -> Void in
+            
+            // Check for errors first.
+            
+            if (error == nil) {
+                
+                // Loop through the returned objects
+                // and fine any matching status updates.
+                
+                for object in objects! {
+                    
+                    // Get the username of the user who posted the status update.
+                    let userstr = (object["user"] as AnyObject).username!
+                    
+                    // Only allow the user to delete their own status updates.
+                    
+                    if (userstr == PFUser.current()?.username) {
+                        
+                        // Setup the extra media deletion query.
+                        var queryExtraMedia:PFQuery<PFObject>!
+                        queryExtraMedia = PFQuery(className: "statusMedia")
+                        queryExtraMedia.whereKey("statusUpdateID", equalTo: statusupdate.objectId!)
+                        
+                        // Get any extra media objects.
+                        queryExtraMedia.getFirstObjectInBackground(block: { (object, errorMedia: Error?) in
+                            
+                            // Check for errors before continuing.
+                            
+                            if (errorMedia == nil) {
+                                
+                                object?.deleteInBackground(block: { (success, error) in
+                                    
+                                    if ((error == nil) && (success == true)) {
+                                        
+                                        // Delete the main status update.
+                                        statusupdate.deleteInBackground(block: { (success, error) -> Void in
+                                            
+                                            DispatchQueue.main.async(execute: {
+                                                completion(true)
+                                            })
+                                        })
+                                    }
+                                    
+                                    else {
+                                        
+                                        DispatchQueue.main.async(execute: {
+                                            completion(true)
+                                        })
+                                    }
+                                })
+                            }
+                            
+                            else {
+                                
+                                // Delete the main status update.
+                                statusupdate.deleteInBackground(block: { (success, error) -> Void in
+                                    
+                                    DispatchQueue.main.async(execute: {
+                                        completion(true)
+                                    })
+                                })
+                            }
+                        })
+                    }
+                        
+                    else {
+                        
+                        DispatchQueue.main.async(execute: {
+                            
+                            // Present the deletion error alert.
+                            let alert = UIAlertController(title: "Error", message: "You can only delete your own posts.", preferredStyle: .alert)
+                            alert.view.tintColor = UIColor.flatGreen()
+                            let next = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+                            alert.addAction(next)
+                            viewController.present(alert, animated: true, completion:nil)
+                            
+                            completion(false)
+                        })
+                    }
+                }
+            }
+            
+            else {
+                
+                DispatchQueue.main.async(execute: {
+                    completion(false)
+                })
+            }
+        })
+    }
     
     // Check username string methods.
     
@@ -100,13 +202,13 @@ var finalData:NSMutableArray = []
                                 
                                 // The username contains capital letters
                                 // so change it to a lower case version.
-                                finalString = "\(finalString) \(currentString.lowercased())"
+                                finalString = "\(finalString!) \(currentString.lowercased())"
                             }
                                 
                             else {
                                 
                                 // The username does not contain capital letters.
-                                finalString = "\(finalString) \(currentString)"
+                                finalString = "\(finalString!) \(currentString)"
                             }
                         }
                     }
@@ -121,7 +223,7 @@ var finalData:NSMutableArray = []
                         }
                             
                         else {
-                            finalString = "\(finalString) \(currentString)"
+                            finalString = "\(finalString!) \(currentString)"
                         }
                     }
                 }
@@ -134,7 +236,7 @@ var finalData:NSMutableArray = []
             }
             
             // Pass back the correct username string.
-            completion(finalString)
+            completion(finalString!)
         })
     }
     

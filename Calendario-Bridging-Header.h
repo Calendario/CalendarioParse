@@ -12,5 +12,6 @@
 #import  "FSCalendar.h"
 #import "NSDate+FSExtension.h"
 #import "reportBug.h"
+#import "locationDictParser.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SearchViewController.h"

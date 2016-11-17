@@ -53,6 +53,8 @@
 		A2AE4A501BDCF7B8008E84B9 /* ToSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AE4A4F1BDCF7B8008E84B9 /* ToSViewController.swift */; };
 		A2AE4A521BDCF82F008E84B9 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AE4A511BDCF82F008E84B9 /* PrivacyPolicyViewController.swift */; };
 		A2C55BAC1BE7B77B00431EA0 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C55BAB1BE7B77B00431EA0 /* WebPageViewController.swift */; };
+		A2DBF03F1DDDC2BB00705E6F /* StatusUpdateCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DBF03E1DDDC2BB00705E6F /* StatusUpdateCollectionCell.swift */; };
+		A2DBF0441DDE096900705E6F /* locationDictParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DBF0431DDE096900705E6F /* locationDictParser.m */; };
 		A2E881261C6A96F2008DFFAC /* MIBadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E881251C6A96F2008DFFAC /* MIBadgeButton.swift */; };
 		A2FBF5C61C00BADA0051A553 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FBF5C51C00BADA0051A553 /* EditProfileViewController.swift */; };
 		A2FBF5CA1C010B360051A553 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FBF5C91C010B360051A553 /* SettingsViewController.swift */; };
@@ -224,6 +226,9 @@
 		A2AE4A4F1BDCF7B8008E84B9 /* ToSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToSViewController.swift; sourceTree = "<group>"; };
 		A2AE4A511BDCF82F008E84B9 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		A2C55BAB1BE7B77B00431EA0 /* WebPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
+		A2DBF03E1DDDC2BB00705E6F /* StatusUpdateCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusUpdateCollectionCell.swift; sourceTree = "<group>"; };
+		A2DBF0421DDE096900705E6F /* locationDictParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = locationDictParser.h; sourceTree = "<group>"; };
+		A2DBF0431DDE096900705E6F /* locationDictParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = locationDictParser.m; sourceTree = "<group>"; };
 		A2E881251C6A96F2008DFFAC /* MIBadgeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIBadgeButton.swift; sourceTree = "<group>"; };
 		A2FBF5C51C00BADA0051A553 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		A2FBF5C91C010B360051A553 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -532,6 +537,7 @@
 			isa = PBXGroup;
 			children = (
 				E2AE81501BCAFAAD0047D1FA /* StatusUpdateViewController.swift */,
+				A2DBF03E1DDDC2BB00705E6F /* StatusUpdateCollectionCell.swift */,
 			);
 			name = "Status Update";
 			sourceTree = "<group>";
@@ -814,6 +820,8 @@
 			children = (
 				E24DA5EE1C13E3AC00901DF0 /* LocationSearchTableViewController.swift */,
 				E24DA5F11C13EA7A00901DF0 /* LocatonViewController.swift */,
+				A2DBF0421DDE096900705E6F /* locationDictParser.h */,
+				A2DBF0431DDE096900705E6F /* locationDictParser.m */,
 			);
 			name = "Location swift";
 			sourceTree = "<group>";
@@ -1254,6 +1262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2FBF5C61C00BADA0051A553 /* EditProfileViewController.swift in Sources */,
+				A2DBF0441DDE096900705E6F /* locationDictParser.m in Sources */,
 				E2EE565C1BF199F70064BA1D /* ChameleonConstants.m in Sources */,
 				E23083681C7426EB001C0142 /* FSCalendar.m in Sources */,
 				A2E881261C6A96F2008DFFAC /* MIBadgeButton.swift in Sources */,
@@ -1337,6 +1346,7 @@
 				E2065DAE1C3EEE9D0054AB2A /* FollowersTableViewCell.swift in Sources */,
 				E2F3EF901BE1C75600F42433 /* CommentsTableViewCell.swift in Sources */,
 				E27ACC811BEDA64100503DD7 /* TimelineViewController.swift in Sources */,
+				A2DBF03F1DDDC2BB00705E6F /* StatusUpdateCollectionCell.swift in Sources */,
 				A23456CD1D23FDEE00C4A769 /* SearchFilterUserSelector.swift in Sources */,
 				E151AF721BD72D6500811A31 /* tabBarViewController.m in Sources */,
 				784E96191CA185CC00085057 /* IntrochildViewController.swift in Sources */,

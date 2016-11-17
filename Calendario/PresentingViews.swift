@@ -65,10 +65,13 @@ open class PresentingViews: NSObject {
         viewController.parent!!.present(NC, animated: true, completion: nil)
     }
     
-    class func showPhotoViewer(_ viewController: AnyObject, userPostedImage: UIImageView) {
+    class func showPhotoViewer(_ viewController: AnyObject, userPostedImage: UIImageView, userProfilePic: UIImage, userName: String, statusObject: PFObject) {
         let sb = UIStoryboard(name: "FullimageViewController", bundle: nil)
         let photoView = sb.instantiateViewController(withIdentifier: "photoViewer") as! FullimageViewController
         photoView.passedImage = userPostedImage.image!
+        photoView.passedUserName = userName
+        photoView.passedObject = statusObject
+        photoView.passedUserProfileImage = userProfilePic
         viewController.parent!!.present(photoView, animated: true, completion: nil)
     }
     

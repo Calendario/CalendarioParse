@@ -206,14 +206,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         
         ParseCalls.findUserDetails(self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
         
-
-        ParseCalls.checkForUserPostedMedia(imageView: cell.userPostedImage, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, cell: cell) { (status) in
-            
-            if (status == false) {
-                
-                ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, cell: cell)
-            }
-        }
+        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, cell: cell)
         
         ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject)
         
@@ -298,42 +291,16 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         // Setup the delete status button.
         let deletestatus = UITableViewRowAction(style: .normal, title: "Delete") { (actiom, indexPath) -> Void in
             
-            var query:PFQuery<PFObject>!
-            query = PFQuery(className: "StatusUpdate")
-            query.includeKey("user")
-            query.whereKey("objectId", equalTo: statusupdate.objectId!)
-            query.findObjectsInBackground(block: { (objects, error) -> Void in
+            // Delete the selected status update.
+            ManageUser.deleteStatusUpdate(statusupdate, self, completion: { (deletionSuccess) in
                 
-                if (error == nil) {
+                if (deletionSuccess == true) {
                     
-                    for object in objects! {
-                        
-                        let userstr = (object["user"] as AnyObject).username!
-                        
-                        if (userstr == PFUser.current()?.username) {
-                            
-                            statusupdate.deleteInBackground(block: { (success, error) -> Void in
-                                
-                                if (success) {
-                                    
-                                    // Remove the status update from the array.
-                                    self.sortedArray.removeObject(at: (indexPath as NSIndexPath).row)
-                                    
-                                    // Remove the cell from the table view.
-                                    self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-                                }
-                            })
-                        }
-                            
-                        else {
-                            let alert = UIAlertController(title: "Error", message: "You can only delete your own posts.", preferredStyle: .alert)
-                            alert.view.tintColor = UIColor.flatGreen()
-                            let next = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
-                            alert.addAction(next)
-                            
-                            self.present(alert, animated: true, completion: nil)
-                        }
-                    }
+                    // Remove the status update from the array.
+                    self.sortedArray.removeObject(at: (indexPath as NSIndexPath).row)
+                    
+                    // Remove the cell from the table view.
+                    self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
                 }
             })
         }
