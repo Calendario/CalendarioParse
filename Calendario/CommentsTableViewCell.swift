@@ -9,8 +9,7 @@
 import UIKit
 import KILabel
 
-class CommentsTableViewCell: UITableViewCell {
-    
+class CommentsTableViewCell: PFTableViewCell {
     
    // @IBOutlet weak var commentTextView: UITextView!
     
@@ -19,6 +18,14 @@ class CommentsTableViewCell: UITableViewCell {
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var createdAtLabel: UILabel!
     
+    //MARK: LIFECYCLE METHODS
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        // Hide the previous cell image.
+        self.userProfileImage.image = nil
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,8 +33,6 @@ class CommentsTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
-
 }

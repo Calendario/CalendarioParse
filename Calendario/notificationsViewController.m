@@ -22,7 +22,7 @@
 
 @implementation notificationsViewController
 
-- (void) viewWillAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
     [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:nil];
@@ -30,7 +30,7 @@
     [self getNotifications];
 }
 
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     [super viewDidLoad];
     
     self.tableView.delegate = self;
@@ -39,7 +39,7 @@
     [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:nil];
 }
 
-- (void) getNotifications {
+-(void)getNotifications {
     
     // Download the user notifications.
     [ManageUser getUserNotifications:[PFUser currentUser] completion:^(NSArray *userData, NSArray *notificationData, NSArray *extLinks) {
@@ -63,7 +63,7 @@
     }];
 }
 
-- (UIImage *) checkActionType: (NSString *)type {
+-(UIImage *)checkActionType: (NSString *)type {
     if ([type isEqualToString:@"comment"]) {
         UIImage *commentIcon = [UIImage imageNamed:@"comment-icon"];
         return commentIcon;
@@ -84,21 +84,23 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return notifications.count;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // Open the appropriate controller depending on the notification type - user,
-    // comment, etc.. in the future we will add support for like (see more view controller).
+    // Disable table view access until the taks is complete.
+    [self.tableView setUserInteractionEnabled:NO];
+    
+    // Open the appropriate controller depending on the notification type - user, comment, etc..
     UIStoryboard *mainSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-    if (([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"user"]) || ([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"like"])) {
+    if ([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"user"]) {
         
         // Get the user data before opening
         // the profile view controller.
@@ -113,26 +115,102 @@
                 profVC.passedUser = (PFUser *)object;
                 profVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
                 [self presentViewController:profVC animated:YES completion:^{
+                    
+                    // Re-enable table view access.
+                    [self.tableView setUserInteractionEnabled:YES];
                     [tableView deselectRowAtIndexPath:indexPath animated:YES];
                 }];
+            }
+            
+            else {
+                
+                // Re-enable table view access.
+                [self.tableView setUserInteractionEnabled:YES];
             }
         }];
     }
     
-    else if ([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"comment"]) {
+    else if (([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"comment"]) || ([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"like"])) {
         
-        // Show the comments for this status update.
-        CommentsViewController *commentvc = [mainSB instantiateViewControllerWithIdentifier:@"comments"];
-        commentvc.savedobjectID = [NSString stringWithFormat:@"%@", [notificationsExtLinks[indexPath.row] objectAtIndex:1]];
-        commentvc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:commentvc];
-        [self presentViewController:navController animated:YES completion:^{
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        // Load the status update object.
+        PFQuery *objectQuery = [PFQuery queryWithClassName:@"StatusUpdate"];
+        [objectQuery whereKey:@"objectId" equalTo:[NSString stringWithFormat:@"%@", [notificationsExtLinks[indexPath.row] objectAtIndex:1]]];
+        [objectQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            
+            if (error == nil) {
+                
+                // Check if the status update has an image.
+                
+                if ([object valueForKey:@"image"] == nil) {
+                    
+                    // Re-enable table view access.
+                    [self.tableView setUserInteractionEnabled:YES];
+                    
+                    // Open the see more view without the image.
+                    [self openSeeMoreView:object :tableView :indexPath :mainSB :nil];
+                }
+                
+                else {
+                    
+                    // Download the user image.
+                    PFFile *userImageFile = object[@"image"];
+                    [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+                        
+                        // Re-enable table view access.
+                        [self.tableView setUserInteractionEnabled:YES];
+                        
+                        if (error == nil) {
+                            
+                            // Set the profile image view & the various proerties.
+                            UIImage *image = [UIImage imageWithData:imageData];
+                            
+                            // Open the see more view with the image.
+                            [self openSeeMoreView:object :tableView :indexPath :mainSB :image];
+                        }
+                        
+                        else {
+                            
+                            // Open the see more view without the image.
+                            [self openSeeMoreView:object :tableView :indexPath :mainSB :nil];
+                        }
+                    }];
+                }
+            }
+            
+            else {
+                
+                // Re-enable table view access.
+                [self.tableView setUserInteractionEnabled:YES];
+                
+                // Display the error alert.
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+                
+                // Create the alert actions.
+                UIAlertAction *dismiss = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {}];
+                
+                // Add the action and present the alert.
+                [alert addAction:dismiss];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
         }];
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(void)openSeeMoreView:(PFObject *)object :(UITableView *)tableView :(NSIndexPath *)indexPath :(UIStoryboard *)mainSB :(UIImage *)imageData {
+    
+    // Show the see more for the selected notification.
+    CommentsViewController *commentvc = [mainSB instantiateViewControllerWithIdentifier:@"comments"];
+    commentvc.savedobjectID = [NSString stringWithFormat:@"%@", [notificationsExtLinks[indexPath.row] objectAtIndex:1]];
+    commentvc.passedInObjectForSeeMoreView = object;
+    commentvc.passedInImage = imageData;
+    commentvc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:commentvc];
+    [self presentViewController:navController animated:YES completion:^{
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }];
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // Setup the table view cell.
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notificationCell" forIndexPath:indexPath];
@@ -194,12 +272,12 @@
 }
 
 // Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
 }
 
 // Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the item to be re-orderable.
     return NO;
 }

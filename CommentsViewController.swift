@@ -11,13 +11,19 @@ import UIKit
 class CommentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var commentTextView: UITextField!
     @IBOutlet weak var commentsContainerView: UIView!
     
     var commentdata:NSMutableArray = NSMutableArray()
-    
     var savedobjectID:String!
+    
+    // See More subview controller.
+    var seeMoreSubview:SeeMoreHeaderView!
+    var passedInObjectForSeeMoreView: PFObject!
+    var passedInImage: UIImage?
+    
+    // Tableview header set check.
+    var headerSetCheck = false
     
     @IBOutlet weak var backbutton: UIBarButtonItem!
     @IBOutlet weak var sendbutton: UIButton!
@@ -40,7 +46,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.commentTextView.delegate = self
         self.commentTextView.autocapitalizationType = .sentences
-      
+        
         // Do any additional setup after loading the view.
     
         //let defaults = NSUserDefaults.standardUserDefaults()
@@ -51,10 +57,44 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewWillAppear(animated)
         LoadCommentData()
         
+        // Check if the header view has been set.
+        
+        if (self.headerSetCheck == false) {
+            
+            // Setup the see more header view.
+            let story_file = UIStoryboard(name: "SeeMoreHeaderUI", bundle: nil)
+            self.seeMoreSubview = story_file.instantiateViewController(withIdentifier: "SeeMoreHeaderUI") as! SeeMoreHeaderView
+            
+            // Create the header view height value.
+            var customHeight:CGFloat = 220
+            
+            // Set the header view height and image.
+            
+            if (self.passedInImage != nil) {
+                customHeight = 440
+                self.seeMoreSubview.passedImageOne = self.passedInImage!
+            }
+            
+            // Setup the header container view.
+            var headerView:UIView!
+            headerView = UIView(frame: CGRect(x:0, y:0, width:self.view.bounds.size.width, height:customHeight))
+            headerView.clipsToBounds = true
+            
+            // Insert the see more subview as the table header view.
+            self.seeMoreSubview.passedInObject = self.passedInObjectForSeeMoreView
+            self.addChildViewController(self.seeMoreSubview)
+            self.seeMoreSubview.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: customHeight)
+            headerView.addSubview(self.seeMoreSubview.view)
+            self.tableView.tableHeaderView = headerView
+            
+            // The header view has been set.
+            self.headerSetCheck = true
+        }
+        
         self.view.bringSubview(toFront: self.commentsContainerView)
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-        self.navigationItem.title  = "Comments"
+        self.navigationItem.title  = ""
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = false
         self.sendbutton.layer.cornerRadius = 4.0
@@ -65,23 +105,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         self.navigationItem.leftBarButtonItem = backbutton
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 98.0;
-
-        
-       /* let navigationbar = UINavigationBar(frame:  CGRectMake(0, 0, self.view.frame.size.width, 53))
-        navigationbar.backgroundColor = UIColor.whiteColor()
-        navigationbar.delegate = self
-        navigationbar.barTintColor = UIColor(hexString: "#2c9560")
-        navigationbar.tintColor = UIColor.whiteColor()
-        
-        let navitems = UINavigationItem()
-        
-        navitems.rightBarButtonItem = sendbutton
-        navitems.leftBarButtonItem = backbutton
-        
-        // set nav items in nav bar
-        navigationbar.items = [navitems]
-        self.view.addSubview(navigationbar)
-        */
     }
     
     func keyboardWillShow(_ notification:Notification) {
@@ -342,22 +365,36 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                     
                     image.getDataInBackground(block: { (ImageData, error) -> Void in
                         
-                        if error == nil {
-                            let image = UIImage(data: ImageData!)
-                            cell.userProfileImage.image = image
-                        }
+                        DispatchQueue.main.async(execute: {
                             
-                        else {
-                            cell.userProfileImage.image = UIImage(named: "default_profile_pic.png")
-                        }
+                            if error == nil {
+                                                                
+                                let image = UIImage(data: ImageData!)
+                                cell.userProfileImage.image = image
+                                cell.layoutIfNeeded()
+                            }
+                                
+                            else {
+                                cell.userProfileImage.image = UIImage(named: "default_profile_pic.png")
+                                cell.layoutIfNeeded()
+                            }
+                        })
                     })
                 } else {
-                    cell.userProfileImage.image = UIImage(named: "default_profile_pic.png")
+                    
+                    DispatchQueue.main.async(execute: {
+                        cell.userProfileImage.image = UIImage(named: "default_profile_pic.png")
+                        cell.layoutIfNeeded()
+                    })
                 }
             }
             
             else {
-                cell.userProfileImage.image = UIImage(named: "default_profile_pic.png")
+                
+                DispatchQueue.main.async(execute: {
+                    cell.userProfileImage.image = UIImage(named: "default_profile_pic.png")
+                    cell.layoutIfNeeded()
+                })
             }
         })
         

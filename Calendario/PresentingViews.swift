@@ -57,10 +57,16 @@ open class PresentingViews: NSObject {
         viewController.parent!!.present(likesView, animated: true, completion: nil)
     }
     
-    class func openComments(_ commentsID: String, viewController: AnyObject) {
+    class func openComments(_ passedInObject: PFObject, viewController: AnyObject, statusPicture: UIImage?) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let commentvc = sb.instantiateViewController(withIdentifier: "comments") as! CommentsViewController
-        commentvc.savedobjectID = commentsID
+        commentvc.savedobjectID = passedInObject.objectId!
+        commentvc.passedInObjectForSeeMoreView = passedInObject
+        
+        if (statusPicture != nil) {
+            commentvc.passedInImage = statusPicture
+        }
+        
         let NC = UINavigationController(rootViewController: commentvc)
         viewController.parent!!.present(NC, animated: true, completion: nil)
     }

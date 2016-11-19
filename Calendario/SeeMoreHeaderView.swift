@@ -1,64 +1,48 @@
 //
-//  NewsfeedTableView swift
+//  SeeMoreHeaderView.swift
 //  Calendario
 //
-//  Created by Derek Cacciotti on 10/14/15.
-//  Copyright © 2015 Calendario. All rights reserved.
+//  Created by Daniel Sadjadian on 18/11/2016.
+//  Copyright © 2016 Calendario. All rights reserved.
 //
 
 import UIKit
 import KILabel
 
-class NewsfeedTableViewCell: PFTableViewCell {
-    
+class SeeMoreHeaderView: UIViewController {
+
     @IBOutlet weak var UserNameLabel: UILabel!
-    @IBOutlet weak var commentsLabel: UILabel!
     @IBOutlet weak var userPostedImage: UIImageView!
     @IBOutlet weak var createdAtLabel: UILabel!
     @IBOutlet weak var statusTextView: KILabel!
     @IBOutlet weak var attendantContainerView: UIView!
-    @IBOutlet weak var commentButton: UIView!
     @IBOutlet weak var profileimageview: UIImageView!
     @IBOutlet weak var uploaddatelabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var likeslabel: UILabel!
-    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var privateView: UIView!
-    @IBOutlet weak var privateViewText: UITextView!
     @IBOutlet weak var rsvpButton: UIButton!
     @IBOutlet weak var rsvpLabel: UILabel!
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var likebutton: UIView!
     @IBOutlet weak var eventTitle: UILabel!
-    @IBOutlet weak var Likebuttoncontainerbutton: UIButton!
-    @IBOutlet weak var userImageViewContainerHeightContstraint: NSLayoutConstraint!
-    @IBOutlet weak var userImageContainer: UIView!
     @IBOutlet weak var likeButtonImage: UIImageView!
     
     var attendGestureRecognizer: UITapGestureRecognizer!
     var passedInObject: PFObject!
-    var parentViewController: AnyObject!
+    internal var passedImageOne:UIImage!
+    var inputParentViewController: AnyObject!
     var rsvpArray: [String] = []
     
     //MARK: LIFECYCLE METHODS
-    override func prepareForReuse() {
-        super.prepareForReuse()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
         
         // Hide the previous cell image.
         self.profileimageview.image = nil
         self.userPostedImage.image = nil
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    override func layoutSubviews() {
-        // Get the specific status object for this cell and call all needed methods.
+        
         self.setupUI()
         self.createTenseAndDateLabel()
         self.setLocationLabelAndCheckingContents()
@@ -66,6 +50,13 @@ class NewsfeedTableViewCell: PFTableViewCell {
         self.getLikesData()
         self.getRsvpData()
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    //MARK: UI METHODS.
     
     func setupUI () {
         self.statusTextView.textColor = UIColor.darkGray
@@ -90,12 +81,16 @@ class NewsfeedTableViewCell: PFTableViewCell {
         // Setup User Posted Image
         self.userPostedImage.layer.cornerRadius = 2.0
         self.userPostedImage.clipsToBounds = true
+        self.userPostedImage.image = self.passedImageOne
         
         // Setup the profile Image
         self.profileimageview.layer.cornerRadius = self.profileimageview.frame.height / 2
         self.profileimageview.layer.borderColor = UIColor.white.cgColor
         self.profileimageview.layer.borderWidth = 2.0
         self.profileimageview.clipsToBounds = true
+        
+        // Get the username and profiel picture of the status.
+        ParseCalls.findUserDetails(self.passedInObject , usernameLabel: self.UserNameLabel, profileImageView: self.profileimageview)
         
         // Setup the status labels.
         
@@ -106,29 +101,9 @@ class NewsfeedTableViewCell: PFTableViewCell {
             
             if (passedInObject.object(forKey: "image") == nil) {
                 self.userPostedImage.image = nil
-                self.userImageViewContainerHeightContstraint.constant = 0
             } else {
-                self.userImageViewContainerHeightContstraint.constant = 205
             }
-            
-            self.layoutIfNeeded()
-            self.updateConstraintsIfNeeded()
         }
-            
-        else {
-            
-            // Only show the private view as we are
-            // looking at a profile which is private.
-            self.privateView.alpha = 1.0
-            
-            // Set the private view lavel font.
-            let font = UIFont(name: "SFUIDisplay-Regular", size: 18)
-            self.privateViewText.font = font
-        }
-    }
-    
-    func setPostedImage(_ image : UIImage) {
-        self.userPostedImage.image = image
     }
     
     func createTenseAndDateLabel() {
@@ -355,17 +330,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
     }
     
     //MARK: TAP GESTURE METHODS
-    func commentsLabelClicked(_ sender: UITapGestureRecognizer) {
-        let currentObject:PFObject = self.passedInObject
-        
-        // Open the comments view.
-        
-        if (passedInObject.object(forKey: "image") == nil) {
-            PresentingViews.openComments(currentObject, viewController: self, statusPicture: nil)
-        } else {
-            PresentingViews.openComments(currentObject, viewController: self, statusPicture: self.userPostedImage.image!)
-        }
-    }
     
     func goToLikesList(_ sender: UITapGestureRecognizer) {
         
@@ -440,17 +404,6 @@ class NewsfeedTableViewCell: PFTableViewCell {
             // in user hasn't liked the post either so we
             // can go ahead and save the like for the user.
             self.saveRsvpForPost(currentObject, rsvpPost: true)
-        }
-    }
-    
-    func commentClicked(_ sender: UIButton) {
-        
-        // Open the comments view.
-        
-        if (passedInObject.object(forKey: "image") == nil) {
-            PresentingViews.openComments(self.passedInObject, viewController: self, statusPicture: nil)
-        } else {
-            PresentingViews.openComments(self.passedInObject, viewController: self, statusPicture: self.userPostedImage.image!)
         }
     }
     
@@ -630,18 +583,12 @@ class NewsfeedTableViewCell: PFTableViewCell {
     // Attendants button container: button action method
     
     @IBAction func AttendantsListContainerInteraction(_ sender: AnyObject) {
-        PresentingViews.ViewAttendantsListView(parentViewController, eventID: self.passedInObject.objectId!)
+        PresentingViews.ViewAttendantsListView(inputParentViewController, eventID: self.passedInObject.objectId!)
     }
     
     // RSVP button container: button action method
     
     @IBAction func RSVPbuttontapped(_ sender: AnyObject) {
         self.rsvpClicked()
-    }
-    
-    // Comment button container: button action method
-    
-    @IBAction func CommentButtonTapped(_ sender: AnyObject) {
-        self.commentClicked(sender as! UIButton)
     }
 }

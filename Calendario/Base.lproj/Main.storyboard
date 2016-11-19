@@ -1935,8 +1935,7 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KVT-oa-tf6" userLabel="ImageContainer">
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgG-Ce-fbo">
-                                                        <frame key="frameInset" minX="86" minY="48" width="42" height="41"/>
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgG-Ce-fbo">
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="Qet-u7-JXI"/>
                                                             <constraint firstAttribute="width" constant="50" id="lVG-dO-s3c"/>
@@ -1953,8 +1952,7 @@
                                                             <action selector="VideoTapped:" destination="9Rc-cM-4J1" eventType="touchUpInside" id="P9O-jD-dnD"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXb-ik-p0Z">
-                                                        <frame key="frameInset" minX="28" minY="48" width="41" height="41"/>
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXb-ik-p0Z">
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="36" id="nCy-bE-vI2"/>
                                                             <constraint firstAttribute="height" constant="36" id="z4s-er-3lT"/>
@@ -4224,11 +4222,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="Bvh-3e-EYh"/>
-                                                            <exclude reference="7PO-e3-CMa"/>
-                                                            <exclude reference="ORg-3O-8RR"/>
                                                             <exclude reference="pI7-sW-g0y"/>
                                                             <exclude reference="VdS-0R-RJ8"/>
                                                             <exclude reference="gIo-sE-upW"/>
+                                                            <exclude reference="7PO-e3-CMa"/>
+                                                            <exclude reference="ORg-3O-8RR"/>
                                                         </mask>
                                                     </variation>
                                                 </view>
@@ -5109,11 +5107,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="olu-fF-V4p"/>
-                                                    <exclude reference="67q-L8-mLI"/>
-                                                    <exclude reference="L3V-N3-dFG"/>
                                                     <exclude reference="Pok-7A-jkR"/>
                                                     <exclude reference="DQf-j7-Kob"/>
                                                     <exclude reference="Ekc-nH-Vct"/>
+                                                    <exclude reference="67q-L8-mLI"/>
+                                                    <exclude reference="L3V-N3-dFG"/>
                                                 </mask>
                                             </variation>
                                         </view>
