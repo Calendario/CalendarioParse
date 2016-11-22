@@ -27,9 +27,6 @@
     if ((freshInstallCheck == nil) || ([freshInstallCheck isEqualToString:@"YES"])) {
         [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"FRESH_CHECK_SETTINGS"];
         [[NSUserDefaults standardUserDefaults] setObject:@"tap to select location..." forKey:@"location"];
-        [[NSUserDefaults standardUserDefaults] setObject:@NO forKey:@"filterDateCheck"];
-        [[NSUserDefaults standardUserDefaults] setObject:@NO forKey:@"filterLocationCheck"];
-        [[NSUserDefaults standardUserDefaults] setObject:@NO forKey:@"filterUserCheck"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
