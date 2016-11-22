@@ -32,14 +32,11 @@
 		A2267D171C4BD9C200180C6D /* FollowRequestsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2267D161C4BD9C200180C6D /* FollowRequestsTableViewController.swift */; };
 		A2267D191C4BE15700180C6D /* FollowRequestCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2267D181C4BE15700180C6D /* FollowRequestCustomCell.swift */; };
 		A23456C61D2280B800C4A769 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23456C51D2280B800C4A769 /* SearchUserCell.swift */; };
-		A23456CA1D22B7F600C4A769 /* SearchFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23456C91D22B7F600C4A769 /* SearchFilterView.swift */; };
-		A23456CD1D23FDEE00C4A769 /* SearchFilterUserSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23456CC1D23FDEE00C4A769 /* SearchFilterUserSelector.swift */; };
 		A23457961C765A9000376F2F /* NewsfeedV3.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457951C765A9000376F2F /* NewsfeedV3.swift */; };
 		A23457981C768A9B00376F2F /* LikesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457971C768A9B00376F2F /* LikesListViewController.swift */; };
 		A234579A1C768F5700376F2F /* LikesCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457991C768F5700376F2F /* LikesCustomCell.swift */; };
 		A23457AB1C79E6E500376F2F /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457AA1C79E6E500376F2F /* DateManager.swift */; };
 		A23457AE1C7B4AA300376F2F /* HashtagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23457AD1C7B4AA300376F2F /* HashtagViewController.swift */; };
-		A238736C1D25B6F200C785EF /* SearchFilterUI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A238736B1D25B6F200C785EF /* SearchFilterUI.storyboard */; };
 		A23D83D21DDB23600013C233 /* ProfileSubController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23D83D11DDB23600013C233 /* ProfileSubController.swift */; };
 		A23D83D41DDB236D0013C233 /* ProfileUI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A23D83D31DDB236D0013C233 /* ProfileUI.storyboard */; };
 		A24DB1181C8F705E002D4897 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24DB1171C8F705E002D4897 /* EventManager.swift */; };
@@ -210,14 +207,11 @@
 		A2267D161C4BD9C200180C6D /* FollowRequestsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowRequestsTableViewController.swift; sourceTree = "<group>"; };
 		A2267D181C4BE15700180C6D /* FollowRequestCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowRequestCustomCell.swift; sourceTree = "<group>"; };
 		A23456C51D2280B800C4A769 /* SearchUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
-		A23456C91D22B7F600C4A769 /* SearchFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilterView.swift; sourceTree = "<group>"; };
-		A23456CC1D23FDEE00C4A769 /* SearchFilterUserSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilterUserSelector.swift; sourceTree = "<group>"; };
 		A23457951C765A9000376F2F /* NewsfeedV3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedV3.swift; sourceTree = "<group>"; };
 		A23457971C768A9B00376F2F /* LikesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesListViewController.swift; sourceTree = "<group>"; };
 		A23457991C768F5700376F2F /* LikesCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesCustomCell.swift; sourceTree = "<group>"; };
 		A23457AA1C79E6E500376F2F /* DateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		A23457AD1C7B4AA300376F2F /* HashtagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashtagViewController.swift; sourceTree = "<group>"; };
-		A238736B1D25B6F200C785EF /* SearchFilterUI.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchFilterUI.storyboard; sourceTree = "<group>"; };
 		A23D83D11DDB23600013C233 /* ProfileSubController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSubController.swift; sourceTree = "<group>"; };
 		A23D83D31DDB236D0013C233 /* ProfileUI.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProfileUI.storyboard; sourceTree = "<group>"; };
 		A24DB1171C8F705E002D4897 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
@@ -506,24 +500,14 @@
 			name = "Follow Requests List";
 			sourceTree = "<group>";
 		};
-		A23456C71D22B7D000C4A769 /* Search Filter view */ = {
-			isa = PBXGroup;
-			children = (
-				A23456C91D22B7F600C4A769 /* SearchFilterView.swift */,
-				A23456CC1D23FDEE00C4A769 /* SearchFilterUserSelector.swift */,
-				A238736B1D25B6F200C785EF /* SearchFilterUI.storyboard */,
-			);
-			name = "Search Filter view";
-			sourceTree = "<group>";
-		};
-		A23456C81D22B7DC00C4A769 /* Search view */ = {
+		A23456C81D22B7DC00C4A769 /* Search view V2 */ = {
 			isa = PBXGroup;
 			children = (
 				A29C2C041D21CC7E00C201FD /* SearchViewV2.swift */,
 				A23456C51D2280B800C4A769 /* SearchUserCell.swift */,
 				A2185AB01DE3074400EDA251 /* SearchViewUI.storyboard */,
 			);
-			name = "Search view";
+			name = "Search view V2";
 			sourceTree = "<group>";
 		};
 		A23457A31C79E60D00376F2F /* Likes List View */ = {
@@ -634,8 +618,7 @@
 		A29C2C031D21CC4C00C201FD /* New search view */ = {
 			isa = PBXGroup;
 			children = (
-				A23456C71D22B7D000C4A769 /* Search Filter view */,
-				A23456C81D22B7DC00C4A769 /* Search view */,
+				A23456C81D22B7DC00C4A769 /* Search view V2 */,
 			);
 			name = "New search view";
 			sourceTree = "<group>";
@@ -1190,7 +1173,6 @@
 				78E4E0E51C86BE7800C37864 /* button-placeholder-primary.png in Resources */,
 				A211473B1D6DAE3D00C0C369 /* LoginSignUpUI.storyboard in Resources */,
 				E24DA5E91C1154BE00901DF0 /* Podfile in Resources */,
-				A238736C1D25B6F200C785EF /* SearchFilterUI.storyboard in Resources */,
 				D3DE979A1C80CC0400F4DE7B /* SF-UI-Text-MediumItalic.otf in Resources */,
 				D3DE978C1C80CC0400F4DE7B /* SF-UI-Display-Heavy.otf in Resources */,
 				D3DE979D1C80CC0400F4DE7B /* SF-UI-Text-Semibold.otf in Resources */,
@@ -1372,7 +1354,6 @@
 				E2D09C8F1BCCC575003F4651 /* CLWeeklyCalendarView.m in Sources */,
 				A2FBF5CA1C010B360051A553 /* SettingsViewController.swift in Sources */,
 				E230836C1C7426EB001C0142 /* FSCalendarCollectionView.m in Sources */,
-				A23456CA1D22B7F600C4A769 /* SearchFilterView.swift in Sources */,
 				E230836D1C7426EB001C0142 /* FSCalendarConstance.m in Sources */,
 				E17180521C21389600D591FA /* notificationsViewController.m in Sources */,
 				A23457961C765A9000376F2F /* NewsfeedV3.swift in Sources */,
@@ -1383,7 +1364,6 @@
 				E2F3EF901BE1C75600F42433 /* CommentsTableViewCell.swift in Sources */,
 				E27ACC811BEDA64100503DD7 /* TimelineViewController.swift in Sources */,
 				A2DBF03F1DDDC2BB00705E6F /* StatusUpdateCollectionCell.swift in Sources */,
-				A23456CD1D23FDEE00C4A769 /* SearchFilterUserSelector.swift in Sources */,
 				E151AF721BD72D6500811A31 /* tabBarViewController.m in Sources */,
 				784E96191CA185CC00085057 /* IntrochildViewController.swift in Sources */,
 				E2D09C9D1BCCC59A003F4651 /* UIImage+CL.m in Sources */,

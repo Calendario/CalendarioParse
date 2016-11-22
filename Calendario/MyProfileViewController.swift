@@ -124,6 +124,10 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     }
     
     func setupUI() {
+        
+        // Set the status bar to white.
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         // Get the screen dimensions.
         let width = UIScreen.main.bounds.size.width
         

@@ -35,6 +35,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     @IBOutlet weak var userImageContainer: UIView!
     @IBOutlet weak var likeButtonImage: UIImageView!
     
+    // Passed in data objects.
     var attendGestureRecognizer: UITapGestureRecognizer!
     var passedInObject: PFObject!
     var parentViewController: AnyObject!
@@ -478,7 +479,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
         userQuery.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             
             if let aobject = objects {
-                PresentingViews.showProfileView(((aobject as NSArray).lastObject as? PFUser)!, viewController: self)
+                PresentingViews.showProfileView(((aobject as NSArray).lastObject as? PFUser)!, viewController: self.parentViewController)
             }
         }
     }

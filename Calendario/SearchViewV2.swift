@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Parse
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -39,25 +40,82 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
     @IBOutlet weak var titleLabelTwo: UILabel!
     @IBOutlet weak var noUsersLabel: UILabel!
     @IBOutlet weak var noEventsLabel: UILabel!
-    var introSearchView: UIView!
-    var introSearchImage: UIImageView!
-    var introSearchLabel: UITextView!
+    @IBOutlet weak var wentView: UIView!
+    @IBOutlet weak var currentlyView: UIView!
+    @IBOutlet weak var goingView: UIView!
+    @IBOutlet weak var wentImage: UIImageView!
+    @IBOutlet weak var goingImage: UIImageView!
     
     // Status update data array.
     var statusData:NSMutableArray = []
     var sortedArray:NSMutableArray = []
     var userData:NSMutableArray = []
     
+    // Went/Currently/Going filter states.
+    var wentFilter = true
+    var currentlyFilter = true
+    var goingFilter = true
+    
     //MARK: BUTTONS.
     
-    @IBAction func openFilterSettings(_ sender: UIButton) {
-        let sb = UIStoryboard(name: "SearchFilterUI", bundle: nil)
-        let filterVC = sb.instantiateViewController(withIdentifier: "FilterView") as! SearchFilterView
-        self.present(filterVC, animated: true, completion: nil)
+    @IBAction func goBack(_ sender: UIButton) {
+        self.searchBar.resignFirstResponder()
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func goBack(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+    @IBAction func changeFilterState(_ sender: UIButton) {
+        
+        // Set the filer button states but do NOT allow ALL
+        // three filters to be disabled at any one time.
+        
+        if (sender.tag == 1) {
+            
+            if ((self.currentlyFilter == false) && (self.goingFilter == false)) {
+                self.displayAlert("Error", alertMessage: "You cannot disable all three filters at the same time, as this will result in 0 search results.")
+                
+            } else {
+                self.wentFilter = !self.wentFilter
+                self.setFilterViewDesign(state: self.wentFilter, filterView: self.wentView)
+                self.organizeNewsFeedData()
+            }
+        }
+        
+        else if (sender.tag == 2) {
+            
+            if ((self.wentFilter == false) && (self.goingFilter == false)) {
+                self.displayAlert("Error", alertMessage: "You cannot disable all three filters at the same time, as this will result in 0 search results.")
+                
+            } else {
+                self.currentlyFilter = !self.currentlyFilter
+                self.setFilterViewDesign(state: self.currentlyFilter, filterView: self.currentlyView)
+                self.organizeNewsFeedData()
+            }
+        }
+        
+        else if (sender.tag == 3) {
+            
+            if ((self.wentFilter == false) && (self.currentlyFilter == false)) {
+                self.displayAlert("Error", alertMessage: "You cannot disable all three filters at the same time, as this will result in 0 search results.")
+                
+            } else {
+                self.goingFilter = !self.goingFilter
+                self.setFilterViewDesign(state: self.goingFilter, filterView: self.goingView)
+                self.organizeNewsFeedData()
+            }
+        }
+    }
+    
+    func setFilterViewDesign(state: Bool, filterView: UIView) {
+        
+        // Run the UI update animations.
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseOut, .allowUserInteraction], animations: {
+            
+            if (state == true) {
+                filterView.alpha = 1.0
+            } else {
+                filterView.alpha = 0.6
+            }
+        })
     }
     
     //MARK: VIWW DID LOAD METHOD.
@@ -71,28 +129,31 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        // Set the status bar to black.
+        UIApplication.shared.statusBarStyle = .default
     }
     
     //MARK: UI METHODS.
     
     func setupUI() {
         
-        // Create and add the intro view to the search view.
-        self.introSearchView = UIView(frame: CGRect(x: 0, y: (self.view.frame.size.height / 2), width: self.view.frame.size.width, height: 200))
-        self.view.addSubview(self.introSearchView)
-        self.introSearchLabel = UITextView(frame: CGRect(x: (self.introSearchView.frame.origin.x / 2), y: 0, width: (self.introSearchView.frame.size.width - 14), height: 100))
-        self.introSearchView.addSubview(self.introSearchLabel)
-        self.introSearchLabel.text = "Search for users and events. Tap the filter button to set event filters."
-        self.introSearchLabel.textAlignment = NSTextAlignment.center
-        self.introSearchLabel.isEditable = false
-        self.introSearchLabel.isUserInteractionEnabled = false
-        self.introSearchImage = UIImageView(frame:CGRect(x: (self.introSearchView.bounds.width / 2) - 10, y: -50, width: 40, height: 40));
-        self.introSearchImage.image = UIImage(named: "searchTabLogo.png")
-        self.introSearchImage.contentMode = .scaleAspectFit
-        self.introSearchView.addSubview(self.introSearchImage)
+        // Set the status bar to black.
+        UIApplication.shared.statusBarStyle = .default
+        
+        // Set the went and going images to white.
+        self.wentImage.image = self.wentImage.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        self.goingImage.image = self.goingImage.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        
+        // Curve the edges of the top filter views.
+        self.wentView.layer.cornerRadius = 5.0
+        self.wentView.clipsToBounds = true
+        self.currentlyView.layer.cornerRadius = 5.0
+        self.currentlyView.clipsToBounds = true
+        self.goingView.layer.cornerRadius = 5.0
+        self.goingView.clipsToBounds = true
         
         // Set the various label fonts.
-        self.introSearchLabel.font = UIFont(name: "SFUIDisplay-Regular", size: 17)
         self.titleLabelOne.font = UIFont(name: "SFUIDisplay-Regular", size: 17)
         self.titleLabelTwo.font = UIFont(name: "SFUIDisplay-Regular", size: 17)
         self.noUsersLabel.font = UIFont(name: "SFUIDisplay-Regular", size: 17)
@@ -101,11 +162,10 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         // Set the various UI properties.
         self.userList.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
         self.eventList.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
-        self.userList.backgroundColor = UIColor(red: 223.0/255, green: 223.0/255, blue: 223.0/255, alpha: 1.0)
-        self.searchBar.tintColor = UIColor.white
+        self.userList.backgroundColor = UIColor.white
+        self.searchBar.tintColor = UIColor.gray
         self.noUsersLabel.isHidden = true
         self.noEventsLabel.isHidden = true
-        self.introSearchView.isHidden = false
         self.eventList.isHidden = true
         
         // Allow the user to dismiss the keyboard with a toolabr.
@@ -126,10 +186,13 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
                 
                 if let textField = subsubView as? UITextField {
                     textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Search", comment: ""), attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
-                    textField.textColor = UIColor.white
+                    textField.textColor = UIColor.gray
                 }
             }
         }
+        
+        // Show the on screen keyboard.
+        self.searchBar.becomeFirstResponder()
     }
     
     //MARK: DATA LOADING METHODS.
@@ -149,72 +212,23 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
             }
             
             self.noUsersLabel.isHidden = (self.userData.count > 0)
-            self.userList.reloadData()
-        }
-        
-        self.reloadNewsFeed(inputString)
-    }
-    
-    func reloadNewsFeed(_ inputString: String) {
-        
-        // Get the search filter settings.
-        let defaults = UserDefaults.standard
-        let locationState = defaults.object(forKey: "filterLocationCheck") as? Bool
-        let userState = defaults.object(forKey: "filterUserCheck") as? Bool
-        var locationMode:Int = 2
-        var point:PFGeoPoint = PFGeoPoint(latitude: 0, longitude: 0)
-        var locatonRadius:Double = 0
-        
-        if (locationState == true) {
             
-            let locationLat = defaults.object(forKey: "filterLocationLat") as? Double
-            let locationLon = defaults.object(forKey: "filterLocationLon") as? Double
-            locatonRadius = (defaults.object(forKey: "filterLocationRadius") as? Double)!
-            let locatonRadiusType = defaults.object(forKey: "filterLocationRadiusType") as? String
-            point = PFGeoPoint(latitude:locationLat!, longitude:locationLon!)
-            
-            if (locatonRadiusType == "mi") {
-                locationMode = 1
-            } else {
-                locationMode = 2
-            }
-        }
-        
-        if (userState == true) {
-            
-            var findUser:PFQuery<PFObject>!
-            findUser = PFUser.query()!
-            findUser.getObjectInBackground(withId: (defaults.object(forKey: "filterUserObject") as? String)!, block: { (userAccount, error) in
-                
-                if (error == nil) {
-                    self.loadNewsFeedData(inputString, locationMode: locationMode, locationPoint: point, radius: locatonRadius, userMode: true, inputUser: (userAccount as! PFUser))
-                    
-                } else {
-                    self.loadNewsFeedData(inputString, locationMode: locationMode, locationPoint: point, radius: locatonRadius, userMode: false, inputUser: PFUser.current()!)
-                }
+            DispatchQueue.main.async(execute: {
+                self.userList.reloadData()
             })
-        } else {
-            self.loadNewsFeedData(inputString, locationMode: locationMode, locationPoint: point, radius: locatonRadius, userMode: false, inputUser: PFUser.current()!)
         }
+        
+        // Begin the data search method.
+        self.loadNewsFeedData(inputString, inputUser: PFUser.current()!)
     }
     
-    func loadNewsFeedData(_ inputString: String, locationMode: Int, locationPoint: PFGeoPoint, radius: Double, userMode: Bool, inputUser: PFUser) {
+    func loadNewsFeedData(_ inputString: String, inputUser: PFUser) {
         
         // Setup the status update query.
         var query:PFQuery<PFObject>!
         query = PFQuery(className:"StatusUpdate")
         query.limit = 100
         query.whereKey("eventTitle", matchesRegex: inputString, modifiers: "i")
-
-        if (locationMode == 0) {
-            query.whereKey("placeGeoPoint", nearGeoPoint: locationPoint, withinMiles: radius)
-        } else if (locationMode == 1) {
-            query.whereKey("placeGeoPoint", nearGeoPoint: locationPoint, withinKilometers: radius)
-        }
-        
-        if (userMode == true) {
-            query.whereKey("user", equalTo: inputUser)
-        }
         
         // Get the status update(s).
         query.findObjectsInBackground(block: { (statusUpdates, error) -> Void in
@@ -225,26 +239,16 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
                 self.statusData =  NSMutableArray(array: statusUpdates!)
             }
             
-            self.runSecondFeedQuery(inputString, locationMode: locationMode, locationPoint: locationPoint, radius: radius, userMode: userMode, inputUser: inputUser)
+            self.runSecondFeedQuery(inputString, inputUser: inputUser)
         })
     }
     
-    func runSecondFeedQuery(_ inputString: String, locationMode: Int, locationPoint: PFGeoPoint, radius: Double, userMode: Bool, inputUser: PFUser) {
+    func runSecondFeedQuery(_ inputString: String, inputUser: PFUser) {
 
         var queryTwo:PFQuery<PFObject>!
         queryTwo = PFQuery(className:"StatusUpdate")
         queryTwo.limit = 100
         queryTwo.whereKey("updatetext", matchesRegex: inputString, modifiers: "i")
-        
-        if (locationMode == 0) {
-            queryTwo.whereKey("placeGeoPoint", nearGeoPoint: locationPoint, withinMiles: radius)
-        } else if (locationMode == 1) {
-            queryTwo.whereKey("placeGeoPoint", nearGeoPoint: locationPoint, withinKilometers: radius)
-        }
-        
-        if (userMode == true) {
-            queryTwo.whereKey("user", equalTo: inputUser)
-        }
         
         queryTwo.findObjectsInBackground(block: { (statusUpdatesTwo, errorTwo) -> Void in
             
@@ -286,9 +290,6 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
     
     func organizeNewsFeedData() {
         
-        // Get the feed filter settings.
-        let filterSettings = UserDefaults.standard
-        
         // Only sort the data if there are
         // any status updates for the user.
         
@@ -299,37 +300,49 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
                 return ((obj2 as! PFObject).createdAt?.compare((obj1 as! PFObject).createdAt!))!
             }) as NSArray
             
-            // Save the sorted data to the mutable array.
-            let tempData = NSMutableArray(array: newData)
+            // If ALL filters are ON then we can show ALL the downloaded data. If one or two filters
+            // are off then remove the appropriate data from the array depending on its tense setting.
             
-            // Get the data/user filter settings.
-            let dateState = filterSettings.object(forKey: "filterDateCheck") as? Bool
+            if ((self.wentFilter == true) && (self.currentlyFilter == true) && (self.goingFilter == true)) {
+                
+                // Save the sorted data to the mutable array.
+                self.sortedArray = NSMutableArray(array: newData)
+            }
             
-            if (dateState == true) {
+            else {
                 
-                let dateStart = filterSettings.object(forKey: "filterDateStart") as? Date
-                let dateEnd = filterSettings.object(forKey: "filterDateEnd") as? Date
+                // Save the sorted data to the mutable array.
+                var tempData:NSMutableArray!
+                tempData = NSMutableArray(array: newData)
                 
-                self.sortedArray.removeAllObjects()
+                // Loop through the data and remove the 
+                // correct data depending on the filters.
                 
-                for loop in 0..<tempData.count {
+                for loop in (0..<tempData.count).reversed() {
                     
-                    let currentObject:PFObject = tempData[loop] as! PFObject
+                    let loopTense = tenseChanged(((tempData[loop] as! PFObject).value(forKey: "dateofevent")) as! String)
                     
-                    if let dateString = currentObject["dateofevent"] {
-                        
-                        if ((dateString as! String).characters.count > 1) {
-                            
-                            let date:Date = self.convertStringToDate(dateString as! String)
-                            
-                            if (self.isBetweenDates(dateStart!, endDate: dateEnd!, dateToCheck: date) == true) {
-                                self.sortedArray.add(tempData[loop])
-                            }
-                        }
+                    // Check if we need to remove 'went' data.
+                    
+                    if ((self.wentFilter == false) && (loopTense == "Went")) {
+                        tempData.removeObject(at: loop)
+                    }
+                    
+                    // Check if we need to remove 'currently' data.
+                    
+                    if ((self.currentlyFilter == false) && (loopTense == "Currently")) {
+                        tempData.removeObject(at: loop)
+                    }
+                    
+                    // Check if we need to remove 'going' data.
+                    
+                    if ((self.goingFilter == false) && (loopTense == "Going")) {
+                        tempData.removeObject(at: loop)
                     }
                 }
-            } else {
-                self.sortedArray = NSMutableArray(array: newData)
+                
+                // Save the sorted data to the mutable array.
+                self.sortedArray = NSMutableArray(array: tempData)
             }
         }
             
@@ -343,6 +356,40 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         self.eventList.isScrollEnabled = (self.sortedArray.count > 0)
         self.noEventsLabel.isHidden = (self.sortedArray.count > 0)
         self.eventList.reloadData()
+    }
+    
+    func tenseChanged(_ passedInEventDate: String) -> String {
+        
+        // Get the cureent date.
+        let currentDate:Date = Date()
+        
+        // Create a date formatter to turn the date into a readable string.
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "M/d/yy"
+        
+        // The current date is passed in the date formatter method.
+        let datefromstring = dateformatter.date(from: passedInEventDate)
+        
+        // Set the tense label depending on the comparison result.
+        
+        if currentDate.compare(datefromstring!) == ComparisonResult.orderedAscending {
+            
+            // Current date is earlier than date of event.
+            return "Going"
+            
+        } else if currentDate.compare(datefromstring!) == ComparisonResult.orderedDescending {
+            
+            // Current date is later than date of event.
+            return "Went"
+            
+        } else if currentDate.compare(datefromstring!) == ComparisonResult.orderedSame {
+            
+            // Current date is same than date of event.
+            return "Currently"
+            
+        } else {
+            return "Currently"
+        }
     }
     
     func isBetweenDates(_ beginDate: Date, endDate: Date, dateToCheck: Date) -> Bool {
@@ -378,11 +425,9 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         if (searchCheck.characters.count > 0) {
             self.titleLabelOne.text = "Users matching \"\(searchText)\""
             self.titleLabelTwo.text = "Events with \"\(searchText)\""
-            self.introSearchView.isHidden = true
             self.eventList.isHidden = false
             self.loadUserData(searchText)
         } else {
-            self.introSearchView.isHidden = false
             self.eventList.isHidden = true
             self.noEventsLabel.isHidden = true
         }
@@ -425,6 +470,7 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         
         if ((indexPath as NSIndexPath).row < self.userData.count) {
             cell.passedInUser = self.userData[(indexPath as NSIndexPath).row] as! PFUser
+            cell.setUserDetails()
         }
         
         return cell

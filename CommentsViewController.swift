@@ -36,6 +36,9 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set the status bar to white.
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         // Get the keyboard height when the comment text field is pressed - needed
         // in order to move the comment container view to the correct postion.
      
@@ -139,7 +142,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func refreshData() {
         LoadCommentData()
-        self.tableView.reloadData()
     }
     
     func LoadCommentData()
@@ -273,12 +275,22 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        // Prepare the reusable cell.
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentsTableViewCell
         
+        // Set the profile picture to a circle.
         cell.userProfileImage.layer.cornerRadius = (cell.userProfileImage.frame.size.width / 2)
         cell.userProfileImage.clipsToBounds = true
         
+        // Get the current index news item object.
         let comment:PFObject = self.commentdata.object(at: (indexPath as NSIndexPath).row) as! PFObject
+        
+        // Set the comment data objects.
+        cell.parentViewController = self
+        cell.passedInObject = comment
+        
+        // Load the username and profile picture.
+        cell.loadUserData()
         
         // Set the comment createdAt label.
         DateManager.createDateDifferenceString(comment.createdAt!) { (difference) -> Void in
@@ -352,52 +364,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
         
-        var usernamequery:PFQuery<PFObject>!
-        usernamequery = PFUser.query()
-        usernamequery?.getObjectInBackground(withId: ((comment.value(forKey: "postedby") as? PFObject)!.objectId!), block: { (object, error) -> Void in
-            if error == nil
-            {
-                
-                let nameString = object?.value(forKey: "username") as! String
-                cell.UserLabel.text = nameString
-                
-                if let image = object!["profileImage"] as! PFFile? {
-                    
-                    image.getDataInBackground(block: { (ImageData, error) -> Void in
-                        
-                        DispatchQueue.main.async(execute: {
-                            
-                            if error == nil {
-                                                                
-                                let image = UIImage(data: ImageData!)
-                                cell.userProfileImage.image = image
-                                cell.layoutIfNeeded()
-                            }
-                                
-                            else {
-                                cell.userProfileImage.image = UIImage(named: "default_profile_pic.png")
-                                cell.layoutIfNeeded()
-                            }
-                        })
-                    })
-                } else {
-                    
-                    DispatchQueue.main.async(execute: {
-                        cell.userProfileImage.image = UIImage(named: "default_profile_pic.png")
-                        cell.layoutIfNeeded()
-                    })
-                }
-            }
-            
-            else {
-                
-                DispatchQueue.main.async(execute: {
-                    cell.userProfileImage.image = UIImage(named: "default_profile_pic.png")
-                    cell.layoutIfNeeded()
-                })
-            }
-        })
-        
+        // Set the comment label.
         let commentString = comment.object(forKey: "commenttext") as! String
         cell.commentTextView.text = commentString
    
@@ -475,9 +442,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         // Set the button backgrond colour.
         deletestatus.backgroundColor = UIColor(red: 255/255.0, green: 80/255.0, blue: 79/255.0, alpha: 1.0)
-
         mentioncomment.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-
         
         // Only show the delete button if the comment belongs to the 
         // currently logged in user and conversly, only show the mention

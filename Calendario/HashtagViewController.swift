@@ -38,6 +38,10 @@ class HashtagViewController: UITableViewController {
     }
     
     func setupUI() {
+        
+        // Set the status bar to white.
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 254.0;
         self.tableView.separatorInset = UIEdgeInsets.zero

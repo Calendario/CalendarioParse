@@ -23,7 +23,7 @@ class SearchUserCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.userProfilePicture.image = nil;
+        self.userProfilePicture.image = nil
     }
     
     override func awakeFromNib() {
@@ -32,7 +32,6 @@ class SearchUserCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         self.setupUI()
-        self.setUserDetails()
     }
     
     //MARK: UI METHODS.
@@ -40,7 +39,7 @@ class SearchUserCell: UICollectionViewCell {
     func setupUI() {
         
         // Set the cell background colour.
-        self.backgroundColor = UIColor(red: 223.0/255, green: 223.0/255, blue: 223.0/255, alpha: 1.0)
+        self.backgroundColor = UIColor.white
         
         // Turn the profile picture into a circle.
         self.userProfilePicture.layer.cornerRadius = (self.userProfilePicture.frame.size.width / 2)
@@ -50,7 +49,6 @@ class SearchUserCell: UICollectionViewCell {
         
         // Set the name label font.
         self.nameLabel.font = UIFont(name: "SFUIDisplay-Regular", size: 18)
-        self.nameLabel.textColor = UIColor.black
     }
     
     func setUserDetails() {
@@ -69,16 +67,25 @@ class SearchUserCell: UICollectionViewCell {
                 // Download the profile image.
                 (userImageFile as AnyObject).getDataInBackground(block: { (imageData: Data?, error: Error?) in
                     
-                    if ((error == nil) && (imageData != nil)) {
-                        profileImage = UIImage(data: imageData!)
+                    OperationQueue.main.addOperation {() -> Void in
+                        
+                        if ((error == nil) && (imageData != nil)) {
+                            profileImage = UIImage(data: imageData!)
+                        }
+                        self.userProfilePicture.image = profileImage
                     }
-                    self.userProfilePicture.image = profileImage
                 })
             } else {
-                self.userProfilePicture.image = profileImage
+                
+                OperationQueue.main.addOperation {() -> Void in
+                    self.userProfilePicture.image = profileImage
+                }
             }
         } else {
-            self.userProfilePicture.image = profileImage
+            
+            OperationQueue.main.addOperation {() -> Void in
+                self.userProfilePicture.image = profileImage
+            }
         }
     }
 }

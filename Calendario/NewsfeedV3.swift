@@ -219,10 +219,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
                     
                     // Run UI Updates
                     cell.createdAtLabel.text = difference
-                    
-                    //let currentobjects = self.sortedArray[indexPath.row] as! PFObject
-                    //let dateofevent = currentobjects.objectForKey("dateofevent") as! String
-                    //let currentid = currentobjects.objectId!
                 })
             }
         }

@@ -118,8 +118,6 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
             
             if error == nil {
                 
-                print(objects)
-                
                 // print(objects!.count)
                 for object in objects! {
                     
@@ -356,10 +354,5 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     // Other methods.
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "timelineComments" {
-            //let vc = segue.destinationViewController as! CommentsViewController
-            //vc.savedobjectID = currentObjectid
-        }
     }
 }

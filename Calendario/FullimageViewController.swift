@@ -88,6 +88,9 @@ class FullimageViewController: UIViewController, UIScrollViewDelegate {
     
     func setupUI() {
         
+        // Set the status bar to white.
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         // Turn the profile picture into a circle.
         self.userProfilePicture.layer.cornerRadius = (self.userProfilePicture.frame.size.width / 2)
         self.userProfilePicture.clipsToBounds = true
