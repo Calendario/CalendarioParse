@@ -148,11 +148,15 @@ open class ParseCalls: NSObject {
         }
     }
     
-    class func checkForUserPostedImage(_ imageView: UIImageView, passedObject: PFObject, cell: NewsfeedTableViewCell) {
+    class func checkForUserPostedImage(_ imageView: UIImageView, passedObject: PFObject, cell: NewsfeedTableViewCell, autolayoutCheck: Bool) {
         
         if (passedObject.object(forKey: "image") == nil) {
             imageView.image = nil
-            cell.userImageViewContainerHeightContstraint.constant = 0
+            
+            if (autolayoutCheck == true) {
+                cell.userImageViewContainerHeightContstraint.constant = 0
+            }
+            
             cell.layoutIfNeeded()
             cell.updateConstraintsIfNeeded()
         } else {
@@ -165,12 +169,18 @@ open class ParseCalls: NSObject {
                 
                 if ((error == nil) && (mediaData != nil)) {
                     imageView.image = UIImage(data: mediaData!)
-                    cell.userImageViewContainerHeightContstraint.constant = 205
+                    
+                    if (autolayoutCheck == true) {
+                        cell.userImageViewContainerHeightContstraint.constant = 205
+                    }
                 }
                     
                 else {
                     imageView.image = nil
-                    cell.userImageViewContainerHeightContstraint.constant = 0
+                    
+                    if (autolayoutCheck == true) {
+                        cell.userImageViewContainerHeightContstraint.constant = 0
+                    }
                 }
                 
                 cell.layoutIfNeeded()

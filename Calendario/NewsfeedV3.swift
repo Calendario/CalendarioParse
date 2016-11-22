@@ -206,7 +206,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         
         ParseCalls.findUserDetails(self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
         
-        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, cell: cell)
+        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, cell: cell, autolayoutCheck: true)
         
         ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject)
         

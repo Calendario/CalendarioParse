@@ -93,7 +93,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // Check the website URL before
         // opening the web page view.
         
-        if (userWebsiteLink != nil) {
+        if (self.userWebsiteLink != nil) {
             
             // Open the webpage view.
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -710,7 +710,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             // Get the specific status object for this cell and call all needed methods.
             cell.passedInObject = self.statusObjects[(indexPath as NSIndexPath).row] as! PFObject
             
-            ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.statusObjects[(indexPath as NSIndexPath).row] as! PFObject, cell: cell)
+            ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.statusObjects[(indexPath as NSIndexPath).row] as! PFObject, cell: cell, autolayoutCheck: true)
             
             ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.statusObjects[(indexPath as NSIndexPath).row] as! PFObject)
             

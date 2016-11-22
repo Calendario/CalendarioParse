@@ -11,26 +11,6 @@ import UIKit
 import Parse
 import QuartzCore
 
-/*fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}*/
-
 class HashtagViewController: UITableViewController {
     
     // Status update data array.
@@ -124,21 +104,11 @@ class HashtagViewController: UITableViewController {
         self.present(NC, animated: true, completion: nil)
     }
     
-//    func Seemore() {
-//        
-//        // Open the see more view.
-//        let sb = UIStoryboard(name: "Main", bundle: nil)
-//        let SMVC = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
-//        let NC = UINavigationController(rootViewController: SMVC)
-//        self.presentViewController(NC, animated: true, completion: nil)
-//    }
-    
     func closeView() {
         
         // Load in the hashtag data.
         var defaults = UserDefaults.standard
         var hashtagData: NSMutableArray = []
-        //hashtagData = (((defaults.object(forKey: "HashtagData")) as AnyObject).mutableCopy())! as! NSMutableArray
         hashtagData = (((defaults.object(forKey: "HashtagData")) as! NSArray).mutableCopy()) as! NSMutableArray
         
         if (hashtagData.count > 0) {
@@ -166,10 +136,11 @@ class HashtagViewController: UITableViewController {
     
     func loadInitialHashtagData() {
         let defaults = UserDefaults.standard
-        let hashtagData = defaults.object(forKey: "HashtagData") as? NSMutableArray
+        var hashtagData: NSMutableArray = []
+        hashtagData = (((defaults.object(forKey: "HashtagData")) as! NSArray).mutableCopy()) as! NSMutableArray
         
         // Set the hashtag string.
-        hashtagString = hashtagData![1] as! String
+        hashtagString = hashtagData[1] as! String
         self.navigationItem.title = hashtagString
     }
     
@@ -267,7 +238,7 @@ class HashtagViewController: UITableViewController {
         // Get the specific status object for this cell and call all needed methods.
         cell.passedInObject = self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject
         
-        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, cell: cell)
+        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, cell: cell, autolayoutCheck: true)
         
         ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject)
         
@@ -366,7 +337,7 @@ class HashtagViewController: UITableViewController {
         }
         
         // Set the button backgrond colours.
-      //  seemore.backgroundColor = UIColor.flatGrayColor()
+        // seemore.backgroundColor = UIColor.flatGrayColor()
         report.backgroundColor = UIColor(red: 236/255.0, green: 236/255.0, blue: 236/255.0, alpha: 1.0)
         
         deletestatus.backgroundColor = UIColor(red: 255/255.0, green: 80/255.0, blue: 79/255.0, alpha: 1.0)

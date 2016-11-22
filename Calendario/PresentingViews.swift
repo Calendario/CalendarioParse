@@ -23,10 +23,9 @@ open class PresentingViews: NSObject {
     }
     
     class func ViewSearchController(_ viewController: AnyObject) {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let searchView = sb.instantiateViewController(withIdentifier: "search") as! SearchViewController
-        let NC = UINavigationController(rootViewController: searchView)
-        viewController.present(NC, animated: true, completion: nil)
+        let sb = UIStoryboard(name: "SearchViewUI", bundle: nil)
+        let searchView = sb.instantiateViewController(withIdentifier: "SearchV2") as! SearchViewV2
+        viewController.present(searchView, animated: true, completion: nil)
     }
     
     class func ViewAttendantsListView(_ viewController: AnyObject, eventID: String) {
@@ -48,7 +47,7 @@ open class PresentingViews: NSObject {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let reportVC = sb.instantiateViewController(withIdentifier: "My Profile") as! MyProfileViewController
         reportVC.passedUser = passedUserObject as! PFUser
-        viewController.parent!!.present(reportVC, animated: true, completion: nil)
+        viewController.present(reportVC, animated: true, completion: nil)
     }
     
     class func presentHashtagsView(_ viewController: AnyObject) {

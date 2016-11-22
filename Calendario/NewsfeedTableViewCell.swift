@@ -39,6 +39,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     var passedInObject: PFObject!
     var parentViewController: AnyObject!
     var rsvpArray: [String] = []
+    var autolayoutCheck = true
     
     //MARK: LIFECYCLE METHODS
     override func prepareForReuse() {
@@ -104,11 +105,21 @@ class NewsfeedTableViewCell: PFTableViewCell {
             self.uploaddatelabel.text = self.passedInObject["dateofevent"] as? String
             self.eventTitle.text = self.passedInObject["eventTitle"] as? String
             
-            if (passedInObject.object(forKey: "image") == nil) {
-                self.userPostedImage.image = nil
-                self.userImageViewContainerHeightContstraint.constant = 0
+            if (self.autolayoutCheck == true) {
+                
+                if (passedInObject.object(forKey: "image") == nil) {
+                    self.userPostedImage.image = nil
+                    self.userImageViewContainerHeightContstraint.constant = 0
+                } else {
+                    self.userImageViewContainerHeightContstraint.constant = 205
+                }
+                
             } else {
-                self.userImageViewContainerHeightContstraint.constant = 205
+                
+                if (passedInObject.object(forKey: "image") == nil) {
+                    self.userPostedImage.image = nil
+                } else {
+                }
             }
             
             self.layoutIfNeeded()
@@ -618,7 +629,10 @@ class NewsfeedTableViewCell: PFTableViewCell {
     // Main news item image method
     
     @IBAction func feedImageTapped(_ sender: AnyObject) {
-        PresentingViews.showPhotoViewer(self, userPostedImage: userPostedImage, userProfilePic: self.profileimageview.image!, userName: self.UserNameLabel.text!, statusObject: self.passedInObject)
+        
+        if (self.passedInObject.value(forKey: "image") != nil) {
+            PresentingViews.showPhotoViewer(self, userPostedImage: userPostedImage, userProfilePic: self.profileimageview.image!, userName: self.UserNameLabel.text!, statusObject: self.passedInObject)
+        }
     }
     
     // like button container button action method

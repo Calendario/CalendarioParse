@@ -29,7 +29,6 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
 class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     // Setup the various UI objects.
@@ -55,6 +54,10 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         let sb = UIStoryboard(name: "SearchFilterUI", bundle: nil)
         let filterVC = sb.instantiateViewController(withIdentifier: "FilterView") as! SearchFilterView
         self.present(filterVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func goBack(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     //MARK: VIWW DID LOAD METHOD.
@@ -456,12 +459,13 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         return nil
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 511.0
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        
+        if ((self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject).value(forKey: "image") == nil) {
+            return 220
+        } else {
+            return 440
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -475,9 +479,16 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         // Get the specific status object for this cell and call all needed methods.
         cell.passedInObject = self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject
         
+        // We are not using autolayout for this cell.
+        cell.autolayoutCheck = false
+        
+        // Reset the image views first.
+        cell.userPostedImage.image = nil
+        cell.profileimageview.image = nil
+        
         ParseCalls.findUserDetails(self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, usernameLabel: cell.UserNameLabel, profileImageView: cell.profileimageview)
         
-        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, cell: cell)
+        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject, cell: cell, autolayoutCheck: false)
         
         ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject)
         

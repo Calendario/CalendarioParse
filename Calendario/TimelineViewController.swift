@@ -326,7 +326,7 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         // Get the specific status object for this cell and call all needed methods.
         cell.passedInObject = self.filteredData[(indexPath as NSIndexPath).row] as! PFObject
         
-        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.filteredData[(indexPath as NSIndexPath).row] as! PFObject, cell: cell)
+        ParseCalls.checkForUserPostedImage(cell.userPostedImage, passedObject: self.filteredData[(indexPath as NSIndexPath).row] as! PFObject, cell: cell, autolayoutCheck: true)
         
         ParseCalls.updateCommentsLabel(cell.commentsLabel, passedObject: self.filteredData[(indexPath as NSIndexPath).row] as! PFObject)
         
