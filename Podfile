@@ -11,4 +11,5 @@ target ‘Calendario’ do
    pod 'SDWebImage', '~>3.7'
    pod 'IQKeyboardManager'
    pod 'FSCalendar'
+   pod 'JTCalendar', '~> 2.0'
 end

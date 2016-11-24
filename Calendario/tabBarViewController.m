@@ -9,6 +9,7 @@
 #import "tabBarViewController.h"
 #import "AppDelegate.h"
 #import "Calendario-Swift.h"
+#import <Parse/Parse.h>
 
 @interface tabBarViewController ()
 

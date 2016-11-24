@@ -7,42 +7,66 @@
 //
 
 import UIKit
-import UIKit
 import Parse
 import QuartzCore
 
-class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate {
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate {
     
-    @IBOutlet weak var calendar: FSCalendar!
+    // Setup the various UI objects.
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
+    // Calendar data objects.
     var filteredData:NSMutableArray = NSMutableArray()
     var currentObjectid:String!
     let likebuttonfilled = UIImage(named: "like button filled")
     var dateofevent:String!
-    var b:Bool = false
     var eventsarray = [Date]()
     var selectedDate:Date!
+    var headerSetCheck = false
+        
+    //MARK: VIEW DID LOAD.
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set the calendar date selected notification.
+        NotificationCenter.default.addObserver(self, selector: #selector(self.selectCalendarDate(date:)), name: NSNotification.Name(rawValue: "CalenderDateSelected"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupUI()
-        loadCalendarData(getCurrentDate())
+        
+        self.setupUI()
+        
+        // It is IMPORTANT that the header view is set in the
+        // viewDidAppear method so that ineraction is enabled.
+        
+        if (self.headerSetCheck == false) {
+            
+            // Insert the user profile subview as the table header view.
+            let story_file = UIStoryboard(name: "TimelineCalendarUI", bundle: nil)
+            let calendarSubview = story_file.instantiateViewController(withIdentifier: "CalendarUI") as! TimelineCalendarViewController
+            self.addChildViewController(calendarSubview)
+            calendarSubview.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 370)
+            self.tableview.tableHeaderView = calendarSubview.view
+            
+            // The header view has been set.
+            self.headerSetCheck = true
+            
+            // Load the initial events for the first selected date.
+            self.loadCalendarData(getCurrentDate())
+        }
     }
     
     func setupUI() {
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
-        setTableViewProperties()
-        setCalendarProperties()
-        setNavBarProperties()
+        self.setTableViewProperties()
+        self.setNavBarProperties()
     }
     
     func setTableViewProperties() {
+        self.tableview.isUserInteractionEnabled = true
         self.tableview.delegate = self
         self.tableview.dataSource = self
         self.tableview.rowHeight = UITableViewAutomaticDimension;
@@ -51,7 +75,6 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         self.tableview.sectionHeaderHeight = 0
         self.tableview.sectionFooterHeight = 0
         self.tableview.separatorColor = UIColor.clear
-
     }
     
     func setNavBarProperties() {
@@ -63,26 +86,12 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         self.navigationController?.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
     }
     
-    func setCalendarProperties() {
-        calendar.dataSource = self
-        calendar.delegate = self
-        calendar.scrollDirection = .horizontal
-        calendar.select(Date())
-        calendar.appearance.eventColor = UIColor.white
-        calendar.appearance.titleSelectionColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
-        calendar.appearance.weekdayFont = UIFont(name: "SFUIDisplay-Regular", size: 14)
-        calendar.appearance.titleFont = UIFont(name: "SFUIDisplay-Light", size: 16)
-        calendar.appearance.subtitleFont = UIFont(name: "SFUIDisplay-Light", size: 16)
-        calendar.layoutIfNeeded()
-    }
-    
     func ReportView() {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let reportVC = sb.instantiateViewController(withIdentifier: "report") as! ReportTableViewController
         let NC = UINavigationController(rootViewController: reportVC)
         self.present(NC, animated: true, completion: nil)
     }
-    
     
     func getCurrentDate() -> String {
         let dateformatter = DateFormatter()
@@ -91,14 +100,14 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         return currentDate
     }
     
-    func calendar(_ calendar: FSCalendar!, didSelect date: Date!) {
+    func selectCalendarDate(date: NSNotification) {
         
-        selectedDate = date
-        eventsarray.append(date)
+        self.selectedDate = date.object as! Date!
+        self.eventsarray.append(self.selectedDate)
         
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "M/d/yy"
-        let newdate_V1 = dateformatter.string(from: date)
+        let newdate_V1 = dateformatter.string(from: self.selectedDate)
         
         // Load the calendar data.
         self.loadCalendarData(newdate_V1)
@@ -106,88 +115,52 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     func loadCalendarData(_ selectedData: String) {
         
-        let getdates:PFQuery = PFQuery(className: "StatusUpdate")
-        getdates.whereKey("dateofevent", equalTo: selectedData)
-        getdates.includeKey("user")
+        // Save the selected date string (for later use).
         let defaults = UserDefaults.standard
         defaults.set(selectedData, forKey: "dateofevent")
         
-        var postsdata:NSMutableArray = NSMutableArray()
-        
-        getdates.findObjectsInBackground { (objects:[PFObject]?, error: Error?) in
+        // Load in the events for the selected date.
+        PFCloud.callFunction(inBackground: "getStatusUpdatesForDate", withParameters: ["inputeventdate": "\(selectedData)", "user": "\(PFUser.current()!.objectId!)"]) {
+            (response: Any?, error) in
+            
+            // Reset the filtered data array.
+            self.filteredData.removeAllObjects()
+            
+            // Check for data input errors.
             
             if error == nil {
                 
-                // print(objects!.count)
-                for object in objects! {
-                    
-                    let statusupdate:PFObject = object
-                    postsdata.add(statusupdate)
-                    self.b = true
-                }
+                // Ensure we have at least one status update.
                 
-                let array:NSArray = postsdata.reverseObjectEnumerator().allObjects as NSArray
-                postsdata = NSMutableArray(array: array)
-                
-                // Reset the filtered data array.
-                self.filteredData.removeAllObjects()
-                
-                // Get the list of accounts the user is following.
-                ManageUser.getUserFollowingList(PFUser.current()!, withCurrentUser: true, completion: { (userFollowing) -> Void in
+                if (response != nil) {
                     
-                    // We need to filter the post data so that we only
-                    // see the status updates of people we are folowing.
+                    // Convert the downloaded data into an array.
+                    let updatesData:NSArray = (response as! NSArray)
                     
-                    for loop in 0..<postsdata.count {
-                        
-                        // Get the current user from the
-                        // downloaded status update data.
-                        let loopUser:PFUser = (postsdata[loop] as AnyObject).value(forKey: "user") as! PFUser
-                        
-                        // Loop through the following array and check if the user
-                        // from the postsdata array is being followed or not.
-                        
-                        for loopTwo in 0..<userFollowing.count {
-                            
-                            // Get the current user from the following array.
-                            let followingUser:PFUser = userFollowing[loopTwo] as! PFUser
-                            
-                            // If the user matches add the data
-                            // to the filtered data array.
-                            
-                            if (loopUser.objectId! == followingUser.objectId!) {
-                                self.filteredData.add(postsdata[loop])
-                            }
-                        }
+                    if (updatesData.count > 0) {
+                        self.filteredData = updatesData.mutableCopy() as! NSMutableArray
                     }
-                    
-                    DispatchQueue.main.async(execute: {
-                        
-                        // Now reload the table view.
-                        self.tableview.reloadData()
-                    })
-                })
+                }
             }
-            else {
-                print(error?.localizedDescription)
-            }
+            
+            // Now reload the table view.
+            self.tableview.reloadData()
         }
     }
     
-    func getImageData(_ objects:[PFObject], imageView:UIImageView)
-    {
-        for object in objects
-        {
-            if let image = object["profileImage"] as! PFFile?
-            {
+    func getImageData(_ objects:[PFObject], imageView:UIImageView) {
+        
+        for object in objects {
+            
+            if let image = object["profileImage"] as! PFFile? {
+                
                 image.getDataInBackground(block: { (imagedata, error) -> Void in
-                    if error == nil
-                    {
+                    
+                    if error == nil {
+                        
                         let image = UIImage(data: imagedata!)
                         imageView.image = image
-                    }
-                    else
-                    {
+                    } else {
                         imageView.image = UIImage(named: "default_profile_pic.png")
                     }
                 })
@@ -250,19 +223,6 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
                 }
             })
         }
-        
-        //        // Setup the see more button.
-        //        let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
-        //            
-        //            let defaults = NSUserDefaults.standardUserDefaults()
-        //            let updatetext = statusupdate.objectForKey("updatetext") as! String
-        //            let currentobjectID = statusupdate.objectId
-        //            
-        //            defaults.setObject(updatetext, forKey: "updatetext")
-        //            defaults.setObject(currentobjectID, forKey: "objectId")
-        //            
-        //            self.Seemore()
-        //        }
         
         // Setup the delete status button.
         let deletestatus = UITableViewRowAction(style: .normal, title: "Delete") { (actiom, indexPath) -> Void in
@@ -345,10 +305,6 @@ class TimelineViewController: UIViewController, FSCalendarDataSource, FSCalendar
         }
         
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
     }
     
     // Other methods.

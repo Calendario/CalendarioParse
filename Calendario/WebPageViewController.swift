@@ -45,11 +45,11 @@ class WebPageViewController : UIViewController, UIWebViewDelegate {
             
             if (urlComp.scheme == nil) {
                 
-                // Add the standard URL scheme.
-                urlComp.scheme = "http"
+                // Set the standard URL scheme.
                 
-                // Update the URL string.
-                passedURL = urlComp.string!
+                if (passedURL.contains("://") == false) {
+                    passedURL = "http://\(passedURL!)"
+                }
             }
 
             // Load the website in the web view.
@@ -119,18 +119,22 @@ class WebPageViewController : UIViewController, UIWebViewDelegate {
         present(alertController, animated: true, completion: nil)
     }
     
-    
     @IBAction func ActionPressed(_ sender: AnyObject) {
-        OpeninSafari(URL(string: "http://\(passedURL)")!)
+        
+        let activityViewController : UIActivityViewController = UIActivityViewController(
+            activityItems: [URL(string: "\(passedURL!)")!], applicationActivities: nil)
+        
+        // This lines is for the popover you need to show in iPad
+        activityViewController.popoverPresentationController?.barButtonItem = (sender as! UIBarButtonItem)
+        
+        // This line remove the arrow of the popover to show in iPad
+        activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.any
+        activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
+        
+        present(activityViewController, animated: true, completion: nil)
     }
-    
     
     // Other methods.
-    
-    func OpeninSafari(_ url:URL)
-    {
-        UIApplication.shared.openURL(url)
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

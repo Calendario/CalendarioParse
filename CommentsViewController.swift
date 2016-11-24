@@ -41,7 +41,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         // Get the keyboard height when the comment text field is pressed - needed
         // in order to move the comment container view to the correct postion.
-     
         NotificationCenter.default.addObserver(self, selector: #selector(CommentsViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
         tableView.delegate = self
