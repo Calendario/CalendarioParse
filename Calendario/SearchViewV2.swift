@@ -185,7 +185,7 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
             for subsubView in subView.subviews {
                 
                 if let textField = subsubView as? UITextField {
-                    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Search", comment: ""), attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
+                    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Search users & events", comment: ""), attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
                     textField.textColor = UIColor.gray
                 }
             }

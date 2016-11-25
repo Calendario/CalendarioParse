@@ -79,7 +79,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     func setNavBarProperties() {
         self.navigationBar.topItem?.title = "Timeline"
-        self.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "SFUIDisplay-Regular", size: 18)!, NSForegroundColorAttributeName: UIColor.white]
+        self.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "SFUIDisplay-Regular", size: 20)!, NSForegroundColorAttributeName: UIColor.white]
         
         let image = UIImage()
         self.navigationController?.navigationBar.shadowImage = image

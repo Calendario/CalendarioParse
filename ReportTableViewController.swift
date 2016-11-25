@@ -38,7 +38,7 @@ class ReportTableViewController: UITableViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.173, green: 0.584, blue: 0.376, alpha: 1)
         
         self.navigationItem.title = "Report Status"
-        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "SFUIDisplay-Regular", size: 18)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "SFUIDisplay-Regular", size: 20)!]
         
         self.navigationItem.setLeftBarButton(leftbutton, animated: true)
         self.navigationController?.navigationBar.tintColor = UIColor.white

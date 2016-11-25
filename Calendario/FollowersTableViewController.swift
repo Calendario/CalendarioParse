@@ -37,18 +37,18 @@ class FollowersTableViewController: UITableViewController {
         self.navigationItem.title  = "Followers"
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = false
-        let font = UIFont(name: "SFUIDisplay-Regular", size: 21)
+        let font = UIFont(name: "SFUIDisplay-Regular", size: 20)
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: font!]
         self.navigationController!.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
         
         // Load in the user follower list.
-        LoadData()
+        self.LoadData()
     }
     
     // load data from parse
     
-    func LoadData()
-    {
+    func LoadData() {
+        
         // Disallow table view access until
         // the data has been fully loaded.
         self.tableView.isUserInteractionEnabled = false

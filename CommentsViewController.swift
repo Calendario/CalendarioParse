@@ -100,7 +100,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = false
         self.sendbutton.layer.cornerRadius = 4.0
-        let font = UIFont(name: "SFUIDisplay-Regular", size: 18)
+        let font = UIFont(name: "SFUIDisplay-Regular", size: 20)
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: font!]
         self.navigationController!.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
         
