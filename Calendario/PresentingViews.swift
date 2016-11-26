@@ -10,6 +10,12 @@ import UIKit
 
 open class PresentingViews: NSObject {
     
+    class func openUserPrivateMessages(_ viewController: AnyObject) {
+        let storyboard = UIStoryboard(name: "PrivateMessageUI", bundle: nil)
+        let viewC = storyboard.instantiateViewController(withIdentifier: "MessageList") as! PrivateMessages
+        viewController.present(viewC, animated: true, completion: nil)
+    }
+    
     class func ShowUserEditController(_ viewController: AnyObject) {
         let storyboard = UIStoryboard(name: "EditProfileUI", bundle: nil)
         let viewC = storyboard.instantiateViewController(withIdentifier: "EditView") as! EditProfileViewController

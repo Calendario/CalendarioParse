@@ -14,6 +14,7 @@ import QuartzCore
 class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
     
     //MARK: UI OBJECTS.
+    @IBOutlet weak var headerImageView: UIImageView!
     @IBOutlet weak var profilePictureButton: UIButton!
     @IBOutlet weak var detailScrollView: UIScrollView!
     @IBOutlet weak var userFullNameField: UITextField!
@@ -227,7 +228,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                 self.signUpUserButton.setTitle("Sign up", for: UIControlState())
                 
                 // Set the existing button text.
-                self.alreadyAccountButton.setTitle("Already got an account? Login.", for: UIControlState())
+                self.alreadyAccountButton.setTitle("Already have an account? Login.", for: UIControlState())
                 
                 // Move the appropriate block views down.
                 (self.blockViews[1] as! UIView).frame = (self.blockViews[1] as! UIView).frame.offsetBy(dx: 0, dy: 62.0)
@@ -358,6 +359,23 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
         
         // Setup the detail scroll view.
         self.detailScrollView.isScrollEnabled = true
+        
+        // Calculate the custom size width.
+        let screenWidth = self.view.bounds.size.width
+        let blockWidth = (screenWidth - 40)
+        
+        // Perfrom the UI size corrections.
+        self.headerImageView.frame = CGRect(x: 0 , y: 0, width: screenWidth, height: self.headerImageView.frame.size.height)
+        self.blockViewOne.frame = CGRect(x: 20 , y: self.blockViewOne.frame.origin.y, width: blockWidth, height: self.blockViewOne.frame.size.height)
+        self.blockViewTwo.frame = CGRect(x: 20 , y: self.blockViewTwo.frame.origin.y, width: blockWidth, height: self.blockViewTwo.frame.size.height)
+        self.blockViewThree.frame = CGRect(x: 20 , y: self.blockViewThree.frame.origin.y, width: blockWidth, height: self.blockViewThree.frame.size.height)
+        self.blockViewFour.frame = CGRect(x: 20 , y: self.blockViewFour.frame.origin.y, width: blockWidth, height: self.blockViewFour.frame.size.height)
+        self.blockViewFive.frame = CGRect(x: 20 , y: self.blockViewFive.frame.origin.y, width: blockWidth, height: self.blockViewFive.frame.size.height)
+        self.signUpUserButton.frame = CGRect(x: 20 , y: self.signUpUserButton.frame.origin.y, width: blockWidth, height: self.signUpUserButton.frame.size.height)
+        self.resetPassButton.frame = CGRect(x: 20 , y: self.resetPassButton.frame.origin.y, width: blockWidth, height: self.resetPassButton.frame.size.height)
+        self.profilePictureButton.frame  = CGRect(x: ((screenWidth / 2) - (self.profilePictureButton.frame.size.width / 2)), y: self.profilePictureButton.frame.origin.y, width: self.profilePictureButton.frame.size.width, height: self.profilePictureButton.frame.size.height)
+        self.loadingView.frame = CGRect(x: ((screenWidth / 2) - (self.loadingView.frame.size.width / 2)), y: self.loadingView.frame.origin.y, width: self.loadingView.frame.size.width, height: self.loadingView.frame.size.height)
+        self.view.bringSubview(toFront: self.loadingView)
         
         // Get the screen size values.
         let result = UIScreen.main.bounds.size

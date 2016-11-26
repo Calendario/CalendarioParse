@@ -40,6 +40,8 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         setHashtagDefaultKey()
         self.view.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.contentInset = UIEdgeInsetsMake(((self.navigationController?.navigationBar.frame.height)! + 15), 0, 44, 0)
+        
+        PresentingViews.openUserPrivateMessages(self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
