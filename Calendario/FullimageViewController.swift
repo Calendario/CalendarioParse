@@ -149,7 +149,7 @@ class FullimageViewController: UIViewController, UIScrollViewDelegate {
         if (scrollView.tag == 1) {
             return self.Image
             
-        } else if (scrollView.tag == 1) {
+        } else if (scrollView.tag == 2) {
             return self.ImageViewTwo
             
         } else {
