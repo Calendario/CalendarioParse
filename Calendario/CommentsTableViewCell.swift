@@ -68,6 +68,10 @@ class CommentsTableViewCell: PFTableViewCell {
                                 self.userProfileImage.image = UIImage(named: "default_profile_pic.png")
                                 self.layoutIfNeeded()
                             }
+                            
+                            // Set the profile picture to a circle.
+                            self.userProfileImage.layer.cornerRadius = (self.userProfileImage.frame.size.width / 2)
+                            self.userProfileImage.clipsToBounds = true
                         }
                     })
                 } else {

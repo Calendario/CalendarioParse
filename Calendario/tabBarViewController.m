@@ -59,7 +59,7 @@
     UITabBarItem *thirdTab = [self.tabBar.items objectAtIndex:2];
     
     // Download the user notifications data.
-    [ManageUser getUserNotifications:[PFUser currentUser] completion:^(NSArray *userData, NSArray *notificationData, NSArray *extLinks) {
+    [ManageUser getUserNotifications:[PFUser currentUser] completion:^(NSArray *userData, NSArray *notificationData, NSArray *extLinks, NSArray *notificationDate) {
         
         // Update the UI on the main thread.
         [[NSOperationQueue mainQueue] addOperationWithBlock:^ {

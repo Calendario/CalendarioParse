@@ -23,7 +23,7 @@ and returning the appropriate difference string.
 // in relations to the status update dates.
 @objc class DateManager : NSObject {
     
-    @objc class func createDateDifferenceString(_ inputDate: Date, completion: @escaping (_ difference: String) -> Void) {
+    @objc class func createDateDifferenceString(_ inputDate: Date, _ shortString: Bool, completion: @escaping (_ difference: String) -> Void) {
         
         // Get the current date.
         let currentDate: Date = Date()
@@ -38,65 +38,139 @@ and returning the appropriate difference string.
         // Create the difference string.
         var result: String!
         
-        // Set the difference string depending on the
-        // year, month, day and seconds calculated.
+        // Check if we need to create short
+        // hand or long hand date string.
         
-        if (components.year! > 1) {
-            result = "\(components.year!) years ago"
-        }
+        if (shortString == true) {
             
-        else if (components.year! == 1) {
-            result = "1 year ago"
-        }
-        
-        else {
+            // Set the difference string depending on the
+            // year, month, day and seconds calculated.
             
-            if (components.month! > 1) {
-                result = "\(components.month!) months ago"
+            if (components.year! > 1) {
+                result = "\(components.year!)y"
             }
                 
-            else if (components.month! == 1) {
-                result = "1 month ago"
+            else if (components.year! == 1) {
+                result = "1y"
             }
-            
+                
             else {
                 
-                if (components.day! > 1) {
-                    result = "\(components.day!) days ago"
+                if (components.month! > 1) {
+                    result = "\(components.month!)m"
                 }
                     
-                else if (components.day! == 1) {
-                    result = "1 day ago"
+                else if (components.month! == 1) {
+                    result = "1m"
                 }
-                
+                    
                 else {
                     
-                    if (components.hour! > 1) {
-                        result = "\(components.hour!) hours ago"
+                    if (components.day! > 1) {
+                        result = "\(components.day!)d"
                     }
                         
-                    else if (components.hour! == 1) {
-                        result = "1 hour ago"
+                    else if (components.day! == 1) {
+                        result = "1d"
                     }
-                    
+                        
                     else {
                         
-                        if (components.minute! > 1) {
-                            result = "\(components.minute!) minutes ago"
+                        if (components.hour! > 1) {
+                            result = "\(components.hour!)h"
                         }
                             
-                        else if (components.minute! == 1) {
-                            result = "1 minute ago"
+                        else if (components.hour! == 1) {
+                            result = "1h"
                         }
-                        
+                            
                         else {
                             
-                            if (components.second! > 1) {
-                                result = "\(components.second!) seconds ago"
+                            if (components.minute! > 1) {
+                                result = "\(components.minute!)m"
+                            }
+                                
+                            else if (components.minute! == 1) {
+                                result = "1m"
                             }
                                 
                             else {
-                                result = "just posted"
+                                
+                                if (components.second! > 1) {
+                                    result = "\(components.second!)s"
+                                }
+                                    
+                                else {
+                                    result = "1s"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+        } else {
+            
+            // Set the difference string depending on the
+            // year, month, day and seconds calculated.
+            
+            if (components.year! > 1) {
+                result = "\(components.year!) years ago"
+            }
+                
+            else if (components.year! == 1) {
+                result = "1 year ago"
+            }
+                
+            else {
+                
+                if (components.month! > 1) {
+                    result = "\(components.month!) months ago"
+                }
+                    
+                else if (components.month! == 1) {
+                    result = "1 month ago"
+                }
+                    
+                else {
+                    
+                    if (components.day! > 1) {
+                        result = "\(components.day!) days ago"
+                    }
+                        
+                    else if (components.day! == 1) {
+                        result = "1 day ago"
+                    }
+                        
+                    else {
+                        
+                        if (components.hour! > 1) {
+                            result = "\(components.hour!) hours ago"
+                        }
+                            
+                        else if (components.hour! == 1) {
+                            result = "1 hour ago"
+                        }
+                            
+                        else {
+                            
+                            if (components.minute! > 1) {
+                                result = "\(components.minute!) minutes ago"
+                            }
+                                
+                            else if (components.minute! == 1) {
+                                result = "1 minute ago"
+                            }
+                                
+                            else {
+                                
+                                if (components.second! > 1) {
+                                    result = "\(components.second!) seconds ago"
+                                }
+                                    
+                                else {
+                                    result = "just posted"
+                                }
                             }
                         }
                     }

@@ -1,19 +1,18 @@
 //
-//  ThreadCell.swift
+//  ChatCell.swift
 //  Calendario
 //
-//  Created by Daniel Sadjadian on 18/11/2016.
+//  Created by Daniel Sadjadian on 26/11/2016.
 //  Copyright © 2016 Calendario. All rights reserved.
 //
 
 import UIKit
 
-class ThreadCell: UITableViewCell {
+class ChatCell: UITableViewCell {
 
     //MARK: UI OBJECTS.
-    @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var profileName: UILabel!
-    @IBOutlet weak var latestMessage: UITextView!
+    @IBOutlet weak var messageImage: UIImageView!
+    @IBOutlet weak var messageText: UITextView!
     
     //MARK: LIFECYCLE METHODS.
     

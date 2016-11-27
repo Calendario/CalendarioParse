@@ -724,7 +724,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             DispatchQueue.global(qos: .background).async {
                 
                 // Background Thread
-                DateManager.createDateDifferenceString((self.statusObjects[(indexPath as NSIndexPath).row] as! PFObject).createdAt!) { (difference) -> Void in
+                DateManager.createDateDifferenceString((self.statusObjects[(indexPath as NSIndexPath).row] as! PFObject).createdAt!, false) { (difference) -> Void in
                     
                     DispatchQueue.main.async(execute: {() -> Void in
                         

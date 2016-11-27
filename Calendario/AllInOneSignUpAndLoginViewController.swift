@@ -745,6 +745,7 @@ class AllInOneSignUpAndLoginViewController: UIViewController, UITextFieldDelegat
                         userNotificationData["fromUser"] = []
                         userNotificationData["notificationStrings"] = []
                         userNotificationData["extLink"] = []
+                        userNotificationData["notificationDate"] = []
                         userNotificationData["userLink"] = PFUser.current()
                         
                         // Save the notification data on Parse.

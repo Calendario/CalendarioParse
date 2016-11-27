@@ -292,7 +292,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.loadUserData()
         
         // Set the comment createdAt label.
-        DateManager.createDateDifferenceString(comment.createdAt!) { (difference) -> Void in
+        DateManager.createDateDifferenceString(comment.createdAt!, false) { (difference) -> Void in
             cell.createdAtLabel.text = difference
         }
         

@@ -81,6 +81,12 @@
                                                 <action selector="goBack:" destination="oAm-q7-8qe" id="PSd-eg-sus"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" image="add_icon" id="nBd-r1-Rgj">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="createNewThread:" destination="oAm-q7-8qe" id="sed-gj-QVm"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -97,6 +103,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add_icon" width="22" height="22"/>
         <image name="back_button" width="22" height="16"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

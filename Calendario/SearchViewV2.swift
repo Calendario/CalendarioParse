@@ -541,7 +541,7 @@ class SearchViewV2 : UIViewController, UISearchBarDelegate, UITableViewDelegate,
         DispatchQueue.global(qos: .background).async {
             
             // Background Thread
-            DateManager.createDateDifferenceString((self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject).createdAt!) { (difference) -> Void in
+            DateManager.createDateDifferenceString((self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject).createdAt!, false) { (difference) -> Void in
                 
                 DispatchQueue.main.async(execute: {() -> Void in
                     

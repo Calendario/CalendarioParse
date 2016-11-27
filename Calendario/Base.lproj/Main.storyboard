@@ -189,7 +189,7 @@
         <scene sceneID="iQ0-sf-t3T">
             <objects>
                 <navigationController storyboardIdentifier="AttendantsList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LPz-Tk-am1" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="f3v-My-3zK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="f3v-My-3zK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1960784314" green="0.46666666670000001" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -206,7 +206,7 @@
         <scene sceneID="whP-TF-omU">
             <objects>
                 <navigationController storyboardIdentifier="likesNav" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ynS-9B-vqC" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hTV-dm-4FL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hTV-dm-4FL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1960784314" green="0.46666666670000001" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1160,7 +1160,7 @@
             <objects>
                 <navigationController id="nhc-PG-guG" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="xmP-CN-rgc"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="MYx-kf-otb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="MYx-kf-otb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.19607843137254902" green="0.46666666666666667" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2649,11 +2649,11 @@
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="settingsCell" rowHeight="55" id="pLQ-Pz-6n9">
                                         <rect key="frame" x="0.0" y="22" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pLQ-Pz-6n9" id="N6u-US-uAV">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="pLQ-Pz-6n9" id="N6u-US-uAV">
                                             <frame key="frameInset" width="375" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zed-Ul-qvZ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zed-Ul-qvZ">
                                                     <frame key="frameInset" minX="339" minY="14" width="28" height="28"/>
                                                     <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3158,17 +3158,20 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     <navigationItem title="Activity" id="GuO-cv-Mqt"/>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xmb-za-SdS">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xmb-za-SdS">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="notificationCell" rowHeight="65" id="wcF-Lg-mmq">
                                         <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wcF-Lg-mmq" id="cYt-mJ-hlS">
-                                            <frame key="frameInset" width="375" height="64"/>
+                                            <frame key="frameInset" width="375" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VVV-IP-6Wc">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="227" id="hgj-cG-AYR"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
                                                     <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -3193,8 +3196,14 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                         <constraint firstAttribute="width" constant="30" id="qqu-3l-sJU"/>
                                                     </constraints>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1o-WU-k1m">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="VVV-IP-6Wc" firstAttribute="baseline" secondItem="P1o-WU-k1m" secondAttribute="firstBaseline" constant="-2" id="17h-rx-DUv"/>
                                                 <constraint firstItem="VmK-Dk-lCf" firstAttribute="centerY" secondItem="cYt-mJ-hlS" secondAttribute="centerY" id="48r-xT-uEL"/>
                                                 <constraint firstItem="VVV-IP-6Wc" firstAttribute="top" secondItem="VmK-Dk-lCf" secondAttribute="top" id="4lk-xm-ghr"/>
                                                 <constraint firstItem="VmK-Dk-lCf" firstAttribute="leading" secondItem="cYt-mJ-hlS" secondAttribute="leadingMargin" id="KZ9-IH-iGy"/>
@@ -3202,21 +3211,24 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <constraint firstItem="VVV-IP-6Wc" firstAttribute="trailing" secondItem="cYt-mJ-hlS" secondAttribute="trailingMargin" id="Vvr-R2-wHq"/>
                                                 <constraint firstItem="VmK-Dk-lCf" firstAttribute="top" secondItem="cYt-mJ-hlS" secondAttribute="top" constant="8" id="bx6-63-2EJ"/>
                                                 <constraint firstItem="VVV-IP-6Wc" firstAttribute="bottom" secondItem="VmK-Dk-lCf" secondAttribute="bottom" id="doP-6n-Dmh"/>
+                                                <constraint firstItem="P1o-WU-k1m" firstAttribute="leading" secondItem="VVV-IP-6Wc" secondAttribute="trailing" constant="8" id="gCm-S0-VgL"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="VVV-IP-6Wc" secondAttribute="trailing" constant="10" id="gGV-zt-8Mr"/>
                                                 <constraint firstAttribute="bottom" secondItem="VmK-Dk-lCf" secondAttribute="bottom" constant="8" id="iLf-4H-p08"/>
                                                 <constraint firstItem="Mv5-kL-2dt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VVV-IP-6Wc" secondAttribute="trailing" constant="8" id="j3Q-H0-JI5"/>
+                                                <constraint firstAttribute="trailing" secondItem="P1o-WU-k1m" secondAttribute="trailing" constant="8" id="jeB-us-WeV"/>
                                                 <constraint firstItem="VVV-IP-6Wc" firstAttribute="leading" secondItem="VmK-Dk-lCf" secondAttribute="trailing" constant="8" id="kwo-pa-6Ry"/>
                                                 <constraint firstAttribute="trailing" secondItem="Mv5-kL-2dt" secondAttribute="trailing" constant="8" id="lgf-hf-whb"/>
                                                 <constraint firstItem="VmK-Dk-lCf" firstAttribute="leading" secondItem="cYt-mJ-hlS" secondAttribute="leading" constant="8" id="oLy-UI-mAp"/>
+                                                <constraint firstItem="VVV-IP-6Wc" firstAttribute="baseline" secondItem="P1o-WU-k1m" secondAttribute="baseline" constant="-2" id="sAJ-mH-At5"/>
                                                 <constraint firstItem="Mv5-kL-2dt" firstAttribute="centerY" secondItem="cYt-mJ-hlS" secondAttribute="centerY" id="t2D-xs-1ZG"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="KZ9-IH-iGy"/>
                                                     <exclude reference="4lk-xm-ghr"/>
                                                     <exclude reference="Vvr-R2-wHq"/>
                                                     <exclude reference="doP-6n-Dmh"/>
                                                     <exclude reference="gGV-zt-8Mr"/>
-                                                    <exclude reference="KZ9-IH-iGy"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -3257,7 +3269,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qUa-zC-T8A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="435.5" y="1817.5"/>
+            <point key="canvasLocation" x="434.39999999999998" y="1816.6416791604199"/>
         </scene>
         <!--My Profile-->
         <scene sceneID="GUK-Po-8Bg">
@@ -4138,7 +4150,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="DWg-eY-NtL" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="1c4-27-iSx"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yaK-NM-cuk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yaK-NM-cuk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4653,7 +4665,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <scene sceneID="FpY-dX-yTF">
             <objects>
                 <navigationController storyboardIdentifier="HashtagNav" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Fts-hu-Jwm" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="r1C-MS-WCj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r1C-MS-WCj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1960784314" green="0.46666666670000001" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

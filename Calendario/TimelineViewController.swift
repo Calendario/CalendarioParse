@@ -294,7 +294,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         DispatchQueue.global(qos: .background).async {
             
             // Background Thread
-            DateManager.createDateDifferenceString((self.filteredData[(indexPath as NSIndexPath).row] as! PFObject).createdAt!) { (difference) -> Void in
+            DateManager.createDateDifferenceString((self.filteredData[(indexPath as NSIndexPath).row] as! PFObject).createdAt!, false) { (difference) -> Void in
                 
                 DispatchQueue.main.async(execute: {() -> Void in
                     

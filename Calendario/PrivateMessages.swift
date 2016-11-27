@@ -15,6 +15,7 @@ class PrivateMessages: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var threadList: UITableView!
     
     //MAKR: DATA OBJECTS.
+    var threadIDs:NSMutableArray = NSMutableArray()
     var messageData:NSMutableArray = NSMutableArray()
     var messageUsers:NSMutableArray = NSMutableArray()
     
@@ -22,6 +23,10 @@ class PrivateMessages: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     @IBAction func goBack(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func createNewThread(_ sender: AnyObject) {
+        
     }
     
     //MARK: VIEW DID LOAD.
@@ -55,6 +60,9 @@ class PrivateMessages: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             if (error == nil) {
                 
+                var groupIDs:NSMutableArray!
+                groupIDs = NSMutableArray()
+                
                 var groupMessages:NSMutableArray!
                 groupMessages = NSMutableArray()
                 
@@ -65,7 +73,8 @@ class PrivateMessages: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                     print(object)
                     
-                    self.messageData.add(threadObjects)
+                    groupIDs.add(object.objectId!)
+                    
                     groupMessages.add((object.value(forKey: "groupMessages") as! NSArray).lastObject!)
                     
                     for user in (object.value(forKey: "groupUsers") as! NSArray) {
@@ -79,10 +88,12 @@ class PrivateMessages: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
                 
                 // Reset the data/message arrays.
+                self.threadIDs.removeAllObjects()
                 self.messageData.removeAllObjects()
                 self.messageUsers.removeAllObjects()
                 
                 // Copy in the new data to the arrays.
+                self.threadIDs = groupIDs.mutableCopy() as! NSMutableArray
                 self.messageData = groupMessages.mutableCopy() as! NSMutableArray
                 self.messageUsers = groupUsers.mutableCopy() as! NSMutableArray
                 
@@ -96,6 +107,11 @@ class PrivateMessages: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        // Open the chat view and show the conversation.
+        let storyboard = UIStoryboard(name: "PrivateMessageChatViewUI", bundle: nil)
+        let viewC = storyboard.instantiateViewController(withIdentifier: "ChatUI") as! PrivateMessageChatView
+        viewC.passedChatID = "\(self.threadIDs[indexPath.row])"
+        self.present(viewC, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

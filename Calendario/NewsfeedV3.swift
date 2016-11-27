@@ -40,8 +40,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         setHashtagDefaultKey()
         self.view.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.contentInset = UIEdgeInsetsMake(((self.navigationController?.navigationBar.frame.height)! + 15), 0, 44, 0)
-        
-        PresentingViews.openUserPrivateMessages(self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -215,7 +213,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         DispatchQueue.global(qos: .background).async {
             
             // Background Thread
-            DateManager.createDateDifferenceString((self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject).createdAt!) { (difference) -> Void in
+            DateManager.createDateDifferenceString((self.sortedArray[(indexPath as NSIndexPath).row] as! PFObject).createdAt!, false) { (difference) -> Void in
                 
                 DispatchQueue.main.async(execute: {() -> Void in
                     
