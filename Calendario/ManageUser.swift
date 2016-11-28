@@ -470,12 +470,10 @@ var finalData:NSMutableArray = []
                     
                     // Add the external object ID - if the
                     // ID is set to "n/a" - it wont be used by
-                    // the notifications view conroller.
-                    object?.add([extType, extObjectID], forKey: "extLink")
-                    
-                    // Add the date of the notification.
-                    object?.add(NSDate(), forKey: "notificationDate")
-                    
+                    // the notifications view conroller. Also
+                    // add the date of the user notification.
+                    object?.add([extType, extObjectID, NSDate()], forKey: "extLink")
+
                     // Save the notification data.
                     object?.saveInBackground()
                 }
@@ -483,7 +481,7 @@ var finalData:NSMutableArray = []
         }
     }
     
-    class func getUserNotifications(_ userData:PFUser, completion: @escaping (_ notificationFromUser: NSArray, _ notificationStrings: NSArray, _ extLinks: NSArray, _ notificationDate: NSArray) -> Void) {
+    class func getUserNotifications(_ userData:PFUser, completion: @escaping (_ notificationFromUser: NSArray, _ notificationStrings: NSArray, _ extLinks: NSArray) -> Void) {
         
         // Get the notifications for a particular user.
         var notificationQuery:PFQuery<PFObject>!
@@ -498,7 +496,7 @@ var finalData:NSMutableArray = []
                 
                 // Pass the data back if correctly loaded.
                 DispatchQueue.main.async(execute: {
-                    completion((object?.value(forKey: "fromUser"))! as! NSArray, (object?.value(forKey: "notificationStrings"))! as! NSArray, (object?.value(forKey: "extLink"))! as! NSArray, (object?.value(forKey: "notificationDate"))! as! NSArray)
+                    completion((object?.value(forKey: "fromUser"))! as! NSArray, (object?.value(forKey: "notificationStrings"))! as! NSArray, (object?.value(forKey: "extLink"))! as! NSArray)
                 })
             }
         }

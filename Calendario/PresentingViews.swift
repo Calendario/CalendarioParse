@@ -143,12 +143,4 @@ open class PresentingViews: NSObject {
         let reportbug = sb.instantiateViewController(withIdentifier: "reportbug") as! reportBug
         viewController.present(reportbug, animated: true, completion: nil)
     }
-    
-    //    class func Seemore(viewController: AnyObject) {
-    //        // Open the see more view.
-    //        let sb = UIStoryboard(name: "Main", bundle: nil)
-    //        let SMVC = sb.instantiateViewControllerWithIdentifier("seemore") as! SeeMoreViewController
-    //        let NC = UINavigationController(rootViewController: SMVC)
-    //        viewController.presentViewController(NC, animated: true, completion: nil)
-    //    }
 }

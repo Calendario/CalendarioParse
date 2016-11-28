@@ -19,7 +19,6 @@ typedef void(^userProfileDataCompletion)(PFObject *object, NSError *error);
     NSMutableArray *notificationUsers;
     NSMutableArray *notifications;
     NSMutableArray *notificationsExtLinks;
-    NSMutableArray *notificationDates;
 }
 
 @end
@@ -45,7 +44,7 @@ typedef void(^userProfileDataCompletion)(PFObject *object, NSError *error);
 -(void)getNotifications {
     
     // Download the user notifications.
-    [ManageUser getUserNotifications:[PFUser currentUser] completion:^(NSArray *userData, NSArray *notificationData, NSArray *extLinks, NSArray *notificationDate) {
+    [ManageUser getUserNotifications:[PFUser currentUser] completion:^(NSArray *userData, NSArray *notificationData, NSArray *extLinks) {
         
         // Only load the data if one or
         // more notifications are present.
@@ -57,8 +56,7 @@ typedef void(^userProfileDataCompletion)(PFObject *object, NSError *error);
             notificationUsers = [[NSMutableArray alloc] initWithArray:[[userData reverseObjectEnumerator] allObjects]];
             notifications = [[NSMutableArray alloc] initWithArray:[[notificationData reverseObjectEnumerator] allObjects]];
             notificationsExtLinks = [[NSMutableArray alloc] initWithArray:[[extLinks reverseObjectEnumerator] allObjects]];
-            notificationDates = [[NSMutableArray alloc] initWithArray:[[notificationDate reverseObjectEnumerator] allObjects]];
-            
+
             // Update the table view.
             [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
                 [self.tableView reloadData];
@@ -298,10 +296,10 @@ typedef void(^userProfileDataCompletion)(PFObject *object, NSError *error);
     
     // Check if the notification NSDate exists.
     
-    if (indexPath.row < [notificationDates count]) {
+    if ([notificationsExtLinks[indexPath.row] count] > 2) {
         
         // Create the short hand date string.
-        [DateManager createDateDifferenceString:notificationDates[indexPath.row] :YES completion:^(NSString *dateString) {
+        [DateManager createDateDifferenceString:[notificationsExtLinks[indexPath.row] objectAtIndex:2] :YES completion:^(NSString *dateString) {
             dateLabel.text = dateString;
         }];
     } else {

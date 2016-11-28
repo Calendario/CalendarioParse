@@ -18,7 +18,7 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     var followingData:NSMutableArray = []
     var sortedArray:NSMutableArray = []
     
-    //Create Defaults
+    // Create Defaults
     var defaults: UserDefaults!
     
     // Setup the on screen UI objects.
@@ -270,20 +270,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
             })
         }
         
-        //        // Setup the see more button.
-        //        let seemore = UITableViewRowAction(style: .Normal, title: "See More") { (action, index) -> Void in
-        //
-        //            let defaults = NSUserDefaults.standardUserDefaults()
-        //            let updatetext = statusupdate.objectForKey("updatetext") as! String
-        //            let currentobjectID = statusupdate.objectId
-        //
-        //            defaults.setObject(updatetext, forKey: "updatetext")
-        //            defaults.setObject(currentobjectID, forKey: "objectId")
-        //
-        //            self.Seemore()
-        //        }
-        // WILL BE ADDED IN FUTURE APP UPDATES //
-        
         // Setup the delete status button.
         let deletestatus = UITableViewRowAction(style: .normal, title: "Delete") { (actiom, indexPath) -> Void in
             
@@ -302,7 +288,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         }
         
         // Set the button backgrond colours.
-        //   seemore.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         report.backgroundColor = UIColor(red: 236/255.0, green: 236/255.0, blue: 236/255.0, alpha: 1.0)
         deletestatus.backgroundColor = UIColor(red: 255/255.0, green: 80/255.0, blue: 79/255.0, alpha: 1.0)
         
@@ -310,10 +295,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         // belongs to the currently logged in user.
         
         if ((statusupdate.object(forKey: "user") as! PFUser!).objectId! == PFUser.current()?.objectId!) {
-            
-            // For V1.0 we will not be adding access to
-            // the "See More" section as it is not needed.
-            // return [report, seemore, deletestatus]
             return [report, deletestatus]
         }
         else {
@@ -321,8 +302,6 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         }
     }
 }
-
-
 
 
 //MARK: DEREKS TENSE SORTING METHOD
@@ -383,6 +362,3 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
 //        })
 //    }
 //}
-
-
-

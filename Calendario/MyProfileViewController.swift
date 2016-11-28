@@ -823,7 +823,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         }
         
         // Set the button backgrond colours.
-        //   seemore.backgroundColor = UIColor(red: 33/255.0, green: 135/255.0, blue: 75/255.0, alpha: 1.0)
         report.backgroundColor = UIColor(red: 236/255.0, green: 236/255.0, blue: 236/255.0, alpha: 1.0)
         deletestatus.backgroundColor = UIColor(red: 255/255.0, green: 80/255.0, blue: 79/255.0, alpha: 1.0)
         
@@ -832,10 +831,6 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         // want other users to be able to delete your posts.
         
         if ((self.passedUser == nil) || ((self.passedUser != nil) && (self.passedUser.username! == "\(PFUser.current()!.username!)"))) {
-            
-            // For V1.0 we will not be adding access to
-            // the "See More" section as it is not needed.
-            // return [report, seemore, deletestatus]
             return [report, deletestatus]
         }
             

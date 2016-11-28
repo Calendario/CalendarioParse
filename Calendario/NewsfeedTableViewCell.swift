@@ -538,8 +538,8 @@ class NewsfeedTableViewCell: PFTableViewCell {
         // Get the status update object.
         query.getObjectInBackground(withId: objectID) { (object, error) -> Void in
             
-            // Only post the notification if no
-            // errors have been returned.
+            // Only post the notification if
+            // no errors have been returned.
             
             if (error == nil) {
                 

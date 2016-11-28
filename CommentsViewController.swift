@@ -240,10 +240,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                             }
                         })
                     }
-                        
-                    else {
-                        print(error?.localizedDescription)
-                    }
                 })
             })
         }
