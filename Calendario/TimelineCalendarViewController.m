@@ -43,9 +43,32 @@
     [self.calendarManager setMenuView:self.calendarMenuView];
     [self.calendarManager setContentView:self.calendarContentView];
     [self.calendarManager setDate:[NSDate date]];
+}
+
+//MARK: VIEW DID APPEAR.
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
     
-    // Load the current months dot data.
-    [self loadDotDataWithDate:[NSDate date]];
+    // Check if we need to load the current
+    // calendar date or the selected date.
+    
+    if (selectedDate == nil) {
+        
+        // Load the current months dot data.
+        [self loadDotDataWithDate:[NSDate date]];
+        
+        // Load the events for the current date.
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CalenderDateSelected" object:[NSDate date]];
+        
+    } else {
+        
+        // Load the last selected date.
+        [self loadDotDataWithDate:selectedDate];
+        
+        // Load the events for the selected date.
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CalenderDateSelected" object:selectedDate];
+    }
 }
 
 //MARK: DATA METHODS.
@@ -70,22 +93,32 @@
         dotCache[dateString] = @"NO";
     }
     
-    // Set the dot depending on the number of events for the date.
-    [PFCloud callFunctionInBackground:@"getMonthDotData" withParameters:@{@"inputEventMonth": monthString, @"inputEventYear": yearString, @"user": [[PFUser currentUser] objectId]} block:^(NSArray *objects, NSError *error) {
+    // Ensure the user is logged in
+    // before loading the dot data.
+    
+    if ([PFUser currentUser] != nil) {
         
-        if (error == nil) {
+        // Set the dot depending on the number of events for the date.
+        [PFCloud callFunctionInBackground:@"getMonthDotData" withParameters:@{@"inputEventMonth": monthString, @"inputEventYear": yearString, @"user": [[PFUser currentUser] objectId]} block:^(NSArray *objects, NSError *error) {
             
-            // Loop through any returned status updates and
-            // set the cooresponding date dot checks to 'YES'.
-            
-            for (NSUInteger loop = 0; loop < [objects count]; loop++) {
-                dotCache[[(PFObject *)objects[loop] valueForKey:@"dateofevent"]] = @"YES";
+            if (error == nil) {
+                
+                // Loop through any returned status updates and
+                // set the cooresponding date dot checks to 'YES'.
+                
+                for (NSUInteger loop = 0; loop < [objects count]; loop++) {
+                    dotCache[[(PFObject *)objects[loop] valueForKey:@"dateofevent"]] = @"YES";
+                }
             }
-        }
+            
+            // Update the calendar view.
+            [self.calendarManager reload];
+        }];
+    } else {
         
-        // Update the calendar view.
+        // Clear the calendar as the usrr has signed out.
         [self.calendarManager reload];
-    }];
+    }
 }
 
 //NARK: OTHER METHODS.
@@ -228,6 +261,17 @@
     view.textLabel.textColor = [UIColor whiteColor];
     
     return view;
+}
+
+//MARK: COMPLETE RESET METHODS.
+
+-(void)resetEntireView {
+    
+    // This method is called when the user taps
+    // the 'Sign Out' button in the settings view.
+    [dotCache removeAllObjects];
+    selectedDate = nil;
+    [self loadDotDataWithDate:[NSDate date]];
 }
 
 @end

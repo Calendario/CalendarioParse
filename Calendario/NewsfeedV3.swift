@@ -35,23 +35,28 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        showRecommendedUsers(checkForNewUser())
-        setActivityIndicatorForRefreshing()
-        setHashtagDefaultKey()
+        // Set the view reset notification.
+        NotificationCenter.default.addObserver(self, selector: #selector(self.resetEntireView), name: NSNotification.Name(rawValue: "RESET_TAB_1"), object: nil)
+        
+        self.showRecommendedUsers(checkForNewUser())
+        self.setActivityIndicatorForRefreshing()
+        self.setHashtagDefaultKey()
         self.view.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.contentInset = UIEdgeInsetsMake(((self.navigationController?.navigationBar.frame.height)! + 15), 0, 44, 0)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupUI()
+        
+        self.setupUI()
         self.reloadNewsFeed()
     }
     
     func setupUI() {
-        setStatusBarProperties()
-        setTableViewProperties()
-        setNavigationBarProperties()
+        
+        self.setStatusBarProperties()
+        self.setTableViewProperties()
+        self.setNavigationBarProperties()
     }
     
     func setStatusBarProperties() {
@@ -300,6 +305,18 @@ class NewsfeedV3: UITableViewController, UIGestureRecognizerDelegate {
         else {
             return [report]
         }
+    }
+    
+    //MARK: COMPLETE RESET METHODS.
+    
+    func resetEntireView() {
+        
+        // This method is called when the user taps
+        // the 'Sign Out' button in the settings view.
+        self.statusData.removeAllObjects()
+        self.followingData.removeAllObjects()
+        self.sortedArray.removeAllObjects()
+        self.tableView.reloadData()
     }
 }
 

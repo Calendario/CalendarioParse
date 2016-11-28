@@ -55,6 +55,19 @@ class ProfileSubController: UIViewController {
         self.profPosts.attributedText = myString
     }
     
+    func resetUIObjects() {
+        self.profPicture.image = nil
+        self.profVerified.image = nil
+        self.profName.text = ""
+        self.profUserName.text = ""
+        self.profWeb.setTitle("", for: .normal)
+        self.setPostsLabel(number: "0")
+        self.profFollowers.text = ""
+        self.profFollowing.text = ""
+        self.profDesc.text = ""
+        self.backgroundImage.image = nil
+    }
+    
     //MARK: OTHER METHODS.
     
     override func didReceiveMemoryWarning() {

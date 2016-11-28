@@ -24,6 +24,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     var eventsarray = [Date]()
     var selectedDate:Date!
     var headerSetCheck = false
+    var calendarSubview:TimelineCalendarViewController!
         
     //MARK: VIEW DID LOAD.
     
@@ -32,6 +33,9 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         
         // Set the calendar date selected notification.
         NotificationCenter.default.addObserver(self, selector: #selector(self.selectCalendarDate(date:)), name: NSNotification.Name(rawValue: "CalenderDateSelected"), object: nil)
+        
+        // Set the view reset notification.
+        NotificationCenter.default.addObserver(self, selector: #selector(self.resetEntireView), name: NSNotification.Name(rawValue: "RESET_TAB_2"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,16 +50,13 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
             
             // Insert the user profile subview as the table header view.
             let story_file = UIStoryboard(name: "TimelineCalendarUI", bundle: nil)
-            let calendarSubview = story_file.instantiateViewController(withIdentifier: "CalendarUI") as! TimelineCalendarViewController
-            self.addChildViewController(calendarSubview)
-            calendarSubview.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 370)
-            self.tableview.tableHeaderView = calendarSubview.view
+            self.calendarSubview = story_file.instantiateViewController(withIdentifier: "CalendarUI") as! TimelineCalendarViewController
+            self.addChildViewController(self.calendarSubview)
+            self.calendarSubview.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 370)
+            self.tableview.tableHeaderView = self.calendarSubview.view
             
             // The header view has been set.
             self.headerSetCheck = true
-            
-            // Load the initial events for the first selected date.
-            self.loadCalendarData(getCurrentDate())
         }
     }
     
@@ -299,8 +300,14 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
-    // Other methods.
+    //MARK: COMPLETE RESET METHODS.
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    func resetEntireView() {
+        
+        // This method is called when the user taps
+        // the 'Sign Out' button in the settings view.
+        self.filteredData.removeAllObjects()
+        self.tableview.reloadData()
+        self.calendarSubview.resetEntireView()
     }
 }

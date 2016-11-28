@@ -13,6 +13,9 @@
     
 }
 
+// Reset calendar method.
+-(void)resetEntireView;
+
 // JTCalendar view properties.
 @property (weak, nonatomic) IBOutlet JTCalendarMenuView *calendarMenuView;
 @property (weak, nonatomic) IBOutlet JTHorizontalCalendarView *calendarContentView;

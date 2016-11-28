@@ -120,6 +120,10 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set the view reset notification.
+        NotificationCenter.default.addObserver(self, selector: #selector(self.resetEntireView), name: NSNotification.Name(rawValue: "RESET_TAB_4"), object: nil)
+        
+        // Setup the variosu UI objects.
         self.setupUI()
     }
     
@@ -915,5 +919,17 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             self.profileSubview.profFollowers.text = "\((countObject.value(forKey: "userFollowers") as! NSArray).count) people"
             self.profileSubview.profFollowing.text = "\((countObject.value(forKey: "userFollowing") as! NSArray).count) people"
         }
+    }
+    
+    //MARK: COMPLETE RESET METHODS.
+    
+    func resetEntireView() {
+        
+        // This method is called when the user taps
+        // the 'Sign Out' button in the settings view.
+        self.statusLoadCheck = false
+        self.statusObjects.removeAllObjects()
+        self.statusList.reloadData()
+        self.profileSubview.resetUIObjects()
     }
 }

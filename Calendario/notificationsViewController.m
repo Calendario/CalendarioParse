@@ -35,9 +35,14 @@ typedef void(^userProfileDataCompletion)(PFObject *object, NSError *error);
 -(void)viewDidLoad {
     [super viewDidLoad];
     
+    // Set the view reset notification.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetEntireView) name:@"RESET_TAB_3" object:nil];
+    
+    // Setup the table view delegates.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-        
+    
+    // Hide the notification badge number.
     [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:nil];
 }
 
@@ -318,6 +323,18 @@ typedef void(^userProfileDataCompletion)(PFObject *object, NSError *error);
 -(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the item to be re-orderable.
     return NO;
+}
+
+//MARK: COMPLETE RESET METHODS.
+
+-(void)resetEntireView {
+    
+    // This method is called when the user taps
+    // the 'Sign Out' button in the settings view.
+    [notificationUsers removeAllObjects];
+    [notifications removeAllObjects];
+    [notificationsExtLinks removeAllObjects];
+    [self.tableView reloadData];
 }
 
 @end

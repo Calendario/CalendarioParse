@@ -16,6 +16,7 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
     
     // Setup the various UI objects.
     @IBOutlet weak var tableview: UITableView!
+    var followRequestLabel: UILabel!
     
     // Setup the on screen button actions.
     
@@ -41,7 +42,20 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
                 let storyboard = UIStoryboard(name: "LoginSignUpUI", bundle: nil)
                 let loginView = storyboard.instantiateViewController(withIdentifier: "SignUpLoginUI") as! AllInOneSignUpAndLoginViewController
                 loginView.transitionType = true
-                self.present(loginView, animated: true, completion:nil)
+                self.present(loginView, animated: true, completion: {
+                    
+                    // Reset the follow request label.
+                    
+                    if (self.followRequestLabel != nil) {
+                        self.followRequestLabel.text = "0"
+                    }
+                    
+                    // Reset the 4 main tab views.
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RESET_TAB_1"), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RESET_TAB_2"), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RESET_TAB_3"), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RESET_TAB_4"), object: nil)
+                })
             }
                 
             else {
@@ -126,6 +140,8 @@ class SettingsViewController : UIViewController, UITableViewDelegate, UITableVie
                     else {
                         label.text = "0"
                     }
+                    
+                    self.followRequestLabel = label
                 })
             }
         }
