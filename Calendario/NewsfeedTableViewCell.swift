@@ -133,6 +133,10 @@ class NewsfeedTableViewCell: PFTableViewCell {
             // looking at a profile which is private.
             self.privateView.alpha = 1.0
             
+            // Correct the dimensions of the private view.
+            self.privateView.frame = CGRect(x: 0, y: 0, width: self.contentView.bounds.size.width, height: self.contentView.bounds.size.height)
+            self.privateViewText.frame = self.privateViewText.frame.offsetBy(dx: CGFloat(0), dy: CGFloat(40))
+            
             // Set the private view lavel font.
             let font = UIFont(name: "SFUIDisplay-Regular", size: 18)
             self.privateViewText.font = font

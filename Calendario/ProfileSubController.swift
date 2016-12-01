@@ -35,6 +35,36 @@ class ProfileSubController: UIViewController {
         // Turn the profile picture into a circle.
         self.profPicture.layer.cornerRadius = (self.profPicture.frame.size.width / 2)
         self.profPicture.clipsToBounds = true
+        
+        // Get the screen size values.
+        let result = UIScreen.main.bounds.size
+        
+        // Set the various UI object dimensions
+        // depending on the device screen size.
+        
+        if (result.height == 480) {
+            
+            // 3.5 inch display - iPhone 4S & below.
+            self.profVerified.frame = CGRect(x: 176, y: 92, width: 25, height: 25)
+        }
+            
+        else if (result.height == 568) {
+            
+            // 4 inch display - iPhone 5/5s.
+            self.profVerified.frame = CGRect(x: 176, y: 92, width: 25, height: 25)
+        }
+            
+        else if (result.height == 667) {
+            
+            // 4.7 inch display - iPhone 6.
+            self.profVerified.frame = CGRect(x: 203, y: 92, width: 25, height: 25)
+        }
+            
+        else if (result.height >= 736) {
+            
+            // 5.5 inch display - iPhone 6 Plus.
+            self.profVerified.frame = CGRect(x: 223, y: 92, width: 25, height: 25)
+        }
     }
     
     //MARK: UI METHODS.
