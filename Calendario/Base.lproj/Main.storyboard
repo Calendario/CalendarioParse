@@ -194,7 +194,7 @@
         <scene sceneID="iQ0-sf-t3T">
             <objects>
                 <navigationController storyboardIdentifier="AttendantsList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LPz-Tk-am1" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="f3v-My-3zK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="f3v-My-3zK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1960784314" green="0.46666666670000001" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -211,7 +211,7 @@
         <scene sceneID="whP-TF-omU">
             <objects>
                 <navigationController storyboardIdentifier="likesNav" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ynS-9B-vqC" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hTV-dm-4FL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hTV-dm-4FL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1960784314" green="0.46666666670000001" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -269,13 +269,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KsB-Yc-2RP" userLabel="Username">
-                                                    <rect key="frame" x="56" y="29" width="64" height="18"/>
+                                                    <rect key="frame" x="56" y="29" width="63.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="15"/>
                                                     <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7rJ-wq-Ucb" userLabel="Username">
-                                                    <rect key="frame" x="56" y="4" width="65" height="18"/>
+                                                    <rect key="frame" x="56" y="4" width="64.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="15"/>
                                                     <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -501,9 +501,9 @@
                                 <exclude reference="VYM-ri-QbX"/>
                                 <exclude reference="kzY-UZ-SBn"/>
                                 <exclude reference="2bO-oP-kBd"/>
-                                <exclude reference="BAM-Hz-ba6"/>
                                 <exclude reference="f6O-Ge-cEG"/>
                                 <exclude reference="iOA-V1-9ZX"/>
+                                <exclude reference="BAM-Hz-ba6"/>
                             </mask>
                         </variation>
                         <connections>
@@ -738,12 +738,12 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="WMP-56-AJC"/>
                                                     <exclude reference="nIG-oo-Yl9"/>
                                                     <exclude reference="wtk-Nv-vQQ"/>
                                                     <exclude reference="zMf-Cs-PeE"/>
                                                     <exclude reference="EDi-w1-igj"/>
                                                     <exclude reference="f2L-bY-sj6"/>
+                                                    <exclude reference="WMP-56-AJC"/>
                                                 </mask>
                                             </variation>
                                         </view>
@@ -1209,7 +1209,7 @@
             <objects>
                 <navigationController id="nhc-PG-guG" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="xmP-CN-rgc"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="MYx-kf-otb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="MYx-kf-otb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.19607843137254902" green="0.46666666666666667" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1244,13 +1244,13 @@
                                                 <rect key="frame" x="0.0" y="68" width="414" height="60"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gcm-dB-nn2">
-                                                        <rect key="frame" x="8" y="20" width="37" height="20"/>
+                                                        <rect key="frame" x="8" y="20.5" width="36.5" height="19"/>
                                                         <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
                                                         <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap to select date..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hn-TC-05F">
-                                                        <rect key="frame" x="53" y="20" width="132" height="20"/>
+                                                        <rect key="frame" x="52.5" y="20.5" width="131.5" height="19"/>
                                                         <gestureRecognizers/>
                                                         <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
                                                         <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1270,13 +1270,13 @@
                                                 <rect key="frame" x="0.0" y="190" width="414" height="51"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNr-yN-czA">
-                                                        <rect key="frame" x="8" y="17" width="64" height="20"/>
+                                                        <rect key="frame" x="8" y="17.5" width="63.5" height="19"/>
                                                         <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
                                                         <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap to select location..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mwk-yB-n2C">
-                                                        <rect key="frame" x="80" y="17" width="156" height="20"/>
+                                                        <rect key="frame" x="79.5" y="17.5" width="155.5" height="19"/>
                                                         <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
                                                         <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1425,12 +1425,12 @@
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="constraints">
+                                                        <exclude reference="hZy-9m-PyT"/>
+                                                        <exclude reference="kmQ-FP-V14"/>
                                                         <exclude reference="4v1-2v-rvj"/>
                                                         <exclude reference="9qV-et-iph"/>
                                                         <exclude reference="rQz-QT-oGa"/>
                                                         <exclude reference="wBz-F4-O32"/>
-                                                        <exclude reference="hZy-9m-PyT"/>
-                                                        <exclude reference="kmQ-FP-V14"/>
                                                     </mask>
                                                 </variation>
                                             </view>
@@ -1485,7 +1485,7 @@
                                                 <rect key="frame" x="0.0" y="249" width="414" height="45"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RSVP Private:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yXO-Yt-TPs">
-                                                        <rect key="frame" x="8" y="12" width="94" height="20"/>
+                                                        <rect key="frame" x="8" y="12.5" width="94" height="19"/>
                                                         <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
                                                         <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1539,11 +1539,11 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="kXA-y0-LPU"/>
                                                 <exclude reference="cpc-zR-62S"/>
                                                 <exclude reference="hqA-3Q-sEE"/>
                                                 <exclude reference="o8F-He-UJu"/>
                                                 <exclude reference="5uM-3H-KZ8"/>
-                                                <exclude reference="kXA-y0-LPU"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -1966,7 +1966,9 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="A4x-Ax-bJZ"/>
                                                                 <constraint firstAttribute="height" constant="55" id="P1K-r9-pAI"/>
+                                                                <constraint firstAttribute="width" constant="54" id="U0U-O4-wNB"/>
                                                                 <constraint firstAttribute="width" secondItem="8Zz-JA-mcK" secondAttribute="height" multiplier="1:1" id="XWx-oP-iZ1"/>
+                                                                <constraint firstAttribute="height" constant="54" id="ch3-LK-cyJ"/>
                                                                 <constraint firstAttribute="width" constant="55" id="fGA-zf-mK7"/>
                                                                 <constraint firstAttribute="width" secondItem="8Zz-JA-mcK" secondAttribute="height" multiplier="1:1" id="p86-ZI-A2j"/>
                                                                 <constraint firstAttribute="width" secondItem="8Zz-JA-mcK" secondAttribute="height" multiplier="1:1" id="vIe-9g-8Ld"/>
@@ -1983,6 +1985,10 @@
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flS-vW-TSe">
                                                             <rect key="frame" x="8" y="14" width="54" height="54"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="54" id="9qe-TP-6QY"/>
+                                                                <constraint firstAttribute="width" constant="54" id="YUK-bn-4MQ"/>
+                                                            </constraints>
                                                             <connections>
                                                                 <action selector="openProfileTapped:" destination="flz-PV-PVy" eventType="touchUpInside" id="hDw-XM-mhT"/>
                                                             </connections>
@@ -2168,12 +2174,12 @@
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
+                                                            <exclude reference="jnh-0K-diK"/>
                                                             <exclude reference="3xh-LP-dFX"/>
                                                             <exclude reference="FXK-ju-SXf"/>
                                                             <exclude reference="Iyf-6h-whX"/>
                                                             <exclude reference="zia-ei-6F7"/>
                                                             <exclude reference="qrG-PR-jsB"/>
-                                                            <exclude reference="jnh-0K-diK"/>
                                                         </mask>
                                                     </variation>
                                                 </view>
@@ -2421,15 +2427,14 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="WAG-hR-pPR"/>
                                                     <exclude reference="8JR-m9-cf9"/>
                                                     <exclude reference="igF-QH-2At"/>
+                                                    <exclude reference="WAG-hR-pPR"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
                                         <constraints>
                                             <constraint firstItem="8Zz-JA-mcK" firstAttribute="height" secondItem="flz-PV-PVy" secondAttribute="height" id="osV-sa-qcw"/>
-                                            <constraint firstItem="8Zz-JA-mcK" firstAttribute="width" secondItem="flz-PV-PVy" secondAttribute="width" multiplier="0.143" id="quj-aN-knb"/>
                                         </constraints>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <variation key="default">
@@ -2638,13 +2643,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2J6-C2-yr7">
-                                                    <rect key="frame" x="66" y="5" width="43" height="22"/>
+                                                    <rect key="frame" x="66" y="5.5" width="44.5" height="21"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="18"/>
                                                     <color key="textColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sIl-b7-heR">
-                                                    <rect key="frame" x="66" y="37" width="38" height="20"/>
+                                                    <rect key="frame" x="66" y="37.5" width="39.5" height="19"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
                                                     <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -2767,11 +2772,11 @@
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="settingsCell" rowHeight="55" id="pLQ-Pz-6n9">
                                         <rect key="frame" x="0.0" y="22" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="pLQ-Pz-6n9" id="N6u-US-uAV">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pLQ-Pz-6n9" id="N6u-US-uAV">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zed-Ul-qvZ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zed-Ul-qvZ">
                                                     <rect key="frame" x="339" y="14" width="28" height="28"/>
                                                     <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3317,7 +3322,9 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                 <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VmK-Dk-lCf">
                                                     <rect key="frame" x="8" y="8" width="49" height="49"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="height" constant="49" id="2wr-eg-ad6"/>
                                                         <constraint firstAttribute="width" secondItem="VmK-Dk-lCf" secondAttribute="height" multiplier="1:1" id="Kjs-wB-YR7"/>
+                                                        <constraint firstAttribute="width" constant="49" id="QiK-9T-Upz"/>
                                                         <constraint firstAttribute="height" constant="54" id="Yby-Ww-g0p"/>
                                                         <constraint firstAttribute="width" constant="54" id="hDr-rb-jEQ"/>
                                                     </constraints>
@@ -3365,11 +3372,11 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="KZ9-IH-iGy"/>
                                                     <exclude reference="4lk-xm-ghr"/>
                                                     <exclude reference="Vvr-R2-wHq"/>
                                                     <exclude reference="doP-6n-Dmh"/>
                                                     <exclude reference="gGV-zt-8Mr"/>
-                                                    <exclude reference="KZ9-IH-iGy"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -3467,7 +3474,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="XPQ-Wg-MMC">
-                                                            <rect key="frame" x="70" y="34" width="55" height="15"/>
+                                                            <rect key="frame" x="70" y="34.5" width="55" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="N43-u3-AaG"/>
                                                             </constraints>
@@ -3481,7 +3488,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="ivC-Cx-00h">
-                                                            <rect key="frame" x="70" y="50" width="45" height="15"/>
+                                                            <rect key="frame" x="70" y="49.5" width="44.5" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="19" id="yyC-xB-xFH"/>
                                                             </constraints>
@@ -3495,7 +3502,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKM-i7-9fJ">
-                                                            <rect key="frame" x="70" y="16" width="63" height="17"/>
+                                                            <rect key="frame" x="70" y="16.5" width="63" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="19" id="4li-X4-t1i"/>
                                                             </constraints>
@@ -3512,7 +3519,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             <rect key="frame" x="318" y="17" width="49" height="49"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3XA-gM-ibG">
-                                                                    <rect key="frame" x="17" y="30" width="15" height="15"/>
+                                                                    <rect key="frame" x="17.5" y="30" width="14.5" height="14"/>
                                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="12"/>
                                                                     <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -3632,12 +3639,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="Bvh-3e-EYh"/>
                                                             <exclude reference="pI7-sW-g0y"/>
                                                             <exclude reference="VdS-0R-RJ8"/>
                                                             <exclude reference="gIo-sE-upW"/>
                                                             <exclude reference="7PO-e3-CMa"/>
                                                             <exclude reference="ORg-3O-8RR"/>
+                                                            <exclude reference="Bvh-3e-EYh"/>
                                                         </mask>
                                                     </variation>
                                                 </view>
@@ -3652,7 +3659,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6 hrs Ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="dPp-as-j80">
-                                                            <rect key="frame" x="320" y="20" width="47" height="15"/>
+                                                            <rect key="frame" x="320" y="20.5" width="47" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="VF1-iH-n0Q"/>
                                                             </constraints>
@@ -3666,7 +3673,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOING ON 2/25/16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9TX-Xr-Lui">
-                                                            <rect key="frame" x="30" y="19" width="119" height="17"/>
+                                                            <rect key="frame" x="30" y="19" width="118.5" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="17" id="sN6-6j-D2D"/>
                                                             </constraints>
@@ -3690,7 +3697,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     <rect key="frame" x="0.0" y="180" width="375" height="34"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mCy-6V-cGY" userLabel="Comment Container">
-                                                            <rect key="frame" x="8" y="2" width="112" height="30"/>
+                                                            <rect key="frame" x="8" y="2" width="111.5" height="30"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAP-e3-65k">
                                                                     <rect key="frame" x="0.0" y="4" width="25" height="22"/>
@@ -3702,7 +3709,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                     <state key="normal" image="comment"/>
                                                                 </button>
                                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sax-sM-vce" userLabel="commentsLabel">
-                                                                    <rect key="frame" x="33" y="7" width="79" height="17"/>
+                                                                    <rect key="frame" x="33" y="7" width="78.5" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="iXo-uN-Pyo"/>
                                                                     </constraints>
@@ -3716,7 +3723,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                                     </variation>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3MX-7W-4Aj">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="112" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="111.5" height="30"/>
                                                                     <connections>
                                                                         <action selector="CommentButtonTapped:" destination="ulj-Pi-0Zv" eventType="touchUpInside" id="qLi-jG-ap2"/>
                                                                     </connections>
@@ -3925,9 +3932,9 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="bOE-Rw-gmd"/>
                                                     <exclude reference="KfU-vW-tI9"/>
                                                     <exclude reference="mx2-AJ-Jlk"/>
+                                                    <exclude reference="bOE-Rw-gmd"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -4325,7 +4332,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="DWg-eY-NtL" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="1c4-27-iSx"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yaK-NM-cuk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yaK-NM-cuk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4385,7 +4392,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="TBt-U7-jjK">
-                                                    <rect key="frame" x="70" y="34" width="55" height="15"/>
+                                                    <rect key="frame" x="70" y="34.5" width="55" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="eag-x6-Y0G"/>
                                                     </constraints>
@@ -4399,7 +4406,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="rin-sj-kda">
-                                                    <rect key="frame" x="70" y="50" width="45" height="15"/>
+                                                    <rect key="frame" x="70" y="49.5" width="44.5" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="19" id="EJc-pP-fuJ"/>
                                                     </constraints>
@@ -4413,7 +4420,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qd2-Lk-Y52">
-                                                    <rect key="frame" x="70" y="16" width="63" height="17"/>
+                                                    <rect key="frame" x="70" y="16.5" width="63" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="19" id="V18-Yx-h07"/>
                                                     </constraints>
@@ -4430,7 +4437,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     <rect key="frame" x="318" y="17" width="49" height="49"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mag-Vj-LRO">
-                                                            <rect key="frame" x="17" y="30" width="15" height="15"/>
+                                                            <rect key="frame" x="17.5" y="30" width="14.5" height="14"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="12"/>
                                                             <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -4550,12 +4557,12 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="olu-fF-V4p"/>
                                                     <exclude reference="Pok-7A-jkR"/>
                                                     <exclude reference="DQf-j7-Kob"/>
                                                     <exclude reference="Ekc-nH-Vct"/>
                                                     <exclude reference="67q-L8-mLI"/>
                                                     <exclude reference="L3V-N3-dFG"/>
+                                                    <exclude reference="olu-fF-V4p"/>
                                                 </mask>
                                             </variation>
                                         </view>
@@ -4570,7 +4577,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6 hrs Ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="3lA-bM-ZAK">
-                                                    <rect key="frame" x="320" y="20" width="47" height="15"/>
+                                                    <rect key="frame" x="320" y="20.5" width="47" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="43H-uo-7cO"/>
                                                     </constraints>
@@ -4584,7 +4591,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOING ON 2/25/16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ch6-Hl-MGv">
-                                                    <rect key="frame" x="30" y="19" width="119" height="17"/>
+                                                    <rect key="frame" x="30" y="19" width="118.5" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="17" id="8n8-Dm-j0g"/>
                                                     </constraints>
@@ -4608,7 +4615,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             <rect key="frame" x="0.0" y="180" width="375" height="34"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V0v-K7-eyl" userLabel="Comment Container">
-                                                    <rect key="frame" x="8" y="2" width="122" height="30"/>
+                                                    <rect key="frame" x="8" y="2" width="121.5" height="30"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJp-or-cDf">
                                                             <rect key="frame" x="0.0" y="4" width="25" height="22"/>
@@ -4620,7 +4627,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             <state key="normal" image="comment"/>
                                                         </button>
                                                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDd-OM-COX" userLabel="commentsLabel">
-                                                            <rect key="frame" x="33" y="7" width="87" height="17"/>
+                                                            <rect key="frame" x="33" y="7" width="86.5" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="NiT-Mv-8BY"/>
                                                             </constraints>
@@ -4634,7 +4641,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                                             </variation>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L46-wJ-P3q">
-                                                            <rect key="frame" x="0.0" y="0.0" width="122" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="121.5" height="30"/>
                                                             <connections>
                                                                 <action selector="CommentButtonTapped:" destination="UnR-NO-RMJ" eventType="touchUpInside" id="pJM-ju-Mc9"/>
                                                             </connections>
@@ -4802,9 +4809,9 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="bBL-tF-lde"/>
                                             <exclude reference="2yy-5c-h8n"/>
                                             <exclude reference="FJb-sd-iI9"/>
+                                            <exclude reference="bBL-tF-lde"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -4864,7 +4871,7 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
         <scene sceneID="FpY-dX-yTF">
             <objects>
                 <navigationController storyboardIdentifier="HashtagNav" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Fts-hu-Jwm" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r1C-MS-WCj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="r1C-MS-WCj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1960784314" green="0.46666666670000001" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -4968,8 +4975,8 @@ Calendario gives you a personal, worldwide, royalty-free, non-assignable license
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="xyB-Zv-unC"/>
                                                     <exclude reference="V0U-td-tc3"/>
+                                                    <exclude reference="xyB-Zv-unC"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
