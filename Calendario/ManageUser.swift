@@ -151,9 +151,12 @@ var finalData:NSMutableArray = []
     
     // Check username string methods.
     
-    class func correctStringWithUsernames(_ inputString: String, completion: @escaping (_ correctString: String) -> Void) {
+    class func correctStringWithUsernames(_ inputString: String, completion: @escaping (_ correctString: String, _ usernames: Array<String>) -> Void) {
 
         DispatchQueue.main.async(execute: {
+            
+            // Username string array.
+            var usernameData = [String]()
             
             // Create the final string and get all
             // the seperate strings from the data.
@@ -176,6 +179,10 @@ var finalData:NSMutableArray = []
                     // is a @user mention string or not.
                     
                     if (currentString.contains("@")) {
+                        
+                        // Add the usernames to the data array.
+                        let usernameWithoutAt = currentString.substring(from: currentString.index(currentString.startIndex, offsetBy: 1))
+                        usernameData.append(usernameWithoutAt)
                         
                         // If we are in the first loop then set the
                         // string otherwise concatenate the string.
@@ -236,7 +243,7 @@ var finalData:NSMutableArray = []
             }
             
             // Pass back the correct username string.
-            completion(finalString!)
+            completion(finalString!, usernameData)
         })
     }
     
@@ -446,8 +453,8 @@ var finalData:NSMutableArray = []
     
     class func saveUserNotification(_ notifcation:String, fromUser:PFUser, toUser:PFUser, extType:String, extObjectID:String) {
         
-        // Only save the notification if the user recieving
-        // the notification is NOT the same as the logged in user.
+        // Only save the notification if the user recieving the
+        // notification is NOT the same as the logged in user.
         
         if (fromUser.objectId != toUser.objectId) {
             

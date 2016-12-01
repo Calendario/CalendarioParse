@@ -181,9 +181,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func Sendtapped(_ sender: AnyObject) {
-        
         self.PostComment()
-        // self.refreshData()
     }
     
     func PostComment() {
@@ -191,11 +189,11 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         // Hide the keyboard.
         self.dismissKeyboard()
         
-        if (self.commentTextView .hasText) {
+        if (self.commentTextView.hasText) {
             
             // Make sure the commenttext contains all
             // the @user mentions in lowercase.
-            ManageUser.correctStringWithUsernames(self.commentTextView.text!, completion: { (correctString) -> Void in
+            ManageUser.correctStringWithUsernames(self.commentTextView.text!, completion: { (correctString, usernameData) -> Void in
                 
                 // Setup the comment object.
                 var comment: PFObject!
@@ -213,19 +211,63 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                     
                     if success {
                         
+                        // Setup the status update query.
                         var query: PFQuery<PFObject>!
                         query = PFQuery(className: "StatusUpdate")
                         query.includeKey("user")
+                        
+                        // Load the status update object.
                         query.getObjectInBackground(withId: self.savedobjectID, block: { (object, error) -> Void in
                             
-                            if error == nil {
+                            if (error == nil) {
                                 
-                                // Only save the notification if the user recieving
-                                // the notification is NOT the same as the logged in user.
+                                // Check for any @user mentions.
+                                
+                                if (usernameData.count > 0) {
+                                    
+                                    // Setup the user query.
+                                    var userQuery:PFQuery<PFObject>!
+                                    userQuery = PFUser.query()
+                                    userQuery.whereKey("username", containedIn: usernameData)
+                                    
+                                    // Find out the object IDs of the usernames.
+                                    userQuery.findObjectsInBackground(block: { (userObjects, userError:Error?) in
+                                        
+                                        if (userError == nil) {
+                                                                                        
+                                            // Send push notifications to all users that the
+                                            // logged in user has mentioned in the comment.
+                                            
+                                            for user in userObjects! {
+                                                
+                                                // Get the loop user object.
+                                                let loopUser:PFUser = user as! PFUser
+                                                
+                                                // Only send notifications to users that
+                                                // are not the same as the logged in user.
+                                                
+                                                if (PFUser.current()!.objectId! != loopUser.objectId!) {
+                                                    
+                                                    // Create push notification.
+                                                    let message = "\(PFUser.current()!.username!) mentioned you in a comment"
+                                                    
+                                                    // Send the notification.
+                                                    PFCloud.callFunction(inBackground: "comment", withParameters: ["message" : message, "user" : "\((object!.value(forKey: "user") as! PFUser).objectId!)"])
+                                                    
+                                                    // Save the user notification.
+                                                    ManageUser.saveUserNotification(message, fromUser: PFUser.current()!, toUser: loopUser, extType: "comment", extObjectID: String(self.savedobjectID))
+                                                }
+                                            }
+                                        }
+                                    })
+                                }
+                                
+                                // Only save the notification if the user recieving the
+                                // notification is NOT the same as the logged in user.
                                 
                                 if (PFUser.current()!.objectId! != (object?.object(forKey: "user") as! PFUser).objectId!) {
                                     
-                                    // create push notifcation
+                                    // Create push notification.
                                     let message = "\(PFUser.current()!.username!) has commented on your post"
                                     
                                     // Send the notification.
