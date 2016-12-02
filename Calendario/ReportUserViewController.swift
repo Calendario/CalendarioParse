@@ -56,7 +56,7 @@ class ReportUserViewController : UIViewController, UITextViewDelegate {
         let actionOne = { (action:UIAlertAction!) -> Void in
             
             self.reportCategoryString = "Harassment"
-            self.categorySelected("I am being harassed by @\(self.userString)")
+            self.categorySelected("I am being harassed by @\(self.userString as String)")
         }
         
         let actionTwo = { (action:UIAlertAction!) -> Void in
@@ -72,7 +72,7 @@ class ReportUserViewController : UIViewController, UITextViewDelegate {
         }
 
         // Setup the alert buttons.
-        let buttonOne = UIAlertAction(title: "I am being harassed by @\(userString)", style: .default, handler: actionOne)
+        let buttonOne = UIAlertAction(title: "I am being harassed by @\(self.userString as String)", style: .default, handler: actionOne)
         let buttonTwo = UIAlertAction(title: "I have witnessed abusive behavior.", style: .default, handler: actionTwo)
         let buttonThree = UIAlertAction(title: "Other", style: .default, handler: actionThree)
         let cancel = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
@@ -202,7 +202,7 @@ class ReportUserViewController : UIViewController, UITextViewDelegate {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         // Create the username string.
-        userString = "\(passedUser.username!)"
+        userString = self.passedUser!.username!
         
         // Set the user profile labels.
         userFullName.text = passedUser?.object(forKey: "fullName") as? String

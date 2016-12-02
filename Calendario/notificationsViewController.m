@@ -152,7 +152,7 @@ typedef void(^userProfileDataCompletion)(PFObject *object, NSError *error);
         }];
     }
     
-    else if (([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"comment"]) || ([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"like"])) {
+    else if (([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"comment"]) || ([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"like"]) || ([[notificationsExtLinks[indexPath.row] objectAtIndex:0] isEqualToString:@"rsvp"])) {
         
         // Load the status update object.
         PFQuery *objectQuery = [PFQuery queryWithClassName:@"StatusUpdate"];

@@ -84,6 +84,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             
             // Insert the see more subview as the table header view.
             self.seeMoreSubview.passedInObject = self.passedInObjectForSeeMoreView
+            self.seeMoreSubview.inputParentViewController = self
             self.addChildViewController(self.seeMoreSubview)
             self.seeMoreSubview.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: customHeight)
             headerView.addSubview(self.seeMoreSubview.view)
@@ -143,8 +144,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         LoadCommentData()
     }
     
-    func LoadCommentData()
-    {
+    func LoadCommentData() {
+        
         commentdata.removeAllObjects()
         
         var getcomments:PFQuery<PFObject>!

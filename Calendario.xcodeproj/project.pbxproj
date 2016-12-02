@@ -243,6 +243,7 @@
 		A2A7D75A1D37DC0E003BE0AF /* FullimageViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FullimageViewController.storyboard; sourceTree = "<group>"; };
 		A2AE4A4F1BDCF7B8008E84B9 /* ToSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToSViewController.swift; sourceTree = "<group>"; };
 		A2AE4A511BDCF82F008E84B9 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		A2B59D021DF1840B005AC14C /* Calendario.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Calendario.entitlements; sourceTree = "<group>"; };
 		A2C55BAB1BE7B77B00431EA0 /* WebPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
 		A2DBF03E1DDDC2BB00705E6F /* StatusUpdateCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusUpdateCollectionCell.swift; sourceTree = "<group>"; };
 		A2DBF0421DDE096900705E6F /* locationDictParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = locationDictParser.h; sourceTree = "<group>"; };
@@ -1002,6 +1003,7 @@
 		E2E0D7011BC9950800662E70 /* Calendario */ = {
 			isa = PBXGroup;
 			children = (
+				A2B59D021DF1840B005AC14C /* Calendario.entitlements */,
 				A2A7D75C1D37DD05003BE0AF /* Present View Class */,
 				A2A7D7591D37DBDB003BE0AF /* Full image viewer */,
 				D3D9D7D41C9E0B40000A2528 /* Services */,
@@ -1190,6 +1192,11 @@
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = 52K634K77W;
 						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					E2E0D7171BC9950800662E70 = {
 						CreatedOnToolsVersion = 7.0;
@@ -1585,6 +1592,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Calendario/Calendario.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
@@ -1644,6 +1652,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Calendario/Calendario.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
