@@ -18,12 +18,27 @@
     // Get the location data object.
     id location = [[[searchData objectForKey:@"results"] valueForKey:@"geometry"] valueForKey:@"location"];
     
-    // Get the latitude/longitude values.
-    double coordinate_lat = [[[location valueForKey:@"lat"] objectAtIndex:0] doubleValue];
-    double coordinate_lon = [[[location valueForKey:@"lng"] objectAtIndex:0] doubleValue];
+    // Create the latitude/longitude values.
+    double coordinate_lat;
+    double coordinate_lon;
     
-    // Return the location data.
-    block(coordinate_lat, coordinate_lon);
+    @try {
+        
+        // Set the latitude/longitude values.
+        coordinate_lat = [[[location valueForKey:@"lat"] objectAtIndex:0] doubleValue];
+        coordinate_lon = [[[location valueForKey:@"lng"] objectAtIndex:0] doubleValue];
+        
+    } @catch (NSException *exception) {
+        
+        // Unable to get latitude/longitude.
+        coordinate_lat = 0.00000;
+        coordinate_lon = 0.00000;
+        
+    } @finally {
+        
+        // Return the location data.
+        block(coordinate_lat, coordinate_lon);
+    }
 }
 
 @end

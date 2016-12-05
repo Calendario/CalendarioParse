@@ -227,8 +227,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         self.present(locationReference!, animated: true, completion: nil)
     }
     
-    func dismissKeyboard()
-    {
+    func dismissKeyboard() {
         view.endEditing(true)
     }
     
@@ -241,7 +240,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         // Make sure the updatetext contains all
         // the @user mentions in lowercase.
-        ManageUser.correctStringWithUsernames(self.statusUpdateTextField.text!, completion: { (correctString) -> Void in
+        ManageUser.correctStringWithUsernames(self.statusUpdateTextField.text!, completion: { (correctString, usernameData) -> Void in
             
             if ((self.mediaDataArray.count > 0) && (self.imageCheck == true)) {
                 
@@ -304,12 +303,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                             self.dismiss(animated: true, completion: nil)
                         })
                     }
-                        
-                    else {
-                        
-                        // prints error
-                        print(error?.localizedDescription)
-                    }
                 })
             }
                 
@@ -344,11 +337,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                     
                     if success {
                         self.dismiss(animated: true, completion: nil)
-                    }
-                        
-                    else {
-                        // prints error
-                        print(error?.localizedDescription)
                     }
                 })
             }
