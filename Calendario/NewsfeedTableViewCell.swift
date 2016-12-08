@@ -8,8 +8,10 @@
 
 import UIKit
 import KILabel
+import AVFoundation
+import AVKit
 
-class NewsfeedTableViewCell: PFTableViewCell {
+class NewsfeedTableViewCell: PFTableViewCell, AVPlayerViewControllerDelegate {
     
     @IBOutlet weak var UserNameLabel: UILabel!
     @IBOutlet weak var commentsLabel: UILabel!
@@ -34,6 +36,7 @@ class NewsfeedTableViewCell: PFTableViewCell {
     @IBOutlet weak var userImageViewContainerHeightContstraint: NSLayoutConstraint!
     @IBOutlet weak var userImageContainer: UIView!
     @IBOutlet weak var likeButtonImage: UIImageView!
+    @IBOutlet weak var playButton: UIButton!
     
     // Passed in data objects.
     var attendGestureRecognizer: UITapGestureRecognizer!
@@ -41,6 +44,9 @@ class NewsfeedTableViewCell: PFTableViewCell {
     var parentViewController: AnyObject!
     var rsvpArray: [String] = []
     var autolayoutCheck = true
+    
+    // Video player object.
+    var playerViewController:AVPlayerViewController!
     
     //MARK: LIFECYCLE METHODS
     override func prepareForReuse() {
@@ -106,7 +112,20 @@ class NewsfeedTableViewCell: PFTableViewCell {
             self.uploaddatelabel.text = self.passedInObject["dateofevent"] as? String
             self.eventTitle.text = self.passedInObject["eventTitle"] as? String
             
+            // Show the play button if a video exists.
+            
+            if (self.passedInObject.value(forKey: "videoData") == nil) {
+                self.playButton.alpha = 0.0
+            } else {
+                self.playButton.alpha = 1.0
+            }
+            
+            // Set the image view contraints if
+            // the current view is using autolayout.
+            
             if (self.autolayoutCheck == true) {
+                
+                // Set the image view if the event has photo(s).
                 
                 if (passedInObject.object(forKey: "image") == nil) {
                     self.userPostedImage.image = nil
@@ -117,9 +136,10 @@ class NewsfeedTableViewCell: PFTableViewCell {
                 
             } else {
                 
+                // Set the image view if the event has photo(s).
+                
                 if (passedInObject.object(forKey: "image") == nil) {
                     self.userPostedImage.image = nil
-                } else {
                 }
             }
             
@@ -635,7 +655,24 @@ class NewsfeedTableViewCell: PFTableViewCell {
     
     @IBAction func feedImageTapped(_ sender: AnyObject) {
         
-        if (self.passedInObject.value(forKey: "image") != nil) {
+        // Check if we are opening a video or photo(s).
+        
+        if (self.passedInObject.value(forKey: "videoData") != nil) {
+            
+            // Get video URL from the passed in object.
+            let videoFile:PFFile = (self.passedInObject.value(forKey: "videoData") as? PFFile)!
+            let player = AVPlayer(url: NSURL(string: videoFile.url!) as! URL)
+            self.playerViewController = AVPlayerViewController()
+            self.playerViewController.player = player
+            self.playerViewController.delegate = self
+
+            // Open the video and play it.
+            self.parentViewController.present(self.playerViewController, animated: true, completion: {
+                self.playerViewController.player!.play()
+            })
+        }
+        
+        else if (self.passedInObject.value(forKey: "image") != nil) {
             PresentingViews.showPhotoViewer(self, userPostedImage: userPostedImage, userProfilePic: self.profileimageview.image!, userName: self.UserNameLabel.text!, statusObject: self.passedInObject)
         }
     }

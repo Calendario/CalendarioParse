@@ -207,7 +207,7 @@ class FollowRequestsTableViewController: UIViewController, UITableViewDataSource
             // Get the user object data.
             var findUser:PFQuery<PFObject>!
             findUser = PFUser.query()!
-            findUser.whereKey("objectId", equalTo: ((currentObject.object(forKey: "Requester") as AnyObject).objectId)!)
+            findUser.whereKey("objectId", equalTo: ((currentObject.object(forKey: "Requester") as! PFUser).objectId)!)
             
             findUser.findObjectsInBackground(block: { (objects:[PFObject]?, error: Error?) in
                 

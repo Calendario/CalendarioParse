@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreLocation
+import MobileCoreServices
+import AVFoundation
 
 class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UINavigationBarDelegate, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -37,12 +39,15 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     // Image upload check.
     var imageCheck = false
     
+    // Video upload check.
+    var videoCheck = false
+    var videoData:NSData!
+    
     let deafaults = UserDefaults()
     // tense
     var tensenum:Int!
     
-    enum Tense: String
-    {
+    enum Tense: String {
         case going = "Going"
         case went = "Went"
         case currently = "Currently"
@@ -63,7 +68,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     // location
     let locationManager = CLLocationManager()
     var imagedata:Data?
-    var postingImage = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,8 +138,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         
         let location = deafaults.value(forKey: "location") as? String
         
-        if location == nil
-        {
+        if location == nil {
             //LocationLabel.text = "No Location"
             //LocationLabel.textColor = UIColor.lightGrayColor()
         } else {
@@ -151,8 +154,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         self.eventTitle.resignFirstResponder()
     }
 
-    func setDate()
-    {
+    func setDate() {
+        
         let dateformatter = DateFormatter()
         dateformatter.dateStyle = DateFormatter.Style.short
         dateformatter.dateFormat = "M/d/yy"
@@ -209,8 +212,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         changeSegmentControl(datepicker.date)
     }
     
-    func DatePickerAppear()
-    {
+    func DatePickerAppear() {
+        
         // gesture reconizer for date picker
         viewGestureRecognizer.isEnabled = true
 
@@ -219,8 +222,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         datePickerContainer.isHidden = false
     }
     
-    func LocationlabelTapped()
-    {
+    func LocationlabelTapped() {
         //checkinbutton.hidden = false
         
         let locationReference =  self.storyboard!.instantiateViewController(withIdentifier: "LocationVC") as UIViewController!
@@ -242,66 +244,89 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         // the @user mentions in lowercase.
         ManageUser.correctStringWithUsernames(self.statusUpdateTextField.text!, completion: { (correctString, usernameData) -> Void in
             
-            if ((self.mediaDataArray.count > 0) && (self.imageCheck == true)) {
+            if (self.mediaDataArray.count > 0) {
                 
-                self.postingImage = true
-                
-                var statusupdatewithimage: PFObject!
-                statusupdatewithimage = PFObject(className: "StatusUpdate")
-                statusupdatewithimage["updatetext"] = correctString
-                statusupdatewithimage["user"] = PFUser.current()
-                statusupdatewithimage["dateofevent"] = self.shortStyleDateToBeSaved
-                statusupdatewithimage["ID"] = Int(self.statusID)
-                statusupdatewithimage["tense"] = self.currenttense
-                statusupdatewithimage["location"] = self.LocationLabel.text!
-                statusupdatewithimage["likesarray"] = []
-                statusupdatewithimage["rsvpArray"] = []
-                statusupdatewithimage["eventTitle"] = self.eventTitle.text!
+                var statusupdatewithMedia: PFObject!
+                statusupdatewithMedia = PFObject(className: "StatusUpdate")
+                statusupdatewithMedia["updatetext"] = correctString
+                statusupdatewithMedia["user"] = PFUser.current()
+                statusupdatewithMedia["dateofevent"] = self.shortStyleDateToBeSaved
+                statusupdatewithMedia["ID"] = Int(self.statusID)
+                statusupdatewithMedia["tense"] = self.currenttense
+                statusupdatewithMedia["location"] = self.LocationLabel.text!
+                statusupdatewithMedia["likesarray"] = []
+                statusupdatewithMedia["rsvpArray"] = []
+                statusupdatewithMedia["eventTitle"] = self.eventTitle.text!
                 
                 if (self.rsvpSwitch.isOn == true) {
-                    statusupdatewithimage["privateRsvp"] = true
+                    statusupdatewithMedia["privateRsvp"] = true
                 }
                     
                 else if (self.rsvpSwitch.isOn == false) {
-                    statusupdatewithimage["privateRsvp"] = false
+                    statusupdatewithMedia["privateRsvp"] = false
                 }
 
                 if ((self.LocationLabel.text?.contains("tap to select location")) == false) {
                     let point = PFGeoPoint(latitude:locationLatitude!, longitude:locationLongitude!)
-                    statusupdatewithimage["placeGeoPoint"] = point
+                    statusupdatewithMedia["placeGeoPoint"] = point
                 }
                 
-                // image 1 posting
-                self.imagedata = UIImageJPEGRepresentation(self.mediaDataArray[0], 0.5)
-                let imagefile = PFFile(name: "image.jpg", data: self.imagedata!)
-                statusupdatewithimage["image"] = imagefile!
+                if (self.imageCheck == true) {
+                    
+                    // image 1 posting
+                    self.imagedata = UIImageJPEGRepresentation(self.mediaDataArray[0], 0.5)
+                    let imagefile = PFFile(name: "image.jpg", data: self.imagedata!)
+                    statusupdatewithMedia["image"] = imagefile!
+                    
+                } else if (self.videoCheck == true) {
+                    
+                    // Video data posting.
+                    let videoFile = PFFile(data: self.videoData as Data, contentType: "video/mp4")
+                    statusupdatewithMedia["videoData"] = videoFile
+                    
+                    // Set the video thumbnail image.
+                    self.imagedata = UIImageJPEGRepresentation(self.mediaDataArray[0], 0.5)
+                    let imagefile = PFFile(name: "videoThumbnail.jpg", data: self.imagedata!)
+                    statusupdatewithMedia["image"] = imagefile!
+                }
                 
                 // saves object in background
                 
-                statusupdatewithimage.saveInBackground(block: { (success: Bool, error: Error?) in
+                statusupdatewithMedia.saveInBackground(block: { (success: Bool, error: Error?) in
                     
-                    if success {
+                    if (success) {
                         
-                        // Setup the extra image query.
-                        var extraMediaImage: PFObject!
-                        extraMediaImage = PFObject(className: "statusMedia")
-                        let imagedataTwo:Data = UIImageJPEGRepresentation(self.mediaDataArray[1], 0.5)!
-                        let imagefileTwo = PFFile(name: "image2.jpg", data: imagedataTwo)
-                        extraMediaImage["imageDataTwo"] = imagefileTwo!
-                        
-                        if (self.mediaDataArray.count > 2) {
+                        if ((self.imageCheck == true) && (self.mediaDataArray.count > 1)) {
                             
-                            let imagedataThree:Data = UIImageJPEGRepresentation(self.mediaDataArray[2], 0.5)!
-                            let imagefileThree = PFFile(name: "image3.jpg", data: imagedataThree)
-                            extraMediaImage["imageDataThree"] = imagefileThree!
-                        }
-                        
-                        extraMediaImage["statusUpdateID"] = statusupdatewithimage.objectId!
-                        
-                        // Save the extra images with status ID.
-                        extraMediaImage.saveInBackground(block: { (success: Bool, errorExtra: Error?) in
+                            // Setup the extra image query.
+                            var extraMediaImage: PFObject!
+                            extraMediaImage = PFObject(className: "statusMedia")
+                            extraMediaImage["statusUpdateID"] = statusupdatewithMedia.objectId!
+                            
+                            if (self.mediaDataArray.count == 2) {
+                                
+                                let imagedataTwo:Data = UIImageJPEGRepresentation(self.mediaDataArray[1], 0.5)!
+                                let imagefileTwo = PFFile(name: "image2.jpg", data: imagedataTwo)
+                                extraMediaImage["imageDataTwo"] = imagefileTwo!
+                                
+                            } else if (self.mediaDataArray.count == 3) {
+                                
+                                let imagedataTwo:Data = UIImageJPEGRepresentation(self.mediaDataArray[1], 0.5)!
+                                let imagefileTwo = PFFile(name: "image2.jpg", data: imagedataTwo)
+                                extraMediaImage["imageDataTwo"] = imagefileTwo!
+                                let imagedataThree:Data = UIImageJPEGRepresentation(self.mediaDataArray[2], 0.5)!
+                                let imagefileThree = PFFile(name: "image3.jpg", data: imagedataThree)
+                                extraMediaImage["imageDataThree"] = imagefileThree!
+                            }
+                            
+                            // Save the extra images with status ID.
+                            extraMediaImage.saveInBackground(block: { (success: Bool, errorExtra: Error?) in
+                                self.dismiss(animated: true, completion: nil)
+                            })
+                            
+                        } else {
                             self.dismiss(animated: true, completion: nil)
-                        })
+                        }
                     }
                 })
             }
@@ -380,8 +405,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             self.present(reportalert, animated: true, completion: nil)
         } else {
             self.textViewDismissKeyboard()
-            PostStatusUpdate()
-            GotoNewsfeed()
+            self.PostStatusUpdate()
+            self.dismiss(animated: true, completion: nil)
             
             //reset userDefaults
             deafaults.removeObject(forKey: "location")
@@ -399,25 +424,109 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
     
     @IBAction func CameraTapped(_ sender: AnyObject) {
         
-        if (self.mediaDataArray.count < 3) {
+        if (self.mediaDataArray.count == 0) {
+            
+            // Setup the alert controller.
+            let choiceAlert = UIAlertController(title: "Capture mode", message: "Would you like to take a photo or record a video?", preferredStyle: .actionSheet)
+            
+            // Setup the alert actions.
+            let takePhoto = { (action:UIAlertAction!) -> Void in
+                
+                let camera = UIImagePickerController()
+                DispatchQueue.main.async { () -> Void in
+                    self.videoCheck = false
+                    camera.delegate = self
+                    camera.sourceType = UIImagePickerControllerSourceType.camera
+                    camera.allowsEditing = false
+                    self.present(camera, animated: true, completion: nil)
+                }
+            }
+            let photoButton = UIAlertAction(title: "Photo", style: .default, handler: takePhoto)
+            
+            let takeVideo = { (action:UIAlertAction!) -> Void in
+                
+                if (UIImagePickerController.isSourceTypeAvailable(.camera)) {
+                    
+                    if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
+                        
+                        let imagePicker = UIImagePickerController()
+                        DispatchQueue.main.async { () -> Void in
+                            imagePicker.sourceType = .camera
+                            imagePicker.mediaTypes = [kUTTypeMovie as String]
+                            imagePicker.allowsEditing = false
+                            imagePicker.delegate = self
+                            self.present(imagePicker, animated: true, completion: nil)
+                        }
+                        
+                    } else {
+                        self.displayAlert("Error", alertMessage: "Calendario cannot access the device camera.")
+                    }
+                } else {
+                    self.displayAlert("Error", alertMessage: "Calendario cannot access the device camera.")
+                }
+            }
+            let videoButton = UIAlertAction(title: "Video", style: .default, handler: takeVideo)
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            choiceAlert.addAction(photoButton)
+            choiceAlert.addAction(videoButton)
+            choiceAlert.addAction(cancel)
+            
+            // Present the alert on screen.
+            present(choiceAlert, animated: true, completion: nil)
+            
+        } else if (self.mediaDataArray.count == 1) {
+            self.capturePhotoCheck()
+        } else if (self.mediaDataArray.count == 2) {
+            self.capturePhotoCheck()
+        } else {
+            self.displayAlert("Error", alertMessage: "You can add a maximum of 1 video or 3 photos to the event.")
+        }
+    }
+    
+    func capturePhotoCheck() {
+        
+        if (self.videoCheck == true) {
+            self.displayAlert("Error", alertMessage: "You can add a maximum of 1 video or 3 photos to the event.")
+        } else {
             
             let camera = UIImagePickerController()
             DispatchQueue.main.async { () -> Void in
+                self.videoCheck = false
                 camera.delegate = self
                 camera.sourceType = UIImagePickerControllerSourceType.camera
                 camera.allowsEditing = false
                 self.present(camera, animated: true, completion: nil)
             }
         }
-        
-        else {
-            self.displayAlert("Error", alertMessage: "You can add a maximum of 3 photos to each status update.")
-        }
     }
     
     @IBAction func VideoTapped(_ sender: AnyObject) {
         
-        if (self.mediaDataArray.count < 3) {
+        if (self.mediaDataArray.count == 0) {
+            
+            let imagePicker = UIImagePickerController()
+            DispatchQueue.main.async { () -> Void in
+                imagePicker.sourceType = .photoLibrary
+                imagePicker.delegate = self
+                imagePicker.mediaTypes = ["public.image", "public.movie"]
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+            
+        } else if (self.mediaDataArray.count == 1) {
+            self.useLibraryPhotoCheck()
+        } else if (self.mediaDataArray.count == 2) {
+            self.useLibraryPhotoCheck()
+        } else {
+            self.displayAlert("Error", alertMessage: "You can add a maximum of 1 video or 3 photos to the event.")
+        }
+    }
+    
+    func useLibraryPhotoCheck() {
+        
+        if (self.videoCheck == true) {
+            self.displayAlert("Error", alertMessage: "You can add a maximum of 1 video or 3 photos to the event.")
+        } else {
             
             var photo:UIImagePickerController!
             photo = UIImagePickerController()
@@ -427,10 +536,6 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
                 photo.allowsEditing = false
                 self.present(photo, animated: true, completion: nil)
             }
-        }
-            
-        else {
-            self.displayAlert("Error", alertMessage: "You can add a maximum of 3 photos to each status update.")
         }
     }
 
@@ -447,35 +552,74 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         self.placeholderLabel.isHidden = true
     }
     
-    func GotoNewsfeed() {
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let tabBarController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "tabBar") as! tabBarViewController
-        appDelegate.window.makeKeyAndVisible()
-        appDelegate.window.rootViewController = tabBarController
-    }
-    
     // image picker delegate methods
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        
         self.dismiss(animated: true, completion: nil)
         self.mediaDataArray.insert(image, at:0)
         self.imageCheck = true
+        self.videoCheck = false
         self.imageList.reloadData()
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let pickedVideo:NSURL = (info[UIImagePickerControllerMediaURL] as? NSURL) {
+            
+            do {
+                
+                self.imageCheck = false
+                self.videoCheck = true
+                self.videoData = NSData(contentsOf: pickedVideo as URL)
+                let asset = AVURLAsset(url: pickedVideo as URL, options: nil)
+                let imgGenerator = AVAssetImageGenerator(asset: asset)
+                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                let uiImage = UIImage(cgImage: cgImage)
+                self.mediaDataArray.insert(uiImage, at:0)
+                self.imageList.reloadData()
+                
+            } catch {}
+        } else {
+            
+            self.mediaDataArray.insert(info[UIImagePickerControllerOriginalImage] as! UIImage, at:0)
+            self.imageCheck = true
+            self.videoCheck = false
+            self.imageList.reloadData()
+        }
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     // Collection view delegate methods.
     
     func deleteImageAtIndex(object: AnyObject) {
         
+        // Create the alert title/message.
+        var alertTitle:String!
+        var alertMessage:String!
+        
+        if ((self.videoCheck == true) && (self.mediaDataArray.count < 2)) {
+            alertTitle = "Delete video"
+            alertMessage = "Would you like to remove the selected video from the status update."
+        } else {
+            alertTitle = "Delete photo"
+            alertMessage = "Would you like to remove the selected photo from the status update."
+        }
+        
         // Setup the alert controller.
-        let choiceAlert = UIAlertController(title: "Delete phpto", message: "Would you like to remove the selected photo from the status update.", preferredStyle: .actionSheet)
+        let choiceAlert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .actionSheet)
         
         // Setup the alert actions.
         let deletePhotoAction = { (action:UIAlertAction!) -> Void in
             
+            self.videoCheck = false
             self.mediaDataArray.remove(at: object.tag)
+            
+            if (self.mediaDataArray.count < 1) {
+                self.imageCheck = false
+            }
+            
             self.imageList.reloadData()
         }
         let deleteButton = UIAlertAction(title: "Delete", style: .destructive, handler: deletePhotoAction)
@@ -492,12 +636,8 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         return 1
     }
     
-    //func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    //    self.deleteImageAtIndex(selectedPath: indexPath)
-    //}
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return mediaDataArray.count
+        return self.mediaDataArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -514,7 +654,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StatusCell", for: indexPath as IndexPath) as! StatusUpdateCollectionCell
         
         // Set the preview image view.
-        cell.previewImage.setImage(mediaDataArray[indexPath.row], for: .normal)
+        cell.previewImage.setImage(self.mediaDataArray[indexPath.row], for: .normal)
         
         // Set the buttont tag number.
         cell.previewImage.tag = indexPath.row

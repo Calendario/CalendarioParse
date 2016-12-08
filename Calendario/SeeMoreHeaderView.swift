@@ -8,8 +8,10 @@
 
 import UIKit
 import KILabel
+import AVFoundation
+import AVKit
 
-class SeeMoreHeaderView: UIViewController {
+class SeeMoreHeaderView: UIViewController, AVPlayerViewControllerDelegate {
 
     @IBOutlet weak var UserNameLabel: UILabel!
     @IBOutlet weak var userPostedImage: UIImageView!
@@ -25,12 +27,16 @@ class SeeMoreHeaderView: UIViewController {
     @IBOutlet weak var likebutton: UIView!
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var likeButtonImage: UIImageView!
+    @IBOutlet weak var playButton: UIButton!
     
     var attendGestureRecognizer: UITapGestureRecognizer!
     var passedInObject: PFObject!
     internal var passedImageOne:UIImage!
     var inputParentViewController: AnyObject!
     var rsvpArray: [String] = []
+    
+    // Video player object.
+    var playerViewController:AVPlayerViewController!
     
     //MARK: LIFECYCLE METHODS
     
@@ -99,9 +105,18 @@ class SeeMoreHeaderView: UIViewController {
             self.uploaddatelabel.text = self.passedInObject["dateofevent"] as? String
             self.eventTitle.text = self.passedInObject["eventTitle"] as? String
             
-            if (passedInObject.object(forKey: "image") == nil) {
-                self.userPostedImage.image = nil
+            // Show the play button if a video exists.
+            
+            if (self.passedInObject.value(forKey: "videoData") == nil) {
+                self.playButton.alpha = 0.0
             } else {
+                self.playButton.alpha = 1.0
+            }
+            
+            // Set the image view if the event has photo(s).
+            
+            if (self.passedInObject.object(forKey: "image") == nil) {
+                self.userPostedImage.image = nil
             }
         }
     }
@@ -571,7 +586,29 @@ class SeeMoreHeaderView: UIViewController {
     // Main news item image method
     
     @IBAction func feedImageTapped(_ sender: AnyObject) {
-        PresentingViews.showPhotoViewer(self, userPostedImage: userPostedImage, userProfilePic: self.profileimageview.image!, userName: self.UserNameLabel.text!, statusObject: self.passedInObject)
+        
+        // Check if we are opening a video or photo(s).
+        
+        if (self.passedInObject.value(forKey: "videoData") != nil) {
+            
+            // Get video URL from the passed in object.
+            let videoFile:PFFile = (self.passedInObject.value(forKey: "videoData") as? PFFile)!
+            let player = AVPlayer(url: NSURL(string: videoFile.url!) as! URL)
+            self.playerViewController = AVPlayerViewController()
+            self.playerViewController.player = player
+            self.playerViewController.delegate = self
+            
+            // Open the video and play it.
+            self.inputParentViewController.present(self.playerViewController, animated: true, completion: {
+                self.playerViewController.player!.play()
+            })
+        }
+        
+        else if (self.passedInObject.value(forKey: "image") != nil) {
+            
+            // Open the event picture(s).
+            PresentingViews.showPhotoViewer(self, userPostedImage: userPostedImage, userProfilePic: self.profileimageview.image!, userName: self.UserNameLabel.text!, statusObject: self.passedInObject)
+        }
     }
     
     // like button container button action method
