@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import MobileCoreServices
 import AVFoundation
+import Photos
 
 class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UINavigationBarDelegate, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -431,39 +432,12 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
             
             // Setup the alert actions.
             let takePhoto = { (action:UIAlertAction!) -> Void in
-                
-                let camera = UIImagePickerController()
-                DispatchQueue.main.async { () -> Void in
-                    self.videoCheck = false
-                    camera.delegate = self
-                    camera.sourceType = UIImagePickerControllerSourceType.camera
-                    camera.allowsEditing = false
-                    self.present(camera, animated: true, completion: nil)
-                }
+                self.takePhoto()
             }
             let photoButton = UIAlertAction(title: "Photo", style: .default, handler: takePhoto)
             
             let takeVideo = { (action:UIAlertAction!) -> Void in
-                
-                if (UIImagePickerController.isSourceTypeAvailable(.camera)) {
-                    
-                    if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
-                        
-                        let imagePicker = UIImagePickerController()
-                        DispatchQueue.main.async { () -> Void in
-                            imagePicker.sourceType = .camera
-                            imagePicker.mediaTypes = [kUTTypeMovie as String]
-                            imagePicker.allowsEditing = false
-                            imagePicker.delegate = self
-                            self.present(imagePicker, animated: true, completion: nil)
-                        }
-                        
-                    } else {
-                        self.displayAlert("Error", alertMessage: "Calendario cannot access the device camera.")
-                    }
-                } else {
-                    self.displayAlert("Error", alertMessage: "Calendario cannot access the device camera.")
-                }
+                self.recordVideo()
             }
             let videoButton = UIAlertAction(title: "Video", style: .default, handler: takeVideo)
             
@@ -489,57 +463,176 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         if (self.videoCheck == true) {
             self.displayAlert("Error", alertMessage: "You can add a maximum of 1 video or 3 photos to the event.")
         } else {
+            self.takePhoto()
+        }
+    }
+    
+    func takePhoto() {
+        
+        self.authoriseCamera(completion: { (accessState, error) in
             
-            let camera = UIImagePickerController()
-            DispatchQueue.main.async { () -> Void in
-                self.videoCheck = false
-                camera.delegate = self
-                camera.sourceType = UIImagePickerControllerSourceType.camera
-                camera.allowsEditing = false
-                self.present(camera, animated: true, completion: nil)
+            if (accessState == true) {
+                
+                let camera = UIImagePickerController()
+                DispatchQueue.main.async { () -> Void in
+                    self.videoCheck = false
+                    camera.delegate = self
+                    camera.sourceType = UIImagePickerControllerSourceType.camera
+                    camera.allowsEditing = false
+                    self.present(camera, animated: true, completion: nil)
+                }
+                
+            } else {
+                self.displayAlert("Error", alertMessage: error)
             }
+        })
+    }
+    
+    func recordVideo() {
+        
+        if (UIImagePickerController.isSourceTypeAvailable(.camera)) {
+            
+            if (UIImagePickerController.availableCaptureModes(for: .rear) != nil) {
+                
+                self.authoriseCamera(completion: { (accessState, error) in
+                    
+                    if (accessState == true) {
+                        
+                        let imagePicker = UIImagePickerController()
+                        DispatchQueue.main.async { () -> Void in
+                            imagePicker.sourceType = .camera
+                            imagePicker.mediaTypes = [kUTTypeMovie as String]
+                            imagePicker.allowsEditing = false
+                            imagePicker.delegate = self
+                            self.present(imagePicker, animated: true, completion: nil)
+                        }
+                        
+                    } else {
+                        self.displayAlert("Error", alertMessage: error)
+                    }
+                })
+                
+            } else {
+                self.displayAlert("Error", alertMessage: "Calendario cannot access the device camera.")
+            }
+        } else {
+            self.displayAlert("Error", alertMessage: "Calendario cannot access the device camera.")
         }
     }
     
     @IBAction func VideoTapped(_ sender: AnyObject) {
         
         if (self.mediaDataArray.count == 0) {
-            
-            let imagePicker = UIImagePickerController()
-            DispatchQueue.main.async { () -> Void in
-                imagePicker.sourceType = .photoLibrary
-                imagePicker.delegate = self
-                imagePicker.mediaTypes = ["public.image", "public.movie"]
-                self.present(imagePicker, animated: true, completion: nil)
-            }
-            
+            self.useLibraryPhotoCheck(true)
         } else if (self.mediaDataArray.count == 1) {
-            self.useLibraryPhotoCheck()
+            self.useLibraryPhotoCheck(false)
         } else if (self.mediaDataArray.count == 2) {
-            self.useLibraryPhotoCheck()
+            self.useLibraryPhotoCheck(false)
         } else {
             self.displayAlert("Error", alertMessage: "You can add a maximum of 1 video or 3 photos to the event.")
         }
     }
     
-    func useLibraryPhotoCheck() {
+    func useLibraryPhotoCheck(_ withVideos: Bool) {
         
         if (self.videoCheck == true) {
             self.displayAlert("Error", alertMessage: "You can add a maximum of 1 video or 3 photos to the event.")
         } else {
             
-            var photo:UIImagePickerController!
-            photo = UIImagePickerController()
-            DispatchQueue.main.async {
-                photo.delegate = self
-                photo.sourceType = UIImagePickerControllerSourceType.photoLibrary
-                photo.allowsEditing = false
-                self.present(photo, animated: true, completion: nil)
+            self.authorisePhotoLibrary(completion: { (accessState, error) in
+                
+                if (accessState == true) {
+                    
+                    var imagePicker:UIImagePickerController!
+                    imagePicker = UIImagePickerController()
+                    DispatchQueue.main.async {
+                        imagePicker.delegate = self
+                        imagePicker.sourceType = .photoLibrary
+                        
+                        if (withVideos == true) {
+                            imagePicker.allowsEditing = true
+                            imagePicker.mediaTypes = ["public.image", "public.movie"]
+                        } else {
+                            imagePicker.allowsEditing = false
+                        }
+                        
+                        self.present(imagePicker, animated: true, completion: nil)
+                    }
+                    
+                } else {
+                    self.displayAlert("Error", alertMessage: error)
+                }
+            })
+        }
+    }
+    
+    // Photo library/Camera authorisation methods.
+    
+    func authorisePhotoLibrary(completion:@escaping (_ accessState: Bool, _ error: String) -> Void) {
+        
+        // Get the current authorization state.
+        let status = PHPhotoLibrary.authorizationStatus()
+        
+        if (status == PHAuthorizationStatus.authorized) {
+            // Access has been granted.
+            completion(true, "")
+        }
+            
+        else if (status == PHAuthorizationStatus.denied) {
+            // Access has been denied.
+            completion(false, "Calendario is unable to access your photo library. Please enable access in the Settings app and try again.")
+        }
+            
+        else if (status == PHAuthorizationStatus.notDetermined) {
+            
+            DispatchQueue.main.async(execute: {
+                
+                // Access has not been determined.
+                PHPhotoLibrary.requestAuthorization({ (newStatus) in
+                    
+                    if (newStatus == PHAuthorizationStatus.authorized) {
+                        completion(true, "")
+                    } else {
+                        completion(false, "Calendario is unable to access your photo library. Please enable access in the Settings app and try again.")
+                    }
+                })
+            })
+        }
+            
+        else if (status == PHAuthorizationStatus.restricted) {
+            // Restricted access - normally won't happen.
+            completion(false, "Calendario is unable to access your photo library. Please enable access in the Settings app and try again.")
+        }
+    }
+    
+    func authoriseCamera(completion:@escaping (_ accessState: Bool, _ error: String) -> Void) {
+        
+        AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { (cameraAccess) in
+            
+            if (cameraAccess) {
+                
+                AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeAudio, completionHandler: { (microphoneAccess) in
+                    
+                    DispatchQueue.main.async(execute: {
+                        
+                        if (microphoneAccess) {
+                            completion(true, "")
+                        } else {
+                            completion(false, "Calendario is unable to access your device microphone. Please enable access in the Settings app and try again.")
+                        }
+                    })
+                })
+                
+            } else {
+                
+                DispatchQueue.main.async(execute: {
+                    completion(false, "Calendario is unable to access your device camera. Please enable access in the Settings app and try again.")
+                })
             }
         }
     }
 
-    // UITextfield delegate methods
+    // UITextfield delegate methods.
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newLength:Int = (statusUpdateTextField.text as NSString).length + (text as NSString).length - range.length
@@ -552,7 +645,7 @@ class StatusUpdateViewController: UIViewController, UITextViewDelegate, CLLocati
         self.placeholderLabel.isHidden = true
     }
     
-    // image picker delegate methods
+    // image picker delegate methods.
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         
