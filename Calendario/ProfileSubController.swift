@@ -25,6 +25,7 @@ class ProfileSubController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var privateMessagesButton: MIBadgeButton!
     
     //MARK: VIEW DID LOAD.
     
@@ -65,6 +66,10 @@ class ProfileSubController: UIViewController {
             // 5.5 inch display - iPhone 6 Plus.
             self.profVerified.frame = CGRect(x: 223, y: 92, width: 25, height: 25)
         }
+        
+        // Set the private message button properties.
+        self.privateMessagesButton.badgeTextColor = UIColor.white
+        self.privateMessagesButton.badgeEdgeInsets = UIEdgeInsetsMake(10, 0, 0, 15)
     }
     
     //MARK: UI METHODS.

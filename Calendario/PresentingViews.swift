@@ -11,8 +11,8 @@ import UIKit
 open class PresentingViews: NSObject {
     
     class func openUserPrivateMessages(_ viewController: AnyObject) {
-        let storyboard = UIStoryboard(name: "PrivateMessageUI", bundle: nil)
-        let viewC = storyboard.instantiateViewController(withIdentifier: "MessageList") as! PrivateMessages
+        let storyboard = UIStoryboard(name: "PrivateMessagesList", bundle: nil)
+        let viewC = storyboard.instantiateViewController(withIdentifier: "PrivateMessagesList") as! PrivateMessagesList
         viewController.present(viewC, animated: true, completion: nil)
     }
     

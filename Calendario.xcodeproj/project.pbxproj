@@ -50,19 +50,17 @@
 		A27A7D591DE65EE800DEEF9B /* SAMCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A27A7D581DE65EE800DEEF9B /* SAMCache.m */; };
 		A27A7D5C1DE65F0700DEEF9B /* SAMCache+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = A27A7D5B1DE65F0700DEEF9B /* SAMCache+Image.m */; };
 		A28825F61BE3960500564EBF /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28825F51BE3960500564EBF /* MyProfileViewController.swift */; };
-		A29293651DEA1F2F004B49D5 /* PrivateMessageChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29293641DEA1F2F004B49D5 /* PrivateMessageChatView.swift */; };
-		A29293691DEA1F5E004B49D5 /* PrivateMessageChatViewUI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A29293681DEA1F5E004B49D5 /* PrivateMessageChatViewUI.storyboard */; };
-		A292936B1DEA2127004B49D5 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A292936A1DEA2127004B49D5 /* ChatCell.swift */; };
 		A29C2C051D21CC7E00C201FD /* SearchViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29C2C041D21CC7E00C201FD /* SearchViewV2.swift */; };
 		A2A7D75B1D37DC0E003BE0AF /* FullimageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2A7D75A1D37DC0E003BE0AF /* FullimageViewController.storyboard */; };
 		A2AE4A501BDCF7B8008E84B9 /* ToSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AE4A4F1BDCF7B8008E84B9 /* ToSViewController.swift */; };
 		A2AE4A521BDCF82F008E84B9 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AE4A511BDCF82F008E84B9 /* PrivacyPolicyViewController.swift */; };
 		A2C55BAC1BE7B77B00431EA0 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C55BAB1BE7B77B00431EA0 /* WebPageViewController.swift */; };
+		A2CF647B1E81A0F700A70FE7 /* PrivateMessagesList.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CF647A1E81A0F700A70FE7 /* PrivateMessagesList.m */; };
+		A2CF647D1E81A10700A70FE7 /* PrivateMessagesList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2CF647C1E81A10700A70FE7 /* PrivateMessagesList.storyboard */; };
+		A2CF64811E81A1BE00A70FE7 /* MessagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CF647F1E81A1BE00A70FE7 /* MessagePreviewCell.m */; };
+		A2CF64821E81A1BE00A70FE7 /* MessagePreviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2CF64801E81A1BE00A70FE7 /* MessagePreviewCell.xib */; };
 		A2DBF03F1DDDC2BB00705E6F /* StatusUpdateCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DBF03E1DDDC2BB00705E6F /* StatusUpdateCollectionCell.swift */; };
 		A2DBF0441DDE096900705E6F /* locationDictParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DBF0431DDE096900705E6F /* locationDictParser.m */; };
-		A2DBF0471DDE555C00705E6F /* PrivateMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DBF0461DDE555C00705E6F /* PrivateMessages.swift */; };
-		A2DBF0491DDE556800705E6F /* PrivateMessageUI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2DBF0481DDE556800705E6F /* PrivateMessageUI.storyboard */; };
-		A2DBF04B1DDF141400705E6F /* ThreadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DBF04A1DDF141400705E6F /* ThreadCell.swift */; };
 		A2DBF04F1DDF1ADE00705E6F /* SeeMoreHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DBF04E1DDF1ADE00705E6F /* SeeMoreHeaderView.swift */; };
 		A2DBF0511DDF1AEA00705E6F /* SeeMoreHeaderUI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2DBF0501DDF1AEA00705E6F /* SeeMoreHeaderUI.storyboard */; };
 		A2E881261C6A96F2008DFFAC /* MIBadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E881251C6A96F2008DFFAC /* MIBadgeButton.swift */; };
@@ -236,21 +234,21 @@
 		A27A7D5B1DE65F0700DEEF9B /* SAMCache+Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAMCache+Image.m"; sourceTree = "<group>"; };
 		A27A7D5D1DE65F5300DEEF9B /* SAMCache+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SAMCache+Private.h"; sourceTree = "<group>"; };
 		A28825F51BE3960500564EBF /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
-		A29293641DEA1F2F004B49D5 /* PrivateMessageChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateMessageChatView.swift; sourceTree = "<group>"; };
-		A29293681DEA1F5E004B49D5 /* PrivateMessageChatViewUI.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PrivateMessageChatViewUI.storyboard; sourceTree = "<group>"; };
-		A292936A1DEA2127004B49D5 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		A29C2C041D21CC7E00C201FD /* SearchViewV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewV2.swift; sourceTree = "<group>"; };
 		A2A7D75A1D37DC0E003BE0AF /* FullimageViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FullimageViewController.storyboard; sourceTree = "<group>"; };
 		A2AE4A4F1BDCF7B8008E84B9 /* ToSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToSViewController.swift; sourceTree = "<group>"; };
 		A2AE4A511BDCF82F008E84B9 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		A2B59D021DF1840B005AC14C /* Calendario.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Calendario.entitlements; sourceTree = "<group>"; };
 		A2C55BAB1BE7B77B00431EA0 /* WebPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
+		A2CF64791E81A0F700A70FE7 /* PrivateMessagesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateMessagesList.h; sourceTree = "<group>"; };
+		A2CF647A1E81A0F700A70FE7 /* PrivateMessagesList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateMessagesList.m; sourceTree = "<group>"; };
+		A2CF647C1E81A10700A70FE7 /* PrivateMessagesList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PrivateMessagesList.storyboard; sourceTree = "<group>"; };
+		A2CF647E1E81A1BE00A70FE7 /* MessagePreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePreviewCell.h; sourceTree = "<group>"; };
+		A2CF647F1E81A1BE00A70FE7 /* MessagePreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePreviewCell.m; sourceTree = "<group>"; };
+		A2CF64801E81A1BE00A70FE7 /* MessagePreviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagePreviewCell.xib; sourceTree = "<group>"; };
 		A2DBF03E1DDDC2BB00705E6F /* StatusUpdateCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusUpdateCollectionCell.swift; sourceTree = "<group>"; };
 		A2DBF0421DDE096900705E6F /* locationDictParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = locationDictParser.h; sourceTree = "<group>"; };
 		A2DBF0431DDE096900705E6F /* locationDictParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = locationDictParser.m; sourceTree = "<group>"; };
-		A2DBF0461DDE555C00705E6F /* PrivateMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateMessages.swift; sourceTree = "<group>"; };
-		A2DBF0481DDE556800705E6F /* PrivateMessageUI.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PrivateMessageUI.storyboard; sourceTree = "<group>"; };
-		A2DBF04A1DDF141400705E6F /* ThreadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadCell.swift; sourceTree = "<group>"; };
 		A2DBF04E1DDF1ADE00705E6F /* SeeMoreHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeeMoreHeaderView.swift; sourceTree = "<group>"; };
 		A2DBF0501DDF1AEA00705E6F /* SeeMoreHeaderUI.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SeeMoreHeaderUI.storyboard; sourceTree = "<group>"; };
 		A2E881251C6A96F2008DFFAC /* MIBadgeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIBadgeButton.swift; sourceTree = "<group>"; };
@@ -657,26 +655,6 @@
 			name = "My Profile section";
 			sourceTree = "<group>";
 		};
-		A29293661DEA1F34004B49D5 /* Private Message List */ = {
-			isa = PBXGroup;
-			children = (
-				A2DBF04A1DDF141400705E6F /* ThreadCell.swift */,
-				A2DBF0461DDE555C00705E6F /* PrivateMessages.swift */,
-				A2DBF0481DDE556800705E6F /* PrivateMessageUI.storyboard */,
-			);
-			name = "Private Message List";
-			sourceTree = "<group>";
-		};
-		A29293671DEA1F4C004B49D5 /* Chat View */ = {
-			isa = PBXGroup;
-			children = (
-				A292936A1DEA2127004B49D5 /* ChatCell.swift */,
-				A29293641DEA1F2F004B49D5 /* PrivateMessageChatView.swift */,
-				A29293681DEA1F5E004B49D5 /* PrivateMessageChatViewUI.storyboard */,
-			);
-			name = "Chat View";
-			sourceTree = "<group>";
-		};
 		A29C2C021D21CC4800C201FD /* Old */ = {
 			isa = PBXGroup;
 			children = (
@@ -711,11 +689,31 @@
 			name = "Web Page Viewer";
 			sourceTree = "<group>";
 		};
+		A2CF64771E81A0A800A70FE7 /* Message Thread List */ = {
+			isa = PBXGroup;
+			children = (
+				A2CF64791E81A0F700A70FE7 /* PrivateMessagesList.h */,
+				A2CF647A1E81A0F700A70FE7 /* PrivateMessagesList.m */,
+				A2CF647C1E81A10700A70FE7 /* PrivateMessagesList.storyboard */,
+				A2CF647E1E81A1BE00A70FE7 /* MessagePreviewCell.h */,
+				A2CF647F1E81A1BE00A70FE7 /* MessagePreviewCell.m */,
+				A2CF64801E81A1BE00A70FE7 /* MessagePreviewCell.xib */,
+			);
+			name = "Message Thread List";
+			sourceTree = "<group>";
+		};
+		A2CF64781E81A0BB00A70FE7 /* Message Detail View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Message Detail View";
+			sourceTree = "<group>";
+		};
 		A2DBF0451DDE552300705E6F /* Private Messages Class */ = {
 			isa = PBXGroup;
 			children = (
-				A29293671DEA1F4C004B49D5 /* Chat View */,
-				A29293661DEA1F34004B49D5 /* Private Message List */,
+				A2CF64781E81A0BB00A70FE7 /* Message Detail View */,
+				A2CF64771E81A0A800A70FE7 /* Message Thread List */,
 			);
 			name = "Private Messages Class";
 			sourceTree = "<group>";
@@ -1235,6 +1233,7 @@
 			files = (
 				78CE15B91C95CE2F00257C4B /* following-icon.png in Resources */,
 				D3DE97901C80CC0400F4DE7B /* SF-UI-Display-Semibold.otf in Resources */,
+				A2CF64821E81A1BE00A70FE7 /* MessagePreviewCell.xib in Resources */,
 				78CE15BA1C95CE2F00257C4B /* post-icon.png in Resources */,
 				D3DE978E1C80CC0400F4DE7B /* SF-UI-Display-Medium.otf in Resources */,
 				D3DE97991C80CC0400F4DE7B /* SF-UI-Text-Medium.otf in Resources */,
@@ -1256,7 +1255,6 @@
 				D3DE97931C80CC0400F4DE7B /* SF-UI-Text-Bold.otf in Resources */,
 				D3DE97961C80CC0400F4DE7B /* SF-UI-Text-HeavyItalic.otf in Resources */,
 				D3DE979B1C80CC0400F4DE7B /* SF-UI-Text-Regular.otf in Resources */,
-				A29293691DEA1F5E004B49D5 /* PrivateMessageChatViewUI.storyboard in Resources */,
 				D3DE978D1C80CC0400F4DE7B /* SF-UI-Display-Light.otf in Resources */,
 				D3DE978F1C80CC0400F4DE7B /* SF-UI-Display-Regular.otf in Resources */,
 				A259E8911DD9C22300963F0C /* EditProfileUI.storyboard in Resources */,
@@ -1273,7 +1271,7 @@
 				A21147411D6F0E8800C0C369 /* ResetPassUI.storyboard in Resources */,
 				D3DE979C1C80CC0400F4DE7B /* SF-UI-Text-RegularItalic.otf in Resources */,
 				D3DE978A1C80CC0400F4DE7B /* SF-UI-Display-Black.otf in Resources */,
-				A2DBF0491DDE556800705E6F /* PrivateMessageUI.storyboard in Resources */,
+				A2CF647D1E81A10700A70FE7 /* PrivateMessagesList.storyboard in Resources */,
 				A226AB351DE59BF6002139C4 /* TimelineCalendarUI.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1351,6 +1349,7 @@
 				A2DBF0441DDE096900705E6F /* locationDictParser.m in Sources */,
 				E2EE565C1BF199F70064BA1D /* ChameleonConstants.m in Sources */,
 				E23083681C7426EB001C0142 /* FSCalendar.m in Sources */,
+				A2CF64811E81A1BE00A70FE7 /* MessagePreviewCell.m in Sources */,
 				A2E881261C6A96F2008DFFAC /* MIBadgeButton.swift in Sources */,
 				E2D09C9C1BCCC59A003F4651 /* UIColor+CL.m in Sources */,
 				A22038041C5D35FF000080AC /* RecommendedUsersCustomCell.swift in Sources */,
@@ -1358,11 +1357,9 @@
 				A2C55BAC1BE7B77B00431EA0 /* WebPageViewController.swift in Sources */,
 				E2E0D7071BC9950800662E70 /* AppDelegate.m in Sources */,
 				E2065DAC1C3EDBB40054AB2A /* FollowersTableViewController.swift in Sources */,
-				A2DBF0471DDE555C00705E6F /* PrivateMessages.swift in Sources */,
 				A22038021C5D332F000080AC /* RecommendedUsersViewController.swift in Sources */,
 				E230836A1C7426EB001C0142 /* FSCalendarAppearance.m in Sources */,
 				A211473E1D6DB76500C0C369 /* AllInOneSignUpAndLoginViewController.swift in Sources */,
-				A2DBF04B1DDF141400705E6F /* ThreadCell.swift in Sources */,
 				A26701F21C369D5B0041E1D1 /* ManageUser.swift in Sources */,
 				E2EE565B1BF199F70064BA1D /* Chameleon_.m in Sources */,
 				E2D09C911BCCC575003F4651 /* DayTitleLabel.m in Sources */,
@@ -1388,7 +1385,6 @@
 				A2AE4A521BDCF82F008E84B9 /* PrivacyPolicyViewController.swift in Sources */,
 				A234579A1C768F5700376F2F /* LikesCustomCell.swift in Sources */,
 				784E961B1CA1980D00085057 /* LastIntroViewController.swift in Sources */,
-				A292936B1DEA2127004B49D5 /* ChatCell.swift in Sources */,
 				E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */,
 				A2AE4A501BDCF7B8008E84B9 /* ToSViewController.swift in Sources */,
 				E2D09C9B1BCCC59A003F4651 /* NSDictionary+CL.m in Sources */,
@@ -1418,6 +1414,7 @@
 				E230836F1C7426EB001C0142 /* FSCalendarFlowLayout.m in Sources */,
 				A27A7D591DE65EE800DEEF9B /* SAMCache.m in Sources */,
 				E1D759AC1C1243160017B53F /* locationViewController.m in Sources */,
+				A2CF647B1E81A0F700A70FE7 /* PrivateMessagesList.m in Sources */,
 				E2EE565F1BF199F70064BA1D /* UIColor+Chameleon.m in Sources */,
 				E2D09C901BCCC575003F4651 /* DailyCalendarView.m in Sources */,
 				E23083741C7426EB001C0142 /* NSString+FSExtension.m in Sources */,
@@ -1435,7 +1432,6 @@
 				E2EE56611BF199F70064BA1D /* UIImage+ChameleonPrivate.m in Sources */,
 				E2065DAE1C3EEE9D0054AB2A /* FollowersTableViewCell.swift in Sources */,
 				E2F3EF901BE1C75600F42433 /* CommentsTableViewCell.swift in Sources */,
-				A29293651DEA1F2F004B49D5 /* PrivateMessageChatView.swift in Sources */,
 				E27ACC811BEDA64100503DD7 /* TimelineViewController.swift in Sources */,
 				A2DBF03F1DDDC2BB00705E6F /* StatusUpdateCollectionCell.swift in Sources */,
 				E151AF721BD72D6500811A31 /* tabBarViewController.m in Sources */,

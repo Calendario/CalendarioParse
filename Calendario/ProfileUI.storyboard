@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="WzW-kz-hyQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="WzW-kz-hyQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -43,7 +43,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="User Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VF0-Lz-pNd">
-                                        <rect key="frame" x="62" y="42" width="195" height="20"/>
+                                        <rect key="frame" x="89" y="42" width="143" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="16"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -91,8 +91,8 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tU7-s0-dJ5">
-                                        <rect key="frame" x="267" y="40" width="62" height="22"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tU7-s0-dJ5">
+                                        <rect key="frame" x="267" y="41" width="60" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="more_button"/>
                                     </button>
@@ -123,8 +123,8 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oax-7K-fXU">
-                                        <rect key="frame" x="20" y="41" width="22" height="22"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oax-7K-fXU">
+                                        <rect key="frame" x="18" y="41" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="back_button"/>
                                     </button>
@@ -144,6 +144,11 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3OS-yR-had" customClass="MIBadgeButton" customModule="Calendario" customModuleProvider="target">
+                                        <rect key="frame" x="241" y="36" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="inbox"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.19036321989999999" green="0.19036321989999999" blue="0.19036321989999999" alpha="0.81000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -158,6 +163,7 @@
                         <outlet property="backgroundImage" destination="5cc-GM-oJK" id="0Ss-Ca-gUt"/>
                         <outlet property="followButton" destination="kLY-V7-C4F" id="P6h-6I-wRl"/>
                         <outlet property="moreButton" destination="tU7-s0-dJ5" id="ghx-52-ZiK"/>
+                        <outlet property="privateMessagesButton" destination="3OS-yR-had" id="gNU-i9-Nza"/>
                         <outlet property="profDesc" destination="OA1-Q2-d1o" id="7TD-MK-T9V"/>
                         <outlet property="profFollowers" destination="ChG-BY-Ynk" id="rr4-gN-sUG"/>
                         <outlet property="profFollowing" destination="o40-AD-tlr" id="fPK-ZG-mur"/>
@@ -179,6 +185,7 @@
         <image name="FollowersIcon" width="75" height="48"/>
         <image name="back_button" width="22" height="16"/>
         <image name="bookmarkicon" width="120" height="120"/>
+        <image name="inbox" width="32" height="32"/>
         <image name="more_button" width="22" height="16"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

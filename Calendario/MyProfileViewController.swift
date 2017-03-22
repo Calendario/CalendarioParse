@@ -68,6 +68,16 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
     
     // Setup the on screen button actions.
     
+    @IBAction func viewPrivateMessages(_ sender: MIBadgeButton) {
+        
+        // Only show the private messages if the
+        // user is viewing his/her own profile.
+        
+        if ((passedUser == nil) || ((passedUser != nil) && (passedUser.username! == "\(PFUser.current()!.username!)"))) {
+            PresentingViews.openUserPrivateMessages(self)
+        }
+    }
+    
     @IBAction func openFollowers(_ sender: UIButton) {
         self.GotoFollowerView()
     }
@@ -411,6 +421,7 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             self.profileSubview.moreButton.addTarget(self, action: #selector(MyProfileViewController.openSettingsOrMoreSection(_:)), for: .touchUpInside)
             self.profileSubview.backButton.addTarget(self, action: #selector(MyProfileViewController.dismissProfile(_:)), for: .touchUpInside)
             self.profileSubview.followButton.addTarget(self, action: #selector(MyProfileViewController.followUserTapped(_:)), for: .touchUpInside)
+            self.profileSubview.privateMessagesButton.addTarget(self, action: #selector(MyProfileViewController.viewPrivateMessages(_:)), for: .touchUpInside)
             
             // The header view has been set.
             self.headerSetCheck = true
@@ -443,6 +454,16 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
                 self.profileSubview.backButton.alpha = 1.0
             }
             
+            // Enable the private message button.
+            self.profileSubview.privateMessagesButton.isEnabled = true
+            self.profileSubview.privateMessagesButton.isUserInteractionEnabled = true
+            self.profileSubview.privateMessagesButton.alpha = 1.0
+        
+            ///// FIX /////
+            // Set the private message button badge.
+            self.profileSubview.privateMessagesButton.badgeString = nil
+            ///// FIX /////
+            
             // Disable the follow user button.
             self.profileSubview.followButton.isUserInteractionEnabled = false
             self.profileSubview.followButton.isEnabled = false
@@ -452,6 +473,11 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         }
             
         else {
+            
+            // Disable the private message button.
+            self.profileSubview.privateMessagesButton.isEnabled = false
+            self.profileSubview.privateMessagesButton.isUserInteractionEnabled = false
+            self.profileSubview.privateMessagesButton.alpha = 0.0
             
             // Enable the follow user button.
             self.profileSubview.followButton.isUserInteractionEnabled = true
