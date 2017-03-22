@@ -7,6 +7,7 @@
 //
 
 #import "PrivateMessagesList.h"
+#import "MessageUserSelector.h"
 
 @interface PrivateMessagesList ()
 
@@ -22,6 +23,10 @@
 
 -(IBAction)createNewMessage:(id)sender {
     
+    // Open the user selector view.
+    UIStoryboard *storyFile = [UIStoryboard storyboardWithName:@"MessageUserSelector" bundle:nil];
+    UIViewController *screen = [storyFile instantiateViewControllerWithIdentifier:@"MessageUserSelector"];
+    [self presentViewController:screen animated:YES completion:nil];
 }
 
 /// VIEW DID LOAD ///
@@ -29,6 +34,9 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // Set the user selected notification.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userSelected:) name:@"user_selected_private_message" object:nil];
     
     // Intialise the message array.
     messageData = [[NSMutableArray alloc] init];
@@ -44,6 +52,16 @@
 }
 
 /// DATA METHODS ///
+
+-(void)userSelected:(NSNotification *)data {
+    
+    if (data != nil) {
+        
+        PFUser *user = (PFUser *)[data object];
+        
+        NSLog(@"USER INFO: %@ | %@", user.username, user.objectId);
+    }
+}
 
 -(void)loadThreadsForCurrentUser {
     
@@ -299,11 +317,11 @@
         }
         
         // Change the user pciture into a circle.
-        CGPoint save_center = cell.profilePicture.center;
-        CGRect new_frame = CGRectMake(cell.profilePicture.frame.origin.x, cell.profilePicture.frame.origin.y, 50.0, 50.0);
-        cell.profilePicture.frame = new_frame;
+        CGPoint saveCenter = cell.profilePicture.center;
+        CGRect newFrame = CGRectMake(cell.profilePicture.frame.origin.x, cell.profilePicture.frame.origin.y, 48.0, 48.0);
+        cell.profilePicture.frame = newFrame;
         cell.profilePicture.layer.cornerRadius = (50.0 / 2.0);
-        cell.profilePicture.center = save_center;
+        cell.profilePicture.center = saveCenter;
         
         // Get the other user's profile data.
         [self getUserCachedData:userID :^(NSString *username, UIImage *picture) {

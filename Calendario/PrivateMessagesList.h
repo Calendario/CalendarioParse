@@ -28,6 +28,7 @@ typedef void(^threadCompletion)(NSString *preview);
 -(IBAction)createNewMessage:(id)sender;
 
 // Data methods.
+-(void)userSelected:(NSNotification *)data;
 -(void)loadThreadsForCurrentUser;
 -(void)getPreviewForThread:(NSString *)threadID :(NSString *)otherUser :(threadCompletion)dataBlock;
 -(void)getUserCachedData:(NSString *)userID :(userCompletion)dataBlock;
