@@ -19,18 +19,29 @@ typedef void(^threadCompletion)(NSString *preview);
     // Messages table view.
     IBOutlet UITableView *messagesList;
     
+    // Message display control.
+    IBOutlet UISegmentedControl *messageControl;
+    
     // Main messages array.
     NSMutableArray *messageData;
+    NSMutableArray *messageDataArchived;
+    
+    // Data reload timer.
+    NSTimer *reloadTimer;
 }
 
 // Buttons.
 -(IBAction)done:(id)sender;
 -(IBAction)createNewMessage:(id)sender;
+-(IBAction)changeListType:(id)sender;
 
 // Data methods.
 -(void)userSelected:(NSNotification *)data;
+-(void)checkArchivedMessages:(PFUser *)user;
+-(void)openNewMessageThread:(PFUser *)user;
+-(void)openExistingMessageThread:(PFObject *)thread;
 -(void)loadThreadsForCurrentUser;
--(void)getPreviewForThread:(NSString *)threadID :(NSString *)otherUser :(threadCompletion)dataBlock;
+-(void)getPreviewForThread:(PFObject *)thread :(NSString *)otherUser :(threadCompletion)dataBlock;
 -(void)getUserCachedData:(NSString *)userID :(userCompletion)dataBlock;
 
 // Info methods.

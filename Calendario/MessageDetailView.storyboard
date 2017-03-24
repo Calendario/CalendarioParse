@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="FQe-cy-mI5">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Message Detail View-->
+        <scene sceneID="zIA-QK-8iv">
+            <objects>
+                <viewController storyboardIdentifier="MessageDetailView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FQe-cy-mI5" customClass="MessageDetailView" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="llo-V9-ugr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="xHq-V7-5z4">
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="FQe-cy-mI5" id="uxM-uM-j4m"/>
+                                    <outlet property="delegate" destination="FQe-cy-mI5" id="F37-cX-8ln"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" misplaced="YES" id="MJt-8B-9wY" userLabel="Status Bar BG">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" misplaced="YES" translucent="NO" id="spb-Cc-Od4">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.2156862745" green="0.60784313729999995" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="20"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem id="VHc-Bo-Ffh">
+                                        <barButtonItem key="leftBarButtonItem" image="back_button" id="urC-Hv-v5i">
+                                            <inset key="imageInsets" minX="-2" minY="2" maxX="6" maxY="2"/>
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="done:" destination="FQe-cy-mI5" id="eNm-4O-1YP"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" misplaced="YES" id="3IJ-u9-ApZ">
+                                <rect key="frame" x="0.0" y="434" width="320" height="46"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Direct Message" minimumFontSize="17" id="dzU-Fa-RaP" userLabel="Comment TextField">
+                                        <rect key="frame" x="38" y="6" width="199" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="twitter" returnKeyType="send"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GbD-jE-C70">
+                                        <rect key="frame" x="245" y="6" width="70" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Send">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="send:" destination="FQe-cy-mI5" eventType="touchUpInside" id="zoa-YR-wDF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6AN-FM-qPj">
+                                        <rect key="frame" x="0.0" y="0.0" width="37" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <state key="normal" image="clip"/>
+                                        <connections>
+                                            <action selector="addAttachment:" destination="FQe-cy-mI5" eventType="touchUpInside" id="hDa-S4-eAD"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" misplaced="YES" id="Ows-kN-Sc9">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" id="CgY-Zy-xlu">
+                                        <rect key="frame" x="40" y="176" width="240" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gJL-DG-vqn">
+                                                <rect key="frame" x="0.0" y="98" width="74" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <state key="normal" title="Record">
+                                                    <color key="titleColor" red="0.68497850530000004" green="0.20723859489999999" blue="0.20493155069999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="startRecording:" destination="FQe-cy-mI5" eventType="touchUpInside" id="Wtk-dt-h8U"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xhk-ZG-oVh">
+                                                <rect key="frame" x="196" y="0.0" width="44" height="38"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="cancel_icon"/>
+                                                <connections>
+                                                    <action selector="closeRecordView:" destination="FQe-cy-mI5" eventType="touchUpInside" id="whz-hp-PDZ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="J6l-Jw-ibD">
+                                                <rect key="frame" x="166" y="98" width="74" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <state key="normal" title="Send">
+                                                    <color key="titleColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="sendVoiceMessage:" destination="FQe-cy-mI5" eventType="touchUpInside" id="ipq-IM-ebD"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4cd-ng-B3e">
+                                                <rect key="frame" x="37" y="57" width="166" height="31"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Voice Message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bGa-tG-uTy">
+                                                <rect key="frame" x="37" y="32" width="166" height="31"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2Q3-1f-4SA">
+                                                <rect key="frame" x="83" y="98" width="74" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <state key="normal" title="Play"/>
+                                                <connections>
+                                                    <action selector="playCurrentRecording:" destination="FQe-cy-mI5" eventType="touchUpInside" id="fpl-Z6-cGo"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.43346178209459457" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="audioBackgroundView" destination="Ows-kN-Sc9" id="waf-XH-my2"/>
+                        <outlet property="audioDuration" destination="4cd-ng-B3e" id="3sb-8U-y7X"/>
+                        <outlet property="audioView" destination="CgY-Zy-xlu" id="acj-hp-fwi"/>
+                        <outlet property="chatList" destination="xHq-V7-5z4" id="JLx-Vx-Z9Y"/>
+                        <outlet property="commentContainer" destination="3IJ-u9-ApZ" id="dTq-Ng-ARC"/>
+                        <outlet property="messageField" destination="dzU-Fa-RaP" id="eNv-K7-L9l"/>
+                        <outlet property="playAudioButton" destination="2Q3-1f-4SA" id="nHx-xy-RxS"/>
+                        <outlet property="recordAudioButton" destination="gJL-DG-vqn" id="haC-H4-wRZ"/>
+                        <outlet property="sendAudioButton" destination="J6l-Jw-ibD" id="JQ4-b1-eje"/>
+                        <outlet property="sendButton" destination="GbD-jE-C70" id="IlK-6j-PeB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MeT-0t-6s5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="179" y="177"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back_button" width="22" height="16"/>
+        <image name="cancel_icon" width="18" height="18"/>
+        <image name="clip" width="26" height="30"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

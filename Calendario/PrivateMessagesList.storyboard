@@ -32,7 +32,8 @@
                                     <color key="textShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Messages" id="dCh-Zd-GcR">
+                                    <navigationItem id="dCh-Zd-GcR">
+                                        <nil key="title"/>
                                         <barButtonItem key="leftBarButtonItem" image="back_button" id="wdv-g1-tjt">
                                             <inset key="imageInsets" minX="-2" minY="2" maxX="6" maxY="2"/>
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -40,6 +41,18 @@
                                                 <action selector="done:" destination="yjp-xJ-xyl" id="OT9-jr-cDB"/>
                                             </connections>
                                         </barButtonItem>
+                                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="SLx-Rq-vuB">
+                                            <rect key="frame" x="96" y="8" width="128" height="29"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="Inbox"/>
+                                                <segment title="Archive"/>
+                                            </segments>
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="changeListType:" destination="yjp-xJ-xyl" eventType="valueChanged" id="2mg-pV-xZs"/>
+                                            </connections>
+                                        </segmentedControl>
                                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="oyN-7i-G25">
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
@@ -63,6 +76,7 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="messageControl" destination="SLx-Rq-vuB" id="0Ka-eh-SaK"/>
                         <outlet property="messagesList" destination="qnD-fu-g9V" id="wTA-OR-vZZ"/>
                     </connections>
                 </viewController>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatVideoCellOtherUser" rowHeight="183" id="A8j-s5-UMX" customClass="ChatVideoCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="183"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A8j-s5-UMX" id="Id5-6J-fC4">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="182"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="chatBubbleTriangle" id="gRM-lP-FfG">
+                        <rect key="frame" x="57" y="15" width="16" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="hVb-Hz-04H">
+                        <rect key="frame" x="6" y="8" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="07/04/2017 at 10:30 AM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BfX-kd-7QH">
+                        <rect key="frame" x="69" y="160" width="243" height="22"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                        <color key="textColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" misplaced="YES" id="v1J-Ys-bEl">
+                        <rect key="frame" x="69" y="8" width="243" height="153"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="0eg-Lj-b5D">
+                                <rect key="frame" x="5" y="5" width="233" height="143"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0d8-o4-jhf">
+                                <rect key="frame" x="90" y="44" width="64" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="playbutton"/>
+                                <connections>
+                                    <action selector="playVideo:" destination="A8j-s5-UMX" eventType="touchUpInside" id="3IV-g6-NCM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.12941176469999999" green="0.52941176469999995" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                </subviews>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="boxView" destination="v1J-Ys-bEl" id="tF4-im-ArH"/>
+                <outlet property="dateLabel" destination="BfX-kd-7QH" id="faS-jF-f1e"/>
+                <outlet property="playButton" destination="0d8-o4-jhf" id="bQ0-7o-vt9"/>
+                <outlet property="profilePicture" destination="hVb-Hz-04H" id="zb8-Nh-92R"/>
+                <outlet property="triangleView" destination="gRM-lP-FfG" id="yY2-kU-413"/>
+                <outlet property="videoThumbnail" destination="0eg-Lj-b5D" id="vYf-Oz-Iny"/>
+            </connections>
+            <point key="canvasLocation" x="29" y="26"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="chatBubbleTriangle" width="16" height="16"/>
+        <image name="playbutton" width="64" height="64"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

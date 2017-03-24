@@ -17,6 +17,7 @@
 /// BUTTONS ///
 
 -(IBAction)done:(id)sender {
+    [userSearchBar resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -123,6 +124,9 @@
     
     // Deselect the selected table view cell.
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // Hide the on screen keyboard.
+    [userSearchBar resignFirstResponder];
     
     // Close the user selector view.
     [self dismissViewControllerAnimated:YES completion:^{

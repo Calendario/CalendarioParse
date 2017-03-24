@@ -8,6 +8,7 @@
 
 #import "PrivateMessagesList.h"
 #import "MessageUserSelector.h"
+#import "MessageDetailView.h"
 
 @interface PrivateMessagesList ()
 
@@ -18,7 +19,9 @@
 /// BUTTONS ///
 
 -(IBAction)done:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [reloadTimer invalidate];
+    }];
 }
 
 -(IBAction)createNewMessage:(id)sender {
@@ -27,6 +30,10 @@
     UIStoryboard *storyFile = [UIStoryboard storyboardWithName:@"MessageUserSelector" bundle:nil];
     UIViewController *screen = [storyFile instantiateViewControllerWithIdentifier:@"MessageUserSelector"];
     [self presentViewController:screen animated:YES completion:nil];
+}
+
+-(IBAction)changeListType:(id)sender {
+    [messagesList reloadData];
 }
 
 /// VIEW DID LOAD ///
@@ -38,17 +45,15 @@
     // Set the user selected notification.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userSelected:) name:@"user_selected_private_message" object:nil];
     
-    // Intialise the message array.
+    // Intialise the message arrays.
     messageData = [[NSMutableArray alloc] init];
-}
-
-/// VIEW DID APPEAR ///
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
+    messageDataArchived = [[NSMutableArray alloc] init];
     
-    // Load the logged in users private messages.
+    // Load all the threads.
     [self loadThreadsForCurrentUser];
+    
+    // Keep checking for new threads (every 1.5 seconds).
+    reloadTimer = [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(loadThreadsForCurrentUser) userInfo:nil repeats:YES];
 }
 
 /// DATA METHODS ///
@@ -59,8 +64,83 @@
         
         PFUser *user = (PFUser *)[data object];
         
-        NSLog(@"USER INFO: %@ | %@", user.username, user.objectId);
+        if ([messageData count] > 0) {
+            
+            PFObject *loopThread = nil;
+            
+            for (NSUInteger loop = 0; loop < [messageData count]; loop++) {
+                
+                // Get the loop data.
+                PFObject *loopData = [messageData[loop] objectAtIndex:0];
+                
+                // Check if a message thread with the
+                // selected user already exists or not.
+                
+                if (([[(PFUser *)[loopData valueForKey:@"userA"] objectId] isEqualToString:[user objectId]]) || ([[(PFUser *)[loopData valueForKey:@"userB"] objectId] isEqualToString:[user objectId]])) {
+                    loopThread = loopData;
+                    break;
+                }
+            }
+            
+            if (loopThread == nil) {
+                [self checkArchivedMessages:user];
+            } else {
+                [self openExistingMessageThread:loopThread];
+            }
+            
+        } else {
+            [self checkArchivedMessages:user];
+        }
     }
+}
+
+-(void)checkArchivedMessages:(PFUser *)user {
+    
+    if ([messageDataArchived count] > 0) {
+        
+        PFObject *loopThread = nil;
+        
+        for (NSUInteger loop = 0; loop < [messageDataArchived count]; loop++) {
+            
+            // Get the loop data.
+            PFObject *loopData = [messageDataArchived[loop] objectAtIndex:0];
+            
+            // Check if a message thread with the
+            // selected user already exists or not.
+            
+            if (([[(PFUser *)[loopData valueForKey:@"userA"] objectId] isEqualToString:[user objectId]]) || ([[(PFUser *)[loopData valueForKey:@"userB"] objectId] isEqualToString:[user objectId]])) {
+                loopThread = loopData;
+                break;
+            }
+        }
+        
+        if (loopThread == nil) {
+            [self openNewMessageThread:user];
+        } else {
+            [self openExistingMessageThread:loopThread];
+        }
+        
+    } else {
+        [self openNewMessageThread:user];
+    }
+}
+
+-(void)openNewMessageThread:(PFUser *)user {
+    
+    // Open the message detail view.
+    UIStoryboard *storyFile = [UIStoryboard storyboardWithName:@"MessageDetailView" bundle:nil];
+    MessageDetailView *screen = [storyFile instantiateViewControllerWithIdentifier:@"MessageDetailView"];
+    [screen setPassedInUser:user];
+    [self presentViewController:screen animated:YES completion:nil];
+}
+
+-(void)openExistingMessageThread:(PFObject *)thread {
+    
+    // Open the message detail view.
+    UIStoryboard *storyFile = [UIStoryboard storyboardWithName:@"MessageDetailView" bundle:nil];
+    MessageDetailView *screen = [storyFile instantiateViewControllerWithIdentifier:@"MessageDetailView"];
+    [screen setPassedInThread:thread];
+    [self presentViewController:screen animated:YES completion:nil];
 }
 
 -(void)loadThreadsForCurrentUser {
@@ -88,8 +168,9 @@
             
             if (threadCount > 0) {
                 
-                // Create the temporary array.
+                // Create the temporary arrays.
                 NSMutableArray *tempData = [[NSMutableArray alloc] init];
+                NSMutableArray *tempDataArchived = [[NSMutableArray alloc] init];
                 
                 // Loop through the data and sort it.
                 
@@ -106,6 +187,8 @@
                         
                         if ([[thread valueForKey:@"userAHidden"] boolValue] == NO) {
                             [tempData addObject:@[thread, @"A"]];
+                        } else {
+                            [tempDataArchived addObject:@[thread, @"A"]];
                         }
                         
                     } else {
@@ -114,17 +197,21 @@
                         
                         if ([[thread valueForKey:@"userBHidden"] boolValue] == NO) {
                             [tempData addObject:@[thread, @"B"]];
+                        } else {
+                            [tempDataArchived addObject:@[thread, @"B"]];
                         }
                     }
                 }
                 
                 // Copy in the new thread data.
                 messageData = [tempData mutableCopy];
+                messageDataArchived = [tempDataArchived mutableCopy];
                 
             } else {
                 
                 // Clear the message list.
                 [messageData removeAllObjects];
+                [messageDataArchived removeAllObjects];
             }
             
             // Refresh the table view.
@@ -138,16 +225,16 @@
     }];
 }
 
--(void)getPreviewForThread:(NSString *)threadID :(NSString *)otherUser :(threadCompletion)dataBlock {
+-(void)getPreviewForThread:(PFObject *)thread :(NSString *)otherUser :(threadCompletion)dataBlock {
     
     // Setup the message data query.
-    PFQuery *messageQuery = [PFQuery queryWithClassName:@"privateMessageMedia"];
-    [messageQuery whereKey:@"threadID" equalTo:threadID];
+    PFQuery *messageQuery = [PFQuery queryWithClassName:@"privateMessagesMedia"];
+    [messageQuery whereKey:@"threadID" equalTo:[thread objectId]];
     
     // Run the message data query.
     [messageQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         
-        if (error == nil) {
+        if ((error == nil) && (object != nil)) {
             
             // Get the message type.
             NSString *messageType = [object valueForKey:@"typeData"];
@@ -273,6 +360,12 @@
     
     // Deselect the selected table view cell.
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (messageControl.selectedSegmentIndex == 0) {
+        [self openExistingMessageThread:(PFObject *)[messageData[indexPath.row] objectAtIndex:0]];
+    } else {
+        [self openExistingMessageThread:(PFObject *)[messageDataArchived[indexPath.row] objectAtIndex:0]];
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -288,7 +381,7 @@
     
     // Check if there is any message data.
     
-    if ([messageData count] > 0) {
+    if ((messageControl.selectedSegmentIndex == 0 ? [messageData count] : [messageDataArchived count]) > 0) {
         
         // Show all the main views.
         cell.profilePicture.alpha = 1.0;
@@ -300,10 +393,18 @@
         cell.noMessagesLabel.alpha = 0.0;
         
         // Get the current table view data object.
-        PFObject *data = [messageData[indexPath.row] objectAtIndex:0];
+        PFObject *data = nil;
         
         // Get the current data object user.
-        NSString *userCheck = [messageData[indexPath.row] objectAtIndex:1];
+        NSString *userCheck = nil;
+        
+        if (messageControl.selectedSegmentIndex == 0) {
+            data = [messageData[indexPath.row] objectAtIndex:0];
+            userCheck = [messageData[indexPath.row] objectAtIndex:1];
+        } else {
+            data = [messageDataArchived[indexPath.row] objectAtIndex:0];
+            userCheck = [messageDataArchived[indexPath.row] objectAtIndex:1];
+        }
         
         // Create the user ID string.
         NSString *userID = nil;
@@ -333,7 +434,7 @@
             }
             
             // Get the latest message of the thread.
-            [self getPreviewForThread:[data valueForKey:@"threadID"] :username :^(NSString *preview) {
+            [self getPreviewForThread:data :username :^(NSString *preview) {
                 
                 if (preview == nil) {
                     [cell.descriptionLabel setText:@"-"];
@@ -388,7 +489,12 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return ([messageData count] > 0 ? 76 : messagesList.frame.size.height);
+    
+    if (messageControl.selectedSegmentIndex == 0) {
+        return ([messageData count] > 0 ? 76 : messagesList.frame.size.height);
+    } else {
+        return ([messageDataArchived count] > 0 ? 76 : messagesList.frame.size.height);
+    }
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -396,7 +502,12 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return ([messageData count] > 0 ? [messageData count] : 1);
+    
+    if (messageControl.selectedSegmentIndex == 0) {
+        return ([messageData count] > 0 ? [messageData count] : 1);
+    } else {
+        return ([messageDataArchived count] > 0 ? [messageDataArchived count] : 1);
+    }
 }
 
 /// OTHER METHODS ///
