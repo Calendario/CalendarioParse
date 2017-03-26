@@ -24,7 +24,7 @@ typedef void(^pictureCompletion)(UIImage *picture);
 typedef void(^mapScreenshotCompletion)(UIImage *picture);
 typedef void(^locationCheckCompletion)(BOOL dataCheck);
 
-@interface MessageDetailView : UIViewController <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate, AVAudioPlayerDelegate, AVAudioRecorderDelegate> {
+@interface MessageDetailView : UIViewController <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate, AVAudioPlayerDelegate, AVAudioRecorderDelegate, UITextFieldDelegate> {
     
     // Message container views.
     IBOutlet UITextField *messageField;

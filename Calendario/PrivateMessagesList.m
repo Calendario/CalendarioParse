@@ -230,6 +230,7 @@
     // Setup the message data query.
     PFQuery *messageQuery = [PFQuery queryWithClassName:@"privateMessagesMedia"];
     [messageQuery whereKey:@"threadID" equalTo:[thread objectId]];
+    [messageQuery orderByDescending:@"createdAt"];
     
     // Run the message data query.
     [messageQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {

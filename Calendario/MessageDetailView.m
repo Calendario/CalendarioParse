@@ -401,6 +401,12 @@
     
     // Hide the audio view by default.
     [audioBackgroundView setAlpha:0.0];
+    
+    // Ensure that the table view cells cannot be selected.
+    [chatList setAllowsSelection:NO];
+    
+    // Ensure the comment container does not block the table view.
+    [chatList setContentInset:UIEdgeInsetsMake(0, 0, commentContainer.frame.size.height, 0)];
         
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
@@ -452,12 +458,40 @@
             if (error == nil) {
                 
                 if ([objects count] > 0) {
-                    chatMessages = [objects mutableCopy];
-                } else {
-                    [chatMessages removeAllObjects];
+                    
+                    if ([chatMessages count] > 0) {
+                        
+                        for (NSUInteger newDataLoop = 0; newDataLoop < [objects count]; newDataLoop++) {
+                            
+                            // Add new data check.
+                            BOOL addDataCheck = YES;
+                            
+                            // Get the current data object.
+                            PFObject *newData = [objects objectAtIndex:newDataLoop];
+                            
+                            for (NSUInteger chatLoop = 0; chatLoop < [chatMessages count]; chatLoop++) {
+                                
+                                if ([[(PFObject *)chatMessages[chatLoop] objectId] isEqualToString:[newData objectId]]) {
+                                    addDataCheck = NO;
+                                    break;
+                                }
+                            }
+                            
+                            if (addDataCheck == YES) {
+                                [chatMessages addObject:newData];
+                                [chatList insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:newDataLoop inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                                
+                                if ([chatList contentSize].height > chatList.frame.size.height) {
+                                    [chatList setContentOffset:CGPointMake(0, [chatList contentSize].height - chatList.frame.size.height) animated:YES];
+                                }
+                            }
+                        }
+                        
+                    } else {
+                        chatMessages = [objects mutableCopy];
+                        [chatList reloadData];
+                    }
                 }
-                
-                [chatList reloadData];
             }
         }];
     }
@@ -835,7 +869,7 @@
     [messageField resignFirstResponder];
     
     [UIView animateWithDuration:0.2 delay:0.0 options:(UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction) animations:^{
-        commentContainer.frame = CGRectMake(0, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width, commentContainer.frame.size.height);
+        commentContainer.frame = CGRectMake(0, ([[UIScreen mainScreen] bounds].size.height - commentContainer.frame.size.height), [[UIScreen mainScreen] bounds].size.width, commentContainer.frame.size.height);
     } completion:nil];
 }
 
@@ -1079,7 +1113,7 @@
     
     // Curve the edges of the box view.
     [[cell.messageLabel layer] setCornerRadius:4.0];
-    
+        
     // Set the content restraints.
     [cell.triangleView setClipsToBounds:YES];
     [cell.dateLabel setClipsToBounds:YES];
@@ -1473,6 +1507,24 @@
 
 -(void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError *)error {
     
+}
+
+/// UITEXTFIELD METHODS ///
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    // Trim the chat string text.
+    NSString *chatString = [messageField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    // Check if the chat data is valid or not
+    // before performing the upload request.
+    
+    if (([chatString length] > 0) && (messageField.text != nil)) {
+        [self dismissKeyboard];
+        [self sendMessage:@"Text" :messageField.text];
+    }
+    
+    return YES;
 }
 
 /// OTHER METHODS ///
