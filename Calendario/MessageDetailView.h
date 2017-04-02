@@ -31,6 +31,7 @@ typedef void(^locationCheckCompletion)(BOOL dataCheck);
     IBOutlet UITextField *messageField;
     IBOutlet UIView *commentContainer;
     IBOutlet UIButton *sendButton;
+    IBOutlet UIButton *attachmentButton;
     
     // Message chat list.
     IBOutlet UITableView *chatList;
@@ -40,9 +41,6 @@ typedef void(^locationCheckCompletion)(BOOL dataCheck);
     
     // Current location data.
     CLLocationManager *locationManager;
-        
-    // Audio recording custom view.
-    IBOutlet UIButton *sendAudioButton;
     
     // Data reload timer.
     NSTimer *reloadTimer;
@@ -75,6 +73,7 @@ typedef void(^locationCheckCompletion)(BOOL dataCheck);
 -(void)openAudioRecorder;
 -(void)updateNoDataLabel;
 -(void)scrollToBottomOfList:(BOOL)animated;
+-(void)setBottomContainerAccess:(BOOL)check;
 
 // Info methods.
 -(void)displayAlert:(NSString *)title :(NSString *)message;

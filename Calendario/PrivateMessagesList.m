@@ -170,6 +170,16 @@
     UIStoryboard *storyFile = [UIStoryboard storyboardWithName:@"MessageDetailView" bundle:nil];
     MessageDetailView *screen = [storyFile instantiateViewControllerWithIdentifier:@"MessageDetailView"];
     [screen setPassedInThread:thread];
+    
+    // Establish if the logged in user is userA or userB.
+    
+    if ([[(PFUser *)[thread valueForKey:@"userA"] objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
+        [screen setPassedInUser:[thread valueForKey:@"userA"]];
+    } else {
+        [screen setPassedInUser:[thread valueForKey:@"userB"]];
+    }
+    
+    // Open the existing message thread view.
     [self presentViewController:screen animated:YES completion:nil];
 }
 

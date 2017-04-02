@@ -58,6 +58,9 @@
 
 -(IBAction)addAttachment:(id)sender {
     
+    // Hide the on screen keyboard.
+    [self dismissKeyboard];
+    
     // Create the info alert.
     UIAlertController *alert;
     
@@ -478,44 +481,114 @@
 
 -(void)sendMessage:(NSString *)messageType :(id)data {
     
-    // Check if the thread data is available.
+    // Temporarily disable access to the bottom view.
+    [self setBottomContainerAccess:NO];
     
-    if (passedInThread == nil) {
+    // Create the "has the logged in user
+    // blocked the passed in user" query.
+    PFQuery *blockQueryOne = [PFQuery queryWithClassName:@"blockUser"];
+    [blockQueryOne whereKey:@"userBlock" equalTo:passedInUser];
+    [blockQueryOne whereKey:@"userBlocking" equalTo:[PFUser currentUser]];
+    
+    // Run the first user block query.
+    [blockQueryOne findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         
-        // Setup the first thread data query.
-        PFQuery *threadQueryA = [PFQuery queryWithClassName:@"privateMessageThreads"];
-        [threadQueryA whereKey:@"userA" equalTo:[PFUser currentUser]];
-        [threadQueryA whereKey:@"userB" equalTo:passedInUser];
-        
-        // Setup the second thread data query.
-        PFQuery *threadQueryB = [PFQuery queryWithClassName:@"privateMessageThreads"];
-        [threadQueryB whereKey:@"userA" equalTo:passedInUser];
-        [threadQueryB whereKey:@"userB" equalTo:[PFUser currentUser]];
-        
-        // Create the overall message query (userA OR userB).
-        PFQuery *messageQuery = [PFQuery orQueryWithSubqueries:@[threadQueryA, threadQueryB]];
-        
-        // Run the message thread query.
-        [messageQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (error == nil) {
             
-            if (error == nil) {
+            if ([objects count] > 0) {
                 
-                // Check if there is an existing thread.
+                // Re-enable access to the bottom views.
+                [self setBottomContainerAccess:YES];
                 
-                if (object == nil) {
-                    [self uploadMessageData:messageType :nil :data];
-                } else {
-                    [self uploadMessageData:messageType :object :data];
-                }
+                // Display the user blocked error.
+                [self displayAlert:@"Error" :@"Please unblock the user, in order to send him/her a private message."];
                 
             } else {
-                [self uploadMessageData:messageType :nil :data];
+                
+                // Create the "has the passed in user
+                // blocked the logged in user" query.
+                PFQuery *blockQueryTwo = [PFQuery queryWithClassName:@"blockUser"];
+                [blockQueryTwo whereKey:@"userBlock" equalTo:[PFUser currentUser]];
+                [blockQueryTwo whereKey:@"userBlocking" equalTo:passedInUser];
+                
+                // Run the second user block query.
+                [blockQueryTwo findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                    
+                    if (error == nil) {
+                        
+                        if ([objects count] > 0) {
+                            
+                            // Re-enable access to the bottom views.
+                            [self setBottomContainerAccess:YES];
+                            
+                            // Display the user blocked error.
+                            [self displayAlert:@"Error" :@"The user you are trying to message has blocked you."];
+                            
+                        } else {
+                            
+                            // Check if the thread data is available.
+                            
+                            if (passedInThread == nil) {
+                                
+                                // Setup the first thread data query.
+                                PFQuery *threadQueryA = [PFQuery queryWithClassName:@"privateMessageThreads"];
+                                [threadQueryA whereKey:@"userA" equalTo:[PFUser currentUser]];
+                                [threadQueryA whereKey:@"userB" equalTo:passedInUser];
+                                
+                                // Setup the second thread data query.
+                                PFQuery *threadQueryB = [PFQuery queryWithClassName:@"privateMessageThreads"];
+                                [threadQueryB whereKey:@"userA" equalTo:passedInUser];
+                                [threadQueryB whereKey:@"userB" equalTo:[PFUser currentUser]];
+                                
+                                // Create the overall message query (userA OR userB).
+                                PFQuery *messageQuery = [PFQuery orQueryWithSubqueries:@[threadQueryA, threadQueryB]];
+                                
+                                // Run the message thread query.
+                                [messageQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                                    
+                                    if (error == nil) {
+                                        
+                                        // Check if there is an existing thread.
+                                        
+                                        if (object == nil) {
+                                            
+                                            // Upload the private message data.
+                                            [self uploadMessageData:messageType :nil :data];
+                                            
+                                        } else {
+                                            
+                                            // Upload the private message data.
+                                            [self uploadMessageData:messageType :object :data];
+                                        }
+                                        
+                                    } else {
+                                        
+                                        // Upload the private message data.
+                                        [self uploadMessageData:messageType :nil :data];
+                                    }
+                                }];
+                                
+                            } else {
+                                
+                                // Upload the private message data.
+                                [self uploadMessageData:messageType :passedInThread :data];
+                            }
+                        }
+                        
+                    } else {
+                        
+                        // Re-enable access to the bottom views.
+                        [self setBottomContainerAccess:YES];
+                    }
+                }];
             }
-        }];
-        
-    } else {
-        [self uploadMessageData:messageType :passedInThread :data];
-    }
+            
+        } else {
+            
+            // Re-enable access to the bottom views.
+            [self setBottomContainerAccess:YES];
+        }
+    }];
 }
 
 -(void)uploadMessageData:(NSString *)messageType :(PFObject *)thread :(id)data {
@@ -557,7 +630,14 @@
                         [messageField setText:nil];
                         [self loadAllMessages];
                     }
+                    
+                    // Re-enable access to the bottom views.
+                    [self setBottomContainerAccess:YES];
                 }];
+            } else {
+                
+                // Re-enable access to the bottom views.
+                [self setBottomContainerAccess:YES];
             }
         }];
         
@@ -597,7 +677,14 @@
                             [messageField setText:nil];
                             [self loadAllMessages];
                         }
+                        
+                        // Re-enable access to the bottom views.
+                        [self setBottomContainerAccess:YES];
                     }];
+                } else {
+                    
+                    // Re-enable access to the bottom views.
+                    [self setBottomContainerAccess:YES];
                 }
             }];
             
@@ -620,6 +707,9 @@
                     [messageField setText:nil];
                     [self loadAllMessages];
                 }
+                
+                // Re-enable access to the bottom views.
+                [self setBottomContainerAccess:YES];
             }];
         }
     }
@@ -993,6 +1083,17 @@
     if ([chatList contentSize].height > chatList.frame.size.height) {
         [chatList scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:([chatMessages count] - 1) inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:animated];
     }
+}
+
+-(void)setBottomContainerAccess:(BOOL)check {
+    
+    // Set interaction access to the container views.
+    [attachmentButton setUserInteractionEnabled:check];
+    [messageField setUserInteractionEnabled:check];
+    [sendButton setUserInteractionEnabled:check];
+    [attachmentButton setEnabled:check];
+    [messageField setEnabled:check];
+    [sendButton setEnabled:check];
 }
 
 /// INFO METHODS ///
