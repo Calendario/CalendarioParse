@@ -50,6 +50,8 @@ typedef void(^threadCompletion)(NSString *preview);
 -(void)loadThreadsForCurrentUser;
 -(void)getPreviewForThread:(PFObject *)thread :(NSString *)otherUser :(threadCompletion)dataBlock;
 -(void)getUserCachedData:(NSString *)userID :(userCompletion)dataBlock;
+-(void)refreshListCell:(NSInteger)row :(id)newObject :(BOOL)dataMode;
+-(NSString *)createDateString:(PFObject *)data;
 
 // UI methods.
 -(void)updateNoDataLabel;

@@ -266,12 +266,47 @@
                                 
                                 if ([[[data threadObject] objectId] isEqualToString:[[currentData threadObject] objectId]]) {
                                     
-                                    [messageData replaceObjectAtIndex:currentDataLoop withObject:tempData[newDataLoop]];
+                                    // Check if the new data contains
+                                    // a message preview data object.
                                     
-                                    [messagesList reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:currentDataLoop inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                                    if ([data latestMessage] != nil) {
+                                        
+                                        // Check if the current data contains
+                                        // a message preview data object.
+                                        
+                                        if ([currentData latestMessage] != nil) {
+                                            
+                                            // Check if the new and current message
+                                            // preview objects are the same or not.
+                                            
+                                            if ([[[data latestMessage] objectId] isEqualToString:[[currentData latestMessage] objectId]]) {
+                                                
+                                                // No new message preview objects have been
+                                                // made however an existing one has been updated.
+                                                
+                                                if ([[data unreadCount] intValue] != [[currentData unreadCount] intValue]) {
+                                                    [self refreshListCell:currentDataLoop :tempData[newDataLoop] :YES];
+                                                }
+                                                
+                                            } else {
+                                                [self refreshListCell:currentDataLoop :tempData[newDataLoop] :YES];
+                                            }
+                                            
+                                        } else {
+                                            [self refreshListCell:currentDataLoop :tempData[newDataLoop] :YES];
+                                        }
+                                    } else {
+                                        
+                                        // Check if the current data contains
+                                        // a message preview data object.
+                                        
+                                        if ([currentData latestMessage] != nil) {
+                                            [self refreshListCell:currentDataLoop :tempData[newDataLoop] :YES];
+                                        }
+                                    }
                                     
+                                    // We are not adding new additional data.
                                     addDataCheck = NO;
-                                    
                                     break;
                                 }
                             }
@@ -336,17 +371,61 @@
                             // Create the new data check.
                             BOOL addDataCheck = YES;
                             
-                            // Get the current new data object.
-                            PFObject *data = [(ThreadDataObject *)[tempDataArchived[newDataLoop] objectAtIndex:0] threadObject];
+                            // Get the new data object.
+                            ThreadDataObject *data = (ThreadDataObject *)[tempDataArchived[newDataLoop] objectAtIndex:0];
                             
                             // Loop through the current data array and check
                             // if there are any copies of the downloaded data.
                             
                             for (NSUInteger currentDataLoop = 0; currentDataLoop < [messageDataArchived count]; currentDataLoop++) {
                                 
+                                // Get the current message data object.
+                                ThreadDataObject *currentData = [messageDataArchived[currentDataLoop] objectAtIndex:0];
+                                
                                 // Check if the data already exists.
                                 
-                                if ([[data objectId] isEqualToString:[[(ThreadDataObject *)[messageDataArchived[currentDataLoop] objectAtIndex:0] threadObject] objectId]]) {
+                                if ([[[data threadObject] objectId] isEqualToString:[[currentData threadObject] objectId]]) {
+                                    
+                                    // Check if the new data contains
+                                    // a message preview data object.
+                                    
+                                    if ([data latestMessage] != nil) {
+                                        
+                                        // Check if the current data contains
+                                        // a message preview data object.
+                                        
+                                        if ([currentData latestMessage] != nil) {
+                                            
+                                            // Check if the new and current message
+                                            // preview objects are the same or not.
+                                            
+                                            if ([[[data latestMessage] objectId] isEqualToString:[[currentData latestMessage] objectId]]) {
+                                                
+                                                // No new message preview objects have been
+                                                // made however an existing one has been updated.
+                                                
+                                                if ([[data unreadCount] intValue] != [[currentData unreadCount] intValue]) {
+                                                    [self refreshListCell:currentDataLoop :tempDataArchived[newDataLoop] :NO];
+                                                }
+                                                
+                                            } else {
+                                                [self refreshListCell:currentDataLoop :tempDataArchived[newDataLoop] :NO];
+                                            }
+                                            
+                                        } else {
+                                            [self refreshListCell:currentDataLoop :tempDataArchived[newDataLoop] :NO];
+                                        }
+                                    } else {
+                                        
+                                        // Check if the current data contains
+                                        // a message preview data object.
+                                        
+                                        if ([currentData latestMessage] != nil) {
+                                            [self refreshListCell:currentDataLoop :tempDataArchived[newDataLoop] :NO];
+                                        }
+                                    }
+                                    
+                                    // We are not adding new additional data.
                                     addDataCheck = NO;
                                     break;
                                 }
@@ -499,6 +578,92 @@
     }
 }
 
+-(void)refreshListCell:(NSInteger)row :(id)newObject :(BOOL)dataMode {
+    
+    // Update the correct data array.
+    
+    if (dataMode == YES) {
+        [messageData replaceObjectAtIndex:row withObject:newObject];
+    } else {
+        [messageDataArchived replaceObjectAtIndex:row withObject:newObject];
+    }
+    
+    // Reload the specific table view cell.
+    [messagesList reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+-(NSString *)createDateString:(PFObject *)data {
+    
+    // Create the input date object.
+    NSDate *inputDate = [data createdAt];
+    
+    // Calculate the difference between the dates.
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:inputDate toDate:[NSDate date] options:0];
+    
+    // Create the date string.
+    NSString *dateString = nil;
+    
+    // Set the date string depending on the time between
+    // now and when the private thread was last updated.
+    
+    if ([components day] > 7) {
+        
+        // Get the date and time data.
+        NSDateComponents *dateComponent = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:inputDate];
+        
+        // Set the date string.
+        dateString = [NSString stringWithFormat:@"%02ld/%02ld/%ld", (long)[dateComponent month], (long)[dateComponent day], (long)[dateComponent year]];
+        
+    } else {
+        
+        // Set the day or the hour:minute string depending on
+        // how many days ago the thread was last updated.
+        
+        if ([components day] >= 1) {
+            
+            // Create the data formatter object.
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"EEEE"];
+            
+            // Set the date string.
+            dateString = [dateFormatter stringFromDate:inputDate];
+            
+        } else {
+            
+            // Get the time data.
+            NSDateComponents *time = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:inputDate];
+            
+            // Check the current hour and create
+            // a 12 hour format time string.
+            
+            if (([time hour] <= 23) && ([time hour] >= 12)) {
+                
+                // Convert the hour to single digit format.
+                
+                if ([time hour] != 12) {
+                    dateString = [NSString stringWithFormat:@"%ld:%02ld", (long)([time hour] - 12), (long)[time minute]];
+                }
+                
+                else {
+                    dateString = [NSString stringWithFormat:@"%ld:%02ld", (long)[time hour], (long)[time minute]];
+                }
+                
+                // Display the time - PM format.
+                dateString = [NSString stringWithFormat:@"%@ PM", dateString];
+            }
+            
+            else {
+                
+                // Display the time - AM format.
+                dateString = [NSString stringWithFormat:@"%ld:%02ld", (long)[time hour], (long)[time minute]];
+                dateString = [NSString stringWithFormat:@"%@ AM", dateString];
+            }
+        }
+    }
+    
+    return dateString;
+}
+
 /// UI METHODS ///
 
 -(void)updateNoDataLabel {
@@ -604,6 +769,14 @@
         cell.profilePicture.frame = newFrame;
         cell.profilePicture.layer.cornerRadius = (50.0 / 2.0);
         cell.profilePicture.center = saveCenter;
+        
+        // Set the cell data label.
+        
+        if (messagePreviewData == nil) {
+            [cell.dateLabel setText:[self createDateString:data]];
+        } else {
+            [cell.dateLabel setText:[self createDateString:messagePreviewData]];
+        }
         
         // Check the thread message unread count.
         
