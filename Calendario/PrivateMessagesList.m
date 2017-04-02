@@ -9,12 +9,14 @@
 #import "PrivateMessagesList.h"
 #import "MessageUserSelector.h"
 #import "MessageDetailView.h"
+#import "ThreadDataObject.h"
 
 @interface PrivateMessagesList ()
 
 @end
 
 @implementation PrivateMessagesList
+@synthesize dataHelper;
 
 /// BUTTONS ///
 
@@ -33,6 +35,7 @@
 }
 
 -(IBAction)changeListType:(id)sender {
+    [self updateNoDataLabel];
     [messagesList reloadData];
 }
 
@@ -45,9 +48,15 @@
     // Set the user selected notification.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userSelected:) name:@"user_selected_private_message" object:nil];
     
+    // Make an object for the Private Messages Helper class.
+    self.dataHelper = [[PrivateMessagesHelper alloc] init];
+    
     // Intialise the message arrays.
     messageData = [[NSMutableArray alloc] init];
     messageDataArchived = [[NSMutableArray alloc] init];
+    
+    // Hide the no data label by default.
+    [noDataLabel setAlpha:0.0];
     
     // Load all the threads.
     [self loadThreadsForCurrentUser];
@@ -60,18 +69,27 @@
 
 -(void)userSelected:(NSNotification *)data {
     
+    // Check if auser object has been returned.
+    
     if (data != nil) {
         
+        // Get the user data object.
         PFUser *user = (PFUser *)[data object];
+        
+        // Check if we currently have any message threads.
         
         if ([messageData count] > 0) {
             
+            // Create the loop thread object.
             PFObject *loopThread = nil;
+            
+            // Loop through the current data and check for
+            // existing threads with the passed in user.
             
             for (NSUInteger loop = 0; loop < [messageData count]; loop++) {
                 
                 // Get the loop data.
-                PFObject *loopData = [messageData[loop] objectAtIndex:0];
+                PFObject *loopData = [(ThreadDataObject *)[messageData[loop] objectAtIndex:0] threadObject];
                 
                 // Check if a message thread with the
                 // selected user already exists or not.
@@ -81,6 +99,9 @@
                     break;
                 }
             }
+            
+            // If an existing thread is available then open
+            // it otherwise check the archived threads.
             
             if (loopThread == nil) {
                 [self checkArchivedMessages:user];
@@ -96,14 +117,20 @@
 
 -(void)checkArchivedMessages:(PFUser *)user {
     
+    // Check if we currently have any message threads.
+    
     if ([messageDataArchived count] > 0) {
         
+        // Create the loop thread object.
         PFObject *loopThread = nil;
+        
+        // Loop through the current data and check for
+        // existing threads with the passed in user.
         
         for (NSUInteger loop = 0; loop < [messageDataArchived count]; loop++) {
             
             // Get the loop data.
-            PFObject *loopData = [messageDataArchived[loop] objectAtIndex:0];
+            PFObject *loopData = [(ThreadDataObject *)[messageDataArchived[loop] objectAtIndex:0] threadObject];
             
             // Check if a message thread with the
             // selected user already exists or not.
@@ -113,6 +140,9 @@
                 break;
             }
         }
+        
+        // If an existing thread is available then open
+        // it otherwise create a new message thread.
         
         if (loopThread == nil) {
             [self openNewMessageThread:user];
@@ -145,24 +175,15 @@
 
 -(void)loadThreadsForCurrentUser {
     
-    // Setup the first thread data query.
-    PFQuery *threadQueryA = [PFQuery queryWithClassName:@"privateMessageThreads"];
-    [threadQueryA whereKey:@"userA" equalTo:[PFUser currentUser]];
-    
-    // Setup the second thread data query.
-    PFQuery *threadQueryB = [PFQuery queryWithClassName:@"privateMessageThreads"];
-    [threadQueryB whereKey:@"userB" equalTo:[PFUser currentUser]];
-    
-    // Create the overall message query (userA OR userB).
-    PFQuery *messageQuery = [PFQuery orQueryWithSubqueries:@[threadQueryA, threadQueryB]];
-    
-    // Run the message thread query.
-    [messageQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+    // Load the logged in user's private message threads.
+    [self.dataHelper getUserThreadsWithInfo:^(NSMutableArray *allData) {
         
-        if (error == nil) {
+        // Check if there is any thread data.
+        
+        if (allData != nil) {
             
             // Get the number of message threads.
-            NSUInteger threadCount = [objects count];
+            NSUInteger threadCount = [allData count];
             
             // Sort the data if we have any.
             
@@ -176,8 +197,11 @@
                 
                 for (NSUInteger loop = 0; loop < threadCount; loop++) {
                     
-                    // Get the current loop data.
-                    PFObject *thread = [objects objectAtIndex:loop];
+                    // Get the current loop data object.
+                    ThreadDataObject *loopData = [allData objectAtIndex:loop];
+                    
+                    // Get the current loop thread data.
+                    PFObject *thread = [loopData threadObject];
                     
                     // Establish if the logged in user is userA or userB.
                     
@@ -186,9 +210,9 @@
                         // Save the data if the user has NOT archived it.
                         
                         if ([[thread valueForKey:@"userAHidden"] boolValue] == NO) {
-                            [tempData addObject:@[thread, @"A"]];
+                            [tempData addObject:@[loopData, @"A"]];
                         } else {
-                            [tempDataArchived addObject:@[thread, @"A"]];
+                            [tempDataArchived addObject:@[loopData, @"A"]];
                         }
                         
                     } else {
@@ -196,91 +220,226 @@
                         // Save the data if the user has NOT archived it.
                         
                         if ([[thread valueForKey:@"userBHidden"] boolValue] == NO) {
-                            [tempData addObject:@[thread, @"B"]];
+                            [tempData addObject:@[loopData, @"B"]];
                         } else {
-                            [tempDataArchived addObject:@[thread, @"B"]];
+                            [tempDataArchived addObject:@[loopData, @"B"]];
                         }
                     }
                 }
                 
-                // Copy in the new thread data.
-                messageData = [tempData mutableCopy];
-                messageDataArchived = [tempDataArchived mutableCopy];
+                // Depending on the current view mode perform
+                // the correct table view cell data updates.
                 
-            } else {
-                
-                // Clear the message list.
-                [messageData removeAllObjects];
-                [messageDataArchived removeAllObjects];
+                if (messageControl.selectedSegmentIndex == 0) {
+                    
+                    // Archived data can just be copied as
+                    // we are in the inbox table view mode.
+                    messageDataArchived = [tempDataArchived mutableCopy];
+                    
+                    // Check if we currently have any data on display.
+                    
+                    if ([messageData count] > 0) {
+                        
+                        // Create the new objects array.
+                        NSMutableArray *newDataObjects = [[NSMutableArray alloc] init];
+                        
+                        // Loop through the downloaded data and add
+                        // any new objects to the current data array.
+                        
+                        for (NSUInteger newDataLoop = 0; newDataLoop < [tempData count]; newDataLoop++) {
+                            
+                            // Create the new data check.
+                            BOOL addDataCheck = YES;
+                            
+                            // Get the new data object.
+                            ThreadDataObject *data = (ThreadDataObject *)[tempData[newDataLoop] objectAtIndex:0];
+                            
+                            // Loop through the current data array and check
+                            // if there are any copies of the downloaded data.
+                            
+                            for (NSUInteger currentDataLoop = 0; currentDataLoop < [messageData count]; currentDataLoop++) {
+                                
+                                // Get the current message data object.
+                                ThreadDataObject *currentData = [messageData[currentDataLoop] objectAtIndex:0];
+                                
+                                // Check if the data already exists.
+                                
+                                if ([[[data threadObject] objectId] isEqualToString:[[currentData threadObject] objectId]]) {
+                                    
+                                    [messageData replaceObjectAtIndex:currentDataLoop withObject:tempData[newDataLoop]];
+                                    
+                                    [messagesList reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:currentDataLoop inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                                    
+                                    addDataCheck = NO;
+                                    
+                                    break;
+                                }
+                            }
+                            
+                            // Add the downloaded data if it does not
+                            // exist in the current data array otherwise
+                            // check if existing data needs updating.
+                            
+                            if (addDataCheck == YES) {
+                                [newDataObjects insertObject:tempData[newDataLoop] atIndex:0];
+                            }
+                        }
+                        
+                        // Get the size of the new data array.
+                        NSUInteger newSize = [newDataObjects count];
+                        
+                        // Check if there are any new data objects.
+                        
+                        if (newSize > 0) {
+                            
+                            // Create the table view index array.
+                            NSMutableArray *indexes = [[NSMutableArray alloc] init];
+                            
+                            // Create the new NSIndexPath objects.
+                            
+                            for (NSUInteger loop = 1; loop < (newSize + 1); loop++) {
+                                [indexes addObject:[NSIndexPath indexPathForRow:(([messageData count] - 1) + loop) inSection:0]];
+                            }
+                            
+                            // Add the new data to the current array.
+                            [messageData addObjectsFromArray:newDataObjects];
+                            
+                            // Add the new thread cells to the table view.
+                            [messagesList insertRowsAtIndexPaths:newDataObjects withRowAnimation:UITableViewRowAnimationAutomatic];
+                        }
+                        
+                    } else {
+                        
+                        // Reload all the data.
+                        messageData = [tempData mutableCopy];
+                        [messagesList reloadData];
+                    }
+                    
+                } else {
+                    
+                    // Inbox data can just be copied as we
+                    // are in the Archived table view mode.
+                    messageData = [tempData mutableCopy];
+                    
+                    // Check if we currently have any data on display.
+                    
+                    if ([messageDataArchived count] > 0) {
+                        
+                        // Create the new objects array.
+                        NSMutableArray *newDataObjects = [[NSMutableArray alloc] init];
+                        
+                        // Loop through the downloaded data and add
+                        // any new objects to the current data array.
+                        
+                        for (NSUInteger newDataLoop = 0; newDataLoop < [tempDataArchived count]; newDataLoop++) {
+                            
+                            // Create the new data check.
+                            BOOL addDataCheck = YES;
+                            
+                            // Get the current new data object.
+                            PFObject *data = [(ThreadDataObject *)[tempDataArchived[newDataLoop] objectAtIndex:0] threadObject];
+                            
+                            // Loop through the current data array and check
+                            // if there are any copies of the downloaded data.
+                            
+                            for (NSUInteger currentDataLoop = 0; currentDataLoop < [messageDataArchived count]; currentDataLoop++) {
+                                
+                                // Check if the data already exists.
+                                
+                                if ([[data objectId] isEqualToString:[[(ThreadDataObject *)[messageDataArchived[currentDataLoop] objectAtIndex:0] threadObject] objectId]]) {
+                                    addDataCheck = NO;
+                                    break;
+                                }
+                            }
+                            
+                            // Add the downloaded data if it does
+                            // not exist in the current data array.
+                            
+                            if (addDataCheck == YES) {
+                                [newDataObjects insertObject:tempDataArchived[newDataLoop] atIndex:0];
+                            }
+                        }
+                        
+                        // Get the size of the new data array.
+                        NSUInteger newSize = [newDataObjects count];
+                        
+                        // Check if there are any new data objects.
+                        
+                        if (newSize > 0) {
+                            
+                            // Create the table view index array.
+                            NSMutableArray *indexes = [[NSMutableArray alloc] init];
+                            
+                            // Create the new NSIndexPath objects.
+                            
+                            for (NSUInteger loop = 1; loop < (newSize + 1); loop++) {
+                                [indexes addObject:[NSIndexPath indexPathForRow:(([messageDataArchived count] - 1) + loop) inSection:0]];
+                            }
+                            
+                            // Add the new data to the current array.
+                            [messageDataArchived addObjectsFromArray:newDataObjects];
+                            
+                            // Add the new thread cells to the table view.
+                            [messagesList insertRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationAutomatic];
+                        }
+                        
+                    } else {
+                        
+                        // Reload all the data.
+                        messageDataArchived = [tempDataArchived mutableCopy];
+                        [messagesList reloadData];
+                    }
+                }
             }
-            
-            // Refresh the table view.
-            [messagesList reloadData];
-            
-        } else {
-            
-            // Display the error alert.
-            [self displayAlert:@"Error" :error.localizedDescription];
         }
+        
+        // Show/hide the no data label depending
+        // on the number of message threads.
+        [self updateNoDataLabel];
     }];
 }
 
 -(void)getPreviewForThread:(PFObject *)thread :(NSString *)otherUser :(threadCompletion)dataBlock {
     
-    // Setup the message data query.
-    PFQuery *messageQuery = [PFQuery queryWithClassName:@"privateMessagesMedia"];
-    [messageQuery whereKey:@"threadID" equalTo:[thread objectId]];
-    [messageQuery orderByDescending:@"createdAt"];
+    // Get the message type.
+    NSString *messageType = [thread valueForKey:@"typeData"];
     
-    // Run the message data query.
-    [messageQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+    // Check the message type and create the
+    // appropriate preview description string.
+    
+    if ([messageType isEqualToString:@"Text"]) {
+        dataBlock([thread valueForKey:@"textData"]);
+    } else {
         
-        if ((error == nil) && (object != nil)) {
-            
-            // Get the message type.
-            NSString *messageType = [object valueForKey:@"typeData"];
-            
-            // Check the message type and create the
-            // appropriate preview description string.
-            
-            if ([messageType isEqualToString:@"Text"]) {
-                dataBlock([object valueForKey:@"textData"]);
-            } else {
-                
-                // Create the name start string.
-                NSString *startString = nil;
-                
-                // Check who sent the latest message.
-                
-                if ([[(PFUser *)[object valueForKey:@"fromUser"] objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
-                    startString = @"You";
-                } else {
-                    startString = otherUser;
-                }
-                
-                // Create the preview message.
-                
-                if ([messageType isEqualToString:@"Photo"]) {
-                    dataBlock([NSString stringWithFormat:@"%@ sent a photo.", startString]);
-                }
-                
-                else if ([messageType isEqualToString:@"Map"]) {
-                    dataBlock([NSString stringWithFormat:@"%@ shared a location.", startString]);
-                }
-                
-                else if ([messageType isEqualToString:@"Video"]) {
-                    dataBlock([NSString stringWithFormat:@"%@ sent a video.", startString]);
-                }
-                
-                else if ([messageType isEqualToString:@"Audio"]) {
-                    dataBlock([NSString stringWithFormat:@"%@ sent a voice message.", startString]);
-                }
-            }
-            
+        // Create the name start string.
+        NSString *startString = nil;
+        
+        // Check who sent the latest message.
+        
+        if ([[(PFUser *)[thread valueForKey:@"fromUser"] objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
+            startString = @"You";
         } else {
-            dataBlock(nil);
+            startString = otherUser;
         }
-    }];
+        
+        // Create the preview message.
+        
+        if ([messageType isEqualToString:@"Photo"]) {
+            dataBlock([NSString stringWithFormat:@"%@ sent a photo.", startString]);
+        }
+        
+        else if ([messageType isEqualToString:@"Map"]) {
+            dataBlock([NSString stringWithFormat:@"%@ shared a location.", startString]);
+        }
+        
+        else if ([messageType isEqualToString:@"Video"]) {
+            dataBlock([NSString stringWithFormat:@"%@ sent a video.", startString]);
+        }
+        
+        else if ([messageType isEqualToString:@"Audio"]) {
+            dataBlock([NSString stringWithFormat:@"%@ sent a voice message.", startString]);
+        }
+    }
 }
 
 -(void)getUserCachedData:(NSString *)userID :(userCompletion)dataBlock {
@@ -340,6 +499,20 @@
     }
 }
 
+/// UI METHODS ///
+
+-(void)updateNoDataLabel {
+    
+    // Show or hide the no data label depending
+    // on the current data array and control mode.
+    
+    if (messageControl.selectedSegmentIndex == 0) {
+        [noDataLabel setAlpha:([messageData count] > 0 ? 0.0 : 1.0)];
+    } else {
+        [noDataLabel setAlpha:([messageDataArchived count] > 0 ? 0.0 : 1.0)];
+    }
+}
+
 /// INFO METHODS ///
 
 -(void)displayAlert:(NSString *)title :(NSString *)message {
@@ -363,9 +536,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (messageControl.selectedSegmentIndex == 0) {
-        [self openExistingMessageThread:(PFObject *)[messageData[indexPath.row] objectAtIndex:0]];
+        [self openExistingMessageThread:[(ThreadDataObject *)[messageData[indexPath.row] objectAtIndex:0] threadObject]];
     } else {
-        [self openExistingMessageThread:(PFObject *)[messageDataArchived[indexPath.row] objectAtIndex:0]];
+        [self openExistingMessageThread:[(ThreadDataObject *)[messageDataArchived[indexPath.row] objectAtIndex:0] threadObject]];
     }
 }
 
@@ -385,25 +558,32 @@
     if ((messageControl.selectedSegmentIndex == 0 ? [messageData count] : [messageDataArchived count]) > 0) {
         
         // Show all the main views.
-        cell.profilePicture.alpha = 1.0;
-        cell.titleLabel.alpha = 1.0;
-        cell.descriptionLabel.alpha = 1.0;
-        cell.dateLabel.alpha = 1.0;
+        [cell.profilePicture setAlpha:1.0];
+        [cell.titleLabel setAlpha:1.0];
+        [cell.descriptionLabel setAlpha:1.0];
+        [cell.dateLabel setAlpha:1.0];
         
-        // Hide the no message label.
-        cell.noMessagesLabel.alpha = 0.0;
-        
-        // Get the current table view data object.
+        // Create the current table view thread data object.
         PFObject *data = nil;
         
-        // Get the current data object user.
+        // Create the current message preview data.
+        PFObject *messagePreviewData = nil;
+        
+        // Create the current message unread count.
+        NSNumber *messageUnreadCount;
+        
+        // Create the current data object user.
         NSString *userCheck = nil;
         
         if (messageControl.selectedSegmentIndex == 0) {
-            data = [messageData[indexPath.row] objectAtIndex:0];
+            data = [(ThreadDataObject *)[messageData[indexPath.row] objectAtIndex:0] threadObject];
+            messagePreviewData = [(ThreadDataObject *)[messageData[indexPath.row] objectAtIndex:0] latestMessage];
+            messageUnreadCount = [(ThreadDataObject *)[messageData[indexPath.row] objectAtIndex:0] unreadCount];
             userCheck = [messageData[indexPath.row] objectAtIndex:1];
         } else {
-            data = [messageDataArchived[indexPath.row] objectAtIndex:0];
+            data = [(ThreadDataObject *)[messageDataArchived[indexPath.row] objectAtIndex:0] threadObject];
+            messagePreviewData = [(ThreadDataObject *)[messageDataArchived[indexPath.row] objectAtIndex:0] latestMessage];
+            messageUnreadCount = [(ThreadDataObject *)[messageDataArchived[indexPath.row] objectAtIndex:0] unreadCount];
             userCheck = [messageDataArchived[indexPath.row] objectAtIndex:1];
         }
         
@@ -425,6 +605,26 @@
         cell.profilePicture.layer.cornerRadius = (50.0 / 2.0);
         cell.profilePicture.center = saveCenter;
         
+        // Check the thread message unread count.
+        
+        if ([messageUnreadCount intValue] > 0) {
+            
+            // Create the unread messages label.
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 28, 22)];
+            [label setText:[NSString stringWithFormat:@"%d", [messageUnreadCount intValue]]];
+            [label setNumberOfLines:1];
+            [label setAdjustsFontSizeToFitWidth:YES];
+            [label setClipsToBounds:YES];
+            [[label layer] setCornerRadius:12];
+            [label setBackgroundColor:[UIColor redColor]];
+            [label setTextColor:[UIColor whiteColor]];
+            [label setTextAlignment:NSTextAlignmentCenter];
+            [cell setAccessoryView:label];
+            
+        } else {
+            [cell setAccessoryView:nil];
+        }
+        
         // Get the other user's profile data.
         [self getUserCachedData:userID :^(NSString *username, UIImage *picture) {
             
@@ -434,15 +634,20 @@
                 [cell.profilePicture setImage:picture];
             }
             
-            // Get the latest message of the thread.
-            [self getPreviewForThread:data :username :^(NSString *preview) {
+            if (messagePreviewData == nil) {
+                [cell.descriptionLabel setText:@"-"];
+            } else {
                 
-                if (preview == nil) {
-                    [cell.descriptionLabel setText:@"-"];
-                } else {
-                    [cell.descriptionLabel setText:preview];
-                }
-            }];
+                // Get the latest message of the thread.
+                [self getPreviewForThread:messagePreviewData :username :^(NSString *preview) {
+                    
+                    if (preview == nil) {
+                        [cell.descriptionLabel setText:@"-"];
+                    } else {
+                        [cell.descriptionLabel setText:preview];
+                    }
+                }];
+            }
             
             [cell.titleLabel setText:username];
         }];
@@ -450,13 +655,13 @@
     } else {
         
         // Hide all the main views.
-        cell.profilePicture.alpha = 0.0;
-        cell.titleLabel.alpha = 0.0;
-        cell.descriptionLabel.alpha = 0.0;
-        cell.dateLabel.alpha = 0.0;
+        [cell.profilePicture setAlpha:0.0];
+        [cell.titleLabel setAlpha:0.0];
+        [cell.descriptionLabel setAlpha:0.0];
+        [cell.dateLabel setAlpha:0.0];
         
-        // Show the no message label.
-        cell.noMessagesLabel.alpha = 1.0;
+        // Hide the cell accessory view.
+        [cell setAccessoryView:nil];
     }
         
     // Set the cell selected background colour.
@@ -469,7 +674,6 @@
     [cell.titleLabel setClipsToBounds:YES];
     [cell.descriptionLabel setClipsToBounds:YES];
     [cell.dateLabel setClipsToBounds:YES];
-    [cell.noMessagesLabel setClipsToBounds:YES];
     [cell.contentView setClipsToBounds:NO];
     
     return cell;
@@ -490,12 +694,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (messageControl.selectedSegmentIndex == 0) {
-        return ([messageData count] > 0 ? 76 : messagesList.frame.size.height);
-    } else {
-        return ([messageDataArchived count] > 0 ? 76 : messagesList.frame.size.height);
-    }
+    return 76;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -505,9 +704,9 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (messageControl.selectedSegmentIndex == 0) {
-        return ([messageData count] > 0 ? [messageData count] : 1);
+        return [messageData count];
     } else {
-        return ([messageDataArchived count] > 0 ? [messageDataArchived count] : 1);
+        return [messageDataArchived count];
     }
 }
 

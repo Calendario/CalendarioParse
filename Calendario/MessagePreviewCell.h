@@ -20,7 +20,4 @@
 @property (strong, nonatomic) IBOutlet UITextView *descriptionLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 
-// No messages label.
-@property (strong, nonatomic) IBOutlet UILabel *noMessagesLabel;
-
 @end

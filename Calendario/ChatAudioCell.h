@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 
-@interface ChatAudioCell : UITableViewCell {
+@interface ChatAudioCell : UITableViewCell <AVPlayerViewControllerDelegate> {
     
 }
 
@@ -28,9 +31,13 @@
 // Message audio player views.
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *durationLabel;
-@property (strong, nonatomic) IBOutlet UIButton *playButton;
+@property (strong, nonatomic) IBOutlet UIImageView *playButton;
 
-// Passed in data object.
-@property (nonatomic, retain) NSArray *passedInData;
+// Main cell selection button.
+@property (strong, nonatomic) IBOutlet UIButton *selectionButton;
+
+// Properties - strings, contacts, etc..
+@property (nonatomic, retain) PFObject *passedInData;
+@property (nonatomic, retain) UIViewController *passedInView;
 
 @end

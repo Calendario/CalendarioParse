@@ -24,6 +24,7 @@ class FullimageViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userProfilePicture: UIImageView!
     @IBOutlet weak var dotLoadingView: UIActivityIndicatorView!
+    @IBOutlet weak var bottomContainerView: UIView!
     var pageControlCheck = false
     
     // Passed in image data.
@@ -73,7 +74,7 @@ class FullimageViewController: UIViewController, UIScrollViewDelegate {
             if (numberOfPictures == 1) {
                 self.containerScrollView.contentSize = CGSize(width: (UIScreen.main.bounds.size.width * 2), height: UIScreen.main.bounds.size.height)
             }
-            
+                
             else if (numberOfPictures == 2) {
                 self.containerScrollView.contentSize = CGSize(width: (UIScreen.main.bounds.size.width * 3), height: UIScreen.main.bounds.size.height)
             }
@@ -132,7 +133,13 @@ class FullimageViewController: UIViewController, UIScrollViewDelegate {
         self.userNameLabel.text = self.passedUserName!
         
         // Load in the additional data.
-        self.loadMedia()
+        
+        if (self.passedObject != nil) {
+            self.loadMedia()
+        } else {
+            self.bottomContainerView.alpha = 0.0
+            self.dotLoadingView.stopAnimating()
+        }
     }
     
     //MARK: OTHER METHODS.

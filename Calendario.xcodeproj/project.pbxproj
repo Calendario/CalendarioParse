@@ -49,11 +49,27 @@
 		A26701F21C369D5B0041E1D1 /* ManageUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26701F11C369D5B0041E1D1 /* ManageUser.swift */; };
 		A27A7D591DE65EE800DEEF9B /* SAMCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A27A7D581DE65EE800DEEF9B /* SAMCache.m */; };
 		A27A7D5C1DE65F0700DEEF9B /* SAMCache+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = A27A7D5B1DE65F0700DEEF9B /* SAMCache+Image.m */; };
+		A27BFB891E8D58210044A0F0 /* IQ_FDWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = A27BFB881E8D58210044A0F0 /* IQ_FDWaveformView.m */; };
+		A27BFB9C1E8D583E0044A0F0 /* IQAudioCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A27BFB8B1E8D583E0044A0F0 /* IQAudioCropperViewController.m */; };
+		A27BFB9D1E8D583E0044A0F0 /* IQAudioRecorderConstraints.m in Sources */ = {isa = PBXBuildFile; fileRef = A27BFB8D1E8D583E0044A0F0 /* IQAudioRecorderConstraints.m */; };
+		A27BFB9E1E8D583E0044A0F0 /* IQAudioRecorderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A27BFB8F1E8D583E0044A0F0 /* IQAudioRecorderViewController.m */; };
+		A27BFB9F1E8D583E0044A0F0 /* IQCropSelectionBeginView.m in Sources */ = {isa = PBXBuildFile; fileRef = A27BFB911E8D583E0044A0F0 /* IQCropSelectionBeginView.m */; };
+		A27BFBA01E8D583E0044A0F0 /* IQCropSelectionEndView.m in Sources */ = {isa = PBXBuildFile; fileRef = A27BFB931E8D583E0044A0F0 /* IQCropSelectionEndView.m */; };
+		A27BFBA11E8D583E0044A0F0 /* IQCropSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A27BFB951E8D583E0044A0F0 /* IQCropSelectionView.m */; };
+		A27BFBA21E8D583E0044A0F0 /* IQMessageDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = A27BFB971E8D583E0044A0F0 /* IQMessageDisplayView.m */; };
+		A27BFBA31E8D583E0044A0F0 /* IQPlaybackDurationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A27BFB991E8D583E0044A0F0 /* IQPlaybackDurationView.m */; };
+		A27BFBA41E8D583E0044A0F0 /* NSString+IQTimeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A27BFB9B1E8D583E0044A0F0 /* NSString+IQTimeIntervalFormatter.m */; };
+		A27BFBA71E8D59730044A0F0 /* SCSiriWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = A27BFBA61E8D59730044A0F0 /* SCSiriWaveformView.m */; };
+		A27BFBAB1E8E62B50044A0F0 /* PrivateMessagesHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A27BFBAA1E8E62B50044A0F0 /* PrivateMessagesHelper.m */; };
 		A28825F61BE3960500564EBF /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28825F51BE3960500564EBF /* MyProfileViewController.swift */; };
 		A29C2C051D21CC7E00C201FD /* SearchViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29C2C041D21CC7E00C201FD /* SearchViewV2.swift */; };
+		A29F428C1E90FF73000248FE /* ThreadDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A29F428B1E90FF73000248FE /* ThreadDataObject.m */; };
 		A2A7D75B1D37DC0E003BE0AF /* FullimageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2A7D75A1D37DC0E003BE0AF /* FullimageViewController.storyboard */; };
 		A2AE4A501BDCF7B8008E84B9 /* ToSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AE4A4F1BDCF7B8008E84B9 /* ToSViewController.swift */; };
 		A2AE4A521BDCF82F008E84B9 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AE4A511BDCF82F008E84B9 /* PrivacyPolicyViewController.swift */; };
+		A2C47CBB1E8BCA4900097B56 /* MessageLocationViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = A2C47CBA1E8BCA4900097B56 /* MessageLocationViewer.m */; };
+		A2C47CBD1E8BCA5300097B56 /* MessageLocationViewer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2C47CBC1E8BCA5300097B56 /* MessageLocationViewer.storyboard */; };
+		A2C47CBE1E8C1E9600097B56 /* FullimageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78971E781CA668730078CBDC /* FullimageViewController.swift */; };
 		A2C55BAC1BE7B77B00431EA0 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C55BAB1BE7B77B00431EA0 /* WebPageViewController.swift */; };
 		A2CB53D11E8464D900527F38 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2CB53D01E8464D900527F38 /* Photos.framework */; };
 		A2CB53D31E8464FB00527F38 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2CB53D21E8464FB00527F38 /* MobileCoreServices.framework */; };
@@ -71,16 +87,10 @@
 		A2CF64A21E82FB7F00A70FE7 /* ChatTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2CF64A01E82FB7F00A70FE7 /* ChatTextCell.xib */; };
 		A2CF64A61E82FB9200A70FE7 /* ChatPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CF64A41E82FB9200A70FE7 /* ChatPhotoCell.m */; };
 		A2CF64A71E82FB9200A70FE7 /* ChatPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2CF64A51E82FB9200A70FE7 /* ChatPhotoCell.xib */; };
-		A2CF64AB1E82FBA300A70FE7 /* ChatMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CF64A91E82FBA300A70FE7 /* ChatMapCell.m */; };
-		A2CF64AC1E82FBA300A70FE7 /* ChatMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2CF64AA1E82FBA300A70FE7 /* ChatMapCell.xib */; };
-		A2CF64B01E82FBBF00A70FE7 /* ChatVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CF64AE1E82FBBF00A70FE7 /* ChatVideoCell.m */; };
-		A2CF64B11E82FBC000A70FE7 /* ChatVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2CF64AF1E82FBBF00A70FE7 /* ChatVideoCell.xib */; };
 		A2CF64B51E82FBD300A70FE7 /* ChatAudioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CF64B31E82FBD300A70FE7 /* ChatAudioCell.m */; };
 		A2CF64B61E82FBD300A70FE7 /* ChatAudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2CF64B41E82FBD300A70FE7 /* ChatAudioCell.xib */; };
 		A2CF64B81E83106D00A70FE7 /* ChatTextCellOtherUser.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2CF64B71E83106D00A70FE7 /* ChatTextCellOtherUser.xib */; };
 		A2CF64BA1E83108800A70FE7 /* ChatPhotoCellOtherUser.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2CF64B91E83108800A70FE7 /* ChatPhotoCellOtherUser.xib */; };
-		A2CF64BC1E83109800A70FE7 /* ChatMapCellOtherUser.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2CF64BB1E83109800A70FE7 /* ChatMapCellOtherUser.xib */; };
-		A2CF64BE1E8310A800A70FE7 /* ChatVideoCellOtherUser.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2CF64BD1E8310A800A70FE7 /* ChatVideoCellOtherUser.xib */; };
 		A2CF64C01E8310BA00A70FE7 /* ChatAudioCellOtherUser.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2CF64BF1E8310BA00A70FE7 /* ChatAudioCellOtherUser.xib */; };
 		A2DBF03F1DDDC2BB00705E6F /* StatusUpdateCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DBF03E1DDDC2BB00705E6F /* StatusUpdateCollectionCell.swift */; };
 		A2DBF0441DDE096900705E6F /* locationDictParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DBF0431DDE096900705E6F /* locationDictParser.m */; };
@@ -256,12 +266,41 @@
 		A27A7D5A1DE65F0700DEEF9B /* SAMCache+Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAMCache+Image.h"; sourceTree = "<group>"; };
 		A27A7D5B1DE65F0700DEEF9B /* SAMCache+Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAMCache+Image.m"; sourceTree = "<group>"; };
 		A27A7D5D1DE65F5300DEEF9B /* SAMCache+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SAMCache+Private.h"; sourceTree = "<group>"; };
+		A27BFB871E8D58210044A0F0 /* IQ_FDWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQ_FDWaveformView.h; sourceTree = "<group>"; };
+		A27BFB881E8D58210044A0F0 /* IQ_FDWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQ_FDWaveformView.m; sourceTree = "<group>"; };
+		A27BFB8A1E8D583E0044A0F0 /* IQAudioCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQAudioCropperViewController.h; sourceTree = "<group>"; };
+		A27BFB8B1E8D583E0044A0F0 /* IQAudioCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQAudioCropperViewController.m; sourceTree = "<group>"; };
+		A27BFB8C1E8D583E0044A0F0 /* IQAudioRecorderConstraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQAudioRecorderConstraints.h; sourceTree = "<group>"; };
+		A27BFB8D1E8D583E0044A0F0 /* IQAudioRecorderConstraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQAudioRecorderConstraints.m; sourceTree = "<group>"; };
+		A27BFB8E1E8D583E0044A0F0 /* IQAudioRecorderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQAudioRecorderViewController.h; sourceTree = "<group>"; };
+		A27BFB8F1E8D583E0044A0F0 /* IQAudioRecorderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQAudioRecorderViewController.m; sourceTree = "<group>"; };
+		A27BFB901E8D583E0044A0F0 /* IQCropSelectionBeginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQCropSelectionBeginView.h; sourceTree = "<group>"; };
+		A27BFB911E8D583E0044A0F0 /* IQCropSelectionBeginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQCropSelectionBeginView.m; sourceTree = "<group>"; };
+		A27BFB921E8D583E0044A0F0 /* IQCropSelectionEndView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQCropSelectionEndView.h; sourceTree = "<group>"; };
+		A27BFB931E8D583E0044A0F0 /* IQCropSelectionEndView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQCropSelectionEndView.m; sourceTree = "<group>"; };
+		A27BFB941E8D583E0044A0F0 /* IQCropSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQCropSelectionView.h; sourceTree = "<group>"; };
+		A27BFB951E8D583E0044A0F0 /* IQCropSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQCropSelectionView.m; sourceTree = "<group>"; };
+		A27BFB961E8D583E0044A0F0 /* IQMessageDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQMessageDisplayView.h; sourceTree = "<group>"; };
+		A27BFB971E8D583E0044A0F0 /* IQMessageDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQMessageDisplayView.m; sourceTree = "<group>"; };
+		A27BFB981E8D583E0044A0F0 /* IQPlaybackDurationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQPlaybackDurationView.h; sourceTree = "<group>"; };
+		A27BFB991E8D583E0044A0F0 /* IQPlaybackDurationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQPlaybackDurationView.m; sourceTree = "<group>"; };
+		A27BFB9A1E8D583E0044A0F0 /* NSString+IQTimeIntervalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+IQTimeIntervalFormatter.h"; sourceTree = "<group>"; };
+		A27BFB9B1E8D583E0044A0F0 /* NSString+IQTimeIntervalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+IQTimeIntervalFormatter.m"; sourceTree = "<group>"; };
+		A27BFBA51E8D59730044A0F0 /* SCSiriWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSiriWaveformView.h; sourceTree = "<group>"; };
+		A27BFBA61E8D59730044A0F0 /* SCSiriWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSiriWaveformView.m; sourceTree = "<group>"; };
+		A27BFBA91E8E62B50044A0F0 /* PrivateMessagesHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateMessagesHelper.h; sourceTree = "<group>"; };
+		A27BFBAA1E8E62B50044A0F0 /* PrivateMessagesHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateMessagesHelper.m; sourceTree = "<group>"; };
 		A28825F51BE3960500564EBF /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		A29C2C041D21CC7E00C201FD /* SearchViewV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewV2.swift; sourceTree = "<group>"; };
+		A29F428A1E90FF73000248FE /* ThreadDataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadDataObject.h; sourceTree = "<group>"; };
+		A29F428B1E90FF73000248FE /* ThreadDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadDataObject.m; sourceTree = "<group>"; };
 		A2A7D75A1D37DC0E003BE0AF /* FullimageViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FullimageViewController.storyboard; sourceTree = "<group>"; };
 		A2AE4A4F1BDCF7B8008E84B9 /* ToSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToSViewController.swift; sourceTree = "<group>"; };
 		A2AE4A511BDCF82F008E84B9 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		A2B59D021DF1840B005AC14C /* Calendario.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Calendario.entitlements; sourceTree = "<group>"; };
+		A2C47CB91E8BCA4900097B56 /* MessageLocationViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageLocationViewer.h; sourceTree = "<group>"; };
+		A2C47CBA1E8BCA4900097B56 /* MessageLocationViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageLocationViewer.m; sourceTree = "<group>"; };
+		A2C47CBC1E8BCA5300097B56 /* MessageLocationViewer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MessageLocationViewer.storyboard; sourceTree = "<group>"; };
 		A2C55BAB1BE7B77B00431EA0 /* WebPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
 		A2CB53D01E8464D900527F38 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		A2CB53D21E8464FB00527F38 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -286,19 +325,11 @@
 		A2CF64A31E82FB9200A70FE7 /* ChatPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatPhotoCell.h; sourceTree = "<group>"; };
 		A2CF64A41E82FB9200A70FE7 /* ChatPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatPhotoCell.m; sourceTree = "<group>"; };
 		A2CF64A51E82FB9200A70FE7 /* ChatPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatPhotoCell.xib; sourceTree = "<group>"; };
-		A2CF64A81E82FBA300A70FE7 /* ChatMapCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMapCell.h; sourceTree = "<group>"; };
-		A2CF64A91E82FBA300A70FE7 /* ChatMapCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMapCell.m; sourceTree = "<group>"; };
-		A2CF64AA1E82FBA300A70FE7 /* ChatMapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMapCell.xib; sourceTree = "<group>"; };
-		A2CF64AD1E82FBBF00A70FE7 /* ChatVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatVideoCell.h; sourceTree = "<group>"; };
-		A2CF64AE1E82FBBF00A70FE7 /* ChatVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatVideoCell.m; sourceTree = "<group>"; };
-		A2CF64AF1E82FBBF00A70FE7 /* ChatVideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatVideoCell.xib; sourceTree = "<group>"; };
 		A2CF64B21E82FBD300A70FE7 /* ChatAudioCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatAudioCell.h; sourceTree = "<group>"; };
 		A2CF64B31E82FBD300A70FE7 /* ChatAudioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatAudioCell.m; sourceTree = "<group>"; };
 		A2CF64B41E82FBD300A70FE7 /* ChatAudioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatAudioCell.xib; sourceTree = "<group>"; };
 		A2CF64B71E83106D00A70FE7 /* ChatTextCellOtherUser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatTextCellOtherUser.xib; sourceTree = "<group>"; };
 		A2CF64B91E83108800A70FE7 /* ChatPhotoCellOtherUser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatPhotoCellOtherUser.xib; sourceTree = "<group>"; };
-		A2CF64BB1E83109800A70FE7 /* ChatMapCellOtherUser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMapCellOtherUser.xib; sourceTree = "<group>"; };
-		A2CF64BD1E8310A800A70FE7 /* ChatVideoCellOtherUser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatVideoCellOtherUser.xib; sourceTree = "<group>"; };
 		A2CF64BF1E8310BA00A70FE7 /* ChatAudioCellOtherUser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatAudioCellOtherUser.xib; sourceTree = "<group>"; };
 		A2DBF03E1DDDC2BB00705E6F /* StatusUpdateCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusUpdateCollectionCell.swift; sourceTree = "<group>"; };
 		A2DBF0421DDE096900705E6F /* locationDictParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = locationDictParser.h; sourceTree = "<group>"; };
@@ -686,6 +717,46 @@
 			name = "Manage User Class";
 			sourceTree = "<group>";
 		};
+		A27BFB861E8D580D0044A0F0 /* IQAudioRecorderController  */ = {
+			isa = PBXGroup;
+			children = (
+				A27BFBA51E8D59730044A0F0 /* SCSiriWaveformView.h */,
+				A27BFBA61E8D59730044A0F0 /* SCSiriWaveformView.m */,
+				A27BFB8A1E8D583E0044A0F0 /* IQAudioCropperViewController.h */,
+				A27BFB8B1E8D583E0044A0F0 /* IQAudioCropperViewController.m */,
+				A27BFB8C1E8D583E0044A0F0 /* IQAudioRecorderConstraints.h */,
+				A27BFB8D1E8D583E0044A0F0 /* IQAudioRecorderConstraints.m */,
+				A27BFB8E1E8D583E0044A0F0 /* IQAudioRecorderViewController.h */,
+				A27BFB8F1E8D583E0044A0F0 /* IQAudioRecorderViewController.m */,
+				A27BFB901E8D583E0044A0F0 /* IQCropSelectionBeginView.h */,
+				A27BFB911E8D583E0044A0F0 /* IQCropSelectionBeginView.m */,
+				A27BFB921E8D583E0044A0F0 /* IQCropSelectionEndView.h */,
+				A27BFB931E8D583E0044A0F0 /* IQCropSelectionEndView.m */,
+				A27BFB941E8D583E0044A0F0 /* IQCropSelectionView.h */,
+				A27BFB951E8D583E0044A0F0 /* IQCropSelectionView.m */,
+				A27BFB961E8D583E0044A0F0 /* IQMessageDisplayView.h */,
+				A27BFB971E8D583E0044A0F0 /* IQMessageDisplayView.m */,
+				A27BFB981E8D583E0044A0F0 /* IQPlaybackDurationView.h */,
+				A27BFB991E8D583E0044A0F0 /* IQPlaybackDurationView.m */,
+				A27BFB9A1E8D583E0044A0F0 /* NSString+IQTimeIntervalFormatter.h */,
+				A27BFB9B1E8D583E0044A0F0 /* NSString+IQTimeIntervalFormatter.m */,
+				A27BFB871E8D58210044A0F0 /* IQ_FDWaveformView.h */,
+				A27BFB881E8D58210044A0F0 /* IQ_FDWaveformView.m */,
+			);
+			name = "IQAudioRecorderController ";
+			sourceTree = "<group>";
+		};
+		A27BFBA81E8E62940044A0F0 /* Private Messages Helper Methods */ = {
+			isa = PBXGroup;
+			children = (
+				A27BFBA91E8E62B50044A0F0 /* PrivateMessagesHelper.h */,
+				A27BFBAA1E8E62B50044A0F0 /* PrivateMessagesHelper.m */,
+				A29F428A1E90FF73000248FE /* ThreadDataObject.h */,
+				A29F428B1E90FF73000248FE /* ThreadDataObject.m */,
+			);
+			name = "Private Messages Helper Methods";
+			sourceTree = "<group>";
+		};
 		A28609BC1DE657BC001A4513 /* Calendar Data Cache */ = {
 			isa = PBXGroup;
 			children = (
@@ -737,6 +808,16 @@
 			name = "Present View Class";
 			sourceTree = "<group>";
 		};
+		A2C47CB81E8BCA2700097B56 /* Message Location Viewer */ = {
+			isa = PBXGroup;
+			children = (
+				A2C47CB91E8BCA4900097B56 /* MessageLocationViewer.h */,
+				A2C47CBA1E8BCA4900097B56 /* MessageLocationViewer.m */,
+				A2C47CBC1E8BCA5300097B56 /* MessageLocationViewer.storyboard */,
+			);
+			name = "Message Location Viewer";
+			sourceTree = "<group>";
+		};
 		A2C55BAA1BE7B75000431EA0 /* Web Page Viewer */ = {
 			isa = PBXGroup;
 			children = (
@@ -786,9 +867,7 @@
 			isa = PBXGroup;
 			children = (
 				A2CF64991E82FAC300A70FE7 /* Text Cell */,
-				A2CF649A1E82FACB00A70FE7 /* Photo Cell */,
-				A2CF649B1E82FADC00A70FE7 /* Map Cell */,
-				A2CF649C1E82FAE300A70FE7 /* Video Cell */,
+				A2CF649A1E82FACB00A70FE7 /* Photo/Map/Video Cell */,
 				A2CF649D1E82FAEA00A70FE7 /* Audio Cell */,
 			);
 			name = "Chat Custom Cells";
@@ -805,7 +884,7 @@
 			name = "Text Cell";
 			sourceTree = "<group>";
 		};
-		A2CF649A1E82FACB00A70FE7 /* Photo Cell */ = {
+		A2CF649A1E82FACB00A70FE7 /* Photo/Map/Video Cell */ = {
 			isa = PBXGroup;
 			children = (
 				A2CF64A31E82FB9200A70FE7 /* ChatPhotoCell.h */,
@@ -813,29 +892,7 @@
 				A2CF64A51E82FB9200A70FE7 /* ChatPhotoCell.xib */,
 				A2CF64B91E83108800A70FE7 /* ChatPhotoCellOtherUser.xib */,
 			);
-			name = "Photo Cell";
-			sourceTree = "<group>";
-		};
-		A2CF649B1E82FADC00A70FE7 /* Map Cell */ = {
-			isa = PBXGroup;
-			children = (
-				A2CF64A81E82FBA300A70FE7 /* ChatMapCell.h */,
-				A2CF64A91E82FBA300A70FE7 /* ChatMapCell.m */,
-				A2CF64AA1E82FBA300A70FE7 /* ChatMapCell.xib */,
-				A2CF64BB1E83109800A70FE7 /* ChatMapCellOtherUser.xib */,
-			);
-			name = "Map Cell";
-			sourceTree = "<group>";
-		};
-		A2CF649C1E82FAE300A70FE7 /* Video Cell */ = {
-			isa = PBXGroup;
-			children = (
-				A2CF64AD1E82FBBF00A70FE7 /* ChatVideoCell.h */,
-				A2CF64AE1E82FBBF00A70FE7 /* ChatVideoCell.m */,
-				A2CF64AF1E82FBBF00A70FE7 /* ChatVideoCell.xib */,
-				A2CF64BD1E8310A800A70FE7 /* ChatVideoCellOtherUser.xib */,
-			);
-			name = "Video Cell";
+			name = "Photo/Map/Video Cell";
 			sourceTree = "<group>";
 		};
 		A2CF649D1E82FAEA00A70FE7 /* Audio Cell */ = {
@@ -852,6 +909,9 @@
 		A2DBF0451DDE552300705E6F /* Private Messages Class */ = {
 			isa = PBXGroup;
 			children = (
+				A27BFB861E8D580D0044A0F0 /* IQAudioRecorderController  */,
+				A27BFBA81E8E62940044A0F0 /* Private Messages Helper Methods */,
+				A2C47CB81E8BCA2700097B56 /* Message Location Viewer */,
 				A2CF64831E82922400A70FE7 /* Message User Selector */,
 				A2CF64781E81A0BB00A70FE7 /* Message Detail View */,
 				A2CF64771E81A0A800A70FE7 /* Message Thread List */,
@@ -1389,7 +1449,6 @@
 				D3DE97911C80CC0400F4DE7B /* SF-UI-Display-Thin.otf in Resources */,
 				D3DE97951C80CC0400F4DE7B /* SF-UI-Text-Heavy.otf in Resources */,
 				D3DE97971C80CC0400F4DE7B /* SF-UI-Text-Light.otf in Resources */,
-				A2CF64BE1E8310A800A70FE7 /* ChatVideoCellOtherUser.xib in Resources */,
 				A2CF64C01E8310BA00A70FE7 /* ChatAudioCellOtherUser.xib in Resources */,
 				E23083721C7426EB001C0142 /* Info.plist in Resources */,
 				A2CF64A21E82FB7F00A70FE7 /* ChatTextCell.xib in Resources */,
@@ -1409,7 +1468,6 @@
 				A2CF64971E82B7BD00A70FE7 /* MessageDetailView.storyboard in Resources */,
 				A259E8911DD9C22300963F0C /* EditProfileUI.storyboard in Resources */,
 				E2E0D7121BC9950800662E70 /* LaunchScreen.storyboard in Resources */,
-				A2CF64BC1E83109800A70FE7 /* ChatMapCellOtherUser.xib in Resources */,
 				78CE15B81C95CE2F00257C4B /* followers-icon.png in Resources */,
 				A23D83D41DDB236D0013C233 /* ProfileUI.storyboard in Resources */,
 				A2A7D75B1D37DC0E003BE0AF /* FullimageViewController.storyboard in Resources */,
@@ -1422,13 +1480,12 @@
 				D3DE978B1C80CC0400F4DE7B /* SF-UI-Display-Bold.otf in Resources */,
 				D3DE97941C80CC0400F4DE7B /* SF-UI-Text-BoldItalic.otf in Resources */,
 				A21147411D6F0E8800C0C369 /* ResetPassUI.storyboard in Resources */,
+				A2C47CBD1E8BCA5300097B56 /* MessageLocationViewer.storyboard in Resources */,
 				A2CF64B81E83106D00A70FE7 /* ChatTextCellOtherUser.xib in Resources */,
 				D3DE979C1C80CC0400F4DE7B /* SF-UI-Text-RegularItalic.otf in Resources */,
 				D3DE978A1C80CC0400F4DE7B /* SF-UI-Display-Black.otf in Resources */,
 				A2CF647D1E81A10700A70FE7 /* PrivateMessagesList.storyboard in Resources */,
-				A2CF64AC1E82FBA300A70FE7 /* ChatMapCell.xib in Resources */,
 				A226AB351DE59BF6002139C4 /* TimelineCalendarUI.storyboard in Resources */,
-				A2CF64B11E82FBC000A70FE7 /* ChatVideoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1503,7 +1560,6 @@
 			files = (
 				A2FBF5C61C00BADA0051A553 /* EditProfileViewController.swift in Sources */,
 				A2DBF0441DDE096900705E6F /* locationDictParser.m in Sources */,
-				A2CF64AB1E82FBA300A70FE7 /* ChatMapCell.m in Sources */,
 				E2EE565C1BF199F70064BA1D /* ChameleonConstants.m in Sources */,
 				E23083681C7426EB001C0142 /* FSCalendar.m in Sources */,
 				A2CF64811E81A1BE00A70FE7 /* MessagePreviewCell.m in Sources */,
@@ -1522,15 +1578,19 @@
 				E2D09C911BCCC575003F4651 /* DayTitleLabel.m in Sources */,
 				A2CF64861E82928F00A70FE7 /* MessageUserSelector.m in Sources */,
 				E2FE96481BDF1AEA003BEDD2 /* ReportTableViewController.swift in Sources */,
+				A27BFBA01E8D583E0044A0F0 /* IQCropSelectionEndView.m in Sources */,
+				A27BFB9C1E8D583E0044A0F0 /* IQAudioCropperViewController.m in Sources */,
 				A28825F61BE3960500564EBF /* MyProfileViewController.swift in Sources */,
 				A2CF64B51E82FBD300A70FE7 /* ChatAudioCell.m in Sources */,
 				E2EE56651BF199F70064BA1D /* UIViewController+Chameleon.m in Sources */,
 				A2CF64951E82B7B000A70FE7 /* MessageDetailView.m in Sources */,
+				A27BFB9D1E8D583E0044A0F0 /* IQAudioRecorderConstraints.m in Sources */,
 				E2EE56641BF199F70064BA1D /* UIView+ChameleonPrivate.m in Sources */,
 				E2EE56601BF199F70064BA1D /* UIColor+ChameleonPrivate.m in Sources */,
 				E2D8D9FD1BCF51E800A40350 /* NewsfeedTableViewCell.swift in Sources */,
 				E24DA5F21C13EA7A00901DF0 /* LocatonViewController.swift in Sources */,
 				E23083701C7426EB001C0142 /* FSCalendarHeader.m in Sources */,
+				A27BFB891E8D58210044A0F0 /* IQ_FDWaveformView.m in Sources */,
 				78971E791CA668730078CBDC /* FullimageViewController.swift in Sources */,
 				A2DBF04F1DDF1ADE00705E6F /* SeeMoreHeaderView.swift in Sources */,
 				E2E0D7041BC9950800662E70 /* main.m in Sources */,
@@ -1548,8 +1608,10 @@
 				E187B5F61BD3368400845C2F /* SearchViewController.m in Sources */,
 				A2AE4A501BDCF7B8008E84B9 /* ToSViewController.swift in Sources */,
 				E2D09C9B1BCCC59A003F4651 /* NSDictionary+CL.m in Sources */,
+				A29F428C1E90FF73000248FE /* ThreadDataObject.m in Sources */,
 				E2065DA81C3E0EF30054AB2A /* FollowingTableViewController.swift in Sources */,
 				A24DB11A1C8F7EB1002D4897 /* AttendantsListViewController.swift in Sources */,
+				A27BFBA21E8D583E0044A0F0 /* IQMessageDisplayView.m in Sources */,
 				E2C9223C1C1CB581004278E3 /* CalPhotoViewerViewController.swift in Sources */,
 				A26359E41BDA8342003F8FEB /* ResetPasswordViewController.swift in Sources */,
 				A2CF64911E8296DA00A70FE7 /* MessageUserCell.m in Sources */,
@@ -1559,17 +1621,20 @@
 				E23083731C7426EB001C0142 /* NSDate+FSExtension.m in Sources */,
 				A23457AB1C79E6E500376F2F /* DateManager.swift in Sources */,
 				D3D9D7D61C9E0B4B000A2528 /* ParseCalls.swift in Sources */,
+				A27BFBA41E8D583E0044A0F0 /* NSString+IQTimeIntervalFormatter.m in Sources */,
+				A27BFBAB1E8E62B50044A0F0 /* PrivateMessagesHelper.m in Sources */,
 				E2EE565D1BF199F70064BA1D /* NSArray+Chameleon.m in Sources */,
 				E24DA5EF1C13E3AC00901DF0 /* LocationSearchTableViewController.swift in Sources */,
 				A23D83D21DDB23600013C233 /* ProfileSubController.swift in Sources */,
 				E2EE56621BF199F70064BA1D /* UILabel+Chameleon.m in Sources */,
-				A2CF64B01E82FBBF00A70FE7 /* ChatVideoCell.m in Sources */,
 				E2CAAA3B1C69A2AB001C9E06 /* NSDate+Compare.swift in Sources */,
 				E23083671C7426EB001C0142 /* CALayer+FSExtension.m in Sources */,
 				D3D9D7D81C9E2580000A2528 /* PresentingViews.swift in Sources */,
+				A27BFBA31E8D583E0044A0F0 /* IQPlaybackDurationView.m in Sources */,
 				E23083711C7426EB001C0142 /* FSCalendarStickyHeader.m in Sources */,
 				A2267D171C4BD9C200180C6D /* FollowRequestsTableViewController.swift in Sources */,
 				E2EE56631BF199F70064BA1D /* UINavigationController+Chameleon.m in Sources */,
+				A2C47CBB1E8BCA4900097B56 /* MessageLocationViewer.m in Sources */,
 				78C1C01C1C006D9200ACDCEC /* reportBug.m in Sources */,
 				E2EE565E1BF199F70064BA1D /* UIButton+Chameleon.m in Sources */,
 				E2065DAA1C3E25710054AB2A /* FollowingTableViewCell.swift in Sources */,
@@ -1601,8 +1666,12 @@
 				E151AF721BD72D6500811A31 /* tabBarViewController.m in Sources */,
 				784E96191CA185CC00085057 /* IntrochildViewController.swift in Sources */,
 				E2D09C9D1BCCC59A003F4651 /* UIImage+CL.m in Sources */,
+				A27BFBA11E8D583E0044A0F0 /* IQCropSelectionView.m in Sources */,
 				E23083751C7426EB001C0142 /* UIView+FSExtension.m in Sources */,
+				A27BFB9F1E8D583E0044A0F0 /* IQCropSelectionBeginView.m in Sources */,
 				A226AB311DE599ED002139C4 /* TimelineCalendarViewController.m in Sources */,
+				A27BFBA71E8D59730044A0F0 /* SCSiriWaveformView.m in Sources */,
+				A27BFB9E1E8D583E0044A0F0 /* IQAudioRecorderViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1619,6 +1688,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2E0D7281BC9950800662E70 /* CalendarioUITests.m in Sources */,
+				A2C47CBE1E8C1E9600097B56 /* FullimageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

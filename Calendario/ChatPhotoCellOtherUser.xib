@@ -10,53 +10,72 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatPhotoCellOtherUser" rowHeight="183" id="6de-7P-gHO" customClass="ChatPhotoCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="183"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatPhotoCellOtherUser" rowHeight="153" id="Rjj-Cg-rVS" customClass="ChatPhotoCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="153"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6de-7P-gHO" id="Gn9-sW-un4">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="182"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rjj-Cg-rVS" id="BSk-Gn-8ij">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="152"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="chatBubbleTriangle" id="Ayr-aB-PSu">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="chatBubbleTriangle" id="NTs-xa-g1s">
                         <rect key="frame" x="57" y="15" width="16" height="16"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="ewX-ci-Ere">
-                        <rect key="frame" x="6" y="8" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="07/04/2017 at 10:30 AM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ku6-b3-e2q">
-                        <rect key="frame" x="69" y="161" width="243" height="22"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="Fx3-Zw-hik">
+                        <rect key="frame" x="6" y="8" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" misplaced="YES" id="NeM-Te-j3l">
+                        <rect key="frame" x="69" y="7" width="195" height="124"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="d6o-9n-92d">
+                                <rect key="frame" x="5" y="6" width="185" height="112"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="gray" id="kwv-ZZ-4FI">
+                                <rect key="frame" x="87" y="52" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="playbutton" id="9yZ-nX-TeW">
+                                <rect key="frame" x="66" y="30" width="64" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rZ3-fP-9dk">
+                                <rect key="frame" x="0.0" y="0.0" width="195" height="124"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <connections>
+                                    <action selector="mediaSelected:" destination="Rjj-Cg-rVS" eventType="touchUpInside" id="Dad-gU-ViQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="07/04/2017 at 10:30 AM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BRB-4I-38a">
+                        <rect key="frame" x="69" y="130" width="195" height="22"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                         <color key="textColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" misplaced="YES" id="AIO-ng-exd">
-                        <rect key="frame" x="69" y="8" width="243" height="154"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="V21-FH-Sth">
-                                <rect key="frame" x="5" y="5" width="233" height="144"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="boxView" destination="AIO-ng-exd" id="fXt-Dc-Npi"/>
-                <outlet property="dateLabel" destination="ku6-b3-e2q" id="TXp-hO-e0I"/>
-                <outlet property="messagePicture" destination="V21-FH-Sth" id="jjh-z5-N7j"/>
-                <outlet property="profilePicture" destination="ewX-ci-Ere" id="Yb9-2j-hI6"/>
-                <outlet property="triangleView" destination="Ayr-aB-PSu" id="bPe-gm-XmX"/>
+                <outlet property="active" destination="kwv-ZZ-4FI" id="RIZ-E6-nO9"/>
+                <outlet property="boxView" destination="NeM-Te-j3l" id="lnC-Cf-Y9c"/>
+                <outlet property="dateLabel" destination="BRB-4I-38a" id="FOq-Tr-ExB"/>
+                <outlet property="messagePicture" destination="d6o-9n-92d" id="yCz-Qa-Bsc"/>
+                <outlet property="playVideoButton" destination="9yZ-nX-TeW" id="em0-KJ-Wcl"/>
+                <outlet property="profilePicture" destination="Fx3-Zw-hik" id="Lfl-uq-Vrr"/>
+                <outlet property="selectionButton" destination="rZ3-fP-9dk" id="PBw-Sr-ryo"/>
+                <outlet property="triangleView" destination="NTs-xa-g1s" id="eXu-WU-3E4"/>
             </connections>
-            <point key="canvasLocation" x="26" y="62.5"/>
+            <point key="canvasLocation" x="26" y="-153.5"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="chatBubbleTriangle" width="16" height="16"/>
+        <image name="playbutton" width="64" height="64"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

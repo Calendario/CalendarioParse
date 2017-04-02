@@ -7,9 +7,16 @@
 //
 
 #import "MessageDetailView.h"
+#import "Calendario-Swift.h"
+#import "IQAudioRecorderViewController.h"
 
-@interface MessageDetailView () {
+@interface MessageDetailView () <IQAudioRecorderViewControllerDelegate> {
+    
+    // New message data object.
     PFObject *newMessage;
+    
+    // Video data object.
+    NSData *videoData;
 }
 
 @end
@@ -22,16 +29,10 @@
 
 -(IBAction)done:(id)sender {
     
+    // Hide the on screen keyboard.
     [self dismissKeyboard];
     
-    if (audioPlayer.playing == YES) {
-        [audioPlayer stop];
-    }
-    
-    if (audioRecorder.recording == YES) {
-        [audioRecorder stop];
-    }
-    
+    // Close the current view.
     [self dismissViewControllerAnimated:YES completion:^{
         [reloadTimer invalidate];
     }];
@@ -46,7 +47,11 @@
     // before performing the upload request.
     
     if (([chatString length] > 0) && (messageField.text != nil)) {
+        
+        // Hide the on screen keyboard.
         [self dismissKeyboard];
+        
+        // Send the text message.
         [self sendMessage:@"Text" :messageField.text];
     }
 }
@@ -240,9 +245,18 @@
     
     UIAlertAction *currentLocation = [UIAlertAction actionWithTitle:@"Current Location" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
+        // Check if current location data is available.
         [self checkCurrentLocation:^(BOOL dataCheck) {
             
+            // Check if current location data
+            // authorization has been granted.
+            
             if (dataCheck == YES) {
+                
+                // Hide the on screen keyboard.
+                [self dismissKeyboard];
+                
+                // Send the location message.
                 [self sendMessage:@"Map" :[PFGeoPoint geoPointWithLatitude:locationManager.location.coordinate.latitude longitude:locationManager.location.coordinate.longitude]];
             }
         }];
@@ -250,6 +264,53 @@
     
     UIAlertAction *audio = [UIAlertAction actionWithTitle:@"Voice message" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
+        // Check the microphone authorisation status.
+        AVAuthorizationStatus statusMicrophone = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+        
+        // Check the status responce and act acoordingly.
+        
+        if (statusMicrophone == AVAuthorizationStatusAuthorized) {
+            
+            // Open the audio recorder view.
+            [self openAudioRecorder];
+        }
+        
+        else if (statusMicrophone == AVAuthorizationStatusDenied) {
+            
+            // Access has been denied.
+            [self displayAlert:@"Error" :@"Calendario has not been granted access to the microphone. Please ensure you have granted access in the Settings app and try again."];
+        }
+        
+        else if (statusMicrophone == AVAuthorizationStatusRestricted) {
+            
+            // Access has been restricted.
+            [self displayAlert:@"Error" :@"Calendario has not been granted access to the microphone. Please ensure you have granted access in the Settings app and try again."];
+        }
+        
+        else if (statusMicrophone == AVAuthorizationStatusNotDetermined) {
+            
+            // Access has not been determined - Microphone.
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeAudio completionHandler:^(BOOL granted_audio) {
+                
+                if (granted_audio) {
+                    
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        
+                        // Open the audio recorder view.
+                        [self openAudioRecorder];
+                    });
+                }
+                
+                else {
+                    
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        
+                        // Access has been denied.
+                        [self displayAlert:@"Error" :@"Calendario has not been granted access to the microphone. Please ensure you have granted access in the Settings app and try again."];
+                    });
+                }
+            }];
+        }
     }];
     
     UIAlertAction *dismiss = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}];
@@ -264,128 +325,22 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
--(IBAction)startRecording:(id)sender {
-    
-    // Check the microphone authorisation status.
-    AVAuthorizationStatus statusMicrophone = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
-    
-    // Check the status responce and act acoordingly.
-    
-    if (statusMicrophone == AVAuthorizationStatusAuthorized) {
-        
-        if (audioRecorder.recording) {
-            [audioRecorder stop];
-            [recordAudioButton setTitle:@"Record" forState:UIControlStateNormal];
-        } else {
-            [recordAudioButton setTitle:@"Stop" forState:UIControlStateNormal];
-            [audioRecorder record];
-        }
-    }
-    
-    else if (statusMicrophone == AVAuthorizationStatusDenied) {
-        
-        // Access has been denied.
-        [self displayAlert:@"Error" :@"Calendario has not been granted access to the microphone. Please ensure you have granted access in the Settings app and try again."];
-    }
-    
-    else if (statusMicrophone == AVAuthorizationStatusRestricted) {
-        
-        // Access has been restricted.
-        [self displayAlert:@"Error" :@"Calendario has not been granted access to the microphone. Please ensure you have granted access in the Settings app and try again."];
-    }
-    
-    else if (statusMicrophone == AVAuthorizationStatusNotDetermined) {
-        
-        // Access has not been determined - Microphone.
-        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeAudio completionHandler:^(BOOL granted_audio) {
-            
-            if (granted_audio) {
-                
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    
-                    if (audioRecorder.recording) {
-                        [audioRecorder stop];
-                        [recordAudioButton setTitle:@"Record" forState:UIControlStateNormal];
-                    } else {
-                        [recordAudioButton setTitle:@"Stop" forState:UIControlStateNormal];
-                        [audioRecorder record];
-                    }
-                });
-            }
-            
-            else {
-                
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    
-                    // Access has been denied.
-                    [self displayAlert:@"Error" :@"Calendario has not been granted access to the microphone. Please ensure you have granted access in the Settings app and try again."];
-                });
-            }
-        }];
-    }
-}
-
--(IBAction)playCurrentRecording:(id)sender {
-    
-    if (!audioRecorder.recording) {
-        
-        if (audioPlayer.playing == YES) {
-            [audioPlayer stop];
-            [playAudioButton setTitle:@"Play" forState:UIControlStateNormal];
-        } else {
-            
-            NSError *error = nil;
-            
-            audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:audioRecorder.url error:&error];
-            [audioPlayer setDelegate:self];
-            
-            if (error) {
-                NSLog(@"Error: %@", [error localizedDescription]);
-            } else {
-                [audioPlayer play];
-                [playAudioButton setTitle:@"Pause" forState:UIControlStateNormal];
-            }
-        }
-    }
-}
-
--(IBAction)sendVoiceMessage:(id)sender {
-    
-    // Send the voice message.
-    [self sendVoiceMessage:[PFFile fileWithName:@"sound.caf" data:[NSData dataWithContentsOfURL:audioRecorder.url]]];
-}
-
--(IBAction)closeRecordView:(id)sender {
-    
-    // Stop the audio player if its playing.
-    
-    if (audioPlayer.playing == YES) {
-        [audioPlayer stop];
-    }
-    
-    // Stop the audio recorder if its recording.
-    
-    if (audioRecorder.recording == YES) {
-        [audioRecorder stop];
-    }
-    
-    // Close the record view.
-    [UIView animateWithDuration:0.3 delay:0.0 options:(UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction) animations:^{
-        [audioBackgroundView setAlpha:(audioBackgroundView.alpha > 0 ? 0.0 : 1.0)];
-    } completion:^(BOOL finished) {
-        [recordAudioButton setEnabled:YES];
-        [recordAudioButton setTitle:@"Record" forState:UIControlStateNormal];
-        [playAudioButton setEnabled:NO];
-        [playAudioButton setUserInteractionEnabled:NO];
-        [playAudioButton setTitle:@"Play" forState:UIControlStateNormal];
-    }];
-}
-
 /// VIEW DID LOAD ///
 
 -(void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // Set the received location notification.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationReceived:) name:@"PRIVATE-DM-LOCATION" object:nil];
+    
+    // Set the keyboard appeared notification.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    // Setup the audio session and the
+    // change audio method notification.
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioRouteChangeListenerCallback:) name:AVAudioSessionRouteChangeNotification object:nil];
     
     // Setup the location manager class.
     locationManager = [[CLLocationManager alloc] init];
@@ -396,44 +351,14 @@
     [locationManager startUpdatingLocation];
     
     // Curve the egdes of the record/send button views.
-    [[audioView layer] setCornerRadius:4.0];
     [[sendButton layer] setCornerRadius:4.0];
     
-    // Hide the audio view by default.
-    [audioBackgroundView setAlpha:0.0];
-    
-    // Ensure that the table view cells cannot be selected.
-    [chatList setAllowsSelection:NO];
-    
-    // Ensure the comment container does not block the table view.
+    // Ensure the comment container does not block the table view (and scroll bar).
     [chatList setContentInset:UIEdgeInsetsMake(0, 0, commentContainer.frame.size.height, 0)];
-        
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [chatList setScrollIndicatorInsets:UIEdgeInsetsMake(0, 0, commentContainer.frame.size.height, 0)];
     
-    NSArray *dirPaths;
-    NSString *docsDir;
-    
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docsDir = dirPaths[0];
-    
-    NSString *soundFilePath = [docsDir stringByAppendingPathComponent:@"sound.caf"];
-    
-    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
-    
-    NSDictionary *recordSettings = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:AVAudioQualityMin], AVEncoderAudioQualityKey, [NSNumber numberWithInt:16], AVEncoderBitRateKey, [NSNumber numberWithInt:2], AVNumberOfChannelsKey, [NSNumber numberWithFloat:44100.0], AVSampleRateKey, nil];
-    
-    NSError *error = nil;
-    
-    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-    
-    audioRecorder = [[AVAudioRecorder alloc] initWithURL:soundFileURL settings:recordSettings error:&error];
-    
-    if (error) {
-        NSLog(@"error: %@", [error localizedDescription]);
-    } else {
-        [audioRecorder prepareToRecord];
-    }
+    // Hide the no data label by default.
+    [noDataLabel setAlpha:0.0];
     
     // Load all the thread messages.
     [self loadAllMessages];
@@ -446,6 +371,8 @@
 
 -(void)loadAllMessages {
     
+    // Check if a thread object has been passed in.
+    
     if (passedInThread != nil) {
         
         // Setup the messages media data query.
@@ -457,9 +384,19 @@
             
             if (error == nil) {
                 
+                // Check if there are any messages in the thread.
+                
                 if ([objects count] > 0) {
                     
+                    // Check if we are currently display any messages.
+                    
                     if ([chatMessages count] > 0) {
+                        
+                        // Create the new objects array.
+                        NSMutableArray *newDataObjects = [[NSMutableArray alloc] init];
+                        
+                        // Loop through the current message data
+                        // and check if there are any new messages.
                         
                         for (NSUInteger newDataLoop = 0; newDataLoop < [objects count]; newDataLoop++) {
                             
@@ -469,7 +406,13 @@
                             // Get the current data object.
                             PFObject *newData = [objects objectAtIndex:newDataLoop];
                             
+                            // Loop through the current message array and
+                            // check if the new data is already present.
+                            
                             for (NSUInteger chatLoop = 0; chatLoop < [chatMessages count]; chatLoop++) {
+                                
+                                // If the data is already present then do
+                                // not add it to the messages table view.
                                 
                                 if ([[(PFObject *)chatMessages[chatLoop] objectId] isEqualToString:[newData objectId]]) {
                                     addDataCheck = NO;
@@ -477,27 +420,65 @@
                                 }
                             }
                             
+                            // Check if we can the new data in.
+                            
                             if (addDataCheck == YES) {
-                                [chatMessages addObject:newData];
-                                [chatList insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:newDataLoop inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-                                
-                                if ([chatList contentSize].height > chatList.frame.size.height) {
-                                    [chatList setContentOffset:CGPointMake(0, [chatList contentSize].height - chatList.frame.size.height) animated:YES];
-                                }
+                                [newDataObjects insertObject:newData atIndex:0];
                             }
                         }
                         
+                        // Get the size of the new data array.
+                        NSUInteger newSize = [newDataObjects count];
+                        
+                        // Check if there are any new data objects.
+                        
+                        if (newSize > 0) {
+                            
+                            // Create the table view index array.
+                            NSMutableArray *indexes = [[NSMutableArray alloc] init];
+                            
+                            // Create the new NSIndexPath objects.
+                            
+                            for (NSUInteger loop = 1; loop < (newSize + 1); loop++) {
+                                [indexes addObject:[NSIndexPath indexPathForRow:(([chatMessages count] - 1) + loop) inSection:0]];
+                            }
+                            
+                            // Add the new data to the current array.
+                            [chatMessages addObjectsFromArray:newDataObjects];
+                            
+                            // Add the new thread cells to the table view.
+                            [chatList insertRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationAutomatic];
+                            
+                            // Scroll to the bottom of the table view.
+                            [self scrollToBottomOfList:YES];
+                        }
+                        
                     } else {
+                        
+                        // Reload the entire thread data.
                         chatMessages = [objects mutableCopy];
                         [chatList reloadData];
+                        [self scrollToBottomOfList:NO];
                     }
                 }
             }
+            
+            // Show/hide the no data label
+            // based on the number of messages.
+            [self updateNoDataLabel];
         }];
+        
+    } else {
+        
+        // Show/hide the no data label
+        // based on the number of messages.
+        [self updateNoDataLabel];
     }
 }
 
 -(void)sendMessage:(NSString *)messageType :(id)data {
+    
+    // Check if the thread data is available.
     
     if (passedInThread == nil) {
         
@@ -519,6 +500,8 @@
             
             if (error == nil) {
                 
+                // Check if there is an existing thread.
+                
                 if (object == nil) {
                     [self uploadMessageData:messageType :nil :data];
                 } else {
@@ -536,6 +519,9 @@
 }
 
 -(void)uploadMessageData:(NSString *)messageType :(PFObject *)thread :(id)data {
+    
+    // Create a new thread is an existing
+    // one is not present for the two users.
     
     if (thread == nil) {
         
@@ -559,6 +545,7 @@
                 newMessage[@"threadID"] = [passedInThread objectId];
                 newMessage[@"fromUser"] = [PFUser currentUser];
                 newMessage[@"typeData"] = messageType;
+                newMessage[@"currentStatus"] = @NO;
                 
                 // Set the query info data.
                 [self setMessageQueryData:messageType :data];
@@ -575,6 +562,9 @@
         }];
         
     } else {
+        
+        // Check if both users have the message in their
+        // inboxes rather than their archived messages.
         
         if (([[thread valueForKey:@"userAHidden"] boolValue] == YES) || ([[thread valueForKey:@"userBHidden"] boolValue] == YES)) {
             
@@ -595,6 +585,7 @@
                     newMessage[@"threadID"] = [passedInThread objectId];
                     newMessage[@"fromUser"] = [PFUser currentUser];
                     newMessage[@"typeData"] = messageType;
+                    newMessage[@"currentStatus"] = @NO;
                     
                     // Set the query info data.
                     [self setMessageQueryData:messageType :data];
@@ -617,6 +608,7 @@
             newMessage[@"threadID"] = [thread objectId];
             newMessage[@"fromUser"] = [PFUser currentUser];
             newMessage[@"typeData"] = messageType;
+            newMessage[@"currentStatus"] = @NO;
             
             // Set the query info data.
             [self setMessageQueryData:messageType :data];
@@ -635,12 +627,14 @@
 
 -(void)setMessageQueryData:(NSString *)messageType :(id)data {
     
+    // Set the main message data object.
+    
     if ([messageType isEqualToString:@"Text"]) {
         newMessage[@"textData"] = data;
     }
     
     else if ([messageType isEqualToString:@"Photo"]) {
-        newMessage[@"photoData"] = data;
+        newMessage[@"photoData"] = [PFFile fileWithData:UIImageJPEGRepresentation(data, 0.5)];
     }
     
     else if ([messageType isEqualToString:@"Map"]) {
@@ -648,12 +642,13 @@
     }
     
     else if ([messageType isEqualToString:@"Video"]) {
-        newMessage[@"photoData"] = (NSArray *)data[0];
-        newMessage[@"videoData"] = (NSArray *)data[1];
+        newMessage[@"photoData"] = [PFFile fileWithData:UIImageJPEGRepresentation(data, 0.5)];
+        newMessage[@"videoData"] = [PFFile fileWithData:videoData contentType:@"video/mp4"];
     }
     
     else {
-        newMessage[@"audioData"] = data;
+        newMessage[@"audioDurationData"] = (NSArray *)data[0];
+        newMessage[@"audioData"] = (NSArray *)data[1];
     }
 }
 
@@ -670,16 +665,18 @@
     });
     
     // Create the profile picture key.
-    NSString *pictureKey = [NSString stringWithFormat:@"%@-Picture", userID];
+    NSString *pictureKey = [NSString stringWithFormat:@"PROFILE-PICTURE-%@", userID];
+    NSString *usernameKey = [NSString stringWithFormat:@"PROFILE-USERNAME-%@", userID];
     
     // Access the user cache with the unique ID string.
     UIImage *cachedUserPicture = [userCache objectForKey:pictureKey];
+    NSString *cachedUsername = [userCache objectForKey:usernameKey];
     
     // Check if the user data has been
     // previously stored in the cache.
     
-    if (cachedUserPicture) {
-        dataBlock(cachedUserPicture);
+    if ((cachedUserPicture != nil) && ((cachedUsername != nil))) {
+        dataBlock(cachedUserPicture, cachedUsername);
     }
     
     else {
@@ -690,6 +687,9 @@
         [userQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
             
             if (error == nil) {
+                
+                // Get the user data object.
+                PFUser *user = (PFUser *)object;
                 
                 // Download the user profile image.
                 PFFile *userImageFile = object[@"profileImage"];
@@ -703,15 +703,15 @@
                         // Save the user data in the cache.
                         [userCache setObject:image forKey:pictureKey];
                         
-                        dataBlock(image);
+                        dataBlock(image, [user username]);
                         
                     } else {
-                        dataBlock(nil);
+                        dataBlock(nil, [user username]);
                     }
                 }];
                 
             } else {
-                dataBlock(nil);
+                dataBlock(nil, nil);
             }
         }];
     }
@@ -730,7 +730,7 @@
     });
     
     // Create the main picture key.
-    NSString *pictureKey = [NSString stringWithFormat:@"%@-Picture", [data objectId]];
+    NSString *pictureKey = [NSString stringWithFormat:@"PICTURE-%@-%@", [data valueForKey:@"typeData"], [data objectId]];
     
     // Access the picture cache with the unique ID string.
     UIImage *cachedMainPicture = [pictureCache objectForKey:pictureKey];
@@ -739,7 +739,7 @@
     // been previously stored in the cache.
     
     if (cachedMainPicture) {
-        dataBlock(cachedMainPicture);
+        dataBlock(cachedMainPicture, nil);
     }
     
     else {
@@ -756,10 +756,10 @@
                 // Save the picture data in the cache.
                 [pictureCache setObject:image forKey:pictureKey];
                 
-                dataBlock(image);
+                dataBlock(image, nil);
                 
             } else {
-                dataBlock(nil);
+                dataBlock(nil, nil);
             }
         }];
     }
@@ -777,8 +777,11 @@
         heightCache = [NSCache new];
     });
     
+    // Create the main height key.
+    NSString *heightKey = [NSString stringWithFormat:@"HEIGHT-%@", [data objectId]];
+    
     // Access the height cache with the unique ID string.
-    NSNumber *cachedHeight = [heightCache objectForKey:[data objectId]];
+    NSNumber *cachedHeight = [heightCache objectForKey:heightKey];
     
     // Check if the height data has been
     // previously stored in the cache.
@@ -807,9 +810,74 @@
         }
         
         // Save the cell height data in the cache.
-        [heightCache setObject:[NSNumber numberWithFloat:cellHeight] forKey:[data objectId]];
+        [heightCache setObject:[NSNumber numberWithFloat:cellHeight] forKey:heightKey];
         
         return cellHeight;
+    }
+}
+
+-(void)updateMessageStatus:(PFObject *)data {
+    
+    // Only edit the message statuses of posts not
+    // created by you (sent via the other users).
+    
+    if (![[(PFUser *)[data valueForKey:@"fromUser"] objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
+        
+        // Setup the status cache.
+        static NSCache *statusCache = nil;
+        static dispatch_once_t onceToken;
+        
+        // Setup the cache object.
+        
+        dispatch_once(&onceToken, ^{
+            statusCache = [NSCache new];
+        });
+        
+        // Create the main status key.
+        NSString *statusKey = [NSString stringWithFormat:@"MESSAGE-STATUS-%@", [data objectId]];
+        
+        // Access the status cache with the unique ID string.
+        NSString *cachedStatus = [statusCache objectForKey:statusKey];
+        
+        // Check if the status data has been
+        // previously stored in the cache.
+        
+        if (cachedStatus) {
+            
+            // Check if the status has not been updated yet.
+            
+            if ([cachedStatus isEqualToString:@"NO"]) {
+                
+                // Set the message status to read.
+                data[@"currentStatus"] = @YES;
+                
+                // Update the message data object.
+                [data saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        [statusCache setObject:@"YES" forKey:statusKey];
+                    }
+                }];
+            }
+        }
+        
+        else {
+            
+            // Check if the message status is currently
+            // in the 'un-read' user message state.
+            
+            if ([[data valueForKey:@"currentStatus"] boolValue] == NO) {
+                
+                // Set the message status to read.
+                data[@"currentStatus"] = @YES;
+                
+                // Update the message data object.
+                [data saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        [statusCache setObject:@"YES" forKey:statusKey];
+                    }
+                }];
+            }
+        }
     }
 }
 
@@ -853,12 +921,31 @@
     dataBlock(NO);
 }
 
+-(void)locationReceived:(NSNotification *)object {
+    
+    // Check if the data is valid.
+    
+    if (object != nil) {
+        
+        // Get the location data array.
+        NSArray *data = (NSArray *)[object object];
+        
+        // Hide the on screen keyboard.
+        [self dismissKeyboard];
+        
+        // Send the location message.
+        [self sendMessage:@"Map" :[PFGeoPoint geoPointWithLatitude:[data[0] doubleValue] longitude:[data[1] doubleValue]]];
+    }
+}
+
 /// KEYBOARD METHODS ///
 
 -(void)keyboardWillShow:(NSNotification *)object {
     
+    // Get the current keyboard height.
     float height = [[[object userInfo] valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
     
+    // Move the comment container above the keyboard.
     [UIView animateWithDuration:0.2 delay:0.0 options:(UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction) animations:^{
         commentContainer.frame = CGRectMake(0, ([[UIScreen mainScreen] bounds].size.height - height - commentContainer.frame.size.height), [[UIScreen mainScreen] bounds].size.width, commentContainer.frame.size.height);
     } completion:nil];
@@ -866,11 +953,46 @@
 
 -(void)dismissKeyboard {
     
+    // Hide the on screen keyboard.
     [messageField resignFirstResponder];
     
+    // Move the comment container to the bottom.
     [UIView animateWithDuration:0.2 delay:0.0 options:(UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction) animations:^{
         commentContainer.frame = CGRectMake(0, ([[UIScreen mainScreen] bounds].size.height - commentContainer.frame.size.height), [[UIScreen mainScreen] bounds].size.width, commentContainer.frame.size.height);
     } completion:nil];
+}
+
+/// UI METHODS ///
+
+-(void)openAudioRecorder {
+    
+    // Open the audio recorder view.
+    IQAudioRecorderViewController *controller = [[IQAudioRecorderViewController alloc] init];
+    [controller setDelegate:self];
+    [controller setTitle:@"Voice Message"];
+    [controller setMaximumRecordDuration:30];
+    [controller setAudioQuality:IQAudioQualityMax];
+    [controller setAllowCropping:NO];
+    [controller setBarStyle:UIBarStyleBlack];
+    [controller setNormalTintColor:[UIColor whiteColor]];
+    [controller setHighlightedTintColor:[UIColor whiteColor]];
+    [self presentBlurredAudioRecorderViewControllerAnimated:controller];
+}
+
+-(void)updateNoDataLabel {
+    
+    // Show or hide the no data label
+    // depending on the number of messages.
+    [noDataLabel setAlpha:([chatMessages count] > 0 ? 0.0 : 1.0)];
+}
+
+-(void)scrollToBottomOfList:(BOOL)animated {
+    
+    // Scroll to the bottom of the table view.
+    
+    if ([chatList contentSize].height > chatList.frame.size.height) {
+        [chatList scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:([chatMessages count] - 1) inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:animated];
+    }
 }
 
 /// INFO METHODS ///
@@ -928,7 +1050,7 @@
     [label setText:[NSString stringWithFormat:@"%@ at %@", currentDate, currentTime]];
 }
 
--(void)createMapScreenshot:(MKCoordinateRegion)region :(NSString *)dataID :(CGRect)frame :(mapScreenshotCompletion)dataBlock {
+-(void)createMapScreenshot:(PFObject *)data :(CGRect)frame :(mapScreenshotCompletion)dataBlock {
     
     // Setup the map cache.
     static NSCache *mapCache = nil;
@@ -941,7 +1063,7 @@
     });
     
     // Access the map cache with the unique ID string.
-    UIImage *cachedMap = [mapCache objectForKey:dataID];
+    UIImage *cachedMap = [mapCache objectForKey:[NSString stringWithFormat:@"MAP-%@", [data objectId]]];
     
     // Check if the map data has been
     // previously stored in the cache.
@@ -951,6 +1073,13 @@
     }
     
     else {
+        
+        // Set the map view coordinates.
+        MKCoordinateRegion region = { {0.0, 0.0}, {0.0, 0.0} };
+        region.center.latitude = [(PFGeoPoint *)[data valueForKey:@"locationData"] latitude];
+        region.center.longitude = [(PFGeoPoint *)[data valueForKey:@"locationData"] longitude];
+        region.span.longitudeDelta = 0.01f;
+        region.span.latitudeDelta = 0.01f;
         
         // Set the map snapshot properties.
         MKMapSnapshotOptions *snapOptions = [[MKMapSnapshotOptions alloc] init];
@@ -1004,7 +1133,7 @@
                 UIGraphicsEndImageContext();
                 
                 // Save the cell map data in the cache.
-                [mapCache setObject:mapPlusPin forKey:dataID];
+                [mapCache setObject:mapPlusPin forKey:[NSString stringWithFormat:@"MAP-%@", [data objectId]]];
                 
                 dataBlock(mapPlusPin);
             }
@@ -1033,6 +1162,9 @@
     // Get the current cell data object.
     PFObject *data = [chatMessages objectAtIndex:indexPath.row];
     
+    // Update the message status is required.
+    [self updateMessageStatus:data];
+    
     // Get the current message data tyoe.
     NSString *messageType = [data valueForKey:@"typeData"];
     
@@ -1043,20 +1175,12 @@
         return [self createTextCell:data];
     }
     
-    else if ([messageType isEqualToString:@"Photo"]) {
-        return [self createPhotoCell:data];
-    }
-    
-    else if ([messageType isEqualToString:@"Map"]) {
-        return [self createMapCell:data];
-    }
-    
-    else if ([messageType isEqualToString:@"Video"]) {
-        return [self createVideoCell:data];
+    else if ([messageType isEqualToString:@"Photo"] || [messageType isEqualToString:@"Map"] || [messageType isEqualToString:@"Video"]) {
+        return [self createPhotoCell:data :indexPath.row];
     }
     
     else {
-        return [self createAudioCell:data];
+        return [self createAudioCell:data :indexPath.row];
     }
 }
 
@@ -1091,7 +1215,7 @@
     [self turnImageViewToCircle:cell.profilePicture :48.0];
     
     // Get the user's profile data.
-    [self getProfilePictureCachedData:author.objectId :^(UIImage *picture) {
+    [self getProfilePictureCachedData:author.objectId :^(UIImage *picture, NSString *username) {
         
         if (picture == nil) {
             [cell.profilePicture setImage:[UIImage imageNamed:@"default_profile_pic.png"]];
@@ -1102,7 +1226,7 @@
     
     // Set the message label text.
     [cell.messageLabel setText:[data valueForKey:@"textData"]];
-    
+        
     // Set the date label text.
     [self setDateLabel:cell.dateLabel :[data createdAt]];
     
@@ -1124,7 +1248,7 @@
     return cell;
 }
 
--(UITableViewCell *)createPhotoCell:(PFObject *)data {
+-(UITableViewCell *)createPhotoCell:(PFObject *)data :(NSInteger)index {
     
     // Get the message author object.
     PFUser *author = [data valueForKey:@"fromUser"];
@@ -1151,23 +1275,72 @@
         cell = [nib objectAtIndex:0];
     }
     
+    cell.tag = index;
+    
+    // Set the input object data.
+    [cell setPassedInData:data];
+    [cell setPassedInView:self];
+    
+    // Start the loading indicator.
+    [cell.active startAnimating];
+    
+    // Reset the main image view.
+    [cell.messagePicture setImage:nil];
+    
     // Change the profile picture into a circle.
     [self turnImageViewToCircle:cell.profilePicture :48.0];
     
     // Get the user's profile data.
-    [self getProfilePictureCachedData:author.objectId :^(UIImage *picture) {
+    [self getProfilePictureCachedData:author.objectId :^(UIImage *picture, NSString *username) {
         
         if (picture == nil) {
             [cell.profilePicture setImage:[UIImage imageNamed:@"default_profile_pic.png"]];
         } else {
             [cell.profilePicture setImage:picture];
         }
+        
+        [cell setPassedInUsername:username];
     }];
     
-    // Get the main message picture.
-    [self getMainPictureCachedData:data :^(UIImage *picture) {
-        [cell.messagePicture setImage:picture];
-    }];
+    // Get the current message data tyoe.
+    NSString *messageType = [data valueForKey:@"typeData"];
+    
+    // Check the message type and load the
+    // appropriate table view cell data.
+    
+    if ([messageType isEqualToString:@"Map"]) {
+        
+        // Create the map + pin preview image.
+        [self createMapScreenshot:data :cell.messagePicture.frame :^(UIImage *picture) {
+            
+            // Ensure we use the correct cached image.
+            
+            if (cell.tag == index) {
+                [cell.messagePicture setImage:picture];
+                [cell.messagePicture setNeedsLayout];
+                [cell.active stopAnimating];
+            };
+        }];
+    }
+    
+    else {
+        
+        // Get the main message picture.
+        [self getMainPictureCachedData:data :^(UIImage *picture, NSString *username) {
+            
+            // Ensure we use the correct cached image.
+            
+            if (cell.tag == index) {
+                [cell.messagePicture setImage:picture];
+                [cell.messagePicture setNeedsLayout];
+                [cell.active stopAnimating];
+            };
+        }];
+    }
+    
+    // Show or hide the play button depending on
+    // the data type (if it is a video or not).
+    [cell.playVideoButton setAlpha:([messageType isEqualToString:@"Video"] ? 1.0 : 0.0)];
     
     // Set the date label text.
     [self setDateLabel:cell.dateLabel :[data createdAt]];
@@ -1177,166 +1350,25 @@
     cell.triangleView.image = [cell.triangleView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [cell.triangleView setTintColor:mainColour];
     
-    // Curve the edges of the box view.
+    // Curve the edges of the box/picture views.
     [[cell.boxView layer] setCornerRadius:4.0];
-    
+    [[cell.messagePicture layer] setCornerRadius:4.0];
+        
     // Set the content restraints.
     [cell.boxView setClipsToBounds:YES];
     [cell.triangleView setClipsToBounds:YES];
     [cell.dateLabel setClipsToBounds:YES];
     [cell.profilePicture setClipsToBounds:YES];
     [cell.messagePicture setClipsToBounds:YES];
+    [cell.playVideoButton setClipsToBounds:YES];
+    [cell.active setClipsToBounds:YES];
+    [cell.selectionButton setClipsToBounds:YES];
     [cell.contentView setClipsToBounds:NO];
     
     return cell;
 }
 
--(UITableViewCell *)createMapCell:(PFObject *)data {
-    
-    // Get the message author object.
-    PFUser *author = [data valueForKey:@"fromUser"];
-    
-    // Create the cellID/UI file name string.
-    NSString *cellID = nil;
-    
-    // Create the main colour object.
-    UIColor *mainColour;
-    
-    if ([[author objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
-        cellID = @"ChatMapCell";
-        mainColour = [UIColor colorWithRed:(33/255.0) green:(135/255.0) blue:(75/255.0) alpha:1.0];
-    } else {
-        cellID = @"ChatMapCellOtherUser";
-        mainColour = [UIColor colorWithRed:(204/255.0) green:(204/255.0) blue:(204/255.0) alpha:1.0];
-    }
-    
-    // Delegate call back for cell at index path.
-    ChatMapCell *cell = (ChatMapCell *)[chatList dequeueReusableCellWithIdentifier:cellID];
-    
-    if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:cellID owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-    }
-    
-    // Change the profile picture into a circle.
-    [self turnImageViewToCircle:cell.profilePicture :48.0];
-    
-    // Get the user's profile data.
-    [self getProfilePictureCachedData:author.objectId :^(UIImage *picture) {
-        
-        if (picture == nil) {
-            [cell.profilePicture setImage:[UIImage imageNamed:@"default_profile_pic.png"]];
-        } else {
-            [cell.profilePicture setImage:picture];
-        }
-    }];
-    
-    // Set the map view coordinates.
-    MKCoordinateRegion region = { {0.0, 0.0}, {0.0, 0.0} };
-    region.center.latitude = [(PFGeoPoint *)[data valueForKey:@"locationData"] latitude];
-    region.center.longitude = [(PFGeoPoint *)[data valueForKey:@"locationData"] longitude];
-    region.span.longitudeDelta = 0.01f;
-    region.span.latitudeDelta = 0.01f;
-    
-    // Create the map + pin preview image.
-    [self createMapScreenshot:region :[data objectId] :cell.mapPreview.frame :^(UIImage *picture) {
-        [cell.mapPreview setImage:picture];
-    }];
-    
-    // Set the date label text.
-    [self setDateLabel:cell.dateLabel :[data createdAt]];
-    
-    // Set the triangle image to match the colour of the
-    // main box view (green = current user | gray = other user).
-    cell.triangleView.image = [cell.triangleView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [cell.triangleView setTintColor:mainColour];
-    
-    // Curve the edges of the box view.
-    [[cell.boxView layer] setCornerRadius:4.0];
-    
-    // Set the content restraints.
-    [cell.boxView setClipsToBounds:YES];
-    [cell.triangleView setClipsToBounds:YES];
-    [cell.dateLabel setClipsToBounds:YES];
-    [cell.profilePicture setClipsToBounds:YES];
-    [cell.mapPreview setClipsToBounds:YES];
-    [cell.contentView setClipsToBounds:NO];
-    
-    return cell;
-}
-
--(UITableViewCell *)createVideoCell:(PFObject *)data {
-    
-    // Get the message author object.
-    PFUser *author = [data valueForKey:@"fromUser"];
-    
-    // Create the cellID/UI file name string.
-    NSString *cellID = nil;
-    
-    // Create the main colour object.
-    UIColor *mainColour;
-    
-    if ([[author objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
-        cellID = @"ChatVideoCell";
-        mainColour = [UIColor colorWithRed:(33/255.0) green:(135/255.0) blue:(75/255.0) alpha:1.0];
-    } else {
-        cellID = @"ChatVideoCellOtherUser";
-        mainColour = [UIColor colorWithRed:(204/255.0) green:(204/255.0) blue:(204/255.0) alpha:1.0];
-    }
-    
-    // Delegate call back for cell at index path.
-    ChatVideoCell *cell = (ChatVideoCell *)[chatList dequeueReusableCellWithIdentifier:cellID];
-    
-    if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:cellID owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-    }
-    
-    // Set the cell pass in data object.
-    cell.passedInData = @[self, data];
-    
-    // Change the profile picture into a circle.
-    [self turnImageViewToCircle:cell.profilePicture :48.0];
-    
-    // Get the user's profile data.
-    [self getProfilePictureCachedData:author.objectId :^(UIImage *picture) {
-        
-        if (picture == nil) {
-            [cell.profilePicture setImage:[UIImage imageNamed:@"default_profile_pic.png"]];
-        } else {
-            [cell.profilePicture setImage:picture];
-        }
-    }];
-    
-    // Get the main message picture.
-    [self getMainPictureCachedData:data :^(UIImage *picture) {
-        [cell.videoThumbnail setImage:picture];
-    }];
-    
-    // Set the date label text.
-    [self setDateLabel:cell.dateLabel :[data createdAt]];
-    
-    // Set the triangle image to match the colour of the
-    // main box view (green = current user | gray = other user).
-    cell.triangleView.image = [cell.triangleView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [cell.triangleView setTintColor:mainColour];
-    
-    // Curve the edges of the box view.
-    [[cell.boxView layer] setCornerRadius:4.0];
-    
-    // Set the content restraints.
-    [cell.boxView setClipsToBounds:YES];
-    [cell.triangleView setClipsToBounds:YES];
-    [cell.dateLabel setClipsToBounds:YES];
-    [cell.profilePicture setClipsToBounds:YES];
-    [cell.videoThumbnail setClipsToBounds:YES];
-    [cell.playButton setClipsToBounds:YES];
-    [cell.contentView setClipsToBounds:NO];
-    
-    return cell;
-}
-
--(UITableViewCell *)createAudioCell:(PFObject *)data {
+-(UITableViewCell *)createAudioCell:(PFObject *)data :(NSInteger)index {
     
     // Get the message author object.
     PFUser *author = [data valueForKey:@"fromUser"];
@@ -1363,14 +1395,26 @@
         cell = [nib objectAtIndex:0];
     }
     
-    // Set the cell pass in data object.
-    cell.passedInData = @[self, data];
+    // Set the input object data.
+    [cell setPassedInData:data];
+    [cell setPassedInView:self];
+    
+    // Get the audio clip duration value.
+    int audioDuration = [[data valueForKey:@"audioDurationData"] intValue];
+    
+    // Set the audio clip duration label.
+    
+    if (audioDuration < 10) {
+        [cell.durationLabel setText:[NSString stringWithFormat:@"00:0%d", audioDuration]];
+    } else {
+        [cell.durationLabel setText:[NSString stringWithFormat:@"00:%d", audioDuration]];
+    }
     
     // Change the profile picture into a circle.
     [self turnImageViewToCircle:cell.profilePicture :48.0];
     
     // Get the user's profile data.
-    [self getProfilePictureCachedData:author.objectId :^(UIImage *picture) {
+    [self getProfilePictureCachedData:author.objectId :^(UIImage *picture, NSString *username) {
         
         if (picture == nil) {
             [cell.profilePicture setImage:[UIImage imageNamed:@"default_profile_pic.png"]];
@@ -1398,6 +1442,7 @@
     [cell.titleLabel setClipsToBounds:YES];
     [cell.durationLabel setClipsToBounds:YES];
     [cell.playButton setClipsToBounds:YES];
+    [cell.selectionButton setClipsToBounds:YES];
     [cell.contentView setClipsToBounds:NO];
     
     return cell;
@@ -1475,38 +1520,112 @@
 /// IMAGEPICKER METHODS ///
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    // Get the passed in media type.
+    NSString *mediaType = info[UIImagePickerControllerMediaType];
+    
+    // Check if the selected media is a photo or video.
+    BOOL videoCheck = UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie) != 0;
+    
+    // Perform the correct action depending
+    // on the passed in media file type.
+    
+    if (videoCheck == YES) {
         
-    // Store the photo if one has been taken.
-    UIImage *chosenImage;
-    
-    // Get the image which has been taken.
-    chosenImage = info[UIImagePickerControllerEditedImage];
-    
-    // Save the image to the users library.
-    UIImageWriteToSavedPhotosAlbum(chosenImage, nil, nil, nil);
-    
-    // Send the image/video message.
-    [picker dismissViewControllerAnimated:YES completion:^{
-        [self sendMessage:@"Photo" :chosenImage];
-    }];
+        // Save the video file to the local user library.
+        
+        if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum((NSString *)[[info objectForKey:UIImagePickerControllerMediaURL] path])) {
+            UISaveVideoAtPathToSavedPhotosAlbum((NSString *)[[info objectForKey:UIImagePickerControllerMediaURL] path], nil, nil, nil);
+        }
+        
+        // No present the media player.
+        [picker dismissViewControllerAnimated:YES completion:^{
+            
+            // Get the video data and video thumbnail.
+            videoData = [NSData dataWithContentsOfURL:(NSURL *)info[UIImagePickerControllerMediaURL]];
+            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:(NSURL *)info[UIImagePickerControllerMediaURL] options:nil];
+            id imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
+            UIImage *videoThumbnail = [UIImage imageWithCGImage:[imageGenerator copyCGImageAtTime:CMTimeMake(0, 1) actualTime:nil error:nil]];
+            
+            // Hide the on screen keyboard.
+            [self dismissKeyboard];
+            
+            // Send the video message.
+            [self sendMessage:@"Video" :videoThumbnail];
+        }];
+        
+    } else {
+        
+        // Get the image which has been taken.
+        UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+        
+        // Save the image to the users library.
+        UIImageWriteToSavedPhotosAlbum(chosenImage, nil, nil, nil);
+        
+        // Send the image/video message.
+        [picker dismissViewControllerAnimated:YES completion:^{
+            
+            // Hide the on screen keyboard.
+            [self dismissKeyboard];
+            
+            // Send the photo message.
+            [self sendMessage:@"Photo" :chosenImage];
+        }];
+    }
 }
 
 /// AUDIOPLAYER METHODS ///
 
--(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+-(BOOL)checkHeadphones {
     
+    // Get the AVSession audio data.
+    AVAudioSessionRouteDescription *route = [[AVAudioSession sharedInstance] currentRoute];
+    
+    // Loop through the data to figure out
+    // if the headphones are connected.
+    
+    for (AVAudioSessionPortDescription *desc in [route outputs]) {
+        
+        if ([[desc portType] isEqualToString:AVAudioSessionPortHeadphones]) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
--(void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
+-(void)audioRouteChangeListenerCallback:(NSNotification *)notification {
     
+    // If the headphones are not connected
+    // then play the audio through the speakers.
+    
+    if ([self checkHeadphones] == NO) {
+        [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
+    }
 }
 
--(void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag {
+/// IQAUDIORECORDERVIEWCONTROLLER METHODS ///
+
+-(void)audioRecorderController:(IQAudioRecorderViewController *)controller didFinishWithAudioAtPath:(NSString *)filePath {
     
+    // Get the audio data file.
+    AVURLAsset *audioAsset = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:filePath]];
+    
+    // Get the duration of the audio file.
+    CMTime audioDuration = audioAsset.duration;
+    int audioDurationSeconds = CMTimeGetSeconds(audioDuration);
+    
+    // Send the voice message.
+    [self sendMessage:@"Audio" :@[[NSNumber numberWithInt:audioDurationSeconds], [PFFile fileWithName:@"sound.m4a" data:[NSData dataWithContentsOfFile:filePath]]]];
+    
+    // Close the custom audio recorder view.
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError *)error {
+-(void)audioRecorderControllerDidCancel:(IQAudioRecorderViewController *)controller {
     
+    // Close the custom audio recorder view.
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 /// UITEXTFIELD METHODS ///
@@ -1520,7 +1639,11 @@
     // before performing the upload request.
     
     if (([chatString length] > 0) && (messageField.text != nil)) {
+        
+        // Hide the on screen keyboard.
         [self dismissKeyboard];
+        
+        // Send the text message.
         [self sendMessage:@"Text" :messageField.text];
     }
     

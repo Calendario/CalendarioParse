@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="vol-zR-eNV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="vol-zR-eNV">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -10,19 +13,19 @@
             <objects>
                 <viewController storyboardIdentifier="photoViewer" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vol-zR-eNV" customClass="FullimageViewController" customModule="Calendario" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QwU-3H-mt7">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="aX6-3r-0gD">
-                                <frame key="frameInset"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleAspectFit" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="O9O-DN-J3u">
-                                        <rect key="frame" x="0.0" y="0.0" width="640" height="960"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1015" height="1627"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="86v-DI-5h1">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="695" height="1147"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </imageView>
                                         </subviews>
@@ -31,11 +34,11 @@
                                         </connections>
                                     </scrollView>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="nrt-cc-jFx">
-                                        <rect key="frame" x="0.0" y="0.0" width="640" height="960"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1015" height="1627"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="86P-aS-uRP">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="695" height="1147"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </imageView>
                                         </subviews>
@@ -44,11 +47,11 @@
                                         </connections>
                                     </scrollView>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="3" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="siQ-fC-1eR">
-                                        <rect key="frame" x="0.0" y="0.0" width="640" height="960"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1015" height="1627"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="qeD-WY-XU7">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="695" height="1147"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </imageView>
                                         </subviews>
@@ -62,18 +65,18 @@
                                 </connections>
                             </scrollView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="KGn-qW-0bf">
-                                <frame key="frameInset" minX="8" minY="17" width="50" height="50"/>
+                                <rect key="frame" x="8" y="17" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sf1-DA-vbC">
-                                <frame key="frameInset" minX="20.94%" minY="23" width="58.13%" height="38"/>
+                                <rect key="frame" x="78" y="23" width="218" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.19061197630000001" green="0.698922822" blue="0.4629998541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vNW-1S-7fv">
-                                <frame key="frameInset" minY="27" width="46" height="30" maxX="1"/>
+                                <rect key="frame" x="328" y="27" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="close"/>
                                 <connections>
@@ -81,18 +84,18 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" misplaced="YES" id="9gg-9q-jmE">
-                                <frame key="frameInset" height="36"/>
+                                <rect key="frame" x="0.0" y="631" width="375" height="36"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <pageControl opaque="NO" alpha="0.0" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="1" id="SYl-OQ-JKu">
-                                        <frame key="frameInset" minX="9" minY="0.0%" height="37" maxX="9"/>
+                                        <rect key="frame" x="9" y="0.0" width="357" height="37"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <action selector="changePage:" destination="vol-zR-eNV" eventType="valueChanged" id="TVw-BJ-mVR"/>
                                         </connections>
                                     </pageControl>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="white" id="UTn-VV-Z59">
-                                        <frame key="frameInset" minX="50.00%" minY="43.75%" width="20" height="20"/>
+                                        <rect key="frame" x="177" y="7" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -106,6 +109,7 @@
                         <outlet property="Image" destination="86v-DI-5h1" id="Sg1-FP-1eA"/>
                         <outlet property="ImageViewThree" destination="qeD-WY-XU7" id="Q7b-bC-oZt"/>
                         <outlet property="ImageViewTwo" destination="86P-aS-uRP" id="vC6-Em-gnH"/>
+                        <outlet property="bottomContainerView" destination="9gg-9q-jmE" id="U6H-oO-W57"/>
                         <outlet property="containerScrollView" destination="aX6-3r-0gD" id="rR4-xr-oM2"/>
                         <outlet property="dotLoadingView" destination="UTn-VV-Z59" id="rjm-Fl-Yax"/>
                         <outlet property="dotView" destination="SYl-OQ-JKu" id="ANZ-IC-JCN"/>
@@ -127,6 +131,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
 </document>

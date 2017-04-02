@@ -459,10 +459,8 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
             self.profileSubview.privateMessagesButton.isUserInteractionEnabled = true
             self.profileSubview.privateMessagesButton.alpha = 1.0
         
-            ///// FIX /////
             // Set the private message button badge.
-            self.profileSubview.privateMessagesButton.badgeString = nil
-            ///// FIX /////
+            self.getUserUnreadPrivateMessageCount()
             
             // Disable the follow user button.
             self.profileSubview.followButton.isUserInteractionEnabled = false
@@ -957,5 +955,24 @@ class MyProfileViewController : UIViewController, UITableViewDelegate, UITableVi
         self.statusObjects.removeAllObjects()
         self.statusList.reloadData()
         self.profileSubview.resetUIObjects()
+    }
+    
+    //MARK: PRIVATE MESSAGE METHODS.
+    
+    func getUserUnreadPrivateMessageCount() {
+        
+        // Create the custom helper class object.
+        var messageHelper:PrivateMessagesHelper!
+        messageHelper = PrivateMessagesHelper()
+        
+        // Get the total number of unread messages.
+        messageHelper.getTotalNumber { (unreadMessages) in
+            
+            if (unreadMessages?.intValue > 0) {
+                self.profileSubview.privateMessagesButton.badgeString = "\(unreadMessages!.intValue)"
+            } else {
+                self.profileSubview.privateMessagesButton.badgeString = nil
+            }
+        }
     }
 }

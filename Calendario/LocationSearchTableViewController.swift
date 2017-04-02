@@ -84,6 +84,10 @@ class LocationSearchTableViewController: UITableViewController {
                         defaults.set(lon, forKey: "locationLon")
                         defaults.synchronize()
                         
+                        // Send the selected location as a private message (this will only invoke the
+                        // intended method if the private DM view controller is currently being used).
+                        NotificationCenter.default.post(name:NSNotification.Name(rawValue:"PRIVATE-DM-LOCATION"), object:[lat as NSNumber, lon as NSNumber])
+                        
                         // 4
                         self.delegate.locateWithLongitude(lon, andLatitude: lat, andTitle: self.SearchResults[(indexPath as NSIndexPath).row] )
                     })

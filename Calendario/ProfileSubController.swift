@@ -69,7 +69,7 @@ class ProfileSubController: UIViewController {
         
         // Set the private message button properties.
         self.privateMessagesButton.badgeTextColor = UIColor.white
-        self.privateMessagesButton.badgeEdgeInsets = UIEdgeInsetsMake(10, 0, 0, 15)
+        self.privateMessagesButton.badgeEdgeInsets = UIEdgeInsetsMake(10, 0, 0, 0)
     }
     
     //MARK: UI METHODS.

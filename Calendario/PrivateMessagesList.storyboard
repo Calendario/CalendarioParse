@@ -71,6 +71,13 @@
                                     <outlet property="delegate" destination="yjp-xJ-xyl" id="SOx-C3-kh1"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="You have no messages" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bJK-2F-lKm">
+                                <rect key="frame" x="0.0" y="216" width="320" height="49"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -78,6 +85,7 @@
                     <connections>
                         <outlet property="messageControl" destination="SLx-Rq-vuB" id="0Ka-eh-SaK"/>
                         <outlet property="messagesList" destination="qnD-fu-g9V" id="wTA-OR-vZZ"/>
+                        <outlet property="noDataLabel" destination="bJK-2F-lKm" id="Lpu-26-Amu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vck-vK-A4u" userLabel="First Responder" sceneMemberID="firstResponder"/>

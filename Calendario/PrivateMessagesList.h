@@ -10,11 +10,15 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Parse/Parse.h>
 #import "MessagePreviewCell.h"
+#import "PrivateMessagesHelper.h"
 
 typedef void(^userCompletion)(NSString *username, UIImage *picture);
 typedef void(^threadCompletion)(NSString *preview);
 
 @interface PrivateMessagesList : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+    
+    // Private Message Helper Class.
+    PrivateMessagesHelper *dataHelper;
     
     // Messages table view.
     IBOutlet UITableView *messagesList;
@@ -28,6 +32,9 @@ typedef void(^threadCompletion)(NSString *preview);
     
     // Data reload timer.
     NSTimer *reloadTimer;
+    
+    // No message data label.
+    IBOutlet UILabel *noDataLabel;
 }
 
 // Buttons.
@@ -44,7 +51,13 @@ typedef void(^threadCompletion)(NSString *preview);
 -(void)getPreviewForThread:(PFObject *)thread :(NSString *)otherUser :(threadCompletion)dataBlock;
 -(void)getUserCachedData:(NSString *)userID :(userCompletion)dataBlock;
 
+// UI methods.
+-(void)updateNoDataLabel;
+
 // Info methods.
 -(void)displayAlert:(NSString *)title :(NSString *)message;
+
+// Private Message Helper Class property.
+@property (nonatomic, retain) PrivateMessagesHelper *dataHelper;
 
 @end

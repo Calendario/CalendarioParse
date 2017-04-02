@@ -7,15 +7,28 @@
 //
 
 #import "ChatAudioCell.h"
-#import <Parse/Parse.h>
 
 @implementation ChatAudioCell
 @synthesize passedInData;
+@synthesize passedInView;
 
 /// BUTTONS ///
 
 -(IBAction)playAudio:(id)sender {
     
+    // Get the audio file object.
+    PFFile *audioFile = [passedInData valueForKey:@"audioData"];
+    
+    // Play the message audio file.
+    AVPlayer *player = [AVPlayer playerWithURL:[NSURL URLWithString:[audioFile url]]];
+    AVPlayerViewController *controller = [[AVPlayerViewController alloc] init];
+    [controller setPlayer:player];
+    [controller setDelegate:self];
+    
+    // Open the player view and play the audio clip.
+    [passedInView presentViewController:controller animated:YES completion:^{
+        [player play];
+    }];
 }
 
 /// OTHER METHODS ///

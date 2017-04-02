@@ -9,22 +9,23 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <MapKit/MKAnnotation.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <CoreLocation/CoreLocation.h>
 #import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 #import <Photos/Photos.h>
 #import <Parse/Parse.h>
 #import "ChatTextCell.h"
 #import "ChatPhotoCell.h"
-#import "ChatMapCell.h"
-#import "ChatVideoCell.h"
 #import "ChatAudioCell.h"
+#import "MessageLocationViewer.h"
 
-typedef void(^pictureCompletion)(UIImage *picture);
+typedef void(^pictureCompletion)(UIImage *picture, NSString *username);
 typedef void(^mapScreenshotCompletion)(UIImage *picture);
 typedef void(^locationCheckCompletion)(BOOL dataCheck);
 
-@interface MessageDetailView : UIViewController <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate, AVAudioPlayerDelegate, AVAudioRecorderDelegate, UITextFieldDelegate> {
+@interface MessageDetailView : UIViewController <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate, AVPlayerViewControllerDelegate, AVAudioPlayerDelegate, AVAudioRecorderDelegate, UITextFieldDelegate> {
     
     // Message container views.
     IBOutlet UITextField *messageField;
@@ -39,31 +40,21 @@ typedef void(^locationCheckCompletion)(BOOL dataCheck);
     
     // Current location data.
     CLLocationManager *locationManager;
-    
-    // Audio message recorder.
-    AVAudioPlayer *audioPlayer;
-    AVAudioRecorder *audioRecorder;
-    
+        
     // Audio recording custom view.
-    IBOutlet UIView *audioView;
-    IBOutlet UILabel *audioDuration;
-    IBOutlet UIButton *recordAudioButton;
-    IBOutlet UIButton *playAudioButton;
     IBOutlet UIButton *sendAudioButton;
-    IBOutlet UIView *audioBackgroundView;
     
     // Data reload timer.
     NSTimer *reloadTimer;
+    
+    // No message data label.
+    IBOutlet UILabel *noDataLabel;
 }
 
 // Buttons.
 -(IBAction)done:(id)sender;
 -(IBAction)send:(id)sender;
 -(IBAction)addAttachment:(id)sender;
--(IBAction)startRecording:(id)sender;
--(IBAction)playCurrentRecording:(id)sender;
--(IBAction)sendVoiceMessage:(id)sender;
--(IBAction)closeRecordView:(id)sender;
 
 // Data methods.
 -(void)loadAllMessages;
@@ -72,18 +63,25 @@ typedef void(^locationCheckCompletion)(BOOL dataCheck);
 -(void)getProfilePictureCachedData:(NSString *)userID :(pictureCompletion)dataBlock;
 -(void)getMainPictureCachedData:(PFObject *)data :(pictureCompletion)dataBlock;
 -(float)getHeightCachedData:(PFObject *)data;
+-(void)updateMessageStatus:(PFObject *)data;
 -(void)checkCurrentLocation:(locationCheckCompletion)dataBlock;
+-(void)locationReceived:(NSNotification *)object;
 
 // Keyboard methods.
 -(void)keyboardWillShow:(NSNotification *)object;
 -(void)dismissKeyboard;
+
+// UI methods.
+-(void)openAudioRecorder;
+-(void)updateNoDataLabel;
+-(void)scrollToBottomOfList:(BOOL)animated;
 
 // Info methods.
 -(void)displayAlert:(NSString *)title :(NSString *)message;
 
 // Cell helper methods.
 -(void)setDateLabel:(UILabel *)label :(NSDate *)date;
--(void)createMapScreenshot:(MKCoordinateRegion)region :(NSString *)dataID :(CGRect)frame :(mapScreenshotCompletion)dataBlock;
+-(void)createMapScreenshot:(PFObject *)data :(CGRect)frame :(mapScreenshotCompletion)dataBlock;
 -(void)turnImageViewToCircle:(UIImageView *)picture :(float)size;
 
 // Properties - strings, contacts, etc..
