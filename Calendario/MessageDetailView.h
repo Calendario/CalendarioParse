@@ -47,6 +47,9 @@ typedef void(^locationCheckCompletion)(BOOL dataCheck);
     
     // No message data label.
     IBOutlet UILabel *noDataLabel;
+    
+    // Cell width size value.
+    float textCellWidth;
 }
 
 // Buttons.

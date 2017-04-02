@@ -363,6 +363,32 @@
     // Hide the no data label by default.
     [noDataLabel setAlpha:0.0];
     
+    CGSize result = [[UIScreen mainScreen] bounds].size;
+    
+    if (result.height <= 480) {
+        
+        // 3.5 inch display - iPhone 4S & below.
+        textCellWidth = 204;
+    }
+    
+    else if (result.height == 568) {
+        
+        // 4 inch display - iPhone 5/5s.
+        textCellWidth = 204;
+    }
+    
+    else if (result.height == 667) {
+        
+        // 4.7 inch display - iPhone 6.
+        textCellWidth = 259;
+    }
+    
+    else if (result.height >= 736) {
+        
+        // 5.5 inch display - iPhone 6 Plus.
+        textCellWidth = 259;
+    }
+    
     // Load all the thread messages.
     [self loadAllMessages];
     
@@ -891,12 +917,33 @@
         // Check the message type and calculate the
         // appropriate table view cell height value.
         
-        if ([messageType isEqualToString:@"Text"] || [messageType isEqualToString:@"Audio"]) {
+        if ([messageType isEqualToString:@"Text"]) {
+            
+            // Get the full message strings.
+            NSString *messageLabel = [NSString stringWithFormat:@"@%@", [data valueForKey:@"textData"]];
+            
+            // Calculate the message text height.
+            NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:16]};
+            CGRect rect = [messageLabel boundingRectWithSize:CGSizeMake(textCellWidth - 30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
+            
+            // Only return the generated height if
+            // it is bigger than the original height.
+            
+            if (rect.size.height > 72) {
+                cellHeight = (30 + rect.size.height);
+            }
+            
+            else {
+                cellHeight = 103;
+            }
+        }
+        
+        else if ([messageType isEqualToString:@"Audio"]) {
             cellHeight = 103;
         }
         
         else {
-            cellHeight = 183;
+            cellHeight = 153;
         }
         
         // Save the cell height data in the cache.
@@ -1345,6 +1392,9 @@
     [cell.profilePicture setClipsToBounds:YES];
     [cell.messageLabel setClipsToBounds:YES];
     [cell.contentView setClipsToBounds:NO];
+    
+    NSLog(@"MESSAGE %@", cell.messageLabel.text);
+    NSLog(@"TEXT SIZE: %f", cell.messageLabel.frame.size.width);
     
     return cell;
 }
