@@ -792,6 +792,9 @@
             [cell.dateLabel setText:[self createDateString:messagePreviewData]];
         }
         
+        // Ensure the date label text fits.
+        [cell.dateLabel setAdjustsFontSizeToFitWidth:YES];
+        
         // Check the thread message unread count.
         
         if ([messageUnreadCount intValue] > 0) {
