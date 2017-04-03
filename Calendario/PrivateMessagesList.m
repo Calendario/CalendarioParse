@@ -738,6 +738,10 @@
         [cell.descriptionLabel setAlpha:1.0];
         [cell.dateLabel setAlpha:1.0];
         
+        // Set the preview text view to 2 lines maximum.
+        [cell.descriptionLabel.textContainer setMaximumNumberOfLines:2];
+        [cell.descriptionLabel.textContainer setLineBreakMode:NSLineBreakByTruncatingTail];
+        
         // Create the current table view thread data object.
         PFObject *data = nil;
         

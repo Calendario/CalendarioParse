@@ -334,16 +334,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    // Set the received location notification.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationReceived:) name:@"PRIVATE-DM-LOCATION" object:nil];
-    
-    // Set the keyboard appeared notification.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    
     // Setup the audio session and the
     // change audio method notification.
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioRouteChangeListenerCallback:) name:AVAudioSessionRouteChangeNotification object:nil];
     
     // Setup the location manager class.
     locationManager = [[CLLocationManager alloc] init];
@@ -363,30 +356,33 @@
     // Hide the no data label by default.
     [noDataLabel setAlpha:0.0];
     
+    // Get the device screen size.
     CGSize result = [[UIScreen mainScreen] bounds].size;
+    
+    // Set the cell width based on the screen size.
     
     if (result.height <= 480) {
         
         // 3.5 inch display - iPhone 4S & below.
-        textCellWidth = 204;
+        textCellWidth = 205;
     }
     
     else if (result.height == 568) {
         
         // 4 inch display - iPhone 5/5s.
-        textCellWidth = 204;
+        textCellWidth = 205;
     }
     
     else if (result.height == 667) {
         
         // 4.7 inch display - iPhone 6.
-        textCellWidth = 259;
+        textCellWidth = 249;
     }
     
     else if (result.height >= 736) {
         
         // 5.5 inch display - iPhone 6 Plus.
-        textCellWidth = 259;
+        textCellWidth = 288;
     }
     
     // Load all the thread messages.
@@ -394,6 +390,33 @@
     
     // Keep checking for new thread messages (every 1.5 seconds).
     reloadTimer = [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(loadAllMessages) userInfo:nil repeats:YES];
+}
+
+/// VIEW WILL APPEAR ///
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // Set the received location notification.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationReceived:) name:@"PRIVATE-DM-LOCATION" object:nil];
+    
+    // Set the keyboard appeared notification.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    // Set the audio route changed notification.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioRouteChangeListenerCallback:) name:AVAudioSessionRouteChangeNotification object:nil];
+}
+
+/// VIEW WILL DISSAPPEAR ///
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // Remove the notification observers so that
+    // we do not get any accidental method calls.
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PRIVATE-DM-LOCATION" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVAudioSessionRouteChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 }
 
 /// DATA METHODS ///
@@ -924,17 +947,17 @@
             
             // Calculate the message text height.
             NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:16]};
-            CGRect rect = [messageLabel boundingRectWithSize:CGSizeMake(textCellWidth - 30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
+            CGRect rect = [messageLabel boundingRectWithSize:CGSizeMake(textCellWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
             
             // Only return the generated height if
             // it is bigger than the original height.
             
-            if (rect.size.height > 72) {
-                cellHeight = (30 + rect.size.height);
+            if (rect.size.height > 31) {
+                cellHeight = (30 + rect.size.height + 31);
             }
             
             else {
-                cellHeight = 103;
+                cellHeight = 68;
             }
         }
         
@@ -943,7 +966,7 @@
         }
         
         else {
-            cellHeight = 153;
+            cellHeight = 195;
         }
         
         // Save the cell height data in the cache.
@@ -1374,7 +1397,7 @@
     
     // Set the message label text.
     [cell.messageLabel setText:[data valueForKey:@"textData"]];
-        
+    
     // Set the date label text.
     [self setDateLabel:cell.dateLabel :[data createdAt]];
     
@@ -1384,17 +1407,15 @@
     [cell.triangleView setTintColor:mainColour];
     
     // Curve the edges of the box view.
-    [[cell.messageLabel layer] setCornerRadius:4.0];
+    [[cell.messageLabelContainer layer] setCornerRadius:4.0];
         
     // Set the content restraints.
     [cell.triangleView setClipsToBounds:YES];
     [cell.dateLabel setClipsToBounds:YES];
     [cell.profilePicture setClipsToBounds:YES];
     [cell.messageLabel setClipsToBounds:YES];
+    [cell.messageLabelContainer setClipsToBounds:YES];
     [cell.contentView setClipsToBounds:NO];
-    
-    NSLog(@"MESSAGE %@", cell.messageLabel.text);
-    NSLog(@"TEXT SIZE: %f", cell.messageLabel.frame.size.width);
     
     return cell;
 }

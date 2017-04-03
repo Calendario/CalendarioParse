@@ -23,6 +23,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *profilePicture;
 
 // Main message label.
-@property (strong, nonatomic) IBOutlet UITextView *messageLabel;
+@property (strong, nonatomic) IBOutlet UILabel *messageLabel;
+@property (strong, nonatomic) IBOutlet UIView *messageLabelContainer;
 
 @end
