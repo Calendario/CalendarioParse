@@ -350,7 +350,7 @@
                             [messageData addObjectsFromArray:newDataObjects];
                             
                             // Add the new thread cells to the table view.
-                            [messagesList insertRowsAtIndexPaths:newDataObjects withRowAnimation:UITableViewRowAnimationAutomatic];
+                            [messagesList insertRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationAutomatic];
                         }
                         
                     } else {
@@ -868,6 +868,42 @@
     
     return cell;
 }
+
+
+//// ADD SUPPORT FOR DELETING OR ARCHIVING
+//// PRIVATE MESSAGES IN A FUTURE UPDATE.
+/*-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+-(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // Create the table view cell edit buttons.
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Archive" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        
+        // Get the current cell thread object.
+        PFObject *cellThread = [(ThreadDataObject *)[messageData[indexPath.row] objectAtIndex:0] threadObject];
+        
+        // Check if the current user is userA or userB.
+        
+        if ([[(PFUser *)[cellThread valueForKey:@"userA"] objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
+            [cellThread setObject:@YES forKey:@"userAHidden"];
+        } else {
+            [cellThread setObject:@YES forKey:@"userBHidden"];
+        }
+        
+        // Upload the new thread data.
+        [cellThread saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            
+            if ((succeeded) && (error == nil)) {
+                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+        }];
+    }];
+    
+    return @[deleteAction];
+}*/
+////
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     

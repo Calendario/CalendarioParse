@@ -73,8 +73,11 @@
         userCache = [NSCache new];
     });
     
+    // Create the user data key.
+    NSString *userKey = [NSString stringWithFormat:@"PROFILE-DATA-%@", userID];
+    
     // Access the user cache with the unique ID string.
-    NSArray *cachedUserData = [userCache objectForKey:userID];
+    NSArray *cachedUserData = [userCache objectForKey:userKey];
     
     // Check if the user data has been
     // previously stored in the cache.
@@ -102,7 +105,7 @@
                         UIImage *image = [UIImage imageWithData:imageData];
                         
                         // Save the user data in the cache.
-                        [userCache setObject:@[[(PFUser *)object username], image] forKey:userID];
+                        [userCache setObject:@[[(PFUser *)object username], image] forKey:userKey];
                         
                         dataBlock([(PFUser *)object username], image);
                         

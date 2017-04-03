@@ -61,6 +61,8 @@ typedef void(^locationCheckCompletion)(BOOL dataCheck);
 -(void)loadAllMessages;
 -(void)sendMessage:(NSString *)messageType :(id)data;
 -(void)setMessageQueryData:(NSString *)messageType :(id)data;
+-(void)sendPushNotification:(NSString *)messageType :(NSString *)data;
+-(void)pushNotificationPartTwo:(NSString *)messageType :(NSString *)data :(NSString *)username;
 -(void)getProfilePictureCachedData:(NSString *)userID :(pictureCompletion)dataBlock;
 -(void)getMainPictureCachedData:(PFObject *)data :(pictureCompletion)dataBlock;
 -(float)getHeightCachedData:(PFObject *)data;

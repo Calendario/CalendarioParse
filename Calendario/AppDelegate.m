@@ -58,12 +58,14 @@
 
     // Creating Installation with User
     
-    // NOTE: The below line of code will crash if no
+    // NOTE: The below lines of code will crash if no
     // user is currently logged in therefore I added
     // a if statement in place - chaneg made by Dan.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     if ([PFUser currentUser] != nil) {
-        [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
-        [[PFInstallation currentInstallation] saveEventually];
+        [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
+        [currentInstallation setChannels:@[[NSString stringWithFormat:@"user_%@", [[PFUser currentUser] objectId]]]];
+        [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {}];
     }
     
     // Notifications Registration

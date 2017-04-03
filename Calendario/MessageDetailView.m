@@ -676,6 +676,7 @@
                 [newMessage saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     
                     if ((succeeded) && (error == nil)) {
+                        [self sendPushNotification:messageType :([messageType isEqualToString:@"Text"] ? data : nil)];
                         [messageField setText:nil];
                         [self loadAllMessages];
                     }
@@ -723,6 +724,7 @@
                     [newMessage saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                         
                         if ((succeeded) && (error == nil)) {
+                            [self sendPushNotification:messageType :([messageType isEqualToString:@"Text"] ? data : nil)];
                             [messageField setText:nil];
                             [self loadAllMessages];
                         }
@@ -753,6 +755,7 @@
             [newMessage saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 
                 if ((succeeded) && (error == nil)) {
+                    [self sendPushNotification:messageType :([messageType isEqualToString:@"Text"] ? data : nil)];
                     [messageField setText:nil];
                     [self loadAllMessages];
                 }
@@ -789,6 +792,63 @@
         newMessage[@"audioDurationData"] = (NSArray *)data[0];
         newMessage[@"audioData"] = (NSArray *)data[1];
     }
+}
+
+-(void)sendPushNotification:(NSString *)messageType :(NSString *)data {
+    
+    // Check if we have the logged in user's username.
+    
+    if ([[PFUser currentUser] username] == nil) {
+        
+        // Setup the user search query.
+        PFQuery *userQuery = [PFUser query];
+        [userQuery whereKey:@"objectId" equalTo:[[PFUser currentUser] objectId]];
+        
+        // Get the user object data.
+        [userQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            
+            if (error == nil) {
+                
+                if (object != nil) {
+                    [self pushNotificationPartTwo:messageType :data :[(PFUser *)object username]];
+                }
+            }
+        }];
+        
+    } else {
+        [self pushNotificationPartTwo:messageType :data :[[PFUser currentUser] username]];
+    }
+}
+
+-(void)pushNotificationPartTwo:(NSString *)messageType :(NSString *)data :(NSString *)username {
+    
+    // Create the notification description.
+    NSString *notificationDesc;
+    
+    // Set the main message data object.
+    
+    if ([messageType isEqualToString:@"Text"]) {
+        notificationDesc = [NSString stringWithFormat:@"%@: %@", username, data];
+    }
+    
+    else if ([messageType isEqualToString:@"Photo"]) {
+        notificationDesc = [NSString stringWithFormat:@"%@ sent you a photo.", username];
+    }
+    
+    else if ([messageType isEqualToString:@"Map"]) {
+        notificationDesc = [NSString stringWithFormat:@"%@ shared a location with you.", username];
+    }
+    
+    else if ([messageType isEqualToString:@"Video"]) {
+        notificationDesc = [NSString stringWithFormat:@"%@ sent you a video.", username];
+    }
+    
+    else {
+        notificationDesc = [NSString stringWithFormat:@"%@ sent you a voice message.", username];
+    }
+    
+    // Submit the push notification.
+    [PFCloud callFunctionInBackground:@"sendPrivateMessageNotification" withParameters:@{@"message" : notificationDesc, @"user" : [passedInUser objectId]}];
 }
 
 -(void)getProfilePictureCachedData:(NSString *)userID :(pictureCompletion)dataBlock {
