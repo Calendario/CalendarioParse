@@ -77,7 +77,7 @@
     // Disable the share button until
     // the location data has been loaded.
     [shareButton setEnabled:NO];
-    
+        
     // Get the location data.
     location = [passedInData valueForKey:@"locationData"];
     

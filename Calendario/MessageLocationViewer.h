@@ -22,7 +22,7 @@
     
     // Share bar button.
     IBOutlet UIBarButtonItem *shareButton;
-    
+        
     // Map control type.
     IBOutlet UISegmentedControl *mapControl;
 }

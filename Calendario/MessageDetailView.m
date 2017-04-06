@@ -34,7 +34,15 @@
     
     // Close the current view.
     [self dismissViewControllerAnimated:YES completion:^{
+        
+        // Stop the timer from reloading.
         [reloadTimer invalidate];
+        
+        // Remove the notification observers so that
+        // we do not get any accidental method calls.
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PRIVATE-DM-LOCATION" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVAudioSessionRouteChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     }];
 }
 
@@ -338,6 +346,15 @@
     // change audio method notification.
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     
+    // Set the received location notification.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationReceived:) name:@"PRIVATE-DM-LOCATION" object:nil];
+    
+    // Set the keyboard appeared notification.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    // Set the audio route changed notification.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioRouteChangeListenerCallback:) name:AVAudioSessionRouteChangeNotification object:nil];
+    
     // Setup the location manager class.
     locationManager = [[CLLocationManager alloc] init];
     [locationManager setDelegate:self];
@@ -390,33 +407,6 @@
     
     // Keep checking for new thread messages (every 1.5 seconds).
     reloadTimer = [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(loadAllMessages) userInfo:nil repeats:YES];
-}
-
-/// VIEW WILL APPEAR ///
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    // Set the received location notification.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationReceived:) name:@"PRIVATE-DM-LOCATION" object:nil];
-    
-    // Set the keyboard appeared notification.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    
-    // Set the audio route changed notification.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioRouteChangeListenerCallback:) name:AVAudioSessionRouteChangeNotification object:nil];
-}
-
-/// VIEW WILL DISSAPPEAR ///
-
--(void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    // Remove the notification observers so that
-    // we do not get any accidental method calls.
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PRIVATE-DM-LOCATION" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVAudioSessionRouteChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 }
 
 /// DATA METHODS ///

@@ -16,6 +16,8 @@
 
 -(IBAction)playAudio:(id)sender {
     
+    NSLog(@"TESTING");
+    
     // Get the audio file object.
     PFFile *audioFile = [passedInData valueForKey:@"audioData"];
     
